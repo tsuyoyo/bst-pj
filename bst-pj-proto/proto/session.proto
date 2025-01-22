@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package bst.v1;
+
+option go_package = "github.com/yourusername/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+// セッション関連のサービス定義
+service SessionService {
+  // セッション作成
+  rpc CreateSession (CreateSessionRequest) returns (CreateSessionResponse);
+  // セッション取得
+  rpc GetSession (GetSessionRequest) returns (GetSessionResponse);
+  // セッション一覧取得
+  rpc ListSessions (ListSessionsRequest) returns (ListSessionsResponse);
+}
+
+// セッション作成リクエスト
+message CreateSessionRequest {
+  string title = 1;
+  string description = 2;
+  string date = 3;
+  int32 organizer_id = 4;
+}
+
+// セッション作成レスポンス
+message CreateSessionResponse {
+  Session session = 1;
+}
+
+// セッション取得リクエスト
+message GetSessionRequest {
+  int32 session_id = 1;
+}
+
+// セッション取得レスポンス
+message GetSessionResponse {
+  Session session = 1;
+}
+
+// セッション一覧取得リクエスト
+message ListSessionsRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+}
+
+// セッション一覧取得レスポンス
+message ListSessionsResponse {
+  repeated Session sessions = 1;
+  string next_page_token = 2;
+}
+
+// セッションモデル
+message Session {
+  int32 id = 1;
+  string title = 2;
+  string description = 3;
+  string date = 4;
+  int32 organizer_id = 5;
+  SessionStatus status = 6;
+}
+
+// セッションステータス
+enum SessionStatus {
+  SESSION_STATUS_UNSPECIFIED = 0;
+  SESSION_STATUS_DRAFT = 1;
+  SESSION_STATUS_PUBLISHED = 2;
+  SESSION_STATUS_CANCELLED = 3;
+  SESSION_STATUS_COMPLETED = 4;
+} 

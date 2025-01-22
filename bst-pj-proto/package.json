@@ -1,0 +1,16 @@
+{
+  "name": "bst-pj-proto",
+  "version": "1.0.0",
+  "description": "Protocol Buffers and gRPC definitions for BST Project",
+  "scripts": {
+    "generate": "npm run generate:ts && npm run generate:dart",
+    "generate:ts": "protoc --plugin=protoc-gen-ts_proto=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./gen/ts --ts_proto_opt=esModuleInterop=true --proto_path=./proto ./proto/*.proto",
+    "generate:dart": "protoc --dart_out=grpc:./gen/dart --proto_path=./proto ./proto/*.proto"
+  },
+  "devDependencies": {
+    "@types/google-protobuf": "^3.15.12",
+    "grpc-tools": "^1.12.4",
+    "ts-proto": "^1.167.3",
+    "typescript": "^5.3.3"
+  }
+}
