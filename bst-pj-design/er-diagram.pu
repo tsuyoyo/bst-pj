@@ -1,127 +1,301 @@
-@startuml er-diagram
+@startuml SessionManagementERDiagram
 !define ENTITY(x) class x << (E,#FFAAAA) >>
-'
-entity "User" as User {
-  + ID : Integer
-  + Name : String
-  + Email : String
-  + Role : String
-}
 
-entity "Profile" as Profile {
-  + ID : Integer
-  + Bio : String
-  + Avatar : String
-}
-
-entity "Session" as Session {
+ENTITY(Session) {
   + ID : Integer
   + Title : String
+  + Status : Enum <<BeforeEntry, EntryOpen, Approaching, Ongoing, Completed>>
+  + Description : String
   + Date : DateTime
-  + Status : String
+  + OrganizerID : Integer // 作成者のUserID
+  + LocationID : Integer
 }
 
-entity "Part" as Part {
+ENTITY(SessionAchievementLog) {
+  + ID : Integer
+  + SessionID : Integer
+}
+
+ENTITY(SessionParticipant) {
+  + ID : Integer
+  + SessionID : Integer
+  + UserID : Integer
+  + RoleID : Integer <<Optional>>
+  + Status : String <<Optional>> // 参加ステータス（例: 確定、キャンセル）
+  + IsAdmin : Boolean // 管理者フラグ
+}
+
+ENTITY(SessionRole) {
+  + ID : Integer
+  + Name : String //役割 (例: カメラ撮影係などセッションに応じて設定)
+  + Description : String
+}
+
+ENTITY(Schedule) {
+  + ID : Integer
+  + SessionID : Integer
+}
+
+ENTITY(Activity) {
+  + ID : Integer
+  + ScheduleID : Integer
+  + Type : String // 活動の種類 (例: SongPerformance, Party)
+  + StartTime : DateTime
+  + EndTime : DateTime
+  + Description : String
+}
+
+ENTITY(SongPerformance) {
+  + ID : Integer
+  + ActivityID : Integer
+  + SongID : Integer
+}
+
+ENTITY(Party) {
+  + ID : Integer
+  + ActivityID : Integer
+  + LocationID : Integer
+}
+
+ENTITY(Entry) {
+  + ID : Integer
+  + SongPerformanceID : Integer
+  + SessionParticipantID : Integer
+  + SessionPartID : Integer
+}
+
+ENTITY(SessionPart) {
+  + ID : Integer
+  + SessionID : Integer
+  + Name : String // パート名 (例: Gt1, Gt2 のようなケースのためにSessionPartもNameを持つ)
+  + PartID : Integer
+  + TransitionCost : Integer // 転換コスト (セッションごとに変わる)
+  + Notes : String <<Optional>> // 何かセッション特有のパートに関することがあれば
+}
+
+ENTITY(Part) {
   + ID : Integer
   + Name : String
-  + MaxSlots : Integer
+  + Description : String
 }
 
-entity "Schedule" as Schedule {
+ENTITY(ParticipantPart) {
   + ID : Integer
-  + TimeSlot : String
+  + SessionParticipantID : Integer
+  + SessionPartID : Integer
+  + IsPrimary : Boolean // このPartがメインであることを示す
 }
 
-entity "Participant" as Participant {
+ENTITY(Resource) {
+  + ID : Integer
+  + TargetType : Enum <<Comment, SongPerformance, Session>> // 対象の種類
+  + TargetID : Integer // 対象のID
+  + Type : String // リソースの種類 (例: 楽譜, YouTubeリンク, 録音, 録画)
+  + URL : String // リンク
+  + Description : String <<Optional>> // リソースの説明
+}
+
+ENTITY(Comment) {
+  + ID : Integer
+  + TargetType : Enum <<Thread, Timeline, Media>>
+  + TargetID : Integer
+  + UserID : Integer
+  + Content : Text
+  + CreatedAt : DateTime
+}
+
+ENTITY(Thread) {
+  + ID : Integer
+  + ContextType : Enum <<Session, Group, Global>> // スレッドの文脈（例: セッション、グループ、全体）
+  + ContextID : Integer <<Optional>> // 対応するコンテキストのID
+  + Title : String
+  + Description: String // スレッドの説明
+  + CreatedAt : DateTime 
+  + CreatedBy : Integer // 作成者のUserID
+}
+
+ENTITY(Mention) {
+  + ID : Integer
+  + CommentID : Integer
+  + MentionType : Enum <<User, AllSession, AllThread>>
+  + MentionedUserID : Integer <<Optional>> // MentionTypeがUserの場合に使用
+  + MentionedSessionID : Integer <<Optional>> // MentionTypeがAllSessionの場合に使用
+  + MentionedThreadID : Integer <<Optional>> // MentionTypeがAllThreadの場合に使用
+}
+
+ENTITY(Reaction) {
+  + ID : Integer
+  + TargetType : Enum <<Thread, Comment>>
+  + TargetID : Integer
+  + UserID : Integer
+  + ReactionTypeID : Integer
+  + CreatedAt : DateTime
+}
+
+ENTITY(ReactionType) {
+  + ID : Integer
+  + Name : String // 例: Like, Dislike, Emoji
+  + Description : String <<Optional>> // 反応の説明
+  + IconURL : String <<Optional>> // アイコンのリンク
+}
+
+ENTITY(PartyHost) {
+  + ID : Integer
+  + PartyID : Integer
+  + SessionParticipantID : Integer
+  + Role : String <<Optional>> // ホストの役割（例: メインホスト、補助ホスト）
+}
+
+ENTITY(PartyParticipant) {
+  + ID : Integer
+  + PartyID : Integer
+  + SessionParticipantID : Integer
+  + Status : String <<Optional>> // 参加ステータス（例: 確定、キャンセル）
+}
+
+ENTITY(Location) {
   + ID : Integer
   + Name : String
-  + Role : String
+  + GoogleMapsURL : String
+  + Type : Enum <<Studio, Restaurant, Hall>>
+  + AdditionalInfo : String
+  + AreaID : Integer
 }
 
-entity "Entry" as Entry {
+ENTITY(Area) {
   + ID : Integer
-  + ParticipantID : Integer
+  + Name : String // 都道府県名
+  + PrefectureID : Integer <<1~47>>
+}
+
+ENTITY(Rating) {
+  + ID : Integer
+  + TargetType : Enum <<Session, SongPerformance, Party, User>>
+  + TargetID : Integer
+  + Rating : Integer <<1~5>>
+  + Comment : String <<Optional>>
+}
+
+' ==== Music Domain Entities ====
+ENTITY(Song) {
+  + ID : Integer
+  + Name : String
+  + ArtistID : Integer
+}
+
+ENTITY(Artist) {
+  + ID : Integer
+  + Name : String
+  + GenreID : Integer
+  + Website : String <<Optional>>
+}
+
+ENTITY(Genre) {
+  + ID : Integer
+  + Name : String
+}
+
+' ==== User Domain Entities ====
+ENTITY(User) {
+  + ID : Integer
+  + ExternalID : String // 外部サービスでのユーザーID
+  + ExternalService : Enum <<Google, Facebook, Twitter, GitHub>> // 外部サービスの種類
+  + Name : String // ユーザー名
+  + Email : String <<Optional>> // 任意のメールアドレス
+  + ProfilePictureURL : String <<Optional>> // プロフィール画像
+  + CreatedAt : DateTime // アカウント作成日
+}
+
+ENTITY(UserProfile) {
+  + ID : Integer
+  + UserID : Integer // Userへの外部キー
+  + Bio : Text <<Optional>> // 自己紹介
+  + AreaID : Integer // 活動地域
+  + LastUpdated : DateTime // 最終更新日
+}
+
+ENTITY(UserArtist){
+  + ID : Integer
+  + UserID : Integer
+  + ArtistID : Integer
+}
+
+ENTITY(UserPart){
+  + ID : Integer
+  + UserID : Integer
   + PartID : Integer
 }
 
-entity "Timetable" as Timetable {
+ENTITY(UserGenre){
   + ID : Integer
-  + Time : String
+  + UserID : Integer
+  + GenreID : Integer
 }
 
-entity "Comment" as Comment {
+ENTITY(UserResource){
   + ID : Integer
-  + Content : String
+  + UserID : Integer
+  + ResourceID : Integer // 演奏動画、写真など
 }
 
-entity "Notification" as Notification {
+ENTITY(Follow) {
   + ID : Integer
-  + Content : String
+  + FollowerID : Integer // フォローしているユーザー (UserID)
+  + FolloweeID : Integer // フォローされているユーザー (UserID)
+  + CreatedAt : DateTime // フォローした日時
+  + Status : Enum <<Following, Blocked, Requested>> // フォロー関係の状態
 }
 
-entity "Thread" as Thread {
-  + ID : Integer
-  + Title : String
-}
+' ==== Relation ====
+Session "1" -- "1" Schedule
+Session "1" -- "1" Resource : カバー画像
+Session "1" -- "1" Location : 開催場所 (スタジオなど)
+Session "1" -- "*" Thread
+Session "1" -- "1" SessionParticipant : 作成者
+Session "1" -- "*" SessionParticipant : 参加者
+Session "1" -- "0..1" Party : 打ち上げ
+Session "1" -- "0..1" SessionAchievementLog : セッションの記録
+Session "1" -- "*" SessionPart : セッションの中で演奏されるパート
+SessionAchievementLog "1" -- "*" Resource : セッションの動画や写真
+SessionAchievementLog "1" -- "*" Rating : セッションの評価
+SessionParticipant "1" -- "1" User
+SessionParticipant "1" -- "*" ParticipantPart
+SessionParticipant "1" -- "1" SessionRole
+ParticipantPart "1" -- "1" SessionPart
+Schedule "1" -- "*" Activity
+Activity "1" -- "0..1" SongPerformance
+Activity "1" -- "0..1" Party
+SongPerformance "1" -- "1..*" Entry
+Comment "1" -- "*" Resource : 動画、楽譜、画像など添付
+SongPerformance "1" -- "*" Resource : 動画、楽譜、画像など添付
+Party "1" -- "1" Location
+Party "1" -- "*" PartyHost
+PartyHost "1" -- "1" SessionParticipant
+Party "1" -- "*" PartyParticipant
+PartyParticipant "1" -- "1" SessionParticipant
+Thread "1" -- "*" Comment : has_comments
+Comment "1" -- "*" Mention
+Comment "1" -- "*" Reaction
+Thread "1" -- "*" Reaction
+Reaction "1" -- "1" ReactionType
+Location "1" -- "1" Area
+Entry "1" -- "1" SessionParticipant
+Entry "1" -- "1" SessionPart
+SessionPart "1" -- "1" Part
+SongPerformance "1" -- "1" Song
+Song "1" -- "1" Artist
+Artist "1" -- "1" Genre
 
-entity "Song" as Song {
-  + ID : Integer
-  + Title : String
-}
+User "1" -- "1" UserProfile
+User "1" -- "*" UserArtist
+User "1" -- "*" UserPart
+User "1" -- "*" UserGenre
+User "1" -- "*" UserResource
+User "1" -- "*" Follow
+User "1" -- "*" Rating
+UserArtist "1" -- "1" Artist
+UserPart "1" -- "1" Part
+UserGenre "1" -- "1" Genre
+UserResource "1" -- "1" Resource
 
-entity "Artist" as Artist {
-  + ID : Integer
-  + Name : String
-}
-
-entity "Resource" as Resource {
-  + ID : Integer
-  + Type : String
-}
-
-entity "Rating" as Rating {
-  + ID : Integer
-  + Score : Integer
-}
-
-entity "Rating History" as RatingHistory {
-  + ID : Integer
-  + RatingID : Integer
-}
-
-entity "Dashboard Data" as Dashboard {
-  + ID : Integer
-  + Content : String
-}
-
-entity "Search Index" as SearchIndex {
-  + ID : Integer
-  + Keywords : String
-}
-
-User --> Profile
-User --> Session
-User --> Participant
-User --> Comment
-User --> Rating
-User --> Dashboard
-
-Session --> Part
-Session --> Schedule
-Session --> Participant
-Session --> Entry
-Session --> Timetable
-
-Part --> Entry
-Participant --> Entry
-Entry --> Timetable
-
-Comment --> Notification
-Thread --> Comment
-
-Song --> Artist
-Song --> Resource
-
-Rating --> RatingHistory
-Dashboard --> SearchIndex
 @enduml
