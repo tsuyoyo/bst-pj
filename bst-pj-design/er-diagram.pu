@@ -1,0 +1,127 @@
+@startuml er-diagram
+!define ENTITY(x) class x << (E,#FFAAAA) >>
+'
+entity "User" as User {
+  + ID : Integer
+  + Name : String
+  + Email : String
+  + Role : String
+}
+
+entity "Profile" as Profile {
+  + ID : Integer
+  + Bio : String
+  + Avatar : String
+}
+
+entity "Session" as Session {
+  + ID : Integer
+  + Title : String
+  + Date : DateTime
+  + Status : String
+}
+
+entity "Part" as Part {
+  + ID : Integer
+  + Name : String
+  + MaxSlots : Integer
+}
+
+entity "Schedule" as Schedule {
+  + ID : Integer
+  + TimeSlot : String
+}
+
+entity "Participant" as Participant {
+  + ID : Integer
+  + Name : String
+  + Role : String
+}
+
+entity "Entry" as Entry {
+  + ID : Integer
+  + ParticipantID : Integer
+  + PartID : Integer
+}
+
+entity "Timetable" as Timetable {
+  + ID : Integer
+  + Time : String
+}
+
+entity "Comment" as Comment {
+  + ID : Integer
+  + Content : String
+}
+
+entity "Notification" as Notification {
+  + ID : Integer
+  + Content : String
+}
+
+entity "Thread" as Thread {
+  + ID : Integer
+  + Title : String
+}
+
+entity "Song" as Song {
+  + ID : Integer
+  + Title : String
+}
+
+entity "Artist" as Artist {
+  + ID : Integer
+  + Name : String
+}
+
+entity "Resource" as Resource {
+  + ID : Integer
+  + Type : String
+}
+
+entity "Rating" as Rating {
+  + ID : Integer
+  + Score : Integer
+}
+
+entity "Rating History" as RatingHistory {
+  + ID : Integer
+  + RatingID : Integer
+}
+
+entity "Dashboard Data" as Dashboard {
+  + ID : Integer
+  + Content : String
+}
+
+entity "Search Index" as SearchIndex {
+  + ID : Integer
+  + Keywords : String
+}
+
+User --> Profile
+User --> Session
+User --> Participant
+User --> Comment
+User --> Rating
+User --> Dashboard
+
+Session --> Part
+Session --> Schedule
+Session --> Participant
+Session --> Entry
+Session --> Timetable
+
+Part --> Entry
+Participant --> Entry
+Entry --> Timetable
+
+Comment --> Notification
+Thread --> Comment
+
+Song --> Artist
+Song --> Resource
+
+Rating --> RatingHistory
+Dashboard --> SearchIndex
+@enduml
