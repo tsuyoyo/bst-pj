@@ -6,8 +6,8 @@
 
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
-import { Location } from "./content";
 import { Timestamp } from "./google/protobuf/timestamp";
+import { Location } from "./location";
 import { User } from "./user";
 
 export const protobufPackage = "bst.v1";
@@ -16,6 +16,7 @@ export enum PartyParticipantRole {
   PARTY_PARTICIPANT_ROLE_UNSPECIFIED = 0,
   PARTY_PARTICIPANT_ROLE_HOST = 1,
   PARTY_PARTICIPANT_ROLE_PARTICIPANT = 2,
+  PARTY_PARTICIPANT_ROLE_OBSERVER = 3,
   UNRECOGNIZED = -1,
 }
 
@@ -30,6 +31,9 @@ export function partyParticipantRoleFromJSON(object: any): PartyParticipantRole 
     case 2:
     case "PARTY_PARTICIPANT_ROLE_PARTICIPANT":
       return PartyParticipantRole.PARTY_PARTICIPANT_ROLE_PARTICIPANT;
+    case 3:
+    case "PARTY_PARTICIPANT_ROLE_OBSERVER":
+      return PartyParticipantRole.PARTY_PARTICIPANT_ROLE_OBSERVER;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -45,6 +49,8 @@ export function partyParticipantRoleToJSON(object: PartyParticipantRole): string
       return "PARTY_PARTICIPANT_ROLE_HOST";
     case PartyParticipantRole.PARTY_PARTICIPANT_ROLE_PARTICIPANT:
       return "PARTY_PARTICIPANT_ROLE_PARTICIPANT";
+    case PartyParticipantRole.PARTY_PARTICIPANT_ROLE_OBSERVER:
+      return "PARTY_PARTICIPANT_ROLE_OBSERVER";
     case PartyParticipantRole.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";

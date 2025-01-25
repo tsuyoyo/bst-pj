@@ -6,133 +6,50 @@
 
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
+import { Area } from "./area";
+import { Artist, Genre, Part } from "./content";
 import { Timestamp } from "./google/protobuf/timestamp";
 
 export const protobufPackage = "bst.v1";
-
-export enum UserParticipantStatus {
-  USER_PARTICIPANT_STATUS_UNSPECIFIED = 0,
-  USER_PARTICIPANT_STATUS_PARTICIPANT = 1,
-  USER_PARTICIPANT_STATUS_CANCEL = 2,
-  UNRECOGNIZED = -1,
-}
-
-export function userParticipantStatusFromJSON(object: any): UserParticipantStatus {
-  switch (object) {
-    case 0:
-    case "USER_PARTICIPANT_STATUS_UNSPECIFIED":
-      return UserParticipantStatus.USER_PARTICIPANT_STATUS_UNSPECIFIED;
-    case 1:
-    case "USER_PARTICIPANT_STATUS_PARTICIPANT":
-      return UserParticipantStatus.USER_PARTICIPANT_STATUS_PARTICIPANT;
-    case 2:
-    case "USER_PARTICIPANT_STATUS_CANCEL":
-      return UserParticipantStatus.USER_PARTICIPANT_STATUS_CANCEL;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return UserParticipantStatus.UNRECOGNIZED;
-  }
-}
-
-export function userParticipantStatusToJSON(object: UserParticipantStatus): string {
-  switch (object) {
-    case UserParticipantStatus.USER_PARTICIPANT_STATUS_UNSPECIFIED:
-      return "USER_PARTICIPANT_STATUS_UNSPECIFIED";
-    case UserParticipantStatus.USER_PARTICIPANT_STATUS_PARTICIPANT:
-      return "USER_PARTICIPANT_STATUS_PARTICIPANT";
-    case UserParticipantStatus.USER_PARTICIPANT_STATUS_CANCEL:
-      return "USER_PARTICIPANT_STATUS_CANCEL";
-    case UserParticipantStatus.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
-}
-
-/** User role enumeration */
-export enum UserRole {
-  USER_ROLE_UNSPECIFIED = 0,
-  USER_ROLE_ADMIN = 1,
-  USER_ROLE_ORGANIZER = 2,
-  USER_ROLE_MEMBER = 3,
-  UNRECOGNIZED = -1,
-}
-
-export function userRoleFromJSON(object: any): UserRole {
-  switch (object) {
-    case 0:
-    case "USER_ROLE_UNSPECIFIED":
-      return UserRole.USER_ROLE_UNSPECIFIED;
-    case 1:
-    case "USER_ROLE_ADMIN":
-      return UserRole.USER_ROLE_ADMIN;
-    case 2:
-    case "USER_ROLE_ORGANIZER":
-      return UserRole.USER_ROLE_ORGANIZER;
-    case 3:
-    case "USER_ROLE_MEMBER":
-      return UserRole.USER_ROLE_MEMBER;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return UserRole.UNRECOGNIZED;
-  }
-}
-
-export function userRoleToJSON(object: UserRole): string {
-  switch (object) {
-    case UserRole.USER_ROLE_UNSPECIFIED:
-      return "USER_ROLE_UNSPECIFIED";
-    case UserRole.USER_ROLE_ADMIN:
-      return "USER_ROLE_ADMIN";
-    case UserRole.USER_ROLE_ORGANIZER:
-      return "USER_ROLE_ORGANIZER";
-    case UserRole.USER_ROLE_MEMBER:
-      return "USER_ROLE_MEMBER";
-    case UserRole.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
-}
 
 /** User model */
 export interface User {
   id: number;
   name: string;
+  icon: string;
+}
+
+export interface UserFavorite {
+  genres: Genre[];
+  artists: Artist[];
+  parts: Part[];
+}
+
+export interface UserProfile {
+  user: User | undefined;
+  introduction: string;
+  area: Area | undefined;
+  favorite: UserFavorite | undefined;
+  createdAt:
+    | Date
+    | undefined;
+  /** When the user is well evaluated, the badge is given. */
+  badges: UserRatingBadge[];
+}
+
+export interface MyProfile {
+  profile: UserProfile | undefined;
   email: string;
-  role: UserRole;
-  status: UserParticipantStatus;
-  profile: Profile | undefined;
 }
 
-/** Profile model */
-export interface Profile {
+export interface UserRatingBadge {
   id: number;
-  bio: string;
-  avatar: string;
-  userId: number;
-}
-
-/** Rating model */
-export interface Rating {
-  id: number;
-  score: number;
-  userId: number;
-  targetId: number;
-  targetType: string;
-  createdAt: Date | undefined;
-}
-
-/** Rating history model */
-export interface RatingHistory {
-  id: number;
-  ratingId: number;
-  previousScore: number;
-  createdAt: Date | undefined;
+  name: string;
+  color: string;
 }
 
 function createBaseUser(): User {
-  return { id: 0, name: "", email: "", role: 0, status: 0, profile: undefined };
+  return { id: 0, name: "", icon: "" };
 }
 
 export const User = {
@@ -143,17 +60,8 @@ export const User = {
     if (message.name !== "") {
       writer.uint32(18).string(message.name);
     }
-    if (message.email !== "") {
-      writer.uint32(26).string(message.email);
-    }
-    if (message.role !== 0) {
-      writer.uint32(32).int32(message.role);
-    }
-    if (message.status !== 0) {
-      writer.uint32(40).int32(message.status);
-    }
-    if (message.profile !== undefined) {
-      Profile.encode(message.profile, writer.uint32(50).fork()).ldelim();
+    if (message.icon !== "") {
+      writer.uint32(26).string(message.icon);
     }
     return writer;
   },
@@ -184,28 +92,7 @@ export const User = {
             break;
           }
 
-          message.email = reader.string();
-          continue;
-        case 4:
-          if (tag !== 32) {
-            break;
-          }
-
-          message.role = reader.int32() as any;
-          continue;
-        case 5:
-          if (tag !== 40) {
-            break;
-          }
-
-          message.status = reader.int32() as any;
-          continue;
-        case 6:
-          if (tag !== 50) {
-            break;
-          }
-
-          message.profile = Profile.decode(reader, reader.uint32());
+          message.icon = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -220,10 +107,7 @@ export const User = {
     return {
       id: isSet(object.id) ? globalThis.Number(object.id) : 0,
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      email: isSet(object.email) ? globalThis.String(object.email) : "",
-      role: isSet(object.role) ? userRoleFromJSON(object.role) : 0,
-      status: isSet(object.status) ? userParticipantStatusFromJSON(object.status) : 0,
-      profile: isSet(object.profile) ? Profile.fromJSON(object.profile) : undefined,
+      icon: isSet(object.icon) ? globalThis.String(object.icon) : "",
     };
   },
 
@@ -235,17 +119,8 @@ export const User = {
     if (message.name !== "") {
       obj.name = message.name;
     }
-    if (message.email !== "") {
-      obj.email = message.email;
-    }
-    if (message.role !== 0) {
-      obj.role = userRoleToJSON(message.role);
-    }
-    if (message.status !== 0) {
-      obj.status = userParticipantStatusToJSON(message.status);
-    }
-    if (message.profile !== undefined) {
-      obj.profile = Profile.toJSON(message.profile);
+    if (message.icon !== "") {
+      obj.icon = message.icon;
     }
     return obj;
   },
@@ -257,41 +132,336 @@ export const User = {
     const message = createBaseUser();
     message.id = object.id ?? 0;
     message.name = object.name ?? "";
-    message.email = object.email ?? "";
-    message.role = object.role ?? 0;
-    message.status = object.status ?? 0;
-    message.profile = (object.profile !== undefined && object.profile !== null)
-      ? Profile.fromPartial(object.profile)
-      : undefined;
+    message.icon = object.icon ?? "";
     return message;
   },
 };
 
-function createBaseProfile(): Profile {
-  return { id: 0, bio: "", avatar: "", userId: 0 };
+function createBaseUserFavorite(): UserFavorite {
+  return { genres: [], artists: [], parts: [] };
 }
 
-export const Profile = {
-  encode(message: Profile, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.id !== 0) {
-      writer.uint32(8).int32(message.id);
+export const UserFavorite = {
+  encode(message: UserFavorite, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.genres) {
+      Genre.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.bio !== "") {
-      writer.uint32(18).string(message.bio);
+    for (const v of message.artists) {
+      Artist.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.avatar !== "") {
-      writer.uint32(26).string(message.avatar);
-    }
-    if (message.userId !== 0) {
-      writer.uint32(32).int32(message.userId);
+    for (const v of message.parts) {
+      Part.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Profile {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UserFavorite {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseProfile();
+    const message = createBaseUserFavorite();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.genres.push(Genre.decode(reader, reader.uint32()));
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.artists.push(Artist.decode(reader, reader.uint32()));
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.parts.push(Part.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UserFavorite {
+    return {
+      genres: globalThis.Array.isArray(object?.genres) ? object.genres.map((e: any) => Genre.fromJSON(e)) : [],
+      artists: globalThis.Array.isArray(object?.artists) ? object.artists.map((e: any) => Artist.fromJSON(e)) : [],
+      parts: globalThis.Array.isArray(object?.parts) ? object.parts.map((e: any) => Part.fromJSON(e)) : [],
+    };
+  },
+
+  toJSON(message: UserFavorite): unknown {
+    const obj: any = {};
+    if (message.genres?.length) {
+      obj.genres = message.genres.map((e) => Genre.toJSON(e));
+    }
+    if (message.artists?.length) {
+      obj.artists = message.artists.map((e) => Artist.toJSON(e));
+    }
+    if (message.parts?.length) {
+      obj.parts = message.parts.map((e) => Part.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UserFavorite>, I>>(base?: I): UserFavorite {
+    return UserFavorite.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UserFavorite>, I>>(object: I): UserFavorite {
+    const message = createBaseUserFavorite();
+    message.genres = object.genres?.map((e) => Genre.fromPartial(e)) || [];
+    message.artists = object.artists?.map((e) => Artist.fromPartial(e)) || [];
+    message.parts = object.parts?.map((e) => Part.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseUserProfile(): UserProfile {
+  return { user: undefined, introduction: "", area: undefined, favorite: undefined, createdAt: undefined, badges: [] };
+}
+
+export const UserProfile = {
+  encode(message: UserProfile, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.user !== undefined) {
+      User.encode(message.user, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.introduction !== "") {
+      writer.uint32(18).string(message.introduction);
+    }
+    if (message.area !== undefined) {
+      Area.encode(message.area, writer.uint32(26).fork()).ldelim();
+    }
+    if (message.favorite !== undefined) {
+      UserFavorite.encode(message.favorite, writer.uint32(34).fork()).ldelim();
+    }
+    if (message.createdAt !== undefined) {
+      Timestamp.encode(toTimestamp(message.createdAt), writer.uint32(42).fork()).ldelim();
+    }
+    for (const v of message.badges) {
+      UserRatingBadge.encode(v!, writer.uint32(50).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): UserProfile {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUserProfile();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.user = User.decode(reader, reader.uint32());
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.introduction = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.area = Area.decode(reader, reader.uint32());
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.favorite = UserFavorite.decode(reader, reader.uint32());
+          continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.createdAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        case 6:
+          if (tag !== 50) {
+            break;
+          }
+
+          message.badges.push(UserRatingBadge.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UserProfile {
+    return {
+      user: isSet(object.user) ? User.fromJSON(object.user) : undefined,
+      introduction: isSet(object.introduction) ? globalThis.String(object.introduction) : "",
+      area: isSet(object.area) ? Area.fromJSON(object.area) : undefined,
+      favorite: isSet(object.favorite) ? UserFavorite.fromJSON(object.favorite) : undefined,
+      createdAt: isSet(object.createdAt) ? fromJsonTimestamp(object.createdAt) : undefined,
+      badges: globalThis.Array.isArray(object?.badges)
+        ? object.badges.map((e: any) => UserRatingBadge.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: UserProfile): unknown {
+    const obj: any = {};
+    if (message.user !== undefined) {
+      obj.user = User.toJSON(message.user);
+    }
+    if (message.introduction !== "") {
+      obj.introduction = message.introduction;
+    }
+    if (message.area !== undefined) {
+      obj.area = Area.toJSON(message.area);
+    }
+    if (message.favorite !== undefined) {
+      obj.favorite = UserFavorite.toJSON(message.favorite);
+    }
+    if (message.createdAt !== undefined) {
+      obj.createdAt = message.createdAt.toISOString();
+    }
+    if (message.badges?.length) {
+      obj.badges = message.badges.map((e) => UserRatingBadge.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UserProfile>, I>>(base?: I): UserProfile {
+    return UserProfile.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UserProfile>, I>>(object: I): UserProfile {
+    const message = createBaseUserProfile();
+    message.user = (object.user !== undefined && object.user !== null) ? User.fromPartial(object.user) : undefined;
+    message.introduction = object.introduction ?? "";
+    message.area = (object.area !== undefined && object.area !== null) ? Area.fromPartial(object.area) : undefined;
+    message.favorite = (object.favorite !== undefined && object.favorite !== null)
+      ? UserFavorite.fromPartial(object.favorite)
+      : undefined;
+    message.createdAt = object.createdAt ?? undefined;
+    message.badges = object.badges?.map((e) => UserRatingBadge.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseMyProfile(): MyProfile {
+  return { profile: undefined, email: "" };
+}
+
+export const MyProfile = {
+  encode(message: MyProfile, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.profile !== undefined) {
+      UserProfile.encode(message.profile, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.email !== "") {
+      writer.uint32(18).string(message.email);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MyProfile {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMyProfile();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.profile = UserProfile.decode(reader, reader.uint32());
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.email = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MyProfile {
+    return {
+      profile: isSet(object.profile) ? UserProfile.fromJSON(object.profile) : undefined,
+      email: isSet(object.email) ? globalThis.String(object.email) : "",
+    };
+  },
+
+  toJSON(message: MyProfile): unknown {
+    const obj: any = {};
+    if (message.profile !== undefined) {
+      obj.profile = UserProfile.toJSON(message.profile);
+    }
+    if (message.email !== "") {
+      obj.email = message.email;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<MyProfile>, I>>(base?: I): MyProfile {
+    return MyProfile.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<MyProfile>, I>>(object: I): MyProfile {
+    const message = createBaseMyProfile();
+    message.profile = (object.profile !== undefined && object.profile !== null)
+      ? UserProfile.fromPartial(object.profile)
+      : undefined;
+    message.email = object.email ?? "";
+    return message;
+  },
+};
+
+function createBaseUserRatingBadge(): UserRatingBadge {
+  return { id: 0, name: "", color: "" };
+}
+
+export const UserRatingBadge = {
+  encode(message: UserRatingBadge, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.id !== 0) {
+      writer.uint32(8).int32(message.id);
+    }
+    if (message.name !== "") {
+      writer.uint32(18).string(message.name);
+    }
+    if (message.color !== "") {
+      writer.uint32(26).string(message.color);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): UserRatingBadge {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUserRatingBadge();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -307,21 +477,14 @@ export const Profile = {
             break;
           }
 
-          message.bio = reader.string();
+          message.name = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.avatar = reader.string();
-          continue;
-        case 4:
-          if (tag !== 32) {
-            break;
-          }
-
-          message.userId = reader.int32();
+          message.color = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -332,279 +495,36 @@ export const Profile = {
     return message;
   },
 
-  fromJSON(object: any): Profile {
+  fromJSON(object: any): UserRatingBadge {
     return {
       id: isSet(object.id) ? globalThis.Number(object.id) : 0,
-      bio: isSet(object.bio) ? globalThis.String(object.bio) : "",
-      avatar: isSet(object.avatar) ? globalThis.String(object.avatar) : "",
-      userId: isSet(object.userId) ? globalThis.Number(object.userId) : 0,
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      color: isSet(object.color) ? globalThis.String(object.color) : "",
     };
   },
 
-  toJSON(message: Profile): unknown {
+  toJSON(message: UserRatingBadge): unknown {
     const obj: any = {};
     if (message.id !== 0) {
       obj.id = Math.round(message.id);
     }
-    if (message.bio !== "") {
-      obj.bio = message.bio;
+    if (message.name !== "") {
+      obj.name = message.name;
     }
-    if (message.avatar !== "") {
-      obj.avatar = message.avatar;
-    }
-    if (message.userId !== 0) {
-      obj.userId = Math.round(message.userId);
+    if (message.color !== "") {
+      obj.color = message.color;
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Profile>, I>>(base?: I): Profile {
-    return Profile.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<UserRatingBadge>, I>>(base?: I): UserRatingBadge {
+    return UserRatingBadge.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<Profile>, I>>(object: I): Profile {
-    const message = createBaseProfile();
+  fromPartial<I extends Exact<DeepPartial<UserRatingBadge>, I>>(object: I): UserRatingBadge {
+    const message = createBaseUserRatingBadge();
     message.id = object.id ?? 0;
-    message.bio = object.bio ?? "";
-    message.avatar = object.avatar ?? "";
-    message.userId = object.userId ?? 0;
-    return message;
-  },
-};
-
-function createBaseRating(): Rating {
-  return { id: 0, score: 0, userId: 0, targetId: 0, targetType: "", createdAt: undefined };
-}
-
-export const Rating = {
-  encode(message: Rating, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.id !== 0) {
-      writer.uint32(8).int32(message.id);
-    }
-    if (message.score !== 0) {
-      writer.uint32(16).int32(message.score);
-    }
-    if (message.userId !== 0) {
-      writer.uint32(24).int32(message.userId);
-    }
-    if (message.targetId !== 0) {
-      writer.uint32(32).int32(message.targetId);
-    }
-    if (message.targetType !== "") {
-      writer.uint32(42).string(message.targetType);
-    }
-    if (message.createdAt !== undefined) {
-      Timestamp.encode(toTimestamp(message.createdAt), writer.uint32(50).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): Rating {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseRating();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.id = reader.int32();
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.score = reader.int32();
-          continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.userId = reader.int32();
-          continue;
-        case 4:
-          if (tag !== 32) {
-            break;
-          }
-
-          message.targetId = reader.int32();
-          continue;
-        case 5:
-          if (tag !== 42) {
-            break;
-          }
-
-          message.targetType = reader.string();
-          continue;
-        case 6:
-          if (tag !== 50) {
-            break;
-          }
-
-          message.createdAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): Rating {
-    return {
-      id: isSet(object.id) ? globalThis.Number(object.id) : 0,
-      score: isSet(object.score) ? globalThis.Number(object.score) : 0,
-      userId: isSet(object.userId) ? globalThis.Number(object.userId) : 0,
-      targetId: isSet(object.targetId) ? globalThis.Number(object.targetId) : 0,
-      targetType: isSet(object.targetType) ? globalThis.String(object.targetType) : "",
-      createdAt: isSet(object.createdAt) ? fromJsonTimestamp(object.createdAt) : undefined,
-    };
-  },
-
-  toJSON(message: Rating): unknown {
-    const obj: any = {};
-    if (message.id !== 0) {
-      obj.id = Math.round(message.id);
-    }
-    if (message.score !== 0) {
-      obj.score = Math.round(message.score);
-    }
-    if (message.userId !== 0) {
-      obj.userId = Math.round(message.userId);
-    }
-    if (message.targetId !== 0) {
-      obj.targetId = Math.round(message.targetId);
-    }
-    if (message.targetType !== "") {
-      obj.targetType = message.targetType;
-    }
-    if (message.createdAt !== undefined) {
-      obj.createdAt = message.createdAt.toISOString();
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<Rating>, I>>(base?: I): Rating {
-    return Rating.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<Rating>, I>>(object: I): Rating {
-    const message = createBaseRating();
-    message.id = object.id ?? 0;
-    message.score = object.score ?? 0;
-    message.userId = object.userId ?? 0;
-    message.targetId = object.targetId ?? 0;
-    message.targetType = object.targetType ?? "";
-    message.createdAt = object.createdAt ?? undefined;
-    return message;
-  },
-};
-
-function createBaseRatingHistory(): RatingHistory {
-  return { id: 0, ratingId: 0, previousScore: 0, createdAt: undefined };
-}
-
-export const RatingHistory = {
-  encode(message: RatingHistory, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.id !== 0) {
-      writer.uint32(8).int32(message.id);
-    }
-    if (message.ratingId !== 0) {
-      writer.uint32(16).int32(message.ratingId);
-    }
-    if (message.previousScore !== 0) {
-      writer.uint32(24).int32(message.previousScore);
-    }
-    if (message.createdAt !== undefined) {
-      Timestamp.encode(toTimestamp(message.createdAt), writer.uint32(34).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): RatingHistory {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseRatingHistory();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.id = reader.int32();
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.ratingId = reader.int32();
-          continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.previousScore = reader.int32();
-          continue;
-        case 4:
-          if (tag !== 34) {
-            break;
-          }
-
-          message.createdAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): RatingHistory {
-    return {
-      id: isSet(object.id) ? globalThis.Number(object.id) : 0,
-      ratingId: isSet(object.ratingId) ? globalThis.Number(object.ratingId) : 0,
-      previousScore: isSet(object.previousScore) ? globalThis.Number(object.previousScore) : 0,
-      createdAt: isSet(object.createdAt) ? fromJsonTimestamp(object.createdAt) : undefined,
-    };
-  },
-
-  toJSON(message: RatingHistory): unknown {
-    const obj: any = {};
-    if (message.id !== 0) {
-      obj.id = Math.round(message.id);
-    }
-    if (message.ratingId !== 0) {
-      obj.ratingId = Math.round(message.ratingId);
-    }
-    if (message.previousScore !== 0) {
-      obj.previousScore = Math.round(message.previousScore);
-    }
-    if (message.createdAt !== undefined) {
-      obj.createdAt = message.createdAt.toISOString();
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<RatingHistory>, I>>(base?: I): RatingHistory {
-    return RatingHistory.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<RatingHistory>, I>>(object: I): RatingHistory {
-    const message = createBaseRatingHistory();
-    message.id = object.id ?? 0;
-    message.ratingId = object.ratingId ?? 0;
-    message.previousScore = object.previousScore ?? 0;
-    message.createdAt = object.createdAt ?? undefined;
+    message.name = object.name ?? "";
+    message.color = object.color ?? "";
     return message;
   },
 };

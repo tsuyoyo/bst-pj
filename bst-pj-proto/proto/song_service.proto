@@ -1,0 +1,111 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "content.proto";
+
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+service SongService {
+  // POST /songs
+  rpc CreateSong(CreateSongRequest) returns (CreateSongResponse);
+  // GET /songs
+  rpc ListSongs(ListSongsRequest) returns (ListSongsResponse);
+  // GET /songs/{id}
+  rpc GetSong(GetSongRequest) returns (GetSongResponse);
+  // PUT /songs/{id}
+  rpc UpdateSong(UpdateSongRequest) returns (UpdateSongResponse);
+  // DELETE /songs/{id}
+  rpc DeleteSong(DeleteSongRequest) returns (DeleteSongResponse);
+  // POST /songs/{id}/resources
+  rpc AddSongResource(AddSongResourceRequest) returns (AddSongResourceResponse);
+  // GET /songs/{id}/resources
+  rpc ListSongResources(ListSongResourcesRequest)
+      returns (ListSongResourcesResponse);
+  // DELETE /songs/{id}/resources/{resourceId}
+  rpc DeleteSongResource(DeleteSongResourceRequest)
+      returns (DeleteSongResourceResponse);
+}
+
+message CreateSongRequest {
+  string title       = 1;
+  Artist artist      = 2;
+  Genre  genre       = 3;
+  string description = 4;
+}
+
+message CreateSongResponse {
+  Song song = 1;
+}
+
+message ListSongsRequest {
+  int32  page_size  = 1;
+  int32  page_token = 2;
+  string query      = 3;
+  Genre  genre      = 4;
+  int32  artist_id  = 5;
+}
+
+message ListSongsResponse {
+  repeated Song songs           = 1;
+  string        next_page_token = 2;
+  int32         total_size      = 3;
+}
+
+message GetSongRequest {
+  int32 song_id = 1;
+}
+
+message GetSongResponse {
+  Song song = 1;
+}
+
+message UpdateSongRequest {
+  int32  song_id     = 1;
+  string title       = 2;
+  Artist artist      = 3;
+  Genre  genre       = 4;
+  string description = 5;
+}
+
+message UpdateSongResponse {
+  Song song = 1;
+}
+
+message DeleteSongRequest {
+  int32 song_id = 1;
+}
+
+message DeleteSongResponse {
+  bool success = 1;
+}
+
+message AddSongResourceRequest {
+  int32    song_id  = 1;
+  Resource resource = 2;
+}
+
+message AddSongResourceResponse {
+  Resource resource = 1;
+}
+
+message ListSongResourcesRequest {
+  int32 song_id    = 1;
+  int32 page_size  = 2;
+  int32 page_token = 3;
+}
+
+message ListSongResourcesResponse {
+  repeated Resource resources       = 1;
+  string            next_page_token = 2;
+  int32             total_size      = 3;
+}
+
+message DeleteSongResourceRequest {
+  int32 song_id     = 1;
+  int32 resource_id = 2;
+}
+
+message DeleteSongResourceResponse {
+  bool success = 1;
+}

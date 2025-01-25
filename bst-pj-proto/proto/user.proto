@@ -2,11 +2,11 @@ syntax = "proto3";
 
 package bst.v1;
 
-import "google/protobuf/timestamp.proto";
-import "location.proto";
+import "area.proto";
 import "content.proto";
+import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/yourusername/bst-pj-proto/gen/go/bst/v1;bstv1";
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
 
 // User model
 message User {
@@ -26,8 +26,10 @@ message UserProfile {
   string                    introduction = 2;
   Area                      area         = 3;
   UserFavorite              favorite     = 4;
-  google.protobuf.Timestamp createdAt    = 5;
-  repeated UserRatingBadge  badges = 6;  // When the user is well evaluated, the badge is given.
+  google.protobuf.Timestamp created_at   = 5;
+
+  // When the user is well evaluated, the badge is given.
+  repeated UserRatingBadge badges = 6;
 }
 
 message MyProfile {

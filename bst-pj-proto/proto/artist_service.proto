@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "content.proto";
+
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+service ArtistService {
+  // POST /artists
+  rpc CreateArtist(CreateArtistRequest) returns (CreateArtistResponse);
+  // GET /artists
+  rpc ListArtists(ListArtistsRequest) returns (ListArtistsResponse);
+  // GET /artists/{id}
+  rpc GetArtist(GetArtistRequest) returns (GetArtistResponse);
+  // PUT /artists/{id}
+  rpc UpdateArtist(UpdateArtistRequest) returns (UpdateArtistResponse);
+  // DELETE /artists/{id}
+  rpc DeleteArtist(DeleteArtistRequest) returns (DeleteArtistResponse);
+  // GET /artists/{id}/songs
+  rpc ListArtistSongs(ListArtistSongsRequest) returns (ListArtistSongsResponse);
+}
+
+message CreateArtistRequest {
+  string name        = 1;
+  string description = 2;
+  Genre  genre       = 3;
+  string website     = 4;
+}
+
+message CreateArtistResponse {
+  Artist artist = 1;
+}
+
+message ListArtistsRequest {
+  int32  page_size  = 1;
+  int32  page_token = 2;
+  string query      = 3;
+  Genre  genre      = 4;
+}
+
+message ListArtistsResponse {
+  repeated Artist artists         = 1;
+  string          next_page_token = 2;
+  int32           total_size      = 3;
+}
+
+message GetArtistRequest {
+  int32 artist_id = 1;
+}
+
+message GetArtistResponse {
+  Artist artist = 1;
+}
+
+message UpdateArtistRequest {
+  int32  artist_id   = 1;
+  string name        = 2;
+  string description = 3;
+  Genre  genre       = 4;
+  string website     = 5;
+}
+
+message UpdateArtistResponse {
+  Artist artist = 1;
+}
+
+message DeleteArtistRequest {
+  int32 artist_id = 1;
+}
+
+message DeleteArtistResponse {
+  bool success = 1;
+}
+
+message ListArtistSongsRequest {
+  int32 artist_id  = 1;
+  int32 page_size  = 2;
+  int32 page_token = 3;
+}
+
+message ListArtistSongsResponse {
+  repeated Song songs           = 1;
+  string        next_page_token = 2;
+  int32         total_size      = 3;
+}

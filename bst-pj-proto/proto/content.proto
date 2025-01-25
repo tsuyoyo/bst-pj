@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package bst.v1;
 
-option go_package = "github.com/yourusername/bst-pj-proto/gen/go/bst/v1;bstv1";
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
 
 message Resource {
   enum ResourceType {

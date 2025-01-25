@@ -105,35 +105,3 @@ final $typed_data.Uint8List partDescriptor = $convert.base64Decode(
     'CgRQYXJ0Eg4KAmlkGAEgASgFUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEiAKC2Rlc2NyaXB0aW'
     '9uGAMgASgJUgtkZXNjcmlwdGlvbg==');
 
-@$core.Deprecated('Use areaDescriptor instead')
-const Area$json = {
-  '1': 'Area',
-  '2': [
-    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'prefectureId', '3': 2, '4': 1, '5': 5, '10': 'prefectureId'},
-  ],
-};
-
-/// Descriptor for `Area`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List areaDescriptor = $convert.base64Decode(
-    'CgRBcmVhEhIKBG5hbWUYASABKAlSBG5hbWUSIgoMcHJlZmVjdHVyZUlkGAIgASgFUgxwcmVmZW'
-    'N0dXJlSWQ=');
-
-@$core.Deprecated('Use locationDescriptor instead')
-const Location$json = {
-  '1': 'Location',
-  '2': [
-    {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
-    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'additionalInfo', '3': 3, '4': 1, '5': 9, '10': 'additionalInfo'},
-    {'1': 'area', '3': 4, '4': 1, '5': 11, '6': '.bst.v1.Area', '10': 'area'},
-    {'1': 'mapUrl', '3': 5, '4': 1, '5': 9, '10': 'mapUrl'},
-  ],
-};
-
-/// Descriptor for `Location`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List locationDescriptor = $convert.base64Decode(
-    'CghMb2NhdGlvbhIOCgJpZBgBIAEoBVICaWQSEgoEbmFtZRgCIAEoCVIEbmFtZRImCg5hZGRpdG'
-    'lvbmFsSW5mbxgDIAEoCVIOYWRkaXRpb25hbEluZm8SIAoEYXJlYRgEIAEoCzIMLmJzdC52MS5B'
-    'cmVhUgRhcmVhEhYKBm1hcFVybBgFIAEoCVIGbWFwVXJs');
-

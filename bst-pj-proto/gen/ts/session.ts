@@ -118,65 +118,20 @@ export function sessionParticipantRoleToJSON(object: SessionParticipantRole): st
   }
 }
 
-export enum TimetableEntryType {
-  TIMETABLE_ENTRY_TYPE_UNSPECIFIED = 0,
-  TIMETABLE_ENTRY_TYPE_TASK = 1,
-  TIMETABLE_ENTRY_TYPE_PERFORMANCE = 2,
-  TIMETABLE_ENTRY_TYPE_PARTY = 3,
-  UNRECOGNIZED = -1,
-}
-
-export function timetableEntryTypeFromJSON(object: any): TimetableEntryType {
-  switch (object) {
-    case 0:
-    case "TIMETABLE_ENTRY_TYPE_UNSPECIFIED":
-      return TimetableEntryType.TIMETABLE_ENTRY_TYPE_UNSPECIFIED;
-    case 1:
-    case "TIMETABLE_ENTRY_TYPE_TASK":
-      return TimetableEntryType.TIMETABLE_ENTRY_TYPE_TASK;
-    case 2:
-    case "TIMETABLE_ENTRY_TYPE_PERFORMANCE":
-      return TimetableEntryType.TIMETABLE_ENTRY_TYPE_PERFORMANCE;
-    case 3:
-    case "TIMETABLE_ENTRY_TYPE_PARTY":
-      return TimetableEntryType.TIMETABLE_ENTRY_TYPE_PARTY;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return TimetableEntryType.UNRECOGNIZED;
-  }
-}
-
-export function timetableEntryTypeToJSON(object: TimetableEntryType): string {
-  switch (object) {
-    case TimetableEntryType.TIMETABLE_ENTRY_TYPE_UNSPECIFIED:
-      return "TIMETABLE_ENTRY_TYPE_UNSPECIFIED";
-    case TimetableEntryType.TIMETABLE_ENTRY_TYPE_TASK:
-      return "TIMETABLE_ENTRY_TYPE_TASK";
-    case TimetableEntryType.TIMETABLE_ENTRY_TYPE_PERFORMANCE:
-      return "TIMETABLE_ENTRY_TYPE_PERFORMANCE";
-    case TimetableEntryType.TIMETABLE_ENTRY_TYPE_PARTY:
-      return "TIMETABLE_ENTRY_TYPE_PARTY";
-    case TimetableEntryType.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
-}
-
 /** Session model */
+export interface SessionTimelineDate {
+  createdAt: Date | undefined;
+  entryOpen: Date | undefined;
+  entryClose: Date | undefined;
+  eventDate: Date | undefined;
+}
+
 export interface Session {
   id: number;
   title: string;
   timeline: SessionTimelineDate | undefined;
   status: SessionStatus;
   participantsNum: number;
-}
-
-export interface SessionTimelineDate {
-  createdAt: Date | undefined;
-  entryOpen: Date | undefined;
-  entryClose: Date | undefined;
-  eventDate: Date | undefined;
 }
 
 export interface SessionDetail {
@@ -194,6 +149,10 @@ export interface SessionPart {
     | undefined;
   /** Part name in the session (e.g. "Gt1", "Gt2") */
   name: string;
+  /** Display order in the session */
+  displayOrder: number;
+  /** Max number of entries user can make */
+  maxEntry: number;
 }
 
 export interface SessionTask {
@@ -227,11 +186,56 @@ export interface SongPerformance {
 }
 
 export interface TimetableEntry {
-  type: TimetableEntryType;
+  type: TimetableEntry_TimetableEntryType;
   /** Index of the entry in the entities array */
   index: number;
   start: Date | undefined;
   end: Date | undefined;
+}
+
+export enum TimetableEntry_TimetableEntryType {
+  TIMETABLE_ENTRY_TYPE_UNSPECIFIED = 0,
+  TIMETABLE_ENTRY_TYPE_TASK = 1,
+  TIMETABLE_ENTRY_TYPE_PERFORMANCE = 2,
+  TIMETABLE_ENTRY_TYPE_PARTY = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function timetableEntry_TimetableEntryTypeFromJSON(object: any): TimetableEntry_TimetableEntryType {
+  switch (object) {
+    case 0:
+    case "TIMETABLE_ENTRY_TYPE_UNSPECIFIED":
+      return TimetableEntry_TimetableEntryType.TIMETABLE_ENTRY_TYPE_UNSPECIFIED;
+    case 1:
+    case "TIMETABLE_ENTRY_TYPE_TASK":
+      return TimetableEntry_TimetableEntryType.TIMETABLE_ENTRY_TYPE_TASK;
+    case 2:
+    case "TIMETABLE_ENTRY_TYPE_PERFORMANCE":
+      return TimetableEntry_TimetableEntryType.TIMETABLE_ENTRY_TYPE_PERFORMANCE;
+    case 3:
+    case "TIMETABLE_ENTRY_TYPE_PARTY":
+      return TimetableEntry_TimetableEntryType.TIMETABLE_ENTRY_TYPE_PARTY;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return TimetableEntry_TimetableEntryType.UNRECOGNIZED;
+  }
+}
+
+export function timetableEntry_TimetableEntryTypeToJSON(object: TimetableEntry_TimetableEntryType): string {
+  switch (object) {
+    case TimetableEntry_TimetableEntryType.TIMETABLE_ENTRY_TYPE_UNSPECIFIED:
+      return "TIMETABLE_ENTRY_TYPE_UNSPECIFIED";
+    case TimetableEntry_TimetableEntryType.TIMETABLE_ENTRY_TYPE_TASK:
+      return "TIMETABLE_ENTRY_TYPE_TASK";
+    case TimetableEntry_TimetableEntryType.TIMETABLE_ENTRY_TYPE_PERFORMANCE:
+      return "TIMETABLE_ENTRY_TYPE_PERFORMANCE";
+    case TimetableEntry_TimetableEntryType.TIMETABLE_ENTRY_TYPE_PARTY:
+      return "TIMETABLE_ENTRY_TYPE_PARTY";
+    case TimetableEntry_TimetableEntryType.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
 }
 
 export interface Timetable {
@@ -243,6 +247,117 @@ export interface Timetable {
   /** For TimetableEntryType.PARTY */
   parties: Party[];
 }
+
+export interface SessionFeedback {
+  score: number;
+  comment: string;
+  user: User | undefined;
+  createdAt: Date | undefined;
+}
+
+function createBaseSessionTimelineDate(): SessionTimelineDate {
+  return { createdAt: undefined, entryOpen: undefined, entryClose: undefined, eventDate: undefined };
+}
+
+export const SessionTimelineDate = {
+  encode(message: SessionTimelineDate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.createdAt !== undefined) {
+      Timestamp.encode(toTimestamp(message.createdAt), writer.uint32(10).fork()).ldelim();
+    }
+    if (message.entryOpen !== undefined) {
+      Timestamp.encode(toTimestamp(message.entryOpen), writer.uint32(18).fork()).ldelim();
+    }
+    if (message.entryClose !== undefined) {
+      Timestamp.encode(toTimestamp(message.entryClose), writer.uint32(26).fork()).ldelim();
+    }
+    if (message.eventDate !== undefined) {
+      Timestamp.encode(toTimestamp(message.eventDate), writer.uint32(34).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): SessionTimelineDate {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSessionTimelineDate();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.createdAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.entryOpen = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.entryClose = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.eventDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SessionTimelineDate {
+    return {
+      createdAt: isSet(object.createdAt) ? fromJsonTimestamp(object.createdAt) : undefined,
+      entryOpen: isSet(object.entryOpen) ? fromJsonTimestamp(object.entryOpen) : undefined,
+      entryClose: isSet(object.entryClose) ? fromJsonTimestamp(object.entryClose) : undefined,
+      eventDate: isSet(object.eventDate) ? fromJsonTimestamp(object.eventDate) : undefined,
+    };
+  },
+
+  toJSON(message: SessionTimelineDate): unknown {
+    const obj: any = {};
+    if (message.createdAt !== undefined) {
+      obj.createdAt = message.createdAt.toISOString();
+    }
+    if (message.entryOpen !== undefined) {
+      obj.entryOpen = message.entryOpen.toISOString();
+    }
+    if (message.entryClose !== undefined) {
+      obj.entryClose = message.entryClose.toISOString();
+    }
+    if (message.eventDate !== undefined) {
+      obj.eventDate = message.eventDate.toISOString();
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SessionTimelineDate>, I>>(base?: I): SessionTimelineDate {
+    return SessionTimelineDate.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SessionTimelineDate>, I>>(object: I): SessionTimelineDate {
+    const message = createBaseSessionTimelineDate();
+    message.createdAt = object.createdAt ?? undefined;
+    message.entryOpen = object.entryOpen ?? undefined;
+    message.entryClose = object.entryClose ?? undefined;
+    message.eventDate = object.eventDate ?? undefined;
+    return message;
+  },
+};
 
 function createBaseSession(): Session {
   return { id: 0, title: "", timeline: undefined, status: 0, participantsNum: 0 };
@@ -361,110 +476,6 @@ export const Session = {
       : undefined;
     message.status = object.status ?? 0;
     message.participantsNum = object.participantsNum ?? 0;
-    return message;
-  },
-};
-
-function createBaseSessionTimelineDate(): SessionTimelineDate {
-  return { createdAt: undefined, entryOpen: undefined, entryClose: undefined, eventDate: undefined };
-}
-
-export const SessionTimelineDate = {
-  encode(message: SessionTimelineDate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.createdAt !== undefined) {
-      Timestamp.encode(toTimestamp(message.createdAt), writer.uint32(10).fork()).ldelim();
-    }
-    if (message.entryOpen !== undefined) {
-      Timestamp.encode(toTimestamp(message.entryOpen), writer.uint32(18).fork()).ldelim();
-    }
-    if (message.entryClose !== undefined) {
-      Timestamp.encode(toTimestamp(message.entryClose), writer.uint32(26).fork()).ldelim();
-    }
-    if (message.eventDate !== undefined) {
-      Timestamp.encode(toTimestamp(message.eventDate), writer.uint32(34).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): SessionTimelineDate {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSessionTimelineDate();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.createdAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.entryOpen = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.entryClose = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          continue;
-        case 4:
-          if (tag !== 34) {
-            break;
-          }
-
-          message.eventDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): SessionTimelineDate {
-    return {
-      createdAt: isSet(object.createdAt) ? fromJsonTimestamp(object.createdAt) : undefined,
-      entryOpen: isSet(object.entryOpen) ? fromJsonTimestamp(object.entryOpen) : undefined,
-      entryClose: isSet(object.entryClose) ? fromJsonTimestamp(object.entryClose) : undefined,
-      eventDate: isSet(object.eventDate) ? fromJsonTimestamp(object.eventDate) : undefined,
-    };
-  },
-
-  toJSON(message: SessionTimelineDate): unknown {
-    const obj: any = {};
-    if (message.createdAt !== undefined) {
-      obj.createdAt = message.createdAt.toISOString();
-    }
-    if (message.entryOpen !== undefined) {
-      obj.entryOpen = message.entryOpen.toISOString();
-    }
-    if (message.entryClose !== undefined) {
-      obj.entryClose = message.entryClose.toISOString();
-    }
-    if (message.eventDate !== undefined) {
-      obj.eventDate = message.eventDate.toISOString();
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<SessionTimelineDate>, I>>(base?: I): SessionTimelineDate {
-    return SessionTimelineDate.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<SessionTimelineDate>, I>>(object: I): SessionTimelineDate {
-    const message = createBaseSessionTimelineDate();
-    message.createdAt = object.createdAt ?? undefined;
-    message.entryOpen = object.entryOpen ?? undefined;
-    message.entryClose = object.entryClose ?? undefined;
-    message.eventDate = object.eventDate ?? undefined;
     return message;
   },
 };
@@ -595,7 +606,7 @@ export const SessionDetail = {
 };
 
 function createBaseSessionPart(): SessionPart {
-  return { part: undefined, name: "" };
+  return { part: undefined, name: "", displayOrder: 0, maxEntry: 0 };
 }
 
 export const SessionPart = {
@@ -605,6 +616,12 @@ export const SessionPart = {
     }
     if (message.name !== "") {
       writer.uint32(18).string(message.name);
+    }
+    if (message.displayOrder !== 0) {
+      writer.uint32(24).int32(message.displayOrder);
+    }
+    if (message.maxEntry !== 0) {
+      writer.uint32(32).int32(message.maxEntry);
     }
     return writer;
   },
@@ -630,6 +647,20 @@ export const SessionPart = {
 
           message.name = reader.string();
           continue;
+        case 3:
+          if (tag !== 24) {
+            break;
+          }
+
+          message.displayOrder = reader.int32();
+          continue;
+        case 4:
+          if (tag !== 32) {
+            break;
+          }
+
+          message.maxEntry = reader.int32();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -643,6 +674,8 @@ export const SessionPart = {
     return {
       part: isSet(object.part) ? Part.fromJSON(object.part) : undefined,
       name: isSet(object.name) ? globalThis.String(object.name) : "",
+      displayOrder: isSet(object.displayOrder) ? globalThis.Number(object.displayOrder) : 0,
+      maxEntry: isSet(object.maxEntry) ? globalThis.Number(object.maxEntry) : 0,
     };
   },
 
@@ -654,6 +687,12 @@ export const SessionPart = {
     if (message.name !== "") {
       obj.name = message.name;
     }
+    if (message.displayOrder !== 0) {
+      obj.displayOrder = Math.round(message.displayOrder);
+    }
+    if (message.maxEntry !== 0) {
+      obj.maxEntry = Math.round(message.maxEntry);
+    }
     return obj;
   },
 
@@ -664,6 +703,8 @@ export const SessionPart = {
     const message = createBaseSessionPart();
     message.part = (object.part !== undefined && object.part !== null) ? Part.fromPartial(object.part) : undefined;
     message.name = object.name ?? "";
+    message.displayOrder = object.displayOrder ?? 0;
+    message.maxEntry = object.maxEntry ?? 0;
     return message;
   },
 };
@@ -1141,7 +1182,7 @@ export const TimetableEntry = {
 
   fromJSON(object: any): TimetableEntry {
     return {
-      type: isSet(object.type) ? timetableEntryTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? timetableEntry_TimetableEntryTypeFromJSON(object.type) : 0,
       index: isSet(object.index) ? globalThis.Number(object.index) : 0,
       start: isSet(object.start) ? fromJsonTimestamp(object.start) : undefined,
       end: isSet(object.end) ? fromJsonTimestamp(object.end) : undefined,
@@ -1151,7 +1192,7 @@ export const TimetableEntry = {
   toJSON(message: TimetableEntry): unknown {
     const obj: any = {};
     if (message.type !== 0) {
-      obj.type = timetableEntryTypeToJSON(message.type);
+      obj.type = timetableEntry_TimetableEntryTypeToJSON(message.type);
     }
     if (message.index !== 0) {
       obj.index = Math.round(message.index);
@@ -1282,6 +1323,110 @@ export const Timetable = {
     message.tasks = object.tasks?.map((e) => SessionTask.fromPartial(e)) || [];
     message.songPerformances = object.songPerformances?.map((e) => SongPerformance.fromPartial(e)) || [];
     message.parties = object.parties?.map((e) => Party.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseSessionFeedback(): SessionFeedback {
+  return { score: 0, comment: "", user: undefined, createdAt: undefined };
+}
+
+export const SessionFeedback = {
+  encode(message: SessionFeedback, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.score !== 0) {
+      writer.uint32(8).int32(message.score);
+    }
+    if (message.comment !== "") {
+      writer.uint32(18).string(message.comment);
+    }
+    if (message.user !== undefined) {
+      User.encode(message.user, writer.uint32(26).fork()).ldelim();
+    }
+    if (message.createdAt !== undefined) {
+      Timestamp.encode(toTimestamp(message.createdAt), writer.uint32(34).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): SessionFeedback {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSessionFeedback();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.score = reader.int32();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.comment = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.user = User.decode(reader, reader.uint32());
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.createdAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SessionFeedback {
+    return {
+      score: isSet(object.score) ? globalThis.Number(object.score) : 0,
+      comment: isSet(object.comment) ? globalThis.String(object.comment) : "",
+      user: isSet(object.user) ? User.fromJSON(object.user) : undefined,
+      createdAt: isSet(object.createdAt) ? fromJsonTimestamp(object.createdAt) : undefined,
+    };
+  },
+
+  toJSON(message: SessionFeedback): unknown {
+    const obj: any = {};
+    if (message.score !== 0) {
+      obj.score = Math.round(message.score);
+    }
+    if (message.comment !== "") {
+      obj.comment = message.comment;
+    }
+    if (message.user !== undefined) {
+      obj.user = User.toJSON(message.user);
+    }
+    if (message.createdAt !== undefined) {
+      obj.createdAt = message.createdAt.toISOString();
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SessionFeedback>, I>>(base?: I): SessionFeedback {
+    return SessionFeedback.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SessionFeedback>, I>>(object: I): SessionFeedback {
+    const message = createBaseSessionFeedback();
+    message.score = object.score ?? 0;
+    message.comment = object.comment ?? "";
+    message.user = (object.user !== undefined && object.user !== null) ? User.fromPartial(object.user) : undefined;
+    message.createdAt = object.createdAt ?? undefined;
     return message;
   },
 };

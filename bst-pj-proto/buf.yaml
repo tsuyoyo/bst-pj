@@ -1,0 +1,15 @@
+version: v1
+name: buf.build/tsuyoyo/bst-pj-proto
+build:
+  excludes:
+    - node_modules
+lint:
+  use:
+    - DEFAULT
+  ignore:
+    - FIELD_LOWER_SNAKE_CASE
+    - MESSAGE_PASCAL_CASE
+    - RPC_PASCAL_CASE
+breaking:
+  use:
+    - FILE

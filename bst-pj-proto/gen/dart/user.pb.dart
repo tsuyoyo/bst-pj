@@ -13,20 +13,16 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $0;
-import 'user.pbenum.dart';
-
-export 'user.pbenum.dart';
+import 'area.pb.dart' as $8;
+import 'content.pb.dart' as $7;
+import 'google/protobuf/timestamp.pb.dart' as $9;
 
 /// User model
 class User extends $pb.GeneratedMessage {
   factory User({
     $core.int? id,
     $core.String? name,
-    $core.String? email,
-    UserRole? role,
-    UserParticipantStatus? status,
-    Profile? profile,
+    $core.String? icon,
   }) {
     final $result = create();
     if (id != null) {
@@ -35,17 +31,8 @@ class User extends $pb.GeneratedMessage {
     if (name != null) {
       $result.name = name;
     }
-    if (email != null) {
-      $result.email = email;
-    }
-    if (role != null) {
-      $result.role = role;
-    }
-    if (status != null) {
-      $result.status = status;
-    }
-    if (profile != null) {
-      $result.profile = profile;
+    if (icon != null) {
+      $result.icon = icon;
     }
     return $result;
   }
@@ -56,10 +43,7 @@ class User extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'User', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'name')
-    ..aOS(3, _omitFieldNames ? '' : 'email')
-    ..e<UserRole>(4, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: UserRole.USER_ROLE_UNSPECIFIED, valueOf: UserRole.valueOf, enumValues: UserRole.values)
-    ..e<UserParticipantStatus>(5, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: UserParticipantStatus.USER_PARTICIPANT_STATUS_UNSPECIFIED, valueOf: UserParticipantStatus.valueOf, enumValues: UserParticipantStatus.values)
-    ..aOM<Profile>(6, _omitFieldNames ? '' : 'profile', subBuilder: Profile.create)
+    ..aOS(3, _omitFieldNames ? '' : 'icon')
     ..hasRequiredFields = false
   ;
 
@@ -103,76 +87,41 @@ class User extends $pb.GeneratedMessage {
   void clearName() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get email => $_getSZ(2);
+  $core.String get icon => $_getSZ(2);
   @$pb.TagNumber(3)
-  set email($core.String v) { $_setString(2, v); }
+  set icon($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasEmail() => $_has(2);
+  $core.bool hasIcon() => $_has(2);
   @$pb.TagNumber(3)
-  void clearEmail() => clearField(3);
-
-  @$pb.TagNumber(4)
-  UserRole get role => $_getN(3);
-  @$pb.TagNumber(4)
-  set role(UserRole v) { setField(4, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasRole() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearRole() => clearField(4);
-
-  @$pb.TagNumber(5)
-  UserParticipantStatus get status => $_getN(4);
-  @$pb.TagNumber(5)
-  set status(UserParticipantStatus v) { setField(5, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasStatus() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearStatus() => clearField(5);
-
-  @$pb.TagNumber(6)
-  Profile get profile => $_getN(5);
-  @$pb.TagNumber(6)
-  set profile(Profile v) { setField(6, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasProfile() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearProfile() => clearField(6);
-  @$pb.TagNumber(6)
-  Profile ensureProfile() => $_ensure(5);
+  void clearIcon() => clearField(3);
 }
 
-/// Profile model
-class Profile extends $pb.GeneratedMessage {
-  factory Profile({
-    $core.int? id,
-    $core.String? bio,
-    $core.String? avatar,
-    $core.int? userId,
+class UserFavorite extends $pb.GeneratedMessage {
+  factory UserFavorite({
+    $core.Iterable<$7.Genre>? genres,
+    $core.Iterable<$7.Artist>? artists,
+    $core.Iterable<$7.Part>? parts,
   }) {
     final $result = create();
-    if (id != null) {
-      $result.id = id;
+    if (genres != null) {
+      $result.genres.addAll(genres);
     }
-    if (bio != null) {
-      $result.bio = bio;
+    if (artists != null) {
+      $result.artists.addAll(artists);
     }
-    if (avatar != null) {
-      $result.avatar = avatar;
-    }
-    if (userId != null) {
-      $result.userId = userId;
+    if (parts != null) {
+      $result.parts.addAll(parts);
     }
     return $result;
   }
-  Profile._() : super();
-  factory Profile.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Profile.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  UserFavorite._() : super();
+  factory UserFavorite.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UserFavorite.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Profile', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
-    ..aOS(2, _omitFieldNames ? '' : 'bio')
-    ..aOS(3, _omitFieldNames ? '' : 'avatar')
-    ..a<$core.int>(4, _omitFieldNames ? '' : 'userId', $pb.PbFieldType.O3)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UserFavorite', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+    ..pc<$7.Genre>(1, _omitFieldNames ? '' : 'genres', $pb.PbFieldType.PM, subBuilder: $7.Genre.create)
+    ..pc<$7.Artist>(2, _omitFieldNames ? '' : 'artists', $pb.PbFieldType.PM, subBuilder: $7.Artist.create)
+    ..pc<$7.Part>(3, _omitFieldNames ? '' : 'parts', $pb.PbFieldType.PM, subBuilder: $7.Part.create)
     ..hasRequiredFields = false
   ;
 
@@ -180,102 +129,74 @@ class Profile extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  Profile clone() => Profile()..mergeFromMessage(this);
+  UserFavorite clone() => UserFavorite()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  Profile copyWith(void Function(Profile) updates) => super.copyWith((message) => updates(message as Profile)) as Profile;
+  UserFavorite copyWith(void Function(UserFavorite) updates) => super.copyWith((message) => updates(message as UserFavorite)) as UserFavorite;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static Profile create() => Profile._();
-  Profile createEmptyInstance() => create();
-  static $pb.PbList<Profile> createRepeated() => $pb.PbList<Profile>();
+  static UserFavorite create() => UserFavorite._();
+  UserFavorite createEmptyInstance() => create();
+  static $pb.PbList<UserFavorite> createRepeated() => $pb.PbList<UserFavorite>();
   @$core.pragma('dart2js:noInline')
-  static Profile getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Profile>(create);
-  static Profile? _defaultInstance;
+  static UserFavorite getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UserFavorite>(create);
+  static UserFavorite? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get id => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set id($core.int v) { $_setSignedInt32(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearId() => clearField(1);
+  $core.List<$7.Genre> get genres => $_getList(0);
 
   @$pb.TagNumber(2)
-  $core.String get bio => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set bio($core.String v) { $_setString(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasBio() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearBio() => clearField(2);
+  $core.List<$7.Artist> get artists => $_getList(1);
 
   @$pb.TagNumber(3)
-  $core.String get avatar => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set avatar($core.String v) { $_setString(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasAvatar() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearAvatar() => clearField(3);
-
-  @$pb.TagNumber(4)
-  $core.int get userId => $_getIZ(3);
-  @$pb.TagNumber(4)
-  set userId($core.int v) { $_setSignedInt32(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasUserId() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearUserId() => clearField(4);
+  $core.List<$7.Part> get parts => $_getList(2);
 }
 
-/// Rating model
-class Rating extends $pb.GeneratedMessage {
-  factory Rating({
-    $core.int? id,
-    $core.int? score,
-    $core.int? userId,
-    $core.int? targetId,
-    $core.String? targetType,
-    $0.Timestamp? createdAt,
+class UserProfile extends $pb.GeneratedMessage {
+  factory UserProfile({
+    User? user,
+    $core.String? introduction,
+    $8.Area? area,
+    UserFavorite? favorite,
+    $9.Timestamp? createdAt,
+    $core.Iterable<UserRatingBadge>? badges,
   }) {
     final $result = create();
-    if (id != null) {
-      $result.id = id;
+    if (user != null) {
+      $result.user = user;
     }
-    if (score != null) {
-      $result.score = score;
+    if (introduction != null) {
+      $result.introduction = introduction;
     }
-    if (userId != null) {
-      $result.userId = userId;
+    if (area != null) {
+      $result.area = area;
     }
-    if (targetId != null) {
-      $result.targetId = targetId;
-    }
-    if (targetType != null) {
-      $result.targetType = targetType;
+    if (favorite != null) {
+      $result.favorite = favorite;
     }
     if (createdAt != null) {
       $result.createdAt = createdAt;
     }
+    if (badges != null) {
+      $result.badges.addAll(badges);
+    }
     return $result;
   }
-  Rating._() : super();
-  factory Rating.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Rating.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  UserProfile._() : super();
+  factory UserProfile.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UserProfile.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Rating', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'score', $pb.PbFieldType.O3)
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'userId', $pb.PbFieldType.O3)
-    ..a<$core.int>(4, _omitFieldNames ? '' : 'targetId', $pb.PbFieldType.O3)
-    ..aOS(5, _omitFieldNames ? '' : 'targetType')
-    ..aOM<$0.Timestamp>(6, _omitFieldNames ? '' : 'createdAt', subBuilder: $0.Timestamp.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UserProfile', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+    ..aOM<User>(1, _omitFieldNames ? '' : 'user', subBuilder: User.create)
+    ..aOS(2, _omitFieldNames ? '' : 'introduction')
+    ..aOM<$8.Area>(3, _omitFieldNames ? '' : 'area', subBuilder: $8.Area.create)
+    ..aOM<UserFavorite>(4, _omitFieldNames ? '' : 'favorite', subBuilder: UserFavorite.create)
+    ..aOM<$9.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $9.Timestamp.create)
+    ..pc<UserRatingBadge>(6, _omitFieldNames ? '' : 'badges', $pb.PbFieldType.PM, subBuilder: UserRatingBadge.create)
     ..hasRequiredFields = false
   ;
 
@@ -283,112 +204,173 @@ class Rating extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  Rating clone() => Rating()..mergeFromMessage(this);
+  UserProfile clone() => UserProfile()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  Rating copyWith(void Function(Rating) updates) => super.copyWith((message) => updates(message as Rating)) as Rating;
+  UserProfile copyWith(void Function(UserProfile) updates) => super.copyWith((message) => updates(message as UserProfile)) as UserProfile;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static Rating create() => Rating._();
-  Rating createEmptyInstance() => create();
-  static $pb.PbList<Rating> createRepeated() => $pb.PbList<Rating>();
+  static UserProfile create() => UserProfile._();
+  UserProfile createEmptyInstance() => create();
+  static $pb.PbList<UserProfile> createRepeated() => $pb.PbList<UserProfile>();
   @$core.pragma('dart2js:noInline')
-  static Rating getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Rating>(create);
-  static Rating? _defaultInstance;
+  static UserProfile getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UserProfile>(create);
+  static UserProfile? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get id => $_getIZ(0);
+  User get user => $_getN(0);
   @$pb.TagNumber(1)
-  set id($core.int v) { $_setSignedInt32(0, v); }
+  set user(User v) { setField(1, v); }
   @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
+  $core.bool hasUser() => $_has(0);
   @$pb.TagNumber(1)
-  void clearId() => clearField(1);
+  void clearUser() => clearField(1);
+  @$pb.TagNumber(1)
+  User ensureUser() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $core.int get score => $_getIZ(1);
+  $core.String get introduction => $_getSZ(1);
   @$pb.TagNumber(2)
-  set score($core.int v) { $_setSignedInt32(1, v); }
+  set introduction($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasScore() => $_has(1);
+  $core.bool hasIntroduction() => $_has(1);
   @$pb.TagNumber(2)
-  void clearScore() => clearField(2);
+  void clearIntroduction() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.int get userId => $_getIZ(2);
+  $8.Area get area => $_getN(2);
   @$pb.TagNumber(3)
-  set userId($core.int v) { $_setSignedInt32(2, v); }
+  set area($8.Area v) { setField(3, v); }
   @$pb.TagNumber(3)
-  $core.bool hasUserId() => $_has(2);
+  $core.bool hasArea() => $_has(2);
   @$pb.TagNumber(3)
-  void clearUserId() => clearField(3);
+  void clearArea() => clearField(3);
+  @$pb.TagNumber(3)
+  $8.Area ensureArea() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $core.int get targetId => $_getIZ(3);
+  UserFavorite get favorite => $_getN(3);
   @$pb.TagNumber(4)
-  set targetId($core.int v) { $_setSignedInt32(3, v); }
+  set favorite(UserFavorite v) { setField(4, v); }
   @$pb.TagNumber(4)
-  $core.bool hasTargetId() => $_has(3);
+  $core.bool hasFavorite() => $_has(3);
   @$pb.TagNumber(4)
-  void clearTargetId() => clearField(4);
+  void clearFavorite() => clearField(4);
+  @$pb.TagNumber(4)
+  UserFavorite ensureFavorite() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  $core.String get targetType => $_getSZ(4);
+  $9.Timestamp get createdAt => $_getN(4);
   @$pb.TagNumber(5)
-  set targetType($core.String v) { $_setString(4, v); }
+  set createdAt($9.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
-  $core.bool hasTargetType() => $_has(4);
+  $core.bool hasCreatedAt() => $_has(4);
   @$pb.TagNumber(5)
-  void clearTargetType() => clearField(5);
+  void clearCreatedAt() => clearField(5);
+  @$pb.TagNumber(5)
+  $9.Timestamp ensureCreatedAt() => $_ensure(4);
 
+  /// When the user is well evaluated, the badge is given.
   @$pb.TagNumber(6)
-  $0.Timestamp get createdAt => $_getN(5);
-  @$pb.TagNumber(6)
-  set createdAt($0.Timestamp v) { setField(6, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasCreatedAt() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearCreatedAt() => clearField(6);
-  @$pb.TagNumber(6)
-  $0.Timestamp ensureCreatedAt() => $_ensure(5);
+  $core.List<UserRatingBadge> get badges => $_getList(5);
 }
 
-/// Rating history model
-class RatingHistory extends $pb.GeneratedMessage {
-  factory RatingHistory({
+class MyProfile extends $pb.GeneratedMessage {
+  factory MyProfile({
+    UserProfile? profile,
+    $core.String? email,
+  }) {
+    final $result = create();
+    if (profile != null) {
+      $result.profile = profile;
+    }
+    if (email != null) {
+      $result.email = email;
+    }
+    return $result;
+  }
+  MyProfile._() : super();
+  factory MyProfile.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MyProfile.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MyProfile', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+    ..aOM<UserProfile>(1, _omitFieldNames ? '' : 'profile', subBuilder: UserProfile.create)
+    ..aOS(2, _omitFieldNames ? '' : 'email')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MyProfile clone() => MyProfile()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MyProfile copyWith(void Function(MyProfile) updates) => super.copyWith((message) => updates(message as MyProfile)) as MyProfile;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MyProfile create() => MyProfile._();
+  MyProfile createEmptyInstance() => create();
+  static $pb.PbList<MyProfile> createRepeated() => $pb.PbList<MyProfile>();
+  @$core.pragma('dart2js:noInline')
+  static MyProfile getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MyProfile>(create);
+  static MyProfile? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  UserProfile get profile => $_getN(0);
+  @$pb.TagNumber(1)
+  set profile(UserProfile v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasProfile() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearProfile() => clearField(1);
+  @$pb.TagNumber(1)
+  UserProfile ensureProfile() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get email => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set email($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasEmail() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearEmail() => clearField(2);
+}
+
+class UserRatingBadge extends $pb.GeneratedMessage {
+  factory UserRatingBadge({
     $core.int? id,
-    $core.int? ratingId,
-    $core.int? previousScore,
-    $0.Timestamp? createdAt,
+    $core.String? name,
+    $core.String? color,
   }) {
     final $result = create();
     if (id != null) {
       $result.id = id;
     }
-    if (ratingId != null) {
-      $result.ratingId = ratingId;
+    if (name != null) {
+      $result.name = name;
     }
-    if (previousScore != null) {
-      $result.previousScore = previousScore;
-    }
-    if (createdAt != null) {
-      $result.createdAt = createdAt;
+    if (color != null) {
+      $result.color = color;
     }
     return $result;
   }
-  RatingHistory._() : super();
-  factory RatingHistory.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory RatingHistory.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  UserRatingBadge._() : super();
+  factory UserRatingBadge.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UserRatingBadge.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RatingHistory', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UserRatingBadge', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'ratingId', $pb.PbFieldType.O3)
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'previousScore', $pb.PbFieldType.O3)
-    ..aOM<$0.Timestamp>(4, _omitFieldNames ? '' : 'createdAt', subBuilder: $0.Timestamp.create)
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..aOS(3, _omitFieldNames ? '' : 'color')
     ..hasRequiredFields = false
   ;
 
@@ -396,22 +378,22 @@ class RatingHistory extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  RatingHistory clone() => RatingHistory()..mergeFromMessage(this);
+  UserRatingBadge clone() => UserRatingBadge()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  RatingHistory copyWith(void Function(RatingHistory) updates) => super.copyWith((message) => updates(message as RatingHistory)) as RatingHistory;
+  UserRatingBadge copyWith(void Function(UserRatingBadge) updates) => super.copyWith((message) => updates(message as UserRatingBadge)) as UserRatingBadge;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static RatingHistory create() => RatingHistory._();
-  RatingHistory createEmptyInstance() => create();
-  static $pb.PbList<RatingHistory> createRepeated() => $pb.PbList<RatingHistory>();
+  static UserRatingBadge create() => UserRatingBadge._();
+  UserRatingBadge createEmptyInstance() => create();
+  static $pb.PbList<UserRatingBadge> createRepeated() => $pb.PbList<UserRatingBadge>();
   @$core.pragma('dart2js:noInline')
-  static RatingHistory getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RatingHistory>(create);
-  static RatingHistory? _defaultInstance;
+  static UserRatingBadge getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UserRatingBadge>(create);
+  static UserRatingBadge? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.int get id => $_getIZ(0);
@@ -423,33 +405,22 @@ class RatingHistory extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.int get ratingId => $_getIZ(1);
+  $core.String get name => $_getSZ(1);
   @$pb.TagNumber(2)
-  set ratingId($core.int v) { $_setSignedInt32(1, v); }
+  set name($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasRatingId() => $_has(1);
+  $core.bool hasName() => $_has(1);
   @$pb.TagNumber(2)
-  void clearRatingId() => clearField(2);
+  void clearName() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.int get previousScore => $_getIZ(2);
+  $core.String get color => $_getSZ(2);
   @$pb.TagNumber(3)
-  set previousScore($core.int v) { $_setSignedInt32(2, v); }
+  set color($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasPreviousScore() => $_has(2);
+  $core.bool hasColor() => $_has(2);
   @$pb.TagNumber(3)
-  void clearPreviousScore() => clearField(3);
-
-  @$pb.TagNumber(4)
-  $0.Timestamp get createdAt => $_getN(3);
-  @$pb.TagNumber(4)
-  set createdAt($0.Timestamp v) { setField(4, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasCreatedAt() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearCreatedAt() => clearField(4);
-  @$pb.TagNumber(4)
-  $0.Timestamp ensureCreatedAt() => $_ensure(3);
+  void clearColor() => clearField(3);
 }
 
 

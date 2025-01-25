@@ -2,13 +2,12 @@ syntax = "proto3";
 
 package bst.v1;
 
-import "google/protobuf/timestamp.proto";
 import "content.proto";
-import "user.proto";
+import "google/protobuf/timestamp.proto";
 import "party.proto";
-import "location.proto";
+import "user.proto";
 
-option go_package = "github.com/yourusername/bst-pj-proto/gen/go/bst/v1;bstv1";
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
 
 // Common status enumeration
 enum SessionStatus {
@@ -23,18 +22,18 @@ enum SessionStatus {
 
 // Session model
 message SessionTimelineDate {
-  google.protobuf.Timestamp createdAt  = 1;
-  google.protobuf.Timestamp entryOpen  = 2;
-  google.protobuf.Timestamp entryClose = 3;
-  google.protobuf.Timestamp eventDate  = 4;
+  google.protobuf.Timestamp created_at  = 1;
+  google.protobuf.Timestamp entry_open  = 2;
+  google.protobuf.Timestamp entry_close = 3;
+  google.protobuf.Timestamp event_date  = 4;
 }
 
 message Session {
-  int32               id              = 1;
-  string              title           = 2;
-  SessionTimelineDate timeline        = 3;
-  SessionStatus       status          = 4;
-  int32               participantsNum = 5;
+  int32               id               = 1;
+  string              title            = 2;
+  SessionTimelineDate timeline         = 3;
+  SessionStatus       status           = 4;
+  int32               participants_num = 5;
 }
 
 message SessionDetail {
@@ -46,10 +45,10 @@ message SessionDetail {
 }
 
 message SessionPart {
-  Part   part         = 1;  // Instruments, Vocals, etc.
-  string name         = 2;  // Part name in the session (e.g. "Gt1", "Gt2")
-  int32  displayOrder = 3;  // Display order in the session
-  int32  maxEntry     = 4;  // Max number of entries user can make
+  Part   part          = 1;  // Instruments, Vocals, etc.
+  string name          = 2;  // Part name in the session (e.g. "Gt1", "Gt2")
+  int32  display_order = 3;  // Display order in the session
+  int32  max_entry     = 4;  // Max number of entries user can make
 }
 
 message SessionTask {
@@ -59,8 +58,9 @@ message SessionTask {
 // Participant model
 enum SessionParticipantRole {
   SESSION_PARTICIPANT_ROLE_UNSPECIFIED = 0;
-  SESSION_PARTICIPANT_ROLE_ORGANIZER   = 1;  // Organizer role contains player role.
-  SESSION_PARTICIPANT_ROLE_PLAYER      = 2;
+  SESSION_PARTICIPANT_ROLE_ORGANIZER =
+      1;  // Organizer role contains player role.
+  SESSION_PARTICIPANT_ROLE_PLAYER = 2;
 }
 
 message SessionParticipant {
@@ -76,8 +76,8 @@ message SongPerformanceEntry {
 }
 
 message SongPerformancePart {
-  SessionPart part       = 1;
-  bool        isRequired = 2;  // Is required to play the song
+  SessionPart part        = 1;
+  bool        is_required = 2;  // Is required to play the song
 }
 
 message SongPerformance {
@@ -93,8 +93,8 @@ message TimetableEntry {
     TIMETABLE_ENTRY_TYPE_PERFORMANCE = 2;
     TIMETABLE_ENTRY_TYPE_PARTY       = 3;
   }
-  TimetableEntryType        type  = 1;
-  int32                     index = 2;  // Index of the entry in the entities array
+  TimetableEntryType type  = 1;
+  int32              index = 2;  // Index of the entry in the entities array
   google.protobuf.Timestamp start = 3;
   google.protobuf.Timestamp end   = 4;
 }
@@ -103,7 +103,15 @@ message Timetable {
   repeated TimetableEntry entries = 1;
 
   // Entities of each timetable entry
-  repeated SessionTask     tasks            = 2;  // For TimetableEntryType.TASK
-  repeated SongPerformance songPerformances = 3;  // For TimetableEntryType.PERFORMANCE
-  repeated Party           parties          = 4;  // For TimetableEntryType.PARTY
+  repeated SessionTask     tasks = 2;  // For TimetableEntryType.TASK
+  repeated SongPerformance song_performances =
+      3;                       // For TimetableEntryType.PERFORMANCE
+  repeated Party parties = 4;  // For TimetableEntryType.PARTY
+}
+
+message SessionFeedback {
+  int32                     score      = 1;
+  string                    comment    = 2;
+  User                      user       = 3;
+  google.protobuf.Timestamp created_at = 4;
 }

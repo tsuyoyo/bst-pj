@@ -20,6 +20,7 @@ const PartyParticipantRole$json = {
     {'1': 'PARTY_PARTICIPANT_ROLE_UNSPECIFIED', '2': 0},
     {'1': 'PARTY_PARTICIPANT_ROLE_HOST', '2': 1},
     {'1': 'PARTY_PARTICIPANT_ROLE_PARTICIPANT', '2': 2},
+    {'1': 'PARTY_PARTICIPANT_ROLE_OBSERVER', '2': 3},
   ],
 };
 
@@ -27,7 +28,8 @@ const PartyParticipantRole$json = {
 final $typed_data.Uint8List partyParticipantRoleDescriptor = $convert.base64Decode(
     'ChRQYXJ0eVBhcnRpY2lwYW50Um9sZRImCiJQQVJUWV9QQVJUSUNJUEFOVF9ST0xFX1VOU1BFQ0'
     'lGSUVEEAASHwobUEFSVFlfUEFSVElDSVBBTlRfUk9MRV9IT1NUEAESJgoiUEFSVFlfUEFSVElD'
-    'SVBBTlRfUk9MRV9QQVJUSUNJUEFOVBAC');
+    'SVBBTlRfUk9MRV9QQVJUSUNJUEFOVBACEiMKH1BBUlRZX1BBUlRJQ0lQQU5UX1JPTEVfT0JTRV'
+    'JWRVIQAw==');
 
 @$core.Deprecated('Use partyParticipantStatusDescriptor instead')
 const PartyParticipantStatus$json = {

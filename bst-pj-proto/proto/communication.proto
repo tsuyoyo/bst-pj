@@ -2,10 +2,10 @@ syntax = "proto3";
 
 package bst.v1;
 
-import "user.proto";
 import "google/protobuf/timestamp.proto";
+import "user.proto";
 
-option go_package = "github.com/yourusername/bst-pj-proto/gen/go/bst/v1;bstv1";
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
 
 message Comment {
   int32                     id         = 1;
@@ -21,9 +21,9 @@ message Thread {
   string                    title       = 2;
   string                    description = 3;
   repeated Comment          comments    = 4;
-  User                      createdBy   = 5;
-  google.protobuf.Timestamp createdAt   = 6;
-  google.protobuf.Timestamp updatedAt   = 7;
+  User                      created_by  = 5;
+  google.protobuf.Timestamp created_at  = 6;
+  google.protobuf.Timestamp updated_at  = 7;
 }
 
 message Mention {
@@ -39,22 +39,22 @@ message Mention {
   User user = 2;
 
   // Only for MENTION_TYPE_ALL_SESSION_PARTICIPANTS
-  int32 sessionId = 3;
+  int32 session_id = 3;
 
   // Only for MENTION_TYPE_ALL_THREAD_PARTICIPANTS
-  int32 threadId = 4;
+  int32 thread_id = 4;
 }
 
 message ReactionType {
   int32  id          = 1;
   string name        = 2;
   string description = 3;
-  string iconUrl     = 4;
+  string icon_url    = 4;
 }
 
 message Reaction {
-  int32                     id             = 1;
-  User                      user           = 2;
-  int32                     reactionTypeId = 3;
-  google.protobuf.Timestamp createdAt      = 4;
+  int32                     id               = 1;
+  User                      user             = 2;
+  int32                     reaction_type_id = 3;
+  google.protobuf.Timestamp created_at       = 4;
 }

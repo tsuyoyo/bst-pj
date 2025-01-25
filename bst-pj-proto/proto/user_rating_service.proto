@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "user.proto";
+
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+service UserRatingService {
+  // POST /user/{id}/ratings
+  rpc RateUser(RateUserRequest) returns (RateUserResponse);
+  // GET /user/{id}/ratings/badges
+  rpc GetUserRatingBadges(GetUserRatingBadgesRequest)
+      returns (GetUserRatingBadgesResponse);
+}
+
+message RateUserRequest {
+  int32 user_id = 1;
+  int32 session_id =
+      2;  // The session ID of the session where the user was rated
+  int32  score   = 3;
+  string comment = 4;
+}
+
+message RateUserResponse {}
+
+message GetUserRatingBadgesRequest {
+  int32 user_id = 1;
+}
+
+message GetUserRatingBadgesResponse {
+  repeated UserRatingBadge badges = 1;
+}

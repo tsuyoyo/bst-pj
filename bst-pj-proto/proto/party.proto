@@ -3,9 +3,8 @@ syntax = "proto3";
 package bst.v1;
 
 import "google/protobuf/timestamp.proto";
-import "content.proto";
-import "user.proto";
 import "location.proto";
+import "user.proto";
 
 enum PartyParticipantRole {
   PARTY_PARTICIPANT_ROLE_UNSPECIFIED = 0;

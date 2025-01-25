@@ -51,22 +51,24 @@ final $typed_data.Uint8List sessionParticipantRoleDescriptor = $convert.base64De
     'NQRUNJRklFRBAAEiYKIlNFU1NJT05fUEFSVElDSVBBTlRfUk9MRV9PUkdBTklaRVIQARIjCh9T'
     'RVNTSU9OX1BBUlRJQ0lQQU5UX1JPTEVfUExBWUVSEAI=');
 
-@$core.Deprecated('Use timetableEntryTypeDescriptor instead')
-const TimetableEntryType$json = {
-  '1': 'TimetableEntryType',
+@$core.Deprecated('Use sessionTimelineDateDescriptor instead')
+const SessionTimelineDate$json = {
+  '1': 'SessionTimelineDate',
   '2': [
-    {'1': 'TIMETABLE_ENTRY_TYPE_UNSPECIFIED', '2': 0},
-    {'1': 'TIMETABLE_ENTRY_TYPE_TASK', '2': 1},
-    {'1': 'TIMETABLE_ENTRY_TYPE_PERFORMANCE', '2': 2},
-    {'1': 'TIMETABLE_ENTRY_TYPE_PARTY', '2': 3},
+    {'1': 'created_at', '3': 1, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+    {'1': 'entry_open', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'entryOpen'},
+    {'1': 'entry_close', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'entryClose'},
+    {'1': 'event_date', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'eventDate'},
   ],
 };
 
-/// Descriptor for `TimetableEntryType`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List timetableEntryTypeDescriptor = $convert.base64Decode(
-    'ChJUaW1ldGFibGVFbnRyeVR5cGUSJAogVElNRVRBQkxFX0VOVFJZX1RZUEVfVU5TUEVDSUZJRU'
-    'QQABIdChlUSU1FVEFCTEVfRU5UUllfVFlQRV9UQVNLEAESJAogVElNRVRBQkxFX0VOVFJZX1RZ'
-    'UEVfUEVSRk9STUFOQ0UQAhIeChpUSU1FVEFCTEVfRU5UUllfVFlQRV9QQVJUWRAD');
+/// Descriptor for `SessionTimelineDate`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List sessionTimelineDateDescriptor = $convert.base64Decode(
+    'ChNTZXNzaW9uVGltZWxpbmVEYXRlEjkKCmNyZWF0ZWRfYXQYASABKAsyGi5nb29nbGUucHJvdG'
+    '9idWYuVGltZXN0YW1wUgljcmVhdGVkQXQSOQoKZW50cnlfb3BlbhgCIAEoCzIaLmdvb2dsZS5w'
+    'cm90b2J1Zi5UaW1lc3RhbXBSCWVudHJ5T3BlbhI7CgtlbnRyeV9jbG9zZRgDIAEoCzIaLmdvb2'
+    'dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCmVudHJ5Q2xvc2USOQoKZXZlbnRfZGF0ZRgEIAEoCzIa'
+    'Lmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWV2ZW50RGF0ZQ==');
 
 @$core.Deprecated('Use sessionDescriptor instead')
 const Session$json = {
@@ -76,7 +78,7 @@ const Session$json = {
     {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
     {'1': 'timeline', '3': 3, '4': 1, '5': 11, '6': '.bst.v1.SessionTimelineDate', '10': 'timeline'},
     {'1': 'status', '3': 4, '4': 1, '5': 14, '6': '.bst.v1.SessionStatus', '10': 'status'},
-    {'1': 'participantsNum', '3': 5, '4': 1, '5': 5, '10': 'participantsNum'},
+    {'1': 'participants_num', '3': 5, '4': 1, '5': 5, '10': 'participantsNum'},
   ],
 };
 
@@ -84,27 +86,8 @@ const Session$json = {
 final $typed_data.Uint8List sessionDescriptor = $convert.base64Decode(
     'CgdTZXNzaW9uEg4KAmlkGAEgASgFUgJpZBIUCgV0aXRsZRgCIAEoCVIFdGl0bGUSNwoIdGltZW'
     'xpbmUYAyABKAsyGy5ic3QudjEuU2Vzc2lvblRpbWVsaW5lRGF0ZVIIdGltZWxpbmUSLQoGc3Rh'
-    'dHVzGAQgASgOMhUuYnN0LnYxLlNlc3Npb25TdGF0dXNSBnN0YXR1cxIoCg9wYXJ0aWNpcGFudH'
-    'NOdW0YBSABKAVSD3BhcnRpY2lwYW50c051bQ==');
-
-@$core.Deprecated('Use sessionTimelineDateDescriptor instead')
-const SessionTimelineDate$json = {
-  '1': 'SessionTimelineDate',
-  '2': [
-    {'1': 'createdAt', '3': 1, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
-    {'1': 'entryOpen', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'entryOpen'},
-    {'1': 'entryClose', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'entryClose'},
-    {'1': 'eventDate', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'eventDate'},
-  ],
-};
-
-/// Descriptor for `SessionTimelineDate`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List sessionTimelineDateDescriptor = $convert.base64Decode(
-    'ChNTZXNzaW9uVGltZWxpbmVEYXRlEjgKCWNyZWF0ZWRBdBgBIAEoCzIaLmdvb2dsZS5wcm90b2'
-    'J1Zi5UaW1lc3RhbXBSCWNyZWF0ZWRBdBI4CgllbnRyeU9wZW4YAiABKAsyGi5nb29nbGUucHJv'
-    'dG9idWYuVGltZXN0YW1wUgllbnRyeU9wZW4SOgoKZW50cnlDbG9zZRgDIAEoCzIaLmdvb2dsZS'
-    '5wcm90b2J1Zi5UaW1lc3RhbXBSCmVudHJ5Q2xvc2USOAoJZXZlbnREYXRlGAQgASgLMhouZ29v'
-    'Z2xlLnByb3RvYnVmLlRpbWVzdGFtcFIJZXZlbnREYXRl');
+    'dHVzGAQgASgOMhUuYnN0LnYxLlNlc3Npb25TdGF0dXNSBnN0YXR1cxIpChBwYXJ0aWNpcGFudH'
+    'NfbnVtGAUgASgFUg9wYXJ0aWNpcGFudHNOdW0=');
 
 @$core.Deprecated('Use sessionDetailDescriptor instead')
 const SessionDetail$json = {
@@ -132,13 +115,16 @@ const SessionPart$json = {
   '2': [
     {'1': 'part', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.Part', '10': 'part'},
     {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'display_order', '3': 3, '4': 1, '5': 5, '10': 'displayOrder'},
+    {'1': 'max_entry', '3': 4, '4': 1, '5': 5, '10': 'maxEntry'},
   ],
 };
 
 /// Descriptor for `SessionPart`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List sessionPartDescriptor = $convert.base64Decode(
     'CgtTZXNzaW9uUGFydBIgCgRwYXJ0GAEgASgLMgwuYnN0LnYxLlBhcnRSBHBhcnQSEgoEbmFtZR'
-    'gCIAEoCVIEbmFtZQ==');
+    'gCIAEoCVIEbmFtZRIjCg1kaXNwbGF5X29yZGVyGAMgASgFUgxkaXNwbGF5T3JkZXISGwoJbWF4'
+    'X2VudHJ5GAQgASgFUghtYXhFbnRyeQ==');
 
 @$core.Deprecated('Use sessionTaskDescriptor instead')
 const SessionTask$json = {
@@ -188,14 +174,14 @@ const SongPerformancePart$json = {
   '1': 'SongPerformancePart',
   '2': [
     {'1': 'part', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.SessionPart', '10': 'part'},
-    {'1': 'isRequired', '3': 2, '4': 1, '5': 8, '10': 'isRequired'},
+    {'1': 'is_required', '3': 2, '4': 1, '5': 8, '10': 'isRequired'},
   ],
 };
 
 /// Descriptor for `SongPerformancePart`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List songPerformancePartDescriptor = $convert.base64Decode(
     'ChNTb25nUGVyZm9ybWFuY2VQYXJ0EicKBHBhcnQYASABKAsyEy5ic3QudjEuU2Vzc2lvblBhcn'
-    'RSBHBhcnQSHgoKaXNSZXF1aXJlZBgCIAEoCFIKaXNSZXF1aXJlZA==');
+    'RSBHBhcnQSHwoLaXNfcmVxdWlyZWQYAiABKAhSCmlzUmVxdWlyZWQ=');
 
 @$core.Deprecated('Use songPerformanceDescriptor instead')
 const SongPerformance$json = {
@@ -217,19 +203,34 @@ final $typed_data.Uint8List songPerformanceDescriptor = $convert.base64Decode(
 const TimetableEntry$json = {
   '1': 'TimetableEntry',
   '2': [
-    {'1': 'type', '3': 1, '4': 1, '5': 14, '6': '.bst.v1.TimetableEntryType', '10': 'type'},
+    {'1': 'type', '3': 1, '4': 1, '5': 14, '6': '.bst.v1.TimetableEntry.TimetableEntryType', '10': 'type'},
     {'1': 'index', '3': 2, '4': 1, '5': 5, '10': 'index'},
     {'1': 'start', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'start'},
     {'1': 'end', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'end'},
+  ],
+  '4': [TimetableEntry_TimetableEntryType$json],
+};
+
+@$core.Deprecated('Use timetableEntryDescriptor instead')
+const TimetableEntry_TimetableEntryType$json = {
+  '1': 'TimetableEntryType',
+  '2': [
+    {'1': 'TIMETABLE_ENTRY_TYPE_UNSPECIFIED', '2': 0},
+    {'1': 'TIMETABLE_ENTRY_TYPE_TASK', '2': 1},
+    {'1': 'TIMETABLE_ENTRY_TYPE_PERFORMANCE', '2': 2},
+    {'1': 'TIMETABLE_ENTRY_TYPE_PARTY', '2': 3},
   ],
 };
 
 /// Descriptor for `TimetableEntry`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List timetableEntryDescriptor = $convert.base64Decode(
-    'Cg5UaW1ldGFibGVFbnRyeRIuCgR0eXBlGAEgASgOMhouYnN0LnYxLlRpbWV0YWJsZUVudHJ5VH'
-    'lwZVIEdHlwZRIUCgVpbmRleBgCIAEoBVIFaW5kZXgSMAoFc3RhcnQYAyABKAsyGi5nb29nbGUu'
-    'cHJvdG9idWYuVGltZXN0YW1wUgVzdGFydBIsCgNlbmQYBCABKAsyGi5nb29nbGUucHJvdG9idW'
-    'YuVGltZXN0YW1wUgNlbmQ=');
+    'Cg5UaW1ldGFibGVFbnRyeRI9CgR0eXBlGAEgASgOMikuYnN0LnYxLlRpbWV0YWJsZUVudHJ5Ll'
+    'RpbWV0YWJsZUVudHJ5VHlwZVIEdHlwZRIUCgVpbmRleBgCIAEoBVIFaW5kZXgSMAoFc3RhcnQY'
+    'AyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgVzdGFydBIsCgNlbmQYBCABKAsyGi'
+    '5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgNlbmQinwEKElRpbWV0YWJsZUVudHJ5VHlwZRIk'
+    'CiBUSU1FVEFCTEVfRU5UUllfVFlQRV9VTlNQRUNJRklFRBAAEh0KGVRJTUVUQUJMRV9FTlRSWV'
+    '9UWVBFX1RBU0sQARIkCiBUSU1FVEFCTEVfRU5UUllfVFlQRV9QRVJGT1JNQU5DRRACEh4KGlRJ'
+    'TUVUQUJMRV9FTlRSWV9UWVBFX1BBUlRZEAM=');
 
 @$core.Deprecated('Use timetableDescriptor instead')
 const Timetable$json = {
@@ -237,7 +238,7 @@ const Timetable$json = {
   '2': [
     {'1': 'entries', '3': 1, '4': 3, '5': 11, '6': '.bst.v1.TimetableEntry', '10': 'entries'},
     {'1': 'tasks', '3': 2, '4': 3, '5': 11, '6': '.bst.v1.SessionTask', '10': 'tasks'},
-    {'1': 'songPerformances', '3': 3, '4': 3, '5': 11, '6': '.bst.v1.SongPerformance', '10': 'songPerformances'},
+    {'1': 'song_performances', '3': 3, '4': 3, '5': 11, '6': '.bst.v1.SongPerformance', '10': 'songPerformances'},
     {'1': 'parties', '3': 4, '4': 3, '5': 11, '6': '.bst.v1.Party', '10': 'parties'},
   ],
 };
@@ -245,7 +246,24 @@ const Timetable$json = {
 /// Descriptor for `Timetable`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List timetableDescriptor = $convert.base64Decode(
     'CglUaW1ldGFibGUSMAoHZW50cmllcxgBIAMoCzIWLmJzdC52MS5UaW1ldGFibGVFbnRyeVIHZW'
-    '50cmllcxIpCgV0YXNrcxgCIAMoCzITLmJzdC52MS5TZXNzaW9uVGFza1IFdGFza3MSQwoQc29u'
-    'Z1BlcmZvcm1hbmNlcxgDIAMoCzIXLmJzdC52MS5Tb25nUGVyZm9ybWFuY2VSEHNvbmdQZXJmb3'
-    'JtYW5jZXMSJwoHcGFydGllcxgEIAMoCzINLmJzdC52MS5QYXJ0eVIHcGFydGllcw==');
+    '50cmllcxIpCgV0YXNrcxgCIAMoCzITLmJzdC52MS5TZXNzaW9uVGFza1IFdGFza3MSRAoRc29u'
+    'Z19wZXJmb3JtYW5jZXMYAyADKAsyFy5ic3QudjEuU29uZ1BlcmZvcm1hbmNlUhBzb25nUGVyZm'
+    '9ybWFuY2VzEicKB3BhcnRpZXMYBCADKAsyDS5ic3QudjEuUGFydHlSB3BhcnRpZXM=');
+
+@$core.Deprecated('Use sessionFeedbackDescriptor instead')
+const SessionFeedback$json = {
+  '1': 'SessionFeedback',
+  '2': [
+    {'1': 'score', '3': 1, '4': 1, '5': 5, '10': 'score'},
+    {'1': 'comment', '3': 2, '4': 1, '5': 9, '10': 'comment'},
+    {'1': 'user', '3': 3, '4': 1, '5': 11, '6': '.bst.v1.User', '10': 'user'},
+    {'1': 'created_at', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+  ],
+};
+
+/// Descriptor for `SessionFeedback`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List sessionFeedbackDescriptor = $convert.base64Decode(
+    'Cg9TZXNzaW9uRmVlZGJhY2sSFAoFc2NvcmUYASABKAVSBXNjb3JlEhgKB2NvbW1lbnQYAiABKA'
+    'lSB2NvbW1lbnQSIAoEdXNlchgDIAEoCzIMLmJzdC52MS5Vc2VyUgR1c2VyEjkKCmNyZWF0ZWRf'
+    'YXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgljcmVhdGVkQXQ=');
 
