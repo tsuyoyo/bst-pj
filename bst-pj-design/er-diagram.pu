@@ -6,7 +6,10 @@ ENTITY(Session) {
   + Title : String
   + Status : Enum <<BeforeEntry, EntryOpen, Approaching, Ongoing, Completed>>
   + Description : String
+  + CreatedAt : DateTime  
   + Date : DateTime
+  + EntryOpenDate : DateTime
+  + EntryCloseDate : DateTime
   + OrganizerID : Integer // 作成者のUserID
   + LocationID : Integer
 }
@@ -23,6 +26,7 @@ ENTITY(SessionParticipant) {
   + RoleID : Integer <<Optional>>
   + Status : String <<Optional>> // 参加ステータス（例: 確定、キャンセル）
   + IsAdmin : Boolean // 管理者フラグ
+  + IsObserver : Boolean // 観察者フラグ (演奏しない)
 }
 
 ENTITY(SessionRole) {
@@ -31,14 +35,14 @@ ENTITY(SessionRole) {
   + Description : String
 }
 
-ENTITY(Schedule) {
+ENTITY(SessionTimetable) {
   + ID : Integer
   + SessionID : Integer
 }
 
 ENTITY(Activity) {
   + ID : Integer
-  + ScheduleID : Integer
+  + SessionTimetableID : Integer
   + Type : String // 活動の種類 (例: SongPerformance, Party)
   + StartTime : DateTime
   + EndTime : DateTime
@@ -55,6 +59,7 @@ ENTITY(Party) {
   + ID : Integer
   + ActivityID : Integer
   + LocationID : Integer
+  + Fee : Integer // 円
 }
 
 ENTITY(Entry) {
@@ -69,8 +74,15 @@ ENTITY(SessionPart) {
   + SessionID : Integer
   + Name : String // パート名 (例: Gt1, Gt2 のようなケースのためにSessionPartもNameを持つ)
   + PartID : Integer
+  + DisplayOrder : Integer // 表示順
+  + MaxEntry : Integer // エントリーできる上限 (進行と共に変更可能)
   + TransitionCost : Integer // 転換コスト (セッションごとに変わる)
   + Notes : String <<Optional>> // 何かセッション特有のパートに関することがあれば
+}
+
+ENTITY(RequiredPart) {
+  + ID : Integer
+  + SongPerformanceID : Integer
 }
 
 ENTITY(Part) {
@@ -92,6 +104,7 @@ ENTITY(Resource) {
   + TargetID : Integer // 対象のID
   + Type : String // リソースの種類 (例: 楽譜, YouTubeリンク, 録音, 録画)
   + URL : String // リンク
+  + Name : String // リソースの名前
   + Description : String <<Optional>> // リソースの説明
 }
 
@@ -157,7 +170,6 @@ ENTITY(Location) {
   + ID : Integer
   + Name : String
   + GoogleMapsURL : String
-  + Type : Enum <<Studio, Restaurant, Hall>>
   + AdditionalInfo : String
   + AreaID : Integer
 }
@@ -166,6 +178,22 @@ ENTITY(Area) {
   + ID : Integer
   + Name : String // 都道府県名
   + PrefectureID : Integer <<1~47>>
+}
+
+ENTITY(Studio) {
+  + ID : Integer
+  + LocationID : Integer
+}
+
+ENTITY(StudioReview) {
+  + ID : Integer
+  + StudioID : Integer
+  + UserID : Integer
+  + Capacity : Integer
+  + Price: Integer  
+  + Rating : Integer <<1~5>>
+  + Comment : String <<Optional>>
+  + CreatedAt : DateTime
 }
 
 ENTITY(Rating) {
@@ -202,6 +230,7 @@ ENTITY(User) {
   + ExternalService : Enum <<Google, Facebook, Twitter, GitHub>> // 外部サービスの種類
   + Name : String // ユーザー名
   + Email : String <<Optional>> // 任意のメールアドレス
+  + IconURL : String <<Optional>> // アイコン
   + ProfilePictureURL : String <<Optional>> // プロフィール画像
   + CreatedAt : DateTime // アカウント作成日
 }
@@ -247,9 +276,9 @@ ENTITY(Follow) {
 }
 
 ' ==== Relation ====
-Session "1" -- "1" Schedule
+Session "1" -- "1" SessionTimetable
 Session "1" -- "1" Resource : カバー画像
-Session "1" -- "1" Location : 開催場所 (スタジオなど)
+Session "1" -- "1" Studio : 開催場所 (スタジオなど)
 Session "1" -- "*" Thread
 Session "1" -- "1" SessionParticipant : 作成者
 Session "1" -- "*" SessionParticipant : 参加者
@@ -262,10 +291,12 @@ SessionParticipant "1" -- "1" User
 SessionParticipant "1" -- "*" ParticipantPart
 SessionParticipant "1" -- "1" SessionRole
 ParticipantPart "1" -- "1" SessionPart
-Schedule "1" -- "*" Activity
+SessionTimetable "1" -- "*" Activity
 Activity "1" -- "0..1" SongPerformance
 Activity "1" -- "0..1" Party
 SongPerformance "1" -- "1..*" Entry
+SongPerformance "1" -- "1..*" RequiredPart
+RequiredPart "1" -- "1" SessionPart
 Comment "1" -- "*" Resource : 動画、楽譜、画像など添付
 SongPerformance "1" -- "*" Resource : 動画、楽譜、画像など添付
 Party "1" -- "1" Location
@@ -285,6 +316,8 @@ SessionPart "1" -- "1" Part
 SongPerformance "1" -- "1" Song
 Song "1" -- "1" Artist
 Artist "1" -- "1" Genre
+Studio "1" -- "1" Location
+Studio "1" -- "*" StudioReview
 
 User "1" -- "1" UserProfile
 User "1" -- "*" UserArtist
