@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "description": "Protocol Buffers and gRPC definitions for BST Project",
   "scripts": {
+    "postinstall": "mkdir -p proto/google/protobuf && cp node_modules/protobufjs/google/protobuf/* proto/google/protobuf/",
     "generate": "npm run generate:ts && npm run generate:dart",
-    "generate:ts": "protoc --plugin=protoc-gen-ts_proto=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./gen/ts --ts_proto_opt=esModuleInterop=true --proto_path=./proto ./proto/*.proto",
-    "generate:dart": "protoc --dart_out=grpc:./gen/dart --proto_path=./proto ./proto/*.proto"
+    "generate:ts": "protoc --proto_path=./proto --plugin=protoc-gen-ts_proto=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./gen/ts --ts_proto_opt=esModuleInterop=true ./proto/*.proto",
+    "generate:dart": "protoc --proto_path=./proto --dart_out=grpc:./gen/dart ./proto/*.proto",
+    "format": "find proto -name '*.proto' -exec clang-format -i {} \\;"
   },
   "devDependencies": {
     "@types/google-protobuf": "^3.15.12",
     "grpc-tools": "^1.12.4",
+    "protobufjs": "^7.2.5",
     "ts-proto": "^1.167.3",
     "typescript": "^5.3.3"
   }

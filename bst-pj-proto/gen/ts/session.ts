@@ -6,16 +6,22 @@
 
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
+import { Part, Song } from "./content";
+import { Timestamp } from "./google/protobuf/timestamp";
+import { Party } from "./party";
+import { User } from "./user";
 
 export const protobufPackage = "bst.v1";
 
-/** セッションステータス */
+/** Common status enumeration */
 export enum SessionStatus {
   SESSION_STATUS_UNSPECIFIED = 0,
-  SESSION_STATUS_DRAFT = 1,
-  SESSION_STATUS_PUBLISHED = 2,
-  SESSION_STATUS_CANCELLED = 3,
-  SESSION_STATUS_COMPLETED = 4,
+  SESSION_STATUS_IN_DRAFT = 1,
+  SESSION_STATUS_OPEN = 2,
+  SESSION_STATUS_ENTRY_OPEN = 3,
+  SESSION_STATUS_ENTRY_CLOSE = 4,
+  SESSION_STATUS_COMPLETED = 5,
+  SESSION_STATUS_CANCELLED = 6,
   UNRECOGNIZED = -1,
 }
 
@@ -25,17 +31,23 @@ export function sessionStatusFromJSON(object: any): SessionStatus {
     case "SESSION_STATUS_UNSPECIFIED":
       return SessionStatus.SESSION_STATUS_UNSPECIFIED;
     case 1:
-    case "SESSION_STATUS_DRAFT":
-      return SessionStatus.SESSION_STATUS_DRAFT;
+    case "SESSION_STATUS_IN_DRAFT":
+      return SessionStatus.SESSION_STATUS_IN_DRAFT;
     case 2:
-    case "SESSION_STATUS_PUBLISHED":
-      return SessionStatus.SESSION_STATUS_PUBLISHED;
+    case "SESSION_STATUS_OPEN":
+      return SessionStatus.SESSION_STATUS_OPEN;
     case 3:
-    case "SESSION_STATUS_CANCELLED":
-      return SessionStatus.SESSION_STATUS_CANCELLED;
+    case "SESSION_STATUS_ENTRY_OPEN":
+      return SessionStatus.SESSION_STATUS_ENTRY_OPEN;
     case 4:
+    case "SESSION_STATUS_ENTRY_CLOSE":
+      return SessionStatus.SESSION_STATUS_ENTRY_CLOSE;
+    case 5:
     case "SESSION_STATUS_COMPLETED":
       return SessionStatus.SESSION_STATUS_COMPLETED;
+    case 6:
+    case "SESSION_STATUS_CANCELLED":
+      return SessionStatus.SESSION_STATUS_CANCELLED;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -47,494 +59,193 @@ export function sessionStatusToJSON(object: SessionStatus): string {
   switch (object) {
     case SessionStatus.SESSION_STATUS_UNSPECIFIED:
       return "SESSION_STATUS_UNSPECIFIED";
-    case SessionStatus.SESSION_STATUS_DRAFT:
-      return "SESSION_STATUS_DRAFT";
-    case SessionStatus.SESSION_STATUS_PUBLISHED:
-      return "SESSION_STATUS_PUBLISHED";
-    case SessionStatus.SESSION_STATUS_CANCELLED:
-      return "SESSION_STATUS_CANCELLED";
+    case SessionStatus.SESSION_STATUS_IN_DRAFT:
+      return "SESSION_STATUS_IN_DRAFT";
+    case SessionStatus.SESSION_STATUS_OPEN:
+      return "SESSION_STATUS_OPEN";
+    case SessionStatus.SESSION_STATUS_ENTRY_OPEN:
+      return "SESSION_STATUS_ENTRY_OPEN";
+    case SessionStatus.SESSION_STATUS_ENTRY_CLOSE:
+      return "SESSION_STATUS_ENTRY_CLOSE";
     case SessionStatus.SESSION_STATUS_COMPLETED:
       return "SESSION_STATUS_COMPLETED";
+    case SessionStatus.SESSION_STATUS_CANCELLED:
+      return "SESSION_STATUS_CANCELLED";
     case SessionStatus.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
 }
 
-/** セッション作成リクエスト */
-export interface CreateSessionRequest {
-  title: string;
-  description: string;
-  date: string;
-  organizerId: number;
+/** Participant model */
+export enum SessionParticipantRole {
+  SESSION_PARTICIPANT_ROLE_UNSPECIFIED = 0,
+  /** SESSION_PARTICIPANT_ROLE_ORGANIZER - Organizer role contains player role. */
+  SESSION_PARTICIPANT_ROLE_ORGANIZER = 1,
+  SESSION_PARTICIPANT_ROLE_PLAYER = 2,
+  UNRECOGNIZED = -1,
 }
 
-/** セッション作成レスポンス */
-export interface CreateSessionResponse {
-  session: Session | undefined;
+export function sessionParticipantRoleFromJSON(object: any): SessionParticipantRole {
+  switch (object) {
+    case 0:
+    case "SESSION_PARTICIPANT_ROLE_UNSPECIFIED":
+      return SessionParticipantRole.SESSION_PARTICIPANT_ROLE_UNSPECIFIED;
+    case 1:
+    case "SESSION_PARTICIPANT_ROLE_ORGANIZER":
+      return SessionParticipantRole.SESSION_PARTICIPANT_ROLE_ORGANIZER;
+    case 2:
+    case "SESSION_PARTICIPANT_ROLE_PLAYER":
+      return SessionParticipantRole.SESSION_PARTICIPANT_ROLE_PLAYER;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return SessionParticipantRole.UNRECOGNIZED;
+  }
 }
 
-/** セッション取得リクエスト */
-export interface GetSessionRequest {
-  sessionId: number;
+export function sessionParticipantRoleToJSON(object: SessionParticipantRole): string {
+  switch (object) {
+    case SessionParticipantRole.SESSION_PARTICIPANT_ROLE_UNSPECIFIED:
+      return "SESSION_PARTICIPANT_ROLE_UNSPECIFIED";
+    case SessionParticipantRole.SESSION_PARTICIPANT_ROLE_ORGANIZER:
+      return "SESSION_PARTICIPANT_ROLE_ORGANIZER";
+    case SessionParticipantRole.SESSION_PARTICIPANT_ROLE_PLAYER:
+      return "SESSION_PARTICIPANT_ROLE_PLAYER";
+    case SessionParticipantRole.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
 }
 
-/** セッション取得レスポンス */
-export interface GetSessionResponse {
-  session: Session | undefined;
+export enum TimetableEntryType {
+  TIMETABLE_ENTRY_TYPE_UNSPECIFIED = 0,
+  TIMETABLE_ENTRY_TYPE_TASK = 1,
+  TIMETABLE_ENTRY_TYPE_PERFORMANCE = 2,
+  TIMETABLE_ENTRY_TYPE_PARTY = 3,
+  UNRECOGNIZED = -1,
 }
 
-/** セッション一覧取得リクエスト */
-export interface ListSessionsRequest {
-  pageSize: number;
-  pageToken: string;
+export function timetableEntryTypeFromJSON(object: any): TimetableEntryType {
+  switch (object) {
+    case 0:
+    case "TIMETABLE_ENTRY_TYPE_UNSPECIFIED":
+      return TimetableEntryType.TIMETABLE_ENTRY_TYPE_UNSPECIFIED;
+    case 1:
+    case "TIMETABLE_ENTRY_TYPE_TASK":
+      return TimetableEntryType.TIMETABLE_ENTRY_TYPE_TASK;
+    case 2:
+    case "TIMETABLE_ENTRY_TYPE_PERFORMANCE":
+      return TimetableEntryType.TIMETABLE_ENTRY_TYPE_PERFORMANCE;
+    case 3:
+    case "TIMETABLE_ENTRY_TYPE_PARTY":
+      return TimetableEntryType.TIMETABLE_ENTRY_TYPE_PARTY;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return TimetableEntryType.UNRECOGNIZED;
+  }
 }
 
-/** セッション一覧取得レスポンス */
-export interface ListSessionsResponse {
-  sessions: Session[];
-  nextPageToken: string;
+export function timetableEntryTypeToJSON(object: TimetableEntryType): string {
+  switch (object) {
+    case TimetableEntryType.TIMETABLE_ENTRY_TYPE_UNSPECIFIED:
+      return "TIMETABLE_ENTRY_TYPE_UNSPECIFIED";
+    case TimetableEntryType.TIMETABLE_ENTRY_TYPE_TASK:
+      return "TIMETABLE_ENTRY_TYPE_TASK";
+    case TimetableEntryType.TIMETABLE_ENTRY_TYPE_PERFORMANCE:
+      return "TIMETABLE_ENTRY_TYPE_PERFORMANCE";
+    case TimetableEntryType.TIMETABLE_ENTRY_TYPE_PARTY:
+      return "TIMETABLE_ENTRY_TYPE_PARTY";
+    case TimetableEntryType.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
 }
 
-/** セッションモデル */
+/** Session model */
 export interface Session {
   id: number;
   title: string;
-  description: string;
-  date: string;
-  organizerId: number;
+  timeline: SessionTimelineDate | undefined;
   status: SessionStatus;
+  participantsNum: number;
 }
 
-function createBaseCreateSessionRequest(): CreateSessionRequest {
-  return { title: "", description: "", date: "", organizerId: 0 };
+export interface SessionTimelineDate {
+  createdAt: Date | undefined;
+  entryOpen: Date | undefined;
+  entryClose: Date | undefined;
+  eventDate: Date | undefined;
 }
 
-export const CreateSessionRequest = {
-  encode(message: CreateSessionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.title !== "") {
-      writer.uint32(10).string(message.title);
-    }
-    if (message.description !== "") {
-      writer.uint32(18).string(message.description);
-    }
-    if (message.date !== "") {
-      writer.uint32(26).string(message.date);
-    }
-    if (message.organizerId !== 0) {
-      writer.uint32(32).int32(message.organizerId);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): CreateSessionRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCreateSessionRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.title = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.date = reader.string();
-          continue;
-        case 4:
-          if (tag !== 32) {
-            break;
-          }
-
-          message.organizerId = reader.int32();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): CreateSessionRequest {
-    return {
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
-      date: isSet(object.date) ? globalThis.String(object.date) : "",
-      organizerId: isSet(object.organizerId) ? globalThis.Number(object.organizerId) : 0,
-    };
-  },
-
-  toJSON(message: CreateSessionRequest): unknown {
-    const obj: any = {};
-    if (message.title !== "") {
-      obj.title = message.title;
-    }
-    if (message.description !== "") {
-      obj.description = message.description;
-    }
-    if (message.date !== "") {
-      obj.date = message.date;
-    }
-    if (message.organizerId !== 0) {
-      obj.organizerId = Math.round(message.organizerId);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<CreateSessionRequest>, I>>(base?: I): CreateSessionRequest {
-    return CreateSessionRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<CreateSessionRequest>, I>>(object: I): CreateSessionRequest {
-    const message = createBaseCreateSessionRequest();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    message.date = object.date ?? "";
-    message.organizerId = object.organizerId ?? 0;
-    return message;
-  },
-};
-
-function createBaseCreateSessionResponse(): CreateSessionResponse {
-  return { session: undefined };
+export interface SessionDetail {
+  session: Session | undefined;
+  description: string;
+  parts: SessionPart[];
+  participants: SessionParticipant[];
+  timetable: Timetable | undefined;
 }
 
-export const CreateSessionResponse = {
-  encode(message: CreateSessionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.session !== undefined) {
-      Session.encode(message.session, writer.uint32(10).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): CreateSessionResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCreateSessionResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.session = Session.decode(reader, reader.uint32());
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): CreateSessionResponse {
-    return { session: isSet(object.session) ? Session.fromJSON(object.session) : undefined };
-  },
-
-  toJSON(message: CreateSessionResponse): unknown {
-    const obj: any = {};
-    if (message.session !== undefined) {
-      obj.session = Session.toJSON(message.session);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<CreateSessionResponse>, I>>(base?: I): CreateSessionResponse {
-    return CreateSessionResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<CreateSessionResponse>, I>>(object: I): CreateSessionResponse {
-    const message = createBaseCreateSessionResponse();
-    message.session = (object.session !== undefined && object.session !== null)
-      ? Session.fromPartial(object.session)
-      : undefined;
-    return message;
-  },
-};
-
-function createBaseGetSessionRequest(): GetSessionRequest {
-  return { sessionId: 0 };
+export interface SessionPart {
+  /** Instruments, Vocals, etc. */
+  part:
+    | Part
+    | undefined;
+  /** Part name in the session (e.g. "Gt1", "Gt2") */
+  name: string;
 }
 
-export const GetSessionRequest = {
-  encode(message: GetSessionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.sessionId !== 0) {
-      writer.uint32(8).int32(message.sessionId);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetSessionRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseGetSessionRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.sessionId = reader.int32();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): GetSessionRequest {
-    return { sessionId: isSet(object.sessionId) ? globalThis.Number(object.sessionId) : 0 };
-  },
-
-  toJSON(message: GetSessionRequest): unknown {
-    const obj: any = {};
-    if (message.sessionId !== 0) {
-      obj.sessionId = Math.round(message.sessionId);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<GetSessionRequest>, I>>(base?: I): GetSessionRequest {
-    return GetSessionRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<GetSessionRequest>, I>>(object: I): GetSessionRequest {
-    const message = createBaseGetSessionRequest();
-    message.sessionId = object.sessionId ?? 0;
-    return message;
-  },
-};
-
-function createBaseGetSessionResponse(): GetSessionResponse {
-  return { session: undefined };
+export interface SessionTask {
+  name: string;
 }
 
-export const GetSessionResponse = {
-  encode(message: GetSessionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.session !== undefined) {
-      Session.encode(message.session, writer.uint32(10).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetSessionResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseGetSessionResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.session = Session.decode(reader, reader.uint32());
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): GetSessionResponse {
-    return { session: isSet(object.session) ? Session.fromJSON(object.session) : undefined };
-  },
-
-  toJSON(message: GetSessionResponse): unknown {
-    const obj: any = {};
-    if (message.session !== undefined) {
-      obj.session = Session.toJSON(message.session);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<GetSessionResponse>, I>>(base?: I): GetSessionResponse {
-    return GetSessionResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<GetSessionResponse>, I>>(object: I): GetSessionResponse {
-    const message = createBaseGetSessionResponse();
-    message.session = (object.session !== undefined && object.session !== null)
-      ? Session.fromPartial(object.session)
-      : undefined;
-    return message;
-  },
-};
-
-function createBaseListSessionsRequest(): ListSessionsRequest {
-  return { pageSize: 0, pageToken: "" };
+export interface SessionParticipant {
+  id: number;
+  name: string;
+  role: SessionParticipantRole;
+  user: User | undefined;
 }
 
-export const ListSessionsRequest = {
-  encode(message: ListSessionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.pageSize !== 0) {
-      writer.uint32(8).int32(message.pageSize);
-    }
-    if (message.pageToken !== "") {
-      writer.uint32(18).string(message.pageToken);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListSessionsRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseListSessionsRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.pageSize = reader.int32();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.pageToken = reader.string();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): ListSessionsRequest {
-    return {
-      pageSize: isSet(object.pageSize) ? globalThis.Number(object.pageSize) : 0,
-      pageToken: isSet(object.pageToken) ? globalThis.String(object.pageToken) : "",
-    };
-  },
-
-  toJSON(message: ListSessionsRequest): unknown {
-    const obj: any = {};
-    if (message.pageSize !== 0) {
-      obj.pageSize = Math.round(message.pageSize);
-    }
-    if (message.pageToken !== "") {
-      obj.pageToken = message.pageToken;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<ListSessionsRequest>, I>>(base?: I): ListSessionsRequest {
-    return ListSessionsRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<ListSessionsRequest>, I>>(object: I): ListSessionsRequest {
-    const message = createBaseListSessionsRequest();
-    message.pageSize = object.pageSize ?? 0;
-    message.pageToken = object.pageToken ?? "";
-    return message;
-  },
-};
-
-function createBaseListSessionsResponse(): ListSessionsResponse {
-  return { sessions: [], nextPageToken: "" };
+export interface SongPerformanceEntry {
+  user: User | undefined;
+  part: SessionPart | undefined;
 }
 
-export const ListSessionsResponse = {
-  encode(message: ListSessionsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.sessions) {
-      Session.encode(v!, writer.uint32(10).fork()).ldelim();
-    }
-    if (message.nextPageToken !== "") {
-      writer.uint32(18).string(message.nextPageToken);
-    }
-    return writer;
-  },
+export interface SongPerformancePart {
+  part:
+    | SessionPart
+    | undefined;
+  /** Is required to play the song */
+  isRequired: boolean;
+}
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListSessionsResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseListSessionsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
+export interface SongPerformance {
+  song: Song | undefined;
+  entries: SongPerformanceEntry[];
+  parts: SongPerformancePart[];
+}
 
-          message.sessions.push(Session.decode(reader, reader.uint32()));
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
+export interface TimetableEntry {
+  type: TimetableEntryType;
+  /** Index of the entry in the entities array */
+  index: number;
+  start: Date | undefined;
+  end: Date | undefined;
+}
 
-          message.nextPageToken = reader.string();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): ListSessionsResponse {
-    return {
-      sessions: globalThis.Array.isArray(object?.sessions) ? object.sessions.map((e: any) => Session.fromJSON(e)) : [],
-      nextPageToken: isSet(object.nextPageToken) ? globalThis.String(object.nextPageToken) : "",
-    };
-  },
-
-  toJSON(message: ListSessionsResponse): unknown {
-    const obj: any = {};
-    if (message.sessions?.length) {
-      obj.sessions = message.sessions.map((e) => Session.toJSON(e));
-    }
-    if (message.nextPageToken !== "") {
-      obj.nextPageToken = message.nextPageToken;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<ListSessionsResponse>, I>>(base?: I): ListSessionsResponse {
-    return ListSessionsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<ListSessionsResponse>, I>>(object: I): ListSessionsResponse {
-    const message = createBaseListSessionsResponse();
-    message.sessions = object.sessions?.map((e) => Session.fromPartial(e)) || [];
-    message.nextPageToken = object.nextPageToken ?? "";
-    return message;
-  },
-};
+export interface Timetable {
+  entries: TimetableEntry[];
+  /** Entities of each timetable entry */
+  tasks: SessionTask[];
+  /** For TimetableEntryType.PERFORMANCE */
+  songPerformances: SongPerformance[];
+  /** For TimetableEntryType.PARTY */
+  parties: Party[];
+}
 
 function createBaseSession(): Session {
-  return { id: 0, title: "", description: "", date: "", organizerId: 0, status: 0 };
+  return { id: 0, title: "", timeline: undefined, status: 0, participantsNum: 0 };
 }
 
 export const Session = {
@@ -545,17 +256,14 @@ export const Session = {
     if (message.title !== "") {
       writer.uint32(18).string(message.title);
     }
-    if (message.description !== "") {
-      writer.uint32(26).string(message.description);
-    }
-    if (message.date !== "") {
-      writer.uint32(34).string(message.date);
-    }
-    if (message.organizerId !== 0) {
-      writer.uint32(40).int32(message.organizerId);
+    if (message.timeline !== undefined) {
+      SessionTimelineDate.encode(message.timeline, writer.uint32(26).fork()).ldelim();
     }
     if (message.status !== 0) {
-      writer.uint32(48).int32(message.status);
+      writer.uint32(32).int32(message.status);
+    }
+    if (message.participantsNum !== 0) {
+      writer.uint32(40).int32(message.participantsNum);
     }
     return writer;
   },
@@ -586,28 +294,21 @@ export const Session = {
             break;
           }
 
-          message.description = reader.string();
+          message.timeline = SessionTimelineDate.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag !== 34) {
+          if (tag !== 32) {
             break;
           }
 
-          message.date = reader.string();
+          message.status = reader.int32() as any;
           continue;
         case 5:
           if (tag !== 40) {
             break;
           }
 
-          message.organizerId = reader.int32();
-          continue;
-        case 6:
-          if (tag !== 48) {
-            break;
-          }
-
-          message.status = reader.int32() as any;
+          message.participantsNum = reader.int32();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -622,10 +323,9 @@ export const Session = {
     return {
       id: isSet(object.id) ? globalThis.Number(object.id) : 0,
       title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
-      date: isSet(object.date) ? globalThis.String(object.date) : "",
-      organizerId: isSet(object.organizerId) ? globalThis.Number(object.organizerId) : 0,
+      timeline: isSet(object.timeline) ? SessionTimelineDate.fromJSON(object.timeline) : undefined,
       status: isSet(object.status) ? sessionStatusFromJSON(object.status) : 0,
+      participantsNum: isSet(object.participantsNum) ? globalThis.Number(object.participantsNum) : 0,
     };
   },
 
@@ -637,17 +337,14 @@ export const Session = {
     if (message.title !== "") {
       obj.title = message.title;
     }
-    if (message.description !== "") {
-      obj.description = message.description;
-    }
-    if (message.date !== "") {
-      obj.date = message.date;
-    }
-    if (message.organizerId !== 0) {
-      obj.organizerId = Math.round(message.organizerId);
+    if (message.timeline !== undefined) {
+      obj.timeline = SessionTimelineDate.toJSON(message.timeline);
     }
     if (message.status !== 0) {
       obj.status = sessionStatusToJSON(message.status);
+    }
+    if (message.participantsNum !== 0) {
+      obj.participantsNum = Math.round(message.participantsNum);
     }
     return obj;
   },
@@ -659,57 +356,935 @@ export const Session = {
     const message = createBaseSession();
     message.id = object.id ?? 0;
     message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    message.date = object.date ?? "";
-    message.organizerId = object.organizerId ?? 0;
+    message.timeline = (object.timeline !== undefined && object.timeline !== null)
+      ? SessionTimelineDate.fromPartial(object.timeline)
+      : undefined;
     message.status = object.status ?? 0;
+    message.participantsNum = object.participantsNum ?? 0;
     return message;
   },
 };
 
-/** セッション関連のサービス定義 */
-export interface SessionService {
-  /** セッション作成 */
-  CreateSession(request: CreateSessionRequest): Promise<CreateSessionResponse>;
-  /** セッション取得 */
-  GetSession(request: GetSessionRequest): Promise<GetSessionResponse>;
-  /** セッション一覧取得 */
-  ListSessions(request: ListSessionsRequest): Promise<ListSessionsResponse>;
+function createBaseSessionTimelineDate(): SessionTimelineDate {
+  return { createdAt: undefined, entryOpen: undefined, entryClose: undefined, eventDate: undefined };
 }
 
-export const SessionServiceServiceName = "bst.v1.SessionService";
-export class SessionServiceClientImpl implements SessionService {
-  private readonly rpc: Rpc;
-  private readonly service: string;
-  constructor(rpc: Rpc, opts?: { service?: string }) {
-    this.service = opts?.service || SessionServiceServiceName;
-    this.rpc = rpc;
-    this.CreateSession = this.CreateSession.bind(this);
-    this.GetSession = this.GetSession.bind(this);
-    this.ListSessions = this.ListSessions.bind(this);
-  }
-  CreateSession(request: CreateSessionRequest): Promise<CreateSessionResponse> {
-    const data = CreateSessionRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "CreateSession", data);
-    return promise.then((data) => CreateSessionResponse.decode(_m0.Reader.create(data)));
-  }
+export const SessionTimelineDate = {
+  encode(message: SessionTimelineDate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.createdAt !== undefined) {
+      Timestamp.encode(toTimestamp(message.createdAt), writer.uint32(10).fork()).ldelim();
+    }
+    if (message.entryOpen !== undefined) {
+      Timestamp.encode(toTimestamp(message.entryOpen), writer.uint32(18).fork()).ldelim();
+    }
+    if (message.entryClose !== undefined) {
+      Timestamp.encode(toTimestamp(message.entryClose), writer.uint32(26).fork()).ldelim();
+    }
+    if (message.eventDate !== undefined) {
+      Timestamp.encode(toTimestamp(message.eventDate), writer.uint32(34).fork()).ldelim();
+    }
+    return writer;
+  },
 
-  GetSession(request: GetSessionRequest): Promise<GetSessionResponse> {
-    const data = GetSessionRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "GetSession", data);
-    return promise.then((data) => GetSessionResponse.decode(_m0.Reader.create(data)));
-  }
+  decode(input: _m0.Reader | Uint8Array, length?: number): SessionTimelineDate {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSessionTimelineDate();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
 
-  ListSessions(request: ListSessionsRequest): Promise<ListSessionsResponse> {
-    const data = ListSessionsRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "ListSessions", data);
-    return promise.then((data) => ListSessionsResponse.decode(_m0.Reader.create(data)));
-  }
+          message.createdAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.entryOpen = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.entryClose = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.eventDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SessionTimelineDate {
+    return {
+      createdAt: isSet(object.createdAt) ? fromJsonTimestamp(object.createdAt) : undefined,
+      entryOpen: isSet(object.entryOpen) ? fromJsonTimestamp(object.entryOpen) : undefined,
+      entryClose: isSet(object.entryClose) ? fromJsonTimestamp(object.entryClose) : undefined,
+      eventDate: isSet(object.eventDate) ? fromJsonTimestamp(object.eventDate) : undefined,
+    };
+  },
+
+  toJSON(message: SessionTimelineDate): unknown {
+    const obj: any = {};
+    if (message.createdAt !== undefined) {
+      obj.createdAt = message.createdAt.toISOString();
+    }
+    if (message.entryOpen !== undefined) {
+      obj.entryOpen = message.entryOpen.toISOString();
+    }
+    if (message.entryClose !== undefined) {
+      obj.entryClose = message.entryClose.toISOString();
+    }
+    if (message.eventDate !== undefined) {
+      obj.eventDate = message.eventDate.toISOString();
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SessionTimelineDate>, I>>(base?: I): SessionTimelineDate {
+    return SessionTimelineDate.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SessionTimelineDate>, I>>(object: I): SessionTimelineDate {
+    const message = createBaseSessionTimelineDate();
+    message.createdAt = object.createdAt ?? undefined;
+    message.entryOpen = object.entryOpen ?? undefined;
+    message.entryClose = object.entryClose ?? undefined;
+    message.eventDate = object.eventDate ?? undefined;
+    return message;
+  },
+};
+
+function createBaseSessionDetail(): SessionDetail {
+  return { session: undefined, description: "", parts: [], participants: [], timetable: undefined };
 }
 
-interface Rpc {
-  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
+export const SessionDetail = {
+  encode(message: SessionDetail, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.session !== undefined) {
+      Session.encode(message.session, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.description !== "") {
+      writer.uint32(18).string(message.description);
+    }
+    for (const v of message.parts) {
+      SessionPart.encode(v!, writer.uint32(26).fork()).ldelim();
+    }
+    for (const v of message.participants) {
+      SessionParticipant.encode(v!, writer.uint32(34).fork()).ldelim();
+    }
+    if (message.timetable !== undefined) {
+      Timetable.encode(message.timetable, writer.uint32(42).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): SessionDetail {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSessionDetail();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.session = Session.decode(reader, reader.uint32());
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.description = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.parts.push(SessionPart.decode(reader, reader.uint32()));
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.participants.push(SessionParticipant.decode(reader, reader.uint32()));
+          continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.timetable = Timetable.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SessionDetail {
+    return {
+      session: isSet(object.session) ? Session.fromJSON(object.session) : undefined,
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      parts: globalThis.Array.isArray(object?.parts) ? object.parts.map((e: any) => SessionPart.fromJSON(e)) : [],
+      participants: globalThis.Array.isArray(object?.participants)
+        ? object.participants.map((e: any) => SessionParticipant.fromJSON(e))
+        : [],
+      timetable: isSet(object.timetable) ? Timetable.fromJSON(object.timetable) : undefined,
+    };
+  },
+
+  toJSON(message: SessionDetail): unknown {
+    const obj: any = {};
+    if (message.session !== undefined) {
+      obj.session = Session.toJSON(message.session);
+    }
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    if (message.parts?.length) {
+      obj.parts = message.parts.map((e) => SessionPart.toJSON(e));
+    }
+    if (message.participants?.length) {
+      obj.participants = message.participants.map((e) => SessionParticipant.toJSON(e));
+    }
+    if (message.timetable !== undefined) {
+      obj.timetable = Timetable.toJSON(message.timetable);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SessionDetail>, I>>(base?: I): SessionDetail {
+    return SessionDetail.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SessionDetail>, I>>(object: I): SessionDetail {
+    const message = createBaseSessionDetail();
+    message.session = (object.session !== undefined && object.session !== null)
+      ? Session.fromPartial(object.session)
+      : undefined;
+    message.description = object.description ?? "";
+    message.parts = object.parts?.map((e) => SessionPart.fromPartial(e)) || [];
+    message.participants = object.participants?.map((e) => SessionParticipant.fromPartial(e)) || [];
+    message.timetable = (object.timetable !== undefined && object.timetable !== null)
+      ? Timetable.fromPartial(object.timetable)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseSessionPart(): SessionPart {
+  return { part: undefined, name: "" };
 }
+
+export const SessionPart = {
+  encode(message: SessionPart, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.part !== undefined) {
+      Part.encode(message.part, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.name !== "") {
+      writer.uint32(18).string(message.name);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): SessionPart {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSessionPart();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.part = Part.decode(reader, reader.uint32());
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SessionPart {
+    return {
+      part: isSet(object.part) ? Part.fromJSON(object.part) : undefined,
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+    };
+  },
+
+  toJSON(message: SessionPart): unknown {
+    const obj: any = {};
+    if (message.part !== undefined) {
+      obj.part = Part.toJSON(message.part);
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SessionPart>, I>>(base?: I): SessionPart {
+    return SessionPart.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SessionPart>, I>>(object: I): SessionPart {
+    const message = createBaseSessionPart();
+    message.part = (object.part !== undefined && object.part !== null) ? Part.fromPartial(object.part) : undefined;
+    message.name = object.name ?? "";
+    return message;
+  },
+};
+
+function createBaseSessionTask(): SessionTask {
+  return { name: "" };
+}
+
+export const SessionTask = {
+  encode(message: SessionTask, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.name !== "") {
+      writer.uint32(10).string(message.name);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): SessionTask {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSessionTask();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SessionTask {
+    return { name: isSet(object.name) ? globalThis.String(object.name) : "" };
+  },
+
+  toJSON(message: SessionTask): unknown {
+    const obj: any = {};
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SessionTask>, I>>(base?: I): SessionTask {
+    return SessionTask.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SessionTask>, I>>(object: I): SessionTask {
+    const message = createBaseSessionTask();
+    message.name = object.name ?? "";
+    return message;
+  },
+};
+
+function createBaseSessionParticipant(): SessionParticipant {
+  return { id: 0, name: "", role: 0, user: undefined };
+}
+
+export const SessionParticipant = {
+  encode(message: SessionParticipant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.id !== 0) {
+      writer.uint32(8).int32(message.id);
+    }
+    if (message.name !== "") {
+      writer.uint32(18).string(message.name);
+    }
+    if (message.role !== 0) {
+      writer.uint32(24).int32(message.role);
+    }
+    if (message.user !== undefined) {
+      User.encode(message.user, writer.uint32(34).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): SessionParticipant {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSessionParticipant();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.id = reader.int32();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        case 3:
+          if (tag !== 24) {
+            break;
+          }
+
+          message.role = reader.int32() as any;
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.user = User.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SessionParticipant {
+    return {
+      id: isSet(object.id) ? globalThis.Number(object.id) : 0,
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      role: isSet(object.role) ? sessionParticipantRoleFromJSON(object.role) : 0,
+      user: isSet(object.user) ? User.fromJSON(object.user) : undefined,
+    };
+  },
+
+  toJSON(message: SessionParticipant): unknown {
+    const obj: any = {};
+    if (message.id !== 0) {
+      obj.id = Math.round(message.id);
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.role !== 0) {
+      obj.role = sessionParticipantRoleToJSON(message.role);
+    }
+    if (message.user !== undefined) {
+      obj.user = User.toJSON(message.user);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SessionParticipant>, I>>(base?: I): SessionParticipant {
+    return SessionParticipant.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SessionParticipant>, I>>(object: I): SessionParticipant {
+    const message = createBaseSessionParticipant();
+    message.id = object.id ?? 0;
+    message.name = object.name ?? "";
+    message.role = object.role ?? 0;
+    message.user = (object.user !== undefined && object.user !== null) ? User.fromPartial(object.user) : undefined;
+    return message;
+  },
+};
+
+function createBaseSongPerformanceEntry(): SongPerformanceEntry {
+  return { user: undefined, part: undefined };
+}
+
+export const SongPerformanceEntry = {
+  encode(message: SongPerformanceEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.user !== undefined) {
+      User.encode(message.user, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.part !== undefined) {
+      SessionPart.encode(message.part, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): SongPerformanceEntry {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSongPerformanceEntry();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.user = User.decode(reader, reader.uint32());
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.part = SessionPart.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SongPerformanceEntry {
+    return {
+      user: isSet(object.user) ? User.fromJSON(object.user) : undefined,
+      part: isSet(object.part) ? SessionPart.fromJSON(object.part) : undefined,
+    };
+  },
+
+  toJSON(message: SongPerformanceEntry): unknown {
+    const obj: any = {};
+    if (message.user !== undefined) {
+      obj.user = User.toJSON(message.user);
+    }
+    if (message.part !== undefined) {
+      obj.part = SessionPart.toJSON(message.part);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SongPerformanceEntry>, I>>(base?: I): SongPerformanceEntry {
+    return SongPerformanceEntry.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SongPerformanceEntry>, I>>(object: I): SongPerformanceEntry {
+    const message = createBaseSongPerformanceEntry();
+    message.user = (object.user !== undefined && object.user !== null) ? User.fromPartial(object.user) : undefined;
+    message.part = (object.part !== undefined && object.part !== null)
+      ? SessionPart.fromPartial(object.part)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseSongPerformancePart(): SongPerformancePart {
+  return { part: undefined, isRequired: false };
+}
+
+export const SongPerformancePart = {
+  encode(message: SongPerformancePart, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.part !== undefined) {
+      SessionPart.encode(message.part, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.isRequired !== false) {
+      writer.uint32(16).bool(message.isRequired);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): SongPerformancePart {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSongPerformancePart();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.part = SessionPart.decode(reader, reader.uint32());
+          continue;
+        case 2:
+          if (tag !== 16) {
+            break;
+          }
+
+          message.isRequired = reader.bool();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SongPerformancePart {
+    return {
+      part: isSet(object.part) ? SessionPart.fromJSON(object.part) : undefined,
+      isRequired: isSet(object.isRequired) ? globalThis.Boolean(object.isRequired) : false,
+    };
+  },
+
+  toJSON(message: SongPerformancePart): unknown {
+    const obj: any = {};
+    if (message.part !== undefined) {
+      obj.part = SessionPart.toJSON(message.part);
+    }
+    if (message.isRequired !== false) {
+      obj.isRequired = message.isRequired;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SongPerformancePart>, I>>(base?: I): SongPerformancePart {
+    return SongPerformancePart.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SongPerformancePart>, I>>(object: I): SongPerformancePart {
+    const message = createBaseSongPerformancePart();
+    message.part = (object.part !== undefined && object.part !== null)
+      ? SessionPart.fromPartial(object.part)
+      : undefined;
+    message.isRequired = object.isRequired ?? false;
+    return message;
+  },
+};
+
+function createBaseSongPerformance(): SongPerformance {
+  return { song: undefined, entries: [], parts: [] };
+}
+
+export const SongPerformance = {
+  encode(message: SongPerformance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.song !== undefined) {
+      Song.encode(message.song, writer.uint32(10).fork()).ldelim();
+    }
+    for (const v of message.entries) {
+      SongPerformanceEntry.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+    for (const v of message.parts) {
+      SongPerformancePart.encode(v!, writer.uint32(26).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): SongPerformance {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSongPerformance();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.song = Song.decode(reader, reader.uint32());
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.entries.push(SongPerformanceEntry.decode(reader, reader.uint32()));
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.parts.push(SongPerformancePart.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SongPerformance {
+    return {
+      song: isSet(object.song) ? Song.fromJSON(object.song) : undefined,
+      entries: globalThis.Array.isArray(object?.entries)
+        ? object.entries.map((e: any) => SongPerformanceEntry.fromJSON(e))
+        : [],
+      parts: globalThis.Array.isArray(object?.parts)
+        ? object.parts.map((e: any) => SongPerformancePart.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: SongPerformance): unknown {
+    const obj: any = {};
+    if (message.song !== undefined) {
+      obj.song = Song.toJSON(message.song);
+    }
+    if (message.entries?.length) {
+      obj.entries = message.entries.map((e) => SongPerformanceEntry.toJSON(e));
+    }
+    if (message.parts?.length) {
+      obj.parts = message.parts.map((e) => SongPerformancePart.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SongPerformance>, I>>(base?: I): SongPerformance {
+    return SongPerformance.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SongPerformance>, I>>(object: I): SongPerformance {
+    const message = createBaseSongPerformance();
+    message.song = (object.song !== undefined && object.song !== null) ? Song.fromPartial(object.song) : undefined;
+    message.entries = object.entries?.map((e) => SongPerformanceEntry.fromPartial(e)) || [];
+    message.parts = object.parts?.map((e) => SongPerformancePart.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseTimetableEntry(): TimetableEntry {
+  return { type: 0, index: 0, start: undefined, end: undefined };
+}
+
+export const TimetableEntry = {
+  encode(message: TimetableEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.type !== 0) {
+      writer.uint32(8).int32(message.type);
+    }
+    if (message.index !== 0) {
+      writer.uint32(16).int32(message.index);
+    }
+    if (message.start !== undefined) {
+      Timestamp.encode(toTimestamp(message.start), writer.uint32(26).fork()).ldelim();
+    }
+    if (message.end !== undefined) {
+      Timestamp.encode(toTimestamp(message.end), writer.uint32(34).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): TimetableEntry {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTimetableEntry();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.type = reader.int32() as any;
+          continue;
+        case 2:
+          if (tag !== 16) {
+            break;
+          }
+
+          message.index = reader.int32();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.start = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.end = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TimetableEntry {
+    return {
+      type: isSet(object.type) ? timetableEntryTypeFromJSON(object.type) : 0,
+      index: isSet(object.index) ? globalThis.Number(object.index) : 0,
+      start: isSet(object.start) ? fromJsonTimestamp(object.start) : undefined,
+      end: isSet(object.end) ? fromJsonTimestamp(object.end) : undefined,
+    };
+  },
+
+  toJSON(message: TimetableEntry): unknown {
+    const obj: any = {};
+    if (message.type !== 0) {
+      obj.type = timetableEntryTypeToJSON(message.type);
+    }
+    if (message.index !== 0) {
+      obj.index = Math.round(message.index);
+    }
+    if (message.start !== undefined) {
+      obj.start = message.start.toISOString();
+    }
+    if (message.end !== undefined) {
+      obj.end = message.end.toISOString();
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TimetableEntry>, I>>(base?: I): TimetableEntry {
+    return TimetableEntry.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TimetableEntry>, I>>(object: I): TimetableEntry {
+    const message = createBaseTimetableEntry();
+    message.type = object.type ?? 0;
+    message.index = object.index ?? 0;
+    message.start = object.start ?? undefined;
+    message.end = object.end ?? undefined;
+    return message;
+  },
+};
+
+function createBaseTimetable(): Timetable {
+  return { entries: [], tasks: [], songPerformances: [], parties: [] };
+}
+
+export const Timetable = {
+  encode(message: Timetable, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.entries) {
+      TimetableEntry.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    for (const v of message.tasks) {
+      SessionTask.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+    for (const v of message.songPerformances) {
+      SongPerformance.encode(v!, writer.uint32(26).fork()).ldelim();
+    }
+    for (const v of message.parties) {
+      Party.encode(v!, writer.uint32(34).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Timetable {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTimetable();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.entries.push(TimetableEntry.decode(reader, reader.uint32()));
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.tasks.push(SessionTask.decode(reader, reader.uint32()));
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.songPerformances.push(SongPerformance.decode(reader, reader.uint32()));
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.parties.push(Party.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Timetable {
+    return {
+      entries: globalThis.Array.isArray(object?.entries)
+        ? object.entries.map((e: any) => TimetableEntry.fromJSON(e))
+        : [],
+      tasks: globalThis.Array.isArray(object?.tasks) ? object.tasks.map((e: any) => SessionTask.fromJSON(e)) : [],
+      songPerformances: globalThis.Array.isArray(object?.songPerformances)
+        ? object.songPerformances.map((e: any) => SongPerformance.fromJSON(e))
+        : [],
+      parties: globalThis.Array.isArray(object?.parties) ? object.parties.map((e: any) => Party.fromJSON(e)) : [],
+    };
+  },
+
+  toJSON(message: Timetable): unknown {
+    const obj: any = {};
+    if (message.entries?.length) {
+      obj.entries = message.entries.map((e) => TimetableEntry.toJSON(e));
+    }
+    if (message.tasks?.length) {
+      obj.tasks = message.tasks.map((e) => SessionTask.toJSON(e));
+    }
+    if (message.songPerformances?.length) {
+      obj.songPerformances = message.songPerformances.map((e) => SongPerformance.toJSON(e));
+    }
+    if (message.parties?.length) {
+      obj.parties = message.parties.map((e) => Party.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<Timetable>, I>>(base?: I): Timetable {
+    return Timetable.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<Timetable>, I>>(object: I): Timetable {
+    const message = createBaseTimetable();
+    message.entries = object.entries?.map((e) => TimetableEntry.fromPartial(e)) || [];
+    message.tasks = object.tasks?.map((e) => SessionTask.fromPartial(e)) || [];
+    message.songPerformances = object.songPerformances?.map((e) => SongPerformance.fromPartial(e)) || [];
+    message.parties = object.parties?.map((e) => Party.fromPartial(e)) || [];
+    return message;
+  },
+};
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
@@ -722,6 +1297,28 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function toTimestamp(date: Date): Timestamp {
+  const seconds = Math.trunc(date.getTime() / 1_000);
+  const nanos = (date.getTime() % 1_000) * 1_000_000;
+  return { seconds, nanos };
+}
+
+function fromTimestamp(t: Timestamp): Date {
+  let millis = (t.seconds || 0) * 1_000;
+  millis += (t.nanos || 0) / 1_000_000;
+  return new globalThis.Date(millis);
+}
+
+function fromJsonTimestamp(o: any): Date {
+  if (o instanceof globalThis.Date) {
+    return o;
+  } else if (typeof o === "string") {
+    return new globalThis.Date(o);
+  } else {
+    return fromTimestamp(Timestamp.fromJSON(o));
+  }
+}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

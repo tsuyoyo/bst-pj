@@ -55,3 +55,15 @@ bst-pj-proto/
 1. Edit proto files in the `proto/` directory
 2. Run `npm run generate` to generate code
 3. Use the generated code in your projects
+
+## Formatting
+
+(Only for macOS / first time)
+
+```bash
+brew install clang-format
+```
+
+```bash
+npm run format
+```

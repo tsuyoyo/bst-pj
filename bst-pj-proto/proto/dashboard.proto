@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package bst.v1;
+
+// import "common.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/yourusername/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+// Dashboard data model
+message DashboardData {
+  int32                     id         = 1;
+  string                    content    = 2;
+  int32                     user_id    = 3;
+  google.protobuf.Timestamp updated_at = 4;
+}
+
+// Search index model
+message SearchIndex {
+  int32                     id          = 1;
+  string                    keywords    = 2;
+  string                    target_type = 3;
+  int32                     target_id   = 4;
+  google.protobuf.Timestamp indexed_at  = 5;
+}
+
+// Search result model
+message SearchResult {
+  string target_type     = 1;
+  int32  target_id       = 2;
+  string title           = 3;
+  string description     = 4;
+  float  relevance_score = 5;
+}

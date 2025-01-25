@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package bst.v1;
+
+option go_package = "github.com/yourusername/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+message Resource {
+  enum ResourceType {
+    RESOURCE_TYPE_UNSPECIFIED = 0;
+    RESOURCE_TYPE_IMAGE       = 1;
+    RESOURCE_TYPE_VIDEO       = 2;
+  }
+  ResourceType type        = 1;
+  int32        id          = 2;
+  string       url         = 3;
+  string       name        = 4;
+  string       description = 5;
+}
+
+message Song {
+  int32             id        = 1;
+  string            title     = 2;
+  Artist            artist    = 3;
+  repeated Resource resources = 4;
+}
+
+message Genre {
+  int32  id   = 1;
+  string name = 2;
+}
+
+message Artist {
+  int32  id      = 1;
+  string name    = 2;
+  Genre  genre   = 3;
+  string website = 4;
+}
+
+message Part {
+  int32  id          = 1;
+  string name        = 2;
+  string description = 3;
+}

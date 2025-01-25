@@ -13,26 +13,67 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-/// セッションステータス
+/// Common status enumeration
 class SessionStatus extends $pb.ProtobufEnum {
   static const SessionStatus SESSION_STATUS_UNSPECIFIED = SessionStatus._(0, _omitEnumNames ? '' : 'SESSION_STATUS_UNSPECIFIED');
-  static const SessionStatus SESSION_STATUS_DRAFT = SessionStatus._(1, _omitEnumNames ? '' : 'SESSION_STATUS_DRAFT');
-  static const SessionStatus SESSION_STATUS_PUBLISHED = SessionStatus._(2, _omitEnumNames ? '' : 'SESSION_STATUS_PUBLISHED');
-  static const SessionStatus SESSION_STATUS_CANCELLED = SessionStatus._(3, _omitEnumNames ? '' : 'SESSION_STATUS_CANCELLED');
-  static const SessionStatus SESSION_STATUS_COMPLETED = SessionStatus._(4, _omitEnumNames ? '' : 'SESSION_STATUS_COMPLETED');
+  static const SessionStatus SESSION_STATUS_IN_DRAFT = SessionStatus._(1, _omitEnumNames ? '' : 'SESSION_STATUS_IN_DRAFT');
+  static const SessionStatus SESSION_STATUS_OPEN = SessionStatus._(2, _omitEnumNames ? '' : 'SESSION_STATUS_OPEN');
+  static const SessionStatus SESSION_STATUS_ENTRY_OPEN = SessionStatus._(3, _omitEnumNames ? '' : 'SESSION_STATUS_ENTRY_OPEN');
+  static const SessionStatus SESSION_STATUS_ENTRY_CLOSE = SessionStatus._(4, _omitEnumNames ? '' : 'SESSION_STATUS_ENTRY_CLOSE');
+  static const SessionStatus SESSION_STATUS_COMPLETED = SessionStatus._(5, _omitEnumNames ? '' : 'SESSION_STATUS_COMPLETED');
+  static const SessionStatus SESSION_STATUS_CANCELLED = SessionStatus._(6, _omitEnumNames ? '' : 'SESSION_STATUS_CANCELLED');
 
   static const $core.List<SessionStatus> values = <SessionStatus> [
     SESSION_STATUS_UNSPECIFIED,
-    SESSION_STATUS_DRAFT,
-    SESSION_STATUS_PUBLISHED,
-    SESSION_STATUS_CANCELLED,
+    SESSION_STATUS_IN_DRAFT,
+    SESSION_STATUS_OPEN,
+    SESSION_STATUS_ENTRY_OPEN,
+    SESSION_STATUS_ENTRY_CLOSE,
     SESSION_STATUS_COMPLETED,
+    SESSION_STATUS_CANCELLED,
   ];
 
   static final $core.Map<$core.int, SessionStatus> _byValue = $pb.ProtobufEnum.initByValue(values);
   static SessionStatus? valueOf($core.int value) => _byValue[value];
 
   const SessionStatus._($core.int v, $core.String n) : super(v, n);
+}
+
+/// Participant model
+class SessionParticipantRole extends $pb.ProtobufEnum {
+  static const SessionParticipantRole SESSION_PARTICIPANT_ROLE_UNSPECIFIED = SessionParticipantRole._(0, _omitEnumNames ? '' : 'SESSION_PARTICIPANT_ROLE_UNSPECIFIED');
+  static const SessionParticipantRole SESSION_PARTICIPANT_ROLE_ORGANIZER = SessionParticipantRole._(1, _omitEnumNames ? '' : 'SESSION_PARTICIPANT_ROLE_ORGANIZER');
+  static const SessionParticipantRole SESSION_PARTICIPANT_ROLE_PLAYER = SessionParticipantRole._(2, _omitEnumNames ? '' : 'SESSION_PARTICIPANT_ROLE_PLAYER');
+
+  static const $core.List<SessionParticipantRole> values = <SessionParticipantRole> [
+    SESSION_PARTICIPANT_ROLE_UNSPECIFIED,
+    SESSION_PARTICIPANT_ROLE_ORGANIZER,
+    SESSION_PARTICIPANT_ROLE_PLAYER,
+  ];
+
+  static final $core.Map<$core.int, SessionParticipantRole> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static SessionParticipantRole? valueOf($core.int value) => _byValue[value];
+
+  const SessionParticipantRole._($core.int v, $core.String n) : super(v, n);
+}
+
+class TimetableEntryType extends $pb.ProtobufEnum {
+  static const TimetableEntryType TIMETABLE_ENTRY_TYPE_UNSPECIFIED = TimetableEntryType._(0, _omitEnumNames ? '' : 'TIMETABLE_ENTRY_TYPE_UNSPECIFIED');
+  static const TimetableEntryType TIMETABLE_ENTRY_TYPE_TASK = TimetableEntryType._(1, _omitEnumNames ? '' : 'TIMETABLE_ENTRY_TYPE_TASK');
+  static const TimetableEntryType TIMETABLE_ENTRY_TYPE_PERFORMANCE = TimetableEntryType._(2, _omitEnumNames ? '' : 'TIMETABLE_ENTRY_TYPE_PERFORMANCE');
+  static const TimetableEntryType TIMETABLE_ENTRY_TYPE_PARTY = TimetableEntryType._(3, _omitEnumNames ? '' : 'TIMETABLE_ENTRY_TYPE_PARTY');
+
+  static const $core.List<TimetableEntryType> values = <TimetableEntryType> [
+    TIMETABLE_ENTRY_TYPE_UNSPECIFIED,
+    TIMETABLE_ENTRY_TYPE_TASK,
+    TIMETABLE_ENTRY_TYPE_PERFORMANCE,
+    TIMETABLE_ENTRY_TYPE_PARTY,
+  ];
+
+  static final $core.Map<$core.int, TimetableEntryType> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static TimetableEntryType? valueOf($core.int value) => _byValue[value];
+
+  const TimetableEntryType._($core.int v, $core.String n) : super(v, n);
 }
 
 
