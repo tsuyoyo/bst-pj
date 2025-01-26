@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "bst/v1/area.proto";
+import "bst/v1/content.proto";
+import "bst/v1/user.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+message Location {
+  int32  id              = 1;
+  string name            = 2;
+  string additional_info = 3;
+  Area   area            = 4;
+  string map_url         = 5;
+}
+
+// Note: Will add more fields later (e.g. capacity, price, etc)
+message StudioReview {
+  User                      user       = 1;
+  string                    review     = 2;
+  int32                     rating     = 3;
+  repeated Resource         resources  = 4;  // Photos of the studio...etc
+  google.protobuf.Timestamp created_at = 5;
+}
+
+message Studio {
+  int32    id             = 1;
+  Location location       = 2;
+  int32    overall_rating = 3;  // Note: Rating logic is hidden in the backend
+}

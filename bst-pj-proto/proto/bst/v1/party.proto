@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "bst/v1/location.proto";
+import "bst/v1/user.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+enum PartyParticipantRole {
+  PARTY_PARTICIPANT_ROLE_UNSPECIFIED = 0;
+  PARTY_PARTICIPANT_ROLE_HOST        = 1;
+  PARTY_PARTICIPANT_ROLE_PARTICIPANT = 2;
+  PARTY_PARTICIPANT_ROLE_OBSERVER    = 3;
+}
+
+enum PartyParticipantStatus {
+  PARTY_PARTICIPANT_STATUS_UNSPECIFIED = 0;
+  PARTY_PARTICIPANT_STATUS_PENDING     = 1;
+  PARTY_PARTICIPANT_STATUS_CONFIRMED   = 2;
+  PARTY_PARTICIPANT_STATUS_CANCELLED   = 3;
+}
+
+message PartyParticipant {
+  User                   user   = 1;
+  PartyParticipantRole   role   = 2;
+  PartyParticipantStatus status = 3;
+}
+
+message Party {
+  repeated PartyParticipant participants = 1;
+  Location                  location     = 2;
+  int32                     fee          = 3;
+  google.protobuf.Timestamp start_at      = 4;
+  google.protobuf.Timestamp end_at        = 5;
+}

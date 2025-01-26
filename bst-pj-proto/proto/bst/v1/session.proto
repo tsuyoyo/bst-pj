@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "bst/v1/content.proto";
+import "bst/v1/party.proto";
+import "bst/v1/user.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+// Common status enumeration
+enum SessionStatus {
+  SESSION_STATUS_UNSPECIFIED = 0;
+  SESSION_STATUS_IN_DRAFT    = 1;
+  SESSION_STATUS_OPEN        = 2;
+  SESSION_STATUS_ENTRY_OPEN  = 3;
+  SESSION_STATUS_ENTRY_CLOSE = 4;
+  SESSION_STATUS_COMPLETED   = 5;
+  SESSION_STATUS_CANCELLED   = 6;
+}
+
+// Session model
+message SessionTimelineDate {
+  google.protobuf.Timestamp created_at  = 1;
+  google.protobuf.Timestamp entry_open  = 2;
+  google.protobuf.Timestamp entry_close = 3;
+  google.protobuf.Timestamp event_date  = 4;
+}
+
+message Session {
+  int32               id               = 1;
+  string              title            = 2;
+  SessionTimelineDate timeline         = 3;
+  SessionStatus       status           = 4;
+  int32               participants_num = 5;
+}
+
+message SessionDetail {
+  Session                     session      = 1;
+  string                      description  = 2;
+  repeated SessionPart        parts        = 3;
+  repeated SessionParticipant participants = 4;
+  Timetable                   timetable    = 5;
+}
+
+message SessionPart {
+  Part   part          = 1;  // Instruments, Vocals, etc.
+  string name          = 2;  // Part name in the session (e.g. "Gt1", "Gt2")
+  int32  display_order = 3;  // Display order in the session
+  int32  max_entry     = 4;  // Max number of entries user can make
+}
+
+message SessionTask {
+  string name = 1;
+}
+
+// Participant model
+enum SessionParticipantRole {
+  SESSION_PARTICIPANT_ROLE_UNSPECIFIED = 0;
+  SESSION_PARTICIPANT_ROLE_ORGANIZER =
+      1;  // Organizer role contains player role.
+  SESSION_PARTICIPANT_ROLE_PLAYER = 2;
+}
+
+message SessionParticipant {
+  int32                  id   = 1;
+  string                 name = 2;
+  SessionParticipantRole role = 3;
+  User                   user = 4;
+}
+
+message SongPerformanceEntry {
+  User        user = 1;
+  SessionPart part = 2;
+}
+
+message SongPerformancePart {
+  SessionPart part        = 1;
+  bool        is_required = 2;  // Is required to play the song
+}
+
+message SongPerformance {
+  Song                          song    = 1;
+  repeated SongPerformanceEntry entries = 2;
+  repeated SongPerformancePart  parts   = 3;
+}
+
+message TimetableEntry {
+  enum TimetableEntryType {
+    TIMETABLE_ENTRY_TYPE_UNSPECIFIED = 0;
+    TIMETABLE_ENTRY_TYPE_TASK        = 1;
+    TIMETABLE_ENTRY_TYPE_PERFORMANCE = 2;
+    TIMETABLE_ENTRY_TYPE_PARTY       = 3;
+  }
+  TimetableEntryType type  = 1;
+  int32              index = 2;  // Index of the entry in the entities array
+  google.protobuf.Timestamp start = 3;
+  google.protobuf.Timestamp end   = 4;
+}
+
+message Timetable {
+  repeated TimetableEntry entries = 1;
+
+  // Entities of each timetable entry
+  repeated SessionTask     tasks = 2;  // For TimetableEntryType.TASK
+  repeated SongPerformance song_performances =
+      3;                       // For TimetableEntryType.PERFORMANCE
+  repeated Party parties = 4;  // For TimetableEntryType.PARTY
+}
+
+message SessionFeedback {
+  int32                     score      = 1;
+  string                    comment    = 2;
+  User                      user       = 3;
+  google.protobuf.Timestamp created_at = 4;
+}
