@@ -1,0 +1,27 @@
+{
+  "name": "bst-pj-database",
+  "version": "1.0.0",
+  "description": "Database management for BST Project",
+  "scripts": {
+    "migrate": "node-pg-migrate",
+    "migrate:create": "node-pg-migrate create",
+    "migrate:up": "node-pg-migrate up",
+    "migrate:down": "node-pg-migrate down"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "node-pg-migrate": "^6.2.2",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.16",
+    "@types/node-pg-migrate": "^2.3.1",
+    "@types/pg": "^8.11.11",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
