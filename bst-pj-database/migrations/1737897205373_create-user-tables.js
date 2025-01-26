@@ -3,22 +3,24 @@
 exports.shorthands = undefined;
 
 exports.up = (pgm) => {
-  // Create enum types
+  // Create enum type for external service
   pgm.createType("external_service", [
-    "google",
-    "facebook",
-    "twitter",
-    "github",
+    "GOOGLE",
+    "FACEBOOK",
+    "TWITTER",
+    "GITHUB",
   ]);
-  pgm.createType("follow_status", ["following", "blocked", "requested"]);
+
+  // Create enum type for follow status
+  pgm.createType("follow_status", ["FOLLOWING", "BLOCKED", "REQUESTED"]);
 
   // Create users table
   pgm.createTable("users", {
     id: "id",
-    external_id: { type: "varchar(255)", notNull: true },
-    external_service: { type: "external_service", notNull: true },
-    name: { type: "varchar(255)", notNull: true },
-    email: { type: "email" },
+    external_id: { type: "varchar(255)" },
+    external_service: { type: "external_service" },
+    name: { type: "varchar(30)", notNull: true },
+    email: { type: "varchar(255)", notNull: true },
     icon_url: { type: "text" },
     profile_picture_url: { type: "text" },
     created_at: {
@@ -33,7 +35,7 @@ exports.up = (pgm) => {
     },
   });
 
-  // Create unique index on external_id and service combination
+  // Create unique index for external_id and external_service combination
   pgm.createIndex("users", ["external_id", "external_service"], {
     unique: true,
   });
@@ -50,8 +52,8 @@ exports.up = (pgm) => {
     bio: { type: "text" },
     area_id: {
       type: "integer",
-      notNull: true,
       references: "areas",
+      onDelete: "SET NULL",
     },
     created_at: {
       type: "timestamp",
@@ -65,10 +67,7 @@ exports.up = (pgm) => {
     },
   });
 
-  // Create unique index on user_id as there should be only one profile per user
-  pgm.createIndex("user_profiles", "user_id", { unique: true });
-
-  // Create user_parts table (Many-to-Many relationship)
+  // Create user_parts table
   pgm.createTable("user_parts", {
     id: "id",
     user_id: {
@@ -90,10 +89,7 @@ exports.up = (pgm) => {
     },
   });
 
-  // Create unique index to prevent duplicate relationships
-  pgm.createIndex("user_parts", ["user_id", "part_id"], { unique: true });
-
-  // Create user_genres table (Many-to-Many relationship)
+  // Create user_genres table
   pgm.createTable("user_genres", {
     id: "id",
     user_id: {
@@ -115,9 +111,6 @@ exports.up = (pgm) => {
     },
   });
 
-  // Create unique index to prevent duplicate relationships
-  pgm.createIndex("user_genres", ["user_id", "genre_id"], { unique: true });
-
   // Create follows table
   pgm.createTable("follows", {
     id: "id",
@@ -127,7 +120,7 @@ exports.up = (pgm) => {
       references: "users",
       onDelete: "CASCADE",
     },
-    followee_id: {
+    following_id: {
       type: "integer",
       notNull: true,
       references: "users",
@@ -146,10 +139,13 @@ exports.up = (pgm) => {
     },
   });
 
-  // Create unique index to prevent duplicate relationships
-  pgm.createIndex("follows", ["follower_id", "followee_id"], { unique: true });
+  // Create unique indexes
+  pgm.createIndex("user_profiles", "user_id", { unique: true });
+  pgm.createIndex("user_parts", ["user_id", "part_id"], { unique: true });
+  pgm.createIndex("user_genres", ["user_id", "genre_id"], { unique: true });
+  pgm.createIndex("follows", ["follower_id", "following_id"], { unique: true });
 
-  // Add updated_at triggers
+  // Create triggers for updating updated_at
   const tables = ["users", "user_profiles", "follows"];
   tables.forEach((table) => {
     pgm.createTrigger(table, "update_updated_at_trigger", {
@@ -162,14 +158,20 @@ exports.up = (pgm) => {
 };
 
 exports.down = (pgm) => {
-  // Drop tables in reverse order
-  pgm.dropTable("follows", { ifExists: true, cascade: true });
-  pgm.dropTable("user_genres", { ifExists: true, cascade: true });
-  pgm.dropTable("user_parts", { ifExists: true, cascade: true });
-  pgm.dropTable("user_profiles", { ifExists: true, cascade: true });
-  pgm.dropTable("users", { ifExists: true, cascade: true });
+  // Drop triggers
+  const tables = ["users", "user_profiles", "follows"];
+  tables.forEach((table) => {
+    pgm.dropTrigger(table, "update_updated_at_trigger", { ifExists: true });
+  });
+
+  // Drop tables
+  pgm.dropTable("follows", { ifExists: true });
+  pgm.dropTable("user_genres", { ifExists: true });
+  pgm.dropTable("user_parts", { ifExists: true });
+  pgm.dropTable("user_profiles", { ifExists: true });
+  pgm.dropTable("users", { ifExists: true });
 
   // Drop enum types
-  pgm.dropType("follow_status", { ifExists: true });
   pgm.dropType("external_service", { ifExists: true });
+  pgm.dropType("follow_status", { ifExists: true });
 };

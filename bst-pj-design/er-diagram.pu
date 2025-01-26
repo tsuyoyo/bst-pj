@@ -214,8 +214,13 @@ ENTITY(Song) {
 ENTITY(Artist) {
   + ID : Integer
   + Name : String
-  + GenreID : Integer
   + Website : String <<Optional>>
+}
+
+ENTITY(ArtistGenre) {
+  + ID : Integer
+  + ArtistID : Integer
+  + GenreID : Integer
 }
 
 ENTITY(Genre) {
@@ -226,10 +231,10 @@ ENTITY(Genre) {
 ' ==== User Domain Entities ====
 ENTITY(User) {
   + ID : Integer
-  + ExternalID : String // 外部サービスでのユーザーID
-  + ExternalService : Enum <<Google, Facebook, Twitter, GitHub>> // 外部サービスの種類
+  + ExternalID : String <<Optional>> // 外部サービスでのユーザーID
+  + ExternalService : Enum <<Google, Facebook, Twitter, GitHub>> <<Optional>> // 外部サービスの種類
   + Name : String // ユーザー名
-  + Email : String <<Optional>> // 任意のメールアドレス
+  + Email : String // 任意のメールアドレス
   + IconURL : String <<Optional>> // アイコン
   + ProfilePictureURL : String <<Optional>> // プロフィール画像
   + CreatedAt : DateTime // アカウント作成日
@@ -315,7 +320,8 @@ Entry "1" -- "1" SessionPart
 SessionPart "1" -- "1" Part
 SongPerformance "1" -- "1" Song
 Song "1" -- "1" Artist
-Artist "1" -- "1" Genre
+Artist "1" -- "*" ArtistGenre
+ArtistGenre "1" -- "1" Genre
 Studio "1" -- "1" Location
 Studio "1" -- "*" StudioReview
 

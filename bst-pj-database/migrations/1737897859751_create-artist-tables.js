@@ -7,7 +7,6 @@ exports.up = (pgm) => {
   pgm.createTable("artists", {
     id: "id",
     name: { type: "varchar(255)", notNull: true },
-    description: { type: "text" },
     website: { type: "text" },
     created_at: {
       type: "timestamp",
@@ -21,7 +20,7 @@ exports.up = (pgm) => {
     },
   });
 
-  // Create artist_genres table (Many-to-Many relationship)
+  // Create artist_genres table for many-to-many relationship
   pgm.createTable("artist_genres", {
     id: "id",
     artist_id: {
@@ -43,10 +42,10 @@ exports.up = (pgm) => {
     },
   });
 
-  // Create unique index to prevent duplicate relationships
+  // Create unique index for artist_genres to prevent duplicate relationships
   pgm.createIndex("artist_genres", ["artist_id", "genre_id"], { unique: true });
 
-  // Add updated_at triggers
+  // Create trigger for updating updated_at
   pgm.createTrigger("artists", "update_updated_at_trigger", {
     when: "BEFORE",
     operation: "UPDATE",
@@ -56,7 +55,10 @@ exports.up = (pgm) => {
 };
 
 exports.down = (pgm) => {
-  // Drop tables in reverse order
-  pgm.dropTable("artist_genres", { ifExists: true, cascade: true });
-  pgm.dropTable("artists", { ifExists: true, cascade: true });
+  // Drop trigger
+  pgm.dropTrigger("artists", "update_updated_at_trigger", { ifExists: true });
+
+  // Drop tables
+  pgm.dropTable("artist_genres", { ifExists: true });
+  pgm.dropTable("artists", { ifExists: true });
 };
