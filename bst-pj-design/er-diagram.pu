@@ -163,7 +163,7 @@ ENTITY(PartyParticipant) {
   + ID : Integer
   + PartyID : Integer
   + SessionParticipantID : Integer
-  + Status : String <<Optional>> // 参加ステータス（例: 確定、キャンセル）
+  + Status : Enum <<Confirmed, Pending,Cancelled>> 
 }
 
 ENTITY(Location) {
