@@ -4,7 +4,7 @@
 ENTITY(Session) {
   + ID : Integer
   + Title : String
-  + Status : Enum <<BeforeEntry, EntryOpen, Approaching, Ongoing, Completed>>
+  + Status : Enum <<BeforeEntry, EntryOpen, EntryClosed, Approaching, Ongoing, Completed>>
   + Description : String
   + CreatedAt : DateTime  
   + Date : DateTime
@@ -43,7 +43,7 @@ ENTITY(SessionTimetable) {
 ENTITY(Activity) {
   + ID : Integer
   + SessionTimetableID : Integer
-  + Type : String // 活動の種類 (例: SongPerformance, Party)
+  + Type : Enum <<SongPerformance, Party>> // 活動の種類 (例: SongPerformance, Party)
   + StartTime : DateTime
   + EndTime : DateTime
   + Description : String
@@ -110,7 +110,7 @@ ENTITY(Resource) {
 
 ENTITY(Comment) {
   + ID : Integer
-  + TargetType : Enum <<Thread, Timeline, Media>>
+  + TargetType : Enum <<Thread, Timeline, Resource>>
   + TargetID : Integer
   + UserID : Integer
   + Content : Text
