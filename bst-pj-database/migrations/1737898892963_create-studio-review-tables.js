@@ -18,8 +18,6 @@ exports.up = (pgm) => {
       references: "users",
       onDelete: "CASCADE",
     },
-    capacity: { type: "integer", notNull: true },
-    price: { type: "integer", notNull: true },
     rating: {
       type: "integer",
       notNull: true,
@@ -46,8 +44,15 @@ exports.up = (pgm) => {
     level: "ROW",
   });
 
-  // Create index for studio_id and user_id
-  pgm.createIndex("studio_reviews", ["studio_id", "user_id"]);
+  // Create indexes
+  pgm.createIndex("studio_reviews", ["studio_id"]);
+  pgm.createIndex("studio_reviews", ["user_id"]);
+  pgm.createIndex("studio_reviews", ["rating"]);
+
+  // Create check constraint for rating
+  pgm.createConstraint("studio_reviews", "studio_reviews_rating_check", {
+    check: "rating >= 1 AND rating <= 5",
+  });
 };
 
 exports.down = (pgm) => {
@@ -56,8 +61,15 @@ exports.down = (pgm) => {
     ifExists: true,
   });
 
-  // Drop index
-  pgm.dropIndex("studio_reviews", ["studio_id", "user_id"], { ifExists: true });
+  // Drop constraint
+  pgm.dropConstraint("studio_reviews", "studio_reviews_rating_check", {
+    ifExists: true,
+  });
+
+  // Drop indexes
+  pgm.dropIndex("studio_reviews", ["studio_id"], { ifExists: true });
+  pgm.dropIndex("studio_reviews", ["user_id"], { ifExists: true });
+  pgm.dropIndex("studio_reviews", ["rating"], { ifExists: true });
 
   // Drop table
   pgm.dropTable("studio_reviews", { ifExists: true });

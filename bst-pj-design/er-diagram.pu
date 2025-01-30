@@ -182,6 +182,8 @@ ENTITY(Area) {
 
 ENTITY(Studio) {
   + ID : Integer
+  + Name : String
+  + Description : String
   + LocationID : Integer
 }
 
@@ -189,10 +191,26 @@ ENTITY(StudioReview) {
   + ID : Integer
   + StudioID : Integer
   + UserID : Integer
-  + Capacity : Integer
-  + Price: Integer  
   + Rating : Integer <<1~5>>
   + Comment : String <<Optional>>
+  + CreatedAt : DateTime
+}
+
+ENTITY(StudioRoom) {
+  + ID : Integer
+  + StudioID : Integer
+  + Name: String
+  + Capacity: Integer
+  + Price: Integer
+  + CreatedAt : DateTime
+}
+
+ENTITY(StudioRoomInfo) {
+  + ID : Integer
+  + StudioRoomID : Integer
+  + Type: String // 情報の種類 (例: Equipment)
+  + Key: String // 情報のキー (例: ギターアンプ)
+  + Value: String // 情報の値 (例: Marshall)
   + CreatedAt : DateTime
 }
 
@@ -324,6 +342,8 @@ Artist "1" -- "*" ArtistGenre
 ArtistGenre "1" -- "1" Genre
 Studio "1" -- "1" Location
 Studio "1" -- "*" StudioReview
+Studio "1" -- "*" StudioRoom
+StudioRoom "1" -- "*" StudioRoomInfo
 
 User "1" -- "1" UserProfile
 User "1" -- "*" UserArtist
