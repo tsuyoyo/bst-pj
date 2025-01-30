@@ -23,16 +23,10 @@ export class StudioReview {
   @Column({ name: 'user_id', type: 'integer', nullable: false })
   userId: number;
 
-  @Column({ type: 'integer', nullable: false })
-  capacity: number;
-
-  @Column({ type: 'integer', nullable: false })
-  price: number;
-
-  @Column({ type: 'integer', nullable: false })
+  @Column({ type: 'integer', nullable: false, comment: '評価 (1~5)' })
   rating: number;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: 'text', nullable: true, comment: 'Optional' })
   comment: string;
 
   @CreateDateColumn({ name: 'created_at' })

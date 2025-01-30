@@ -6,8 +6,10 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { Location } from './location.entity';
+import { StudioRoom } from './studio-room.entity';
 
 @Entity('studios')
 export class Studio {
@@ -16,6 +18,9 @@ export class Studio {
 
   @Column({ type: 'varchar', length: 255, nullable: false })
   name: string;
+
+  @Column({ type: 'text', nullable: true })
+  description: string;
 
   @Column({ name: 'location_id', type: 'integer', nullable: false })
   locationId: number;
@@ -29,4 +34,7 @@ export class Studio {
   @ManyToOne(() => Location, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'location_id' })
   location: Location;
+
+  @OneToMany(() => StudioRoom, (room) => room.studio)
+  rooms: StudioRoom[];
 }
