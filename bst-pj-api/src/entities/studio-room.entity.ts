@@ -38,6 +38,6 @@ export class StudioRoom {
   @JoinColumn({ name: 'studio_id' })
   studio: Studio;
 
-  @OneToMany(() => StudioRoomInfo, (info) => info.studioRoom)
-  infos: StudioRoomInfo[];
+  @OneToMany(() => StudioRoomInfo, (info) => info.studioRoom, { eager: false })
+  infos: StudioRoomInfo[] = [];
 }

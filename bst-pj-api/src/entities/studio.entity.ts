@@ -35,6 +35,6 @@ export class Studio {
   @JoinColumn({ name: 'location_id' })
   location: Location;
 
-  @OneToMany(() => StudioRoom, (room) => room.studio)
-  rooms: StudioRoom[];
+  @OneToMany(() => StudioRoom, (room) => room.studio, { eager: false })
+  rooms: StudioRoom[] = [];
 }
