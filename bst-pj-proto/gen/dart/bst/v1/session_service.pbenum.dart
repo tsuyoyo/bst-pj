@@ -1,6 +1,6 @@
 //
 //  Generated code. Do not modify.
-//  source: location.proto
+//  source: bst/v1/session_service.proto
 //
 // @dart = 2.12
 

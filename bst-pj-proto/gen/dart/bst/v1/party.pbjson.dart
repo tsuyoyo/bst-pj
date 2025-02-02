@@ -72,8 +72,8 @@ const Party$json = {
     {'1': 'participants', '3': 1, '4': 3, '5': 11, '6': '.bst.v1.PartyParticipant', '10': 'participants'},
     {'1': 'location', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.Location', '10': 'location'},
     {'1': 'fee', '3': 3, '4': 1, '5': 5, '10': 'fee'},
-    {'1': 'startAt', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'startAt'},
-    {'1': 'endAt', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'endAt'},
+    {'1': 'start_at', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'startAt'},
+    {'1': 'end_at', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'endAt'},
   ],
 };
 
@@ -81,7 +81,7 @@ const Party$json = {
 final $typed_data.Uint8List partyDescriptor = $convert.base64Decode(
     'CgVQYXJ0eRI8CgxwYXJ0aWNpcGFudHMYASADKAsyGC5ic3QudjEuUGFydHlQYXJ0aWNpcGFudF'
     'IMcGFydGljaXBhbnRzEiwKCGxvY2F0aW9uGAIgASgLMhAuYnN0LnYxLkxvY2F0aW9uUghsb2Nh'
-    'dGlvbhIQCgNmZWUYAyABKAVSA2ZlZRI0CgdzdGFydEF0GAQgASgLMhouZ29vZ2xlLnByb3RvYn'
-    'VmLlRpbWVzdGFtcFIHc3RhcnRBdBIwCgVlbmRBdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5U'
-    'aW1lc3RhbXBSBWVuZEF0');
+    'dGlvbhIQCgNmZWUYAyABKAVSA2ZlZRI1CghzdGFydF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2'
+    'J1Zi5UaW1lc3RhbXBSB3N0YXJ0QXQSMQoGZW5kX2F0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVm'
+    'LlRpbWVzdGFtcFIFZW5kQXQ=');
 

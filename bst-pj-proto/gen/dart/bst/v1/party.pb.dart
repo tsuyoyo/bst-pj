@@ -134,8 +134,8 @@ class Party extends $pb.GeneratedMessage {
     ..pc<PartyParticipant>(1, _omitFieldNames ? '' : 'participants', $pb.PbFieldType.PM, subBuilder: PartyParticipant.create)
     ..aOM<$11.Location>(2, _omitFieldNames ? '' : 'location', subBuilder: $11.Location.create)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'fee', $pb.PbFieldType.O3)
-    ..aOM<$9.Timestamp>(4, _omitFieldNames ? '' : 'startAt', protoName: 'startAt', subBuilder: $9.Timestamp.create)
-    ..aOM<$9.Timestamp>(5, _omitFieldNames ? '' : 'endAt', protoName: 'endAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(4, _omitFieldNames ? '' : 'startAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(5, _omitFieldNames ? '' : 'endAt', subBuilder: $9.Timestamp.create)
     ..hasRequiredFields = false
   ;
 

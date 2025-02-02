@@ -1,6 +1,6 @@
 //
 //  Generated code. Do not modify.
-//  source: bst/v1/session-service.proto
+//  source: bst/v1/session_service.proto
 //
 // @dart = 2.12
 
@@ -47,7 +47,7 @@ class CreateSessionRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateSessionRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'title')
     ..aOS(2, _omitFieldNames ? '' : 'description')
-    ..aOM<$9.Timestamp>(3, _omitFieldNames ? '' : 'eventDate', protoName: 'eventDate', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, _omitFieldNames ? '' : 'eventDate', subBuilder: $9.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -169,7 +169,7 @@ class GetSessionRequest extends $pb.GeneratedMessage {
   factory GetSessionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSessionRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -283,10 +283,10 @@ class UpdateSessionRequest extends $pb.GeneratedMessage {
   factory UpdateSessionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'title')
     ..aOS(3, _omitFieldNames ? '' : 'description')
-    ..aOM<$9.Timestamp>(4, _omitFieldNames ? '' : 'eventDate', protoName: 'eventDate', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(4, _omitFieldNames ? '' : 'eventDate', subBuilder: $9.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -421,7 +421,7 @@ class UpdateSessionStatusRequest extends $pb.GeneratedMessage {
   factory UpdateSessionStatusRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionStatusRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..e<$13.SessionStatus>(2, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: $13.SessionStatus.SESSION_STATUS_UNSPECIFIED, valueOf: $13.SessionStatus.valueOf, enumValues: $13.SessionStatus.values)
     ..hasRequiredFields = false
   ;
@@ -537,7 +537,7 @@ class CancelSessionRequest extends $pb.GeneratedMessage {
   factory CancelSessionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CancelSessionRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'reason')
     ..hasRequiredFields = false
   ;
@@ -653,8 +653,8 @@ class DuplicateSessionRequest extends $pb.GeneratedMessage {
   factory DuplicateSessionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DuplicateSessionRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..aOM<$9.Timestamp>(2, _omitFieldNames ? '' : 'newEventDate', protoName: 'newEventDate', subBuilder: $9.Timestamp.create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..aOM<$9.Timestamp>(2, _omitFieldNames ? '' : 'newEventDate', subBuilder: $9.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -772,7 +772,7 @@ class AddSessionPartRequest extends $pb.GeneratedMessage {
   factory AddSessionPartRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSessionPartRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..aOM<$13.SessionPart>(2, _omitFieldNames ? '' : 'part', subBuilder: $13.SessionPart.create)
     ..hasRequiredFields = false
   ;
@@ -894,8 +894,8 @@ class UpdateSessionPartRequest extends $pb.GeneratedMessage {
   factory UpdateSessionPartRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionPartRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'partId', $pb.PbFieldType.O3, protoName: 'partId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'partId', $pb.PbFieldType.O3)
     ..aOM<$13.SessionPart>(3, _omitFieldNames ? '' : 'part', subBuilder: $13.SessionPart.create)
     ..hasRequiredFields = false
   ;
@@ -1022,8 +1022,8 @@ class DeleteSessionPartRequest extends $pb.GeneratedMessage {
   factory DeleteSessionPartRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteSessionPartRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'partId', $pb.PbFieldType.O3, protoName: 'partId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'partId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -1137,7 +1137,7 @@ class UpdateSessionScheduleRequest extends $pb.GeneratedMessage {
   factory UpdateSessionScheduleRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionScheduleRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..aOM<$13.Timetable>(2, _omitFieldNames ? '' : 'timetable', subBuilder: $13.Timetable.create)
     ..hasRequiredFields = false
   ;
@@ -1255,7 +1255,7 @@ class UpdateSessionLocationRequest extends $pb.GeneratedMessage {
   factory UpdateSessionLocationRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionLocationRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..aOM<$11.Location>(2, _omitFieldNames ? '' : 'location', subBuilder: $11.Location.create)
     ..hasRequiredFields = false
   ;
@@ -1370,7 +1370,7 @@ class ListSessionParticipantsRequest extends $pb.GeneratedMessage {
   factory ListSessionParticipantsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSessionParticipantsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -1468,7 +1468,7 @@ class AddSessionParticipantRequest extends $pb.GeneratedMessage {
   factory AddSessionParticipantRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSessionParticipantRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..aOM<$13.SessionParticipant>(2, _omitFieldNames ? '' : 'participant', subBuilder: $13.SessionParticipant.create)
     ..hasRequiredFields = false
   ;
@@ -1590,8 +1590,8 @@ class UpdateSessionParticipantRequest extends $pb.GeneratedMessage {
   factory UpdateSessionParticipantRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionParticipantRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'participantId', $pb.PbFieldType.O3, protoName: 'participantId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'participantId', $pb.PbFieldType.O3)
     ..aOM<$13.SessionParticipant>(3, _omitFieldNames ? '' : 'participant', subBuilder: $13.SessionParticipant.create)
     ..hasRequiredFields = false
   ;
@@ -1715,7 +1715,7 @@ class ListSessionSongsRequest extends $pb.GeneratedMessage {
   factory ListSessionSongsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSessionSongsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -1813,8 +1813,8 @@ class GetSessionSongRequest extends $pb.GeneratedMessage {
   factory GetSessionSongRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSessionSongRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3, protoName: 'songId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -1933,8 +1933,8 @@ class UpdateSessionSongRequest extends $pb.GeneratedMessage {
   factory UpdateSessionSongRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionSongRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3, protoName: 'songId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3)
     ..aOM<$13.SongPerformance>(3, _omitFieldNames ? '' : 'song', subBuilder: $13.SongPerformance.create)
     ..hasRequiredFields = false
   ;
@@ -2061,8 +2061,8 @@ class DeleteSessionSongRequest extends $pb.GeneratedMessage {
   factory DeleteSessionSongRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteSessionSongRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3, protoName: 'songId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -2180,8 +2180,8 @@ class AddSongEntryRequest extends $pb.GeneratedMessage {
   factory AddSongEntryRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSongEntryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3, protoName: 'songId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3)
     ..aOM<$13.SongPerformanceEntry>(3, _omitFieldNames ? '' : 'entry', subBuilder: $13.SongPerformanceEntry.create)
     ..hasRequiredFields = false
   ;
@@ -2312,9 +2312,9 @@ class DeleteSongEntryRequest extends $pb.GeneratedMessage {
   factory DeleteSongEntryRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteSongEntryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3, protoName: 'songId')
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'entryId', $pb.PbFieldType.O3, protoName: 'entryId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'entryId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -2441,8 +2441,8 @@ class AddSessionSongResourceRequest extends $pb.GeneratedMessage {
   factory AddSessionSongResourceRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSessionSongResourceRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3, protoName: 'songId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3)
     ..aOM<$7.Resource>(3, _omitFieldNames ? '' : 'resource', subBuilder: $7.Resource.create)
     ..hasRequiredFields = false
   ;
@@ -2569,8 +2569,8 @@ class ListSessionSongResourcesRequest extends $pb.GeneratedMessage {
   factory ListSessionSongResourcesRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSessionSongResourcesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3, protoName: 'songId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -2638,8 +2638,8 @@ class ListSessionSongResourcesResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSessionSongResourcesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..pc<$7.Resource>(1, _omitFieldNames ? '' : 'resources', $pb.PbFieldType.PM, subBuilder: $7.Resource.create)
-    ..aOS(2, _omitFieldNames ? '' : 'nextPageToken', protoName: 'nextPageToken')
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'totalSize', $pb.PbFieldType.O3, protoName: 'totalSize')
+    ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'totalSize', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -2709,9 +2709,9 @@ class DeleteSessionSongResourceRequest extends $pb.GeneratedMessage {
   factory DeleteSessionSongResourceRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteSessionSongResourceRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3, protoName: 'songId')
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'resourceId', $pb.PbFieldType.O3, protoName: 'resourceId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'resourceId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -2830,7 +2830,7 @@ class ListSessionOrganizersRequest extends $pb.GeneratedMessage {
   factory ListSessionOrganizersRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSessionOrganizersRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -2928,8 +2928,8 @@ class AddSessionOrganizerRequest extends $pb.GeneratedMessage {
   factory AddSessionOrganizerRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSessionOrganizerRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'userId', $pb.PbFieldType.O3, protoName: 'userId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'userId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -3044,8 +3044,8 @@ class DeleteSessionOrganizerRequest extends $pb.GeneratedMessage {
   factory DeleteSessionOrganizerRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteSessionOrganizerRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'userId', $pb.PbFieldType.O3, protoName: 'userId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'userId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -3159,7 +3159,7 @@ class CreateSessionThreadRequest extends $pb.GeneratedMessage {
   factory CreateSessionThreadRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateSessionThreadRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..aOM<$14.Thread>(2, _omitFieldNames ? '' : 'thread', subBuilder: $14.Thread.create)
     ..hasRequiredFields = false
   ;
@@ -3273,7 +3273,7 @@ class ListSessionThreadsRequest extends $pb.GeneratedMessage {
   factory ListSessionThreadsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSessionThreadsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -3375,8 +3375,8 @@ class CreateSongThreadRequest extends $pb.GeneratedMessage {
   factory CreateSongThreadRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateSongThreadRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3, protoName: 'songId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3)
     ..aOM<$14.Thread>(3, _omitFieldNames ? '' : 'thread', subBuilder: $14.Thread.create)
     ..hasRequiredFields = false
   ;
@@ -3503,8 +3503,8 @@ class GetSessionThreadRequest extends $pb.GeneratedMessage {
   factory GetSessionThreadRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSessionThreadRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'threadId', $pb.PbFieldType.O3, protoName: 'threadId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'threadId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -3619,8 +3619,8 @@ class DeleteSessionThreadRequest extends $pb.GeneratedMessage {
   factory DeleteSessionThreadRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteSessionThreadRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'threadId', $pb.PbFieldType.O3, protoName: 'threadId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'threadId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -3737,9 +3737,9 @@ class CreateSessionNotificationRequest extends $pb.GeneratedMessage {
   factory CreateSessionNotificationRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateSessionNotificationRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'content')
-    ..p<$core.int>(3, _omitFieldNames ? '' : 'userIds', $pb.PbFieldType.K3, protoName: 'userIds')
+    ..p<$core.int>(3, _omitFieldNames ? '' : 'userIds', $pb.PbFieldType.K3)
     ..hasRequiredFields = false
   ;
 
@@ -3852,7 +3852,7 @@ class GetSessionTimetableRequest extends $pb.GeneratedMessage {
   factory GetSessionTimetableRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSessionTimetableRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -3958,7 +3958,7 @@ class UpdateSessionTimetableRequest extends $pb.GeneratedMessage {
   factory UpdateSessionTimetableRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionTimetableRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..aOM<$13.Timetable>(2, _omitFieldNames ? '' : 'timetable', subBuilder: $13.Timetable.create)
     ..hasRequiredFields = false
   ;
@@ -4076,8 +4076,8 @@ class GetOptimizedTimetableRequest extends $pb.GeneratedMessage {
   factory GetOptimizedTimetableRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetOptimizedTimetableRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..pPS(2, _omitFieldNames ? '' : 'optimizationRules', protoName: 'optimizationRules')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..pPS(2, _omitFieldNames ? '' : 'optimizationRules')
     ..hasRequiredFields = false
   ;
 
@@ -4182,7 +4182,7 @@ class GetTimetableProgressRequest extends $pb.GeneratedMessage {
   factory GetTimetableProgressRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetTimetableProgressRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -4236,8 +4236,8 @@ class GetTimetableProgressResponse extends $pb.GeneratedMessage {
   factory GetTimetableProgressResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetTimetableProgressResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$13.TimetableEntry>(1, _omitFieldNames ? '' : 'completedEntries', $pb.PbFieldType.PM, protoName: 'completedEntries', subBuilder: $13.TimetableEntry.create)
-    ..aOM<$13.TimetableEntry>(2, _omitFieldNames ? '' : 'currentEntry', protoName: 'currentEntry', subBuilder: $13.TimetableEntry.create)
+    ..pc<$13.TimetableEntry>(1, _omitFieldNames ? '' : 'completedEntries', $pb.PbFieldType.PM, subBuilder: $13.TimetableEntry.create)
+    ..aOM<$13.TimetableEntry>(2, _omitFieldNames ? '' : 'currentEntry', subBuilder: $13.TimetableEntry.create)
     ..hasRequiredFields = false
   ;
 
@@ -4296,8 +4296,8 @@ class UpdateTimetableProgressRequest extends $pb.GeneratedMessage {
   factory UpdateTimetableProgressRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateTimetableProgressRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'currentEntryId', $pb.PbFieldType.O3, protoName: 'currentEntryId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'currentEntryId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -4411,7 +4411,7 @@ class AddSessionResourceRequest extends $pb.GeneratedMessage {
   factory AddSessionResourceRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSessionResourceRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..aOM<$7.Resource>(2, _omitFieldNames ? '' : 'resource', subBuilder: $7.Resource.create)
     ..hasRequiredFields = false
   ;
@@ -4525,7 +4525,7 @@ class ListSessionResourcesRequest extends $pb.GeneratedMessage {
   factory ListSessionResourcesRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSessionResourcesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -4623,8 +4623,8 @@ class DeleteSessionResourceRequest extends $pb.GeneratedMessage {
   factory DeleteSessionResourceRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteSessionResourceRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'resourceId', $pb.PbFieldType.O3, protoName: 'resourceId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'resourceId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -4836,7 +4836,7 @@ class ListSessionFeedbacksRequest extends $pb.GeneratedMessage {
   factory ListSessionFeedbacksRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSessionFeedbacksRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -4931,7 +4931,7 @@ class ListRelatedSessionsRequest extends $pb.GeneratedMessage {
   factory ListRelatedSessionsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListRelatedSessionsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -5029,8 +5029,8 @@ class AddRelatedSessionRequest extends $pb.GeneratedMessage {
   factory AddRelatedSessionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddRelatedSessionRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'relatedSessionId', $pb.PbFieldType.O3, protoName: 'relatedSessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'relatedSessionId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -5144,7 +5144,7 @@ class CreateSessionPartyRequest extends $pb.GeneratedMessage {
   factory CreateSessionPartyRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateSessionPartyRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..aOM<$12.Party>(2, _omitFieldNames ? '' : 'party', subBuilder: $12.Party.create)
     ..hasRequiredFields = false
   ;
@@ -5258,7 +5258,7 @@ class GetSessionPartyRequest extends $pb.GeneratedMessage {
   factory GetSessionPartyRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSessionPartyRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -5364,7 +5364,7 @@ class AddPartyParticipantRequest extends $pb.GeneratedMessage {
   factory AddPartyParticipantRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddPartyParticipantRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..aOM<$12.PartyParticipant>(2, _omitFieldNames ? '' : 'participant', subBuilder: $12.PartyParticipant.create)
     ..hasRequiredFields = false
   ;
@@ -5478,7 +5478,7 @@ class ListPartyParticipantsRequest extends $pb.GeneratedMessage {
   factory ListPartyParticipantsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListPartyParticipantsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -5580,8 +5580,8 @@ class UpdatePartyParticipantRequest extends $pb.GeneratedMessage {
   factory UpdatePartyParticipantRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdatePartyParticipantRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'participantId', $pb.PbFieldType.O3, protoName: 'participantId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'participantId', $pb.PbFieldType.O3)
     ..aOM<$12.PartyParticipant>(3, _omitFieldNames ? '' : 'participant', subBuilder: $12.PartyParticipant.create)
     ..hasRequiredFields = false
   ;
@@ -5708,8 +5708,8 @@ class DeletePartyParticipantRequest extends $pb.GeneratedMessage {
   factory DeletePartyParticipantRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeletePartyParticipantRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3, protoName: 'sessionId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'participantId', $pb.PbFieldType.O3, protoName: 'participantId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'participantId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 

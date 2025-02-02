@@ -1,6 +1,6 @@
 //
 //  Generated code. Do not modify.
-//  source: bst/v1/session-service.proto
+//  source: bst/v1/session_service.proto
 //
 // @dart = 2.12
 
@@ -19,15 +19,15 @@ const CreateSessionRequest$json = {
   '2': [
     {'1': 'title', '3': 1, '4': 1, '5': 9, '10': 'title'},
     {'1': 'description', '3': 2, '4': 1, '5': 9, '10': 'description'},
-    {'1': 'eventDate', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'eventDate'},
+    {'1': 'event_date', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'eventDate'},
   ],
 };
 
 /// Descriptor for `CreateSessionRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createSessionRequestDescriptor = $convert.base64Decode(
     'ChRDcmVhdGVTZXNzaW9uUmVxdWVzdBIUCgV0aXRsZRgBIAEoCVIFdGl0bGUSIAoLZGVzY3JpcH'
-    'Rpb24YAiABKAlSC2Rlc2NyaXB0aW9uEjgKCWV2ZW50RGF0ZRgDIAEoCzIaLmdvb2dsZS5wcm90'
-    'b2J1Zi5UaW1lc3RhbXBSCWV2ZW50RGF0ZQ==');
+    'Rpb24YAiABKAlSC2Rlc2NyaXB0aW9uEjkKCmV2ZW50X2RhdGUYAyABKAsyGi5nb29nbGUucHJv'
+    'dG9idWYuVGltZXN0YW1wUglldmVudERhdGU=');
 
 @$core.Deprecated('Use createSessionResponseDescriptor instead')
 const CreateSessionResponse$json = {
@@ -46,13 +46,13 @@ final $typed_data.Uint8List createSessionResponseDescriptor = $convert.base64Dec
 const GetSessionRequest$json = {
   '1': 'GetSessionRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
   ],
 };
 
 /// Descriptor for `GetSessionRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getSessionRequestDescriptor = $convert.base64Decode(
-    'ChFHZXRTZXNzaW9uUmVxdWVzdBIcCglzZXNzaW9uSWQYASABKAVSCXNlc3Npb25JZA==');
+    'ChFHZXRTZXNzaW9uUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZXNzaW9uSWQ=');
 
 @$core.Deprecated('Use getSessionResponseDescriptor instead')
 const GetSessionResponse$json = {
@@ -71,19 +71,19 @@ final $typed_data.Uint8List getSessionResponseDescriptor = $convert.base64Decode
 const UpdateSessionRequest$json = {
   '1': 'UpdateSessionRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
     {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
     {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
-    {'1': 'eventDate', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'eventDate'},
+    {'1': 'event_date', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'eventDate'},
   ],
 };
 
 /// Descriptor for `UpdateSessionRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateSessionRequestDescriptor = $convert.base64Decode(
-    'ChRVcGRhdGVTZXNzaW9uUmVxdWVzdBIcCglzZXNzaW9uSWQYASABKAVSCXNlc3Npb25JZBIUCg'
-    'V0aXRsZRgCIAEoCVIFdGl0bGUSIAoLZGVzY3JpcHRpb24YAyABKAlSC2Rlc2NyaXB0aW9uEjgK'
-    'CWV2ZW50RGF0ZRgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWV2ZW50RGF0ZQ'
-    '==');
+    'ChRVcGRhdGVTZXNzaW9uUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZXNzaW9uSWQSFA'
+    'oFdGl0bGUYAiABKAlSBXRpdGxlEiAKC2Rlc2NyaXB0aW9uGAMgASgJUgtkZXNjcmlwdGlvbhI5'
+    'CgpldmVudF9kYXRlGAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIJZXZlbnREYX'
+    'Rl');
 
 @$core.Deprecated('Use updateSessionResponseDescriptor instead')
 const UpdateSessionResponse$json = {
@@ -102,15 +102,15 @@ final $typed_data.Uint8List updateSessionResponseDescriptor = $convert.base64Dec
 const UpdateSessionStatusRequest$json = {
   '1': 'UpdateSessionStatusRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
     {'1': 'status', '3': 2, '4': 1, '5': 14, '6': '.bst.v1.SessionStatus', '10': 'status'},
   ],
 };
 
 /// Descriptor for `UpdateSessionStatusRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateSessionStatusRequestDescriptor = $convert.base64Decode(
-    'ChpVcGRhdGVTZXNzaW9uU3RhdHVzUmVxdWVzdBIcCglzZXNzaW9uSWQYASABKAVSCXNlc3Npb2'
-    '5JZBItCgZzdGF0dXMYAiABKA4yFS5ic3QudjEuU2Vzc2lvblN0YXR1c1IGc3RhdHVz');
+    'ChpVcGRhdGVTZXNzaW9uU3RhdHVzUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZXNzaW'
+    '9uSWQSLQoGc3RhdHVzGAIgASgOMhUuYnN0LnYxLlNlc3Npb25TdGF0dXNSBnN0YXR1cw==');
 
 @$core.Deprecated('Use updateSessionStatusResponseDescriptor instead')
 const UpdateSessionStatusResponse$json = {
@@ -129,15 +129,15 @@ final $typed_data.Uint8List updateSessionStatusResponseDescriptor = $convert.bas
 const CancelSessionRequest$json = {
   '1': 'CancelSessionRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
     {'1': 'reason', '3': 2, '4': 1, '5': 9, '10': 'reason'},
   ],
 };
 
 /// Descriptor for `CancelSessionRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cancelSessionRequestDescriptor = $convert.base64Decode(
-    'ChRDYW5jZWxTZXNzaW9uUmVxdWVzdBIcCglzZXNzaW9uSWQYASABKAVSCXNlc3Npb25JZBIWCg'
-    'ZyZWFzb24YAiABKAlSBnJlYXNvbg==');
+    'ChRDYW5jZWxTZXNzaW9uUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZXNzaW9uSWQSFg'
+    'oGcmVhc29uGAIgASgJUgZyZWFzb24=');
 
 @$core.Deprecated('Use cancelSessionResponseDescriptor instead')
 const CancelSessionResponse$json = {
@@ -156,16 +156,16 @@ final $typed_data.Uint8List cancelSessionResponseDescriptor = $convert.base64Dec
 const DuplicateSessionRequest$json = {
   '1': 'DuplicateSessionRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'newEventDate', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'newEventDate'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'new_event_date', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'newEventDate'},
   ],
 };
 
 /// Descriptor for `DuplicateSessionRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List duplicateSessionRequestDescriptor = $convert.base64Decode(
-    'ChdEdXBsaWNhdGVTZXNzaW9uUmVxdWVzdBIcCglzZXNzaW9uSWQYASABKAVSCXNlc3Npb25JZB'
-    'I+CgxuZXdFdmVudERhdGUYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgxuZXdF'
-    'dmVudERhdGU=');
+    'ChdEdXBsaWNhdGVTZXNzaW9uUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZXNzaW9uSW'
+    'QSQAoObmV3X2V2ZW50X2RhdGUYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgxu'
+    'ZXdFdmVudERhdGU=');
 
 @$core.Deprecated('Use duplicateSessionResponseDescriptor instead')
 const DuplicateSessionResponse$json = {
@@ -184,15 +184,15 @@ final $typed_data.Uint8List duplicateSessionResponseDescriptor = $convert.base64
 const AddSessionPartRequest$json = {
   '1': 'AddSessionPartRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
     {'1': 'part', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.SessionPart', '10': 'part'},
   ],
 };
 
 /// Descriptor for `AddSessionPartRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addSessionPartRequestDescriptor = $convert.base64Decode(
-    'ChVBZGRTZXNzaW9uUGFydFJlcXVlc3QSHAoJc2Vzc2lvbklkGAEgASgFUglzZXNzaW9uSWQSJw'
-    'oEcGFydBgCIAEoCzITLmJzdC52MS5TZXNzaW9uUGFydFIEcGFydA==');
+    'ChVBZGRTZXNzaW9uUGFydFJlcXVlc3QSHQoKc2Vzc2lvbl9pZBgBIAEoBVIJc2Vzc2lvbklkEi'
+    'cKBHBhcnQYAiABKAsyEy5ic3QudjEuU2Vzc2lvblBhcnRSBHBhcnQ=');
 
 @$core.Deprecated('Use addSessionPartResponseDescriptor instead')
 const AddSessionPartResponse$json = {
@@ -211,17 +211,17 @@ final $typed_data.Uint8List addSessionPartResponseDescriptor = $convert.base64De
 const UpdateSessionPartRequest$json = {
   '1': 'UpdateSessionPartRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'partId', '3': 2, '4': 1, '5': 5, '10': 'partId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'part_id', '3': 2, '4': 1, '5': 5, '10': 'partId'},
     {'1': 'part', '3': 3, '4': 1, '5': 11, '6': '.bst.v1.SessionPart', '10': 'part'},
   ],
 };
 
 /// Descriptor for `UpdateSessionPartRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateSessionPartRequestDescriptor = $convert.base64Decode(
-    'ChhVcGRhdGVTZXNzaW9uUGFydFJlcXVlc3QSHAoJc2Vzc2lvbklkGAEgASgFUglzZXNzaW9uSW'
-    'QSFgoGcGFydElkGAIgASgFUgZwYXJ0SWQSJwoEcGFydBgDIAEoCzITLmJzdC52MS5TZXNzaW9u'
-    'UGFydFIEcGFydA==');
+    'ChhVcGRhdGVTZXNzaW9uUGFydFJlcXVlc3QSHQoKc2Vzc2lvbl9pZBgBIAEoBVIJc2Vzc2lvbk'
+    'lkEhcKB3BhcnRfaWQYAiABKAVSBnBhcnRJZBInCgRwYXJ0GAMgASgLMhMuYnN0LnYxLlNlc3Np'
+    'b25QYXJ0UgRwYXJ0');
 
 @$core.Deprecated('Use updateSessionPartResponseDescriptor instead')
 const UpdateSessionPartResponse$json = {
@@ -240,15 +240,15 @@ final $typed_data.Uint8List updateSessionPartResponseDescriptor = $convert.base6
 const DeleteSessionPartRequest$json = {
   '1': 'DeleteSessionPartRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'partId', '3': 2, '4': 1, '5': 5, '10': 'partId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'part_id', '3': 2, '4': 1, '5': 5, '10': 'partId'},
   ],
 };
 
 /// Descriptor for `DeleteSessionPartRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List deleteSessionPartRequestDescriptor = $convert.base64Decode(
-    'ChhEZWxldGVTZXNzaW9uUGFydFJlcXVlc3QSHAoJc2Vzc2lvbklkGAEgASgFUglzZXNzaW9uSW'
-    'QSFgoGcGFydElkGAIgASgFUgZwYXJ0SWQ=');
+    'ChhEZWxldGVTZXNzaW9uUGFydFJlcXVlc3QSHQoKc2Vzc2lvbl9pZBgBIAEoBVIJc2Vzc2lvbk'
+    'lkEhcKB3BhcnRfaWQYAiABKAVSBnBhcnRJZA==');
 
 @$core.Deprecated('Use deleteSessionPartResponseDescriptor instead')
 const DeleteSessionPartResponse$json = {
@@ -266,15 +266,15 @@ final $typed_data.Uint8List deleteSessionPartResponseDescriptor = $convert.base6
 const UpdateSessionScheduleRequest$json = {
   '1': 'UpdateSessionScheduleRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
     {'1': 'timetable', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.Timetable', '10': 'timetable'},
   ],
 };
 
 /// Descriptor for `UpdateSessionScheduleRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateSessionScheduleRequestDescriptor = $convert.base64Decode(
-    'ChxVcGRhdGVTZXNzaW9uU2NoZWR1bGVSZXF1ZXN0EhwKCXNlc3Npb25JZBgBIAEoBVIJc2Vzc2'
-    'lvbklkEi8KCXRpbWV0YWJsZRgCIAEoCzIRLmJzdC52MS5UaW1ldGFibGVSCXRpbWV0YWJsZQ==');
+    'ChxVcGRhdGVTZXNzaW9uU2NoZWR1bGVSZXF1ZXN0Eh0KCnNlc3Npb25faWQYASABKAVSCXNlc3'
+    'Npb25JZBIvCgl0aW1ldGFibGUYAiABKAsyES5ic3QudjEuVGltZXRhYmxlUgl0aW1ldGFibGU=');
 
 @$core.Deprecated('Use updateSessionScheduleResponseDescriptor instead')
 const UpdateSessionScheduleResponse$json = {
@@ -293,15 +293,15 @@ final $typed_data.Uint8List updateSessionScheduleResponseDescriptor = $convert.b
 const UpdateSessionLocationRequest$json = {
   '1': 'UpdateSessionLocationRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
     {'1': 'location', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.Location', '10': 'location'},
   ],
 };
 
 /// Descriptor for `UpdateSessionLocationRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateSessionLocationRequestDescriptor = $convert.base64Decode(
-    'ChxVcGRhdGVTZXNzaW9uTG9jYXRpb25SZXF1ZXN0EhwKCXNlc3Npb25JZBgBIAEoBVIJc2Vzc2'
-    'lvbklkEiwKCGxvY2F0aW9uGAIgASgLMhAuYnN0LnYxLkxvY2F0aW9uUghsb2NhdGlvbg==');
+    'ChxVcGRhdGVTZXNzaW9uTG9jYXRpb25SZXF1ZXN0Eh0KCnNlc3Npb25faWQYASABKAVSCXNlc3'
+    'Npb25JZBIsCghsb2NhdGlvbhgCIAEoCzIQLmJzdC52MS5Mb2NhdGlvblIIbG9jYXRpb24=');
 
 @$core.Deprecated('Use updateSessionLocationResponseDescriptor instead')
 const UpdateSessionLocationResponse$json = {
@@ -320,14 +320,14 @@ final $typed_data.Uint8List updateSessionLocationResponseDescriptor = $convert.b
 const ListSessionParticipantsRequest$json = {
   '1': 'ListSessionParticipantsRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
   ],
 };
 
 /// Descriptor for `ListSessionParticipantsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listSessionParticipantsRequestDescriptor = $convert.base64Decode(
-    'Ch5MaXN0U2Vzc2lvblBhcnRpY2lwYW50c1JlcXVlc3QSHAoJc2Vzc2lvbklkGAEgASgFUglzZX'
-    'NzaW9uSWQ=');
+    'Ch5MaXN0U2Vzc2lvblBhcnRpY2lwYW50c1JlcXVlc3QSHQoKc2Vzc2lvbl9pZBgBIAEoBVIJc2'
+    'Vzc2lvbklk');
 
 @$core.Deprecated('Use listSessionParticipantsResponseDescriptor instead')
 const ListSessionParticipantsResponse$json = {
@@ -346,16 +346,16 @@ final $typed_data.Uint8List listSessionParticipantsResponseDescriptor = $convert
 const AddSessionParticipantRequest$json = {
   '1': 'AddSessionParticipantRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
     {'1': 'participant', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.SessionParticipant', '10': 'participant'},
   ],
 };
 
 /// Descriptor for `AddSessionParticipantRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addSessionParticipantRequestDescriptor = $convert.base64Decode(
-    'ChxBZGRTZXNzaW9uUGFydGljaXBhbnRSZXF1ZXN0EhwKCXNlc3Npb25JZBgBIAEoBVIJc2Vzc2'
-    'lvbklkEjwKC3BhcnRpY2lwYW50GAIgASgLMhouYnN0LnYxLlNlc3Npb25QYXJ0aWNpcGFudFIL'
-    'cGFydGljaXBhbnQ=');
+    'ChxBZGRTZXNzaW9uUGFydGljaXBhbnRSZXF1ZXN0Eh0KCnNlc3Npb25faWQYASABKAVSCXNlc3'
+    'Npb25JZBI8CgtwYXJ0aWNpcGFudBgCIAEoCzIaLmJzdC52MS5TZXNzaW9uUGFydGljaXBhbnRS'
+    'C3BhcnRpY2lwYW50');
 
 @$core.Deprecated('Use addSessionParticipantResponseDescriptor instead')
 const AddSessionParticipantResponse$json = {
@@ -374,17 +374,17 @@ final $typed_data.Uint8List addSessionParticipantResponseDescriptor = $convert.b
 const UpdateSessionParticipantRequest$json = {
   '1': 'UpdateSessionParticipantRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'participantId', '3': 2, '4': 1, '5': 5, '10': 'participantId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'participant_id', '3': 2, '4': 1, '5': 5, '10': 'participantId'},
     {'1': 'participant', '3': 3, '4': 1, '5': 11, '6': '.bst.v1.SessionParticipant', '10': 'participant'},
   ],
 };
 
 /// Descriptor for `UpdateSessionParticipantRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateSessionParticipantRequestDescriptor = $convert.base64Decode(
-    'Ch9VcGRhdGVTZXNzaW9uUGFydGljaXBhbnRSZXF1ZXN0EhwKCXNlc3Npb25JZBgBIAEoBVIJc2'
-    'Vzc2lvbklkEiQKDXBhcnRpY2lwYW50SWQYAiABKAVSDXBhcnRpY2lwYW50SWQSPAoLcGFydGlj'
-    'aXBhbnQYAyABKAsyGi5ic3QudjEuU2Vzc2lvblBhcnRpY2lwYW50UgtwYXJ0aWNpcGFudA==');
+    'Ch9VcGRhdGVTZXNzaW9uUGFydGljaXBhbnRSZXF1ZXN0Eh0KCnNlc3Npb25faWQYASABKAVSCX'
+    'Nlc3Npb25JZBIlCg5wYXJ0aWNpcGFudF9pZBgCIAEoBVINcGFydGljaXBhbnRJZBI8CgtwYXJ0'
+    'aWNpcGFudBgDIAEoCzIaLmJzdC52MS5TZXNzaW9uUGFydGljaXBhbnRSC3BhcnRpY2lwYW50');
 
 @$core.Deprecated('Use updateSessionParticipantResponseDescriptor instead')
 const UpdateSessionParticipantResponse$json = {
@@ -403,14 +403,14 @@ final $typed_data.Uint8List updateSessionParticipantResponseDescriptor = $conver
 const ListSessionSongsRequest$json = {
   '1': 'ListSessionSongsRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
   ],
 };
 
 /// Descriptor for `ListSessionSongsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listSessionSongsRequestDescriptor = $convert.base64Decode(
-    'ChdMaXN0U2Vzc2lvblNvbmdzUmVxdWVzdBIcCglzZXNzaW9uSWQYASABKAVSCXNlc3Npb25JZA'
-    '==');
+    'ChdMaXN0U2Vzc2lvblNvbmdzUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZXNzaW9uSW'
+    'Q=');
 
 @$core.Deprecated('Use listSessionSongsResponseDescriptor instead')
 const ListSessionSongsResponse$json = {
@@ -429,15 +429,15 @@ final $typed_data.Uint8List listSessionSongsResponseDescriptor = $convert.base64
 const GetSessionSongRequest$json = {
   '1': 'GetSessionSongRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'songId', '3': 2, '4': 1, '5': 5, '10': 'songId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'song_id', '3': 2, '4': 1, '5': 5, '10': 'songId'},
   ],
 };
 
 /// Descriptor for `GetSessionSongRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getSessionSongRequestDescriptor = $convert.base64Decode(
-    'ChVHZXRTZXNzaW9uU29uZ1JlcXVlc3QSHAoJc2Vzc2lvbklkGAEgASgFUglzZXNzaW9uSWQSFg'
-    'oGc29uZ0lkGAIgASgFUgZzb25nSWQ=');
+    'ChVHZXRTZXNzaW9uU29uZ1JlcXVlc3QSHQoKc2Vzc2lvbl9pZBgBIAEoBVIJc2Vzc2lvbklkEh'
+    'cKB3NvbmdfaWQYAiABKAVSBnNvbmdJZA==');
 
 @$core.Deprecated('Use getSessionSongResponseDescriptor instead')
 const GetSessionSongResponse$json = {
@@ -456,17 +456,17 @@ final $typed_data.Uint8List getSessionSongResponseDescriptor = $convert.base64De
 const UpdateSessionSongRequest$json = {
   '1': 'UpdateSessionSongRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'songId', '3': 2, '4': 1, '5': 5, '10': 'songId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'song_id', '3': 2, '4': 1, '5': 5, '10': 'songId'},
     {'1': 'song', '3': 3, '4': 1, '5': 11, '6': '.bst.v1.SongPerformance', '10': 'song'},
   ],
 };
 
 /// Descriptor for `UpdateSessionSongRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateSessionSongRequestDescriptor = $convert.base64Decode(
-    'ChhVcGRhdGVTZXNzaW9uU29uZ1JlcXVlc3QSHAoJc2Vzc2lvbklkGAEgASgFUglzZXNzaW9uSW'
-    'QSFgoGc29uZ0lkGAIgASgFUgZzb25nSWQSKwoEc29uZxgDIAEoCzIXLmJzdC52MS5Tb25nUGVy'
-    'Zm9ybWFuY2VSBHNvbmc=');
+    'ChhVcGRhdGVTZXNzaW9uU29uZ1JlcXVlc3QSHQoKc2Vzc2lvbl9pZBgBIAEoBVIJc2Vzc2lvbk'
+    'lkEhcKB3NvbmdfaWQYAiABKAVSBnNvbmdJZBIrCgRzb25nGAMgASgLMhcuYnN0LnYxLlNvbmdQ'
+    'ZXJmb3JtYW5jZVIEc29uZw==');
 
 @$core.Deprecated('Use updateSessionSongResponseDescriptor instead')
 const UpdateSessionSongResponse$json = {
@@ -485,15 +485,15 @@ final $typed_data.Uint8List updateSessionSongResponseDescriptor = $convert.base6
 const DeleteSessionSongRequest$json = {
   '1': 'DeleteSessionSongRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'songId', '3': 2, '4': 1, '5': 5, '10': 'songId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'song_id', '3': 2, '4': 1, '5': 5, '10': 'songId'},
   ],
 };
 
 /// Descriptor for `DeleteSessionSongRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List deleteSessionSongRequestDescriptor = $convert.base64Decode(
-    'ChhEZWxldGVTZXNzaW9uU29uZ1JlcXVlc3QSHAoJc2Vzc2lvbklkGAEgASgFUglzZXNzaW9uSW'
-    'QSFgoGc29uZ0lkGAIgASgFUgZzb25nSWQ=');
+    'ChhEZWxldGVTZXNzaW9uU29uZ1JlcXVlc3QSHQoKc2Vzc2lvbl9pZBgBIAEoBVIJc2Vzc2lvbk'
+    'lkEhcKB3NvbmdfaWQYAiABKAVSBnNvbmdJZA==');
 
 @$core.Deprecated('Use deleteSessionSongResponseDescriptor instead')
 const DeleteSessionSongResponse$json = {
@@ -511,17 +511,17 @@ final $typed_data.Uint8List deleteSessionSongResponseDescriptor = $convert.base6
 const AddSongEntryRequest$json = {
   '1': 'AddSongEntryRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'songId', '3': 2, '4': 1, '5': 5, '10': 'songId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'song_id', '3': 2, '4': 1, '5': 5, '10': 'songId'},
     {'1': 'entry', '3': 3, '4': 1, '5': 11, '6': '.bst.v1.SongPerformanceEntry', '10': 'entry'},
   ],
 };
 
 /// Descriptor for `AddSongEntryRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addSongEntryRequestDescriptor = $convert.base64Decode(
-    'ChNBZGRTb25nRW50cnlSZXF1ZXN0EhwKCXNlc3Npb25JZBgBIAEoBVIJc2Vzc2lvbklkEhYKBn'
-    'NvbmdJZBgCIAEoBVIGc29uZ0lkEjIKBWVudHJ5GAMgASgLMhwuYnN0LnYxLlNvbmdQZXJmb3Jt'
-    'YW5jZUVudHJ5UgVlbnRyeQ==');
+    'ChNBZGRTb25nRW50cnlSZXF1ZXN0Eh0KCnNlc3Npb25faWQYASABKAVSCXNlc3Npb25JZBIXCg'
+    'dzb25nX2lkGAIgASgFUgZzb25nSWQSMgoFZW50cnkYAyABKAsyHC5ic3QudjEuU29uZ1BlcmZv'
+    'cm1hbmNlRW50cnlSBWVudHJ5');
 
 @$core.Deprecated('Use addSongEntryResponseDescriptor instead')
 const AddSongEntryResponse$json = {
@@ -540,16 +540,16 @@ final $typed_data.Uint8List addSongEntryResponseDescriptor = $convert.base64Deco
 const DeleteSongEntryRequest$json = {
   '1': 'DeleteSongEntryRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'songId', '3': 2, '4': 1, '5': 5, '10': 'songId'},
-    {'1': 'entryId', '3': 3, '4': 1, '5': 5, '10': 'entryId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'song_id', '3': 2, '4': 1, '5': 5, '10': 'songId'},
+    {'1': 'entry_id', '3': 3, '4': 1, '5': 5, '10': 'entryId'},
   ],
 };
 
 /// Descriptor for `DeleteSongEntryRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List deleteSongEntryRequestDescriptor = $convert.base64Decode(
-    'ChZEZWxldGVTb25nRW50cnlSZXF1ZXN0EhwKCXNlc3Npb25JZBgBIAEoBVIJc2Vzc2lvbklkEh'
-    'YKBnNvbmdJZBgCIAEoBVIGc29uZ0lkEhgKB2VudHJ5SWQYAyABKAVSB2VudHJ5SWQ=');
+    'ChZEZWxldGVTb25nRW50cnlSZXF1ZXN0Eh0KCnNlc3Npb25faWQYASABKAVSCXNlc3Npb25JZB'
+    'IXCgdzb25nX2lkGAIgASgFUgZzb25nSWQSGQoIZW50cnlfaWQYAyABKAVSB2VudHJ5SWQ=');
 
 @$core.Deprecated('Use deleteSongEntryResponseDescriptor instead')
 const DeleteSongEntryResponse$json = {
@@ -567,17 +567,17 @@ final $typed_data.Uint8List deleteSongEntryResponseDescriptor = $convert.base64D
 const AddSessionSongResourceRequest$json = {
   '1': 'AddSessionSongResourceRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'songId', '3': 2, '4': 1, '5': 5, '10': 'songId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'song_id', '3': 2, '4': 1, '5': 5, '10': 'songId'},
     {'1': 'resource', '3': 3, '4': 1, '5': 11, '6': '.bst.v1.Resource', '10': 'resource'},
   ],
 };
 
 /// Descriptor for `AddSessionSongResourceRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addSessionSongResourceRequestDescriptor = $convert.base64Decode(
-    'Ch1BZGRTZXNzaW9uU29uZ1Jlc291cmNlUmVxdWVzdBIcCglzZXNzaW9uSWQYASABKAVSCXNlc3'
-    'Npb25JZBIWCgZzb25nSWQYAiABKAVSBnNvbmdJZBIsCghyZXNvdXJjZRgDIAEoCzIQLmJzdC52'
-    'MS5SZXNvdXJjZVIIcmVzb3VyY2U=');
+    'Ch1BZGRTZXNzaW9uU29uZ1Jlc291cmNlUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZX'
+    'NzaW9uSWQSFwoHc29uZ19pZBgCIAEoBVIGc29uZ0lkEiwKCHJlc291cmNlGAMgASgLMhAuYnN0'
+    'LnYxLlJlc291cmNlUghyZXNvdXJjZQ==');
 
 @$core.Deprecated('Use addSessionSongResourceResponseDescriptor instead')
 const AddSessionSongResourceResponse$json = {
@@ -596,47 +596,47 @@ final $typed_data.Uint8List addSessionSongResourceResponseDescriptor = $convert.
 const ListSessionSongResourcesRequest$json = {
   '1': 'ListSessionSongResourcesRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'songId', '3': 2, '4': 1, '5': 5, '10': 'songId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'song_id', '3': 2, '4': 1, '5': 5, '10': 'songId'},
   ],
 };
 
 /// Descriptor for `ListSessionSongResourcesRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listSessionSongResourcesRequestDescriptor = $convert.base64Decode(
-    'Ch9MaXN0U2Vzc2lvblNvbmdSZXNvdXJjZXNSZXF1ZXN0EhwKCXNlc3Npb25JZBgBIAEoBVIJc2'
-    'Vzc2lvbklkEhYKBnNvbmdJZBgCIAEoBVIGc29uZ0lk');
+    'Ch9MaXN0U2Vzc2lvblNvbmdSZXNvdXJjZXNSZXF1ZXN0Eh0KCnNlc3Npb25faWQYASABKAVSCX'
+    'Nlc3Npb25JZBIXCgdzb25nX2lkGAIgASgFUgZzb25nSWQ=');
 
 @$core.Deprecated('Use listSessionSongResourcesResponseDescriptor instead')
 const ListSessionSongResourcesResponse$json = {
   '1': 'ListSessionSongResourcesResponse',
   '2': [
     {'1': 'resources', '3': 1, '4': 3, '5': 11, '6': '.bst.v1.Resource', '10': 'resources'},
-    {'1': 'nextPageToken', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
-    {'1': 'totalSize', '3': 3, '4': 1, '5': 5, '10': 'totalSize'},
+    {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
+    {'1': 'total_size', '3': 3, '4': 1, '5': 5, '10': 'totalSize'},
   ],
 };
 
 /// Descriptor for `ListSessionSongResourcesResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listSessionSongResourcesResponseDescriptor = $convert.base64Decode(
     'CiBMaXN0U2Vzc2lvblNvbmdSZXNvdXJjZXNSZXNwb25zZRIuCglyZXNvdXJjZXMYASADKAsyEC'
-    '5ic3QudjEuUmVzb3VyY2VSCXJlc291cmNlcxIkCg1uZXh0UGFnZVRva2VuGAIgASgJUg1uZXh0'
-    'UGFnZVRva2VuEhwKCXRvdGFsU2l6ZRgDIAEoBVIJdG90YWxTaXpl');
+    '5ic3QudjEuUmVzb3VyY2VSCXJlc291cmNlcxImCg9uZXh0X3BhZ2VfdG9rZW4YAiABKAlSDW5l'
+    'eHRQYWdlVG9rZW4SHQoKdG90YWxfc2l6ZRgDIAEoBVIJdG90YWxTaXpl');
 
 @$core.Deprecated('Use deleteSessionSongResourceRequestDescriptor instead')
 const DeleteSessionSongResourceRequest$json = {
   '1': 'DeleteSessionSongResourceRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'songId', '3': 2, '4': 1, '5': 5, '10': 'songId'},
-    {'1': 'resourceId', '3': 3, '4': 1, '5': 5, '10': 'resourceId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'song_id', '3': 2, '4': 1, '5': 5, '10': 'songId'},
+    {'1': 'resource_id', '3': 3, '4': 1, '5': 5, '10': 'resourceId'},
   ],
 };
 
 /// Descriptor for `DeleteSessionSongResourceRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List deleteSessionSongResourceRequestDescriptor = $convert.base64Decode(
-    'CiBEZWxldGVTZXNzaW9uU29uZ1Jlc291cmNlUmVxdWVzdBIcCglzZXNzaW9uSWQYASABKAVSCX'
-    'Nlc3Npb25JZBIWCgZzb25nSWQYAiABKAVSBnNvbmdJZBIeCgpyZXNvdXJjZUlkGAMgASgFUgpy'
-    'ZXNvdXJjZUlk');
+    'CiBEZWxldGVTZXNzaW9uU29uZ1Jlc291cmNlUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUg'
+    'lzZXNzaW9uSWQSFwoHc29uZ19pZBgCIAEoBVIGc29uZ0lkEh8KC3Jlc291cmNlX2lkGAMgASgF'
+    'UgpyZXNvdXJjZUlk');
 
 @$core.Deprecated('Use deleteSessionSongResourceResponseDescriptor instead')
 const DeleteSessionSongResourceResponse$json = {
@@ -655,14 +655,14 @@ final $typed_data.Uint8List deleteSessionSongResourceResponseDescriptor = $conve
 const ListSessionOrganizersRequest$json = {
   '1': 'ListSessionOrganizersRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
   ],
 };
 
 /// Descriptor for `ListSessionOrganizersRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listSessionOrganizersRequestDescriptor = $convert.base64Decode(
-    'ChxMaXN0U2Vzc2lvbk9yZ2FuaXplcnNSZXF1ZXN0EhwKCXNlc3Npb25JZBgBIAEoBVIJc2Vzc2'
-    'lvbklk');
+    'ChxMaXN0U2Vzc2lvbk9yZ2FuaXplcnNSZXF1ZXN0Eh0KCnNlc3Npb25faWQYASABKAVSCXNlc3'
+    'Npb25JZA==');
 
 @$core.Deprecated('Use listSessionOrganizersResponseDescriptor instead')
 const ListSessionOrganizersResponse$json = {
@@ -681,15 +681,15 @@ final $typed_data.Uint8List listSessionOrganizersResponseDescriptor = $convert.b
 const AddSessionOrganizerRequest$json = {
   '1': 'AddSessionOrganizerRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'userId', '3': 2, '4': 1, '5': 5, '10': 'userId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'user_id', '3': 2, '4': 1, '5': 5, '10': 'userId'},
   ],
 };
 
 /// Descriptor for `AddSessionOrganizerRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addSessionOrganizerRequestDescriptor = $convert.base64Decode(
-    'ChpBZGRTZXNzaW9uT3JnYW5pemVyUmVxdWVzdBIcCglzZXNzaW9uSWQYASABKAVSCXNlc3Npb2'
-    '5JZBIWCgZ1c2VySWQYAiABKAVSBnVzZXJJZA==');
+    'ChpBZGRTZXNzaW9uT3JnYW5pemVyUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZXNzaW'
+    '9uSWQSFwoHdXNlcl9pZBgCIAEoBVIGdXNlcklk');
 
 @$core.Deprecated('Use addSessionOrganizerResponseDescriptor instead')
 const AddSessionOrganizerResponse$json = {
@@ -708,15 +708,15 @@ final $typed_data.Uint8List addSessionOrganizerResponseDescriptor = $convert.bas
 const DeleteSessionOrganizerRequest$json = {
   '1': 'DeleteSessionOrganizerRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'userId', '3': 2, '4': 1, '5': 5, '10': 'userId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'user_id', '3': 2, '4': 1, '5': 5, '10': 'userId'},
   ],
 };
 
 /// Descriptor for `DeleteSessionOrganizerRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List deleteSessionOrganizerRequestDescriptor = $convert.base64Decode(
-    'Ch1EZWxldGVTZXNzaW9uT3JnYW5pemVyUmVxdWVzdBIcCglzZXNzaW9uSWQYASABKAVSCXNlc3'
-    'Npb25JZBIWCgZ1c2VySWQYAiABKAVSBnVzZXJJZA==');
+    'Ch1EZWxldGVTZXNzaW9uT3JnYW5pemVyUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZX'
+    'NzaW9uSWQSFwoHdXNlcl9pZBgCIAEoBVIGdXNlcklk');
 
 @$core.Deprecated('Use deleteSessionOrganizerResponseDescriptor instead')
 const DeleteSessionOrganizerResponse$json = {
@@ -735,15 +735,15 @@ final $typed_data.Uint8List deleteSessionOrganizerResponseDescriptor = $convert.
 const CreateSessionThreadRequest$json = {
   '1': 'CreateSessionThreadRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
     {'1': 'thread', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.Thread', '10': 'thread'},
   ],
 };
 
 /// Descriptor for `CreateSessionThreadRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createSessionThreadRequestDescriptor = $convert.base64Decode(
-    'ChpDcmVhdGVTZXNzaW9uVGhyZWFkUmVxdWVzdBIcCglzZXNzaW9uSWQYASABKAVSCXNlc3Npb2'
-    '5JZBImCgZ0aHJlYWQYAiABKAsyDi5ic3QudjEuVGhyZWFkUgZ0aHJlYWQ=');
+    'ChpDcmVhdGVTZXNzaW9uVGhyZWFkUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZXNzaW'
+    '9uSWQSJgoGdGhyZWFkGAIgASgLMg4uYnN0LnYxLlRocmVhZFIGdGhyZWFk');
 
 @$core.Deprecated('Use createSessionThreadResponseDescriptor instead')
 const CreateSessionThreadResponse$json = {
@@ -762,14 +762,14 @@ final $typed_data.Uint8List createSessionThreadResponseDescriptor = $convert.bas
 const ListSessionThreadsRequest$json = {
   '1': 'ListSessionThreadsRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
   ],
 };
 
 /// Descriptor for `ListSessionThreadsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listSessionThreadsRequestDescriptor = $convert.base64Decode(
-    'ChlMaXN0U2Vzc2lvblRocmVhZHNSZXF1ZXN0EhwKCXNlc3Npb25JZBgBIAEoBVIJc2Vzc2lvbk'
-    'lk');
+    'ChlMaXN0U2Vzc2lvblRocmVhZHNSZXF1ZXN0Eh0KCnNlc3Npb25faWQYASABKAVSCXNlc3Npb2'
+    '5JZA==');
 
 @$core.Deprecated('Use listSessionThreadsResponseDescriptor instead')
 const ListSessionThreadsResponse$json = {
@@ -788,17 +788,17 @@ final $typed_data.Uint8List listSessionThreadsResponseDescriptor = $convert.base
 const CreateSongThreadRequest$json = {
   '1': 'CreateSongThreadRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'songId', '3': 2, '4': 1, '5': 5, '10': 'songId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'song_id', '3': 2, '4': 1, '5': 5, '10': 'songId'},
     {'1': 'thread', '3': 3, '4': 1, '5': 11, '6': '.bst.v1.Thread', '10': 'thread'},
   ],
 };
 
 /// Descriptor for `CreateSongThreadRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createSongThreadRequestDescriptor = $convert.base64Decode(
-    'ChdDcmVhdGVTb25nVGhyZWFkUmVxdWVzdBIcCglzZXNzaW9uSWQYASABKAVSCXNlc3Npb25JZB'
-    'IWCgZzb25nSWQYAiABKAVSBnNvbmdJZBImCgZ0aHJlYWQYAyABKAsyDi5ic3QudjEuVGhyZWFk'
-    'UgZ0aHJlYWQ=');
+    'ChdDcmVhdGVTb25nVGhyZWFkUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZXNzaW9uSW'
+    'QSFwoHc29uZ19pZBgCIAEoBVIGc29uZ0lkEiYKBnRocmVhZBgDIAEoCzIOLmJzdC52MS5UaHJl'
+    'YWRSBnRocmVhZA==');
 
 @$core.Deprecated('Use createSongThreadResponseDescriptor instead')
 const CreateSongThreadResponse$json = {
@@ -817,15 +817,15 @@ final $typed_data.Uint8List createSongThreadResponseDescriptor = $convert.base64
 const GetSessionThreadRequest$json = {
   '1': 'GetSessionThreadRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'threadId', '3': 2, '4': 1, '5': 5, '10': 'threadId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'thread_id', '3': 2, '4': 1, '5': 5, '10': 'threadId'},
   ],
 };
 
 /// Descriptor for `GetSessionThreadRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getSessionThreadRequestDescriptor = $convert.base64Decode(
-    'ChdHZXRTZXNzaW9uVGhyZWFkUmVxdWVzdBIcCglzZXNzaW9uSWQYASABKAVSCXNlc3Npb25JZB'
-    'IaCgh0aHJlYWRJZBgCIAEoBVIIdGhyZWFkSWQ=');
+    'ChdHZXRTZXNzaW9uVGhyZWFkUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZXNzaW9uSW'
+    'QSGwoJdGhyZWFkX2lkGAIgASgFUgh0aHJlYWRJZA==');
 
 @$core.Deprecated('Use getSessionThreadResponseDescriptor instead')
 const GetSessionThreadResponse$json = {
@@ -844,15 +844,15 @@ final $typed_data.Uint8List getSessionThreadResponseDescriptor = $convert.base64
 const DeleteSessionThreadRequest$json = {
   '1': 'DeleteSessionThreadRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'threadId', '3': 2, '4': 1, '5': 5, '10': 'threadId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'thread_id', '3': 2, '4': 1, '5': 5, '10': 'threadId'},
   ],
 };
 
 /// Descriptor for `DeleteSessionThreadRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List deleteSessionThreadRequestDescriptor = $convert.base64Decode(
-    'ChpEZWxldGVTZXNzaW9uVGhyZWFkUmVxdWVzdBIcCglzZXNzaW9uSWQYASABKAVSCXNlc3Npb2'
-    '5JZBIaCgh0aHJlYWRJZBgCIAEoBVIIdGhyZWFkSWQ=');
+    'ChpEZWxldGVTZXNzaW9uVGhyZWFkUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZXNzaW'
+    '9uSWQSGwoJdGhyZWFkX2lkGAIgASgFUgh0aHJlYWRJZA==');
 
 @$core.Deprecated('Use deleteSessionThreadResponseDescriptor instead')
 const DeleteSessionThreadResponse$json = {
@@ -871,17 +871,17 @@ final $typed_data.Uint8List deleteSessionThreadResponseDescriptor = $convert.bas
 const CreateSessionNotificationRequest$json = {
   '1': 'CreateSessionNotificationRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
     {'1': 'content', '3': 2, '4': 1, '5': 9, '10': 'content'},
-    {'1': 'userIds', '3': 3, '4': 3, '5': 5, '10': 'userIds'},
+    {'1': 'user_ids', '3': 3, '4': 3, '5': 5, '10': 'userIds'},
   ],
 };
 
 /// Descriptor for `CreateSessionNotificationRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createSessionNotificationRequestDescriptor = $convert.base64Decode(
-    'CiBDcmVhdGVTZXNzaW9uTm90aWZpY2F0aW9uUmVxdWVzdBIcCglzZXNzaW9uSWQYASABKAVSCX'
-    'Nlc3Npb25JZBIYCgdjb250ZW50GAIgASgJUgdjb250ZW50EhgKB3VzZXJJZHMYAyADKAVSB3Vz'
-    'ZXJJZHM=');
+    'CiBDcmVhdGVTZXNzaW9uTm90aWZpY2F0aW9uUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUg'
+    'lzZXNzaW9uSWQSGAoHY29udGVudBgCIAEoCVIHY29udGVudBIZCgh1c2VyX2lkcxgDIAMoBVIH'
+    'dXNlcklkcw==');
 
 @$core.Deprecated('Use createSessionNotificationResponseDescriptor instead')
 const CreateSessionNotificationResponse$json = {
@@ -900,14 +900,14 @@ final $typed_data.Uint8List createSessionNotificationResponseDescriptor = $conve
 const GetSessionTimetableRequest$json = {
   '1': 'GetSessionTimetableRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
   ],
 };
 
 /// Descriptor for `GetSessionTimetableRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getSessionTimetableRequestDescriptor = $convert.base64Decode(
-    'ChpHZXRTZXNzaW9uVGltZXRhYmxlUmVxdWVzdBIcCglzZXNzaW9uSWQYASABKAVSCXNlc3Npb2'
-    '5JZA==');
+    'ChpHZXRTZXNzaW9uVGltZXRhYmxlUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZXNzaW'
+    '9uSWQ=');
 
 @$core.Deprecated('Use getSessionTimetableResponseDescriptor instead')
 const GetSessionTimetableResponse$json = {
@@ -926,15 +926,15 @@ final $typed_data.Uint8List getSessionTimetableResponseDescriptor = $convert.bas
 const UpdateSessionTimetableRequest$json = {
   '1': 'UpdateSessionTimetableRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
     {'1': 'timetable', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.Timetable', '10': 'timetable'},
   ],
 };
 
 /// Descriptor for `UpdateSessionTimetableRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateSessionTimetableRequestDescriptor = $convert.base64Decode(
-    'Ch1VcGRhdGVTZXNzaW9uVGltZXRhYmxlUmVxdWVzdBIcCglzZXNzaW9uSWQYASABKAVSCXNlc3'
-    'Npb25JZBIvCgl0aW1ldGFibGUYAiABKAsyES5ic3QudjEuVGltZXRhYmxlUgl0aW1ldGFibGU=');
+    'Ch1VcGRhdGVTZXNzaW9uVGltZXRhYmxlUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZX'
+    'NzaW9uSWQSLwoJdGltZXRhYmxlGAIgASgLMhEuYnN0LnYxLlRpbWV0YWJsZVIJdGltZXRhYmxl');
 
 @$core.Deprecated('Use updateSessionTimetableResponseDescriptor instead')
 const UpdateSessionTimetableResponse$json = {
@@ -953,15 +953,15 @@ final $typed_data.Uint8List updateSessionTimetableResponseDescriptor = $convert.
 const GetOptimizedTimetableRequest$json = {
   '1': 'GetOptimizedTimetableRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'optimizationRules', '3': 2, '4': 3, '5': 9, '10': 'optimizationRules'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'optimization_rules', '3': 2, '4': 3, '5': 9, '10': 'optimizationRules'},
   ],
 };
 
 /// Descriptor for `GetOptimizedTimetableRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getOptimizedTimetableRequestDescriptor = $convert.base64Decode(
-    'ChxHZXRPcHRpbWl6ZWRUaW1ldGFibGVSZXF1ZXN0EhwKCXNlc3Npb25JZBgBIAEoBVIJc2Vzc2'
-    'lvbklkEiwKEW9wdGltaXphdGlvblJ1bGVzGAIgAygJUhFvcHRpbWl6YXRpb25SdWxlcw==');
+    'ChxHZXRPcHRpbWl6ZWRUaW1ldGFibGVSZXF1ZXN0Eh0KCnNlc3Npb25faWQYASABKAVSCXNlc3'
+    'Npb25JZBItChJvcHRpbWl6YXRpb25fcnVsZXMYAiADKAlSEW9wdGltaXphdGlvblJ1bGVz');
 
 @$core.Deprecated('Use getOptimizedTimetableResponseDescriptor instead')
 const GetOptimizedTimetableResponse$json = {
@@ -980,43 +980,43 @@ final $typed_data.Uint8List getOptimizedTimetableResponseDescriptor = $convert.b
 const GetTimetableProgressRequest$json = {
   '1': 'GetTimetableProgressRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
   ],
 };
 
 /// Descriptor for `GetTimetableProgressRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getTimetableProgressRequestDescriptor = $convert.base64Decode(
-    'ChtHZXRUaW1ldGFibGVQcm9ncmVzc1JlcXVlc3QSHAoJc2Vzc2lvbklkGAEgASgFUglzZXNzaW'
-    '9uSWQ=');
+    'ChtHZXRUaW1ldGFibGVQcm9ncmVzc1JlcXVlc3QSHQoKc2Vzc2lvbl9pZBgBIAEoBVIJc2Vzc2'
+    'lvbklk');
 
 @$core.Deprecated('Use getTimetableProgressResponseDescriptor instead')
 const GetTimetableProgressResponse$json = {
   '1': 'GetTimetableProgressResponse',
   '2': [
-    {'1': 'completedEntries', '3': 1, '4': 3, '5': 11, '6': '.bst.v1.TimetableEntry', '10': 'completedEntries'},
-    {'1': 'currentEntry', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.TimetableEntry', '10': 'currentEntry'},
+    {'1': 'completed_entries', '3': 1, '4': 3, '5': 11, '6': '.bst.v1.TimetableEntry', '10': 'completedEntries'},
+    {'1': 'current_entry', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.TimetableEntry', '10': 'currentEntry'},
   ],
 };
 
 /// Descriptor for `GetTimetableProgressResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getTimetableProgressResponseDescriptor = $convert.base64Decode(
-    'ChxHZXRUaW1ldGFibGVQcm9ncmVzc1Jlc3BvbnNlEkIKEGNvbXBsZXRlZEVudHJpZXMYASADKA'
-    'syFi5ic3QudjEuVGltZXRhYmxlRW50cnlSEGNvbXBsZXRlZEVudHJpZXMSOgoMY3VycmVudEVu'
-    'dHJ5GAIgASgLMhYuYnN0LnYxLlRpbWV0YWJsZUVudHJ5UgxjdXJyZW50RW50cnk=');
+    'ChxHZXRUaW1ldGFibGVQcm9ncmVzc1Jlc3BvbnNlEkMKEWNvbXBsZXRlZF9lbnRyaWVzGAEgAy'
+    'gLMhYuYnN0LnYxLlRpbWV0YWJsZUVudHJ5UhBjb21wbGV0ZWRFbnRyaWVzEjsKDWN1cnJlbnRf'
+    'ZW50cnkYAiABKAsyFi5ic3QudjEuVGltZXRhYmxlRW50cnlSDGN1cnJlbnRFbnRyeQ==');
 
 @$core.Deprecated('Use updateTimetableProgressRequestDescriptor instead')
 const UpdateTimetableProgressRequest$json = {
   '1': 'UpdateTimetableProgressRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'currentEntryId', '3': 2, '4': 1, '5': 5, '10': 'currentEntryId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'current_entry_id', '3': 2, '4': 1, '5': 5, '10': 'currentEntryId'},
   ],
 };
 
 /// Descriptor for `UpdateTimetableProgressRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateTimetableProgressRequestDescriptor = $convert.base64Decode(
-    'Ch5VcGRhdGVUaW1ldGFibGVQcm9ncmVzc1JlcXVlc3QSHAoJc2Vzc2lvbklkGAEgASgFUglzZX'
-    'NzaW9uSWQSJgoOY3VycmVudEVudHJ5SWQYAiABKAVSDmN1cnJlbnRFbnRyeUlk');
+    'Ch5VcGRhdGVUaW1ldGFibGVQcm9ncmVzc1JlcXVlc3QSHQoKc2Vzc2lvbl9pZBgBIAEoBVIJc2'
+    'Vzc2lvbklkEigKEGN1cnJlbnRfZW50cnlfaWQYAiABKAVSDmN1cnJlbnRFbnRyeUlk');
 
 @$core.Deprecated('Use updateTimetableProgressResponseDescriptor instead')
 const UpdateTimetableProgressResponse$json = {
@@ -1035,15 +1035,15 @@ final $typed_data.Uint8List updateTimetableProgressResponseDescriptor = $convert
 const AddSessionResourceRequest$json = {
   '1': 'AddSessionResourceRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
     {'1': 'resource', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.Resource', '10': 'resource'},
   ],
 };
 
 /// Descriptor for `AddSessionResourceRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addSessionResourceRequestDescriptor = $convert.base64Decode(
-    'ChlBZGRTZXNzaW9uUmVzb3VyY2VSZXF1ZXN0EhwKCXNlc3Npb25JZBgBIAEoBVIJc2Vzc2lvbk'
-    'lkEiwKCHJlc291cmNlGAIgASgLMhAuYnN0LnYxLlJlc291cmNlUghyZXNvdXJjZQ==');
+    'ChlBZGRTZXNzaW9uUmVzb3VyY2VSZXF1ZXN0Eh0KCnNlc3Npb25faWQYASABKAVSCXNlc3Npb2'
+    '5JZBIsCghyZXNvdXJjZRgCIAEoCzIQLmJzdC52MS5SZXNvdXJjZVIIcmVzb3VyY2U=');
 
 @$core.Deprecated('Use addSessionResourceResponseDescriptor instead')
 const AddSessionResourceResponse$json = {
@@ -1062,14 +1062,14 @@ final $typed_data.Uint8List addSessionResourceResponseDescriptor = $convert.base
 const ListSessionResourcesRequest$json = {
   '1': 'ListSessionResourcesRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
   ],
 };
 
 /// Descriptor for `ListSessionResourcesRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listSessionResourcesRequestDescriptor = $convert.base64Decode(
-    'ChtMaXN0U2Vzc2lvblJlc291cmNlc1JlcXVlc3QSHAoJc2Vzc2lvbklkGAEgASgFUglzZXNzaW'
-    '9uSWQ=');
+    'ChtMaXN0U2Vzc2lvblJlc291cmNlc1JlcXVlc3QSHQoKc2Vzc2lvbl9pZBgBIAEoBVIJc2Vzc2'
+    'lvbklk');
 
 @$core.Deprecated('Use listSessionResourcesResponseDescriptor instead')
 const ListSessionResourcesResponse$json = {
@@ -1088,15 +1088,15 @@ final $typed_data.Uint8List listSessionResourcesResponseDescriptor = $convert.ba
 const DeleteSessionResourceRequest$json = {
   '1': 'DeleteSessionResourceRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'resourceId', '3': 2, '4': 1, '5': 5, '10': 'resourceId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'resource_id', '3': 2, '4': 1, '5': 5, '10': 'resourceId'},
   ],
 };
 
 /// Descriptor for `DeleteSessionResourceRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List deleteSessionResourceRequestDescriptor = $convert.base64Decode(
-    'ChxEZWxldGVTZXNzaW9uUmVzb3VyY2VSZXF1ZXN0EhwKCXNlc3Npb25JZBgBIAEoBVIJc2Vzc2'
-    'lvbklkEh4KCnJlc291cmNlSWQYAiABKAVSCnJlc291cmNlSWQ=');
+    'ChxEZWxldGVTZXNzaW9uUmVzb3VyY2VSZXF1ZXN0Eh0KCnNlc3Npb25faWQYASABKAVSCXNlc3'
+    'Npb25JZBIfCgtyZXNvdXJjZV9pZBgCIAEoBVIKcmVzb3VyY2VJZA==');
 
 @$core.Deprecated('Use deleteSessionResourceResponseDescriptor instead')
 const DeleteSessionResourceResponse$json = {
@@ -1140,14 +1140,14 @@ final $typed_data.Uint8List addSessionFeedbackResponseDescriptor = $convert.base
 const ListSessionFeedbacksRequest$json = {
   '1': 'ListSessionFeedbacksRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
   ],
 };
 
 /// Descriptor for `ListSessionFeedbacksRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listSessionFeedbacksRequestDescriptor = $convert.base64Decode(
-    'ChtMaXN0U2Vzc2lvbkZlZWRiYWNrc1JlcXVlc3QSHAoJc2Vzc2lvbklkGAEgASgFUglzZXNzaW'
-    '9uSWQ=');
+    'ChtMaXN0U2Vzc2lvbkZlZWRiYWNrc1JlcXVlc3QSHQoKc2Vzc2lvbl9pZBgBIAEoBVIJc2Vzc2'
+    'lvbklk');
 
 @$core.Deprecated('Use listSessionFeedbacksResponseDescriptor instead')
 const ListSessionFeedbacksResponse$json = {
@@ -1166,14 +1166,14 @@ final $typed_data.Uint8List listSessionFeedbacksResponseDescriptor = $convert.ba
 const ListRelatedSessionsRequest$json = {
   '1': 'ListRelatedSessionsRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
   ],
 };
 
 /// Descriptor for `ListRelatedSessionsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listRelatedSessionsRequestDescriptor = $convert.base64Decode(
-    'ChpMaXN0UmVsYXRlZFNlc3Npb25zUmVxdWVzdBIcCglzZXNzaW9uSWQYASABKAVSCXNlc3Npb2'
-    '5JZA==');
+    'ChpMaXN0UmVsYXRlZFNlc3Npb25zUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZXNzaW'
+    '9uSWQ=');
 
 @$core.Deprecated('Use listRelatedSessionsResponseDescriptor instead')
 const ListRelatedSessionsResponse$json = {
@@ -1192,15 +1192,15 @@ final $typed_data.Uint8List listRelatedSessionsResponseDescriptor = $convert.bas
 const AddRelatedSessionRequest$json = {
   '1': 'AddRelatedSessionRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'relatedSessionId', '3': 2, '4': 1, '5': 5, '10': 'relatedSessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'related_session_id', '3': 2, '4': 1, '5': 5, '10': 'relatedSessionId'},
   ],
 };
 
 /// Descriptor for `AddRelatedSessionRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addRelatedSessionRequestDescriptor = $convert.base64Decode(
-    'ChhBZGRSZWxhdGVkU2Vzc2lvblJlcXVlc3QSHAoJc2Vzc2lvbklkGAEgASgFUglzZXNzaW9uSW'
-    'QSKgoQcmVsYXRlZFNlc3Npb25JZBgCIAEoBVIQcmVsYXRlZFNlc3Npb25JZA==');
+    'ChhBZGRSZWxhdGVkU2Vzc2lvblJlcXVlc3QSHQoKc2Vzc2lvbl9pZBgBIAEoBVIJc2Vzc2lvbk'
+    'lkEiwKEnJlbGF0ZWRfc2Vzc2lvbl9pZBgCIAEoBVIQcmVsYXRlZFNlc3Npb25JZA==');
 
 @$core.Deprecated('Use addRelatedSessionResponseDescriptor instead')
 const AddRelatedSessionResponse$json = {
@@ -1218,15 +1218,15 @@ final $typed_data.Uint8List addRelatedSessionResponseDescriptor = $convert.base6
 const CreateSessionPartyRequest$json = {
   '1': 'CreateSessionPartyRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
     {'1': 'party', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.Party', '10': 'party'},
   ],
 };
 
 /// Descriptor for `CreateSessionPartyRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createSessionPartyRequestDescriptor = $convert.base64Decode(
-    'ChlDcmVhdGVTZXNzaW9uUGFydHlSZXF1ZXN0EhwKCXNlc3Npb25JZBgBIAEoBVIJc2Vzc2lvbk'
-    'lkEiMKBXBhcnR5GAIgASgLMg0uYnN0LnYxLlBhcnR5UgVwYXJ0eQ==');
+    'ChlDcmVhdGVTZXNzaW9uUGFydHlSZXF1ZXN0Eh0KCnNlc3Npb25faWQYASABKAVSCXNlc3Npb2'
+    '5JZBIjCgVwYXJ0eRgCIAEoCzINLmJzdC52MS5QYXJ0eVIFcGFydHk=');
 
 @$core.Deprecated('Use createSessionPartyResponseDescriptor instead')
 const CreateSessionPartyResponse$json = {
@@ -1245,13 +1245,14 @@ final $typed_data.Uint8List createSessionPartyResponseDescriptor = $convert.base
 const GetSessionPartyRequest$json = {
   '1': 'GetSessionPartyRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
   ],
 };
 
 /// Descriptor for `GetSessionPartyRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getSessionPartyRequestDescriptor = $convert.base64Decode(
-    'ChZHZXRTZXNzaW9uUGFydHlSZXF1ZXN0EhwKCXNlc3Npb25JZBgBIAEoBVIJc2Vzc2lvbklk');
+    'ChZHZXRTZXNzaW9uUGFydHlSZXF1ZXN0Eh0KCnNlc3Npb25faWQYASABKAVSCXNlc3Npb25JZA'
+    '==');
 
 @$core.Deprecated('Use getSessionPartyResponseDescriptor instead')
 const GetSessionPartyResponse$json = {
@@ -1270,16 +1271,16 @@ final $typed_data.Uint8List getSessionPartyResponseDescriptor = $convert.base64D
 const AddPartyParticipantRequest$json = {
   '1': 'AddPartyParticipantRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
     {'1': 'participant', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.PartyParticipant', '10': 'participant'},
   ],
 };
 
 /// Descriptor for `AddPartyParticipantRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addPartyParticipantRequestDescriptor = $convert.base64Decode(
-    'ChpBZGRQYXJ0eVBhcnRpY2lwYW50UmVxdWVzdBIcCglzZXNzaW9uSWQYASABKAVSCXNlc3Npb2'
-    '5JZBI6CgtwYXJ0aWNpcGFudBgCIAEoCzIYLmJzdC52MS5QYXJ0eVBhcnRpY2lwYW50UgtwYXJ0'
-    'aWNpcGFudA==');
+    'ChpBZGRQYXJ0eVBhcnRpY2lwYW50UmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZXNzaW'
+    '9uSWQSOgoLcGFydGljaXBhbnQYAiABKAsyGC5ic3QudjEuUGFydHlQYXJ0aWNpcGFudFILcGFy'
+    'dGljaXBhbnQ=');
 
 @$core.Deprecated('Use addPartyParticipantResponseDescriptor instead')
 const AddPartyParticipantResponse$json = {
@@ -1298,14 +1299,14 @@ final $typed_data.Uint8List addPartyParticipantResponseDescriptor = $convert.bas
 const ListPartyParticipantsRequest$json = {
   '1': 'ListPartyParticipantsRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
   ],
 };
 
 /// Descriptor for `ListPartyParticipantsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listPartyParticipantsRequestDescriptor = $convert.base64Decode(
-    'ChxMaXN0UGFydHlQYXJ0aWNpcGFudHNSZXF1ZXN0EhwKCXNlc3Npb25JZBgBIAEoBVIJc2Vzc2'
-    'lvbklk');
+    'ChxMaXN0UGFydHlQYXJ0aWNpcGFudHNSZXF1ZXN0Eh0KCnNlc3Npb25faWQYASABKAVSCXNlc3'
+    'Npb25JZA==');
 
 @$core.Deprecated('Use listPartyParticipantsResponseDescriptor instead')
 const ListPartyParticipantsResponse$json = {
@@ -1324,17 +1325,17 @@ final $typed_data.Uint8List listPartyParticipantsResponseDescriptor = $convert.b
 const UpdatePartyParticipantRequest$json = {
   '1': 'UpdatePartyParticipantRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'participantId', '3': 2, '4': 1, '5': 5, '10': 'participantId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'participant_id', '3': 2, '4': 1, '5': 5, '10': 'participantId'},
     {'1': 'participant', '3': 3, '4': 1, '5': 11, '6': '.bst.v1.PartyParticipant', '10': 'participant'},
   ],
 };
 
 /// Descriptor for `UpdatePartyParticipantRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updatePartyParticipantRequestDescriptor = $convert.base64Decode(
-    'Ch1VcGRhdGVQYXJ0eVBhcnRpY2lwYW50UmVxdWVzdBIcCglzZXNzaW9uSWQYASABKAVSCXNlc3'
-    'Npb25JZBIkCg1wYXJ0aWNpcGFudElkGAIgASgFUg1wYXJ0aWNpcGFudElkEjoKC3BhcnRpY2lw'
-    'YW50GAMgASgLMhguYnN0LnYxLlBhcnR5UGFydGljaXBhbnRSC3BhcnRpY2lwYW50');
+    'Ch1VcGRhdGVQYXJ0eVBhcnRpY2lwYW50UmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZX'
+    'NzaW9uSWQSJQoOcGFydGljaXBhbnRfaWQYAiABKAVSDXBhcnRpY2lwYW50SWQSOgoLcGFydGlj'
+    'aXBhbnQYAyABKAsyGC5ic3QudjEuUGFydHlQYXJ0aWNpcGFudFILcGFydGljaXBhbnQ=');
 
 @$core.Deprecated('Use updatePartyParticipantResponseDescriptor instead')
 const UpdatePartyParticipantResponse$json = {
@@ -1353,15 +1354,15 @@ final $typed_data.Uint8List updatePartyParticipantResponseDescriptor = $convert.
 const DeletePartyParticipantRequest$json = {
   '1': 'DeletePartyParticipantRequest',
   '2': [
-    {'1': 'sessionId', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'participantId', '3': 2, '4': 1, '5': 5, '10': 'participantId'},
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'participant_id', '3': 2, '4': 1, '5': 5, '10': 'participantId'},
   ],
 };
 
 /// Descriptor for `DeletePartyParticipantRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List deletePartyParticipantRequestDescriptor = $convert.base64Decode(
-    'Ch1EZWxldGVQYXJ0eVBhcnRpY2lwYW50UmVxdWVzdBIcCglzZXNzaW9uSWQYASABKAVSCXNlc3'
-    'Npb25JZBIkCg1wYXJ0aWNpcGFudElkGAIgASgFUg1wYXJ0aWNpcGFudElk');
+    'Ch1EZWxldGVQYXJ0eVBhcnRpY2lwYW50UmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZX'
+    'NzaW9uSWQSJQoOcGFydGljaXBhbnRfaWQYAiABKAVSDXBhcnRpY2lwYW50SWQ=');
 
 @$core.Deprecated('Use deletePartyParticipantResponseDescriptor instead')
 const DeletePartyParticipantResponse$json = {

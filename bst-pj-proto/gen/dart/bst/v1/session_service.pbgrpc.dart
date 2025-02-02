@@ -1,6 +1,6 @@
 //
 //  Generated code. Do not modify.
-//  source: bst/v1/session-service.proto
+//  source: bst/v1/session_service.proto
 //
 // @dart = 2.12
 
@@ -15,9 +15,9 @@ import 'dart:core' as $core;
 import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'session-service.pb.dart' as $2;
+import 'session_service.pb.dart' as $2;
 
-export 'session-service.pb.dart';
+export 'session_service.pb.dart';
 
 @$pb.GrpcServiceName('bst.v1.SessionService')
 class SessionServiceClient extends $grpc.Client {

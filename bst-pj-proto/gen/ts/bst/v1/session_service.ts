@@ -2,7 +2,7 @@
 // versions:
 //   protoc-gen-ts_proto  v1.181.2
 //   protoc               v5.29.3
-// source: bst/v1/session-service.proto
+// source: bst/v1/session_service.proto
 
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
