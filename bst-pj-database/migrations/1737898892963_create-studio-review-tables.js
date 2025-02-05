@@ -21,7 +21,6 @@ exports.up = (pgm) => {
     rating: {
       type: "integer",
       notNull: true,
-      check: "rating >= 1 AND rating <= 5",
     },
     comment: { type: "text" },
     created_at: {

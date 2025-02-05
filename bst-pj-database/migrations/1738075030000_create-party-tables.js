@@ -143,6 +143,7 @@ exports.up = (pgm) => {
       unique: ["party_id", "session_participant_id"],
     }
   );
+
   pgm.createConstraint(
     "party_participants",
     "party_participants_party_id_session_participant_id_key",
@@ -154,7 +155,9 @@ exports.up = (pgm) => {
 
 exports.down = (pgm) => {
   // Drop triggers
-  pgm.dropTrigger("parties", "update_updated_at_trigger", { ifExists: true });
+  pgm.dropTrigger("parties", "update_updated_at_trigger", {
+    ifExists: true,
+  });
   pgm.dropTrigger("party_hosts", "update_updated_at_trigger", {
     ifExists: true,
   });
@@ -166,12 +169,16 @@ exports.down = (pgm) => {
   pgm.dropConstraint(
     "party_hosts",
     "party_hosts_party_id_session_participant_id_key",
-    { ifExists: true }
+    {
+      ifExists: true,
+    }
   );
   pgm.dropConstraint(
     "party_participants",
     "party_participants_party_id_session_participant_id_key",
-    { ifExists: true }
+    {
+      ifExists: true,
+    }
   );
 
   // Drop indexes

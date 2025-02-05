@@ -3,7 +3,7 @@
 exports.shorthands = undefined;
 
 exports.up = (pgm) => {
-  // Create enum type for target_type
+  // Create enum type for rating target type
   pgm.createType("rating_target_type", [
     "Session",
     "SongPerformance",
@@ -14,6 +14,12 @@ exports.up = (pgm) => {
   // Create ratings table
   pgm.createTable("ratings", {
     id: "id",
+    user_id: {
+      type: "integer",
+      notNull: true,
+      references: "users",
+      onDelete: "CASCADE",
+    },
     target_type: {
       type: "rating_target_type",
       notNull: true,
@@ -48,15 +54,16 @@ exports.up = (pgm) => {
     level: "ROW",
   });
 
-  // Create index for target lookup
+  // Create indexes
   pgm.createIndex("ratings", ["target_type", "target_id"]);
-  // Create index for user lookup
   pgm.createIndex("ratings", ["user_id"]);
 };
 
 exports.down = (pgm) => {
   // Drop trigger
-  pgm.dropTrigger("ratings", "update_updated_at_trigger", { ifExists: true });
+  pgm.dropTrigger("ratings", "update_updated_at_trigger", {
+    ifExists: true,
+  });
 
   // Drop indexes
   pgm.dropIndex("ratings", ["target_type", "target_id"], { ifExists: true });
