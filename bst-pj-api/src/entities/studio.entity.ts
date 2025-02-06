@@ -36,5 +36,5 @@ export class Studio {
   location: Location;
 
   @OneToMany(() => StudioRoom, (room) => room.studio, { eager: false })
-  rooms: StudioRoom[] = [];
+  rooms: StudioRoom[];
 }
