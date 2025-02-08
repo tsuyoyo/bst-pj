@@ -29,6 +29,9 @@ export class User {
   @Column({ type: 'varchar', length: 255, nullable: false })
   email: string;
 
+  @Column({ type: 'varchar', length: 255, nullable: false })
+  password: string;
+
   @Column({ name: 'icon_url', type: 'text', nullable: true })
   iconUrl: string;
 

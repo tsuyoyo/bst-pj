@@ -30,7 +30,7 @@ docker-compose down -v
 - Host: localhost
 - Port: 5432
 - Database: bst_db
-- User: bst_user
+- User: bst_admin
 - Password: bst_password
 
 #### Connect using psql (Command Line)
