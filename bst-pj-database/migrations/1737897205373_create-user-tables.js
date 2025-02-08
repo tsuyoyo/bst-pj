@@ -17,12 +17,36 @@ exports.up = (pgm) => {
   // Create users table
   pgm.createTable("users", {
     id: "id",
-    external_id: { type: "varchar(255)" },
-    external_service: { type: "external_service" },
-    name: { type: "varchar(30)", notNull: true },
-    email: { type: "varchar(255)", notNull: true },
-    icon_url: { type: "text" },
-    profile_picture_url: { type: "text" },
+    external_id: {
+      type: "varchar(255)",
+      notNull: false,
+    },
+    // Note: When to implement OAuth, external token column will be required.
+    external_service: {
+      type: "external_service",
+      notNull: false,
+    },
+    name: {
+      type: "varchar(30)",
+      notNull: true,
+    },
+    email: {
+      type: "varchar(255)",
+      notNull: true,
+      unique: true,
+    },
+    password: {
+      type: "varchar(255)",
+      notNull: true,
+    },
+    icon_url: {
+      type: "text",
+      notNull: false,
+    },
+    profile_picture_url: {
+      type: "text",
+      notNull: false,
+    },
     created_at: {
       type: "timestamp",
       notNull: true,
@@ -35,10 +59,17 @@ exports.up = (pgm) => {
     },
   });
 
-  // Create unique index for external_id and external_service combination
-  pgm.createIndex("users", ["external_id", "external_service"], {
-    unique: true,
+  // Create trigger for updating updated_at
+  pgm.createTrigger("users", "update_updated_at_trigger", {
+    when: "BEFORE",
+    operation: "UPDATE",
+    function: "update_updated_at",
+    level: "ROW",
   });
+
+  // Create indexes
+  pgm.createIndex("users", ["email"]);
+  pgm.createIndex("users", ["external_service", "external_id"]);
 
   // Create user_profiles table
   pgm.createTable("user_profiles", {
@@ -144,34 +175,30 @@ exports.up = (pgm) => {
   pgm.createIndex("user_parts", ["user_id", "part_id"], { unique: true });
   pgm.createIndex("user_genres", ["user_id", "genre_id"], { unique: true });
   pgm.createIndex("follows", ["follower_id", "following_id"], { unique: true });
-
-  // Create triggers for updating updated_at
-  const tables = ["users", "user_profiles", "follows"];
-  tables.forEach((table) => {
-    pgm.createTrigger(table, "update_updated_at_trigger", {
-      when: "BEFORE",
-      operation: "UPDATE",
-      function: "update_updated_at",
-      level: "ROW",
-    });
-  });
 };
 
 exports.down = (pgm) => {
-  // Drop triggers
-  const tables = ["users", "user_profiles", "follows"];
-  tables.forEach((table) => {
-    pgm.dropTrigger(table, "update_updated_at_trigger", { ifExists: true });
+  // Drop trigger
+  pgm.dropTrigger("users", "update_updated_at_trigger", { ifExists: true });
+
+  // Drop indexes
+  pgm.dropIndex("users", ["email"], { ifExists: true });
+  pgm.dropIndex("users", ["external_service", "external_id"], {
+    ifExists: true,
   });
+
+  // Drop table
+  pgm.dropTable("users", { ifExists: true });
+
+  // Drop enum type
+  pgm.dropType("external_service", { ifExists: true });
 
   // Drop tables
   pgm.dropTable("follows", { ifExists: true });
   pgm.dropTable("user_genres", { ifExists: true });
   pgm.dropTable("user_parts", { ifExists: true });
   pgm.dropTable("user_profiles", { ifExists: true });
-  pgm.dropTable("users", { ifExists: true });
 
   // Drop enum types
-  pgm.dropType("external_service", { ifExists: true });
   pgm.dropType("follow_status", { ifExists: true });
 };
