@@ -18,6 +18,7 @@ exports.up = (pgm) => {
       notNull: true,
       default: pgm.func("current_timestamp"),
     },
+    updated_user_id: { type: "integer", notNull: true },
   });
 
   // Create artist_genres table for many-to-many relationship
@@ -40,6 +41,7 @@ exports.up = (pgm) => {
       notNull: true,
       default: pgm.func("current_timestamp"),
     },
+    updated_user_id: { type: "integer", notNull: true },
   });
 
   // Create unique index for artist_genres to prevent duplicate relationships

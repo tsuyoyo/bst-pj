@@ -33,6 +33,7 @@ exports.up = (pgm) => {
       notNull: true,
       default: pgm.func("current_timestamp"),
     },
+    updated_user_id: { type: "integer", notNull: true },
   });
 
   // Create trigger for updating updated_at

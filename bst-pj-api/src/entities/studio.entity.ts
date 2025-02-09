@@ -37,4 +37,7 @@ export class Studio {
 
   @OneToMany(() => StudioRoom, (room) => room.studio, { eager: false })
   rooms: StudioRoom[];
+
+  @Column({ name: 'updated_user_id', type: 'integer', nullable: false })
+  updatedUserId: number;
 }

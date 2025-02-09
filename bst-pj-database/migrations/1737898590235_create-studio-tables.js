@@ -27,6 +27,7 @@ exports.up = (pgm) => {
       notNull: true,
       default: pgm.func("current_timestamp"),
     },
+    updated_user_id: { type: "integer", notNull: true },
   });
 
   // Create studio_rooms table
@@ -60,6 +61,7 @@ exports.up = (pgm) => {
       notNull: true,
       default: pgm.func("current_timestamp"),
     },
+    updated_user_id: { type: "integer", notNull: true },
   });
 
   // Create studio_room_infos table
@@ -96,6 +98,7 @@ exports.up = (pgm) => {
       notNull: true,
       default: pgm.func("current_timestamp"),
     },
+    updated_user_id: { type: "integer", notNull: true },
   });
 
   // Create triggers for updating updated_at

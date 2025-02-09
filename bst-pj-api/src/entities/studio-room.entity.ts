@@ -40,4 +40,7 @@ export class StudioRoom {
 
   @OneToMany(() => StudioRoomInfo, (info) => info.studioRoom, { eager: false })
   infos: StudioRoomInfo[];
+
+  @Column({ name: 'updated_user_id', type: 'integer', nullable: false })
+  updatedUserId: number;
 }

@@ -35,4 +35,7 @@ export class Location {
   @ManyToOne(() => Area, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'area_id' })
   area: Area;
+
+  @Column({ name: 'updated_user_id', type: 'integer', nullable: false })
+  updatedUserId: number;
 }

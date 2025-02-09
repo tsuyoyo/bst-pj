@@ -14,7 +14,7 @@ export class GenreService {
     private readonly genreRepository: Repository<Genre>,
   ) {}
 
-  async createGenre(name: string): Promise<Genre> {
+  async createGenre(name: string, userId: number): Promise<Genre> {
     const existingGenre = await this.genreRepository.findOne({
       where: { name },
     });
@@ -24,6 +24,7 @@ export class GenreService {
 
     const genre = this.genreRepository.create({
       name,
+      updatedUserId: userId,
     });
     return await this.genreRepository.save(genre);
   }
@@ -32,7 +33,7 @@ export class GenreService {
     return await this.genreRepository.find();
   }
 
-  async updateGenre(id: number, name: string) {
+  async updateGenre(id: number, name: string, userId: number) {
     const genre = await this.genreRepository.findOne({
       where: { id },
     });
@@ -48,6 +49,8 @@ export class GenreService {
     }
 
     genre.name = name;
+    genre.updatedUserId = userId;
+
     return await this.genreRepository.save(genre);
   }
 }

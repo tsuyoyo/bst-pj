@@ -42,4 +42,7 @@ export class StudioReview {
   @ManyToOne(() => User, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+  @Column({ name: 'updated_user_id', type: 'integer', nullable: false })
+  updatedUserId: number;
 }
