@@ -32,8 +32,7 @@ message Genre {
 message Artist {
   int32  id      = 1;
   string name    = 2;
-  Genre  genre   = 3;
-  string website = 4;
+  string website = 3;
 }
 
 message Part {

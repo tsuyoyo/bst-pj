@@ -4,7 +4,7 @@
   "description": "Protocol Buffers and gRPC definitions for BST Project",
   "scripts": {
     "postinstall": "mkdir -p proto/google/protobuf && cp node_modules/protobufjs/google/protobuf/* proto/google/protobuf/",
-    "generate": "npm run generate:ts && npm run generate:dart",
+    "generate": "rm -rf gen && mkdir -p gen/ts gen/dart && npm run generate:ts && npm run generate:dart",
     "generate:ts": "protoc --proto_path=./proto --plugin=protoc-gen-ts_proto=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./gen/ts --ts_proto_opt=esModuleInterop=true ./proto/bst/v1/*.proto",
     "generate:dart": "protoc --proto_path=./proto --dart_out=grpc:./gen/dart ./proto/bst/v1/*.proto",
     "format": "find proto -name '*.proto' -exec clang-format -i {} \\;"

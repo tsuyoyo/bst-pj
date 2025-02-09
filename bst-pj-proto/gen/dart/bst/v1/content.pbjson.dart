@@ -80,15 +80,14 @@ const Artist$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
     {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'genre', '3': 3, '4': 1, '5': 11, '6': '.bst.v1.Genre', '10': 'genre'},
-    {'1': 'website', '3': 4, '4': 1, '5': 9, '10': 'website'},
+    {'1': 'website', '3': 3, '4': 1, '5': 9, '10': 'website'},
   ],
 };
 
 /// Descriptor for `Artist`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List artistDescriptor = $convert.base64Decode(
-    'CgZBcnRpc3QSDgoCaWQYASABKAVSAmlkEhIKBG5hbWUYAiABKAlSBG5hbWUSIwoFZ2VucmUYAy'
-    'ABKAsyDS5ic3QudjEuR2VucmVSBWdlbnJlEhgKB3dlYnNpdGUYBCABKAlSB3dlYnNpdGU=');
+    'CgZBcnRpc3QSDgoCaWQYASABKAVSAmlkEhIKBG5hbWUYAiABKAlSBG5hbWUSGAoHd2Vic2l0ZR'
+    'gDIAEoCVIHd2Vic2l0ZQ==');
 
 @$core.Deprecated('Use partDescriptor instead')
 const Part$json = {

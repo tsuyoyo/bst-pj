@@ -279,7 +279,6 @@ class Artist extends $pb.GeneratedMessage {
   factory Artist({
     $core.int? id,
     $core.String? name,
-    Genre? genre,
     $core.String? website,
   }) {
     final $result = create();
@@ -288,9 +287,6 @@ class Artist extends $pb.GeneratedMessage {
     }
     if (name != null) {
       $result.name = name;
-    }
-    if (genre != null) {
-      $result.genre = genre;
     }
     if (website != null) {
       $result.website = website;
@@ -304,8 +300,7 @@ class Artist extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Artist', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'name')
-    ..aOM<Genre>(3, _omitFieldNames ? '' : 'genre', subBuilder: Genre.create)
-    ..aOS(4, _omitFieldNames ? '' : 'website')
+    ..aOS(3, _omitFieldNames ? '' : 'website')
     ..hasRequiredFields = false
   ;
 
@@ -349,24 +344,13 @@ class Artist extends $pb.GeneratedMessage {
   void clearName() => clearField(2);
 
   @$pb.TagNumber(3)
-  Genre get genre => $_getN(2);
+  $core.String get website => $_getSZ(2);
   @$pb.TagNumber(3)
-  set genre(Genre v) { setField(3, v); }
+  set website($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasGenre() => $_has(2);
+  $core.bool hasWebsite() => $_has(2);
   @$pb.TagNumber(3)
-  void clearGenre() => clearField(3);
-  @$pb.TagNumber(3)
-  Genre ensureGenre() => $_ensure(2);
-
-  @$pb.TagNumber(4)
-  $core.String get website => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set website($core.String v) { $_setString(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasWebsite() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearWebsite() => clearField(4);
+  void clearWebsite() => clearField(3);
 }
 
 class Part extends $pb.GeneratedMessage {

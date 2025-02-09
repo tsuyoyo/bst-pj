@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "bst/v1/content.proto";
+
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+message CreateGenreRequest {
+  string name = 1;
+}
+
+message CreateGenreResponse {
+  Genre genre = 1;
+}
+
+message ListGenresResponse {
+  repeated Genre genres = 1;
+}
+
+message UpdateGenreRequest {
+  string name = 1;
+}
+
+message UpdateGenreResponse {
+  Genre genre = 1;
+}

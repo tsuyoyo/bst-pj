@@ -71,7 +71,6 @@ export interface Genre {
 export interface Artist {
   id: number;
   name: string;
-  genre: Genre | undefined;
   website: string;
 }
 
@@ -383,7 +382,7 @@ export const Genre = {
 };
 
 function createBaseArtist(): Artist {
-  return { id: 0, name: "", genre: undefined, website: "" };
+  return { id: 0, name: "", website: "" };
 }
 
 export const Artist = {
@@ -394,11 +393,8 @@ export const Artist = {
     if (message.name !== "") {
       writer.uint32(18).string(message.name);
     }
-    if (message.genre !== undefined) {
-      Genre.encode(message.genre, writer.uint32(26).fork()).ldelim();
-    }
     if (message.website !== "") {
-      writer.uint32(34).string(message.website);
+      writer.uint32(26).string(message.website);
     }
     return writer;
   },
@@ -429,13 +425,6 @@ export const Artist = {
             break;
           }
 
-          message.genre = Genre.decode(reader, reader.uint32());
-          continue;
-        case 4:
-          if (tag !== 34) {
-            break;
-          }
-
           message.website = reader.string();
           continue;
       }
@@ -451,7 +440,6 @@ export const Artist = {
     return {
       id: isSet(object.id) ? globalThis.Number(object.id) : 0,
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      genre: isSet(object.genre) ? Genre.fromJSON(object.genre) : undefined,
       website: isSet(object.website) ? globalThis.String(object.website) : "",
     };
   },
@@ -463,9 +451,6 @@ export const Artist = {
     }
     if (message.name !== "") {
       obj.name = message.name;
-    }
-    if (message.genre !== undefined) {
-      obj.genre = Genre.toJSON(message.genre);
     }
     if (message.website !== "") {
       obj.website = message.website;
@@ -480,7 +465,6 @@ export const Artist = {
     const message = createBaseArtist();
     message.id = object.id ?? 0;
     message.name = object.name ?? "";
-    message.genre = (object.genre !== undefined && object.genre !== null) ? Genre.fromPartial(object.genre) : undefined;
     message.website = object.website ?? "";
     return message;
   },
