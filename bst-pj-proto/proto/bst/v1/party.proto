@@ -32,6 +32,6 @@ message Party {
   repeated PartyParticipant participants = 1;
   Location                  location     = 2;
   int32                     fee          = 3;
-  google.protobuf.Timestamp start_at      = 4;
-  google.protobuf.Timestamp end_at        = 5;
+  google.protobuf.Timestamp start_at     = 4;
+  google.protobuf.Timestamp end_at       = 5;
 }

@@ -72,6 +72,7 @@ export interface Artist {
   id: number;
   name: string;
   website: string;
+  genres: Genre[];
 }
 
 export interface Part {
@@ -382,7 +383,7 @@ export const Genre = {
 };
 
 function createBaseArtist(): Artist {
-  return { id: 0, name: "", website: "" };
+  return { id: 0, name: "", website: "", genres: [] };
 }
 
 export const Artist = {
@@ -395,6 +396,9 @@ export const Artist = {
     }
     if (message.website !== "") {
       writer.uint32(26).string(message.website);
+    }
+    for (const v of message.genres) {
+      Genre.encode(v!, writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
@@ -427,6 +431,13 @@ export const Artist = {
 
           message.website = reader.string();
           continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.genres.push(Genre.decode(reader, reader.uint32()));
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -441,6 +452,7 @@ export const Artist = {
       id: isSet(object.id) ? globalThis.Number(object.id) : 0,
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       website: isSet(object.website) ? globalThis.String(object.website) : "",
+      genres: globalThis.Array.isArray(object?.genres) ? object.genres.map((e: any) => Genre.fromJSON(e)) : [],
     };
   },
 
@@ -455,6 +467,9 @@ export const Artist = {
     if (message.website !== "") {
       obj.website = message.website;
     }
+    if (message.genres?.length) {
+      obj.genres = message.genres.map((e) => Genre.toJSON(e));
+    }
     return obj;
   },
 
@@ -466,6 +481,7 @@ export const Artist = {
     message.id = object.id ?? 0;
     message.name = object.name ?? "";
     message.website = object.website ?? "";
+    message.genres = object.genres?.map((e) => Genre.fromPartial(e)) || [];
     return message;
   },
 };

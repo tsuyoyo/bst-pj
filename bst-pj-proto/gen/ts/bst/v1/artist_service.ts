@@ -6,14 +6,14 @@
 
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
-import { Artist, Genre, Song } from "./content";
+import { Artist, Song } from "./content";
 
 export const protobufPackage = "bst.v1";
 
 export interface CreateArtistRequest {
   name: string;
   description: string;
-  genre: Genre | undefined;
+  genreIds: number[];
   website: string;
 }
 
@@ -24,8 +24,6 @@ export interface CreateArtistResponse {
 export interface ListArtistsRequest {
   pageSize: number;
   pageToken: number;
-  query: string;
-  genre: Genre | undefined;
 }
 
 export interface ListArtistsResponse {
@@ -46,7 +44,7 @@ export interface UpdateArtistRequest {
   artistId: number;
   name: string;
   description: string;
-  genre: Genre | undefined;
+  genreIds: number[];
   website: string;
 }
 
@@ -75,7 +73,7 @@ export interface ListArtistSongsResponse {
 }
 
 function createBaseCreateArtistRequest(): CreateArtistRequest {
-  return { name: "", description: "", genre: undefined, website: "" };
+  return { name: "", description: "", genreIds: [], website: "" };
 }
 
 export const CreateArtistRequest = {
@@ -86,9 +84,11 @@ export const CreateArtistRequest = {
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    if (message.genre !== undefined) {
-      Genre.encode(message.genre, writer.uint32(26).fork()).ldelim();
+    writer.uint32(26).fork();
+    for (const v of message.genreIds) {
+      writer.int32(v);
     }
+    writer.ldelim();
     if (message.website !== "") {
       writer.uint32(34).string(message.website);
     }
@@ -117,12 +117,22 @@ export const CreateArtistRequest = {
           message.description = reader.string();
           continue;
         case 3:
-          if (tag !== 26) {
-            break;
+          if (tag === 24) {
+            message.genreIds.push(reader.int32());
+
+            continue;
           }
 
-          message.genre = Genre.decode(reader, reader.uint32());
-          continue;
+          if (tag === 26) {
+            const end2 = reader.uint32() + reader.pos;
+            while (reader.pos < end2) {
+              message.genreIds.push(reader.int32());
+            }
+
+            continue;
+          }
+
+          break;
         case 4:
           if (tag !== 34) {
             break;
@@ -143,7 +153,7 @@ export const CreateArtistRequest = {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       description: isSet(object.description) ? globalThis.String(object.description) : "",
-      genre: isSet(object.genre) ? Genre.fromJSON(object.genre) : undefined,
+      genreIds: globalThis.Array.isArray(object?.genreIds) ? object.genreIds.map((e: any) => globalThis.Number(e)) : [],
       website: isSet(object.website) ? globalThis.String(object.website) : "",
     };
   },
@@ -156,8 +166,8 @@ export const CreateArtistRequest = {
     if (message.description !== "") {
       obj.description = message.description;
     }
-    if (message.genre !== undefined) {
-      obj.genre = Genre.toJSON(message.genre);
+    if (message.genreIds?.length) {
+      obj.genreIds = message.genreIds.map((e) => Math.round(e));
     }
     if (message.website !== "") {
       obj.website = message.website;
@@ -172,7 +182,7 @@ export const CreateArtistRequest = {
     const message = createBaseCreateArtistRequest();
     message.name = object.name ?? "";
     message.description = object.description ?? "";
-    message.genre = (object.genre !== undefined && object.genre !== null) ? Genre.fromPartial(object.genre) : undefined;
+    message.genreIds = object.genreIds?.map((e) => e) || [];
     message.website = object.website ?? "";
     return message;
   },
@@ -238,7 +248,7 @@ export const CreateArtistResponse = {
 };
 
 function createBaseListArtistsRequest(): ListArtistsRequest {
-  return { pageSize: 0, pageToken: 0, query: "", genre: undefined };
+  return { pageSize: 0, pageToken: 0 };
 }
 
 export const ListArtistsRequest = {
@@ -248,12 +258,6 @@ export const ListArtistsRequest = {
     }
     if (message.pageToken !== 0) {
       writer.uint32(16).int32(message.pageToken);
-    }
-    if (message.query !== "") {
-      writer.uint32(26).string(message.query);
-    }
-    if (message.genre !== undefined) {
-      Genre.encode(message.genre, writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
@@ -279,20 +283,6 @@ export const ListArtistsRequest = {
 
           message.pageToken = reader.int32();
           continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.query = reader.string();
-          continue;
-        case 4:
-          if (tag !== 34) {
-            break;
-          }
-
-          message.genre = Genre.decode(reader, reader.uint32());
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -306,8 +296,6 @@ export const ListArtistsRequest = {
     return {
       pageSize: isSet(object.pageSize) ? globalThis.Number(object.pageSize) : 0,
       pageToken: isSet(object.pageToken) ? globalThis.Number(object.pageToken) : 0,
-      query: isSet(object.query) ? globalThis.String(object.query) : "",
-      genre: isSet(object.genre) ? Genre.fromJSON(object.genre) : undefined,
     };
   },
 
@@ -319,12 +307,6 @@ export const ListArtistsRequest = {
     if (message.pageToken !== 0) {
       obj.pageToken = Math.round(message.pageToken);
     }
-    if (message.query !== "") {
-      obj.query = message.query;
-    }
-    if (message.genre !== undefined) {
-      obj.genre = Genre.toJSON(message.genre);
-    }
     return obj;
   },
 
@@ -335,8 +317,6 @@ export const ListArtistsRequest = {
     const message = createBaseListArtistsRequest();
     message.pageSize = object.pageSize ?? 0;
     message.pageToken = object.pageToken ?? 0;
-    message.query = object.query ?? "";
-    message.genre = (object.genre !== undefined && object.genre !== null) ? Genre.fromPartial(object.genre) : undefined;
     return message;
   },
 };
@@ -547,7 +527,7 @@ export const GetArtistResponse = {
 };
 
 function createBaseUpdateArtistRequest(): UpdateArtistRequest {
-  return { artistId: 0, name: "", description: "", genre: undefined, website: "" };
+  return { artistId: 0, name: "", description: "", genreIds: [], website: "" };
 }
 
 export const UpdateArtistRequest = {
@@ -561,9 +541,11 @@ export const UpdateArtistRequest = {
     if (message.description !== "") {
       writer.uint32(26).string(message.description);
     }
-    if (message.genre !== undefined) {
-      Genre.encode(message.genre, writer.uint32(34).fork()).ldelim();
+    writer.uint32(34).fork();
+    for (const v of message.genreIds) {
+      writer.int32(v);
     }
+    writer.ldelim();
     if (message.website !== "") {
       writer.uint32(42).string(message.website);
     }
@@ -599,12 +581,22 @@ export const UpdateArtistRequest = {
           message.description = reader.string();
           continue;
         case 4:
-          if (tag !== 34) {
-            break;
+          if (tag === 32) {
+            message.genreIds.push(reader.int32());
+
+            continue;
           }
 
-          message.genre = Genre.decode(reader, reader.uint32());
-          continue;
+          if (tag === 34) {
+            const end2 = reader.uint32() + reader.pos;
+            while (reader.pos < end2) {
+              message.genreIds.push(reader.int32());
+            }
+
+            continue;
+          }
+
+          break;
         case 5:
           if (tag !== 42) {
             break;
@@ -626,7 +618,7 @@ export const UpdateArtistRequest = {
       artistId: isSet(object.artistId) ? globalThis.Number(object.artistId) : 0,
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       description: isSet(object.description) ? globalThis.String(object.description) : "",
-      genre: isSet(object.genre) ? Genre.fromJSON(object.genre) : undefined,
+      genreIds: globalThis.Array.isArray(object?.genreIds) ? object.genreIds.map((e: any) => globalThis.Number(e)) : [],
       website: isSet(object.website) ? globalThis.String(object.website) : "",
     };
   },
@@ -642,8 +634,8 @@ export const UpdateArtistRequest = {
     if (message.description !== "") {
       obj.description = message.description;
     }
-    if (message.genre !== undefined) {
-      obj.genre = Genre.toJSON(message.genre);
+    if (message.genreIds?.length) {
+      obj.genreIds = message.genreIds.map((e) => Math.round(e));
     }
     if (message.website !== "") {
       obj.website = message.website;
@@ -659,7 +651,7 @@ export const UpdateArtistRequest = {
     message.artistId = object.artistId ?? 0;
     message.name = object.name ?? "";
     message.description = object.description ?? "";
-    message.genre = (object.genre !== undefined && object.genre !== null) ? Genre.fromPartial(object.genre) : undefined;
+    message.genreIds = object.genreIds?.map((e) => e) || [];
     message.website = object.website ?? "";
     return message;
   },

@@ -30,4 +30,7 @@ export class ArtistGenre {
   @ManyToOne(() => Genre, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'genre_id' })
   genre: Genre;
+
+  @Column({ name: 'updated_user_id', type: 'integer', nullable: false })
+  updatedUserId: number;
 }

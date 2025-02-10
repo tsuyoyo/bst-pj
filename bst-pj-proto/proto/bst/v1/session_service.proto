@@ -186,7 +186,7 @@ service SessionService {
 message CreateSessionRequest {
   string                    title       = 1;
   string                    description = 2;
-  google.protobuf.Timestamp event_date   = 3;
+  google.protobuf.Timestamp event_date  = 3;
 }
 
 message CreateSessionResponse {
@@ -202,10 +202,10 @@ message GetSessionResponse {
 }
 
 message UpdateSessionRequest {
-  int32                     session_id   = 1;
+  int32                     session_id  = 1;
   string                    title       = 2;
   string                    description = 3;
-  google.protobuf.Timestamp event_date   = 4;
+  google.protobuf.Timestamp event_date  = 4;
 }
 
 message UpdateSessionResponse {
@@ -214,7 +214,7 @@ message UpdateSessionResponse {
 
 message UpdateSessionStatusRequest {
   int32         session_id = 1;
-  SessionStatus status    = 2;
+  SessionStatus status     = 2;
 }
 
 message UpdateSessionStatusResponse {
@@ -223,7 +223,7 @@ message UpdateSessionStatusResponse {
 
 message CancelSessionRequest {
   int32  session_id = 1;
-  string reason    = 2;
+  string reason     = 2;
 }
 
 message CancelSessionResponse {
@@ -231,7 +231,7 @@ message CancelSessionResponse {
 }
 
 message DuplicateSessionRequest {
-  int32                     session_id    = 1;
+  int32                     session_id     = 1;
   google.protobuf.Timestamp new_event_date = 2;
 }
 
@@ -242,7 +242,7 @@ message DuplicateSessionResponse {
 // Parts Management
 message AddSessionPartRequest {
   int32       session_id = 1;
-  SessionPart part      = 2;
+  SessionPart part       = 2;
 }
 
 message AddSessionPartResponse {
@@ -252,7 +252,7 @@ message AddSessionPartResponse {
 message UpdateSessionPartRequest {
   int32       session_id = 1;
   int32       part_id    = 2;
-  SessionPart part      = 3;
+  SessionPart part       = 3;
 }
 
 message UpdateSessionPartResponse {
@@ -271,7 +271,7 @@ message DeleteSessionPartResponse {
 // Schedule & Location
 message UpdateSessionScheduleRequest {
   int32     session_id = 1;
-  Timetable timetable = 2;
+  Timetable timetable  = 2;
 }
 
 message UpdateSessionScheduleResponse {
@@ -280,7 +280,7 @@ message UpdateSessionScheduleResponse {
 
 message UpdateSessionLocationRequest {
   int32    session_id = 1;
-  Location location  = 2;
+  Location location   = 2;
 }
 
 message UpdateSessionLocationResponse {
@@ -297,7 +297,7 @@ message ListSessionParticipantsResponse {
 }
 
 message AddSessionParticipantRequest {
-  int32              session_id   = 1;
+  int32              session_id  = 1;
   SessionParticipant participant = 2;
 }
 
@@ -308,7 +308,7 @@ message AddSessionParticipantResponse {
 message UpdateSessionParticipantRequest {
   int32              session_id     = 1;
   int32              participant_id = 2;
-  SessionParticipant participant   = 3;
+  SessionParticipant participant    = 3;
 }
 
 message UpdateSessionParticipantResponse {
@@ -336,7 +336,7 @@ message GetSessionSongResponse {
 message UpdateSessionSongRequest {
   int32           session_id = 1;
   int32           song_id    = 2;
-  SongPerformance song      = 3;
+  SongPerformance song       = 3;
 }
 
 message UpdateSessionSongResponse {
@@ -356,7 +356,7 @@ message DeleteSessionSongResponse {
 message AddSongEntryRequest {
   int32                session_id = 1;
   int32                song_id    = 2;
-  SongPerformanceEntry entry     = 3;
+  SongPerformanceEntry entry      = 3;
 }
 
 message AddSongEntryResponse {
@@ -377,7 +377,7 @@ message DeleteSongEntryResponse {
 message AddSessionSongResourceRequest {
   int32    session_id = 1;
   int32    song_id    = 2;
-  Resource resource  = 3;
+  Resource resource   = 3;
 }
 
 message AddSessionSongResourceResponse {
@@ -390,9 +390,9 @@ message ListSessionSongResourcesRequest {
 }
 
 message ListSessionSongResourcesResponse {
-  repeated Resource resources     = 1;
+  repeated Resource resources       = 1;
   string            next_page_token = 2;
-  int32             total_size     = 3;
+  int32             total_size      = 3;
 }
 
 message DeleteSessionSongResourceRequest {
@@ -435,7 +435,7 @@ message DeleteSessionOrganizerResponse {
 // Communication
 message CreateSessionThreadRequest {
   int32  session_id = 1;
-  Thread thread    = 2;
+  Thread thread     = 2;
 }
 
 message CreateSessionThreadResponse {
@@ -453,7 +453,7 @@ message ListSessionThreadsResponse {
 message CreateSongThreadRequest {
   int32  session_id = 1;
   int32  song_id    = 2;
-  Thread thread    = 3;
+  Thread thread     = 3;
 }
 
 message CreateSongThreadResponse {
@@ -480,7 +480,7 @@ message DeleteSessionThreadResponse {
 
 message CreateSessionNotificationRequest {
   int32          session_id = 1;
-  string         content   = 2;
+  string         content    = 2;
   repeated int32 user_ids   = 3;
 }
 
@@ -499,7 +499,7 @@ message GetSessionTimetableResponse {
 
 message UpdateSessionTimetableRequest {
   int32     session_id = 1;
-  Timetable timetable = 2;
+  Timetable timetable  = 2;
 }
 
 message UpdateSessionTimetableResponse {
@@ -525,7 +525,7 @@ message GetTimetableProgressResponse {
 }
 
 message UpdateTimetableProgressRequest {
-  int32 session_id      = 1;
+  int32 session_id       = 1;
   int32 current_entry_id = 2;
 }
 
@@ -536,7 +536,7 @@ message UpdateTimetableProgressResponse {
 // Session Resources
 message AddSessionResourceRequest {
   int32    session_id = 1;
-  Resource resource  = 2;
+  Resource resource   = 2;
 }
 
 message AddSessionResourceResponse {
@@ -587,7 +587,7 @@ message ListRelatedSessionsResponse {
 }
 
 message AddRelatedSessionRequest {
-  int32 session_id        = 1;
+  int32 session_id         = 1;
   int32 related_session_id = 2;
 }
 
@@ -598,7 +598,7 @@ message AddRelatedSessionResponse {
 // Party Management
 message CreateSessionPartyRequest {
   int32 session_id = 1;
-  Party party     = 2;
+  Party party      = 2;
 }
 
 message CreateSessionPartyResponse {
@@ -614,7 +614,7 @@ message GetSessionPartyResponse {
 }
 
 message AddPartyParticipantRequest {
-  int32            session_id   = 1;
+  int32            session_id  = 1;
   PartyParticipant participant = 2;
 }
 
@@ -633,7 +633,7 @@ message ListPartyParticipantsResponse {
 message UpdatePartyParticipantRequest {
   int32            session_id     = 1;
   int32            participant_id = 2;
-  PartyParticipant participant   = 3;
+  PartyParticipant participant    = 3;
 }
 
 message UpdatePartyParticipantResponse {

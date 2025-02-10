@@ -19,7 +19,7 @@ const CreateArtistRequest$json = {
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     {'1': 'description', '3': 2, '4': 1, '5': 9, '10': 'description'},
-    {'1': 'genre', '3': 3, '4': 1, '5': 11, '6': '.bst.v1.Genre', '10': 'genre'},
+    {'1': 'genre_ids', '3': 3, '4': 3, '5': 5, '10': 'genreIds'},
     {'1': 'website', '3': 4, '4': 1, '5': 9, '10': 'website'},
   ],
 };
@@ -27,8 +27,8 @@ const CreateArtistRequest$json = {
 /// Descriptor for `CreateArtistRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createArtistRequestDescriptor = $convert.base64Decode(
     'ChNDcmVhdGVBcnRpc3RSZXF1ZXN0EhIKBG5hbWUYASABKAlSBG5hbWUSIAoLZGVzY3JpcHRpb2'
-    '4YAiABKAlSC2Rlc2NyaXB0aW9uEiMKBWdlbnJlGAMgASgLMg0uYnN0LnYxLkdlbnJlUgVnZW5y'
-    'ZRIYCgd3ZWJzaXRlGAQgASgJUgd3ZWJzaXRl');
+    '4YAiABKAlSC2Rlc2NyaXB0aW9uEhsKCWdlbnJlX2lkcxgDIAMoBVIIZ2VucmVJZHMSGAoHd2Vi'
+    'c2l0ZRgEIAEoCVIHd2Vic2l0ZQ==');
 
 @$core.Deprecated('Use createArtistResponseDescriptor instead')
 const CreateArtistResponse$json = {
@@ -49,16 +49,13 @@ const ListArtistsRequest$json = {
   '2': [
     {'1': 'page_size', '3': 1, '4': 1, '5': 5, '10': 'pageSize'},
     {'1': 'page_token', '3': 2, '4': 1, '5': 5, '10': 'pageToken'},
-    {'1': 'query', '3': 3, '4': 1, '5': 9, '10': 'query'},
-    {'1': 'genre', '3': 4, '4': 1, '5': 11, '6': '.bst.v1.Genre', '10': 'genre'},
   ],
 };
 
 /// Descriptor for `ListArtistsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listArtistsRequestDescriptor = $convert.base64Decode(
     'ChJMaXN0QXJ0aXN0c1JlcXVlc3QSGwoJcGFnZV9zaXplGAEgASgFUghwYWdlU2l6ZRIdCgpwYW'
-    'dlX3Rva2VuGAIgASgFUglwYWdlVG9rZW4SFAoFcXVlcnkYAyABKAlSBXF1ZXJ5EiMKBWdlbnJl'
-    'GAQgASgLMg0uYnN0LnYxLkdlbnJlUgVnZW5yZQ==');
+    'dlX3Rva2VuGAIgASgFUglwYWdlVG9rZW4=');
 
 @$core.Deprecated('Use listArtistsResponseDescriptor instead')
 const ListArtistsResponse$json = {
@@ -108,7 +105,7 @@ const UpdateArtistRequest$json = {
     {'1': 'artist_id', '3': 1, '4': 1, '5': 5, '10': 'artistId'},
     {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
     {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
-    {'1': 'genre', '3': 4, '4': 1, '5': 11, '6': '.bst.v1.Genre', '10': 'genre'},
+    {'1': 'genre_ids', '3': 4, '4': 3, '5': 5, '10': 'genreIds'},
     {'1': 'website', '3': 5, '4': 1, '5': 9, '10': 'website'},
   ],
 };
@@ -116,9 +113,8 @@ const UpdateArtistRequest$json = {
 /// Descriptor for `UpdateArtistRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateArtistRequestDescriptor = $convert.base64Decode(
     'ChNVcGRhdGVBcnRpc3RSZXF1ZXN0EhsKCWFydGlzdF9pZBgBIAEoBVIIYXJ0aXN0SWQSEgoEbm'
-    'FtZRgCIAEoCVIEbmFtZRIgCgtkZXNjcmlwdGlvbhgDIAEoCVILZGVzY3JpcHRpb24SIwoFZ2Vu'
-    'cmUYBCABKAsyDS5ic3QudjEuR2VucmVSBWdlbnJlEhgKB3dlYnNpdGUYBSABKAlSB3dlYnNpdG'
-    'U=');
+    'FtZRgCIAEoCVIEbmFtZRIgCgtkZXNjcmlwdGlvbhgDIAEoCVILZGVzY3JpcHRpb24SGwoJZ2Vu'
+    'cmVfaWRzGAQgAygFUghnZW5yZUlkcxIYCgd3ZWJzaXRlGAUgASgJUgd3ZWJzaXRl');
 
 @$core.Deprecated('Use updateArtistResponseDescriptor instead')
 const UpdateArtistResponse$json = {

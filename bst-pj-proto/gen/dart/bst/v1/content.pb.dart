@@ -280,6 +280,7 @@ class Artist extends $pb.GeneratedMessage {
     $core.int? id,
     $core.String? name,
     $core.String? website,
+    $core.Iterable<Genre>? genres,
   }) {
     final $result = create();
     if (id != null) {
@@ -291,6 +292,9 @@ class Artist extends $pb.GeneratedMessage {
     if (website != null) {
       $result.website = website;
     }
+    if (genres != null) {
+      $result.genres.addAll(genres);
+    }
     return $result;
   }
   Artist._() : super();
@@ -301,6 +305,7 @@ class Artist extends $pb.GeneratedMessage {
     ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'website')
+    ..pc<Genre>(4, _omitFieldNames ? '' : 'genres', $pb.PbFieldType.PM, subBuilder: Genre.create)
     ..hasRequiredFields = false
   ;
 
@@ -351,6 +356,9 @@ class Artist extends $pb.GeneratedMessage {
   $core.bool hasWebsite() => $_has(2);
   @$pb.TagNumber(3)
   void clearWebsite() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.List<Genre> get genres => $_getList(3);
 }
 
 class Part extends $pb.GeneratedMessage {
