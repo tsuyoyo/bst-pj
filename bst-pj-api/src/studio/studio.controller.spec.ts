@@ -1,11 +1,10 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 import { StudioController } from './studio.controller';
 import { StudioService } from './studio.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { JwtService } from '@nestjs/jwt';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { CreateStudioDto } from './dto/create-studio.dto';
-import { UpdateStudioDto } from './dto/update-studio.dto';
 import { User } from '../entities/user.entity';
 
 describe('StudioController', () => {
