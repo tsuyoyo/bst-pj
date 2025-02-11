@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'user.pb.dart' as $12;
+import 'user.pb.dart' as $13;
 
 class LoginRequest extends $pb.GeneratedMessage {
   factory LoginRequest({
@@ -83,7 +83,7 @@ class LoginResponse extends $pb.GeneratedMessage {
   factory LoginResponse({
     $core.String? accessToken,
     $core.String? refreshToken,
-    $12.User? user,
+    $13.User? user,
   }) {
     final $result = create();
     if (accessToken != null) {
@@ -104,7 +104,7 @@ class LoginResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LoginResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'accessToken')
     ..aOS(2, _omitFieldNames ? '' : 'refreshToken')
-    ..aOM<$12.User>(3, _omitFieldNames ? '' : 'user', subBuilder: $12.User.create)
+    ..aOM<$13.User>(3, _omitFieldNames ? '' : 'user', subBuilder: $13.User.create)
     ..hasRequiredFields = false
   ;
 
@@ -148,15 +148,15 @@ class LoginResponse extends $pb.GeneratedMessage {
   void clearRefreshToken() => clearField(2);
 
   @$pb.TagNumber(3)
-  $12.User get user => $_getN(2);
+  $13.User get user => $_getN(2);
   @$pb.TagNumber(3)
-  set user($12.User v) { setField(3, v); }
+  set user($13.User v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUser() => $_has(2);
   @$pb.TagNumber(3)
   void clearUser() => clearField(3);
   @$pb.TagNumber(3)
-  $12.User ensureUser() => $_ensure(2);
+  $13.User ensureUser() => $_ensure(2);
 }
 
 class LogoutRequest extends $pb.GeneratedMessage {
@@ -321,7 +321,7 @@ class RegisterRequest extends $pb.GeneratedMessage {
 
 class RegisterResponse extends $pb.GeneratedMessage {
   factory RegisterResponse({
-    $12.User? user,
+    $13.User? user,
     $core.String? accessToken,
     $core.String? refreshToken,
   }) {
@@ -342,7 +342,7 @@ class RegisterResponse extends $pb.GeneratedMessage {
   factory RegisterResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RegisterResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$12.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $12.User.create)
+    ..aOM<$13.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $13.User.create)
     ..aOS(2, _omitFieldNames ? '' : 'accessToken')
     ..aOS(3, _omitFieldNames ? '' : 'refreshToken')
     ..hasRequiredFields = false
@@ -370,15 +370,15 @@ class RegisterResponse extends $pb.GeneratedMessage {
   static RegisterResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $12.User get user => $_getN(0);
+  $13.User get user => $_getN(0);
   @$pb.TagNumber(1)
-  set user($12.User v) { setField(1, v); }
+  set user($13.User v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasUser() => $_has(0);
   @$pb.TagNumber(1)
   void clearUser() => clearField(1);
   @$pb.TagNumber(1)
-  $12.User ensureUser() => $_ensure(0);
+  $13.User ensureUser() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get accessToken => $_getSZ(1);

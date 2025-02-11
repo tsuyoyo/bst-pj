@@ -15,20 +15,20 @@ import 'dart:core' as $core;
 import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'user_rating_service.pb.dart' as $7;
+import 'user_rating_service.pb.dart' as $8;
 
 export 'user_rating_service.pb.dart';
 
 @$pb.GrpcServiceName('bst.v1.UserRatingService')
 class UserRatingServiceClient extends $grpc.Client {
-  static final _$rateUser = $grpc.ClientMethod<$7.RateUserRequest, $7.RateUserResponse>(
+  static final _$rateUser = $grpc.ClientMethod<$8.RateUserRequest, $8.RateUserResponse>(
       '/bst.v1.UserRatingService/RateUser',
-      ($7.RateUserRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $7.RateUserResponse.fromBuffer(value));
-  static final _$getUserRatingBadges = $grpc.ClientMethod<$7.GetUserRatingBadgesRequest, $7.GetUserRatingBadgesResponse>(
+      ($8.RateUserRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $8.RateUserResponse.fromBuffer(value));
+  static final _$getUserRatingBadges = $grpc.ClientMethod<$8.GetUserRatingBadgesRequest, $8.GetUserRatingBadgesResponse>(
       '/bst.v1.UserRatingService/GetUserRatingBadges',
-      ($7.GetUserRatingBadgesRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $7.GetUserRatingBadgesResponse.fromBuffer(value));
+      ($8.GetUserRatingBadgesRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $8.GetUserRatingBadgesResponse.fromBuffer(value));
 
   UserRatingServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -36,11 +36,11 @@ class UserRatingServiceClient extends $grpc.Client {
       : super(channel, options: options,
         interceptors: interceptors);
 
-  $grpc.ResponseFuture<$7.RateUserResponse> rateUser($7.RateUserRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$8.RateUserResponse> rateUser($8.RateUserRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$rateUser, request, options: options);
   }
 
-  $grpc.ResponseFuture<$7.GetUserRatingBadgesResponse> getUserRatingBadges($7.GetUserRatingBadgesRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$8.GetUserRatingBadgesResponse> getUserRatingBadges($8.GetUserRatingBadgesRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getUserRatingBadges, request, options: options);
   }
 }
@@ -50,30 +50,30 @@ abstract class UserRatingServiceBase extends $grpc.Service {
   $core.String get $name => 'bst.v1.UserRatingService';
 
   UserRatingServiceBase() {
-    $addMethod($grpc.ServiceMethod<$7.RateUserRequest, $7.RateUserResponse>(
+    $addMethod($grpc.ServiceMethod<$8.RateUserRequest, $8.RateUserResponse>(
         'RateUser',
         rateUser_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $7.RateUserRequest.fromBuffer(value),
-        ($7.RateUserResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$7.GetUserRatingBadgesRequest, $7.GetUserRatingBadgesResponse>(
+        ($core.List<$core.int> value) => $8.RateUserRequest.fromBuffer(value),
+        ($8.RateUserResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$8.GetUserRatingBadgesRequest, $8.GetUserRatingBadgesResponse>(
         'GetUserRatingBadges',
         getUserRatingBadges_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $7.GetUserRatingBadgesRequest.fromBuffer(value),
-        ($7.GetUserRatingBadgesResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $8.GetUserRatingBadgesRequest.fromBuffer(value),
+        ($8.GetUserRatingBadgesResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$7.RateUserResponse> rateUser_Pre($grpc.ServiceCall call, $async.Future<$7.RateUserRequest> request) async {
+  $async.Future<$8.RateUserResponse> rateUser_Pre($grpc.ServiceCall call, $async.Future<$8.RateUserRequest> request) async {
     return rateUser(call, await request);
   }
 
-  $async.Future<$7.GetUserRatingBadgesResponse> getUserRatingBadges_Pre($grpc.ServiceCall call, $async.Future<$7.GetUserRatingBadgesRequest> request) async {
+  $async.Future<$8.GetUserRatingBadgesResponse> getUserRatingBadges_Pre($grpc.ServiceCall call, $async.Future<$8.GetUserRatingBadgesRequest> request) async {
     return getUserRatingBadges(call, await request);
   }
 
-  $async.Future<$7.RateUserResponse> rateUser($grpc.ServiceCall call, $7.RateUserRequest request);
-  $async.Future<$7.GetUserRatingBadgesResponse> getUserRatingBadges($grpc.ServiceCall call, $7.GetUserRatingBadgesRequest request);
+  $async.Future<$8.RateUserResponse> rateUser($grpc.ServiceCall call, $8.RateUserRequest request);
+  $async.Future<$8.GetUserRatingBadgesResponse> getUserRatingBadges($grpc.ServiceCall call, $8.GetUserRatingBadgesRequest request);
 }

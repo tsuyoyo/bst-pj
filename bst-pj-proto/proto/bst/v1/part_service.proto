@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "bst/v1/content.proto";
+
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+service PartService {
+  // POST /parts
+  rpc CreatePart(CreatePartRequest) returns (CreatePartResponse);
+  // GET /parts
+  rpc ListParts(ListPartsRequest) returns (ListPartsResponse);
+  // GET /parts/{id}
+  rpc GetPart(GetPartRequest) returns (GetPartResponse);
+  // PUT /parts/{id}
+  rpc UpdatePart(UpdatePartRequest) returns (UpdatePartResponse);
+  // DELETE /parts/{id}
+  rpc DeletePart(DeletePartRequest) returns (DeletePartResponse);
+}
+
+message CreatePartRequest {
+  string name = 1;
+  string description = 2;
+}
+
+message CreatePartResponse {
+  Part part = 1;
+}
+
+message ListPartsRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+}
+
+message ListPartsResponse {
+  repeated Part parts = 1;
+  string next_page_token = 2;
+  int32 total_size = 3;
+}
+
+message GetPartRequest {
+  int32 part_id = 1;
+}
+
+message GetPartResponse {
+  Part part = 1;
+}
+
+message UpdatePartRequest {
+  int32 part_id = 1;
+  optional string name = 2;
+  optional string description = 3;
+}
+
+message UpdatePartResponse {
+  Part part = 1;
+}
+
+message DeletePartRequest {
+  int32 part_id = 1;
+}
+
+message DeletePartResponse {
+  bool success = 1;
+} 
