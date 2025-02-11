@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'content.pb.dart' as $10;
+import 'content.pb.dart' as $11;
 
 class CreatePartRequest extends $pb.GeneratedMessage {
   factory CreatePartRequest({
@@ -81,7 +81,7 @@ class CreatePartRequest extends $pb.GeneratedMessage {
 
 class CreatePartResponse extends $pb.GeneratedMessage {
   factory CreatePartResponse({
-    $10.Part? part,
+    $11.Part? part,
   }) {
     final $result = create();
     if (part != null) {
@@ -94,7 +94,7 @@ class CreatePartResponse extends $pb.GeneratedMessage {
   factory CreatePartResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreatePartResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$10.Part>(1, _omitFieldNames ? '' : 'part', subBuilder: $10.Part.create)
+    ..aOM<$11.Part>(1, _omitFieldNames ? '' : 'part', subBuilder: $11.Part.create)
     ..hasRequiredFields = false
   ;
 
@@ -120,15 +120,15 @@ class CreatePartResponse extends $pb.GeneratedMessage {
   static CreatePartResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $10.Part get part => $_getN(0);
+  $11.Part get part => $_getN(0);
   @$pb.TagNumber(1)
-  set part($10.Part v) { setField(1, v); }
+  set part($11.Part v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPart() => $_has(0);
   @$pb.TagNumber(1)
   void clearPart() => clearField(1);
   @$pb.TagNumber(1)
-  $10.Part ensurePart() => $_ensure(0);
+  $11.Part ensurePart() => $_ensure(0);
 }
 
 class ListPartsRequest extends $pb.GeneratedMessage {
@@ -197,7 +197,7 @@ class ListPartsRequest extends $pb.GeneratedMessage {
 
 class ListPartsResponse extends $pb.GeneratedMessage {
   factory ListPartsResponse({
-    $core.Iterable<$10.Part>? parts,
+    $core.Iterable<$11.Part>? parts,
     $core.String? nextPageToken,
     $core.int? totalSize,
   }) {
@@ -218,7 +218,7 @@ class ListPartsResponse extends $pb.GeneratedMessage {
   factory ListPartsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListPartsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$10.Part>(1, _omitFieldNames ? '' : 'parts', $pb.PbFieldType.PM, subBuilder: $10.Part.create)
+    ..pc<$11.Part>(1, _omitFieldNames ? '' : 'parts', $pb.PbFieldType.PM, subBuilder: $11.Part.create)
     ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'totalSize', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -246,7 +246,7 @@ class ListPartsResponse extends $pb.GeneratedMessage {
   static ListPartsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$10.Part> get parts => $_getList(0);
+  $core.List<$11.Part> get parts => $_getList(0);
 
   @$pb.TagNumber(2)
   $core.String get nextPageToken => $_getSZ(1);
@@ -319,7 +319,7 @@ class GetPartRequest extends $pb.GeneratedMessage {
 
 class GetPartResponse extends $pb.GeneratedMessage {
   factory GetPartResponse({
-    $10.Part? part,
+    $11.Part? part,
   }) {
     final $result = create();
     if (part != null) {
@@ -332,7 +332,7 @@ class GetPartResponse extends $pb.GeneratedMessage {
   factory GetPartResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetPartResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$10.Part>(1, _omitFieldNames ? '' : 'part', subBuilder: $10.Part.create)
+    ..aOM<$11.Part>(1, _omitFieldNames ? '' : 'part', subBuilder: $11.Part.create)
     ..hasRequiredFields = false
   ;
 
@@ -358,15 +358,15 @@ class GetPartResponse extends $pb.GeneratedMessage {
   static GetPartResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $10.Part get part => $_getN(0);
+  $11.Part get part => $_getN(0);
   @$pb.TagNumber(1)
-  set part($10.Part v) { setField(1, v); }
+  set part($11.Part v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPart() => $_has(0);
   @$pb.TagNumber(1)
   void clearPart() => clearField(1);
   @$pb.TagNumber(1)
-  $10.Part ensurePart() => $_ensure(0);
+  $11.Part ensurePart() => $_ensure(0);
 }
 
 class UpdatePartRequest extends $pb.GeneratedMessage {
@@ -449,7 +449,7 @@ class UpdatePartRequest extends $pb.GeneratedMessage {
 
 class UpdatePartResponse extends $pb.GeneratedMessage {
   factory UpdatePartResponse({
-    $10.Part? part,
+    $11.Part? part,
   }) {
     final $result = create();
     if (part != null) {
@@ -462,7 +462,7 @@ class UpdatePartResponse extends $pb.GeneratedMessage {
   factory UpdatePartResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdatePartResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$10.Part>(1, _omitFieldNames ? '' : 'part', subBuilder: $10.Part.create)
+    ..aOM<$11.Part>(1, _omitFieldNames ? '' : 'part', subBuilder: $11.Part.create)
     ..hasRequiredFields = false
   ;
 
@@ -488,15 +488,15 @@ class UpdatePartResponse extends $pb.GeneratedMessage {
   static UpdatePartResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $10.Part get part => $_getN(0);
+  $11.Part get part => $_getN(0);
   @$pb.TagNumber(1)
-  set part($10.Part v) { setField(1, v); }
+  set part($11.Part v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPart() => $_has(0);
   @$pb.TagNumber(1)
   void clearPart() => clearField(1);
   @$pb.TagNumber(1)
-  $10.Part ensurePart() => $_ensure(0);
+  $11.Part ensurePart() => $_ensure(0);
 }
 
 class DeletePartRequest extends $pb.GeneratedMessage {

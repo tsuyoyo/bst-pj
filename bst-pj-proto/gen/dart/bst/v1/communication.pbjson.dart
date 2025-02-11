@@ -96,13 +96,19 @@ const ReactionType$json = {
     {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
     {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
     {'1': 'icon_url', '3': 4, '4': 1, '5': 9, '10': 'iconUrl'},
+    {'1': 'updated_user_id', '3': 5, '4': 1, '5': 5, '10': 'updatedUserId'},
+    {'1': 'created_at', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+    {'1': 'updated_at', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
   ],
 };
 
 /// Descriptor for `ReactionType`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List reactionTypeDescriptor = $convert.base64Decode(
     'CgxSZWFjdGlvblR5cGUSDgoCaWQYASABKAVSAmlkEhIKBG5hbWUYAiABKAlSBG5hbWUSIAoLZG'
-    'VzY3JpcHRpb24YAyABKAlSC2Rlc2NyaXB0aW9uEhkKCGljb25fdXJsGAQgASgJUgdpY29uVXJs');
+    'VzY3JpcHRpb24YAyABKAlSC2Rlc2NyaXB0aW9uEhkKCGljb25fdXJsGAQgASgJUgdpY29uVXJs'
+    'EiYKD3VwZGF0ZWRfdXNlcl9pZBgFIAEoBVINdXBkYXRlZFVzZXJJZBI5CgpjcmVhdGVkX2F0GA'
+    'YgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIJY3JlYXRlZEF0EjkKCnVwZGF0ZWRf'
+    'YXQYByABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgl1cGRhdGVkQXQ=');
 
 @$core.Deprecated('Use reactionDescriptor instead')
 const Reaction$json = {
@@ -111,13 +117,17 @@ const Reaction$json = {
     {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
     {'1': 'user', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.User', '10': 'user'},
     {'1': 'reaction_type_id', '3': 3, '4': 1, '5': 5, '10': 'reactionTypeId'},
-    {'1': 'created_at', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+    {'1': 'updated_user_id', '3': 4, '4': 1, '5': 5, '10': 'updatedUserId'},
+    {'1': 'created_at', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+    {'1': 'updated_at', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
   ],
 };
 
 /// Descriptor for `Reaction`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List reactionDescriptor = $convert.base64Decode(
     'CghSZWFjdGlvbhIOCgJpZBgBIAEoBVICaWQSIAoEdXNlchgCIAEoCzIMLmJzdC52MS5Vc2VyUg'
-    'R1c2VyEigKEHJlYWN0aW9uX3R5cGVfaWQYAyABKAVSDnJlYWN0aW9uVHlwZUlkEjkKCmNyZWF0'
-    'ZWRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgljcmVhdGVkQXQ=');
+    'R1c2VyEigKEHJlYWN0aW9uX3R5cGVfaWQYAyABKAVSDnJlYWN0aW9uVHlwZUlkEiYKD3VwZGF0'
+    'ZWRfdXNlcl9pZBgEIAEoBVINdXBkYXRlZFVzZXJJZBI5CgpjcmVhdGVkX2F0GAUgASgLMhouZ2'
+    '9vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIJY3JlYXRlZEF0EjkKCnVwZGF0ZWRfYXQYBiABKAsy'
+    'Gi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgl1cGRhdGVkQXQ=');
 

@@ -92,13 +92,18 @@ export interface ReactionType {
   name: string;
   description: string;
   iconUrl: string;
+  updatedUserId: number;
+  createdAt: Date | undefined;
+  updatedAt: Date | undefined;
 }
 
 export interface Reaction {
   id: number;
   user: User | undefined;
   reactionTypeId: number;
+  updatedUserId: number;
   createdAt: Date | undefined;
+  updatedAt: Date | undefined;
 }
 
 function createBaseComment(): Comment {
@@ -499,7 +504,15 @@ export const Mention = {
 };
 
 function createBaseReactionType(): ReactionType {
-  return { id: 0, name: "", description: "", iconUrl: "" };
+  return {
+    id: 0,
+    name: "",
+    description: "",
+    iconUrl: "",
+    updatedUserId: 0,
+    createdAt: undefined,
+    updatedAt: undefined,
+  };
 }
 
 export const ReactionType = {
@@ -515,6 +528,15 @@ export const ReactionType = {
     }
     if (message.iconUrl !== "") {
       writer.uint32(34).string(message.iconUrl);
+    }
+    if (message.updatedUserId !== 0) {
+      writer.uint32(40).int32(message.updatedUserId);
+    }
+    if (message.createdAt !== undefined) {
+      Timestamp.encode(toTimestamp(message.createdAt), writer.uint32(50).fork()).ldelim();
+    }
+    if (message.updatedAt !== undefined) {
+      Timestamp.encode(toTimestamp(message.updatedAt), writer.uint32(58).fork()).ldelim();
     }
     return writer;
   },
@@ -554,6 +576,27 @@ export const ReactionType = {
 
           message.iconUrl = reader.string();
           continue;
+        case 5:
+          if (tag !== 40) {
+            break;
+          }
+
+          message.updatedUserId = reader.int32();
+          continue;
+        case 6:
+          if (tag !== 50) {
+            break;
+          }
+
+          message.createdAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        case 7:
+          if (tag !== 58) {
+            break;
+          }
+
+          message.updatedAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -569,6 +612,9 @@ export const ReactionType = {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       description: isSet(object.description) ? globalThis.String(object.description) : "",
       iconUrl: isSet(object.iconUrl) ? globalThis.String(object.iconUrl) : "",
+      updatedUserId: isSet(object.updatedUserId) ? globalThis.Number(object.updatedUserId) : 0,
+      createdAt: isSet(object.createdAt) ? fromJsonTimestamp(object.createdAt) : undefined,
+      updatedAt: isSet(object.updatedAt) ? fromJsonTimestamp(object.updatedAt) : undefined,
     };
   },
 
@@ -586,6 +632,15 @@ export const ReactionType = {
     if (message.iconUrl !== "") {
       obj.iconUrl = message.iconUrl;
     }
+    if (message.updatedUserId !== 0) {
+      obj.updatedUserId = Math.round(message.updatedUserId);
+    }
+    if (message.createdAt !== undefined) {
+      obj.createdAt = message.createdAt.toISOString();
+    }
+    if (message.updatedAt !== undefined) {
+      obj.updatedAt = message.updatedAt.toISOString();
+    }
     return obj;
   },
 
@@ -598,12 +653,15 @@ export const ReactionType = {
     message.name = object.name ?? "";
     message.description = object.description ?? "";
     message.iconUrl = object.iconUrl ?? "";
+    message.updatedUserId = object.updatedUserId ?? 0;
+    message.createdAt = object.createdAt ?? undefined;
+    message.updatedAt = object.updatedAt ?? undefined;
     return message;
   },
 };
 
 function createBaseReaction(): Reaction {
-  return { id: 0, user: undefined, reactionTypeId: 0, createdAt: undefined };
+  return { id: 0, user: undefined, reactionTypeId: 0, updatedUserId: 0, createdAt: undefined, updatedAt: undefined };
 }
 
 export const Reaction = {
@@ -617,8 +675,14 @@ export const Reaction = {
     if (message.reactionTypeId !== 0) {
       writer.uint32(24).int32(message.reactionTypeId);
     }
+    if (message.updatedUserId !== 0) {
+      writer.uint32(32).int32(message.updatedUserId);
+    }
     if (message.createdAt !== undefined) {
-      Timestamp.encode(toTimestamp(message.createdAt), writer.uint32(34).fork()).ldelim();
+      Timestamp.encode(toTimestamp(message.createdAt), writer.uint32(42).fork()).ldelim();
+    }
+    if (message.updatedAt !== undefined) {
+      Timestamp.encode(toTimestamp(message.updatedAt), writer.uint32(50).fork()).ldelim();
     }
     return writer;
   },
@@ -652,11 +716,25 @@ export const Reaction = {
           message.reactionTypeId = reader.int32();
           continue;
         case 4:
-          if (tag !== 34) {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.updatedUserId = reader.int32();
+          continue;
+        case 5:
+          if (tag !== 42) {
             break;
           }
 
           message.createdAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        case 6:
+          if (tag !== 50) {
+            break;
+          }
+
+          message.updatedAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -672,7 +750,9 @@ export const Reaction = {
       id: isSet(object.id) ? globalThis.Number(object.id) : 0,
       user: isSet(object.user) ? User.fromJSON(object.user) : undefined,
       reactionTypeId: isSet(object.reactionTypeId) ? globalThis.Number(object.reactionTypeId) : 0,
+      updatedUserId: isSet(object.updatedUserId) ? globalThis.Number(object.updatedUserId) : 0,
       createdAt: isSet(object.createdAt) ? fromJsonTimestamp(object.createdAt) : undefined,
+      updatedAt: isSet(object.updatedAt) ? fromJsonTimestamp(object.updatedAt) : undefined,
     };
   },
 
@@ -687,8 +767,14 @@ export const Reaction = {
     if (message.reactionTypeId !== 0) {
       obj.reactionTypeId = Math.round(message.reactionTypeId);
     }
+    if (message.updatedUserId !== 0) {
+      obj.updatedUserId = Math.round(message.updatedUserId);
+    }
     if (message.createdAt !== undefined) {
       obj.createdAt = message.createdAt.toISOString();
+    }
+    if (message.updatedAt !== undefined) {
+      obj.updatedAt = message.updatedAt.toISOString();
     }
     return obj;
   },
@@ -701,7 +787,9 @@ export const Reaction = {
     message.id = object.id ?? 0;
     message.user = (object.user !== undefined && object.user !== null) ? User.fromPartial(object.user) : undefined;
     message.reactionTypeId = object.reactionTypeId ?? 0;
+    message.updatedUserId = object.updatedUserId ?? 0;
     message.createdAt = object.createdAt ?? undefined;
+    message.updatedAt = object.updatedAt ?? undefined;
     return message;
   },
 };

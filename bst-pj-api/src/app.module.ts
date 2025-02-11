@@ -10,6 +10,7 @@ import { ResourceModule } from './resource/resource.module';
 import { PartModule } from './part/part.module';
 import { LocationModule } from './location/location.module';
 import { StudioModule } from './studio/studio.module';
+import { ReactionModule } from './reaction/reaction.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { StudioModule } from './studio/studio.module';
     PartModule,
     LocationModule,
     StudioModule,
+    ReactionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

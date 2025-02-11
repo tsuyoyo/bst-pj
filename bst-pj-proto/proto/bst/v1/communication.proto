@@ -47,15 +47,20 @@ message Mention {
 }
 
 message ReactionType {
-  int32  id          = 1;
-  string name        = 2;
-  string description = 3;
-  string icon_url    = 4;
+  int32                     id              = 1;
+  string                    name            = 2;
+  string                    description     = 3;
+  string                    icon_url        = 4;
+  int32                     updated_user_id = 5;
+  google.protobuf.Timestamp created_at      = 6;
+  google.protobuf.Timestamp updated_at      = 7;
 }
 
 message Reaction {
   int32                     id               = 1;
   User                      user             = 2;
   int32                     reaction_type_id = 3;
-  google.protobuf.Timestamp created_at       = 4;
+  int32                     updated_user_id  = 4;
+  google.protobuf.Timestamp created_at       = 5;
+  google.protobuf.Timestamp updated_at       = 6;
 }

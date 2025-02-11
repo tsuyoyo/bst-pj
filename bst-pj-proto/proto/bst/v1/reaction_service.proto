@@ -1,0 +1,123 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "bst/v1/communication.proto";
+
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+service ReactionService {
+  // ReactionType endpoints
+  rpc CreateReactionType(CreateReactionTypeRequest)
+      returns (CreateReactionTypeResponse);
+  rpc GetReactionType(GetReactionTypeRequest) returns (GetReactionTypeResponse);
+  rpc ListReactionTypes(ListReactionTypesRequest)
+      returns (ListReactionTypesResponse);
+  rpc UpdateReactionType(UpdateReactionTypeRequest)
+      returns (UpdateReactionTypeResponse);
+  rpc DeleteReactionType(DeleteReactionTypeRequest)
+      returns (DeleteReactionTypeResponse);
+
+  // Reaction endpoints
+  rpc CreateReaction(CreateReactionRequest) returns (CreateReactionResponse);
+  rpc GetReaction(GetReactionRequest) returns (GetReactionResponse);
+  rpc ListReactions(ListReactionsRequest) returns (ListReactionsResponse);
+  rpc UpdateReaction(UpdateReactionRequest) returns (UpdateReactionResponse);
+  rpc DeleteReaction(DeleteReactionRequest) returns (DeleteReactionResponse);
+}
+
+// ReactionType messages
+message CreateReactionTypeRequest {
+  string name        = 1;
+  string description = 2;
+  string icon_url    = 3;
+}
+
+message CreateReactionTypeResponse {
+  ReactionType reaction_type = 1;
+}
+
+message GetReactionTypeRequest {
+  int32 reaction_type_id = 1;
+}
+
+message GetReactionTypeResponse {
+  ReactionType reaction_type = 1;
+}
+
+message ListReactionTypesRequest {
+  int32  page_size  = 1;
+  string page_token = 2;
+}
+
+message ListReactionTypesResponse {
+  repeated ReactionType reaction_types  = 1;
+  string                next_page_token = 2;
+  int32                 total_size      = 3;
+}
+
+message UpdateReactionTypeRequest {
+  int32           reaction_type_id = 1;
+  optional string name             = 2;
+  optional string description      = 3;
+  optional string icon_url         = 4;
+}
+
+message UpdateReactionTypeResponse {
+  ReactionType reaction_type = 1;
+}
+
+message DeleteReactionTypeRequest {
+  int32 reaction_type_id = 1;
+}
+
+message DeleteReactionTypeResponse {
+  bool success = 1;
+}
+
+// Reaction messages
+message CreateReactionRequest {
+  int32 target_id        = 1;
+  int32 reaction_type_id = 2;
+}
+
+message CreateReactionResponse {
+  Reaction reaction = 1;
+}
+
+message GetReactionRequest {
+  int32 reaction_id = 1;
+}
+
+message GetReactionResponse {
+  Reaction reaction = 1;
+}
+
+message ListReactionsRequest {
+  int32  page_size  = 1;
+  string page_token = 2;
+  int32  target_id  = 3;
+}
+
+message ListReactionsResponse {
+  repeated Reaction reactions       = 1;
+  string            next_page_token = 2;
+  int32             total_size      = 3;
+}
+
+message UpdateReactionRequest {
+  int32 reaction_id      = 1;
+  int32 reaction_type_id = 2;
+}
+
+message UpdateReactionResponse {
+  Reaction reaction = 1;
+}
+
+message DeleteReactionRequest {
+  int32 reaction_id = 1;
+}
+
+message DeleteReactionResponse {
+  bool success = 1;
+}

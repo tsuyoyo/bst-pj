@@ -13,13 +13,13 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'content.pb.dart' as $10;
+import 'content.pb.dart' as $11;
 
 class CreateSongRequest extends $pb.GeneratedMessage {
   factory CreateSongRequest({
     $core.String? title,
-    $10.Artist? artist,
-    $10.Genre? genre,
+    $11.Artist? artist,
+    $11.Genre? genre,
     $core.String? description,
   }) {
     final $result = create();
@@ -43,8 +43,8 @@ class CreateSongRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateSongRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'title')
-    ..aOM<$10.Artist>(2, _omitFieldNames ? '' : 'artist', subBuilder: $10.Artist.create)
-    ..aOM<$10.Genre>(3, _omitFieldNames ? '' : 'genre', subBuilder: $10.Genre.create)
+    ..aOM<$11.Artist>(2, _omitFieldNames ? '' : 'artist', subBuilder: $11.Artist.create)
+    ..aOM<$11.Genre>(3, _omitFieldNames ? '' : 'genre', subBuilder: $11.Genre.create)
     ..aOS(4, _omitFieldNames ? '' : 'description')
     ..hasRequiredFields = false
   ;
@@ -80,26 +80,26 @@ class CreateSongRequest extends $pb.GeneratedMessage {
   void clearTitle() => clearField(1);
 
   @$pb.TagNumber(2)
-  $10.Artist get artist => $_getN(1);
+  $11.Artist get artist => $_getN(1);
   @$pb.TagNumber(2)
-  set artist($10.Artist v) { setField(2, v); }
+  set artist($11.Artist v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasArtist() => $_has(1);
   @$pb.TagNumber(2)
   void clearArtist() => clearField(2);
   @$pb.TagNumber(2)
-  $10.Artist ensureArtist() => $_ensure(1);
+  $11.Artist ensureArtist() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $10.Genre get genre => $_getN(2);
+  $11.Genre get genre => $_getN(2);
   @$pb.TagNumber(3)
-  set genre($10.Genre v) { setField(3, v); }
+  set genre($11.Genre v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasGenre() => $_has(2);
   @$pb.TagNumber(3)
   void clearGenre() => clearField(3);
   @$pb.TagNumber(3)
-  $10.Genre ensureGenre() => $_ensure(2);
+  $11.Genre ensureGenre() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.String get description => $_getSZ(3);
@@ -113,7 +113,7 @@ class CreateSongRequest extends $pb.GeneratedMessage {
 
 class CreateSongResponse extends $pb.GeneratedMessage {
   factory CreateSongResponse({
-    $10.Song? song,
+    $11.Song? song,
   }) {
     final $result = create();
     if (song != null) {
@@ -126,7 +126,7 @@ class CreateSongResponse extends $pb.GeneratedMessage {
   factory CreateSongResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateSongResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$10.Song>(1, _omitFieldNames ? '' : 'song', subBuilder: $10.Song.create)
+    ..aOM<$11.Song>(1, _omitFieldNames ? '' : 'song', subBuilder: $11.Song.create)
     ..hasRequiredFields = false
   ;
 
@@ -152,15 +152,15 @@ class CreateSongResponse extends $pb.GeneratedMessage {
   static CreateSongResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $10.Song get song => $_getN(0);
+  $11.Song get song => $_getN(0);
   @$pb.TagNumber(1)
-  set song($10.Song v) { setField(1, v); }
+  set song($11.Song v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSong() => $_has(0);
   @$pb.TagNumber(1)
   void clearSong() => clearField(1);
   @$pb.TagNumber(1)
-  $10.Song ensureSong() => $_ensure(0);
+  $11.Song ensureSong() => $_ensure(0);
 }
 
 class ListSongsRequest extends $pb.GeneratedMessage {
@@ -168,7 +168,7 @@ class ListSongsRequest extends $pb.GeneratedMessage {
     $core.int? pageSize,
     $core.int? pageToken,
     $core.String? query,
-    $10.Genre? genre,
+    $11.Genre? genre,
     $core.int? artistId,
   }) {
     final $result = create();
@@ -197,7 +197,7 @@ class ListSongsRequest extends $pb.GeneratedMessage {
     ..a<$core.int>(1, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.O3)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'pageToken', $pb.PbFieldType.O3)
     ..aOS(3, _omitFieldNames ? '' : 'query')
-    ..aOM<$10.Genre>(4, _omitFieldNames ? '' : 'genre', subBuilder: $10.Genre.create)
+    ..aOM<$11.Genre>(4, _omitFieldNames ? '' : 'genre', subBuilder: $11.Genre.create)
     ..a<$core.int>(5, _omitFieldNames ? '' : 'artistId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
@@ -251,15 +251,15 @@ class ListSongsRequest extends $pb.GeneratedMessage {
   void clearQuery() => clearField(3);
 
   @$pb.TagNumber(4)
-  $10.Genre get genre => $_getN(3);
+  $11.Genre get genre => $_getN(3);
   @$pb.TagNumber(4)
-  set genre($10.Genre v) { setField(4, v); }
+  set genre($11.Genre v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasGenre() => $_has(3);
   @$pb.TagNumber(4)
   void clearGenre() => clearField(4);
   @$pb.TagNumber(4)
-  $10.Genre ensureGenre() => $_ensure(3);
+  $11.Genre ensureGenre() => $_ensure(3);
 
   @$pb.TagNumber(5)
   $core.int get artistId => $_getIZ(4);
@@ -273,7 +273,7 @@ class ListSongsRequest extends $pb.GeneratedMessage {
 
 class ListSongsResponse extends $pb.GeneratedMessage {
   factory ListSongsResponse({
-    $core.Iterable<$10.Song>? songs,
+    $core.Iterable<$11.Song>? songs,
     $core.String? nextPageToken,
     $core.int? totalSize,
   }) {
@@ -294,7 +294,7 @@ class ListSongsResponse extends $pb.GeneratedMessage {
   factory ListSongsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSongsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$10.Song>(1, _omitFieldNames ? '' : 'songs', $pb.PbFieldType.PM, subBuilder: $10.Song.create)
+    ..pc<$11.Song>(1, _omitFieldNames ? '' : 'songs', $pb.PbFieldType.PM, subBuilder: $11.Song.create)
     ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'totalSize', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -322,7 +322,7 @@ class ListSongsResponse extends $pb.GeneratedMessage {
   static ListSongsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$10.Song> get songs => $_getList(0);
+  $core.List<$11.Song> get songs => $_getList(0);
 
   @$pb.TagNumber(2)
   $core.String get nextPageToken => $_getSZ(1);
@@ -395,7 +395,7 @@ class GetSongRequest extends $pb.GeneratedMessage {
 
 class GetSongResponse extends $pb.GeneratedMessage {
   factory GetSongResponse({
-    $10.Song? song,
+    $11.Song? song,
   }) {
     final $result = create();
     if (song != null) {
@@ -408,7 +408,7 @@ class GetSongResponse extends $pb.GeneratedMessage {
   factory GetSongResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSongResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$10.Song>(1, _omitFieldNames ? '' : 'song', subBuilder: $10.Song.create)
+    ..aOM<$11.Song>(1, _omitFieldNames ? '' : 'song', subBuilder: $11.Song.create)
     ..hasRequiredFields = false
   ;
 
@@ -434,23 +434,23 @@ class GetSongResponse extends $pb.GeneratedMessage {
   static GetSongResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $10.Song get song => $_getN(0);
+  $11.Song get song => $_getN(0);
   @$pb.TagNumber(1)
-  set song($10.Song v) { setField(1, v); }
+  set song($11.Song v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSong() => $_has(0);
   @$pb.TagNumber(1)
   void clearSong() => clearField(1);
   @$pb.TagNumber(1)
-  $10.Song ensureSong() => $_ensure(0);
+  $11.Song ensureSong() => $_ensure(0);
 }
 
 class UpdateSongRequest extends $pb.GeneratedMessage {
   factory UpdateSongRequest({
     $core.int? songId,
     $core.String? title,
-    $10.Artist? artist,
-    $10.Genre? genre,
+    $11.Artist? artist,
+    $11.Genre? genre,
     $core.String? description,
   }) {
     final $result = create();
@@ -478,8 +478,8 @@ class UpdateSongRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSongRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'title')
-    ..aOM<$10.Artist>(3, _omitFieldNames ? '' : 'artist', subBuilder: $10.Artist.create)
-    ..aOM<$10.Genre>(4, _omitFieldNames ? '' : 'genre', subBuilder: $10.Genre.create)
+    ..aOM<$11.Artist>(3, _omitFieldNames ? '' : 'artist', subBuilder: $11.Artist.create)
+    ..aOM<$11.Genre>(4, _omitFieldNames ? '' : 'genre', subBuilder: $11.Genre.create)
     ..aOS(5, _omitFieldNames ? '' : 'description')
     ..hasRequiredFields = false
   ;
@@ -524,26 +524,26 @@ class UpdateSongRequest extends $pb.GeneratedMessage {
   void clearTitle() => clearField(2);
 
   @$pb.TagNumber(3)
-  $10.Artist get artist => $_getN(2);
+  $11.Artist get artist => $_getN(2);
   @$pb.TagNumber(3)
-  set artist($10.Artist v) { setField(3, v); }
+  set artist($11.Artist v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasArtist() => $_has(2);
   @$pb.TagNumber(3)
   void clearArtist() => clearField(3);
   @$pb.TagNumber(3)
-  $10.Artist ensureArtist() => $_ensure(2);
+  $11.Artist ensureArtist() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $10.Genre get genre => $_getN(3);
+  $11.Genre get genre => $_getN(3);
   @$pb.TagNumber(4)
-  set genre($10.Genre v) { setField(4, v); }
+  set genre($11.Genre v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasGenre() => $_has(3);
   @$pb.TagNumber(4)
   void clearGenre() => clearField(4);
   @$pb.TagNumber(4)
-  $10.Genre ensureGenre() => $_ensure(3);
+  $11.Genre ensureGenre() => $_ensure(3);
 
   @$pb.TagNumber(5)
   $core.String get description => $_getSZ(4);
@@ -557,7 +557,7 @@ class UpdateSongRequest extends $pb.GeneratedMessage {
 
 class UpdateSongResponse extends $pb.GeneratedMessage {
   factory UpdateSongResponse({
-    $10.Song? song,
+    $11.Song? song,
   }) {
     final $result = create();
     if (song != null) {
@@ -570,7 +570,7 @@ class UpdateSongResponse extends $pb.GeneratedMessage {
   factory UpdateSongResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSongResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$10.Song>(1, _omitFieldNames ? '' : 'song', subBuilder: $10.Song.create)
+    ..aOM<$11.Song>(1, _omitFieldNames ? '' : 'song', subBuilder: $11.Song.create)
     ..hasRequiredFields = false
   ;
 
@@ -596,15 +596,15 @@ class UpdateSongResponse extends $pb.GeneratedMessage {
   static UpdateSongResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $10.Song get song => $_getN(0);
+  $11.Song get song => $_getN(0);
   @$pb.TagNumber(1)
-  set song($10.Song v) { setField(1, v); }
+  set song($11.Song v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSong() => $_has(0);
   @$pb.TagNumber(1)
   void clearSong() => clearField(1);
   @$pb.TagNumber(1)
-  $10.Song ensureSong() => $_ensure(0);
+  $11.Song ensureSong() => $_ensure(0);
 }
 
 class DeleteSongRequest extends $pb.GeneratedMessage {
@@ -710,7 +710,7 @@ class DeleteSongResponse extends $pb.GeneratedMessage {
 class AddSongResourceRequest extends $pb.GeneratedMessage {
   factory AddSongResourceRequest({
     $core.int? songId,
-    $10.Resource? resource,
+    $11.Resource? resource,
   }) {
     final $result = create();
     if (songId != null) {
@@ -727,7 +727,7 @@ class AddSongResourceRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSongResourceRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3)
-    ..aOM<$10.Resource>(2, _omitFieldNames ? '' : 'resource', subBuilder: $10.Resource.create)
+    ..aOM<$11.Resource>(2, _omitFieldNames ? '' : 'resource', subBuilder: $11.Resource.create)
     ..hasRequiredFields = false
   ;
 
@@ -762,20 +762,20 @@ class AddSongResourceRequest extends $pb.GeneratedMessage {
   void clearSongId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $10.Resource get resource => $_getN(1);
+  $11.Resource get resource => $_getN(1);
   @$pb.TagNumber(2)
-  set resource($10.Resource v) { setField(2, v); }
+  set resource($11.Resource v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasResource() => $_has(1);
   @$pb.TagNumber(2)
   void clearResource() => clearField(2);
   @$pb.TagNumber(2)
-  $10.Resource ensureResource() => $_ensure(1);
+  $11.Resource ensureResource() => $_ensure(1);
 }
 
 class AddSongResourceResponse extends $pb.GeneratedMessage {
   factory AddSongResourceResponse({
-    $10.Resource? resource,
+    $11.Resource? resource,
   }) {
     final $result = create();
     if (resource != null) {
@@ -788,7 +788,7 @@ class AddSongResourceResponse extends $pb.GeneratedMessage {
   factory AddSongResourceResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSongResourceResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$10.Resource>(1, _omitFieldNames ? '' : 'resource', subBuilder: $10.Resource.create)
+    ..aOM<$11.Resource>(1, _omitFieldNames ? '' : 'resource', subBuilder: $11.Resource.create)
     ..hasRequiredFields = false
   ;
 
@@ -814,15 +814,15 @@ class AddSongResourceResponse extends $pb.GeneratedMessage {
   static AddSongResourceResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $10.Resource get resource => $_getN(0);
+  $11.Resource get resource => $_getN(0);
   @$pb.TagNumber(1)
-  set resource($10.Resource v) { setField(1, v); }
+  set resource($11.Resource v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasResource() => $_has(0);
   @$pb.TagNumber(1)
   void clearResource() => clearField(1);
   @$pb.TagNumber(1)
-  $10.Resource ensureResource() => $_ensure(0);
+  $11.Resource ensureResource() => $_ensure(0);
 }
 
 class ListSongResourcesRequest extends $pb.GeneratedMessage {
@@ -905,7 +905,7 @@ class ListSongResourcesRequest extends $pb.GeneratedMessage {
 
 class ListSongResourcesResponse extends $pb.GeneratedMessage {
   factory ListSongResourcesResponse({
-    $core.Iterable<$10.Resource>? resources,
+    $core.Iterable<$11.Resource>? resources,
     $core.String? nextPageToken,
     $core.int? totalSize,
   }) {
@@ -926,7 +926,7 @@ class ListSongResourcesResponse extends $pb.GeneratedMessage {
   factory ListSongResourcesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSongResourcesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$10.Resource>(1, _omitFieldNames ? '' : 'resources', $pb.PbFieldType.PM, subBuilder: $10.Resource.create)
+    ..pc<$11.Resource>(1, _omitFieldNames ? '' : 'resources', $pb.PbFieldType.PM, subBuilder: $11.Resource.create)
     ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'totalSize', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -954,7 +954,7 @@ class ListSongResourcesResponse extends $pb.GeneratedMessage {
   static ListSongResourcesResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$10.Resource> get resources => $_getList(0);
+  $core.List<$11.Resource> get resources => $_getList(0);
 
   @$pb.TagNumber(2)
   $core.String get nextPageToken => $_getSZ(1);

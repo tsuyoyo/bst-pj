@@ -21,10 +21,10 @@ service LocationService {
 }
 
 message CreateLocationRequest {
-  string name = 1;
+  string name            = 1;
   string google_maps_url = 2;
   string additional_info = 3;
-  int32 area_id = 4;
+  int32  area_id         = 4;
 }
 
 message CreateLocationResponse {
@@ -32,15 +32,15 @@ message CreateLocationResponse {
 }
 
 message ListLocationsRequest {
-  int32 page_size = 1;
+  int32  page_size  = 1;
   string page_token = 2;
-  Area area = 3;
+  Area   area       = 3;
 }
 
 message ListLocationsResponse {
-  repeated Location locations = 1;
-  string next_page_token = 2;
-  int32 total_size = 3;
+  repeated Location locations       = 1;
+  string            next_page_token = 2;
+  int32             total_size      = 3;
 }
 
 message GetLocationRequest {
@@ -52,11 +52,11 @@ message GetLocationResponse {
 }
 
 message UpdateLocationRequest {
-  int32 location_id = 1;
-  optional string name = 2;
+  int32           location_id     = 1;
+  optional string name            = 2;
   optional string google_maps_url = 3;
   optional string additional_info = 4;
-  optional int32 area_id = 5;
+  optional int32  area_id         = 5;
 }
 
 message UpdateLocationResponse {
@@ -69,4 +69,4 @@ message DeleteLocationRequest {
 
 message DeleteLocationResponse {
   bool success = 1;
-} 
+}

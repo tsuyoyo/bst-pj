@@ -19,9 +19,9 @@ service ResourceService {
 
 message CreateResourceRequest {
   Resource.ResourceType type        = 1;
-  string               url         = 2;
-  string               name        = 3;
-  string               description = 4;
+  string                url         = 2;
+  string                name        = 3;
+  string                description = 4;
 }
 
 message CreateResourceResponse {
@@ -37,15 +37,15 @@ message GetResourceResponse {
 }
 
 message ListResourcesRequest {
-  int32                page_size      = 1;
-  string               page_token     = 2;
+  int32                 page_size     = 1;
+  string                page_token    = 2;
   Resource.ResourceType resource_type = 3;
 }
 
 message ListResourcesResponse {
   repeated Resource resources       = 1;
-  string           next_page_token = 2;
-  int32           total_size      = 3;
+  string            next_page_token = 2;
+  int32             total_size      = 3;
 }
 
 message DeleteResourceRequest {
@@ -54,4 +54,4 @@ message DeleteResourceRequest {
 
 message DeleteResourceResponse {
   bool success = 1;
-} 
+}

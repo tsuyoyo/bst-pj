@@ -20,7 +20,7 @@ service PartService {
 }
 
 message CreatePartRequest {
-  string name = 1;
+  string name        = 1;
   string description = 2;
 }
 
@@ -29,14 +29,14 @@ message CreatePartResponse {
 }
 
 message ListPartsRequest {
-  int32 page_size = 1;
+  int32  page_size  = 1;
   string page_token = 2;
 }
 
 message ListPartsResponse {
-  repeated Part parts = 1;
-  string next_page_token = 2;
-  int32 total_size = 3;
+  repeated Part parts           = 1;
+  string        next_page_token = 2;
+  int32         total_size      = 3;
 }
 
 message GetPartRequest {
@@ -48,8 +48,8 @@ message GetPartResponse {
 }
 
 message UpdatePartRequest {
-  int32 part_id = 1;
-  optional string name = 2;
+  int32           part_id     = 1;
+  optional string name        = 2;
   optional string description = 3;
 }
 
@@ -63,4 +63,4 @@ message DeletePartRequest {
 
 message DeletePartResponse {
   bool success = 1;
-} 
+}
