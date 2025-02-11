@@ -7,6 +7,9 @@ import { AuthModule } from './auth/auth.module';
 import { ArtistModule } from './artist/artist.module';
 import { GenreModule } from './genre/genre.module';
 import { ResourceModule } from './resource/resource.module';
+import { PartModule } from './part/part.module';
+import { LocationModule } from './location/location.module';
+import { StudioModule } from './studio/studio.module';
 
 @Module({
   imports: [
@@ -32,6 +35,9 @@ import { ResourceModule } from './resource/resource.module';
     ArtistModule,
     GenreModule,
     ResourceModule,
+    PartModule,
+    LocationModule,
+    StudioModule,
   ],
   controllers: [AppController],
   providers: [AppService],
