@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { ArtistModule } from './artist/artist.module';
 import { GenreModule } from './genre/genre.module';
+import { ResourceModule } from './resource/resource.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { GenreModule } from './genre/genre.module';
     AuthModule,
     ArtistModule,
     GenreModule,
+    ResourceModule,
   ],
   controllers: [AppController],
   providers: [AppService],

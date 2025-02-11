@@ -4,8 +4,12 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 import { ResourceTargetType } from './types/resource-target-type.enum';
+import { ResourceType } from './types/resource-type.enum';
+import { User } from './user.entity';
 
 @Entity('resources')
 export class Resource {
@@ -23,8 +27,14 @@ export class Resource {
   @Column({ name: 'target_id', type: 'integer', nullable: false })
   targetId: number;
 
-  @Column({ type: 'varchar', length: 50, nullable: false })
-  type: string;
+  @Column({
+    name: 'type',
+    type: 'enum',
+    enum: ResourceType,
+    nullable: false,
+    comment: 'リソースの種類 (例: 画像, 動画)',
+  })
+  type: ResourceType;
 
   @Column({ type: 'text', nullable: false })
   url: string;
@@ -34,6 +44,13 @@ export class Resource {
 
   @Column({ type: 'text', nullable: true })
   description: string;
+
+  @Column({ name: 'created_by', type: 'integer', nullable: false })
+  createdBy: number;
+
+  @ManyToOne(() => User, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'created_by' })
+  creator: User;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "bst/v1/content.proto";
+
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+service ResourceService {
+  // POST /resources
+  rpc CreateResource(CreateResourceRequest) returns (CreateResourceResponse);
+  // GET /resources/{id}
+  rpc GetResource(GetResourceRequest) returns (GetResourceResponse);
+  // GET /resources
+  rpc ListResources(ListResourcesRequest) returns (ListResourcesResponse);
+  // DELETE /resources/{id}
+  rpc DeleteResource(DeleteResourceRequest) returns (DeleteResourceResponse);
+}
+
+message CreateResourceRequest {
+  Resource.ResourceType type        = 1;
+  string               url         = 2;
+  string               name        = 3;
+  string               description = 4;
+}
+
+message CreateResourceResponse {
+  Resource resource = 1;
+}
+
+message GetResourceRequest {
+  int32 resource_id = 1;
+}
+
+message GetResourceResponse {
+  Resource resource = 1;
+}
+
+message ListResourcesRequest {
+  int32                page_size      = 1;
+  string               page_token     = 2;
+  Resource.ResourceType resource_type = 3;
+}
+
+message ListResourcesResponse {
+  repeated Resource resources       = 1;
+  string           next_page_token = 2;
+  int32           total_size      = 3;
+}
+
+message DeleteResourceRequest {
+  int32 resource_id = 1;
+}
+
+message DeleteResourceResponse {
+  bool success = 1;
+} 

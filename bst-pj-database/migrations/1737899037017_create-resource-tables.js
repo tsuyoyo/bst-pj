@@ -10,6 +10,13 @@ exports.up = (pgm) => {
     "Session",
   ]);
 
+  // Create enum type for resource_type
+  pgm.createType("resource_type", [
+    "RESOURCE_TYPE_UNSPECIFIED",
+    "RESOURCE_TYPE_IMAGE",
+    "RESOURCE_TYPE_VIDEO",
+  ]);
+
   // Create resources table
   pgm.createTable("resources", {
     id: "id",
@@ -22,9 +29,9 @@ exports.up = (pgm) => {
       notNull: true,
     },
     type: {
-      type: "varchar(50)",
+      type: "resource_type",
       notNull: true,
-      comment: "リソースの種類 (例: 楽譜, YouTubeリンク, 録音, 録画)",
+      comment: "リソースの種類 (例: 画像, 動画)",
     },
     url: {
       type: "text",
@@ -34,7 +41,16 @@ exports.up = (pgm) => {
       type: "varchar(255)",
       notNull: true,
     },
-    description: { type: "text" },
+    description: {
+      type: "text",
+      notNull: true,
+    },
+    created_by: {
+      type: "integer",
+      notNull: true,
+      references: "users",
+      onDelete: "CASCADE",
+    },
     created_at: {
       type: "timestamp",
       notNull: true,
@@ -93,6 +109,8 @@ exports.up = (pgm) => {
   pgm.createIndex("resources", ["target_type", "target_id"]);
   pgm.createIndex("user_resources", ["user_id"]);
   pgm.createIndex("user_resources", ["resource_id"]);
+  pgm.createIndex("resources", ["type"]);
+  pgm.createIndex("resources", ["created_by"]);
 };
 
 exports.down = (pgm) => {
@@ -106,6 +124,8 @@ exports.down = (pgm) => {
   pgm.dropIndex("resources", ["target_type", "target_id"], { ifExists: true });
   pgm.dropIndex("user_resources", ["user_id"], { ifExists: true });
   pgm.dropIndex("user_resources", ["resource_id"], { ifExists: true });
+  pgm.dropIndex("resources", ["type"], { ifExists: true });
+  pgm.dropIndex("resources", ["created_by"], { ifExists: true });
 
   // Drop tables
   pgm.dropTable("user_resources", { ifExists: true });
@@ -113,4 +133,5 @@ exports.down = (pgm) => {
 
   // Drop enum type
   pgm.dropType("resource_target_type", { ifExists: true });
+  pgm.dropType("resource_type", { ifExists: true });
 };
