@@ -63,14 +63,11 @@ describe('ReactionController', () => {
           provide: getRepositoryToken(User),
           useClass: Repository,
         },
-        {
-          provide: JwtAuthGuard,
-          useValue: {
-            canActivate: jest.fn().mockReturnValue(true),
-          },
-        },
       ],
-    }).compile();
+    })
+      .overrideGuard(JwtAuthGuard)
+      .useValue({ canActivate: () => true })
+      .compile();
 
     controller = module.get<ReactionController>(ReactionController);
     service = module.get<ReactionService>(ReactionService);
@@ -94,7 +91,11 @@ describe('ReactionController', () => {
           name: dto.name,
           description: dto.description,
           iconUrl: dto.iconUrl,
-          updatedUserId: mockUser.id,
+          user: {
+            id: mockUser.id,
+            name: mockUser.name,
+            icon: mockUser.iconUrl || '',
+          },
           createdAt: expect.any(Date),
           updatedAt: expect.any(Date),
         },
@@ -111,7 +112,11 @@ describe('ReactionController', () => {
           name: dto.name,
           description: dto.description,
           iconUrl: dto.iconUrl,
-          updatedUserId: mockUser.id,
+          user: {
+            id: mockUser.id,
+            name: mockUser.name,
+            icon: mockUser.iconUrl || '',
+          },
           createdAt: expect.any(Date),
           updatedAt: expect.any(Date),
         },
@@ -164,7 +169,11 @@ describe('ReactionController', () => {
           name: 'Like',
           description: 'Like reaction',
           iconUrl: 'https://example.com/like.png',
-          updatedUserId: mockUser.id,
+          user: {
+            id: mockUser.id,
+            name: mockUser.name,
+            icon: mockUser.iconUrl || '',
+          },
           createdAt: expect.any(Date),
           updatedAt: expect.any(Date),
         },
@@ -194,7 +203,11 @@ describe('ReactionController', () => {
           name: dto.name,
           description: dto.description,
           iconUrl: dto.iconUrl,
-          updatedUserId: mockUser.id,
+          user: {
+            id: mockUser.id,
+            name: mockUser.name,
+            icon: mockUser.iconUrl || '',
+          },
           createdAt: expect.any(Date),
           updatedAt: expect.any(Date),
         },
