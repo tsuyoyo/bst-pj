@@ -13,12 +13,12 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'content.pb.dart' as $8;
-import 'content.pbenum.dart' as $8;
+import 'content.pb.dart' as $9;
+import 'content.pbenum.dart' as $9;
 
 class CreateResourceRequest extends $pb.GeneratedMessage {
   factory CreateResourceRequest({
-    $8.Resource_ResourceType? type,
+    $9.Resource_ResourceType? type,
     $core.String? url,
     $core.String? name,
     $core.String? description,
@@ -43,7 +43,7 @@ class CreateResourceRequest extends $pb.GeneratedMessage {
   factory CreateResourceRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateResourceRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..e<$8.Resource_ResourceType>(1, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: $8.Resource_ResourceType.RESOURCE_TYPE_UNSPECIFIED, valueOf: $8.Resource_ResourceType.valueOf, enumValues: $8.Resource_ResourceType.values)
+    ..e<$9.Resource_ResourceType>(1, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: $9.Resource_ResourceType.RESOURCE_TYPE_UNSPECIFIED, valueOf: $9.Resource_ResourceType.valueOf, enumValues: $9.Resource_ResourceType.values)
     ..aOS(2, _omitFieldNames ? '' : 'url')
     ..aOS(3, _omitFieldNames ? '' : 'name')
     ..aOS(4, _omitFieldNames ? '' : 'description')
@@ -72,9 +72,9 @@ class CreateResourceRequest extends $pb.GeneratedMessage {
   static CreateResourceRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $8.Resource_ResourceType get type => $_getN(0);
+  $9.Resource_ResourceType get type => $_getN(0);
   @$pb.TagNumber(1)
-  set type($8.Resource_ResourceType v) { setField(1, v); }
+  set type($9.Resource_ResourceType v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasType() => $_has(0);
   @$pb.TagNumber(1)
@@ -110,7 +110,7 @@ class CreateResourceRequest extends $pb.GeneratedMessage {
 
 class CreateResourceResponse extends $pb.GeneratedMessage {
   factory CreateResourceResponse({
-    $8.Resource? resource,
+    $9.Resource? resource,
   }) {
     final $result = create();
     if (resource != null) {
@@ -123,7 +123,7 @@ class CreateResourceResponse extends $pb.GeneratedMessage {
   factory CreateResourceResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateResourceResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$8.Resource>(1, _omitFieldNames ? '' : 'resource', subBuilder: $8.Resource.create)
+    ..aOM<$9.Resource>(1, _omitFieldNames ? '' : 'resource', subBuilder: $9.Resource.create)
     ..hasRequiredFields = false
   ;
 
@@ -149,15 +149,15 @@ class CreateResourceResponse extends $pb.GeneratedMessage {
   static CreateResourceResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $8.Resource get resource => $_getN(0);
+  $9.Resource get resource => $_getN(0);
   @$pb.TagNumber(1)
-  set resource($8.Resource v) { setField(1, v); }
+  set resource($9.Resource v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasResource() => $_has(0);
   @$pb.TagNumber(1)
   void clearResource() => clearField(1);
   @$pb.TagNumber(1)
-  $8.Resource ensureResource() => $_ensure(0);
+  $9.Resource ensureResource() => $_ensure(0);
 }
 
 class GetResourceRequest extends $pb.GeneratedMessage {
@@ -212,7 +212,7 @@ class GetResourceRequest extends $pb.GeneratedMessage {
 
 class GetResourceResponse extends $pb.GeneratedMessage {
   factory GetResourceResponse({
-    $8.Resource? resource,
+    $9.Resource? resource,
   }) {
     final $result = create();
     if (resource != null) {
@@ -225,7 +225,7 @@ class GetResourceResponse extends $pb.GeneratedMessage {
   factory GetResourceResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetResourceResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$8.Resource>(1, _omitFieldNames ? '' : 'resource', subBuilder: $8.Resource.create)
+    ..aOM<$9.Resource>(1, _omitFieldNames ? '' : 'resource', subBuilder: $9.Resource.create)
     ..hasRequiredFields = false
   ;
 
@@ -251,22 +251,22 @@ class GetResourceResponse extends $pb.GeneratedMessage {
   static GetResourceResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $8.Resource get resource => $_getN(0);
+  $9.Resource get resource => $_getN(0);
   @$pb.TagNumber(1)
-  set resource($8.Resource v) { setField(1, v); }
+  set resource($9.Resource v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasResource() => $_has(0);
   @$pb.TagNumber(1)
   void clearResource() => clearField(1);
   @$pb.TagNumber(1)
-  $8.Resource ensureResource() => $_ensure(0);
+  $9.Resource ensureResource() => $_ensure(0);
 }
 
 class ListResourcesRequest extends $pb.GeneratedMessage {
   factory ListResourcesRequest({
     $core.int? pageSize,
     $core.String? pageToken,
-    $8.Resource_ResourceType? resourceType,
+    $9.Resource_ResourceType? resourceType,
   }) {
     final $result = create();
     if (pageSize != null) {
@@ -287,7 +287,7 @@ class ListResourcesRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListResourcesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'pageToken')
-    ..e<$8.Resource_ResourceType>(3, _omitFieldNames ? '' : 'resourceType', $pb.PbFieldType.OE, defaultOrMaker: $8.Resource_ResourceType.RESOURCE_TYPE_UNSPECIFIED, valueOf: $8.Resource_ResourceType.valueOf, enumValues: $8.Resource_ResourceType.values)
+    ..e<$9.Resource_ResourceType>(3, _omitFieldNames ? '' : 'resourceType', $pb.PbFieldType.OE, defaultOrMaker: $9.Resource_ResourceType.RESOURCE_TYPE_UNSPECIFIED, valueOf: $9.Resource_ResourceType.valueOf, enumValues: $9.Resource_ResourceType.values)
     ..hasRequiredFields = false
   ;
 
@@ -331,9 +331,9 @@ class ListResourcesRequest extends $pb.GeneratedMessage {
   void clearPageToken() => clearField(2);
 
   @$pb.TagNumber(3)
-  $8.Resource_ResourceType get resourceType => $_getN(2);
+  $9.Resource_ResourceType get resourceType => $_getN(2);
   @$pb.TagNumber(3)
-  set resourceType($8.Resource_ResourceType v) { setField(3, v); }
+  set resourceType($9.Resource_ResourceType v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasResourceType() => $_has(2);
   @$pb.TagNumber(3)
@@ -342,7 +342,7 @@ class ListResourcesRequest extends $pb.GeneratedMessage {
 
 class ListResourcesResponse extends $pb.GeneratedMessage {
   factory ListResourcesResponse({
-    $core.Iterable<$8.Resource>? resources,
+    $core.Iterable<$9.Resource>? resources,
     $core.String? nextPageToken,
     $core.int? totalSize,
   }) {
@@ -363,7 +363,7 @@ class ListResourcesResponse extends $pb.GeneratedMessage {
   factory ListResourcesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListResourcesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$8.Resource>(1, _omitFieldNames ? '' : 'resources', $pb.PbFieldType.PM, subBuilder: $8.Resource.create)
+    ..pc<$9.Resource>(1, _omitFieldNames ? '' : 'resources', $pb.PbFieldType.PM, subBuilder: $9.Resource.create)
     ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'totalSize', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -391,7 +391,7 @@ class ListResourcesResponse extends $pb.GeneratedMessage {
   static ListResourcesResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$8.Resource> get resources => $_getList(0);
+  $core.List<$9.Resource> get resources => $_getList(0);
 
   @$pb.TagNumber(2)
   $core.String get nextPageToken => $_getSZ(1);

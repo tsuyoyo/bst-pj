@@ -13,16 +13,16 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/protobuf/timestamp.pb.dart' as $10;
-import 'location.pb.dart' as $12;
+import '../../google/protobuf/timestamp.pb.dart' as $11;
+import 'location.pb.dart' as $13;
 import 'party.pbenum.dart';
-import 'user.pb.dart' as $11;
+import 'user.pb.dart' as $12;
 
 export 'party.pbenum.dart';
 
 class PartyParticipant extends $pb.GeneratedMessage {
   factory PartyParticipant({
-    $11.User? user,
+    $12.User? user,
     PartyParticipantRole? role,
     PartyParticipantStatus? status,
   }) {
@@ -43,7 +43,7 @@ class PartyParticipant extends $pb.GeneratedMessage {
   factory PartyParticipant.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PartyParticipant', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$11.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $11.User.create)
+    ..aOM<$12.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $12.User.create)
     ..e<PartyParticipantRole>(2, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: PartyParticipantRole.PARTY_PARTICIPANT_ROLE_UNSPECIFIED, valueOf: PartyParticipantRole.valueOf, enumValues: PartyParticipantRole.values)
     ..e<PartyParticipantStatus>(3, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: PartyParticipantStatus.PARTY_PARTICIPANT_STATUS_UNSPECIFIED, valueOf: PartyParticipantStatus.valueOf, enumValues: PartyParticipantStatus.values)
     ..hasRequiredFields = false
@@ -71,15 +71,15 @@ class PartyParticipant extends $pb.GeneratedMessage {
   static PartyParticipant? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $11.User get user => $_getN(0);
+  $12.User get user => $_getN(0);
   @$pb.TagNumber(1)
-  set user($11.User v) { setField(1, v); }
+  set user($12.User v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasUser() => $_has(0);
   @$pb.TagNumber(1)
   void clearUser() => clearField(1);
   @$pb.TagNumber(1)
-  $11.User ensureUser() => $_ensure(0);
+  $12.User ensureUser() => $_ensure(0);
 
   @$pb.TagNumber(2)
   PartyParticipantRole get role => $_getN(1);
@@ -103,10 +103,10 @@ class PartyParticipant extends $pb.GeneratedMessage {
 class Party extends $pb.GeneratedMessage {
   factory Party({
     $core.Iterable<PartyParticipant>? participants,
-    $12.Location? location,
+    $13.Location? location,
     $core.int? fee,
-    $10.Timestamp? startAt,
-    $10.Timestamp? endAt,
+    $11.Timestamp? startAt,
+    $11.Timestamp? endAt,
   }) {
     final $result = create();
     if (participants != null) {
@@ -132,10 +132,10 @@ class Party extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Party', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..pc<PartyParticipant>(1, _omitFieldNames ? '' : 'participants', $pb.PbFieldType.PM, subBuilder: PartyParticipant.create)
-    ..aOM<$12.Location>(2, _omitFieldNames ? '' : 'location', subBuilder: $12.Location.create)
+    ..aOM<$13.Location>(2, _omitFieldNames ? '' : 'location', subBuilder: $13.Location.create)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'fee', $pb.PbFieldType.O3)
-    ..aOM<$10.Timestamp>(4, _omitFieldNames ? '' : 'startAt', subBuilder: $10.Timestamp.create)
-    ..aOM<$10.Timestamp>(5, _omitFieldNames ? '' : 'endAt', subBuilder: $10.Timestamp.create)
+    ..aOM<$11.Timestamp>(4, _omitFieldNames ? '' : 'startAt', subBuilder: $11.Timestamp.create)
+    ..aOM<$11.Timestamp>(5, _omitFieldNames ? '' : 'endAt', subBuilder: $11.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -164,15 +164,15 @@ class Party extends $pb.GeneratedMessage {
   $core.List<PartyParticipant> get participants => $_getList(0);
 
   @$pb.TagNumber(2)
-  $12.Location get location => $_getN(1);
+  $13.Location get location => $_getN(1);
   @$pb.TagNumber(2)
-  set location($12.Location v) { setField(2, v); }
+  set location($13.Location v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasLocation() => $_has(1);
   @$pb.TagNumber(2)
   void clearLocation() => clearField(2);
   @$pb.TagNumber(2)
-  $12.Location ensureLocation() => $_ensure(1);
+  $13.Location ensureLocation() => $_ensure(1);
 
   @$pb.TagNumber(3)
   $core.int get fee => $_getIZ(2);
@@ -184,26 +184,26 @@ class Party extends $pb.GeneratedMessage {
   void clearFee() => clearField(3);
 
   @$pb.TagNumber(4)
-  $10.Timestamp get startAt => $_getN(3);
+  $11.Timestamp get startAt => $_getN(3);
   @$pb.TagNumber(4)
-  set startAt($10.Timestamp v) { setField(4, v); }
+  set startAt($11.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasStartAt() => $_has(3);
   @$pb.TagNumber(4)
   void clearStartAt() => clearField(4);
   @$pb.TagNumber(4)
-  $10.Timestamp ensureStartAt() => $_ensure(3);
+  $11.Timestamp ensureStartAt() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  $10.Timestamp get endAt => $_getN(4);
+  $11.Timestamp get endAt => $_getN(4);
   @$pb.TagNumber(5)
-  set endAt($10.Timestamp v) { setField(5, v); }
+  set endAt($11.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasEndAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearEndAt() => clearField(5);
   @$pb.TagNumber(5)
-  $10.Timestamp ensureEndAt() => $_ensure(4);
+  $11.Timestamp ensureEndAt() => $_ensure(4);
 }
 
 

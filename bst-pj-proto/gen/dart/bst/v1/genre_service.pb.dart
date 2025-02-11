@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'content.pb.dart' as $8;
+import 'content.pb.dart' as $9;
 
 class CreateGenreRequest extends $pb.GeneratedMessage {
   factory CreateGenreRequest({
@@ -67,7 +67,7 @@ class CreateGenreRequest extends $pb.GeneratedMessage {
 
 class CreateGenreResponse extends $pb.GeneratedMessage {
   factory CreateGenreResponse({
-    $8.Genre? genre,
+    $9.Genre? genre,
   }) {
     final $result = create();
     if (genre != null) {
@@ -80,7 +80,7 @@ class CreateGenreResponse extends $pb.GeneratedMessage {
   factory CreateGenreResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateGenreResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$8.Genre>(1, _omitFieldNames ? '' : 'genre', subBuilder: $8.Genre.create)
+    ..aOM<$9.Genre>(1, _omitFieldNames ? '' : 'genre', subBuilder: $9.Genre.create)
     ..hasRequiredFields = false
   ;
 
@@ -106,20 +106,20 @@ class CreateGenreResponse extends $pb.GeneratedMessage {
   static CreateGenreResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $8.Genre get genre => $_getN(0);
+  $9.Genre get genre => $_getN(0);
   @$pb.TagNumber(1)
-  set genre($8.Genre v) { setField(1, v); }
+  set genre($9.Genre v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasGenre() => $_has(0);
   @$pb.TagNumber(1)
   void clearGenre() => clearField(1);
   @$pb.TagNumber(1)
-  $8.Genre ensureGenre() => $_ensure(0);
+  $9.Genre ensureGenre() => $_ensure(0);
 }
 
 class ListGenresResponse extends $pb.GeneratedMessage {
   factory ListGenresResponse({
-    $core.Iterable<$8.Genre>? genres,
+    $core.Iterable<$9.Genre>? genres,
   }) {
     final $result = create();
     if (genres != null) {
@@ -132,7 +132,7 @@ class ListGenresResponse extends $pb.GeneratedMessage {
   factory ListGenresResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListGenresResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$8.Genre>(1, _omitFieldNames ? '' : 'genres', $pb.PbFieldType.PM, subBuilder: $8.Genre.create)
+    ..pc<$9.Genre>(1, _omitFieldNames ? '' : 'genres', $pb.PbFieldType.PM, subBuilder: $9.Genre.create)
     ..hasRequiredFields = false
   ;
 
@@ -158,7 +158,7 @@ class ListGenresResponse extends $pb.GeneratedMessage {
   static ListGenresResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$8.Genre> get genres => $_getList(0);
+  $core.List<$9.Genre> get genres => $_getList(0);
 }
 
 class UpdateGenreRequest extends $pb.GeneratedMessage {
@@ -213,7 +213,7 @@ class UpdateGenreRequest extends $pb.GeneratedMessage {
 
 class UpdateGenreResponse extends $pb.GeneratedMessage {
   factory UpdateGenreResponse({
-    $8.Genre? genre,
+    $9.Genre? genre,
   }) {
     final $result = create();
     if (genre != null) {
@@ -226,7 +226,7 @@ class UpdateGenreResponse extends $pb.GeneratedMessage {
   factory UpdateGenreResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateGenreResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$8.Genre>(1, _omitFieldNames ? '' : 'genre', subBuilder: $8.Genre.create)
+    ..aOM<$9.Genre>(1, _omitFieldNames ? '' : 'genre', subBuilder: $9.Genre.create)
     ..hasRequiredFields = false
   ;
 
@@ -252,15 +252,15 @@ class UpdateGenreResponse extends $pb.GeneratedMessage {
   static UpdateGenreResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $8.Genre get genre => $_getN(0);
+  $9.Genre get genre => $_getN(0);
   @$pb.TagNumber(1)
-  set genre($8.Genre v) { setField(1, v); }
+  set genre($9.Genre v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasGenre() => $_has(0);
   @$pb.TagNumber(1)
   void clearGenre() => clearField(1);
   @$pb.TagNumber(1)
-  $8.Genre ensureGenre() => $_ensure(0);
+  $9.Genre ensureGenre() => $_ensure(0);
 }
 
 
