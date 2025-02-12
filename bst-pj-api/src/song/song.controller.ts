@@ -22,6 +22,9 @@ import {
   GetSongResponse,
   ListSongsResponse,
   UpdateSongResponse,
+  AddSongResourceResponse,
+  ListSongResourcesResponse,
+  DeleteSongResourceResponse,
 } from '../proto/bst/v1/song_service';
 
 @Controller('songs')
@@ -68,5 +71,32 @@ export class SongController {
     @Param('id', ParseIntPipe) id: number,
   ): Promise<DeleteSongResponse> {
     return await this.songService.deleteSong(id);
+  }
+
+  @Post(':id/resources/:resourceId')
+  @UseGuards(JwtAuthGuard)
+  async addSongResource(
+    @Param('id', ParseIntPipe) id: number,
+    @Param('resourceId', ParseIntPipe) resourceId: number,
+  ): Promise<AddSongResourceResponse> {
+    return await this.songService.addSongResource(id, resourceId);
+  }
+
+  @Get(':id/resources')
+  async listSongResources(
+    @Param('id', ParseIntPipe) id: number,
+    @Query('pageSize', new ParseIntPipe()) pageSize: number = 10,
+    @Query('pageToken', new ParseIntPipe()) pageToken: number = 0,
+  ): Promise<ListSongResourcesResponse> {
+    return await this.songService.listSongResources(id, pageSize, pageToken);
+  }
+
+  @Delete(':id/resources/:resourceId')
+  @UseGuards(JwtAuthGuard)
+  async deleteSongResource(
+    @Param('id', ParseIntPipe) id: number,
+    @Param('resourceId', ParseIntPipe) resourceId: number,
+  ): Promise<DeleteSongResourceResponse> {
+    return await this.songService.deleteSongResource(id, resourceId);
   }
 }

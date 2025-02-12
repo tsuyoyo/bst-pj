@@ -3,15 +3,22 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Song } from '../entities/song.entity';
 import { Artist } from '../entities/artist.entity';
-import { CreateSongDto } from './dto/create-song.dto';
-import { UpdateSongDto } from './dto/update-song.dto';
+import { Resource } from '../entities/resource.entity';
 import {
   CreateSongResponse,
-  DeleteSongResponse,
-  GetSongResponse,
   ListSongsResponse,
+  GetSongResponse,
   UpdateSongResponse,
+  DeleteSongResponse,
+  AddSongResourceResponse,
+  ListSongResourcesResponse,
+  DeleteSongResourceResponse,
 } from '../proto/bst/v1/song_service';
+import { ResourceType } from '../entities/types/resource-type.enum';
+import { ResourceTargetType } from '../entities/types/resource-target-type.enum';
+import { Resource_ResourceType } from '../proto/bst/v1/content';
+import { CreateSongDto } from './dto/create-song.dto';
+import { UpdateSongDto } from './dto/update-song.dto';
 
 @Injectable()
 export class SongService {
@@ -20,6 +27,8 @@ export class SongService {
     private readonly songRepository: Repository<Song>,
     @InjectRepository(Artist)
     private readonly artistRepository: Repository<Artist>,
+    @InjectRepository(Resource)
+    private readonly resourceRepository: Repository<Resource>,
   ) {}
 
   async createSong(
@@ -153,13 +162,114 @@ export class SongService {
   }
 
   async deleteSong(id: number): Promise<DeleteSongResponse> {
-    const song = await this.songRepository.findOne({ where: { id } });
+    const song = await this.songRepository.findOne({
+      where: { id },
+    });
     if (!song) {
       throw new NotFoundException('Song not found');
     }
 
     await this.songRepository.remove(song);
 
-    return { success: true };
+    return {
+      success: true,
+    };
+  }
+
+  async addSongResource(
+    songId: number,
+    resourceId: number,
+  ): Promise<AddSongResourceResponse> {
+    const song = await this.songRepository.findOne({
+      where: { id: songId },
+    });
+    if (!song) {
+      throw new NotFoundException('Song not found');
+    }
+
+    const resource = await this.resourceRepository.findOne({
+      where: { id: resourceId },
+    });
+    if (!resource) {
+      throw new NotFoundException('Resource not found');
+    }
+
+    resource.targetType = ResourceTargetType.SONG;
+    resource.targetId = songId;
+    await this.resourceRepository.save(resource);
+
+    return {
+      success: true,
+    };
+  }
+
+  async listSongResources(
+    songId: number,
+    pageSize: number,
+    pageToken: number,
+  ): Promise<ListSongResourcesResponse> {
+    const song = await this.songRepository.findOne({
+      where: { id: songId },
+    });
+    if (!song) {
+      throw new NotFoundException('Song not found');
+    }
+
+    const [resources, totalCount] = await this.resourceRepository.findAndCount({
+      where: {
+        targetType: ResourceTargetType.SONG,
+        targetId: songId,
+      },
+      take: pageSize,
+      skip: pageToken,
+    });
+
+    return {
+      resources: resources.map((resource) => ({
+        id: resource.id,
+        type: this.mapResourceType(resource.type),
+        url: resource.url,
+        name: resource.name,
+        description: resource.description,
+      })),
+      nextPageToken:
+        totalCount > pageToken + pageSize
+          ? (pageToken + pageSize).toString()
+          : '',
+      totalSize: totalCount,
+    };
+  }
+
+  async deleteSongResource(
+    songId: number,
+    resourceId: number,
+  ): Promise<DeleteSongResourceResponse> {
+    const resource = await this.resourceRepository.findOne({
+      where: {
+        id: resourceId,
+        targetType: ResourceTargetType.SONG,
+        targetId: songId,
+      },
+    });
+    if (!resource) {
+      throw new NotFoundException('Resource not found in song');
+    }
+
+    await this.resourceRepository.remove(resource);
+
+    return {
+      success: true,
+    };
+  }
+
+  private mapResourceType(type: ResourceType): Resource_ResourceType {
+    switch (type) {
+      case ResourceType.IMAGE:
+        return Resource_ResourceType.RESOURCE_TYPE_IMAGE;
+      case ResourceType.VIDEO:
+        return Resource_ResourceType.RESOURCE_TYPE_VIDEO;
+      default:
+        return Resource_ResourceType.RESOURCE_TYPE_UNSPECIFIED;
+    }
   }
 }

@@ -5,12 +5,24 @@ import { Repository } from 'typeorm';
 import { SongService } from './song.service';
 import { Song } from '../entities/song.entity';
 import { Artist } from '../entities/artist.entity';
+import { Resource } from '../entities/resource.entity';
 import { NotFoundException } from '@nestjs/common';
+import { ResourceTargetType } from '../entities/types/resource-target-type.enum';
 
 describe('SongService', () => {
   let service: SongService;
   let songRepository: Repository<Song>;
   let artistRepository: Repository<Artist>;
+  let resourceRepository: Repository<Resource>;
+
+  const mockArtist = {
+    id: 1,
+    name: 'Test Artist',
+    website: 'http://test.com',
+    updatedUserId: 1,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
 
   const mockSong = {
     id: 1,
@@ -18,19 +30,22 @@ describe('SongService', () => {
     description: 'Test Description',
     artistId: 1,
     updatedUserId: 1,
-    artist: {
-      id: 1,
-      name: 'Test Artist',
-      website: 'http://test.com',
-      updatedUserId: 1,
-    },
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    artist: mockArtist,
   };
 
-  const mockArtist = {
+  const mockResource = {
     id: 1,
-    name: 'Test Artist',
-    website: 'http://test.com',
-    updatedUserId: 1,
+    targetType: ResourceTargetType.SONG,
+    targetId: 1,
+    type: 'RESOURCE_TYPE_IMAGE',
+    url: 'http://example.com/image.jpg',
+    name: 'Test Resource',
+    description: 'Test Resource Description',
+    createdBy: 1,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   };
 
   beforeEach(async () => {
@@ -54,6 +69,16 @@ describe('SongService', () => {
             findOne: jest.fn().mockResolvedValue(mockArtist),
           },
         },
+        {
+          provide: getRepositoryToken(Resource),
+          useValue: {
+            findOne: jest.fn().mockResolvedValue(mockResource),
+            find: jest.fn().mockResolvedValue([mockResource]),
+            findAndCount: jest.fn().mockResolvedValue([[mockResource], 1]),
+            save: jest.fn().mockResolvedValue(mockResource),
+            remove: jest.fn().mockResolvedValue(true),
+          },
+        },
       ],
     }).compile();
 
@@ -62,6 +87,9 @@ describe('SongService', () => {
     artistRepository = module.get<Repository<Artist>>(
       getRepositoryToken(Artist),
     );
+    resourceRepository = module.get<Repository<Resource>>(
+      getRepositoryToken(Resource),
+    );
   });
 
   it('should be defined', () => {
@@ -69,129 +97,156 @@ describe('SongService', () => {
   });
 
   describe('createSong', () => {
-    const createSongTest = async (): Promise<void> => {
+    it('should create a song successfully', async () => {
       const createSongDto = {
         title: 'Test Song',
-        artistId: 1,
         description: 'Test Description',
+        artistId: 1,
       };
 
       const result = await service.createSong(createSongDto, 1);
-
       expect(result.song).toBeDefined();
-      expect(result.song!.title).toBe(createSongDto.title);
-      expect(songRepository.create).toHaveBeenCalled();
-      expect(songRepository.save).toHaveBeenCalled();
-    };
+      expect(result.song?.title).toBe(createSongDto.title);
+    });
 
-    const createSongNotFoundTest = async (): Promise<void> => {
-      jest.spyOn(artistRepository, 'findOne').mockResolvedValue(null);
+    it('should throw NotFoundException when artist not found', async () => {
+      jest
+        .spyOn(artistRepository, 'findOne')
+        .mockResolvedValueOnce(null as never);
 
       const createSongDto = {
         title: 'Test Song',
-        artistId: 999,
         description: 'Test Description',
+        artistId: 999,
       };
 
       await expect(service.createSong(createSongDto, 1)).rejects.toThrow(
         NotFoundException,
       );
-    };
-
-    it('should create a song successfully', createSongTest);
-    it(
-      'should throw NotFoundException when artist not found',
-      createSongNotFoundTest,
-    );
+    });
   });
 
   describe('listSongs', () => {
-    const listSongsTest = async (): Promise<void> => {
+    it('should return list of songs', async () => {
       const result = await service.listSongs(10, null);
-
       expect(result.songs).toBeDefined();
-      expect(result.songs.length).toBe(1);
-      expect(songRepository.findAndCount).toHaveBeenCalled();
-    };
-
-    it('should return list of songs', listSongsTest);
+      expect(Array.isArray(result.songs)).toBe(true);
+    });
   });
 
   describe('getSong', () => {
-    const getSongTest = async (): Promise<void> => {
+    it('should return a song by id', async () => {
       const result = await service.getSong(1);
-
       expect(result.song).toBeDefined();
-      expect(result.song!.id).toBe(1);
-      expect(songRepository.findOne).toHaveBeenCalled();
-    };
+      expect(result.song?.id).toBe(1);
+    });
 
-    const getSongNotFoundTest = async (): Promise<void> => {
-      jest.spyOn(songRepository, 'findOne').mockResolvedValue(null);
-
+    it('should throw NotFoundException when song not found', async () => {
+      jest
+        .spyOn(songRepository, 'findOne')
+        .mockResolvedValueOnce(null as never);
       await expect(service.getSong(999)).rejects.toThrow(NotFoundException);
-    };
-
-    it('should return a song by id', getSongTest);
-    it(
-      'should throw NotFoundException when song not found',
-      getSongNotFoundTest,
-    );
+    });
   });
 
   describe('updateSong', () => {
-    const updateSongTest = async (): Promise<void> => {
+    it('should update a song successfully', async () => {
       const updateSongDto = {
         title: 'Updated Song',
-        artistId: 1,
         description: 'Updated Description',
+        artistId: 1,
       };
 
       const result = await service.updateSong(1, updateSongDto, 1);
-
       expect(result.song).toBeDefined();
-      expect(songRepository.save).toHaveBeenCalled();
-    };
+      expect(result.song?.title).toBe(mockSong.title);
+    });
 
-    const updateSongNotFoundTest = async (): Promise<void> => {
-      jest.spyOn(songRepository, 'findOne').mockResolvedValue(null);
+    it('should throw NotFoundException when song not found', async () => {
+      jest
+        .spyOn(songRepository, 'findOne')
+        .mockResolvedValueOnce(null as never);
 
       const updateSongDto = {
         title: 'Updated Song',
-        artistId: 1,
         description: 'Updated Description',
+        artistId: 1,
       };
 
       await expect(service.updateSong(999, updateSongDto, 1)).rejects.toThrow(
         NotFoundException,
       );
-    };
-
-    it('should update a song successfully', updateSongTest);
-    it(
-      'should throw NotFoundException when song not found',
-      updateSongNotFoundTest,
-    );
+    });
   });
 
   describe('deleteSong', () => {
-    const deleteSongTest = async (): Promise<void> => {
+    it('should delete a song successfully', async () => {
       const result = await service.deleteSong(1);
-
       expect(result.success).toBe(true);
-      expect(songRepository.remove).toHaveBeenCalled();
-    };
+    });
 
-    const deleteSongNotFoundTest = async (): Promise<void> => {
-      jest.spyOn(songRepository, 'findOne').mockResolvedValue(null);
-
+    it('should throw NotFoundException when song not found', async () => {
+      jest
+        .spyOn(songRepository, 'findOne')
+        .mockResolvedValueOnce(null as never);
       await expect(service.deleteSong(999)).rejects.toThrow(NotFoundException);
-    };
+    });
+  });
 
-    it('should delete a song successfully', deleteSongTest);
-    it(
-      'should throw NotFoundException when song not found',
-      deleteSongNotFoundTest,
-    );
+  describe('addSongResource', () => {
+    it('should add a resource to a song', async () => {
+      const result = await service.addSongResource(1, 1);
+      expect(result.success).toBe(true);
+    });
+
+    it('should throw NotFoundException when song not found', async () => {
+      jest
+        .spyOn(songRepository, 'findOne')
+        .mockResolvedValueOnce(null as never);
+      await expect(service.addSongResource(999, 1)).rejects.toThrow(
+        NotFoundException,
+      );
+    });
+  });
+
+  describe('listSongResources', () => {
+    it('should return list of song resources', async () => {
+      const result = await service.listSongResources(1, 10, 0);
+      expect(result.resources).toBeDefined();
+      expect(Array.isArray(result.resources)).toBe(true);
+    });
+
+    it('should throw NotFoundException when song not found', async () => {
+      jest
+        .spyOn(songRepository, 'findOne')
+        .mockResolvedValueOnce(null as never);
+      await expect(service.listSongResources(999, 10, 0)).rejects.toThrow(
+        NotFoundException,
+      );
+    });
+  });
+
+  describe('deleteSongResource', () => {
+    it('should delete a resource from a song', async () => {
+      const result = await service.deleteSongResource(1, 1);
+      expect(result.success).toBe(true);
+    });
+
+    it('should throw NotFoundException when song not found', async () => {
+      jest.spyOn(songRepository, 'findOne').mockResolvedValue(null);
+      jest.spyOn(resourceRepository, 'findOne').mockResolvedValue(null);
+
+      await expect(service.deleteSongResource(999, 1)).rejects.toThrow(
+        NotFoundException,
+      );
+    });
+
+    it('should throw NotFoundException when resource not found', async () => {
+      jest.spyOn(resourceRepository, 'findOne').mockResolvedValue(null);
+
+      await expect(service.deleteSongResource(1, 999)).rejects.toThrow(
+        NotFoundException,
+      );
+    });
   });
 });

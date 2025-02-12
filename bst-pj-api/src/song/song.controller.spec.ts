@@ -27,16 +27,63 @@ describe('SongController', () => {
     updatedAt: new Date(),
   };
 
-  const mockSong = {
-    id: 1,
-    title: 'Test Song',
-    artist: {
-      id: 1,
-      name: 'Test Artist',
-      website: 'http://test.com',
-      genres: [],
-    },
-    resources: [],
+  const mockSongService = {
+    createSong: jest.fn().mockResolvedValue({
+      song: {
+        id: 1,
+        title: 'Test Song',
+        description: 'Test Description',
+        artist: {
+          id: 1,
+          name: 'Test Artist',
+        },
+      },
+    }),
+    listSongs: jest.fn().mockResolvedValue({
+      songs: [
+        {
+          id: 1,
+          title: 'Test Song',
+          description: 'Test Description',
+          artist: {
+            id: 1,
+            name: 'Test Artist',
+          },
+        },
+      ],
+      nextPageToken: null,
+      totalSize: 1,
+    }),
+    getSong: jest.fn().mockResolvedValue({
+      song: {
+        id: 1,
+        title: 'Test Song',
+        description: 'Test Description',
+        artist: {
+          id: 1,
+          name: 'Test Artist',
+        },
+      },
+    }),
+    updateSong: jest.fn().mockResolvedValue({
+      song: {
+        id: 1,
+        title: 'Updated Song',
+        description: 'Updated Description',
+        artist: {
+          id: 1,
+          name: 'Test Artist',
+        },
+      },
+    }),
+    deleteSong: jest.fn().mockResolvedValue({ success: true }),
+    addSongResource: jest.fn().mockResolvedValue({ success: true }),
+    listSongResources: jest.fn().mockResolvedValue({
+      resources: [],
+      nextPageToken: null,
+      totalSize: 0,
+    }),
+    deleteSongResource: jest.fn().mockResolvedValue({ success: true }),
   };
 
   beforeEach(async () => {
@@ -45,15 +92,7 @@ describe('SongController', () => {
       providers: [
         {
           provide: SongService,
-          useValue: {
-            createSong: jest.fn().mockResolvedValue({ song: mockSong }),
-            listSongs: jest
-              .fn()
-              .mockResolvedValue({ songs: [mockSong], nextPageToken: null }),
-            getSong: jest.fn().mockResolvedValue({ song: mockSong }),
-            updateSong: jest.fn().mockResolvedValue({ song: mockSong }),
-            deleteSong: jest.fn().mockResolvedValue({ success: true }),
-          },
+          useValue: mockSongService,
         },
         JwtAuthGuard,
         {
@@ -82,76 +121,87 @@ describe('SongController', () => {
   });
 
   describe('createSong', () => {
-    const createSongTest = async (): Promise<void> => {
+    it('should create a song', async () => {
       const createSongDto: CreateSongDto = {
         title: 'Test Song',
-        artistId: 1,
         description: 'Test Description',
+        artistId: 1,
       };
 
       const result = await controller.createSong(createSongDto, mockUser);
-
       expect(result.song).toBeDefined();
       expect(service.createSong).toHaveBeenCalledWith(
         createSongDto,
         mockUser.id,
       );
-    };
-
-    it('should create a song', createSongTest);
+    });
   });
 
   describe('listSongs', () => {
-    const listSongsTest = async (): Promise<void> => {
+    it('should return a list of songs', async () => {
       const result = await controller.listSongs(10, null);
-
       expect(result.songs).toBeDefined();
+      expect(Array.isArray(result.songs)).toBe(true);
       expect(service.listSongs).toHaveBeenCalledWith(10, null);
-    };
-
-    it('should return list of songs', listSongsTest);
+    });
   });
 
   describe('getSong', () => {
-    const getSongTest = async (): Promise<void> => {
+    it('should return a song by id', async () => {
       const result = await controller.getSong(1);
-
       expect(result.song).toBeDefined();
       expect(service.getSong).toHaveBeenCalledWith(1);
-    };
-
-    it('should return a song by id', getSongTest);
+    });
   });
 
   describe('updateSong', () => {
-    const updateSongTest = async (): Promise<void> => {
+    it('should update a song', async () => {
       const updateSongDto: UpdateSongDto = {
         title: 'Updated Song',
-        artistId: 1,
         description: 'Updated Description',
+        artistId: 1,
       };
 
       const result = await controller.updateSong(1, updateSongDto, mockUser);
-
       expect(result.song).toBeDefined();
       expect(service.updateSong).toHaveBeenCalledWith(
         1,
         updateSongDto,
         mockUser.id,
       );
-    };
-
-    it('should update a song', updateSongTest);
+    });
   });
 
   describe('deleteSong', () => {
-    const deleteSongTest = async (): Promise<void> => {
+    it('should delete a song', async () => {
       const result = await controller.deleteSong(1);
-
       expect(result.success).toBe(true);
       expect(service.deleteSong).toHaveBeenCalledWith(1);
-    };
+    });
+  });
 
-    it('should delete a song', deleteSongTest);
+  describe('addSongResource', () => {
+    it('should add a resource to a song', async () => {
+      const result = await controller.addSongResource(1, 1);
+      expect(result.success).toBe(true);
+      expect(service.addSongResource).toHaveBeenCalledWith(1, 1);
+    });
+  });
+
+  describe('listSongResources', () => {
+    it('should return a list of song resources', async () => {
+      const result = await controller.listSongResources(1, 10, 0);
+      expect(result.resources).toBeDefined();
+      expect(Array.isArray(result.resources)).toBe(true);
+      expect(service.listSongResources).toHaveBeenCalledWith(1, 10, 0);
+    });
+  });
+
+  describe('deleteSongResource', () => {
+    it('should delete a resource from a song', async () => {
+      const result = await controller.deleteSongResource(1, 1);
+      expect(result.success).toBe(true);
+      expect(service.deleteSongResource).toHaveBeenCalledWith(1, 1);
+    });
   });
 });
