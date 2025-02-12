@@ -15,7 +15,10 @@ export class Song {
   id: number;
 
   @Column({ type: 'varchar', length: 255, nullable: false })
-  name: string;
+  title: string;
+
+  @Column({ type: 'text', nullable: true })
+  description: string;
 
   @Column({ name: 'artist_id', type: 'integer', nullable: false })
   artistId: number;

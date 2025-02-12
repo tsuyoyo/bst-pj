@@ -18,19 +18,15 @@ import 'content.pb.dart' as $11;
 class CreateSongRequest extends $pb.GeneratedMessage {
   factory CreateSongRequest({
     $core.String? title,
-    $11.Artist? artist,
-    $11.Genre? genre,
+    $core.int? artistId,
     $core.String? description,
   }) {
     final $result = create();
     if (title != null) {
       $result.title = title;
     }
-    if (artist != null) {
-      $result.artist = artist;
-    }
-    if (genre != null) {
-      $result.genre = genre;
+    if (artistId != null) {
+      $result.artistId = artistId;
     }
     if (description != null) {
       $result.description = description;
@@ -43,9 +39,8 @@ class CreateSongRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateSongRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'title')
-    ..aOM<$11.Artist>(2, _omitFieldNames ? '' : 'artist', subBuilder: $11.Artist.create)
-    ..aOM<$11.Genre>(3, _omitFieldNames ? '' : 'genre', subBuilder: $11.Genre.create)
-    ..aOS(4, _omitFieldNames ? '' : 'description')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'artistId', $pb.PbFieldType.O3)
+    ..aOS(3, _omitFieldNames ? '' : 'description')
     ..hasRequiredFields = false
   ;
 
@@ -80,35 +75,22 @@ class CreateSongRequest extends $pb.GeneratedMessage {
   void clearTitle() => clearField(1);
 
   @$pb.TagNumber(2)
-  $11.Artist get artist => $_getN(1);
+  $core.int get artistId => $_getIZ(1);
   @$pb.TagNumber(2)
-  set artist($11.Artist v) { setField(2, v); }
+  set artistId($core.int v) { $_setSignedInt32(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasArtist() => $_has(1);
+  $core.bool hasArtistId() => $_has(1);
   @$pb.TagNumber(2)
-  void clearArtist() => clearField(2);
-  @$pb.TagNumber(2)
-  $11.Artist ensureArtist() => $_ensure(1);
+  void clearArtistId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $11.Genre get genre => $_getN(2);
+  $core.String get description => $_getSZ(2);
   @$pb.TagNumber(3)
-  set genre($11.Genre v) { setField(3, v); }
+  set description($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasGenre() => $_has(2);
+  $core.bool hasDescription() => $_has(2);
   @$pb.TagNumber(3)
-  void clearGenre() => clearField(3);
-  @$pb.TagNumber(3)
-  $11.Genre ensureGenre() => $_ensure(2);
-
-  @$pb.TagNumber(4)
-  $core.String get description => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set description($core.String v) { $_setString(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasDescription() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearDescription() => clearField(4);
+  void clearDescription() => clearField(3);
 }
 
 class CreateSongResponse extends $pb.GeneratedMessage {
@@ -168,7 +150,6 @@ class ListSongsRequest extends $pb.GeneratedMessage {
     $core.int? pageSize,
     $core.int? pageToken,
     $core.String? query,
-    $11.Genre? genre,
     $core.int? artistId,
   }) {
     final $result = create();
@@ -180,9 +161,6 @@ class ListSongsRequest extends $pb.GeneratedMessage {
     }
     if (query != null) {
       $result.query = query;
-    }
-    if (genre != null) {
-      $result.genre = genre;
     }
     if (artistId != null) {
       $result.artistId = artistId;
@@ -197,8 +175,7 @@ class ListSongsRequest extends $pb.GeneratedMessage {
     ..a<$core.int>(1, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.O3)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'pageToken', $pb.PbFieldType.O3)
     ..aOS(3, _omitFieldNames ? '' : 'query')
-    ..aOM<$11.Genre>(4, _omitFieldNames ? '' : 'genre', subBuilder: $11.Genre.create)
-    ..a<$core.int>(5, _omitFieldNames ? '' : 'artistId', $pb.PbFieldType.O3)
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'artistId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -251,24 +228,13 @@ class ListSongsRequest extends $pb.GeneratedMessage {
   void clearQuery() => clearField(3);
 
   @$pb.TagNumber(4)
-  $11.Genre get genre => $_getN(3);
+  $core.int get artistId => $_getIZ(3);
   @$pb.TagNumber(4)
-  set genre($11.Genre v) { setField(4, v); }
+  set artistId($core.int v) { $_setSignedInt32(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasGenre() => $_has(3);
+  $core.bool hasArtistId() => $_has(3);
   @$pb.TagNumber(4)
-  void clearGenre() => clearField(4);
-  @$pb.TagNumber(4)
-  $11.Genre ensureGenre() => $_ensure(3);
-
-  @$pb.TagNumber(5)
-  $core.int get artistId => $_getIZ(4);
-  @$pb.TagNumber(5)
-  set artistId($core.int v) { $_setSignedInt32(4, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasArtistId() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearArtistId() => clearField(5);
+  void clearArtistId() => clearField(4);
 }
 
 class ListSongsResponse extends $pb.GeneratedMessage {
@@ -449,8 +415,7 @@ class UpdateSongRequest extends $pb.GeneratedMessage {
   factory UpdateSongRequest({
     $core.int? songId,
     $core.String? title,
-    $11.Artist? artist,
-    $11.Genre? genre,
+    $core.int? artistId,
     $core.String? description,
   }) {
     final $result = create();
@@ -460,11 +425,8 @@ class UpdateSongRequest extends $pb.GeneratedMessage {
     if (title != null) {
       $result.title = title;
     }
-    if (artist != null) {
-      $result.artist = artist;
-    }
-    if (genre != null) {
-      $result.genre = genre;
+    if (artistId != null) {
+      $result.artistId = artistId;
     }
     if (description != null) {
       $result.description = description;
@@ -478,9 +440,8 @@ class UpdateSongRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSongRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'title')
-    ..aOM<$11.Artist>(3, _omitFieldNames ? '' : 'artist', subBuilder: $11.Artist.create)
-    ..aOM<$11.Genre>(4, _omitFieldNames ? '' : 'genre', subBuilder: $11.Genre.create)
-    ..aOS(5, _omitFieldNames ? '' : 'description')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'artistId', $pb.PbFieldType.O3)
+    ..aOS(4, _omitFieldNames ? '' : 'description')
     ..hasRequiredFields = false
   ;
 
@@ -524,35 +485,22 @@ class UpdateSongRequest extends $pb.GeneratedMessage {
   void clearTitle() => clearField(2);
 
   @$pb.TagNumber(3)
-  $11.Artist get artist => $_getN(2);
+  $core.int get artistId => $_getIZ(2);
   @$pb.TagNumber(3)
-  set artist($11.Artist v) { setField(3, v); }
+  set artistId($core.int v) { $_setSignedInt32(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasArtist() => $_has(2);
+  $core.bool hasArtistId() => $_has(2);
   @$pb.TagNumber(3)
-  void clearArtist() => clearField(3);
-  @$pb.TagNumber(3)
-  $11.Artist ensureArtist() => $_ensure(2);
+  void clearArtistId() => clearField(3);
 
   @$pb.TagNumber(4)
-  $11.Genre get genre => $_getN(3);
+  $core.String get description => $_getSZ(3);
   @$pb.TagNumber(4)
-  set genre($11.Genre v) { setField(4, v); }
+  set description($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasGenre() => $_has(3);
+  $core.bool hasDescription() => $_has(3);
   @$pb.TagNumber(4)
-  void clearGenre() => clearField(4);
-  @$pb.TagNumber(4)
-  $11.Genre ensureGenre() => $_ensure(3);
-
-  @$pb.TagNumber(5)
-  $core.String get description => $_getSZ(4);
-  @$pb.TagNumber(5)
-  set description($core.String v) { $_setString(4, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasDescription() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearDescription() => clearField(5);
+  void clearDescription() => clearField(4);
 }
 
 class UpdateSongResponse extends $pb.GeneratedMessage {
@@ -710,14 +658,14 @@ class DeleteSongResponse extends $pb.GeneratedMessage {
 class AddSongResourceRequest extends $pb.GeneratedMessage {
   factory AddSongResourceRequest({
     $core.int? songId,
-    $11.Resource? resource,
+    $core.int? resourceId,
   }) {
     final $result = create();
     if (songId != null) {
       $result.songId = songId;
     }
-    if (resource != null) {
-      $result.resource = resource;
+    if (resourceId != null) {
+      $result.resourceId = resourceId;
     }
     return $result;
   }
@@ -727,7 +675,7 @@ class AddSongResourceRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSongResourceRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3)
-    ..aOM<$11.Resource>(2, _omitFieldNames ? '' : 'resource', subBuilder: $11.Resource.create)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'resourceId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -762,24 +710,22 @@ class AddSongResourceRequest extends $pb.GeneratedMessage {
   void clearSongId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $11.Resource get resource => $_getN(1);
+  $core.int get resourceId => $_getIZ(1);
   @$pb.TagNumber(2)
-  set resource($11.Resource v) { setField(2, v); }
+  set resourceId($core.int v) { $_setSignedInt32(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasResource() => $_has(1);
+  $core.bool hasResourceId() => $_has(1);
   @$pb.TagNumber(2)
-  void clearResource() => clearField(2);
-  @$pb.TagNumber(2)
-  $11.Resource ensureResource() => $_ensure(1);
+  void clearResourceId() => clearField(2);
 }
 
 class AddSongResourceResponse extends $pb.GeneratedMessage {
   factory AddSongResourceResponse({
-    $11.Resource? resource,
+    $core.bool? success,
   }) {
     final $result = create();
-    if (resource != null) {
-      $result.resource = resource;
+    if (success != null) {
+      $result.success = success;
     }
     return $result;
   }
@@ -788,7 +734,7 @@ class AddSongResourceResponse extends $pb.GeneratedMessage {
   factory AddSongResourceResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSongResourceResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$11.Resource>(1, _omitFieldNames ? '' : 'resource', subBuilder: $11.Resource.create)
+    ..aOB(1, _omitFieldNames ? '' : 'success')
     ..hasRequiredFields = false
   ;
 
@@ -814,15 +760,13 @@ class AddSongResourceResponse extends $pb.GeneratedMessage {
   static AddSongResourceResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $11.Resource get resource => $_getN(0);
+  $core.bool get success => $_getBF(0);
   @$pb.TagNumber(1)
-  set resource($11.Resource v) { setField(1, v); }
+  set success($core.bool v) { $_setBool(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasResource() => $_has(0);
+  $core.bool hasSuccess() => $_has(0);
   @$pb.TagNumber(1)
-  void clearResource() => clearField(1);
-  @$pb.TagNumber(1)
-  $11.Resource ensureResource() => $_ensure(0);
+  void clearSuccess() => clearField(1);
 }
 
 class ListSongResourcesRequest extends $pb.GeneratedMessage {

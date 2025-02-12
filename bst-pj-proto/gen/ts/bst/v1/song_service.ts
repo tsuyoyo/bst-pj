@@ -6,14 +6,13 @@
 
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
-import { Artist, Genre, Resource, Song } from "./content";
+import { Resource, Song } from "./content";
 
 export const protobufPackage = "bst.v1";
 
 export interface CreateSongRequest {
   title: string;
-  artist: Artist | undefined;
-  genre: Genre | undefined;
+  artistId: number;
   description: string;
 }
 
@@ -25,7 +24,6 @@ export interface ListSongsRequest {
   pageSize: number;
   pageToken: number;
   query: string;
-  genre: Genre | undefined;
   artistId: number;
 }
 
@@ -46,8 +44,7 @@ export interface GetSongResponse {
 export interface UpdateSongRequest {
   songId: number;
   title: string;
-  artist: Artist | undefined;
-  genre: Genre | undefined;
+  artistId: number;
   description: string;
 }
 
@@ -65,11 +62,11 @@ export interface DeleteSongResponse {
 
 export interface AddSongResourceRequest {
   songId: number;
-  resource: Resource | undefined;
+  resourceId: number;
 }
 
 export interface AddSongResourceResponse {
-  resource: Resource | undefined;
+  success: boolean;
 }
 
 export interface ListSongResourcesRequest {
@@ -94,7 +91,7 @@ export interface DeleteSongResourceResponse {
 }
 
 function createBaseCreateSongRequest(): CreateSongRequest {
-  return { title: "", artist: undefined, genre: undefined, description: "" };
+  return { title: "", artistId: 0, description: "" };
 }
 
 export const CreateSongRequest = {
@@ -102,14 +99,11 @@ export const CreateSongRequest = {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.artist !== undefined) {
-      Artist.encode(message.artist, writer.uint32(18).fork()).ldelim();
-    }
-    if (message.genre !== undefined) {
-      Genre.encode(message.genre, writer.uint32(26).fork()).ldelim();
+    if (message.artistId !== 0) {
+      writer.uint32(16).int32(message.artistId);
     }
     if (message.description !== "") {
-      writer.uint32(34).string(message.description);
+      writer.uint32(26).string(message.description);
     }
     return writer;
   },
@@ -129,21 +123,14 @@ export const CreateSongRequest = {
           message.title = reader.string();
           continue;
         case 2:
-          if (tag !== 18) {
+          if (tag !== 16) {
             break;
           }
 
-          message.artist = Artist.decode(reader, reader.uint32());
+          message.artistId = reader.int32();
           continue;
         case 3:
           if (tag !== 26) {
-            break;
-          }
-
-          message.genre = Genre.decode(reader, reader.uint32());
-          continue;
-        case 4:
-          if (tag !== 34) {
             break;
           }
 
@@ -161,8 +148,7 @@ export const CreateSongRequest = {
   fromJSON(object: any): CreateSongRequest {
     return {
       title: isSet(object.title) ? globalThis.String(object.title) : "",
-      artist: isSet(object.artist) ? Artist.fromJSON(object.artist) : undefined,
-      genre: isSet(object.genre) ? Genre.fromJSON(object.genre) : undefined,
+      artistId: isSet(object.artistId) ? globalThis.Number(object.artistId) : 0,
       description: isSet(object.description) ? globalThis.String(object.description) : "",
     };
   },
@@ -172,11 +158,8 @@ export const CreateSongRequest = {
     if (message.title !== "") {
       obj.title = message.title;
     }
-    if (message.artist !== undefined) {
-      obj.artist = Artist.toJSON(message.artist);
-    }
-    if (message.genre !== undefined) {
-      obj.genre = Genre.toJSON(message.genre);
+    if (message.artistId !== 0) {
+      obj.artistId = Math.round(message.artistId);
     }
     if (message.description !== "") {
       obj.description = message.description;
@@ -190,10 +173,7 @@ export const CreateSongRequest = {
   fromPartial<I extends Exact<DeepPartial<CreateSongRequest>, I>>(object: I): CreateSongRequest {
     const message = createBaseCreateSongRequest();
     message.title = object.title ?? "";
-    message.artist = (object.artist !== undefined && object.artist !== null)
-      ? Artist.fromPartial(object.artist)
-      : undefined;
-    message.genre = (object.genre !== undefined && object.genre !== null) ? Genre.fromPartial(object.genre) : undefined;
+    message.artistId = object.artistId ?? 0;
     message.description = object.description ?? "";
     return message;
   },
@@ -257,7 +237,7 @@ export const CreateSongResponse = {
 };
 
 function createBaseListSongsRequest(): ListSongsRequest {
-  return { pageSize: 0, pageToken: 0, query: "", genre: undefined, artistId: 0 };
+  return { pageSize: 0, pageToken: 0, query: "", artistId: 0 };
 }
 
 export const ListSongsRequest = {
@@ -271,11 +251,8 @@ export const ListSongsRequest = {
     if (message.query !== "") {
       writer.uint32(26).string(message.query);
     }
-    if (message.genre !== undefined) {
-      Genre.encode(message.genre, writer.uint32(34).fork()).ldelim();
-    }
     if (message.artistId !== 0) {
-      writer.uint32(40).int32(message.artistId);
+      writer.uint32(32).int32(message.artistId);
     }
     return writer;
   },
@@ -309,14 +286,7 @@ export const ListSongsRequest = {
           message.query = reader.string();
           continue;
         case 4:
-          if (tag !== 34) {
-            break;
-          }
-
-          message.genre = Genre.decode(reader, reader.uint32());
-          continue;
-        case 5:
-          if (tag !== 40) {
+          if (tag !== 32) {
             break;
           }
 
@@ -336,7 +306,6 @@ export const ListSongsRequest = {
       pageSize: isSet(object.pageSize) ? globalThis.Number(object.pageSize) : 0,
       pageToken: isSet(object.pageToken) ? globalThis.Number(object.pageToken) : 0,
       query: isSet(object.query) ? globalThis.String(object.query) : "",
-      genre: isSet(object.genre) ? Genre.fromJSON(object.genre) : undefined,
       artistId: isSet(object.artistId) ? globalThis.Number(object.artistId) : 0,
     };
   },
@@ -352,9 +321,6 @@ export const ListSongsRequest = {
     if (message.query !== "") {
       obj.query = message.query;
     }
-    if (message.genre !== undefined) {
-      obj.genre = Genre.toJSON(message.genre);
-    }
     if (message.artistId !== 0) {
       obj.artistId = Math.round(message.artistId);
     }
@@ -369,7 +335,6 @@ export const ListSongsRequest = {
     message.pageSize = object.pageSize ?? 0;
     message.pageToken = object.pageToken ?? 0;
     message.query = object.query ?? "";
-    message.genre = (object.genre !== undefined && object.genre !== null) ? Genre.fromPartial(object.genre) : undefined;
     message.artistId = object.artistId ?? 0;
     return message;
   },
@@ -579,7 +544,7 @@ export const GetSongResponse = {
 };
 
 function createBaseUpdateSongRequest(): UpdateSongRequest {
-  return { songId: 0, title: "", artist: undefined, genre: undefined, description: "" };
+  return { songId: 0, title: "", artistId: 0, description: "" };
 }
 
 export const UpdateSongRequest = {
@@ -590,14 +555,11 @@ export const UpdateSongRequest = {
     if (message.title !== "") {
       writer.uint32(18).string(message.title);
     }
-    if (message.artist !== undefined) {
-      Artist.encode(message.artist, writer.uint32(26).fork()).ldelim();
-    }
-    if (message.genre !== undefined) {
-      Genre.encode(message.genre, writer.uint32(34).fork()).ldelim();
+    if (message.artistId !== 0) {
+      writer.uint32(24).int32(message.artistId);
     }
     if (message.description !== "") {
-      writer.uint32(42).string(message.description);
+      writer.uint32(34).string(message.description);
     }
     return writer;
   },
@@ -624,21 +586,14 @@ export const UpdateSongRequest = {
           message.title = reader.string();
           continue;
         case 3:
-          if (tag !== 26) {
+          if (tag !== 24) {
             break;
           }
 
-          message.artist = Artist.decode(reader, reader.uint32());
+          message.artistId = reader.int32();
           continue;
         case 4:
           if (tag !== 34) {
-            break;
-          }
-
-          message.genre = Genre.decode(reader, reader.uint32());
-          continue;
-        case 5:
-          if (tag !== 42) {
             break;
           }
 
@@ -657,8 +612,7 @@ export const UpdateSongRequest = {
     return {
       songId: isSet(object.songId) ? globalThis.Number(object.songId) : 0,
       title: isSet(object.title) ? globalThis.String(object.title) : "",
-      artist: isSet(object.artist) ? Artist.fromJSON(object.artist) : undefined,
-      genre: isSet(object.genre) ? Genre.fromJSON(object.genre) : undefined,
+      artistId: isSet(object.artistId) ? globalThis.Number(object.artistId) : 0,
       description: isSet(object.description) ? globalThis.String(object.description) : "",
     };
   },
@@ -671,11 +625,8 @@ export const UpdateSongRequest = {
     if (message.title !== "") {
       obj.title = message.title;
     }
-    if (message.artist !== undefined) {
-      obj.artist = Artist.toJSON(message.artist);
-    }
-    if (message.genre !== undefined) {
-      obj.genre = Genre.toJSON(message.genre);
+    if (message.artistId !== 0) {
+      obj.artistId = Math.round(message.artistId);
     }
     if (message.description !== "") {
       obj.description = message.description;
@@ -690,10 +641,7 @@ export const UpdateSongRequest = {
     const message = createBaseUpdateSongRequest();
     message.songId = object.songId ?? 0;
     message.title = object.title ?? "";
-    message.artist = (object.artist !== undefined && object.artist !== null)
-      ? Artist.fromPartial(object.artist)
-      : undefined;
-    message.genre = (object.genre !== undefined && object.genre !== null) ? Genre.fromPartial(object.genre) : undefined;
+    message.artistId = object.artistId ?? 0;
     message.description = object.description ?? "";
     return message;
   },
@@ -871,7 +819,7 @@ export const DeleteSongResponse = {
 };
 
 function createBaseAddSongResourceRequest(): AddSongResourceRequest {
-  return { songId: 0, resource: undefined };
+  return { songId: 0, resourceId: 0 };
 }
 
 export const AddSongResourceRequest = {
@@ -879,8 +827,8 @@ export const AddSongResourceRequest = {
     if (message.songId !== 0) {
       writer.uint32(8).int32(message.songId);
     }
-    if (message.resource !== undefined) {
-      Resource.encode(message.resource, writer.uint32(18).fork()).ldelim();
+    if (message.resourceId !== 0) {
+      writer.uint32(16).int32(message.resourceId);
     }
     return writer;
   },
@@ -900,11 +848,11 @@ export const AddSongResourceRequest = {
           message.songId = reader.int32();
           continue;
         case 2:
-          if (tag !== 18) {
+          if (tag !== 16) {
             break;
           }
 
-          message.resource = Resource.decode(reader, reader.uint32());
+          message.resourceId = reader.int32();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -918,7 +866,7 @@ export const AddSongResourceRequest = {
   fromJSON(object: any): AddSongResourceRequest {
     return {
       songId: isSet(object.songId) ? globalThis.Number(object.songId) : 0,
-      resource: isSet(object.resource) ? Resource.fromJSON(object.resource) : undefined,
+      resourceId: isSet(object.resourceId) ? globalThis.Number(object.resourceId) : 0,
     };
   },
 
@@ -927,8 +875,8 @@ export const AddSongResourceRequest = {
     if (message.songId !== 0) {
       obj.songId = Math.round(message.songId);
     }
-    if (message.resource !== undefined) {
-      obj.resource = Resource.toJSON(message.resource);
+    if (message.resourceId !== 0) {
+      obj.resourceId = Math.round(message.resourceId);
     }
     return obj;
   },
@@ -939,21 +887,19 @@ export const AddSongResourceRequest = {
   fromPartial<I extends Exact<DeepPartial<AddSongResourceRequest>, I>>(object: I): AddSongResourceRequest {
     const message = createBaseAddSongResourceRequest();
     message.songId = object.songId ?? 0;
-    message.resource = (object.resource !== undefined && object.resource !== null)
-      ? Resource.fromPartial(object.resource)
-      : undefined;
+    message.resourceId = object.resourceId ?? 0;
     return message;
   },
 };
 
 function createBaseAddSongResourceResponse(): AddSongResourceResponse {
-  return { resource: undefined };
+  return { success: false };
 }
 
 export const AddSongResourceResponse = {
   encode(message: AddSongResourceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.resource !== undefined) {
-      Resource.encode(message.resource, writer.uint32(10).fork()).ldelim();
+    if (message.success !== false) {
+      writer.uint32(8).bool(message.success);
     }
     return writer;
   },
@@ -966,11 +912,11 @@ export const AddSongResourceResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag !== 10) {
+          if (tag !== 8) {
             break;
           }
 
-          message.resource = Resource.decode(reader, reader.uint32());
+          message.success = reader.bool();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -982,13 +928,13 @@ export const AddSongResourceResponse = {
   },
 
   fromJSON(object: any): AddSongResourceResponse {
-    return { resource: isSet(object.resource) ? Resource.fromJSON(object.resource) : undefined };
+    return { success: isSet(object.success) ? globalThis.Boolean(object.success) : false };
   },
 
   toJSON(message: AddSongResourceResponse): unknown {
     const obj: any = {};
-    if (message.resource !== undefined) {
-      obj.resource = Resource.toJSON(message.resource);
+    if (message.success !== false) {
+      obj.success = message.success;
     }
     return obj;
   },
@@ -998,9 +944,7 @@ export const AddSongResourceResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<AddSongResourceResponse>, I>>(object: I): AddSongResourceResponse {
     const message = createBaseAddSongResourceResponse();
-    message.resource = (object.resource !== undefined && object.resource !== null)
-      ? Resource.fromPartial(object.resource)
-      : undefined;
+    message.success = object.success ?? false;
     return message;
   },
 };
