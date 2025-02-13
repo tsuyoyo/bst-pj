@@ -13,8 +13,8 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'area.pb.dart' as $12;
-import 'location.pb.dart' as $15;
+import 'area.pb.dart' as $15;
+import 'location.pb.dart' as $18;
 
 class CreateLocationRequest extends $pb.GeneratedMessage {
   factory CreateLocationRequest({
@@ -110,7 +110,7 @@ class CreateLocationRequest extends $pb.GeneratedMessage {
 
 class CreateLocationResponse extends $pb.GeneratedMessage {
   factory CreateLocationResponse({
-    $15.Location? location,
+    $18.Location? location,
   }) {
     final $result = create();
     if (location != null) {
@@ -123,7 +123,7 @@ class CreateLocationResponse extends $pb.GeneratedMessage {
   factory CreateLocationResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateLocationResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$15.Location>(1, _omitFieldNames ? '' : 'location', subBuilder: $15.Location.create)
+    ..aOM<$18.Location>(1, _omitFieldNames ? '' : 'location', subBuilder: $18.Location.create)
     ..hasRequiredFields = false
   ;
 
@@ -149,22 +149,22 @@ class CreateLocationResponse extends $pb.GeneratedMessage {
   static CreateLocationResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $15.Location get location => $_getN(0);
+  $18.Location get location => $_getN(0);
   @$pb.TagNumber(1)
-  set location($15.Location v) { setField(1, v); }
+  set location($18.Location v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasLocation() => $_has(0);
   @$pb.TagNumber(1)
   void clearLocation() => clearField(1);
   @$pb.TagNumber(1)
-  $15.Location ensureLocation() => $_ensure(0);
+  $18.Location ensureLocation() => $_ensure(0);
 }
 
 class ListLocationsRequest extends $pb.GeneratedMessage {
   factory ListLocationsRequest({
     $core.int? pageSize,
     $core.String? pageToken,
-    $12.Area? area,
+    $15.Area? area,
   }) {
     final $result = create();
     if (pageSize != null) {
@@ -185,7 +185,7 @@ class ListLocationsRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListLocationsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'pageToken')
-    ..aOM<$12.Area>(3, _omitFieldNames ? '' : 'area', subBuilder: $12.Area.create)
+    ..aOM<$15.Area>(3, _omitFieldNames ? '' : 'area', subBuilder: $15.Area.create)
     ..hasRequiredFields = false
   ;
 
@@ -229,20 +229,20 @@ class ListLocationsRequest extends $pb.GeneratedMessage {
   void clearPageToken() => clearField(2);
 
   @$pb.TagNumber(3)
-  $12.Area get area => $_getN(2);
+  $15.Area get area => $_getN(2);
   @$pb.TagNumber(3)
-  set area($12.Area v) { setField(3, v); }
+  set area($15.Area v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasArea() => $_has(2);
   @$pb.TagNumber(3)
   void clearArea() => clearField(3);
   @$pb.TagNumber(3)
-  $12.Area ensureArea() => $_ensure(2);
+  $15.Area ensureArea() => $_ensure(2);
 }
 
 class ListLocationsResponse extends $pb.GeneratedMessage {
   factory ListLocationsResponse({
-    $core.Iterable<$15.Location>? locations,
+    $core.Iterable<$18.Location>? locations,
     $core.String? nextPageToken,
     $core.int? totalSize,
   }) {
@@ -263,7 +263,7 @@ class ListLocationsResponse extends $pb.GeneratedMessage {
   factory ListLocationsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListLocationsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$15.Location>(1, _omitFieldNames ? '' : 'locations', $pb.PbFieldType.PM, subBuilder: $15.Location.create)
+    ..pc<$18.Location>(1, _omitFieldNames ? '' : 'locations', $pb.PbFieldType.PM, subBuilder: $18.Location.create)
     ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'totalSize', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -291,7 +291,7 @@ class ListLocationsResponse extends $pb.GeneratedMessage {
   static ListLocationsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$15.Location> get locations => $_getList(0);
+  $core.List<$18.Location> get locations => $_getList(0);
 
   @$pb.TagNumber(2)
   $core.String get nextPageToken => $_getSZ(1);
@@ -364,7 +364,7 @@ class GetLocationRequest extends $pb.GeneratedMessage {
 
 class GetLocationResponse extends $pb.GeneratedMessage {
   factory GetLocationResponse({
-    $15.Location? location,
+    $18.Location? location,
   }) {
     final $result = create();
     if (location != null) {
@@ -377,7 +377,7 @@ class GetLocationResponse extends $pb.GeneratedMessage {
   factory GetLocationResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetLocationResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$15.Location>(1, _omitFieldNames ? '' : 'location', subBuilder: $15.Location.create)
+    ..aOM<$18.Location>(1, _omitFieldNames ? '' : 'location', subBuilder: $18.Location.create)
     ..hasRequiredFields = false
   ;
 
@@ -403,15 +403,15 @@ class GetLocationResponse extends $pb.GeneratedMessage {
   static GetLocationResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $15.Location get location => $_getN(0);
+  $18.Location get location => $_getN(0);
   @$pb.TagNumber(1)
-  set location($15.Location v) { setField(1, v); }
+  set location($18.Location v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasLocation() => $_has(0);
   @$pb.TagNumber(1)
   void clearLocation() => clearField(1);
   @$pb.TagNumber(1)
-  $15.Location ensureLocation() => $_ensure(0);
+  $18.Location ensureLocation() => $_ensure(0);
 }
 
 class UpdateLocationRequest extends $pb.GeneratedMessage {
@@ -522,7 +522,7 @@ class UpdateLocationRequest extends $pb.GeneratedMessage {
 
 class UpdateLocationResponse extends $pb.GeneratedMessage {
   factory UpdateLocationResponse({
-    $15.Location? location,
+    $18.Location? location,
   }) {
     final $result = create();
     if (location != null) {
@@ -535,7 +535,7 @@ class UpdateLocationResponse extends $pb.GeneratedMessage {
   factory UpdateLocationResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateLocationResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$15.Location>(1, _omitFieldNames ? '' : 'location', subBuilder: $15.Location.create)
+    ..aOM<$18.Location>(1, _omitFieldNames ? '' : 'location', subBuilder: $18.Location.create)
     ..hasRequiredFields = false
   ;
 
@@ -561,15 +561,15 @@ class UpdateLocationResponse extends $pb.GeneratedMessage {
   static UpdateLocationResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $15.Location get location => $_getN(0);
+  $18.Location get location => $_getN(0);
   @$pb.TagNumber(1)
-  set location($15.Location v) { setField(1, v); }
+  set location($18.Location v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasLocation() => $_has(0);
   @$pb.TagNumber(1)
   void clearLocation() => clearField(1);
   @$pb.TagNumber(1)
-  $15.Location ensureLocation() => $_ensure(0);
+  $18.Location ensureLocation() => $_ensure(0);
 }
 
 class DeleteLocationRequest extends $pb.GeneratedMessage {

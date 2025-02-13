@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'communication.pb.dart' as $16;
+import 'communication.pb.dart' as $19;
 
 /// ReactionType messages
 class CreateReactionTypeRequest extends $pb.GeneratedMessage {
@@ -96,7 +96,7 @@ class CreateReactionTypeRequest extends $pb.GeneratedMessage {
 
 class CreateReactionTypeResponse extends $pb.GeneratedMessage {
   factory CreateReactionTypeResponse({
-    $16.ReactionType? reactionType,
+    $19.ReactionType? reactionType,
   }) {
     final $result = create();
     if (reactionType != null) {
@@ -109,7 +109,7 @@ class CreateReactionTypeResponse extends $pb.GeneratedMessage {
   factory CreateReactionTypeResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateReactionTypeResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$16.ReactionType>(1, _omitFieldNames ? '' : 'reactionType', subBuilder: $16.ReactionType.create)
+    ..aOM<$19.ReactionType>(1, _omitFieldNames ? '' : 'reactionType', subBuilder: $19.ReactionType.create)
     ..hasRequiredFields = false
   ;
 
@@ -135,15 +135,15 @@ class CreateReactionTypeResponse extends $pb.GeneratedMessage {
   static CreateReactionTypeResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $16.ReactionType get reactionType => $_getN(0);
+  $19.ReactionType get reactionType => $_getN(0);
   @$pb.TagNumber(1)
-  set reactionType($16.ReactionType v) { setField(1, v); }
+  set reactionType($19.ReactionType v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasReactionType() => $_has(0);
   @$pb.TagNumber(1)
   void clearReactionType() => clearField(1);
   @$pb.TagNumber(1)
-  $16.ReactionType ensureReactionType() => $_ensure(0);
+  $19.ReactionType ensureReactionType() => $_ensure(0);
 }
 
 class GetReactionTypeRequest extends $pb.GeneratedMessage {
@@ -198,7 +198,7 @@ class GetReactionTypeRequest extends $pb.GeneratedMessage {
 
 class GetReactionTypeResponse extends $pb.GeneratedMessage {
   factory GetReactionTypeResponse({
-    $16.ReactionType? reactionType,
+    $19.ReactionType? reactionType,
   }) {
     final $result = create();
     if (reactionType != null) {
@@ -211,7 +211,7 @@ class GetReactionTypeResponse extends $pb.GeneratedMessage {
   factory GetReactionTypeResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetReactionTypeResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$16.ReactionType>(1, _omitFieldNames ? '' : 'reactionType', subBuilder: $16.ReactionType.create)
+    ..aOM<$19.ReactionType>(1, _omitFieldNames ? '' : 'reactionType', subBuilder: $19.ReactionType.create)
     ..hasRequiredFields = false
   ;
 
@@ -237,15 +237,15 @@ class GetReactionTypeResponse extends $pb.GeneratedMessage {
   static GetReactionTypeResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $16.ReactionType get reactionType => $_getN(0);
+  $19.ReactionType get reactionType => $_getN(0);
   @$pb.TagNumber(1)
-  set reactionType($16.ReactionType v) { setField(1, v); }
+  set reactionType($19.ReactionType v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasReactionType() => $_has(0);
   @$pb.TagNumber(1)
   void clearReactionType() => clearField(1);
   @$pb.TagNumber(1)
-  $16.ReactionType ensureReactionType() => $_ensure(0);
+  $19.ReactionType ensureReactionType() => $_ensure(0);
 }
 
 class ListReactionTypesRequest extends $pb.GeneratedMessage {
@@ -314,7 +314,7 @@ class ListReactionTypesRequest extends $pb.GeneratedMessage {
 
 class ListReactionTypesResponse extends $pb.GeneratedMessage {
   factory ListReactionTypesResponse({
-    $core.Iterable<$16.ReactionType>? reactionTypes,
+    $core.Iterable<$19.ReactionType>? reactionTypes,
     $core.String? nextPageToken,
     $core.int? totalSize,
   }) {
@@ -335,7 +335,7 @@ class ListReactionTypesResponse extends $pb.GeneratedMessage {
   factory ListReactionTypesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListReactionTypesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$16.ReactionType>(1, _omitFieldNames ? '' : 'reactionTypes', $pb.PbFieldType.PM, subBuilder: $16.ReactionType.create)
+    ..pc<$19.ReactionType>(1, _omitFieldNames ? '' : 'reactionTypes', $pb.PbFieldType.PM, subBuilder: $19.ReactionType.create)
     ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'totalSize', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -363,7 +363,7 @@ class ListReactionTypesResponse extends $pb.GeneratedMessage {
   static ListReactionTypesResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$16.ReactionType> get reactionTypes => $_getList(0);
+  $core.List<$19.ReactionType> get reactionTypes => $_getList(0);
 
   @$pb.TagNumber(2)
   $core.String get nextPageToken => $_getSZ(1);
@@ -478,7 +478,7 @@ class UpdateReactionTypeRequest extends $pb.GeneratedMessage {
 
 class UpdateReactionTypeResponse extends $pb.GeneratedMessage {
   factory UpdateReactionTypeResponse({
-    $16.ReactionType? reactionType,
+    $19.ReactionType? reactionType,
   }) {
     final $result = create();
     if (reactionType != null) {
@@ -491,7 +491,7 @@ class UpdateReactionTypeResponse extends $pb.GeneratedMessage {
   factory UpdateReactionTypeResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateReactionTypeResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$16.ReactionType>(1, _omitFieldNames ? '' : 'reactionType', subBuilder: $16.ReactionType.create)
+    ..aOM<$19.ReactionType>(1, _omitFieldNames ? '' : 'reactionType', subBuilder: $19.ReactionType.create)
     ..hasRequiredFields = false
   ;
 
@@ -517,15 +517,15 @@ class UpdateReactionTypeResponse extends $pb.GeneratedMessage {
   static UpdateReactionTypeResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $16.ReactionType get reactionType => $_getN(0);
+  $19.ReactionType get reactionType => $_getN(0);
   @$pb.TagNumber(1)
-  set reactionType($16.ReactionType v) { setField(1, v); }
+  set reactionType($19.ReactionType v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasReactionType() => $_has(0);
   @$pb.TagNumber(1)
   void clearReactionType() => clearField(1);
   @$pb.TagNumber(1)
-  $16.ReactionType ensureReactionType() => $_ensure(0);
+  $19.ReactionType ensureReactionType() => $_ensure(0);
 }
 
 class DeleteReactionTypeRequest extends $pb.GeneratedMessage {
@@ -695,7 +695,7 @@ class CreateReactionRequest extends $pb.GeneratedMessage {
 
 class CreateReactionResponse extends $pb.GeneratedMessage {
   factory CreateReactionResponse({
-    $16.Reaction? reaction,
+    $19.Reaction? reaction,
   }) {
     final $result = create();
     if (reaction != null) {
@@ -708,7 +708,7 @@ class CreateReactionResponse extends $pb.GeneratedMessage {
   factory CreateReactionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateReactionResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$16.Reaction>(1, _omitFieldNames ? '' : 'reaction', subBuilder: $16.Reaction.create)
+    ..aOM<$19.Reaction>(1, _omitFieldNames ? '' : 'reaction', subBuilder: $19.Reaction.create)
     ..hasRequiredFields = false
   ;
 
@@ -734,15 +734,15 @@ class CreateReactionResponse extends $pb.GeneratedMessage {
   static CreateReactionResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $16.Reaction get reaction => $_getN(0);
+  $19.Reaction get reaction => $_getN(0);
   @$pb.TagNumber(1)
-  set reaction($16.Reaction v) { setField(1, v); }
+  set reaction($19.Reaction v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasReaction() => $_has(0);
   @$pb.TagNumber(1)
   void clearReaction() => clearField(1);
   @$pb.TagNumber(1)
-  $16.Reaction ensureReaction() => $_ensure(0);
+  $19.Reaction ensureReaction() => $_ensure(0);
 }
 
 class GetReactionRequest extends $pb.GeneratedMessage {
@@ -797,7 +797,7 @@ class GetReactionRequest extends $pb.GeneratedMessage {
 
 class GetReactionResponse extends $pb.GeneratedMessage {
   factory GetReactionResponse({
-    $16.Reaction? reaction,
+    $19.Reaction? reaction,
   }) {
     final $result = create();
     if (reaction != null) {
@@ -810,7 +810,7 @@ class GetReactionResponse extends $pb.GeneratedMessage {
   factory GetReactionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetReactionResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$16.Reaction>(1, _omitFieldNames ? '' : 'reaction', subBuilder: $16.Reaction.create)
+    ..aOM<$19.Reaction>(1, _omitFieldNames ? '' : 'reaction', subBuilder: $19.Reaction.create)
     ..hasRequiredFields = false
   ;
 
@@ -836,15 +836,15 @@ class GetReactionResponse extends $pb.GeneratedMessage {
   static GetReactionResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $16.Reaction get reaction => $_getN(0);
+  $19.Reaction get reaction => $_getN(0);
   @$pb.TagNumber(1)
-  set reaction($16.Reaction v) { setField(1, v); }
+  set reaction($19.Reaction v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasReaction() => $_has(0);
   @$pb.TagNumber(1)
   void clearReaction() => clearField(1);
   @$pb.TagNumber(1)
-  $16.Reaction ensureReaction() => $_ensure(0);
+  $19.Reaction ensureReaction() => $_ensure(0);
 }
 
 class ListReactionsRequest extends $pb.GeneratedMessage {
@@ -927,7 +927,7 @@ class ListReactionsRequest extends $pb.GeneratedMessage {
 
 class ListReactionsResponse extends $pb.GeneratedMessage {
   factory ListReactionsResponse({
-    $core.Iterable<$16.Reaction>? reactions,
+    $core.Iterable<$19.Reaction>? reactions,
     $core.String? nextPageToken,
     $core.int? totalSize,
   }) {
@@ -948,7 +948,7 @@ class ListReactionsResponse extends $pb.GeneratedMessage {
   factory ListReactionsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListReactionsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$16.Reaction>(1, _omitFieldNames ? '' : 'reactions', $pb.PbFieldType.PM, subBuilder: $16.Reaction.create)
+    ..pc<$19.Reaction>(1, _omitFieldNames ? '' : 'reactions', $pb.PbFieldType.PM, subBuilder: $19.Reaction.create)
     ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'totalSize', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -976,7 +976,7 @@ class ListReactionsResponse extends $pb.GeneratedMessage {
   static ListReactionsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$16.Reaction> get reactions => $_getList(0);
+  $core.List<$19.Reaction> get reactions => $_getList(0);
 
   @$pb.TagNumber(2)
   $core.String get nextPageToken => $_getSZ(1);
@@ -1063,7 +1063,7 @@ class UpdateReactionRequest extends $pb.GeneratedMessage {
 
 class UpdateReactionResponse extends $pb.GeneratedMessage {
   factory UpdateReactionResponse({
-    $16.Reaction? reaction,
+    $19.Reaction? reaction,
   }) {
     final $result = create();
     if (reaction != null) {
@@ -1076,7 +1076,7 @@ class UpdateReactionResponse extends $pb.GeneratedMessage {
   factory UpdateReactionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateReactionResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$16.Reaction>(1, _omitFieldNames ? '' : 'reaction', subBuilder: $16.Reaction.create)
+    ..aOM<$19.Reaction>(1, _omitFieldNames ? '' : 'reaction', subBuilder: $19.Reaction.create)
     ..hasRequiredFields = false
   ;
 
@@ -1102,15 +1102,15 @@ class UpdateReactionResponse extends $pb.GeneratedMessage {
   static UpdateReactionResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $16.Reaction get reaction => $_getN(0);
+  $19.Reaction get reaction => $_getN(0);
   @$pb.TagNumber(1)
-  set reaction($16.Reaction v) { setField(1, v); }
+  set reaction($19.Reaction v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasReaction() => $_has(0);
   @$pb.TagNumber(1)
   void clearReaction() => clearField(1);
   @$pb.TagNumber(1)
-  $16.Reaction ensureReaction() => $_ensure(0);
+  $19.Reaction ensureReaction() => $_ensure(0);
 }
 
 class DeleteReactionRequest extends $pb.GeneratedMessage {

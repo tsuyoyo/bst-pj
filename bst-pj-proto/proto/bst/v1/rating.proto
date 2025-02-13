@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+enum RatingTargetType {
+  RATING_TARGET_TYPE_UNSPECIFIED      = 0;
+  RATING_TARGET_TYPE_SESSION          = 1;
+  RATING_TARGET_TYPE_USER             = 2;
+  RATING_TARGET_TYPE_SONG_PERFORMANCE = 3;
+  RATING_TARGET_TYPE_PARTY            = 4;
+}
+
+message Rating {
+  int32                     id         = 1;
+  int32                     userId     = 2;
+  RatingTargetType          targetType = 3;
+  int32                     targetId   = 4;
+  int32                     rating     = 5;
+  string                    comment    = 6;
+  google.protobuf.Timestamp createdAt  = 7;
+  google.protobuf.Timestamp updatedAt  = 8;
+}

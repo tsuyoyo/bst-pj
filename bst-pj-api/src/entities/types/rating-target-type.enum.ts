@@ -1,6 +1,5 @@
 export enum RatingTargetType {
-  SESSION = 'Session',
-  SONG_PERFORMANCE = 'SongPerformance',
-  PARTY = 'Party',
-  USER = 'User',
+  UNSPECIFIED = "RATING_TARGET_TYPE_UNSPECIFIED",
+  SONG = "RATING_TARGET_TYPE_SONG",
+  ARTIST = "RATING_TARGET_TYPE_ARTIST",
 }

@@ -11,6 +11,7 @@ import { PartModule } from './part/part.module';
 import { LocationModule } from './location/location.module';
 import { StudioModule } from './studio/studio.module';
 import { ReactionModule } from './reaction/reaction.module';
+import { RatingModule } from './rating/rating.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { ReactionModule } from './reaction/reaction.module';
     LocationModule,
     StudioModule,
     ReactionModule,
+    RatingModule,
   ],
   controllers: [AppController],
   providers: [AppService],

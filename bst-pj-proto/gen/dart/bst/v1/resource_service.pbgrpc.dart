@@ -15,28 +15,28 @@ import 'dart:core' as $core;
 import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'resource_service.pb.dart' as $5;
+import 'resource_service.pb.dart' as $8;
 
 export 'resource_service.pb.dart';
 
 @$pb.GrpcServiceName('bst.v1.ResourceService')
 class ResourceServiceClient extends $grpc.Client {
-  static final _$createResource = $grpc.ClientMethod<$5.CreateResourceRequest, $5.CreateResourceResponse>(
+  static final _$createResource = $grpc.ClientMethod<$8.CreateResourceRequest, $8.CreateResourceResponse>(
       '/bst.v1.ResourceService/CreateResource',
-      ($5.CreateResourceRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $5.CreateResourceResponse.fromBuffer(value));
-  static final _$getResource = $grpc.ClientMethod<$5.GetResourceRequest, $5.GetResourceResponse>(
+      ($8.CreateResourceRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $8.CreateResourceResponse.fromBuffer(value));
+  static final _$getResource = $grpc.ClientMethod<$8.GetResourceRequest, $8.GetResourceResponse>(
       '/bst.v1.ResourceService/GetResource',
-      ($5.GetResourceRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $5.GetResourceResponse.fromBuffer(value));
-  static final _$listResources = $grpc.ClientMethod<$5.ListResourcesRequest, $5.ListResourcesResponse>(
+      ($8.GetResourceRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $8.GetResourceResponse.fromBuffer(value));
+  static final _$listResources = $grpc.ClientMethod<$8.ListResourcesRequest, $8.ListResourcesResponse>(
       '/bst.v1.ResourceService/ListResources',
-      ($5.ListResourcesRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $5.ListResourcesResponse.fromBuffer(value));
-  static final _$deleteResource = $grpc.ClientMethod<$5.DeleteResourceRequest, $5.DeleteResourceResponse>(
+      ($8.ListResourcesRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $8.ListResourcesResponse.fromBuffer(value));
+  static final _$deleteResource = $grpc.ClientMethod<$8.DeleteResourceRequest, $8.DeleteResourceResponse>(
       '/bst.v1.ResourceService/DeleteResource',
-      ($5.DeleteResourceRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $5.DeleteResourceResponse.fromBuffer(value));
+      ($8.DeleteResourceRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $8.DeleteResourceResponse.fromBuffer(value));
 
   ResourceServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -44,19 +44,19 @@ class ResourceServiceClient extends $grpc.Client {
       : super(channel, options: options,
         interceptors: interceptors);
 
-  $grpc.ResponseFuture<$5.CreateResourceResponse> createResource($5.CreateResourceRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$8.CreateResourceResponse> createResource($8.CreateResourceRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createResource, request, options: options);
   }
 
-  $grpc.ResponseFuture<$5.GetResourceResponse> getResource($5.GetResourceRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$8.GetResourceResponse> getResource($8.GetResourceRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getResource, request, options: options);
   }
 
-  $grpc.ResponseFuture<$5.ListResourcesResponse> listResources($5.ListResourcesRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$8.ListResourcesResponse> listResources($8.ListResourcesRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$listResources, request, options: options);
   }
 
-  $grpc.ResponseFuture<$5.DeleteResourceResponse> deleteResource($5.DeleteResourceRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$8.DeleteResourceResponse> deleteResource($8.DeleteResourceRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteResource, request, options: options);
   }
 }
@@ -66,54 +66,54 @@ abstract class ResourceServiceBase extends $grpc.Service {
   $core.String get $name => 'bst.v1.ResourceService';
 
   ResourceServiceBase() {
-    $addMethod($grpc.ServiceMethod<$5.CreateResourceRequest, $5.CreateResourceResponse>(
+    $addMethod($grpc.ServiceMethod<$8.CreateResourceRequest, $8.CreateResourceResponse>(
         'CreateResource',
         createResource_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $5.CreateResourceRequest.fromBuffer(value),
-        ($5.CreateResourceResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$5.GetResourceRequest, $5.GetResourceResponse>(
+        ($core.List<$core.int> value) => $8.CreateResourceRequest.fromBuffer(value),
+        ($8.CreateResourceResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$8.GetResourceRequest, $8.GetResourceResponse>(
         'GetResource',
         getResource_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $5.GetResourceRequest.fromBuffer(value),
-        ($5.GetResourceResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$5.ListResourcesRequest, $5.ListResourcesResponse>(
+        ($core.List<$core.int> value) => $8.GetResourceRequest.fromBuffer(value),
+        ($8.GetResourceResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$8.ListResourcesRequest, $8.ListResourcesResponse>(
         'ListResources',
         listResources_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $5.ListResourcesRequest.fromBuffer(value),
-        ($5.ListResourcesResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$5.DeleteResourceRequest, $5.DeleteResourceResponse>(
+        ($core.List<$core.int> value) => $8.ListResourcesRequest.fromBuffer(value),
+        ($8.ListResourcesResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$8.DeleteResourceRequest, $8.DeleteResourceResponse>(
         'DeleteResource',
         deleteResource_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $5.DeleteResourceRequest.fromBuffer(value),
-        ($5.DeleteResourceResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $8.DeleteResourceRequest.fromBuffer(value),
+        ($8.DeleteResourceResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$5.CreateResourceResponse> createResource_Pre($grpc.ServiceCall call, $async.Future<$5.CreateResourceRequest> request) async {
+  $async.Future<$8.CreateResourceResponse> createResource_Pre($grpc.ServiceCall call, $async.Future<$8.CreateResourceRequest> request) async {
     return createResource(call, await request);
   }
 
-  $async.Future<$5.GetResourceResponse> getResource_Pre($grpc.ServiceCall call, $async.Future<$5.GetResourceRequest> request) async {
+  $async.Future<$8.GetResourceResponse> getResource_Pre($grpc.ServiceCall call, $async.Future<$8.GetResourceRequest> request) async {
     return getResource(call, await request);
   }
 
-  $async.Future<$5.ListResourcesResponse> listResources_Pre($grpc.ServiceCall call, $async.Future<$5.ListResourcesRequest> request) async {
+  $async.Future<$8.ListResourcesResponse> listResources_Pre($grpc.ServiceCall call, $async.Future<$8.ListResourcesRequest> request) async {
     return listResources(call, await request);
   }
 
-  $async.Future<$5.DeleteResourceResponse> deleteResource_Pre($grpc.ServiceCall call, $async.Future<$5.DeleteResourceRequest> request) async {
+  $async.Future<$8.DeleteResourceResponse> deleteResource_Pre($grpc.ServiceCall call, $async.Future<$8.DeleteResourceRequest> request) async {
     return deleteResource(call, await request);
   }
 
-  $async.Future<$5.CreateResourceResponse> createResource($grpc.ServiceCall call, $5.CreateResourceRequest request);
-  $async.Future<$5.GetResourceResponse> getResource($grpc.ServiceCall call, $5.GetResourceRequest request);
-  $async.Future<$5.ListResourcesResponse> listResources($grpc.ServiceCall call, $5.ListResourcesRequest request);
-  $async.Future<$5.DeleteResourceResponse> deleteResource($grpc.ServiceCall call, $5.DeleteResourceRequest request);
+  $async.Future<$8.CreateResourceResponse> createResource($grpc.ServiceCall call, $8.CreateResourceRequest request);
+  $async.Future<$8.GetResourceResponse> getResource($grpc.ServiceCall call, $8.GetResourceRequest request);
+  $async.Future<$8.ListResourcesResponse> listResources($grpc.ServiceCall call, $8.ListResourcesRequest request);
+  $async.Future<$8.DeleteResourceResponse> deleteResource($grpc.ServiceCall call, $8.DeleteResourceRequest request);
 }

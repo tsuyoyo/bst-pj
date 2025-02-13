@@ -31,6 +31,9 @@ export class Rating {
   @Column({ type: 'text', nullable: true })
   comment: string;
 
+  @Column({ name: 'user_id', type: 'integer', nullable: false })
+  userId: number;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 

@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package bst.v1;
+
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+import "bst/v1/rating.proto";
+import "google/protobuf/empty.proto";
+
+service RatingService {
+  rpc CreateRating(CreateRatingRequest) returns (Rating) {}
+  rpc ListRatings(ListRatingsRequest) returns (ListRatingsResponse) {}
+  rpc UpdateRating(UpdateRatingRequest) returns (Rating) {}
+  rpc DeleteRating(DeleteRatingRequest) returns (google.protobuf.Empty) {}
+}
+
+message CreateRatingRequest {
+  int32            userId     = 1;
+  RatingTargetType targetType = 2;
+  int32            targetId   = 3;
+  int32            rating     = 4;
+  string           comment    = 5;
+}
+
+message ListRatingsRequest {
+  RatingTargetType targetType = 1;
+  int32            targetId   = 2;
+  int32            userId     = 3;
+  int32            page       = 4;
+  int32            pageSize   = 5;
+}
+
+message ListRatingsResponse {
+  repeated Rating ratings     = 1;
+  int32           totalCount  = 2;
+  int32           currentPage = 3;
+  int32           totalPages  = 4;
+}
+
+message UpdateRatingRequest {
+  int32  id      = 1;
+  int32  rating  = 2;
+  string comment = 3;
+}
+
+message DeleteRatingRequest {
+  int32 id = 1;
+}

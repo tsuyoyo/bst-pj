@@ -12,7 +12,6 @@ export const protobufPackage = "bst.v1";
 
 export interface RateUserRequest {
   userId: number;
-  /** The session ID of the session where the user was rated */
   sessionId: number;
   score: number;
   comment: string;
