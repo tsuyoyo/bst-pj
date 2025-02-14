@@ -4,12 +4,7 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
-  JoinColumn,
 } from 'typeorm';
-import { Comment } from './comment.entity';
-import { User } from './user.entity';
-import { Thread } from './thread.entity';
 
 export enum MentionType {
   User = 'User',
@@ -62,16 +57,4 @@ export class Mention {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
-
-  @ManyToOne(() => Comment, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'comment_id' })
-  comment: Comment;
-
-  @ManyToOne(() => User, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'mentioned_user_id' })
-  mentionedUser: User;
-
-  @ManyToOne(() => Thread, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'mentioned_thread_id' })
-  mentionedThread: Thread;
 }

@@ -36,14 +36,17 @@ message Mention {
   }
   MentionType type = 1;
 
+  // text to show in the comment
+  string text = 2;
+
   // Only for MENTION_TYPE_USER
-  User user = 2;
+  int32 user_id = 3;
 
   // Only for MENTION_TYPE_ALL_SESSION_PARTICIPANTS
-  int32 session_id = 3;
+  int32 session_id = 4;
 
   // Only for MENTION_TYPE_ALL_THREAD_PARTICIPANTS
-  int32 thread_id = 4;
+  int32 thread_id = 5;
 }
 
 message ReactionType {
