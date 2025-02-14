@@ -15,30 +15,30 @@ import 'dart:core' as $core;
 import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/protobuf/empty.pb.dart' as $6;
-import 'rating.pb.dart' as $5;
-import 'rating_service.pb.dart' as $4;
+import '../../google/protobuf/empty.pb.dart' as $8;
+import 'rating.pb.dart' as $7;
+import 'rating_service.pb.dart' as $6;
 
 export 'rating_service.pb.dart';
 
 @$pb.GrpcServiceName('bst.v1.RatingService')
 class RatingServiceClient extends $grpc.Client {
-  static final _$createRating = $grpc.ClientMethod<$4.CreateRatingRequest, $5.Rating>(
+  static final _$createRating = $grpc.ClientMethod<$6.CreateRatingRequest, $7.Rating>(
       '/bst.v1.RatingService/CreateRating',
-      ($4.CreateRatingRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $5.Rating.fromBuffer(value));
-  static final _$listRatings = $grpc.ClientMethod<$4.ListRatingsRequest, $4.ListRatingsResponse>(
+      ($6.CreateRatingRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $7.Rating.fromBuffer(value));
+  static final _$listRatings = $grpc.ClientMethod<$6.ListRatingsRequest, $6.ListRatingsResponse>(
       '/bst.v1.RatingService/ListRatings',
-      ($4.ListRatingsRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $4.ListRatingsResponse.fromBuffer(value));
-  static final _$updateRating = $grpc.ClientMethod<$4.UpdateRatingRequest, $5.Rating>(
+      ($6.ListRatingsRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $6.ListRatingsResponse.fromBuffer(value));
+  static final _$updateRating = $grpc.ClientMethod<$6.UpdateRatingRequest, $7.Rating>(
       '/bst.v1.RatingService/UpdateRating',
-      ($4.UpdateRatingRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $5.Rating.fromBuffer(value));
-  static final _$deleteRating = $grpc.ClientMethod<$4.DeleteRatingRequest, $6.Empty>(
+      ($6.UpdateRatingRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $7.Rating.fromBuffer(value));
+  static final _$deleteRating = $grpc.ClientMethod<$6.DeleteRatingRequest, $8.Empty>(
       '/bst.v1.RatingService/DeleteRating',
-      ($4.DeleteRatingRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $6.Empty.fromBuffer(value));
+      ($6.DeleteRatingRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $8.Empty.fromBuffer(value));
 
   RatingServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -46,19 +46,19 @@ class RatingServiceClient extends $grpc.Client {
       : super(channel, options: options,
         interceptors: interceptors);
 
-  $grpc.ResponseFuture<$5.Rating> createRating($4.CreateRatingRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$7.Rating> createRating($6.CreateRatingRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createRating, request, options: options);
   }
 
-  $grpc.ResponseFuture<$4.ListRatingsResponse> listRatings($4.ListRatingsRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$6.ListRatingsResponse> listRatings($6.ListRatingsRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$listRatings, request, options: options);
   }
 
-  $grpc.ResponseFuture<$5.Rating> updateRating($4.UpdateRatingRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$7.Rating> updateRating($6.UpdateRatingRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateRating, request, options: options);
   }
 
-  $grpc.ResponseFuture<$6.Empty> deleteRating($4.DeleteRatingRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$8.Empty> deleteRating($6.DeleteRatingRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteRating, request, options: options);
   }
 }
@@ -68,54 +68,54 @@ abstract class RatingServiceBase extends $grpc.Service {
   $core.String get $name => 'bst.v1.RatingService';
 
   RatingServiceBase() {
-    $addMethod($grpc.ServiceMethod<$4.CreateRatingRequest, $5.Rating>(
+    $addMethod($grpc.ServiceMethod<$6.CreateRatingRequest, $7.Rating>(
         'CreateRating',
         createRating_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $4.CreateRatingRequest.fromBuffer(value),
-        ($5.Rating value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$4.ListRatingsRequest, $4.ListRatingsResponse>(
+        ($core.List<$core.int> value) => $6.CreateRatingRequest.fromBuffer(value),
+        ($7.Rating value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.ListRatingsRequest, $6.ListRatingsResponse>(
         'ListRatings',
         listRatings_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $4.ListRatingsRequest.fromBuffer(value),
-        ($4.ListRatingsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$4.UpdateRatingRequest, $5.Rating>(
+        ($core.List<$core.int> value) => $6.ListRatingsRequest.fromBuffer(value),
+        ($6.ListRatingsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.UpdateRatingRequest, $7.Rating>(
         'UpdateRating',
         updateRating_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $4.UpdateRatingRequest.fromBuffer(value),
-        ($5.Rating value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$4.DeleteRatingRequest, $6.Empty>(
+        ($core.List<$core.int> value) => $6.UpdateRatingRequest.fromBuffer(value),
+        ($7.Rating value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.DeleteRatingRequest, $8.Empty>(
         'DeleteRating',
         deleteRating_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $4.DeleteRatingRequest.fromBuffer(value),
-        ($6.Empty value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $6.DeleteRatingRequest.fromBuffer(value),
+        ($8.Empty value) => value.writeToBuffer()));
   }
 
-  $async.Future<$5.Rating> createRating_Pre($grpc.ServiceCall call, $async.Future<$4.CreateRatingRequest> request) async {
+  $async.Future<$7.Rating> createRating_Pre($grpc.ServiceCall call, $async.Future<$6.CreateRatingRequest> request) async {
     return createRating(call, await request);
   }
 
-  $async.Future<$4.ListRatingsResponse> listRatings_Pre($grpc.ServiceCall call, $async.Future<$4.ListRatingsRequest> request) async {
+  $async.Future<$6.ListRatingsResponse> listRatings_Pre($grpc.ServiceCall call, $async.Future<$6.ListRatingsRequest> request) async {
     return listRatings(call, await request);
   }
 
-  $async.Future<$5.Rating> updateRating_Pre($grpc.ServiceCall call, $async.Future<$4.UpdateRatingRequest> request) async {
+  $async.Future<$7.Rating> updateRating_Pre($grpc.ServiceCall call, $async.Future<$6.UpdateRatingRequest> request) async {
     return updateRating(call, await request);
   }
 
-  $async.Future<$6.Empty> deleteRating_Pre($grpc.ServiceCall call, $async.Future<$4.DeleteRatingRequest> request) async {
+  $async.Future<$8.Empty> deleteRating_Pre($grpc.ServiceCall call, $async.Future<$6.DeleteRatingRequest> request) async {
     return deleteRating(call, await request);
   }
 
-  $async.Future<$5.Rating> createRating($grpc.ServiceCall call, $4.CreateRatingRequest request);
-  $async.Future<$4.ListRatingsResponse> listRatings($grpc.ServiceCall call, $4.ListRatingsRequest request);
-  $async.Future<$5.Rating> updateRating($grpc.ServiceCall call, $4.UpdateRatingRequest request);
-  $async.Future<$6.Empty> deleteRating($grpc.ServiceCall call, $4.DeleteRatingRequest request);
+  $async.Future<$7.Rating> createRating($grpc.ServiceCall call, $6.CreateRatingRequest request);
+  $async.Future<$6.ListRatingsResponse> listRatings($grpc.ServiceCall call, $6.ListRatingsRequest request);
+  $async.Future<$7.Rating> updateRating($grpc.ServiceCall call, $6.UpdateRatingRequest request);
+  $async.Future<$8.Empty> deleteRating($grpc.ServiceCall call, $6.DeleteRatingRequest request);
 }

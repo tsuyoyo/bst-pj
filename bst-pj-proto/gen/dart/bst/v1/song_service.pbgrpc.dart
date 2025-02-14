@@ -15,44 +15,44 @@ import 'dart:core' as $core;
 import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'song_service.pb.dart' as $10;
+import 'song_service.pb.dart' as $12;
 
 export 'song_service.pb.dart';
 
 @$pb.GrpcServiceName('bst.v1.SongService')
 class SongServiceClient extends $grpc.Client {
-  static final _$createSong = $grpc.ClientMethod<$10.CreateSongRequest, $10.CreateSongResponse>(
+  static final _$createSong = $grpc.ClientMethod<$12.CreateSongRequest, $12.CreateSongResponse>(
       '/bst.v1.SongService/CreateSong',
-      ($10.CreateSongRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $10.CreateSongResponse.fromBuffer(value));
-  static final _$listSongs = $grpc.ClientMethod<$10.ListSongsRequest, $10.ListSongsResponse>(
+      ($12.CreateSongRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $12.CreateSongResponse.fromBuffer(value));
+  static final _$listSongs = $grpc.ClientMethod<$12.ListSongsRequest, $12.ListSongsResponse>(
       '/bst.v1.SongService/ListSongs',
-      ($10.ListSongsRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $10.ListSongsResponse.fromBuffer(value));
-  static final _$getSong = $grpc.ClientMethod<$10.GetSongRequest, $10.GetSongResponse>(
+      ($12.ListSongsRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $12.ListSongsResponse.fromBuffer(value));
+  static final _$getSong = $grpc.ClientMethod<$12.GetSongRequest, $12.GetSongResponse>(
       '/bst.v1.SongService/GetSong',
-      ($10.GetSongRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $10.GetSongResponse.fromBuffer(value));
-  static final _$updateSong = $grpc.ClientMethod<$10.UpdateSongRequest, $10.UpdateSongResponse>(
+      ($12.GetSongRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $12.GetSongResponse.fromBuffer(value));
+  static final _$updateSong = $grpc.ClientMethod<$12.UpdateSongRequest, $12.UpdateSongResponse>(
       '/bst.v1.SongService/UpdateSong',
-      ($10.UpdateSongRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $10.UpdateSongResponse.fromBuffer(value));
-  static final _$deleteSong = $grpc.ClientMethod<$10.DeleteSongRequest, $10.DeleteSongResponse>(
+      ($12.UpdateSongRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $12.UpdateSongResponse.fromBuffer(value));
+  static final _$deleteSong = $grpc.ClientMethod<$12.DeleteSongRequest, $12.DeleteSongResponse>(
       '/bst.v1.SongService/DeleteSong',
-      ($10.DeleteSongRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $10.DeleteSongResponse.fromBuffer(value));
-  static final _$addSongResource = $grpc.ClientMethod<$10.AddSongResourceRequest, $10.AddSongResourceResponse>(
+      ($12.DeleteSongRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $12.DeleteSongResponse.fromBuffer(value));
+  static final _$addSongResource = $grpc.ClientMethod<$12.AddSongResourceRequest, $12.AddSongResourceResponse>(
       '/bst.v1.SongService/AddSongResource',
-      ($10.AddSongResourceRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $10.AddSongResourceResponse.fromBuffer(value));
-  static final _$listSongResources = $grpc.ClientMethod<$10.ListSongResourcesRequest, $10.ListSongResourcesResponse>(
+      ($12.AddSongResourceRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $12.AddSongResourceResponse.fromBuffer(value));
+  static final _$listSongResources = $grpc.ClientMethod<$12.ListSongResourcesRequest, $12.ListSongResourcesResponse>(
       '/bst.v1.SongService/ListSongResources',
-      ($10.ListSongResourcesRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $10.ListSongResourcesResponse.fromBuffer(value));
-  static final _$deleteSongResource = $grpc.ClientMethod<$10.DeleteSongResourceRequest, $10.DeleteSongResourceResponse>(
+      ($12.ListSongResourcesRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $12.ListSongResourcesResponse.fromBuffer(value));
+  static final _$deleteSongResource = $grpc.ClientMethod<$12.DeleteSongResourceRequest, $12.DeleteSongResourceResponse>(
       '/bst.v1.SongService/DeleteSongResource',
-      ($10.DeleteSongResourceRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $10.DeleteSongResourceResponse.fromBuffer(value));
+      ($12.DeleteSongResourceRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $12.DeleteSongResourceResponse.fromBuffer(value));
 
   SongServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -60,35 +60,35 @@ class SongServiceClient extends $grpc.Client {
       : super(channel, options: options,
         interceptors: interceptors);
 
-  $grpc.ResponseFuture<$10.CreateSongResponse> createSong($10.CreateSongRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$12.CreateSongResponse> createSong($12.CreateSongRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createSong, request, options: options);
   }
 
-  $grpc.ResponseFuture<$10.ListSongsResponse> listSongs($10.ListSongsRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$12.ListSongsResponse> listSongs($12.ListSongsRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$listSongs, request, options: options);
   }
 
-  $grpc.ResponseFuture<$10.GetSongResponse> getSong($10.GetSongRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$12.GetSongResponse> getSong($12.GetSongRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getSong, request, options: options);
   }
 
-  $grpc.ResponseFuture<$10.UpdateSongResponse> updateSong($10.UpdateSongRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$12.UpdateSongResponse> updateSong($12.UpdateSongRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateSong, request, options: options);
   }
 
-  $grpc.ResponseFuture<$10.DeleteSongResponse> deleteSong($10.DeleteSongRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$12.DeleteSongResponse> deleteSong($12.DeleteSongRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteSong, request, options: options);
   }
 
-  $grpc.ResponseFuture<$10.AddSongResourceResponse> addSongResource($10.AddSongResourceRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$12.AddSongResourceResponse> addSongResource($12.AddSongResourceRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$addSongResource, request, options: options);
   }
 
-  $grpc.ResponseFuture<$10.ListSongResourcesResponse> listSongResources($10.ListSongResourcesRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$12.ListSongResourcesResponse> listSongResources($12.ListSongResourcesRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$listSongResources, request, options: options);
   }
 
-  $grpc.ResponseFuture<$10.DeleteSongResourceResponse> deleteSongResource($10.DeleteSongResourceRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$12.DeleteSongResourceResponse> deleteSongResource($12.DeleteSongResourceRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteSongResource, request, options: options);
   }
 }
@@ -98,102 +98,102 @@ abstract class SongServiceBase extends $grpc.Service {
   $core.String get $name => 'bst.v1.SongService';
 
   SongServiceBase() {
-    $addMethod($grpc.ServiceMethod<$10.CreateSongRequest, $10.CreateSongResponse>(
+    $addMethod($grpc.ServiceMethod<$12.CreateSongRequest, $12.CreateSongResponse>(
         'CreateSong',
         createSong_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $10.CreateSongRequest.fromBuffer(value),
-        ($10.CreateSongResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$10.ListSongsRequest, $10.ListSongsResponse>(
+        ($core.List<$core.int> value) => $12.CreateSongRequest.fromBuffer(value),
+        ($12.CreateSongResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$12.ListSongsRequest, $12.ListSongsResponse>(
         'ListSongs',
         listSongs_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $10.ListSongsRequest.fromBuffer(value),
-        ($10.ListSongsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$10.GetSongRequest, $10.GetSongResponse>(
+        ($core.List<$core.int> value) => $12.ListSongsRequest.fromBuffer(value),
+        ($12.ListSongsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$12.GetSongRequest, $12.GetSongResponse>(
         'GetSong',
         getSong_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $10.GetSongRequest.fromBuffer(value),
-        ($10.GetSongResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$10.UpdateSongRequest, $10.UpdateSongResponse>(
+        ($core.List<$core.int> value) => $12.GetSongRequest.fromBuffer(value),
+        ($12.GetSongResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$12.UpdateSongRequest, $12.UpdateSongResponse>(
         'UpdateSong',
         updateSong_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $10.UpdateSongRequest.fromBuffer(value),
-        ($10.UpdateSongResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$10.DeleteSongRequest, $10.DeleteSongResponse>(
+        ($core.List<$core.int> value) => $12.UpdateSongRequest.fromBuffer(value),
+        ($12.UpdateSongResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$12.DeleteSongRequest, $12.DeleteSongResponse>(
         'DeleteSong',
         deleteSong_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $10.DeleteSongRequest.fromBuffer(value),
-        ($10.DeleteSongResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$10.AddSongResourceRequest, $10.AddSongResourceResponse>(
+        ($core.List<$core.int> value) => $12.DeleteSongRequest.fromBuffer(value),
+        ($12.DeleteSongResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$12.AddSongResourceRequest, $12.AddSongResourceResponse>(
         'AddSongResource',
         addSongResource_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $10.AddSongResourceRequest.fromBuffer(value),
-        ($10.AddSongResourceResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$10.ListSongResourcesRequest, $10.ListSongResourcesResponse>(
+        ($core.List<$core.int> value) => $12.AddSongResourceRequest.fromBuffer(value),
+        ($12.AddSongResourceResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$12.ListSongResourcesRequest, $12.ListSongResourcesResponse>(
         'ListSongResources',
         listSongResources_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $10.ListSongResourcesRequest.fromBuffer(value),
-        ($10.ListSongResourcesResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$10.DeleteSongResourceRequest, $10.DeleteSongResourceResponse>(
+        ($core.List<$core.int> value) => $12.ListSongResourcesRequest.fromBuffer(value),
+        ($12.ListSongResourcesResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$12.DeleteSongResourceRequest, $12.DeleteSongResourceResponse>(
         'DeleteSongResource',
         deleteSongResource_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $10.DeleteSongResourceRequest.fromBuffer(value),
-        ($10.DeleteSongResourceResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $12.DeleteSongResourceRequest.fromBuffer(value),
+        ($12.DeleteSongResourceResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$10.CreateSongResponse> createSong_Pre($grpc.ServiceCall call, $async.Future<$10.CreateSongRequest> request) async {
+  $async.Future<$12.CreateSongResponse> createSong_Pre($grpc.ServiceCall call, $async.Future<$12.CreateSongRequest> request) async {
     return createSong(call, await request);
   }
 
-  $async.Future<$10.ListSongsResponse> listSongs_Pre($grpc.ServiceCall call, $async.Future<$10.ListSongsRequest> request) async {
+  $async.Future<$12.ListSongsResponse> listSongs_Pre($grpc.ServiceCall call, $async.Future<$12.ListSongsRequest> request) async {
     return listSongs(call, await request);
   }
 
-  $async.Future<$10.GetSongResponse> getSong_Pre($grpc.ServiceCall call, $async.Future<$10.GetSongRequest> request) async {
+  $async.Future<$12.GetSongResponse> getSong_Pre($grpc.ServiceCall call, $async.Future<$12.GetSongRequest> request) async {
     return getSong(call, await request);
   }
 
-  $async.Future<$10.UpdateSongResponse> updateSong_Pre($grpc.ServiceCall call, $async.Future<$10.UpdateSongRequest> request) async {
+  $async.Future<$12.UpdateSongResponse> updateSong_Pre($grpc.ServiceCall call, $async.Future<$12.UpdateSongRequest> request) async {
     return updateSong(call, await request);
   }
 
-  $async.Future<$10.DeleteSongResponse> deleteSong_Pre($grpc.ServiceCall call, $async.Future<$10.DeleteSongRequest> request) async {
+  $async.Future<$12.DeleteSongResponse> deleteSong_Pre($grpc.ServiceCall call, $async.Future<$12.DeleteSongRequest> request) async {
     return deleteSong(call, await request);
   }
 
-  $async.Future<$10.AddSongResourceResponse> addSongResource_Pre($grpc.ServiceCall call, $async.Future<$10.AddSongResourceRequest> request) async {
+  $async.Future<$12.AddSongResourceResponse> addSongResource_Pre($grpc.ServiceCall call, $async.Future<$12.AddSongResourceRequest> request) async {
     return addSongResource(call, await request);
   }
 
-  $async.Future<$10.ListSongResourcesResponse> listSongResources_Pre($grpc.ServiceCall call, $async.Future<$10.ListSongResourcesRequest> request) async {
+  $async.Future<$12.ListSongResourcesResponse> listSongResources_Pre($grpc.ServiceCall call, $async.Future<$12.ListSongResourcesRequest> request) async {
     return listSongResources(call, await request);
   }
 
-  $async.Future<$10.DeleteSongResourceResponse> deleteSongResource_Pre($grpc.ServiceCall call, $async.Future<$10.DeleteSongResourceRequest> request) async {
+  $async.Future<$12.DeleteSongResourceResponse> deleteSongResource_Pre($grpc.ServiceCall call, $async.Future<$12.DeleteSongResourceRequest> request) async {
     return deleteSongResource(call, await request);
   }
 
-  $async.Future<$10.CreateSongResponse> createSong($grpc.ServiceCall call, $10.CreateSongRequest request);
-  $async.Future<$10.ListSongsResponse> listSongs($grpc.ServiceCall call, $10.ListSongsRequest request);
-  $async.Future<$10.GetSongResponse> getSong($grpc.ServiceCall call, $10.GetSongRequest request);
-  $async.Future<$10.UpdateSongResponse> updateSong($grpc.ServiceCall call, $10.UpdateSongRequest request);
-  $async.Future<$10.DeleteSongResponse> deleteSong($grpc.ServiceCall call, $10.DeleteSongRequest request);
-  $async.Future<$10.AddSongResourceResponse> addSongResource($grpc.ServiceCall call, $10.AddSongResourceRequest request);
-  $async.Future<$10.ListSongResourcesResponse> listSongResources($grpc.ServiceCall call, $10.ListSongResourcesRequest request);
-  $async.Future<$10.DeleteSongResourceResponse> deleteSongResource($grpc.ServiceCall call, $10.DeleteSongResourceRequest request);
+  $async.Future<$12.CreateSongResponse> createSong($grpc.ServiceCall call, $12.CreateSongRequest request);
+  $async.Future<$12.ListSongsResponse> listSongs($grpc.ServiceCall call, $12.ListSongsRequest request);
+  $async.Future<$12.GetSongResponse> getSong($grpc.ServiceCall call, $12.GetSongRequest request);
+  $async.Future<$12.UpdateSongResponse> updateSong($grpc.ServiceCall call, $12.UpdateSongRequest request);
+  $async.Future<$12.DeleteSongResponse> deleteSong($grpc.ServiceCall call, $12.DeleteSongRequest request);
+  $async.Future<$12.AddSongResourceResponse> addSongResource($grpc.ServiceCall call, $12.AddSongResourceRequest request);
+  $async.Future<$12.ListSongResourcesResponse> listSongResources($grpc.ServiceCall call, $12.ListSongResourcesRequest request);
+  $async.Future<$12.DeleteSongResourceResponse> deleteSongResource($grpc.ServiceCall call, $12.DeleteSongResourceRequest request);
 }

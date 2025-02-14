@@ -17,6 +17,7 @@ export interface Comment {
   userId: number;
   threadId: number;
   createdAt: Date | undefined;
+  updatedAt: Date | undefined;
   mentions: Mention[];
 }
 
@@ -32,10 +33,10 @@ export interface Thread {
 
 export interface Mention {
   type: Mention_MentionType;
+  /** text to show in the comment */
+  text: string;
   /** Only for MENTION_TYPE_USER */
-  user:
-    | User
-    | undefined;
+  userId: number;
   /** Only for MENTION_TYPE_ALL_SESSION_PARTICIPANTS */
   sessionId: number;
   /** Only for MENTION_TYPE_ALL_THREAD_PARTICIPANTS */
@@ -107,7 +108,7 @@ export interface Reaction {
 }
 
 function createBaseComment(): Comment {
-  return { id: 0, content: "", userId: 0, threadId: 0, createdAt: undefined, mentions: [] };
+  return { id: 0, content: "", userId: 0, threadId: 0, createdAt: undefined, updatedAt: undefined, mentions: [] };
 }
 
 export const Comment = {
@@ -127,8 +128,11 @@ export const Comment = {
     if (message.createdAt !== undefined) {
       Timestamp.encode(toTimestamp(message.createdAt), writer.uint32(42).fork()).ldelim();
     }
+    if (message.updatedAt !== undefined) {
+      Timestamp.encode(toTimestamp(message.updatedAt), writer.uint32(50).fork()).ldelim();
+    }
     for (const v of message.mentions) {
-      Mention.encode(v!, writer.uint32(50).fork()).ldelim();
+      Mention.encode(v!, writer.uint32(58).fork()).ldelim();
     }
     return writer;
   },
@@ -180,6 +184,13 @@ export const Comment = {
             break;
           }
 
+          message.updatedAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        case 7:
+          if (tag !== 58) {
+            break;
+          }
+
           message.mentions.push(Mention.decode(reader, reader.uint32()));
           continue;
       }
@@ -198,6 +209,7 @@ export const Comment = {
       userId: isSet(object.userId) ? globalThis.Number(object.userId) : 0,
       threadId: isSet(object.threadId) ? globalThis.Number(object.threadId) : 0,
       createdAt: isSet(object.createdAt) ? fromJsonTimestamp(object.createdAt) : undefined,
+      updatedAt: isSet(object.updatedAt) ? fromJsonTimestamp(object.updatedAt) : undefined,
       mentions: globalThis.Array.isArray(object?.mentions) ? object.mentions.map((e: any) => Mention.fromJSON(e)) : [],
     };
   },
@@ -219,6 +231,9 @@ export const Comment = {
     if (message.createdAt !== undefined) {
       obj.createdAt = message.createdAt.toISOString();
     }
+    if (message.updatedAt !== undefined) {
+      obj.updatedAt = message.updatedAt.toISOString();
+    }
     if (message.mentions?.length) {
       obj.mentions = message.mentions.map((e) => Mention.toJSON(e));
     }
@@ -235,6 +250,7 @@ export const Comment = {
     message.userId = object.userId ?? 0;
     message.threadId = object.threadId ?? 0;
     message.createdAt = object.createdAt ?? undefined;
+    message.updatedAt = object.updatedAt ?? undefined;
     message.mentions = object.mentions?.map((e) => Mention.fromPartial(e)) || [];
     return message;
   },
@@ -400,7 +416,7 @@ export const Thread = {
 };
 
 function createBaseMention(): Mention {
-  return { type: 0, user: undefined, sessionId: 0, threadId: 0 };
+  return { type: 0, text: "", userId: 0, sessionId: 0, threadId: 0 };
 }
 
 export const Mention = {
@@ -408,14 +424,17 @@ export const Mention = {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
     }
-    if (message.user !== undefined) {
-      User.encode(message.user, writer.uint32(18).fork()).ldelim();
+    if (message.text !== "") {
+      writer.uint32(18).string(message.text);
+    }
+    if (message.userId !== 0) {
+      writer.uint32(24).int32(message.userId);
     }
     if (message.sessionId !== 0) {
-      writer.uint32(24).int32(message.sessionId);
+      writer.uint32(32).int32(message.sessionId);
     }
     if (message.threadId !== 0) {
-      writer.uint32(32).int32(message.threadId);
+      writer.uint32(40).int32(message.threadId);
     }
     return writer;
   },
@@ -439,17 +458,24 @@ export const Mention = {
             break;
           }
 
-          message.user = User.decode(reader, reader.uint32());
+          message.text = reader.string();
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.sessionId = reader.int32();
+          message.userId = reader.int32();
           continue;
         case 4:
           if (tag !== 32) {
+            break;
+          }
+
+          message.sessionId = reader.int32();
+          continue;
+        case 5:
+          if (tag !== 40) {
             break;
           }
 
@@ -467,7 +493,8 @@ export const Mention = {
   fromJSON(object: any): Mention {
     return {
       type: isSet(object.type) ? mention_MentionTypeFromJSON(object.type) : 0,
-      user: isSet(object.user) ? User.fromJSON(object.user) : undefined,
+      text: isSet(object.text) ? globalThis.String(object.text) : "",
+      userId: isSet(object.userId) ? globalThis.Number(object.userId) : 0,
       sessionId: isSet(object.sessionId) ? globalThis.Number(object.sessionId) : 0,
       threadId: isSet(object.threadId) ? globalThis.Number(object.threadId) : 0,
     };
@@ -478,8 +505,11 @@ export const Mention = {
     if (message.type !== 0) {
       obj.type = mention_MentionTypeToJSON(message.type);
     }
-    if (message.user !== undefined) {
-      obj.user = User.toJSON(message.user);
+    if (message.text !== "") {
+      obj.text = message.text;
+    }
+    if (message.userId !== 0) {
+      obj.userId = Math.round(message.userId);
     }
     if (message.sessionId !== 0) {
       obj.sessionId = Math.round(message.sessionId);
@@ -496,7 +526,8 @@ export const Mention = {
   fromPartial<I extends Exact<DeepPartial<Mention>, I>>(object: I): Mention {
     const message = createBaseMention();
     message.type = object.type ?? 0;
-    message.user = (object.user !== undefined && object.user !== null) ? User.fromPartial(object.user) : undefined;
+    message.text = object.text ?? "";
+    message.userId = object.userId ?? 0;
     message.sessionId = object.sessionId ?? 0;
     message.threadId = object.threadId ?? 0;
     return message;

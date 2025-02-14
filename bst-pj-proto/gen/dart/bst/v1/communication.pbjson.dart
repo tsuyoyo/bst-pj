@@ -22,7 +22,8 @@ const Comment$json = {
     {'1': 'user_id', '3': 3, '4': 1, '5': 5, '10': 'userId'},
     {'1': 'thread_id', '3': 4, '4': 1, '5': 5, '10': 'threadId'},
     {'1': 'created_at', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
-    {'1': 'mentions', '3': 6, '4': 3, '5': 11, '6': '.bst.v1.Mention', '10': 'mentions'},
+    {'1': 'updated_at', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
+    {'1': 'mentions', '3': 7, '4': 3, '5': 11, '6': '.bst.v1.Mention', '10': 'mentions'},
   ],
 };
 
@@ -30,8 +31,9 @@ const Comment$json = {
 final $typed_data.Uint8List commentDescriptor = $convert.base64Decode(
     'CgdDb21tZW50Eg4KAmlkGAEgASgFUgJpZBIYCgdjb250ZW50GAIgASgJUgdjb250ZW50EhcKB3'
     'VzZXJfaWQYAyABKAVSBnVzZXJJZBIbCgl0aHJlYWRfaWQYBCABKAVSCHRocmVhZElkEjkKCmNy'
-    'ZWF0ZWRfYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgljcmVhdGVkQXQSKw'
-    'oIbWVudGlvbnMYBiADKAsyDy5ic3QudjEuTWVudGlvblIIbWVudGlvbnM=');
+    'ZWF0ZWRfYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgljcmVhdGVkQXQSOQ'
+    'oKdXBkYXRlZF9hdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCXVwZGF0ZWRB'
+    'dBIrCghtZW50aW9ucxgHIAMoCzIPLmJzdC52MS5NZW50aW9uUghtZW50aW9ucw==');
 
 @$core.Deprecated('Use threadDescriptor instead')
 const Thread$json = {
@@ -61,9 +63,10 @@ const Mention$json = {
   '1': 'Mention',
   '2': [
     {'1': 'type', '3': 1, '4': 1, '5': 14, '6': '.bst.v1.Mention.MentionType', '10': 'type'},
-    {'1': 'user', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.User', '10': 'user'},
-    {'1': 'session_id', '3': 3, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'thread_id', '3': 4, '4': 1, '5': 5, '10': 'threadId'},
+    {'1': 'text', '3': 2, '4': 1, '5': 9, '10': 'text'},
+    {'1': 'user_id', '3': 3, '4': 1, '5': 5, '10': 'userId'},
+    {'1': 'session_id', '3': 4, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'thread_id', '3': 5, '4': 1, '5': 5, '10': 'threadId'},
   ],
   '4': [Mention_MentionType$json],
 };
@@ -82,11 +85,11 @@ const Mention_MentionType$json = {
 /// Descriptor for `Mention`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List mentionDescriptor = $convert.base64Decode(
     'CgdNZW50aW9uEi8KBHR5cGUYASABKA4yGy5ic3QudjEuTWVudGlvbi5NZW50aW9uVHlwZVIEdH'
-    'lwZRIgCgR1c2VyGAIgASgLMgwuYnN0LnYxLlVzZXJSBHVzZXISHQoKc2Vzc2lvbl9pZBgDIAEo'
-    'BVIJc2Vzc2lvbklkEhsKCXRocmVhZF9pZBgEIAEoBVIIdGhyZWFkSWQilwEKC01lbnRpb25UeX'
-    'BlEhwKGE1FTlRJT05fVFlQRV9VTlNQRUNJRklFRBAAEhUKEU1FTlRJT05fVFlQRV9VU0VSEAES'
-    'KQolTUVOVElPTl9UWVBFX0FMTF9TRVNTSU9OX1BBUlRJQ0lQQU5UUxACEigKJE1FTlRJT05fVF'
-    'lQRV9BTExfVEhSRUFEX1BBUlRJQ0lQQU5UUxAD');
+    'lwZRISCgR0ZXh0GAIgASgJUgR0ZXh0EhcKB3VzZXJfaWQYAyABKAVSBnVzZXJJZBIdCgpzZXNz'
+    'aW9uX2lkGAQgASgFUglzZXNzaW9uSWQSGwoJdGhyZWFkX2lkGAUgASgFUgh0aHJlYWRJZCKXAQ'
+    'oLTWVudGlvblR5cGUSHAoYTUVOVElPTl9UWVBFX1VOU1BFQ0lGSUVEEAASFQoRTUVOVElPTl9U'
+    'WVBFX1VTRVIQARIpCiVNRU5USU9OX1RZUEVfQUxMX1NFU1NJT05fUEFSVElDSVBBTlRTEAISKA'
+    'okTUVOVElPTl9UWVBFX0FMTF9USFJFQURfUEFSVElDSVBBTlRTEAM=');
 
 @$core.Deprecated('Use reactionTypeDescriptor instead')
 const ReactionType$json = {

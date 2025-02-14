@@ -13,7 +13,7 @@ export class User {
   id: number;
 
   @Column({ name: 'external_id', type: 'varchar', length: 255, nullable: true })
-  externalId: string;
+  externalId: string | null;
 
   @Column({
     name: 'external_service',
@@ -21,7 +21,7 @@ export class User {
     enum: ExternalService,
     nullable: true,
   })
-  externalService: ExternalService;
+  externalService: ExternalService | null;
 
   @Column({ type: 'varchar', length: 30, nullable: false })
   name: string;
@@ -33,10 +33,10 @@ export class User {
   password: string;
 
   @Column({ name: 'icon_url', type: 'text', nullable: true })
-  iconUrl: string;
+  iconUrl: string | null;
 
   @Column({ name: 'profile_picture_url', type: 'text', nullable: true })
-  profilePictureUrl: string;
+  profilePictureUrl: string | null;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

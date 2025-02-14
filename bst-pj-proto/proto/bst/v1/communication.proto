@@ -14,7 +14,8 @@ message Comment {
   int32                     user_id    = 3;
   int32                     thread_id  = 4;
   google.protobuf.Timestamp created_at = 5;
-  repeated Mention          mentions   = 6;
+  google.protobuf.Timestamp updated_at = 6;
+  repeated Mention          mentions   = 7;
 }
 
 message Thread {

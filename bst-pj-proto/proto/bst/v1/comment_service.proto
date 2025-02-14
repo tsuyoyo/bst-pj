@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "bst/v1/communication.proto";
+import "google/protobuf/timestamp.proto";
+
+service CommentService {
+  rpc GetComment(GetCommentRequest) returns (Comment);
+  rpc PostComment(PostCommentRequest) returns (Comment);
+  rpc UpdateComment(UpdateCommentRequest) returns (Comment);
+  rpc DeleteComment(DeleteCommentRequest) returns (DeleteCommentResponse);
+}
+
+message GetCommentRequest {
+  int32 id = 1;
+}
+
+message PostCommentRequest {
+  string content   = 1;
+  int32  user_id   = 2;
+  int32  thread_id = 3;
+}
+
+message UpdateCommentRequest {
+  int32 id      = 1;
+  string content = 2;
+}
+
+message DeleteCommentRequest {
+  int32 id = 1;
+}
+
+message DeleteCommentResponse {
+  bool success = 1;
+}
