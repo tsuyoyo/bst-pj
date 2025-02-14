@@ -11,9 +11,6 @@ exports.up = (pgm) => {
     "GITHUB",
   ]);
 
-  // Create enum type for follow status
-  pgm.createType("follow_status", ["FOLLOWING", "BLOCKED", "REQUESTED"]);
-
   // Create users table
   pgm.createTable("users", {
     id: "id",
@@ -157,7 +154,6 @@ exports.up = (pgm) => {
       references: "users",
       onDelete: "CASCADE",
     },
-    status: { type: "follow_status", notNull: true },
     created_at: {
       type: "timestamp",
       notNull: true,

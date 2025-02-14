@@ -15,32 +15,32 @@ import 'dart:core' as $core;
 import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'part_service.pb.dart' as $5;
+import 'part_service.pb.dart' as $6;
 
 export 'part_service.pb.dart';
 
 @$pb.GrpcServiceName('bst.v1.PartService')
 class PartServiceClient extends $grpc.Client {
-  static final _$createPart = $grpc.ClientMethod<$5.CreatePartRequest, $5.CreatePartResponse>(
+  static final _$createPart = $grpc.ClientMethod<$6.CreatePartRequest, $6.CreatePartResponse>(
       '/bst.v1.PartService/CreatePart',
-      ($5.CreatePartRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $5.CreatePartResponse.fromBuffer(value));
-  static final _$listParts = $grpc.ClientMethod<$5.ListPartsRequest, $5.ListPartsResponse>(
+      ($6.CreatePartRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $6.CreatePartResponse.fromBuffer(value));
+  static final _$listParts = $grpc.ClientMethod<$6.ListPartsRequest, $6.ListPartsResponse>(
       '/bst.v1.PartService/ListParts',
-      ($5.ListPartsRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $5.ListPartsResponse.fromBuffer(value));
-  static final _$getPart = $grpc.ClientMethod<$5.GetPartRequest, $5.GetPartResponse>(
+      ($6.ListPartsRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $6.ListPartsResponse.fromBuffer(value));
+  static final _$getPart = $grpc.ClientMethod<$6.GetPartRequest, $6.GetPartResponse>(
       '/bst.v1.PartService/GetPart',
-      ($5.GetPartRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $5.GetPartResponse.fromBuffer(value));
-  static final _$updatePart = $grpc.ClientMethod<$5.UpdatePartRequest, $5.UpdatePartResponse>(
+      ($6.GetPartRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $6.GetPartResponse.fromBuffer(value));
+  static final _$updatePart = $grpc.ClientMethod<$6.UpdatePartRequest, $6.UpdatePartResponse>(
       '/bst.v1.PartService/UpdatePart',
-      ($5.UpdatePartRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $5.UpdatePartResponse.fromBuffer(value));
-  static final _$deletePart = $grpc.ClientMethod<$5.DeletePartRequest, $5.DeletePartResponse>(
+      ($6.UpdatePartRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $6.UpdatePartResponse.fromBuffer(value));
+  static final _$deletePart = $grpc.ClientMethod<$6.DeletePartRequest, $6.DeletePartResponse>(
       '/bst.v1.PartService/DeletePart',
-      ($5.DeletePartRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $5.DeletePartResponse.fromBuffer(value));
+      ($6.DeletePartRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $6.DeletePartResponse.fromBuffer(value));
 
   PartServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -48,23 +48,23 @@ class PartServiceClient extends $grpc.Client {
       : super(channel, options: options,
         interceptors: interceptors);
 
-  $grpc.ResponseFuture<$5.CreatePartResponse> createPart($5.CreatePartRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$6.CreatePartResponse> createPart($6.CreatePartRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createPart, request, options: options);
   }
 
-  $grpc.ResponseFuture<$5.ListPartsResponse> listParts($5.ListPartsRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$6.ListPartsResponse> listParts($6.ListPartsRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$listParts, request, options: options);
   }
 
-  $grpc.ResponseFuture<$5.GetPartResponse> getPart($5.GetPartRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$6.GetPartResponse> getPart($6.GetPartRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getPart, request, options: options);
   }
 
-  $grpc.ResponseFuture<$5.UpdatePartResponse> updatePart($5.UpdatePartRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$6.UpdatePartResponse> updatePart($6.UpdatePartRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updatePart, request, options: options);
   }
 
-  $grpc.ResponseFuture<$5.DeletePartResponse> deletePart($5.DeletePartRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$6.DeletePartResponse> deletePart($6.DeletePartRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deletePart, request, options: options);
   }
 }
@@ -74,66 +74,66 @@ abstract class PartServiceBase extends $grpc.Service {
   $core.String get $name => 'bst.v1.PartService';
 
   PartServiceBase() {
-    $addMethod($grpc.ServiceMethod<$5.CreatePartRequest, $5.CreatePartResponse>(
+    $addMethod($grpc.ServiceMethod<$6.CreatePartRequest, $6.CreatePartResponse>(
         'CreatePart',
         createPart_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $5.CreatePartRequest.fromBuffer(value),
-        ($5.CreatePartResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$5.ListPartsRequest, $5.ListPartsResponse>(
+        ($core.List<$core.int> value) => $6.CreatePartRequest.fromBuffer(value),
+        ($6.CreatePartResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.ListPartsRequest, $6.ListPartsResponse>(
         'ListParts',
         listParts_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $5.ListPartsRequest.fromBuffer(value),
-        ($5.ListPartsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$5.GetPartRequest, $5.GetPartResponse>(
+        ($core.List<$core.int> value) => $6.ListPartsRequest.fromBuffer(value),
+        ($6.ListPartsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.GetPartRequest, $6.GetPartResponse>(
         'GetPart',
         getPart_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $5.GetPartRequest.fromBuffer(value),
-        ($5.GetPartResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$5.UpdatePartRequest, $5.UpdatePartResponse>(
+        ($core.List<$core.int> value) => $6.GetPartRequest.fromBuffer(value),
+        ($6.GetPartResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.UpdatePartRequest, $6.UpdatePartResponse>(
         'UpdatePart',
         updatePart_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $5.UpdatePartRequest.fromBuffer(value),
-        ($5.UpdatePartResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$5.DeletePartRequest, $5.DeletePartResponse>(
+        ($core.List<$core.int> value) => $6.UpdatePartRequest.fromBuffer(value),
+        ($6.UpdatePartResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.DeletePartRequest, $6.DeletePartResponse>(
         'DeletePart',
         deletePart_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $5.DeletePartRequest.fromBuffer(value),
-        ($5.DeletePartResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $6.DeletePartRequest.fromBuffer(value),
+        ($6.DeletePartResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$5.CreatePartResponse> createPart_Pre($grpc.ServiceCall call, $async.Future<$5.CreatePartRequest> request) async {
+  $async.Future<$6.CreatePartResponse> createPart_Pre($grpc.ServiceCall call, $async.Future<$6.CreatePartRequest> request) async {
     return createPart(call, await request);
   }
 
-  $async.Future<$5.ListPartsResponse> listParts_Pre($grpc.ServiceCall call, $async.Future<$5.ListPartsRequest> request) async {
+  $async.Future<$6.ListPartsResponse> listParts_Pre($grpc.ServiceCall call, $async.Future<$6.ListPartsRequest> request) async {
     return listParts(call, await request);
   }
 
-  $async.Future<$5.GetPartResponse> getPart_Pre($grpc.ServiceCall call, $async.Future<$5.GetPartRequest> request) async {
+  $async.Future<$6.GetPartResponse> getPart_Pre($grpc.ServiceCall call, $async.Future<$6.GetPartRequest> request) async {
     return getPart(call, await request);
   }
 
-  $async.Future<$5.UpdatePartResponse> updatePart_Pre($grpc.ServiceCall call, $async.Future<$5.UpdatePartRequest> request) async {
+  $async.Future<$6.UpdatePartResponse> updatePart_Pre($grpc.ServiceCall call, $async.Future<$6.UpdatePartRequest> request) async {
     return updatePart(call, await request);
   }
 
-  $async.Future<$5.DeletePartResponse> deletePart_Pre($grpc.ServiceCall call, $async.Future<$5.DeletePartRequest> request) async {
+  $async.Future<$6.DeletePartResponse> deletePart_Pre($grpc.ServiceCall call, $async.Future<$6.DeletePartRequest> request) async {
     return deletePart(call, await request);
   }
 
-  $async.Future<$5.CreatePartResponse> createPart($grpc.ServiceCall call, $5.CreatePartRequest request);
-  $async.Future<$5.ListPartsResponse> listParts($grpc.ServiceCall call, $5.ListPartsRequest request);
-  $async.Future<$5.GetPartResponse> getPart($grpc.ServiceCall call, $5.GetPartRequest request);
-  $async.Future<$5.UpdatePartResponse> updatePart($grpc.ServiceCall call, $5.UpdatePartRequest request);
-  $async.Future<$5.DeletePartResponse> deletePart($grpc.ServiceCall call, $5.DeletePartRequest request);
+  $async.Future<$6.CreatePartResponse> createPart($grpc.ServiceCall call, $6.CreatePartRequest request);
+  $async.Future<$6.ListPartsResponse> listParts($grpc.ServiceCall call, $6.ListPartsRequest request);
+  $async.Future<$6.GetPartResponse> getPart($grpc.ServiceCall call, $6.GetPartRequest request);
+  $async.Future<$6.UpdatePartResponse> updatePart($grpc.ServiceCall call, $6.UpdatePartRequest request);
+  $async.Future<$6.DeletePartResponse> deletePart($grpc.ServiceCall call, $6.DeletePartRequest request);
 }

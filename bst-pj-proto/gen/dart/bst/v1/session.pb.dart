@@ -13,21 +13,21 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/protobuf/timestamp.pb.dart' as $18;
-import 'content.pb.dart' as $16;
-import 'party.pb.dart' as $21;
+import '../../google/protobuf/timestamp.pb.dart' as $19;
+import 'content.pb.dart' as $17;
+import 'party.pb.dart' as $22;
 import 'session.pbenum.dart';
-import 'user.pb.dart' as $19;
+import 'user.pb.dart' as $20;
 
 export 'session.pbenum.dart';
 
 /// Session model
 class SessionTimelineDate extends $pb.GeneratedMessage {
   factory SessionTimelineDate({
-    $18.Timestamp? createdAt,
-    $18.Timestamp? entryOpen,
-    $18.Timestamp? entryClose,
-    $18.Timestamp? eventDate,
+    $19.Timestamp? createdAt,
+    $19.Timestamp? entryOpen,
+    $19.Timestamp? entryClose,
+    $19.Timestamp? eventDate,
   }) {
     final $result = create();
     if (createdAt != null) {
@@ -49,10 +49,10 @@ class SessionTimelineDate extends $pb.GeneratedMessage {
   factory SessionTimelineDate.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SessionTimelineDate', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$18.Timestamp>(1, _omitFieldNames ? '' : 'createdAt', subBuilder: $18.Timestamp.create)
-    ..aOM<$18.Timestamp>(2, _omitFieldNames ? '' : 'entryOpen', subBuilder: $18.Timestamp.create)
-    ..aOM<$18.Timestamp>(3, _omitFieldNames ? '' : 'entryClose', subBuilder: $18.Timestamp.create)
-    ..aOM<$18.Timestamp>(4, _omitFieldNames ? '' : 'eventDate', subBuilder: $18.Timestamp.create)
+    ..aOM<$19.Timestamp>(1, _omitFieldNames ? '' : 'createdAt', subBuilder: $19.Timestamp.create)
+    ..aOM<$19.Timestamp>(2, _omitFieldNames ? '' : 'entryOpen', subBuilder: $19.Timestamp.create)
+    ..aOM<$19.Timestamp>(3, _omitFieldNames ? '' : 'entryClose', subBuilder: $19.Timestamp.create)
+    ..aOM<$19.Timestamp>(4, _omitFieldNames ? '' : 'eventDate', subBuilder: $19.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -78,48 +78,48 @@ class SessionTimelineDate extends $pb.GeneratedMessage {
   static SessionTimelineDate? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $18.Timestamp get createdAt => $_getN(0);
+  $19.Timestamp get createdAt => $_getN(0);
   @$pb.TagNumber(1)
-  set createdAt($18.Timestamp v) { setField(1, v); }
+  set createdAt($19.Timestamp v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasCreatedAt() => $_has(0);
   @$pb.TagNumber(1)
   void clearCreatedAt() => clearField(1);
   @$pb.TagNumber(1)
-  $18.Timestamp ensureCreatedAt() => $_ensure(0);
+  $19.Timestamp ensureCreatedAt() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $18.Timestamp get entryOpen => $_getN(1);
+  $19.Timestamp get entryOpen => $_getN(1);
   @$pb.TagNumber(2)
-  set entryOpen($18.Timestamp v) { setField(2, v); }
+  set entryOpen($19.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasEntryOpen() => $_has(1);
   @$pb.TagNumber(2)
   void clearEntryOpen() => clearField(2);
   @$pb.TagNumber(2)
-  $18.Timestamp ensureEntryOpen() => $_ensure(1);
+  $19.Timestamp ensureEntryOpen() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $18.Timestamp get entryClose => $_getN(2);
+  $19.Timestamp get entryClose => $_getN(2);
   @$pb.TagNumber(3)
-  set entryClose($18.Timestamp v) { setField(3, v); }
+  set entryClose($19.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasEntryClose() => $_has(2);
   @$pb.TagNumber(3)
   void clearEntryClose() => clearField(3);
   @$pb.TagNumber(3)
-  $18.Timestamp ensureEntryClose() => $_ensure(2);
+  $19.Timestamp ensureEntryClose() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $18.Timestamp get eventDate => $_getN(3);
+  $19.Timestamp get eventDate => $_getN(3);
   @$pb.TagNumber(4)
-  set eventDate($18.Timestamp v) { setField(4, v); }
+  set eventDate($19.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasEventDate() => $_has(3);
   @$pb.TagNumber(4)
   void clearEventDate() => clearField(4);
   @$pb.TagNumber(4)
-  $18.Timestamp ensureEventDate() => $_ensure(3);
+  $19.Timestamp ensureEventDate() => $_ensure(3);
 }
 
 class Session extends $pb.GeneratedMessage {
@@ -330,7 +330,7 @@ class SessionDetail extends $pb.GeneratedMessage {
 
 class SessionPart extends $pb.GeneratedMessage {
   factory SessionPart({
-    $16.Part? part,
+    $17.Part? part,
     $core.String? name,
     $core.int? displayOrder,
     $core.int? maxEntry,
@@ -355,7 +355,7 @@ class SessionPart extends $pb.GeneratedMessage {
   factory SessionPart.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SessionPart', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$16.Part>(1, _omitFieldNames ? '' : 'part', subBuilder: $16.Part.create)
+    ..aOM<$17.Part>(1, _omitFieldNames ? '' : 'part', subBuilder: $17.Part.create)
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'displayOrder', $pb.PbFieldType.O3)
     ..a<$core.int>(4, _omitFieldNames ? '' : 'maxEntry', $pb.PbFieldType.O3)
@@ -384,15 +384,15 @@ class SessionPart extends $pb.GeneratedMessage {
   static SessionPart? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $16.Part get part => $_getN(0);
+  $17.Part get part => $_getN(0);
   @$pb.TagNumber(1)
-  set part($16.Part v) { setField(1, v); }
+  set part($17.Part v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPart() => $_has(0);
   @$pb.TagNumber(1)
   void clearPart() => clearField(1);
   @$pb.TagNumber(1)
-  $16.Part ensurePart() => $_ensure(0);
+  $17.Part ensurePart() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get name => $_getSZ(1);
@@ -477,7 +477,7 @@ class SessionParticipant extends $pb.GeneratedMessage {
     $core.int? id,
     $core.String? name,
     SessionParticipantRole? role,
-    $19.User? user,
+    $20.User? user,
   }) {
     final $result = create();
     if (id != null) {
@@ -502,7 +502,7 @@ class SessionParticipant extends $pb.GeneratedMessage {
     ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..e<SessionParticipantRole>(3, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: SessionParticipantRole.SESSION_PARTICIPANT_ROLE_UNSPECIFIED, valueOf: SessionParticipantRole.valueOf, enumValues: SessionParticipantRole.values)
-    ..aOM<$19.User>(4, _omitFieldNames ? '' : 'user', subBuilder: $19.User.create)
+    ..aOM<$20.User>(4, _omitFieldNames ? '' : 'user', subBuilder: $20.User.create)
     ..hasRequiredFields = false
   ;
 
@@ -555,20 +555,20 @@ class SessionParticipant extends $pb.GeneratedMessage {
   void clearRole() => clearField(3);
 
   @$pb.TagNumber(4)
-  $19.User get user => $_getN(3);
+  $20.User get user => $_getN(3);
   @$pb.TagNumber(4)
-  set user($19.User v) { setField(4, v); }
+  set user($20.User v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasUser() => $_has(3);
   @$pb.TagNumber(4)
   void clearUser() => clearField(4);
   @$pb.TagNumber(4)
-  $19.User ensureUser() => $_ensure(3);
+  $20.User ensureUser() => $_ensure(3);
 }
 
 class SongPerformanceEntry extends $pb.GeneratedMessage {
   factory SongPerformanceEntry({
-    $19.User? user,
+    $20.User? user,
     SessionPart? part,
   }) {
     final $result = create();
@@ -585,7 +585,7 @@ class SongPerformanceEntry extends $pb.GeneratedMessage {
   factory SongPerformanceEntry.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SongPerformanceEntry', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$19.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $19.User.create)
+    ..aOM<$20.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $20.User.create)
     ..aOM<SessionPart>(2, _omitFieldNames ? '' : 'part', subBuilder: SessionPart.create)
     ..hasRequiredFields = false
   ;
@@ -612,15 +612,15 @@ class SongPerformanceEntry extends $pb.GeneratedMessage {
   static SongPerformanceEntry? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $19.User get user => $_getN(0);
+  $20.User get user => $_getN(0);
   @$pb.TagNumber(1)
-  set user($19.User v) { setField(1, v); }
+  set user($20.User v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasUser() => $_has(0);
   @$pb.TagNumber(1)
   void clearUser() => clearField(1);
   @$pb.TagNumber(1)
-  $19.User ensureUser() => $_ensure(0);
+  $20.User ensureUser() => $_ensure(0);
 
   @$pb.TagNumber(2)
   SessionPart get part => $_getN(1);
@@ -702,7 +702,7 @@ class SongPerformancePart extends $pb.GeneratedMessage {
 
 class SongPerformance extends $pb.GeneratedMessage {
   factory SongPerformance({
-    $16.Song? song,
+    $17.Song? song,
     $core.Iterable<SongPerformanceEntry>? entries,
     $core.Iterable<SongPerformancePart>? parts,
   }) {
@@ -723,7 +723,7 @@ class SongPerformance extends $pb.GeneratedMessage {
   factory SongPerformance.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SongPerformance', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$16.Song>(1, _omitFieldNames ? '' : 'song', subBuilder: $16.Song.create)
+    ..aOM<$17.Song>(1, _omitFieldNames ? '' : 'song', subBuilder: $17.Song.create)
     ..pc<SongPerformanceEntry>(2, _omitFieldNames ? '' : 'entries', $pb.PbFieldType.PM, subBuilder: SongPerformanceEntry.create)
     ..pc<SongPerformancePart>(3, _omitFieldNames ? '' : 'parts', $pb.PbFieldType.PM, subBuilder: SongPerformancePart.create)
     ..hasRequiredFields = false
@@ -751,15 +751,15 @@ class SongPerformance extends $pb.GeneratedMessage {
   static SongPerformance? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $16.Song get song => $_getN(0);
+  $17.Song get song => $_getN(0);
   @$pb.TagNumber(1)
-  set song($16.Song v) { setField(1, v); }
+  set song($17.Song v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSong() => $_has(0);
   @$pb.TagNumber(1)
   void clearSong() => clearField(1);
   @$pb.TagNumber(1)
-  $16.Song ensureSong() => $_ensure(0);
+  $17.Song ensureSong() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.List<SongPerformanceEntry> get entries => $_getList(1);
@@ -772,8 +772,8 @@ class TimetableEntry extends $pb.GeneratedMessage {
   factory TimetableEntry({
     TimetableEntry_TimetableEntryType? type,
     $core.int? index,
-    $18.Timestamp? start,
-    $18.Timestamp? end,
+    $19.Timestamp? start,
+    $19.Timestamp? end,
   }) {
     final $result = create();
     if (type != null) {
@@ -797,8 +797,8 @@ class TimetableEntry extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TimetableEntry', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..e<TimetableEntry_TimetableEntryType>(1, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: TimetableEntry_TimetableEntryType.TIMETABLE_ENTRY_TYPE_UNSPECIFIED, valueOf: TimetableEntry_TimetableEntryType.valueOf, enumValues: TimetableEntry_TimetableEntryType.values)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'index', $pb.PbFieldType.O3)
-    ..aOM<$18.Timestamp>(3, _omitFieldNames ? '' : 'start', subBuilder: $18.Timestamp.create)
-    ..aOM<$18.Timestamp>(4, _omitFieldNames ? '' : 'end', subBuilder: $18.Timestamp.create)
+    ..aOM<$19.Timestamp>(3, _omitFieldNames ? '' : 'start', subBuilder: $19.Timestamp.create)
+    ..aOM<$19.Timestamp>(4, _omitFieldNames ? '' : 'end', subBuilder: $19.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -842,26 +842,26 @@ class TimetableEntry extends $pb.GeneratedMessage {
   void clearIndex() => clearField(2);
 
   @$pb.TagNumber(3)
-  $18.Timestamp get start => $_getN(2);
+  $19.Timestamp get start => $_getN(2);
   @$pb.TagNumber(3)
-  set start($18.Timestamp v) { setField(3, v); }
+  set start($19.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasStart() => $_has(2);
   @$pb.TagNumber(3)
   void clearStart() => clearField(3);
   @$pb.TagNumber(3)
-  $18.Timestamp ensureStart() => $_ensure(2);
+  $19.Timestamp ensureStart() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $18.Timestamp get end => $_getN(3);
+  $19.Timestamp get end => $_getN(3);
   @$pb.TagNumber(4)
-  set end($18.Timestamp v) { setField(4, v); }
+  set end($19.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasEnd() => $_has(3);
   @$pb.TagNumber(4)
   void clearEnd() => clearField(4);
   @$pb.TagNumber(4)
-  $18.Timestamp ensureEnd() => $_ensure(3);
+  $19.Timestamp ensureEnd() => $_ensure(3);
 }
 
 class Timetable extends $pb.GeneratedMessage {
@@ -869,7 +869,7 @@ class Timetable extends $pb.GeneratedMessage {
     $core.Iterable<TimetableEntry>? entries,
     $core.Iterable<SessionTask>? tasks,
     $core.Iterable<SongPerformance>? songPerformances,
-    $core.Iterable<$21.Party>? parties,
+    $core.Iterable<$22.Party>? parties,
   }) {
     final $result = create();
     if (entries != null) {
@@ -894,7 +894,7 @@ class Timetable extends $pb.GeneratedMessage {
     ..pc<TimetableEntry>(1, _omitFieldNames ? '' : 'entries', $pb.PbFieldType.PM, subBuilder: TimetableEntry.create)
     ..pc<SessionTask>(2, _omitFieldNames ? '' : 'tasks', $pb.PbFieldType.PM, subBuilder: SessionTask.create)
     ..pc<SongPerformance>(3, _omitFieldNames ? '' : 'songPerformances', $pb.PbFieldType.PM, subBuilder: SongPerformance.create)
-    ..pc<$21.Party>(4, _omitFieldNames ? '' : 'parties', $pb.PbFieldType.PM, subBuilder: $21.Party.create)
+    ..pc<$22.Party>(4, _omitFieldNames ? '' : 'parties', $pb.PbFieldType.PM, subBuilder: $22.Party.create)
     ..hasRequiredFields = false
   ;
 
@@ -930,15 +930,15 @@ class Timetable extends $pb.GeneratedMessage {
   $core.List<SongPerformance> get songPerformances => $_getList(2);
 
   @$pb.TagNumber(4)
-  $core.List<$21.Party> get parties => $_getList(3);
+  $core.List<$22.Party> get parties => $_getList(3);
 }
 
 class SessionFeedback extends $pb.GeneratedMessage {
   factory SessionFeedback({
     $core.int? score,
     $core.String? comment,
-    $19.User? user,
-    $18.Timestamp? createdAt,
+    $20.User? user,
+    $19.Timestamp? createdAt,
   }) {
     final $result = create();
     if (score != null) {
@@ -962,8 +962,8 @@ class SessionFeedback extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SessionFeedback', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'score', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'comment')
-    ..aOM<$19.User>(3, _omitFieldNames ? '' : 'user', subBuilder: $19.User.create)
-    ..aOM<$18.Timestamp>(4, _omitFieldNames ? '' : 'createdAt', subBuilder: $18.Timestamp.create)
+    ..aOM<$20.User>(3, _omitFieldNames ? '' : 'user', subBuilder: $20.User.create)
+    ..aOM<$19.Timestamp>(4, _omitFieldNames ? '' : 'createdAt', subBuilder: $19.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -1007,26 +1007,26 @@ class SessionFeedback extends $pb.GeneratedMessage {
   void clearComment() => clearField(2);
 
   @$pb.TagNumber(3)
-  $19.User get user => $_getN(2);
+  $20.User get user => $_getN(2);
   @$pb.TagNumber(3)
-  set user($19.User v) { setField(3, v); }
+  set user($20.User v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUser() => $_has(2);
   @$pb.TagNumber(3)
   void clearUser() => clearField(3);
   @$pb.TagNumber(3)
-  $19.User ensureUser() => $_ensure(2);
+  $20.User ensureUser() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $18.Timestamp get createdAt => $_getN(3);
+  $19.Timestamp get createdAt => $_getN(3);
   @$pb.TagNumber(4)
-  set createdAt($18.Timestamp v) { setField(4, v); }
+  set createdAt($19.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasCreatedAt() => $_has(3);
   @$pb.TagNumber(4)
   void clearCreatedAt() => clearField(4);
   @$pb.TagNumber(4)
-  $18.Timestamp ensureCreatedAt() => $_ensure(3);
+  $19.Timestamp ensureCreatedAt() => $_ensure(3);
 }
 
 

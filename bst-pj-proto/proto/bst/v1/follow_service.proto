@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "bst/v1/user.proto";
+
+service FollowService {
+  rpc FollowUser(FollowUserRequest) returns (FollowUserResponse);
+  rpc ListFollowers(ListFollowersRequest) returns (ListFollowersResponse);
+  rpc ListFollowing(ListFollowingRequest) returns (ListFollowingResponse);
+}
+
+message FollowUserRequest {
+  int32 following_id = 1;
+}
+
+message FollowUserResponse {
+  bool success = 1;
+}
+
+message ListFollowersRequest {
+  int32 user_id = 1;
+}
+
+message ListFollowersResponse {
+  repeated User followers = 1;
+}
+
+message ListFollowingRequest {
+  int32 user_id = 1;
+}
+
+message ListFollowingResponse {
+  repeated User followings = 1;
+}
