@@ -24,19 +24,19 @@ export class ResourceService {
   private protoTypeToEntityType(type: Resource_ResourceType): ResourceType {
     switch (type) {
       case Resource_ResourceType.RESOURCE_TYPE_IMAGE:
-        return ResourceType.RESOURCE_TYPE_IMAGE;
+        return ResourceType.IMAGE;
       case Resource_ResourceType.RESOURCE_TYPE_VIDEO:
-        return ResourceType.RESOURCE_TYPE_VIDEO;
+        return ResourceType.VIDEO;
       default:
-        return ResourceType.RESOURCE_TYPE_UNSPECIFIED;
+        return ResourceType.UNSPECIFIED;
     }
   }
 
   private entityTypeToProtoType(type: ResourceType): Resource_ResourceType {
     switch (type) {
-      case ResourceType.RESOURCE_TYPE_IMAGE:
+      case ResourceType.IMAGE:
         return Resource_ResourceType.RESOURCE_TYPE_IMAGE;
-      case ResourceType.RESOURCE_TYPE_VIDEO:
+      case ResourceType.VIDEO:
         return Resource_ResourceType.RESOURCE_TYPE_VIDEO;
       default:
         return Resource_ResourceType.RESOURCE_TYPE_UNSPECIFIED;
@@ -62,7 +62,7 @@ export class ResourceService {
       url: request.url,
       name: request.name,
       description: request.description,
-      targetType: ResourceTargetType.COMMENT,
+      targetType: ResourceTargetType.UNSPECIFIED,
       targetId: 0,
       createdBy: userId,
     });

@@ -3,7 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserArtist } from '../entities/user-artist.entity';
 import { ArtistService } from '../artist/artist.service';
-import { Artist as ProtoArtist } from 'src/proto/bst/v1/content';
+import { Artist as ProtoArtist } from '../proto/bst/v1/content';
+
 @Injectable()
 export class UserArtistService {
   constructor(

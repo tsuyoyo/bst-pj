@@ -12,6 +12,9 @@ import { Genre } from '../entities/genre.entity';
 import { Artist } from '../entities/artist.entity';
 import { Part } from '../entities/part.entity';
 import { Area } from '../entities/area.entity';
+import { UserGenreModule } from '../user-genre/user-genre.module';
+import { UserPartModule } from '../user-part/user-part.module';
+import { UserArtistModule } from '../user-artist/user-artist.module';
 
 @Module({
   imports: [
@@ -30,6 +33,9 @@ import { Area } from '../entities/area.entity';
       secret: process.env.JWT_SECRET || 'your-secret-key',
       signOptions: { expiresIn: '1d' },
     }),
+    UserGenreModule,
+    UserPartModule,
+    UserArtistModule,
   ],
   controllers: [UserProfileController],
   providers: [UserProfileService],

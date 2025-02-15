@@ -64,7 +64,7 @@ export class ReactionService {
       user: {
         id: user.id,
         name: user.name,
-        icon: user.iconUrl,
+        icon: user.iconUrl || '',
       },
       reactionTypeId: reaction.reactionType.id,
       updatedUserId: reaction.userId,
