@@ -15,6 +15,7 @@ import { RatingModule } from './rating/rating.module';
 import { FollowModule } from './follow/follow.module';
 import { CommentModule } from './comment/comment.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
+import { MyProfileModule } from './my-profile/my-profile.module';
 
 @Module({
   imports: [
@@ -48,6 +49,7 @@ import { UserProfileModule } from './user-profile/user-profile.module';
     FollowModule,
     CommentModule,
     UserProfileModule,
+    MyProfileModule,
   ],
   controllers: [AppController],
   providers: [AppService],
