@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'user.pb.dart' as $20;
+import 'user.pb.dart' as $22;
 
 class RateUserRequest extends $pb.GeneratedMessage {
   factory RateUserRequest({
@@ -191,7 +191,7 @@ class GetUserRatingBadgesRequest extends $pb.GeneratedMessage {
 
 class GetUserRatingBadgesResponse extends $pb.GeneratedMessage {
   factory GetUserRatingBadgesResponse({
-    $core.Iterable<$20.UserRatingBadge>? badges,
+    $core.Iterable<$22.UserRatingBadge>? badges,
   }) {
     final $result = create();
     if (badges != null) {
@@ -204,7 +204,7 @@ class GetUserRatingBadgesResponse extends $pb.GeneratedMessage {
   factory GetUserRatingBadgesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetUserRatingBadgesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$20.UserRatingBadge>(1, _omitFieldNames ? '' : 'badges', $pb.PbFieldType.PM, subBuilder: $20.UserRatingBadge.create)
+    ..pc<$22.UserRatingBadge>(1, _omitFieldNames ? '' : 'badges', $pb.PbFieldType.PM, subBuilder: $22.UserRatingBadge.create)
     ..hasRequiredFields = false
   ;
 
@@ -230,7 +230,7 @@ class GetUserRatingBadgesResponse extends $pb.GeneratedMessage {
   static GetUserRatingBadgesResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$20.UserRatingBadge> get badges => $_getList(0);
+  $core.List<$22.UserRatingBadge> get badges => $_getList(0);
 }
 
 

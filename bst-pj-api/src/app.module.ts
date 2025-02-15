@@ -12,6 +12,9 @@ import { LocationModule } from './location/location.module';
 import { StudioModule } from './studio/studio.module';
 import { ReactionModule } from './reaction/reaction.module';
 import { RatingModule } from './rating/rating.module';
+import { FollowModule } from './follow/follow.module';
+import { CommentModule } from './comment/comment.module';
+import { UserProfileModule } from './user-profile/user-profile.module';
 
 @Module({
   imports: [
@@ -42,6 +45,9 @@ import { RatingModule } from './rating/rating.module';
     StudioModule,
     ReactionModule,
     RatingModule,
+    FollowModule,
+    CommentModule,
+    UserProfileModule,
   ],
   controllers: [AppController],
   providers: [AppService],

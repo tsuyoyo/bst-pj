@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, DataSource, QueryRunner } from 'typeorm';
+import { Repository, DataSource, QueryRunner, In } from 'typeorm';
 import { Artist } from '../entities/artist.entity';
 import { ArtistGenre } from '../entities/artist-genre.entity';
 import { Genre } from '../entities/genre.entity';
@@ -8,6 +8,7 @@ import {
   CreateArtistResponse,
   DeleteArtistResponse,
   GetArtistResponse,
+  GetArtistsResponse,
   ListArtistsResponse,
   UpdateArtistResponse,
 } from '../proto/bst/v1/artist_service';
@@ -138,6 +139,18 @@ export class ArtistService {
 
     return {
       artist: await this.mapEntityToProto(artist),
+    };
+  }
+
+  async getArtists(artistIds: number[]): Promise<GetArtistsResponse> {
+    const artists = await this.artistRepository.find({
+      where: { id: In(artistIds) },
+    });
+
+    const protoArtists = await Promise.all(artists.map(this.mapEntityToProto));
+
+    return {
+      artists: protoArtists.filter((a) => a !== undefined),
     };
   }
 

@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'user.pb.dart' as $20;
+import 'user.pb.dart' as $22;
 
 class FollowUserRequest extends $pb.GeneratedMessage {
   factory FollowUserRequest({
@@ -167,7 +167,7 @@ class ListFollowersRequest extends $pb.GeneratedMessage {
 
 class ListFollowersResponse extends $pb.GeneratedMessage {
   factory ListFollowersResponse({
-    $core.Iterable<$20.User>? followers,
+    $core.Iterable<$22.User>? followers,
   }) {
     final $result = create();
     if (followers != null) {
@@ -180,7 +180,7 @@ class ListFollowersResponse extends $pb.GeneratedMessage {
   factory ListFollowersResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListFollowersResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$20.User>(1, _omitFieldNames ? '' : 'followers', $pb.PbFieldType.PM, subBuilder: $20.User.create)
+    ..pc<$22.User>(1, _omitFieldNames ? '' : 'followers', $pb.PbFieldType.PM, subBuilder: $22.User.create)
     ..hasRequiredFields = false
   ;
 
@@ -206,7 +206,7 @@ class ListFollowersResponse extends $pb.GeneratedMessage {
   static ListFollowersResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$20.User> get followers => $_getList(0);
+  $core.List<$22.User> get followers => $_getList(0);
 }
 
 class ListFollowingRequest extends $pb.GeneratedMessage {
@@ -261,7 +261,7 @@ class ListFollowingRequest extends $pb.GeneratedMessage {
 
 class ListFollowingResponse extends $pb.GeneratedMessage {
   factory ListFollowingResponse({
-    $core.Iterable<$20.User>? followings,
+    $core.Iterable<$22.User>? followings,
   }) {
     final $result = create();
     if (followings != null) {
@@ -274,7 +274,7 @@ class ListFollowingResponse extends $pb.GeneratedMessage {
   factory ListFollowingResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListFollowingResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$20.User>(1, _omitFieldNames ? '' : 'followings', $pb.PbFieldType.PM, subBuilder: $20.User.create)
+    ..pc<$22.User>(1, _omitFieldNames ? '' : 'followings', $pb.PbFieldType.PM, subBuilder: $22.User.create)
     ..hasRequiredFields = false
   ;
 
@@ -300,7 +300,7 @@ class ListFollowingResponse extends $pb.GeneratedMessage {
   static ListFollowingResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$20.User> get followings => $_getList(0);
+  $core.List<$22.User> get followings => $_getList(0);
 }
 
 

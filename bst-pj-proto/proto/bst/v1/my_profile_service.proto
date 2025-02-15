@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "bst/v1/user.proto";
+
+message UpdateIntroductionRequest {
+  string introduction = 1;
+}
+
+message UpdateUserNameRequest {
+  string name = 1;
+}
+
+message UpdateUserIconRequest {
+  string icon = 1;
+}
+
+message UpdateUserGenresRequest {
+  repeated int32 genre_ids = 1;
+}
+
+message UpdateUserArtistsRequest {
+  repeated int32 artist_ids = 1;
+}
+
+message UpdateUserPartsRequest {
+  repeated int32 part_ids = 1;
+}
+
+message UpdateUserAreaRequest {
+  int32 area_id = 1;
+}
+
+message UpdateResponse {
+  bool        success = 1;
+  UserProfile profile = 2;
+}
+
+service MyProfileService {
+  rpc UpdateIntroduction(UpdateIntroductionRequest) returns (UpdateResponse);
+  rpc UpdateUserName(UpdateUserNameRequest) returns (UpdateResponse);
+  rpc UpdateUserIcon(UpdateUserIconRequest) returns (UpdateResponse);
+  rpc UpdateUserGenres(UpdateUserGenresRequest) returns (UpdateResponse);
+  rpc UpdateUserArtists(UpdateUserArtistsRequest) returns (UpdateResponse);
+  rpc UpdateUserParts(UpdateUserPartsRequest) returns (UpdateResponse);
+  rpc UpdateUserArea(UpdateUserAreaRequest) returns (UpdateResponse);
+}

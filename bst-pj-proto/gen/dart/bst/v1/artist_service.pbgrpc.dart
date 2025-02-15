@@ -33,6 +33,10 @@ class ArtistServiceClient extends $grpc.Client {
       '/bst.v1.ArtistService/GetArtist',
       ($0.GetArtistRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.GetArtistResponse.fromBuffer(value));
+  static final _$getArtists = $grpc.ClientMethod<$0.GetArtistsRequest, $0.GetArtistsResponse>(
+      '/bst.v1.ArtistService/GetArtists',
+      ($0.GetArtistsRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.GetArtistsResponse.fromBuffer(value));
   static final _$updateArtist = $grpc.ClientMethod<$0.UpdateArtistRequest, $0.UpdateArtistResponse>(
       '/bst.v1.ArtistService/UpdateArtist',
       ($0.UpdateArtistRequest value) => value.writeToBuffer(),
@@ -62,6 +66,10 @@ class ArtistServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.GetArtistResponse> getArtist($0.GetArtistRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getArtist, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.GetArtistsResponse> getArtists($0.GetArtistsRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getArtists, request, options: options);
   }
 
   $grpc.ResponseFuture<$0.UpdateArtistResponse> updateArtist($0.UpdateArtistRequest request, {$grpc.CallOptions? options}) {
@@ -103,6 +111,13 @@ abstract class ArtistServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetArtistRequest.fromBuffer(value),
         ($0.GetArtistResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetArtistsRequest, $0.GetArtistsResponse>(
+        'GetArtists',
+        getArtists_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetArtistsRequest.fromBuffer(value),
+        ($0.GetArtistsResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.UpdateArtistRequest, $0.UpdateArtistResponse>(
         'UpdateArtist',
         updateArtist_Pre,
@@ -138,6 +153,10 @@ abstract class ArtistServiceBase extends $grpc.Service {
     return getArtist(call, await request);
   }
 
+  $async.Future<$0.GetArtistsResponse> getArtists_Pre($grpc.ServiceCall call, $async.Future<$0.GetArtistsRequest> request) async {
+    return getArtists(call, await request);
+  }
+
   $async.Future<$0.UpdateArtistResponse> updateArtist_Pre($grpc.ServiceCall call, $async.Future<$0.UpdateArtistRequest> request) async {
     return updateArtist(call, await request);
   }
@@ -153,6 +172,7 @@ abstract class ArtistServiceBase extends $grpc.Service {
   $async.Future<$0.CreateArtistResponse> createArtist($grpc.ServiceCall call, $0.CreateArtistRequest request);
   $async.Future<$0.ListArtistsResponse> listArtists($grpc.ServiceCall call, $0.ListArtistsRequest request);
   $async.Future<$0.GetArtistResponse> getArtist($grpc.ServiceCall call, $0.GetArtistRequest request);
+  $async.Future<$0.GetArtistsResponse> getArtists($grpc.ServiceCall call, $0.GetArtistsRequest request);
   $async.Future<$0.UpdateArtistResponse> updateArtist($grpc.ServiceCall call, $0.UpdateArtistRequest request);
   $async.Future<$0.DeleteArtistResponse> deleteArtist($grpc.ServiceCall call, $0.DeleteArtistRequest request);
   $async.Future<$0.ListArtistSongsResponse> listArtistSongs($grpc.ServiceCall call, $0.ListArtistSongsRequest request);

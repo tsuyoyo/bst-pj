@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { DataSource, QueryRunner, Repository } from 'typeorm';
+import { DataSource, In, QueryRunner, Repository } from 'typeorm';
 import { ArtistService } from './artist.service';
 import { Artist } from '../entities/artist.entity';
 import { ArtistGenre } from '../entities/artist-genre.entity';
@@ -169,6 +169,16 @@ describe('ArtistService', () => {
           id: 1,
           name: 'Artist 1',
           website: 'http://artist1.com',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          updatedUserId: 1,
+        },
+        {
+          id: 2,
+          name: 'Artist 2',
+          website: 'http://artist2.com',
+          createdAt: new Date(),
+          updatedAt: new Date(),
           updatedUserId: 1,
         },
       ];
@@ -181,42 +191,49 @@ describe('ArtistService', () => {
 
       expect(result).toEqual({
         artists: mockArtists.map((artist) => ({
-          ...artist,
+          id: artist.id,
+          name: artist.name,
+          website: artist.website,
+          updatedUserId: artist.updatedUserId,
           genres: [{ id: 1, name: 'Rock' }],
         })),
         nextPageToken: '',
-        totalSize: 1,
+        totalSize: 2,
       });
     });
   });
 
   describe('getArtist', () => {
-    it('should return an artist by id', async () => {
+    it('should return an artist when found', async () => {
       const artistId = 1;
       const mockArtist = {
         id: artistId,
-        name: 'Artist 1',
-        website: 'http://artist1.com',
+        name: 'Test Artist',
+        website: 'http://test.com',
+        createdAt: new Date(),
+        updatedAt: new Date(),
         updatedUserId: 1,
       };
-
-      jest
-        .spyOn(artistRepository, 'findOne')
-        .mockResolvedValue(mockArtist as Artist);
+      jest.spyOn(artistRepository, 'findOne').mockResolvedValue(mockArtist);
 
       const result = await service.getArtist(artistId);
 
       expect(result).toEqual({
         artist: {
-          ...mockArtist,
+          id: mockArtist.id,
+          name: mockArtist.name,
+          website: mockArtist.website,
+          updatedUserId: mockArtist.updatedUserId,
           genres: [{ id: 1, name: 'Rock' }],
         },
       });
+      expect(artistRepository.findOne).toHaveBeenCalledWith({
+        where: { id: artistId },
+      });
     });
 
-    it('should throw NotFoundException when artist not found', async () => {
-      const artistId = 999;
-
+    it('should throw NotFoundException when artist is not found', async () => {
+      const artistId = 1;
       jest.spyOn(artistRepository, 'findOne').mockResolvedValue(null);
 
       await expect(service.getArtist(artistId)).rejects.toThrow(
@@ -321,6 +338,66 @@ describe('ArtistService', () => {
       await expect(service.deleteArtist(artistId)).rejects.toThrow(
         NotFoundException,
       );
+    });
+  });
+
+  describe('getArtists', () => {
+    it('should return a list of artists when found', async () => {
+      const artistIds = [1, 2];
+      const mockArtists = [
+        {
+          id: 1,
+          name: 'Artist 1',
+          website: 'http://artist1.com',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          updatedUserId: 1,
+        },
+        {
+          id: 2,
+          name: 'Artist 2',
+          website: 'http://artist2.com',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          updatedUserId: 1,
+        },
+      ];
+      jest.spyOn(artistRepository, 'find').mockResolvedValue(mockArtists);
+
+      const result = await service.getArtists(artistIds);
+
+      expect(result).toEqual({
+        artists: [
+          {
+            id: 1,
+            name: 'Artist 1',
+            website: 'http://artist1.com',
+            updatedUserId: 1,
+            genres: [{ id: 1, name: 'Rock' }],
+          },
+          {
+            id: 2,
+            name: 'Artist 2',
+            website: 'http://artist2.com',
+            updatedUserId: 1,
+            genres: [{ id: 1, name: 'Rock' }],
+          },
+        ],
+      });
+      expect(artistRepository.find).toHaveBeenCalledWith({
+        where: { id: In(artistIds) },
+      });
+    });
+
+    it('should return an empty list when no artists are found', async () => {
+      const artistIds = [1, 2];
+      jest.spyOn(artistRepository, 'find').mockResolvedValue([]);
+
+      const result = await service.getArtists(artistIds);
+
+      expect(result).toEqual({
+        artists: [],
+      });
     });
   });
 });

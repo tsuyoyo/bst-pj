@@ -40,6 +40,14 @@ export interface GetArtistResponse {
   artist: Artist | undefined;
 }
 
+export interface GetArtistsRequest {
+  artistIds: number[];
+}
+
+export interface GetArtistsResponse {
+  artists: Artist[];
+}
+
 export interface UpdateArtistRequest {
   artistId: number;
   name: string;
@@ -522,6 +530,138 @@ export const GetArtistResponse = {
     message.artist = (object.artist !== undefined && object.artist !== null)
       ? Artist.fromPartial(object.artist)
       : undefined;
+    return message;
+  },
+};
+
+function createBaseGetArtistsRequest(): GetArtistsRequest {
+  return { artistIds: [] };
+}
+
+export const GetArtistsRequest = {
+  encode(message: GetArtistsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    writer.uint32(10).fork();
+    for (const v of message.artistIds) {
+      writer.int32(v);
+    }
+    writer.ldelim();
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetArtistsRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetArtistsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag === 8) {
+            message.artistIds.push(reader.int32());
+
+            continue;
+          }
+
+          if (tag === 10) {
+            const end2 = reader.uint32() + reader.pos;
+            while (reader.pos < end2) {
+              message.artistIds.push(reader.int32());
+            }
+
+            continue;
+          }
+
+          break;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetArtistsRequest {
+    return {
+      artistIds: globalThis.Array.isArray(object?.artistIds)
+        ? object.artistIds.map((e: any) => globalThis.Number(e))
+        : [],
+    };
+  },
+
+  toJSON(message: GetArtistsRequest): unknown {
+    const obj: any = {};
+    if (message.artistIds?.length) {
+      obj.artistIds = message.artistIds.map((e) => Math.round(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetArtistsRequest>, I>>(base?: I): GetArtistsRequest {
+    return GetArtistsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetArtistsRequest>, I>>(object: I): GetArtistsRequest {
+    const message = createBaseGetArtistsRequest();
+    message.artistIds = object.artistIds?.map((e) => e) || [];
+    return message;
+  },
+};
+
+function createBaseGetArtistsResponse(): GetArtistsResponse {
+  return { artists: [] };
+}
+
+export const GetArtistsResponse = {
+  encode(message: GetArtistsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.artists) {
+      Artist.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetArtistsResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetArtistsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.artists.push(Artist.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetArtistsResponse {
+    return {
+      artists: globalThis.Array.isArray(object?.artists) ? object.artists.map((e: any) => Artist.fromJSON(e)) : [],
+    };
+  },
+
+  toJSON(message: GetArtistsResponse): unknown {
+    const obj: any = {};
+    if (message.artists?.length) {
+      obj.artists = message.artists.map((e) => Artist.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetArtistsResponse>, I>>(base?: I): GetArtistsResponse {
+    return GetArtistsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetArtistsResponse>, I>>(object: I): GetArtistsResponse {
+    const message = createBaseGetArtistsResponse();
+    message.artists = object.artists?.map((e) => Artist.fromPartial(e)) || [];
     return message;
   },
 };
@@ -1015,6 +1155,8 @@ export interface ArtistService {
   ListArtists(request: ListArtistsRequest): Promise<ListArtistsResponse>;
   /** GET /artists/{id} */
   GetArtist(request: GetArtistRequest): Promise<GetArtistResponse>;
+  /** GET /artists/{ids} */
+  GetArtists(request: GetArtistsRequest): Promise<GetArtistsResponse>;
   /** PUT /artists/{id} */
   UpdateArtist(request: UpdateArtistRequest): Promise<UpdateArtistResponse>;
   /** DELETE /artists/{id} */
@@ -1033,6 +1175,7 @@ export class ArtistServiceClientImpl implements ArtistService {
     this.CreateArtist = this.CreateArtist.bind(this);
     this.ListArtists = this.ListArtists.bind(this);
     this.GetArtist = this.GetArtist.bind(this);
+    this.GetArtists = this.GetArtists.bind(this);
     this.UpdateArtist = this.UpdateArtist.bind(this);
     this.DeleteArtist = this.DeleteArtist.bind(this);
     this.ListArtistSongs = this.ListArtistSongs.bind(this);
@@ -1053,6 +1196,12 @@ export class ArtistServiceClientImpl implements ArtistService {
     const data = GetArtistRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "GetArtist", data);
     return promise.then((data) => GetArtistResponse.decode(_m0.Reader.create(data)));
+  }
+
+  GetArtists(request: GetArtistsRequest): Promise<GetArtistsResponse> {
+    const data = GetArtistsRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "GetArtists", data);
+    return promise.then((data) => GetArtistsResponse.decode(_m0.Reader.create(data)));
   }
 
   UpdateArtist(request: UpdateArtistRequest): Promise<UpdateArtistResponse> {

@@ -4,12 +4,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
 import * as bcrypt from 'bcrypt';
+import { UserProfile } from 'src/entities/user-profile.entity';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    @InjectRepository(UserProfile)
+    private readonly userProfileRepository: Repository<UserProfile>,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -33,6 +36,12 @@ export class AuthService {
     });
 
     await this.userRepository.save(user);
+
+    const userProfile = this.userProfileRepository.create({
+      userId: user.id,
+    });
+
+    await this.userProfileRepository.save(userProfile);
 
     const payload = { sub: user.id, email: user.email };
     const access_token = this.jwtService.sign(payload);

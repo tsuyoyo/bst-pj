@@ -13,6 +13,8 @@ service ArtistService {
   rpc ListArtists(ListArtistsRequest) returns (ListArtistsResponse);
   // GET /artists/{id}
   rpc GetArtist(GetArtistRequest) returns (GetArtistResponse);
+  // GET /artists/{ids}
+  rpc GetArtists(GetArtistsRequest) returns (GetArtistsResponse);
   // PUT /artists/{id}
   rpc UpdateArtist(UpdateArtistRequest) returns (UpdateArtistResponse);
   // DELETE /artists/{id}
@@ -49,6 +51,14 @@ message GetArtistRequest {
 
 message GetArtistResponse {
   Artist artist = 1;
+}
+
+message GetArtistsRequest {
+  repeated int32 artist_ids = 1;
+}
+
+message GetArtistsResponse {
+  repeated Artist artists = 1;
 }
 
 message UpdateArtistRequest {

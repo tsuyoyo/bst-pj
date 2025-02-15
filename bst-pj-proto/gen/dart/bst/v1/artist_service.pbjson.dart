@@ -98,6 +98,31 @@ final $typed_data.Uint8List getArtistResponseDescriptor = $convert.base64Decode(
     'ChFHZXRBcnRpc3RSZXNwb25zZRImCgZhcnRpc3QYASABKAsyDi5ic3QudjEuQXJ0aXN0UgZhcn'
     'Rpc3Q=');
 
+@$core.Deprecated('Use getArtistsRequestDescriptor instead')
+const GetArtistsRequest$json = {
+  '1': 'GetArtistsRequest',
+  '2': [
+    {'1': 'artist_ids', '3': 1, '4': 3, '5': 5, '10': 'artistIds'},
+  ],
+};
+
+/// Descriptor for `GetArtistsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getArtistsRequestDescriptor = $convert.base64Decode(
+    'ChFHZXRBcnRpc3RzUmVxdWVzdBIdCgphcnRpc3RfaWRzGAEgAygFUglhcnRpc3RJZHM=');
+
+@$core.Deprecated('Use getArtistsResponseDescriptor instead')
+const GetArtistsResponse$json = {
+  '1': 'GetArtistsResponse',
+  '2': [
+    {'1': 'artists', '3': 1, '4': 3, '5': 11, '6': '.bst.v1.Artist', '10': 'artists'},
+  ],
+};
+
+/// Descriptor for `GetArtistsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getArtistsResponseDescriptor = $convert.base64Decode(
+    'ChJHZXRBcnRpc3RzUmVzcG9uc2USKAoHYXJ0aXN0cxgBIAMoCzIOLmJzdC52MS5BcnRpc3RSB2'
+    'FydGlzdHM=');
+
 @$core.Deprecated('Use updateArtistRequestDescriptor instead')
 const UpdateArtistRequest$json = {
   '1': 'UpdateArtistRequest',
