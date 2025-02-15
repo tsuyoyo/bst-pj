@@ -8,6 +8,7 @@ import { GetUserProfileResponse } from '../proto/bst/v1/user_profile_service';
 import { UserGenreService } from '../user-genre/user-genre.service';
 import { UserPartService } from '../user-part/user-part.service';
 import { UserArtistService } from '../user-artist/user-artist.service';
+import { UserService } from '../user/user.service';
 
 describe('UserProfileService', () => {
   let service: UserProfileService;
@@ -47,6 +48,10 @@ describe('UserProfileService', () => {
           useValue: {
             getUserPreferredArtists: jest.fn(),
           },
+        },
+        {
+          provide: UserService,
+          useValue: {},
         },
       ],
     }).compile();

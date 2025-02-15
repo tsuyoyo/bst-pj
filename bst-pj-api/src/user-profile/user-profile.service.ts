@@ -2,35 +2,22 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserProfile } from '../entities/user-profile.entity';
-import { User } from '../entities/user.entity';
 import { GetUserProfileResponse } from '../proto/bst/v1/user_profile_service';
-import { Area } from '../entities/area.entity';
 import { UserGenreService } from '../user-genre/user-genre.service';
 import { UserPartService } from '../user-part/user-part.service';
 import { UserArtistService } from '../user-artist/user-artist.service';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class UserProfileService {
   constructor(
     @InjectRepository(UserProfile)
     private readonly userProfileRepository: Repository<UserProfile>,
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
-    @InjectRepository(Area)
-    private readonly areaRepository: Repository<Area>,
+    private readonly userService: UserService,
     private readonly userGenreService: UserGenreService,
     private readonly userPartService: UserPartService,
     private readonly userArtistService: UserArtistService,
   ) {}
-
-  private mapUserToProto(user: User) {
-    return {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      icon: user.iconUrl || '',
-    };
-  }
 
   private mapProfileToProto(profile: UserProfile) {
     return {
@@ -61,7 +48,7 @@ export class UserProfileService {
 
     return {
       profile: {
-        user: this.mapUserToProto(userProfile.user),
+        user: this.userService.mapUserToProto(userProfile.user),
         ...this.mapProfileToProto(userProfile),
         area: userProfile.area
           ? {

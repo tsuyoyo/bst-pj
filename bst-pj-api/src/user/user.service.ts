@@ -12,7 +12,7 @@ export class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  private mapUserToProto(user: User): ProtoUser {
+  public mapUserToProto(user: User): ProtoUser {
     return {
       id: user.id,
       name: user.name,
