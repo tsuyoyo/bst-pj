@@ -30,11 +30,11 @@ describe('ResourceService', () => {
 
   const mockResource: Resource = {
     id: 1,
-    type: ResourceType.RESOURCE_TYPE_IMAGE,
+    type: ResourceType.IMAGE,
     url: 'https://example.com/image.jpg',
     name: 'Test Image',
     description: 'Test Description',
-    targetType: ResourceTargetType.COMMENT,
+    targetType: ResourceTargetType.ARTIST_PROFILE,
     targetId: 0,
     createdBy: 1,
     creator: mockUser,
@@ -84,11 +84,11 @@ describe('ResourceService', () => {
       const result = await service.createResource(createResourceDto, userId);
 
       expect(repository.create).toHaveBeenCalledWith({
-        type: ResourceType.RESOURCE_TYPE_IMAGE,
+        type: ResourceType.IMAGE,
         url: createResourceDto.url,
         name: createResourceDto.name,
         description: createResourceDto.description,
-        targetType: ResourceTargetType.COMMENT,
+        targetType: ResourceTargetType.UNSPECIFIED,
         targetId: 0,
         createdBy: userId,
       });

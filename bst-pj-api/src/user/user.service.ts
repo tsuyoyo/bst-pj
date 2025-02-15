@@ -20,7 +20,7 @@ export class UserService {
     };
   }
 
-  async createUser(createUserDto: {
+  async create(createUserDto: {
     name: string;
     email: string;
     password: string;

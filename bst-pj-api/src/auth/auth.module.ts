@@ -6,7 +6,7 @@ import { UserProfile } from '../entities/user-profile.entity';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './jwt-auth.guard';
-
+import { UserService } from 'src/user/user.service';
 @Module({
   imports: [
     TypeOrmModule.forFeature([User, UserProfile]),
@@ -16,7 +16,7 @@ import { JwtAuthGuard } from './jwt-auth.guard';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtAuthGuard],
+  providers: [AuthService, UserService, JwtAuthGuard],
   exports: [AuthService, JwtAuthGuard],
 })
 export class AuthModule {}

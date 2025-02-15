@@ -3,9 +3,10 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
+import { User as ProtoUser } from '../proto/bst/v1/user';
 import * as bcrypt from 'bcrypt';
 import { UserProfile } from 'src/entities/user-profile.entity';
-
+import { UserService } from 'src/user/user.service';
 @Injectable()
 export class AuthService {
   constructor(
@@ -14,13 +15,14 @@ export class AuthService {
     @InjectRepository(UserProfile)
     private readonly userProfileRepository: Repository<UserProfile>,
     private readonly jwtService: JwtService,
+    private readonly userService: UserService,
   ) {}
 
   async register(
     email: string,
     password: string,
     name: string,
-  ): Promise<{ user: User; access_token: string }> {
+  ): Promise<{ user: ProtoUser; access_token: string }> {
     const existingUser = await this.userRepository.findOne({
       where: { email },
     });
@@ -29,21 +31,18 @@ export class AuthService {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = this.userRepository.create({
+    const user = await this.userService.create({
       name,
       email,
       password: hashedPassword,
     });
-
-    await this.userRepository.save(user);
-
     const userProfile = this.userProfileRepository.create({
       userId: user.id,
     });
 
     await this.userProfileRepository.save(userProfile);
 
-    const payload = { sub: user.id, email: user.email };
+    const payload = { sub: user.id, email };
     const access_token = this.jwtService.sign(payload);
 
     return { user, access_token };

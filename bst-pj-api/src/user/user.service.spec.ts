@@ -49,7 +49,7 @@ describe('UserService', () => {
       password: 'password123',
     };
 
-    const result = await service.createUser(createUserDto);
+    const result = await service.create(createUserDto);
     expect(result).toBeDefined();
     expect(result.id).toBe(mockUser.id);
     expect(result.name).toBe(mockUser.name);

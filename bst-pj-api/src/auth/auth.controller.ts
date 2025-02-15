@@ -43,11 +43,7 @@ export class AuthController {
       name,
     );
     return {
-      user: {
-        id: Number(user.id),
-        name: user.name,
-        icon: user.iconUrl || '',
-      },
+      user,
       accessToken: access_token,
       refreshToken: '',
     };
