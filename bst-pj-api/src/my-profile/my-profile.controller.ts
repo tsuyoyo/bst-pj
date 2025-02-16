@@ -1,9 +1,12 @@
-import { Body, Controller, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Put, UseGuards } from '@nestjs/common';
 import { MyProfileService } from './my-profile.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CurrentUser } from '../auth/user.decorator';
 import { User } from '../entities/user.entity';
-import { UpdateResponse } from '../proto/bst/v1/my_profile_service';
+import {
+  GetMyProfileResponse,
+  UpdateResponse,
+} from '../proto/bst/v1/my_profile_service';
 import { UpdateIntroductionDto } from './dto/update-introduction.dto';
 import { UpdateUserNameDto } from './dto/update-user-name.dto';
 import { UpdateUserIconDto } from './dto/update-user-icon.dto';
@@ -16,6 +19,11 @@ import { UpdateUserAreaDto } from './dto/update-user-area.dto';
 @UseGuards(JwtAuthGuard)
 export class MyProfileController {
   constructor(private readonly myProfileService: MyProfileService) {}
+
+  @Get()
+  async getMyProfile(@CurrentUser() user: User): Promise<GetMyProfileResponse> {
+    return this.myProfileService.getMyProfile(user.id);
+  }
 
   @Put('introduction')
   async updateIntroduction(

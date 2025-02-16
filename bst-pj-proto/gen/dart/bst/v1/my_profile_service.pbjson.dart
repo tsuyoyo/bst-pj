@@ -13,6 +13,20 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+@$core.Deprecated('Use getMyProfileResponseDescriptor instead')
+const GetMyProfileResponse$json = {
+  '1': 'GetMyProfileResponse',
+  '2': [
+    {'1': 'profile', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.UserProfile', '10': 'profile'},
+    {'1': 'email', '3': 2, '4': 1, '5': 9, '10': 'email'},
+  ],
+};
+
+/// Descriptor for `GetMyProfileResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getMyProfileResponseDescriptor = $convert.base64Decode(
+    'ChRHZXRNeVByb2ZpbGVSZXNwb25zZRItCgdwcm9maWxlGAEgASgLMhMuYnN0LnYxLlVzZXJQcm'
+    '9maWxlUgdwcm9maWxlEhQKBWVtYWlsGAIgASgJUgVlbWFpbA==');
+
 @$core.Deprecated('Use updateIntroductionRequestDescriptor instead')
 const UpdateIntroductionRequest$json = {
   '1': 'UpdateIntroductionRequest',

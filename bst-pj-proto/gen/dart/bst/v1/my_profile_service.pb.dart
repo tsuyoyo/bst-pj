@@ -15,6 +15,72 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'user.pb.dart' as $22;
 
+class GetMyProfileResponse extends $pb.GeneratedMessage {
+  factory GetMyProfileResponse({
+    $22.UserProfile? profile,
+    $core.String? email,
+  }) {
+    final $result = create();
+    if (profile != null) {
+      $result.profile = profile;
+    }
+    if (email != null) {
+      $result.email = email;
+    }
+    return $result;
+  }
+  GetMyProfileResponse._() : super();
+  factory GetMyProfileResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetMyProfileResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMyProfileResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+    ..aOM<$22.UserProfile>(1, _omitFieldNames ? '' : 'profile', subBuilder: $22.UserProfile.create)
+    ..aOS(2, _omitFieldNames ? '' : 'email')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetMyProfileResponse clone() => GetMyProfileResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetMyProfileResponse copyWith(void Function(GetMyProfileResponse) updates) => super.copyWith((message) => updates(message as GetMyProfileResponse)) as GetMyProfileResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetMyProfileResponse create() => GetMyProfileResponse._();
+  GetMyProfileResponse createEmptyInstance() => create();
+  static $pb.PbList<GetMyProfileResponse> createRepeated() => $pb.PbList<GetMyProfileResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetMyProfileResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetMyProfileResponse>(create);
+  static GetMyProfileResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $22.UserProfile get profile => $_getN(0);
+  @$pb.TagNumber(1)
+  set profile($22.UserProfile v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasProfile() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearProfile() => clearField(1);
+  @$pb.TagNumber(1)
+  $22.UserProfile ensureProfile() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get email => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set email($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasEmail() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearEmail() => clearField(2);
+}
+
 class UpdateIntroductionRequest extends $pb.GeneratedMessage {
   factory UpdateIntroductionRequest({
     $core.String? introduction,

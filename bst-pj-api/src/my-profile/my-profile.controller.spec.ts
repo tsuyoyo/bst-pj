@@ -2,14 +2,19 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MyProfileController } from './my-profile.controller';
 import { MyProfileService } from './my-profile.service';
+import { UserProfileService } from '../user-profile/user-profile.service';
 import { User } from '../entities/user.entity';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { JwtService } from '@nestjs/jwt';
 import { getRepositoryToken } from '@nestjs/typeorm';
+import {
+  GetMyProfileResponse,
+  UpdateResponse,
+} from '../proto/bst/v1/my_profile_service';
 
 describe('MyProfileController', () => {
   let controller: MyProfileController;
-  let service: MyProfileService;
+  let myProfileService: MyProfileService;
 
   const mockUser: User = {
     id: 1,
@@ -24,16 +29,50 @@ describe('MyProfileController', () => {
     updatedAt: new Date(),
   };
 
-  const mockResponse = {
-    success: true,
+  const mockGetMyProfileResponse: GetMyProfileResponse = {
     profile: {
-      user: mockUser,
-      bio: 'Test Bio',
-      areaId: 1,
-      genres: [],
-      parts: [],
-      artists: [],
+      user: {
+        id: mockUser.id,
+        name: mockUser.name,
+        icon: mockUser.iconUrl || '',
+      },
+      introduction: 'Test Bio',
+      area: {
+        name: 'Test Area',
+        prefectureId: 1,
+      },
+      favorite: {
+        genres: [],
+        artists: [],
+        parts: [],
+      },
+      badges: [],
+      createdAt: new Date(),
     },
+    email: mockUser.email,
+  };
+
+  const mockUpdateResponse: UpdateResponse = {
+    profile: {
+      user: {
+        id: mockUser.id,
+        name: mockUser.name,
+        icon: mockUser.iconUrl || '',
+      },
+      introduction: 'Test Bio',
+      area: {
+        name: 'Test Area',
+        prefectureId: 1,
+      },
+      favorite: {
+        genres: [],
+        artists: [],
+        parts: [],
+      },
+      badges: [],
+      createdAt: new Date(),
+    },
+    success: true,
   };
 
   beforeEach(async () => {
@@ -43,13 +82,20 @@ describe('MyProfileController', () => {
         {
           provide: MyProfileService,
           useValue: {
-            updateIntroduction: jest.fn().mockResolvedValue(mockResponse),
-            updateUserName: jest.fn().mockResolvedValue(mockResponse),
-            updateUserIcon: jest.fn().mockResolvedValue(mockResponse),
-            updateUserGenres: jest.fn().mockResolvedValue(mockResponse),
-            updateUserArtists: jest.fn().mockResolvedValue(mockResponse),
-            updateUserParts: jest.fn().mockResolvedValue(mockResponse),
-            updateUserArea: jest.fn().mockResolvedValue(mockResponse),
+            getMyProfile: jest.fn(),
+            updateIntroduction: jest.fn(),
+            updateUserName: jest.fn(),
+            updateUserIcon: jest.fn(),
+            updateUserGenres: jest.fn(),
+            updateUserArtists: jest.fn(),
+            updateUserParts: jest.fn(),
+            updateUserArea: jest.fn(),
+          },
+        },
+        {
+          provide: UserProfileService,
+          useValue: {
+            getUserProfile: jest.fn(),
           },
         },
         {
@@ -72,93 +118,147 @@ describe('MyProfileController', () => {
       .compile();
 
     controller = module.get<MyProfileController>(MyProfileController);
-    service = module.get<MyProfileService>(MyProfileService);
+    myProfileService = module.get<MyProfileService>(MyProfileService);
   });
 
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
 
+  describe('getMyProfile', () => {
+    it('should return user profile successfully', async () => {
+      jest
+        .spyOn(myProfileService, 'getMyProfile')
+        .mockResolvedValue(mockGetMyProfileResponse);
+
+      const result = await controller.getMyProfile(mockUser);
+
+      expect(result).toEqual(mockGetMyProfileResponse);
+      expect(myProfileService.getMyProfile).toHaveBeenCalledWith(mockUser.id);
+    });
+  });
+
   describe('updateIntroduction', () => {
     it('should update introduction successfully', async () => {
-      const dto = { introduction: 'New Introduction' };
-      const result = await controller.updateIntroduction(dto, mockUser);
-      expect(result).toEqual(mockResponse);
-      expect(service.updateIntroduction).toHaveBeenCalledWith(
+      const updateRequest = { introduction: 'New Bio' };
+      jest
+        .spyOn(myProfileService, 'updateIntroduction')
+        .mockResolvedValue(mockUpdateResponse);
+
+      const result = await controller.updateIntroduction(
+        updateRequest,
+        mockUser,
+      );
+
+      expect(result).toEqual(mockUpdateResponse);
+      expect(myProfileService.updateIntroduction).toHaveBeenCalledWith(
         mockUser.id,
-        dto.introduction,
+        updateRequest.introduction,
       );
     });
   });
 
   describe('updateUserName', () => {
     it('should update user name successfully', async () => {
-      const dto = { name: 'New Name' };
-      const result = await controller.updateUserName(dto, mockUser);
-      expect(result).toEqual(mockResponse);
-      expect(service.updateUserName).toHaveBeenCalledWith(
+      const updateRequest = { name: 'New Name' };
+      jest
+        .spyOn(myProfileService, 'updateUserName')
+        .mockResolvedValue(mockUpdateResponse);
+
+      const result = await controller.updateUserName(updateRequest, mockUser);
+
+      expect(result).toEqual(mockUpdateResponse);
+      expect(myProfileService.updateUserName).toHaveBeenCalledWith(
         mockUser.id,
-        dto.name,
+        updateRequest.name,
       );
     });
   });
 
   describe('updateUserIcon', () => {
     it('should update user icon successfully', async () => {
-      const dto = { icon: 'https://example.com/new-icon.jpg' };
-      const result = await controller.updateUserIcon(dto, mockUser);
-      expect(result).toEqual(mockResponse);
-      expect(service.updateUserIcon).toHaveBeenCalledWith(
+      const updateRequest = { icon: 'new-icon-url' };
+      jest
+        .spyOn(myProfileService, 'updateUserIcon')
+        .mockResolvedValue(mockUpdateResponse);
+
+      const result = await controller.updateUserIcon(updateRequest, mockUser);
+
+      expect(result).toEqual(mockUpdateResponse);
+      expect(myProfileService.updateUserIcon).toHaveBeenCalledWith(
         mockUser.id,
-        dto.icon,
+        updateRequest.icon,
       );
     });
   });
 
   describe('updateUserGenres', () => {
     it('should update user genres successfully', async () => {
-      const dto = { genreIds: [1, 2, 3] };
-      const result = await controller.updateUserGenres(dto, mockUser);
-      expect(result).toEqual(mockResponse);
-      expect(service.updateUserGenres).toHaveBeenCalledWith(
+      const updateRequest = { genreIds: [1, 2, 3] };
+      jest
+        .spyOn(myProfileService, 'updateUserGenres')
+        .mockResolvedValue(mockUpdateResponse);
+
+      const result = await controller.updateUserGenres(updateRequest, mockUser);
+
+      expect(result).toEqual(mockUpdateResponse);
+      expect(myProfileService.updateUserGenres).toHaveBeenCalledWith(
         mockUser.id,
-        dto.genreIds,
+        updateRequest.genreIds,
       );
     });
   });
 
   describe('updateUserArtists', () => {
     it('should update user artists successfully', async () => {
-      const dto = { artistIds: [1, 2, 3] };
-      const result = await controller.updateUserArtists(dto, mockUser);
-      expect(result).toEqual(mockResponse);
-      expect(service.updateUserArtists).toHaveBeenCalledWith(
+      const updateRequest = { artistIds: [1, 2, 3] };
+      jest
+        .spyOn(myProfileService, 'updateUserArtists')
+        .mockResolvedValue(mockUpdateResponse);
+
+      const result = await controller.updateUserArtists(
+        updateRequest,
+        mockUser,
+      );
+
+      expect(result).toEqual(mockUpdateResponse);
+      expect(myProfileService.updateUserArtists).toHaveBeenCalledWith(
         mockUser.id,
-        dto.artistIds,
+        updateRequest.artistIds,
       );
     });
   });
 
   describe('updateUserParts', () => {
     it('should update user parts successfully', async () => {
-      const dto = { partIds: [1, 2, 3] };
-      const result = await controller.updateUserParts(dto, mockUser);
-      expect(result).toEqual(mockResponse);
-      expect(service.updateUserParts).toHaveBeenCalledWith(
+      const updateRequest = { partIds: [1, 2, 3] };
+      jest
+        .spyOn(myProfileService, 'updateUserParts')
+        .mockResolvedValue(mockUpdateResponse);
+
+      const result = await controller.updateUserParts(updateRequest, mockUser);
+
+      expect(result).toEqual(mockUpdateResponse);
+      expect(myProfileService.updateUserParts).toHaveBeenCalledWith(
         mockUser.id,
-        dto.partIds,
+        updateRequest.partIds,
       );
     });
   });
 
   describe('updateUserArea', () => {
     it('should update user area successfully', async () => {
-      const dto = { areaId: 2 };
-      const result = await controller.updateUserArea(dto, mockUser);
-      expect(result).toEqual(mockResponse);
-      expect(service.updateUserArea).toHaveBeenCalledWith(
+      const updateRequest = { areaId: 1 };
+      jest
+        .spyOn(myProfileService, 'updateUserArea')
+        .mockResolvedValue(mockUpdateResponse);
+
+      const result = await controller.updateUserArea(updateRequest, mockUser);
+
+      expect(result).toEqual(mockUpdateResponse);
+      expect(myProfileService.updateUserArea).toHaveBeenCalledWith(
         mockUser.id,
-        dto.areaId,
+        updateRequest.areaId,
       );
     });
   });

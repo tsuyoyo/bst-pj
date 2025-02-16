@@ -6,7 +6,10 @@ import { User } from '../entities/user.entity';
 import { UserGenre } from '../entities/user-genre.entity';
 import { UserPart } from '../entities/user-part.entity';
 import { UserArtist } from '../entities/user-artist.entity';
-import { UpdateResponse } from '../proto/bst/v1/my_profile_service';
+import {
+  GetMyProfileResponse,
+  UpdateResponse,
+} from '../proto/bst/v1/my_profile_service';
 import { UserProfileService } from '../user-profile/user-profile.service';
 
 @Injectable()
@@ -24,6 +27,27 @@ export class MyProfileService {
     private readonly userArtistRepository: Repository<UserArtist>,
     private readonly userProfileService: UserProfileService,
   ) {}
+
+  async getMyProfile(userId: number): Promise<GetMyProfileResponse> {
+    const userProfile = await this.userProfileService.getUserProfile(userId);
+    if (!userProfile) {
+      throw new NotFoundException(
+        `User profile not found for user ID: ${userId}`,
+      );
+    }
+
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+    });
+    if (!user) {
+      throw new NotFoundException(`User not found with ID: ${userId}`);
+    }
+
+    return {
+      profile: userProfile.profile,
+      email: user.email,
+    };
+  }
 
   async updateIntroduction(
     userId: number,

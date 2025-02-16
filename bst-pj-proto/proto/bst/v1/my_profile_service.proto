@@ -4,6 +4,11 @@ package bst.v1;
 
 import "bst/v1/user.proto";
 
+message GetMyProfileResponse {
+  UserProfile profile = 1;
+  string      email   = 2;
+}
+
 message UpdateIntroductionRequest {
   string introduction = 1;
 }

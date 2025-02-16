@@ -10,6 +10,11 @@ import { UserProfile } from "./user";
 
 export const protobufPackage = "bst.v1";
 
+export interface GetMyProfileResponse {
+  profile: UserProfile | undefined;
+  email: string;
+}
+
 export interface UpdateIntroductionRequest {
   introduction: string;
 }
@@ -42,6 +47,82 @@ export interface UpdateResponse {
   success: boolean;
   profile: UserProfile | undefined;
 }
+
+function createBaseGetMyProfileResponse(): GetMyProfileResponse {
+  return { profile: undefined, email: "" };
+}
+
+export const GetMyProfileResponse = {
+  encode(message: GetMyProfileResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.profile !== undefined) {
+      UserProfile.encode(message.profile, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.email !== "") {
+      writer.uint32(18).string(message.email);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetMyProfileResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetMyProfileResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.profile = UserProfile.decode(reader, reader.uint32());
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.email = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetMyProfileResponse {
+    return {
+      profile: isSet(object.profile) ? UserProfile.fromJSON(object.profile) : undefined,
+      email: isSet(object.email) ? globalThis.String(object.email) : "",
+    };
+  },
+
+  toJSON(message: GetMyProfileResponse): unknown {
+    const obj: any = {};
+    if (message.profile !== undefined) {
+      obj.profile = UserProfile.toJSON(message.profile);
+    }
+    if (message.email !== "") {
+      obj.email = message.email;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetMyProfileResponse>, I>>(base?: I): GetMyProfileResponse {
+    return GetMyProfileResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetMyProfileResponse>, I>>(object: I): GetMyProfileResponse {
+    const message = createBaseGetMyProfileResponse();
+    message.profile = (object.profile !== undefined && object.profile !== null)
+      ? UserProfile.fromPartial(object.profile)
+      : undefined;
+    message.email = object.email ?? "";
+    return message;
+  },
+};
 
 function createBaseUpdateIntroductionRequest(): UpdateIntroductionRequest {
   return { introduction: "" };

@@ -3,7 +3,6 @@ syntax = "proto3";
 package bst.v1;
 
 import "bst/v1/user.proto";
-import "google/protobuf/timestamp.proto";
 
 message GetUserProfileRequest {
   int32 user_id = 1;
