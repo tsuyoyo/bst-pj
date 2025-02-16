@@ -42,21 +42,19 @@ const Thread$json = {
     {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
     {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
     {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
-    {'1': 'comments', '3': 4, '4': 3, '5': 11, '6': '.bst.v1.Comment', '10': 'comments'},
-    {'1': 'created_by', '3': 5, '4': 1, '5': 11, '6': '.bst.v1.User', '10': 'createdBy'},
-    {'1': 'created_at', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
-    {'1': 'updated_at', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
+    {'1': 'created_by', '3': 4, '4': 1, '5': 11, '6': '.bst.v1.User', '10': 'createdBy'},
+    {'1': 'created_at', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+    {'1': 'updated_at', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
   ],
 };
 
 /// Descriptor for `Thread`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List threadDescriptor = $convert.base64Decode(
     'CgZUaHJlYWQSDgoCaWQYASABKAVSAmlkEhQKBXRpdGxlGAIgASgJUgV0aXRsZRIgCgtkZXNjcm'
-    'lwdGlvbhgDIAEoCVILZGVzY3JpcHRpb24SKwoIY29tbWVudHMYBCADKAsyDy5ic3QudjEuQ29t'
-    'bWVudFIIY29tbWVudHMSKwoKY3JlYXRlZF9ieRgFIAEoCzIMLmJzdC52MS5Vc2VyUgljcmVhdG'
-    'VkQnkSOQoKY3JlYXRlZF9hdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWNy'
-    'ZWF0ZWRBdBI5Cgp1cGRhdGVkX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcF'
-    'IJdXBkYXRlZEF0');
+    'lwdGlvbhgDIAEoCVILZGVzY3JpcHRpb24SKwoKY3JlYXRlZF9ieRgEIAEoCzIMLmJzdC52MS5V'
+    'c2VyUgljcmVhdGVkQnkSOQoKY3JlYXRlZF9hdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW'
+    '1lc3RhbXBSCWNyZWF0ZWRBdBI5Cgp1cGRhdGVkX2F0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVm'
+    'LlRpbWVzdGFtcFIJdXBkYXRlZEF0');
 
 @$core.Deprecated('Use mentionDescriptor instead')
 const Mention$json = {

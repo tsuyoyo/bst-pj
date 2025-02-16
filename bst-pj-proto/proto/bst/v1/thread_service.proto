@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "bst/v1/communication.proto";
+
+service ThreadService {
+  rpc GetThread(GetThreadRequest) returns (Thread);
+  rpc GetThreadsInSession(GetThreadsInSessionRequest)
+      returns (GetThreadsInSessionResponse);
+
+  rpc GetThreadComments(GetThreadCommentsRequest)
+      returns (GetThreadCommentsResponse);
+
+  rpc CreateThread(PostThreadRequest) returns (Thread);
+  rpc CreateThreadInSession(PostThreadInSessionRequest) returns (Thread);
+
+  rpc UpdateThreadTitle(UpdateThreadTitleRequest) returns (Thread);
+  rpc UpdateThreadDescription(UpdateThreadDescriptionRequest) returns (Thread);
+
+  rpc DeleteThread(DeleteThreadRequest) returns (DeleteThreadResponse);
+}
+
+message GetThreadRequest {
+  int32 id = 1;
+}
+
+message GetThreadsInSessionRequest {
+  int32 session_id = 1;
+}
+
+message GetThreadsInSessionResponse {
+  repeated Thread threads = 1;
+}
+
+message GetThreadCommentsRequest {
+  int32 thread_id = 1;
+  int32 page      = 2;
+  int32 limit     = 3;
+}
+
+message GetThreadCommentsResponse {
+  repeated Comment comments  = 1;
+  int32            next_page = 2;
+}
+
+message PostThreadRequest {
+  string title       = 1;
+  string description = 2;
+  int32  userId      = 3;
+}
+
+message PostThreadInSessionRequest {
+  string title       = 1;
+  string description = 2;
+  int32  userId      = 3;
+  int32  sessionId   = 4;
+}
+
+message UpdateThreadTitleRequest {
+  int32  id          = 1;
+  string title       = 2;
+}
+
+message UpdateThreadDescriptionRequest {
+  int32  id          = 1;
+  string description = 2;
+}
+
+message DeleteThreadRequest {
+  int32 id = 1;
+}
+
+message DeleteThreadResponse {
+  bool success = 1;
+}

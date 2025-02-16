@@ -25,7 +25,6 @@ export interface Thread {
   id: number;
   title: string;
   description: string;
-  comments: Comment[];
   createdBy: User | undefined;
   createdAt: Date | undefined;
   updatedAt: Date | undefined;
@@ -257,15 +256,7 @@ export const Comment = {
 };
 
 function createBaseThread(): Thread {
-  return {
-    id: 0,
-    title: "",
-    description: "",
-    comments: [],
-    createdBy: undefined,
-    createdAt: undefined,
-    updatedAt: undefined,
-  };
+  return { id: 0, title: "", description: "", createdBy: undefined, createdAt: undefined, updatedAt: undefined };
 }
 
 export const Thread = {
@@ -279,17 +270,14 @@ export const Thread = {
     if (message.description !== "") {
       writer.uint32(26).string(message.description);
     }
-    for (const v of message.comments) {
-      Comment.encode(v!, writer.uint32(34).fork()).ldelim();
-    }
     if (message.createdBy !== undefined) {
-      User.encode(message.createdBy, writer.uint32(42).fork()).ldelim();
+      User.encode(message.createdBy, writer.uint32(34).fork()).ldelim();
     }
     if (message.createdAt !== undefined) {
-      Timestamp.encode(toTimestamp(message.createdAt), writer.uint32(50).fork()).ldelim();
+      Timestamp.encode(toTimestamp(message.createdAt), writer.uint32(42).fork()).ldelim();
     }
     if (message.updatedAt !== undefined) {
-      Timestamp.encode(toTimestamp(message.updatedAt), writer.uint32(58).fork()).ldelim();
+      Timestamp.encode(toTimestamp(message.updatedAt), writer.uint32(50).fork()).ldelim();
     }
     return writer;
   },
@@ -327,24 +315,17 @@ export const Thread = {
             break;
           }
 
-          message.comments.push(Comment.decode(reader, reader.uint32()));
+          message.createdBy = User.decode(reader, reader.uint32());
           continue;
         case 5:
           if (tag !== 42) {
             break;
           }
 
-          message.createdBy = User.decode(reader, reader.uint32());
+          message.createdAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
         case 6:
           if (tag !== 50) {
-            break;
-          }
-
-          message.createdAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          continue;
-        case 7:
-          if (tag !== 58) {
             break;
           }
 
@@ -364,7 +345,6 @@ export const Thread = {
       id: isSet(object.id) ? globalThis.Number(object.id) : 0,
       title: isSet(object.title) ? globalThis.String(object.title) : "",
       description: isSet(object.description) ? globalThis.String(object.description) : "",
-      comments: globalThis.Array.isArray(object?.comments) ? object.comments.map((e: any) => Comment.fromJSON(e)) : [],
       createdBy: isSet(object.createdBy) ? User.fromJSON(object.createdBy) : undefined,
       createdAt: isSet(object.createdAt) ? fromJsonTimestamp(object.createdAt) : undefined,
       updatedAt: isSet(object.updatedAt) ? fromJsonTimestamp(object.updatedAt) : undefined,
@@ -381,9 +361,6 @@ export const Thread = {
     }
     if (message.description !== "") {
       obj.description = message.description;
-    }
-    if (message.comments?.length) {
-      obj.comments = message.comments.map((e) => Comment.toJSON(e));
     }
     if (message.createdBy !== undefined) {
       obj.createdBy = User.toJSON(message.createdBy);
@@ -405,7 +382,6 @@ export const Thread = {
     message.id = object.id ?? 0;
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.comments = object.comments?.map((e) => Comment.fromPartial(e)) || [];
     message.createdBy = (object.createdBy !== undefined && object.createdBy !== null)
       ? User.fromPartial(object.createdBy)
       : undefined;

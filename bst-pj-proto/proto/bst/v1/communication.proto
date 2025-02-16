@@ -22,10 +22,9 @@ message Thread {
   int32                     id          = 1;
   string                    title       = 2;
   string                    description = 3;
-  repeated Comment          comments    = 4;
-  User                      created_by  = 5;
-  google.protobuf.Timestamp created_at  = 6;
-  google.protobuf.Timestamp updated_at  = 7;
+  User                      created_by  = 4;
+  google.protobuf.Timestamp created_at  = 5;
+  google.protobuf.Timestamp updated_at  = 6;
 }
 
 message Mention {

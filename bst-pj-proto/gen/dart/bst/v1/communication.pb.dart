@@ -13,9 +13,9 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/protobuf/timestamp.pb.dart' as $21;
+import '../../google/protobuf/timestamp.pb.dart' as $22;
 import 'communication.pbenum.dart';
-import 'user.pb.dart' as $22;
+import 'user.pb.dart' as $23;
 
 export 'communication.pbenum.dart';
 
@@ -25,8 +25,8 @@ class Comment extends $pb.GeneratedMessage {
     $core.String? content,
     $core.int? userId,
     $core.int? threadId,
-    $21.Timestamp? createdAt,
-    $21.Timestamp? updatedAt,
+    $22.Timestamp? createdAt,
+    $22.Timestamp? updatedAt,
     $core.Iterable<Mention>? mentions,
   }) {
     final $result = create();
@@ -62,8 +62,8 @@ class Comment extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'content')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'userId', $pb.PbFieldType.O3)
     ..a<$core.int>(4, _omitFieldNames ? '' : 'threadId', $pb.PbFieldType.O3)
-    ..aOM<$21.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $21.Timestamp.create)
-    ..aOM<$21.Timestamp>(6, _omitFieldNames ? '' : 'updatedAt', subBuilder: $21.Timestamp.create)
+    ..aOM<$22.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $22.Timestamp.create)
+    ..aOM<$22.Timestamp>(6, _omitFieldNames ? '' : 'updatedAt', subBuilder: $22.Timestamp.create)
     ..pc<Mention>(7, _omitFieldNames ? '' : 'mentions', $pb.PbFieldType.PM, subBuilder: Mention.create)
     ..hasRequiredFields = false
   ;
@@ -126,26 +126,26 @@ class Comment extends $pb.GeneratedMessage {
   void clearThreadId() => clearField(4);
 
   @$pb.TagNumber(5)
-  $21.Timestamp get createdAt => $_getN(4);
+  $22.Timestamp get createdAt => $_getN(4);
   @$pb.TagNumber(5)
-  set createdAt($21.Timestamp v) { setField(5, v); }
+  set createdAt($22.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCreatedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearCreatedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $21.Timestamp ensureCreatedAt() => $_ensure(4);
+  $22.Timestamp ensureCreatedAt() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  $21.Timestamp get updatedAt => $_getN(5);
+  $22.Timestamp get updatedAt => $_getN(5);
   @$pb.TagNumber(6)
-  set updatedAt($21.Timestamp v) { setField(6, v); }
+  set updatedAt($22.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasUpdatedAt() => $_has(5);
   @$pb.TagNumber(6)
   void clearUpdatedAt() => clearField(6);
   @$pb.TagNumber(6)
-  $21.Timestamp ensureUpdatedAt() => $_ensure(5);
+  $22.Timestamp ensureUpdatedAt() => $_ensure(5);
 
   @$pb.TagNumber(7)
   $core.List<Mention> get mentions => $_getList(6);
@@ -156,10 +156,9 @@ class Thread extends $pb.GeneratedMessage {
     $core.int? id,
     $core.String? title,
     $core.String? description,
-    $core.Iterable<Comment>? comments,
-    $22.User? createdBy,
-    $21.Timestamp? createdAt,
-    $21.Timestamp? updatedAt,
+    $23.User? createdBy,
+    $22.Timestamp? createdAt,
+    $22.Timestamp? updatedAt,
   }) {
     final $result = create();
     if (id != null) {
@@ -170,9 +169,6 @@ class Thread extends $pb.GeneratedMessage {
     }
     if (description != null) {
       $result.description = description;
-    }
-    if (comments != null) {
-      $result.comments.addAll(comments);
     }
     if (createdBy != null) {
       $result.createdBy = createdBy;
@@ -193,10 +189,9 @@ class Thread extends $pb.GeneratedMessage {
     ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'title')
     ..aOS(3, _omitFieldNames ? '' : 'description')
-    ..pc<Comment>(4, _omitFieldNames ? '' : 'comments', $pb.PbFieldType.PM, subBuilder: Comment.create)
-    ..aOM<$22.User>(5, _omitFieldNames ? '' : 'createdBy', subBuilder: $22.User.create)
-    ..aOM<$21.Timestamp>(6, _omitFieldNames ? '' : 'createdAt', subBuilder: $21.Timestamp.create)
-    ..aOM<$21.Timestamp>(7, _omitFieldNames ? '' : 'updatedAt', subBuilder: $21.Timestamp.create)
+    ..aOM<$23.User>(4, _omitFieldNames ? '' : 'createdBy', subBuilder: $23.User.create)
+    ..aOM<$22.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $22.Timestamp.create)
+    ..aOM<$22.Timestamp>(6, _omitFieldNames ? '' : 'updatedAt', subBuilder: $22.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -249,40 +244,37 @@ class Thread extends $pb.GeneratedMessage {
   void clearDescription() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.List<Comment> get comments => $_getList(3);
+  $23.User get createdBy => $_getN(3);
+  @$pb.TagNumber(4)
+  set createdBy($23.User v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasCreatedBy() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCreatedBy() => clearField(4);
+  @$pb.TagNumber(4)
+  $23.User ensureCreatedBy() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  $22.User get createdBy => $_getN(4);
+  $22.Timestamp get createdAt => $_getN(4);
   @$pb.TagNumber(5)
-  set createdBy($22.User v) { setField(5, v); }
+  set createdAt($22.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
-  $core.bool hasCreatedBy() => $_has(4);
+  $core.bool hasCreatedAt() => $_has(4);
   @$pb.TagNumber(5)
-  void clearCreatedBy() => clearField(5);
+  void clearCreatedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $22.User ensureCreatedBy() => $_ensure(4);
+  $22.Timestamp ensureCreatedAt() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  $21.Timestamp get createdAt => $_getN(5);
+  $22.Timestamp get updatedAt => $_getN(5);
   @$pb.TagNumber(6)
-  set createdAt($21.Timestamp v) { setField(6, v); }
+  set updatedAt($22.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
-  $core.bool hasCreatedAt() => $_has(5);
+  $core.bool hasUpdatedAt() => $_has(5);
   @$pb.TagNumber(6)
-  void clearCreatedAt() => clearField(6);
+  void clearUpdatedAt() => clearField(6);
   @$pb.TagNumber(6)
-  $21.Timestamp ensureCreatedAt() => $_ensure(5);
-
-  @$pb.TagNumber(7)
-  $21.Timestamp get updatedAt => $_getN(6);
-  @$pb.TagNumber(7)
-  set updatedAt($21.Timestamp v) { setField(7, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasUpdatedAt() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearUpdatedAt() => clearField(7);
-  @$pb.TagNumber(7)
-  $21.Timestamp ensureUpdatedAt() => $_ensure(6);
+  $22.Timestamp ensureUpdatedAt() => $_ensure(5);
 }
 
 class Mention extends $pb.GeneratedMessage {
@@ -402,8 +394,8 @@ class ReactionType extends $pb.GeneratedMessage {
     $core.String? description,
     $core.String? iconUrl,
     $core.int? updatedUserId,
-    $21.Timestamp? createdAt,
-    $21.Timestamp? updatedAt,
+    $22.Timestamp? createdAt,
+    $22.Timestamp? updatedAt,
   }) {
     final $result = create();
     if (id != null) {
@@ -439,8 +431,8 @@ class ReactionType extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'description')
     ..aOS(4, _omitFieldNames ? '' : 'iconUrl')
     ..a<$core.int>(5, _omitFieldNames ? '' : 'updatedUserId', $pb.PbFieldType.O3)
-    ..aOM<$21.Timestamp>(6, _omitFieldNames ? '' : 'createdAt', subBuilder: $21.Timestamp.create)
-    ..aOM<$21.Timestamp>(7, _omitFieldNames ? '' : 'updatedAt', subBuilder: $21.Timestamp.create)
+    ..aOM<$22.Timestamp>(6, _omitFieldNames ? '' : 'createdAt', subBuilder: $22.Timestamp.create)
+    ..aOM<$22.Timestamp>(7, _omitFieldNames ? '' : 'updatedAt', subBuilder: $22.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -511,36 +503,36 @@ class ReactionType extends $pb.GeneratedMessage {
   void clearUpdatedUserId() => clearField(5);
 
   @$pb.TagNumber(6)
-  $21.Timestamp get createdAt => $_getN(5);
+  $22.Timestamp get createdAt => $_getN(5);
   @$pb.TagNumber(6)
-  set createdAt($21.Timestamp v) { setField(6, v); }
+  set createdAt($22.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasCreatedAt() => $_has(5);
   @$pb.TagNumber(6)
   void clearCreatedAt() => clearField(6);
   @$pb.TagNumber(6)
-  $21.Timestamp ensureCreatedAt() => $_ensure(5);
+  $22.Timestamp ensureCreatedAt() => $_ensure(5);
 
   @$pb.TagNumber(7)
-  $21.Timestamp get updatedAt => $_getN(6);
+  $22.Timestamp get updatedAt => $_getN(6);
   @$pb.TagNumber(7)
-  set updatedAt($21.Timestamp v) { setField(7, v); }
+  set updatedAt($22.Timestamp v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasUpdatedAt() => $_has(6);
   @$pb.TagNumber(7)
   void clearUpdatedAt() => clearField(7);
   @$pb.TagNumber(7)
-  $21.Timestamp ensureUpdatedAt() => $_ensure(6);
+  $22.Timestamp ensureUpdatedAt() => $_ensure(6);
 }
 
 class Reaction extends $pb.GeneratedMessage {
   factory Reaction({
     $core.int? id,
-    $22.User? user,
+    $23.User? user,
     $core.int? reactionTypeId,
     $core.int? updatedUserId,
-    $21.Timestamp? createdAt,
-    $21.Timestamp? updatedAt,
+    $22.Timestamp? createdAt,
+    $22.Timestamp? updatedAt,
   }) {
     final $result = create();
     if (id != null) {
@@ -569,11 +561,11 @@ class Reaction extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Reaction', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
-    ..aOM<$22.User>(2, _omitFieldNames ? '' : 'user', subBuilder: $22.User.create)
+    ..aOM<$23.User>(2, _omitFieldNames ? '' : 'user', subBuilder: $23.User.create)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'reactionTypeId', $pb.PbFieldType.O3)
     ..a<$core.int>(4, _omitFieldNames ? '' : 'updatedUserId', $pb.PbFieldType.O3)
-    ..aOM<$21.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $21.Timestamp.create)
-    ..aOM<$21.Timestamp>(6, _omitFieldNames ? '' : 'updatedAt', subBuilder: $21.Timestamp.create)
+    ..aOM<$22.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $22.Timestamp.create)
+    ..aOM<$22.Timestamp>(6, _omitFieldNames ? '' : 'updatedAt', subBuilder: $22.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -608,15 +600,15 @@ class Reaction extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $22.User get user => $_getN(1);
+  $23.User get user => $_getN(1);
   @$pb.TagNumber(2)
-  set user($22.User v) { setField(2, v); }
+  set user($23.User v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasUser() => $_has(1);
   @$pb.TagNumber(2)
   void clearUser() => clearField(2);
   @$pb.TagNumber(2)
-  $22.User ensureUser() => $_ensure(1);
+  $23.User ensureUser() => $_ensure(1);
 
   @$pb.TagNumber(3)
   $core.int get reactionTypeId => $_getIZ(2);
@@ -637,26 +629,26 @@ class Reaction extends $pb.GeneratedMessage {
   void clearUpdatedUserId() => clearField(4);
 
   @$pb.TagNumber(5)
-  $21.Timestamp get createdAt => $_getN(4);
+  $22.Timestamp get createdAt => $_getN(4);
   @$pb.TagNumber(5)
-  set createdAt($21.Timestamp v) { setField(5, v); }
+  set createdAt($22.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCreatedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearCreatedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $21.Timestamp ensureCreatedAt() => $_ensure(4);
+  $22.Timestamp ensureCreatedAt() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  $21.Timestamp get updatedAt => $_getN(5);
+  $22.Timestamp get updatedAt => $_getN(5);
   @$pb.TagNumber(6)
-  set updatedAt($21.Timestamp v) { setField(6, v); }
+  set updatedAt($22.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasUpdatedAt() => $_has(5);
   @$pb.TagNumber(6)
   void clearUpdatedAt() => clearField(6);
   @$pb.TagNumber(6)
-  $21.Timestamp ensureUpdatedAt() => $_ensure(5);
+  $22.Timestamp ensureUpdatedAt() => $_ensure(5);
 }
 
 

@@ -13,6 +13,7 @@ export enum ThreadContextType {
   Session = 'Session',
   Group = 'Group',
   Global = 'Global',
+  SongPerformance = 'SongPerformance',
 }
 
 @Entity('threads')

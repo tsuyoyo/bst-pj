@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'content.pb.dart' as $19;
+import 'content.pb.dart' as $20;
 
 class CreateSongRequest extends $pb.GeneratedMessage {
   factory CreateSongRequest({
@@ -95,7 +95,7 @@ class CreateSongRequest extends $pb.GeneratedMessage {
 
 class CreateSongResponse extends $pb.GeneratedMessage {
   factory CreateSongResponse({
-    $19.Song? song,
+    $20.Song? song,
   }) {
     final $result = create();
     if (song != null) {
@@ -108,7 +108,7 @@ class CreateSongResponse extends $pb.GeneratedMessage {
   factory CreateSongResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateSongResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$19.Song>(1, _omitFieldNames ? '' : 'song', subBuilder: $19.Song.create)
+    ..aOM<$20.Song>(1, _omitFieldNames ? '' : 'song', subBuilder: $20.Song.create)
     ..hasRequiredFields = false
   ;
 
@@ -134,15 +134,15 @@ class CreateSongResponse extends $pb.GeneratedMessage {
   static CreateSongResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $19.Song get song => $_getN(0);
+  $20.Song get song => $_getN(0);
   @$pb.TagNumber(1)
-  set song($19.Song v) { setField(1, v); }
+  set song($20.Song v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSong() => $_has(0);
   @$pb.TagNumber(1)
   void clearSong() => clearField(1);
   @$pb.TagNumber(1)
-  $19.Song ensureSong() => $_ensure(0);
+  $20.Song ensureSong() => $_ensure(0);
 }
 
 class ListSongsRequest extends $pb.GeneratedMessage {
@@ -239,7 +239,7 @@ class ListSongsRequest extends $pb.GeneratedMessage {
 
 class ListSongsResponse extends $pb.GeneratedMessage {
   factory ListSongsResponse({
-    $core.Iterable<$19.Song>? songs,
+    $core.Iterable<$20.Song>? songs,
     $core.String? nextPageToken,
     $core.int? totalSize,
   }) {
@@ -260,7 +260,7 @@ class ListSongsResponse extends $pb.GeneratedMessage {
   factory ListSongsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSongsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$19.Song>(1, _omitFieldNames ? '' : 'songs', $pb.PbFieldType.PM, subBuilder: $19.Song.create)
+    ..pc<$20.Song>(1, _omitFieldNames ? '' : 'songs', $pb.PbFieldType.PM, subBuilder: $20.Song.create)
     ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'totalSize', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -288,7 +288,7 @@ class ListSongsResponse extends $pb.GeneratedMessage {
   static ListSongsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$19.Song> get songs => $_getList(0);
+  $core.List<$20.Song> get songs => $_getList(0);
 
   @$pb.TagNumber(2)
   $core.String get nextPageToken => $_getSZ(1);
@@ -361,7 +361,7 @@ class GetSongRequest extends $pb.GeneratedMessage {
 
 class GetSongResponse extends $pb.GeneratedMessage {
   factory GetSongResponse({
-    $19.Song? song,
+    $20.Song? song,
   }) {
     final $result = create();
     if (song != null) {
@@ -374,7 +374,7 @@ class GetSongResponse extends $pb.GeneratedMessage {
   factory GetSongResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSongResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$19.Song>(1, _omitFieldNames ? '' : 'song', subBuilder: $19.Song.create)
+    ..aOM<$20.Song>(1, _omitFieldNames ? '' : 'song', subBuilder: $20.Song.create)
     ..hasRequiredFields = false
   ;
 
@@ -400,15 +400,15 @@ class GetSongResponse extends $pb.GeneratedMessage {
   static GetSongResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $19.Song get song => $_getN(0);
+  $20.Song get song => $_getN(0);
   @$pb.TagNumber(1)
-  set song($19.Song v) { setField(1, v); }
+  set song($20.Song v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSong() => $_has(0);
   @$pb.TagNumber(1)
   void clearSong() => clearField(1);
   @$pb.TagNumber(1)
-  $19.Song ensureSong() => $_ensure(0);
+  $20.Song ensureSong() => $_ensure(0);
 }
 
 class UpdateSongRequest extends $pb.GeneratedMessage {
@@ -505,7 +505,7 @@ class UpdateSongRequest extends $pb.GeneratedMessage {
 
 class UpdateSongResponse extends $pb.GeneratedMessage {
   factory UpdateSongResponse({
-    $19.Song? song,
+    $20.Song? song,
   }) {
     final $result = create();
     if (song != null) {
@@ -518,7 +518,7 @@ class UpdateSongResponse extends $pb.GeneratedMessage {
   factory UpdateSongResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSongResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$19.Song>(1, _omitFieldNames ? '' : 'song', subBuilder: $19.Song.create)
+    ..aOM<$20.Song>(1, _omitFieldNames ? '' : 'song', subBuilder: $20.Song.create)
     ..hasRequiredFields = false
   ;
 
@@ -544,15 +544,15 @@ class UpdateSongResponse extends $pb.GeneratedMessage {
   static UpdateSongResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $19.Song get song => $_getN(0);
+  $20.Song get song => $_getN(0);
   @$pb.TagNumber(1)
-  set song($19.Song v) { setField(1, v); }
+  set song($20.Song v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSong() => $_has(0);
   @$pb.TagNumber(1)
   void clearSong() => clearField(1);
   @$pb.TagNumber(1)
-  $19.Song ensureSong() => $_ensure(0);
+  $20.Song ensureSong() => $_ensure(0);
 }
 
 class DeleteSongRequest extends $pb.GeneratedMessage {
@@ -849,7 +849,7 @@ class ListSongResourcesRequest extends $pb.GeneratedMessage {
 
 class ListSongResourcesResponse extends $pb.GeneratedMessage {
   factory ListSongResourcesResponse({
-    $core.Iterable<$19.Resource>? resources,
+    $core.Iterable<$20.Resource>? resources,
     $core.String? nextPageToken,
     $core.int? totalSize,
   }) {
@@ -870,7 +870,7 @@ class ListSongResourcesResponse extends $pb.GeneratedMessage {
   factory ListSongResourcesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSongResourcesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$19.Resource>(1, _omitFieldNames ? '' : 'resources', $pb.PbFieldType.PM, subBuilder: $19.Resource.create)
+    ..pc<$20.Resource>(1, _omitFieldNames ? '' : 'resources', $pb.PbFieldType.PM, subBuilder: $20.Resource.create)
     ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'totalSize', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -898,7 +898,7 @@ class ListSongResourcesResponse extends $pb.GeneratedMessage {
   static ListSongResourcesResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$19.Resource> get resources => $_getList(0);
+  $core.List<$20.Resource> get resources => $_getList(0);
 
   @$pb.TagNumber(2)
   $core.String get nextPageToken => $_getSZ(1);
