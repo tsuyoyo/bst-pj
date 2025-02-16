@@ -58,8 +58,14 @@ message PostThreadInSessionRequest {
 }
 
 message UpdateThreadTitleRequest {
+  int32  id    = 1;
+  string title = 2;
+}
+
+message UpdateThreadRequest {
   int32  id          = 1;
   string title       = 2;
+  string description = 3;
 }
 
 message UpdateThreadDescriptionRequest {

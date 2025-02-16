@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/protobuf/timestamp.pb.dart' as $22;
+import '../../google/protobuf/timestamp.pb.dart' as $24;
 
 /// Dashboard data model
 class DashboardData extends $pb.GeneratedMessage {
@@ -21,7 +21,7 @@ class DashboardData extends $pb.GeneratedMessage {
     $core.int? id,
     $core.String? content,
     $core.int? userId,
-    $22.Timestamp? updatedAt,
+    $24.Timestamp? updatedAt,
   }) {
     final $result = create();
     if (id != null) {
@@ -46,7 +46,7 @@ class DashboardData extends $pb.GeneratedMessage {
     ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'content')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'userId', $pb.PbFieldType.O3)
-    ..aOM<$22.Timestamp>(4, _omitFieldNames ? '' : 'updatedAt', subBuilder: $22.Timestamp.create)
+    ..aOM<$24.Timestamp>(4, _omitFieldNames ? '' : 'updatedAt', subBuilder: $24.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -99,15 +99,15 @@ class DashboardData extends $pb.GeneratedMessage {
   void clearUserId() => clearField(3);
 
   @$pb.TagNumber(4)
-  $22.Timestamp get updatedAt => $_getN(3);
+  $24.Timestamp get updatedAt => $_getN(3);
   @$pb.TagNumber(4)
-  set updatedAt($22.Timestamp v) { setField(4, v); }
+  set updatedAt($24.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasUpdatedAt() => $_has(3);
   @$pb.TagNumber(4)
   void clearUpdatedAt() => clearField(4);
   @$pb.TagNumber(4)
-  $22.Timestamp ensureUpdatedAt() => $_ensure(3);
+  $24.Timestamp ensureUpdatedAt() => $_ensure(3);
 }
 
 /// Search index model
@@ -117,7 +117,7 @@ class SearchIndex extends $pb.GeneratedMessage {
     $core.String? keywords,
     $core.String? targetType,
     $core.int? targetId,
-    $22.Timestamp? indexedAt,
+    $24.Timestamp? indexedAt,
   }) {
     final $result = create();
     if (id != null) {
@@ -146,7 +146,7 @@ class SearchIndex extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'keywords')
     ..aOS(3, _omitFieldNames ? '' : 'targetType')
     ..a<$core.int>(4, _omitFieldNames ? '' : 'targetId', $pb.PbFieldType.O3)
-    ..aOM<$22.Timestamp>(5, _omitFieldNames ? '' : 'indexedAt', subBuilder: $22.Timestamp.create)
+    ..aOM<$24.Timestamp>(5, _omitFieldNames ? '' : 'indexedAt', subBuilder: $24.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -208,15 +208,15 @@ class SearchIndex extends $pb.GeneratedMessage {
   void clearTargetId() => clearField(4);
 
   @$pb.TagNumber(5)
-  $22.Timestamp get indexedAt => $_getN(4);
+  $24.Timestamp get indexedAt => $_getN(4);
   @$pb.TagNumber(5)
-  set indexedAt($22.Timestamp v) { setField(5, v); }
+  set indexedAt($24.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasIndexedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearIndexedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $22.Timestamp ensureIndexedAt() => $_ensure(4);
+  $24.Timestamp ensureIndexedAt() => $_ensure(4);
 }
 
 /// Search result model

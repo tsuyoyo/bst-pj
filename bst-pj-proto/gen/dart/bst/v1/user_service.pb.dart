@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'user.pb.dart' as $23;
+import 'user.pb.dart' as $25;
 
 class GetUserRequest extends $pb.GeneratedMessage {
   factory GetUserRequest({
@@ -67,7 +67,7 @@ class GetUserRequest extends $pb.GeneratedMessage {
 
 class GetUserResponse extends $pb.GeneratedMessage {
   factory GetUserResponse({
-    $23.User? user,
+    $25.User? user,
   }) {
     final $result = create();
     if (user != null) {
@@ -80,7 +80,7 @@ class GetUserResponse extends $pb.GeneratedMessage {
   factory GetUserResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetUserResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$23.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $23.User.create)
+    ..aOM<$25.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $25.User.create)
     ..hasRequiredFields = false
   ;
 
@@ -106,21 +106,21 @@ class GetUserResponse extends $pb.GeneratedMessage {
   static GetUserResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $23.User get user => $_getN(0);
+  $25.User get user => $_getN(0);
   @$pb.TagNumber(1)
-  set user($23.User v) { setField(1, v); }
+  set user($25.User v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasUser() => $_has(0);
   @$pb.TagNumber(1)
   void clearUser() => clearField(1);
   @$pb.TagNumber(1)
-  $23.User ensureUser() => $_ensure(0);
+  $25.User ensureUser() => $_ensure(0);
 }
 
 class UpdateUserRequest extends $pb.GeneratedMessage {
   factory UpdateUserRequest({
     $core.int? userId,
-    $23.User? user,
+    $25.User? user,
   }) {
     final $result = create();
     if (userId != null) {
@@ -137,7 +137,7 @@ class UpdateUserRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateUserRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'userId', $pb.PbFieldType.O3)
-    ..aOM<$23.User>(2, _omitFieldNames ? '' : 'user', subBuilder: $23.User.create)
+    ..aOM<$25.User>(2, _omitFieldNames ? '' : 'user', subBuilder: $25.User.create)
     ..hasRequiredFields = false
   ;
 
@@ -172,20 +172,20 @@ class UpdateUserRequest extends $pb.GeneratedMessage {
   void clearUserId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $23.User get user => $_getN(1);
+  $25.User get user => $_getN(1);
   @$pb.TagNumber(2)
-  set user($23.User v) { setField(2, v); }
+  set user($25.User v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasUser() => $_has(1);
   @$pb.TagNumber(2)
   void clearUser() => clearField(2);
   @$pb.TagNumber(2)
-  $23.User ensureUser() => $_ensure(1);
+  $25.User ensureUser() => $_ensure(1);
 }
 
 class UpdateUserResponse extends $pb.GeneratedMessage {
   factory UpdateUserResponse({
-    $23.User? user,
+    $25.User? user,
   }) {
     final $result = create();
     if (user != null) {
@@ -198,7 +198,7 @@ class UpdateUserResponse extends $pb.GeneratedMessage {
   factory UpdateUserResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateUserResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$23.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $23.User.create)
+    ..aOM<$25.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $25.User.create)
     ..hasRequiredFields = false
   ;
 
@@ -224,15 +224,15 @@ class UpdateUserResponse extends $pb.GeneratedMessage {
   static UpdateUserResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $23.User get user => $_getN(0);
+  $25.User get user => $_getN(0);
   @$pb.TagNumber(1)
-  set user($23.User v) { setField(1, v); }
+  set user($25.User v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasUser() => $_has(0);
   @$pb.TagNumber(1)
   void clearUser() => clearField(1);
   @$pb.TagNumber(1)
-  $23.User ensureUser() => $_ensure(0);
+  $25.User ensureUser() => $_ensure(0);
 }
 
 class DeleteUserRequest extends $pb.GeneratedMessage {
@@ -369,7 +369,7 @@ class GetMyselfRequest extends $pb.GeneratedMessage {
 
 class GetMyselfResponse extends $pb.GeneratedMessage {
   factory GetMyselfResponse({
-    $23.User? user,
+    $25.User? user,
   }) {
     final $result = create();
     if (user != null) {
@@ -382,7 +382,7 @@ class GetMyselfResponse extends $pb.GeneratedMessage {
   factory GetMyselfResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMyselfResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$23.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $23.User.create)
+    ..aOM<$25.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $25.User.create)
     ..hasRequiredFields = false
   ;
 
@@ -408,15 +408,15 @@ class GetMyselfResponse extends $pb.GeneratedMessage {
   static GetMyselfResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $23.User get user => $_getN(0);
+  $25.User get user => $_getN(0);
   @$pb.TagNumber(1)
-  set user($23.User v) { setField(1, v); }
+  set user($25.User v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasUser() => $_has(0);
   @$pb.TagNumber(1)
   void clearUser() => clearField(1);
   @$pb.TagNumber(1)
-  $23.User ensureUser() => $_ensure(0);
+  $25.User ensureUser() => $_ensure(0);
 }
 
 

@@ -27,7 +27,29 @@ message StudioReview {
 }
 
 message Studio {
-  int32    id             = 1;
-  Location location       = 2;
-  int32    overall_rating = 3;  // Note: Rating logic is hidden in the backend
+  int32    id               = 1;
+  Location location         = 2;
+  int32    overall_rating   = 3;  // Note: Rating logic is hidden in the backend
+  repeated StudioRoom rooms = 4;
+}
+
+message StudioRoom {
+  int32                   id       = 1;
+  string                  name     = 2;
+  int32                   capacity = 3;
+  int32                   price    = 4;
+  repeated StudioRoomInfo infos    = 5;
+}
+
+message StudioRoomInfo {
+  int32 id = 1;
+
+  // 情報の種類 (例: Equipment)"
+  string type = 2;
+
+  // 情報のキー (例: ギターアンプ)"
+  string key = 3;
+
+  // 情報の値 (例: Marshall)"
+  string value = 4;
 }

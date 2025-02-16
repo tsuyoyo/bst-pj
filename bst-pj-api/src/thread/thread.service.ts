@@ -14,8 +14,8 @@ import {
   GetThreadCommentsRequest,
   GetThreadCommentsResponse,
   GetThreadsInSessionResponse,
-  UpdateThreadRequest,
   DeleteThreadResponse,
+  UpdateThreadRequest,
 } from '../proto/bst/v1/thread_service';
 import { Thread as ThreadProto } from '../proto/bst/v1/communication';
 import { ThreadContextType } from '../entities/thread.entity';

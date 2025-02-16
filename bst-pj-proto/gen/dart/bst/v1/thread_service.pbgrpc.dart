@@ -16,40 +16,44 @@ import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'communication.pb.dart' as $3;
-import 'thread_service.pb.dart' as $16;
+import 'thread_service.pb.dart' as $18;
 
 export 'thread_service.pb.dart';
 
 @$pb.GrpcServiceName('bst.v1.ThreadService')
 class ThreadServiceClient extends $grpc.Client {
-  static final _$getThread = $grpc.ClientMethod<$16.GetThreadRequest, $3.Thread>(
+  static final _$getThread = $grpc.ClientMethod<$18.GetThreadRequest, $3.Thread>(
       '/bst.v1.ThreadService/GetThread',
-      ($16.GetThreadRequest value) => value.writeToBuffer(),
+      ($18.GetThreadRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $3.Thread.fromBuffer(value));
-  static final _$getThreadsInSession = $grpc.ClientMethod<$16.GetThreadsInSessionRequest, $16.GetThreadsInSessionResponse>(
+  static final _$getThreadsInSession = $grpc.ClientMethod<$18.GetThreadsInSessionRequest, $18.GetThreadsInSessionResponse>(
       '/bst.v1.ThreadService/GetThreadsInSession',
-      ($16.GetThreadsInSessionRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $16.GetThreadsInSessionResponse.fromBuffer(value));
-  static final _$getThreadComments = $grpc.ClientMethod<$16.GetThreadCommentsRequest, $16.GetThreadCommentsResponse>(
+      ($18.GetThreadsInSessionRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.GetThreadsInSessionResponse.fromBuffer(value));
+  static final _$getThreadComments = $grpc.ClientMethod<$18.GetThreadCommentsRequest, $18.GetThreadCommentsResponse>(
       '/bst.v1.ThreadService/GetThreadComments',
-      ($16.GetThreadCommentsRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $16.GetThreadCommentsResponse.fromBuffer(value));
-  static final _$createThread = $grpc.ClientMethod<$16.PostThreadRequest, $3.Thread>(
+      ($18.GetThreadCommentsRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.GetThreadCommentsResponse.fromBuffer(value));
+  static final _$createThread = $grpc.ClientMethod<$18.PostThreadRequest, $3.Thread>(
       '/bst.v1.ThreadService/CreateThread',
-      ($16.PostThreadRequest value) => value.writeToBuffer(),
+      ($18.PostThreadRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $3.Thread.fromBuffer(value));
-  static final _$createThreadInSession = $grpc.ClientMethod<$16.PostThreadInSessionRequest, $3.Thread>(
+  static final _$createThreadInSession = $grpc.ClientMethod<$18.PostThreadInSessionRequest, $3.Thread>(
       '/bst.v1.ThreadService/CreateThreadInSession',
-      ($16.PostThreadInSessionRequest value) => value.writeToBuffer(),
+      ($18.PostThreadInSessionRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $3.Thread.fromBuffer(value));
-  static final _$updateThread = $grpc.ClientMethod<$16.UpdateThreadRequest, $3.Thread>(
-      '/bst.v1.ThreadService/UpdateThread',
-      ($16.UpdateThreadRequest value) => value.writeToBuffer(),
+  static final _$updateThreadTitle = $grpc.ClientMethod<$18.UpdateThreadTitleRequest, $3.Thread>(
+      '/bst.v1.ThreadService/UpdateThreadTitle',
+      ($18.UpdateThreadTitleRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $3.Thread.fromBuffer(value));
-  static final _$deleteThread = $grpc.ClientMethod<$16.DeleteThreadRequest, $16.DeleteThreadResponse>(
+  static final _$updateThreadDescription = $grpc.ClientMethod<$18.UpdateThreadDescriptionRequest, $3.Thread>(
+      '/bst.v1.ThreadService/UpdateThreadDescription',
+      ($18.UpdateThreadDescriptionRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $3.Thread.fromBuffer(value));
+  static final _$deleteThread = $grpc.ClientMethod<$18.DeleteThreadRequest, $18.DeleteThreadResponse>(
       '/bst.v1.ThreadService/DeleteThread',
-      ($16.DeleteThreadRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $16.DeleteThreadResponse.fromBuffer(value));
+      ($18.DeleteThreadRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.DeleteThreadResponse.fromBuffer(value));
 
   ThreadServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -57,31 +61,35 @@ class ThreadServiceClient extends $grpc.Client {
       : super(channel, options: options,
         interceptors: interceptors);
 
-  $grpc.ResponseFuture<$3.Thread> getThread($16.GetThreadRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$3.Thread> getThread($18.GetThreadRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getThread, request, options: options);
   }
 
-  $grpc.ResponseFuture<$16.GetThreadsInSessionResponse> getThreadsInSession($16.GetThreadsInSessionRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$18.GetThreadsInSessionResponse> getThreadsInSession($18.GetThreadsInSessionRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getThreadsInSession, request, options: options);
   }
 
-  $grpc.ResponseFuture<$16.GetThreadCommentsResponse> getThreadComments($16.GetThreadCommentsRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$18.GetThreadCommentsResponse> getThreadComments($18.GetThreadCommentsRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getThreadComments, request, options: options);
   }
 
-  $grpc.ResponseFuture<$3.Thread> createThread($16.PostThreadRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$3.Thread> createThread($18.PostThreadRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createThread, request, options: options);
   }
 
-  $grpc.ResponseFuture<$3.Thread> createThreadInSession($16.PostThreadInSessionRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$3.Thread> createThreadInSession($18.PostThreadInSessionRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createThreadInSession, request, options: options);
   }
 
-  $grpc.ResponseFuture<$3.Thread> updateThread($16.UpdateThreadRequest request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$updateThread, request, options: options);
+  $grpc.ResponseFuture<$3.Thread> updateThreadTitle($18.UpdateThreadTitleRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateThreadTitle, request, options: options);
   }
 
-  $grpc.ResponseFuture<$16.DeleteThreadResponse> deleteThread($16.DeleteThreadRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$3.Thread> updateThreadDescription($18.UpdateThreadDescriptionRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateThreadDescription, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$18.DeleteThreadResponse> deleteThread($18.DeleteThreadRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteThread, request, options: options);
   }
 }
@@ -91,90 +99,102 @@ abstract class ThreadServiceBase extends $grpc.Service {
   $core.String get $name => 'bst.v1.ThreadService';
 
   ThreadServiceBase() {
-    $addMethod($grpc.ServiceMethod<$16.GetThreadRequest, $3.Thread>(
+    $addMethod($grpc.ServiceMethod<$18.GetThreadRequest, $3.Thread>(
         'GetThread',
         getThread_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $16.GetThreadRequest.fromBuffer(value),
+        ($core.List<$core.int> value) => $18.GetThreadRequest.fromBuffer(value),
         ($3.Thread value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$16.GetThreadsInSessionRequest, $16.GetThreadsInSessionResponse>(
+    $addMethod($grpc.ServiceMethod<$18.GetThreadsInSessionRequest, $18.GetThreadsInSessionResponse>(
         'GetThreadsInSession',
         getThreadsInSession_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $16.GetThreadsInSessionRequest.fromBuffer(value),
-        ($16.GetThreadsInSessionResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$16.GetThreadCommentsRequest, $16.GetThreadCommentsResponse>(
+        ($core.List<$core.int> value) => $18.GetThreadsInSessionRequest.fromBuffer(value),
+        ($18.GetThreadsInSessionResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$18.GetThreadCommentsRequest, $18.GetThreadCommentsResponse>(
         'GetThreadComments',
         getThreadComments_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $16.GetThreadCommentsRequest.fromBuffer(value),
-        ($16.GetThreadCommentsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$16.PostThreadRequest, $3.Thread>(
+        ($core.List<$core.int> value) => $18.GetThreadCommentsRequest.fromBuffer(value),
+        ($18.GetThreadCommentsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$18.PostThreadRequest, $3.Thread>(
         'CreateThread',
         createThread_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $16.PostThreadRequest.fromBuffer(value),
+        ($core.List<$core.int> value) => $18.PostThreadRequest.fromBuffer(value),
         ($3.Thread value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$16.PostThreadInSessionRequest, $3.Thread>(
+    $addMethod($grpc.ServiceMethod<$18.PostThreadInSessionRequest, $3.Thread>(
         'CreateThreadInSession',
         createThreadInSession_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $16.PostThreadInSessionRequest.fromBuffer(value),
+        ($core.List<$core.int> value) => $18.PostThreadInSessionRequest.fromBuffer(value),
         ($3.Thread value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$16.UpdateThreadRequest, $3.Thread>(
-        'UpdateThread',
-        updateThread_Pre,
+    $addMethod($grpc.ServiceMethod<$18.UpdateThreadTitleRequest, $3.Thread>(
+        'UpdateThreadTitle',
+        updateThreadTitle_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $16.UpdateThreadRequest.fromBuffer(value),
+        ($core.List<$core.int> value) => $18.UpdateThreadTitleRequest.fromBuffer(value),
         ($3.Thread value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$16.DeleteThreadRequest, $16.DeleteThreadResponse>(
+    $addMethod($grpc.ServiceMethod<$18.UpdateThreadDescriptionRequest, $3.Thread>(
+        'UpdateThreadDescription',
+        updateThreadDescription_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $18.UpdateThreadDescriptionRequest.fromBuffer(value),
+        ($3.Thread value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$18.DeleteThreadRequest, $18.DeleteThreadResponse>(
         'DeleteThread',
         deleteThread_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $16.DeleteThreadRequest.fromBuffer(value),
-        ($16.DeleteThreadResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $18.DeleteThreadRequest.fromBuffer(value),
+        ($18.DeleteThreadResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$3.Thread> getThread_Pre($grpc.ServiceCall call, $async.Future<$16.GetThreadRequest> request) async {
+  $async.Future<$3.Thread> getThread_Pre($grpc.ServiceCall call, $async.Future<$18.GetThreadRequest> request) async {
     return getThread(call, await request);
   }
 
-  $async.Future<$16.GetThreadsInSessionResponse> getThreadsInSession_Pre($grpc.ServiceCall call, $async.Future<$16.GetThreadsInSessionRequest> request) async {
+  $async.Future<$18.GetThreadsInSessionResponse> getThreadsInSession_Pre($grpc.ServiceCall call, $async.Future<$18.GetThreadsInSessionRequest> request) async {
     return getThreadsInSession(call, await request);
   }
 
-  $async.Future<$16.GetThreadCommentsResponse> getThreadComments_Pre($grpc.ServiceCall call, $async.Future<$16.GetThreadCommentsRequest> request) async {
+  $async.Future<$18.GetThreadCommentsResponse> getThreadComments_Pre($grpc.ServiceCall call, $async.Future<$18.GetThreadCommentsRequest> request) async {
     return getThreadComments(call, await request);
   }
 
-  $async.Future<$3.Thread> createThread_Pre($grpc.ServiceCall call, $async.Future<$16.PostThreadRequest> request) async {
+  $async.Future<$3.Thread> createThread_Pre($grpc.ServiceCall call, $async.Future<$18.PostThreadRequest> request) async {
     return createThread(call, await request);
   }
 
-  $async.Future<$3.Thread> createThreadInSession_Pre($grpc.ServiceCall call, $async.Future<$16.PostThreadInSessionRequest> request) async {
+  $async.Future<$3.Thread> createThreadInSession_Pre($grpc.ServiceCall call, $async.Future<$18.PostThreadInSessionRequest> request) async {
     return createThreadInSession(call, await request);
   }
 
-  $async.Future<$3.Thread> updateThread_Pre($grpc.ServiceCall call, $async.Future<$16.UpdateThreadRequest> request) async {
-    return updateThread(call, await request);
+  $async.Future<$3.Thread> updateThreadTitle_Pre($grpc.ServiceCall call, $async.Future<$18.UpdateThreadTitleRequest> request) async {
+    return updateThreadTitle(call, await request);
   }
 
-  $async.Future<$16.DeleteThreadResponse> deleteThread_Pre($grpc.ServiceCall call, $async.Future<$16.DeleteThreadRequest> request) async {
+  $async.Future<$3.Thread> updateThreadDescription_Pre($grpc.ServiceCall call, $async.Future<$18.UpdateThreadDescriptionRequest> request) async {
+    return updateThreadDescription(call, await request);
+  }
+
+  $async.Future<$18.DeleteThreadResponse> deleteThread_Pre($grpc.ServiceCall call, $async.Future<$18.DeleteThreadRequest> request) async {
     return deleteThread(call, await request);
   }
 
-  $async.Future<$3.Thread> getThread($grpc.ServiceCall call, $16.GetThreadRequest request);
-  $async.Future<$16.GetThreadsInSessionResponse> getThreadsInSession($grpc.ServiceCall call, $16.GetThreadsInSessionRequest request);
-  $async.Future<$16.GetThreadCommentsResponse> getThreadComments($grpc.ServiceCall call, $16.GetThreadCommentsRequest request);
-  $async.Future<$3.Thread> createThread($grpc.ServiceCall call, $16.PostThreadRequest request);
-  $async.Future<$3.Thread> createThreadInSession($grpc.ServiceCall call, $16.PostThreadInSessionRequest request);
-  $async.Future<$3.Thread> updateThread($grpc.ServiceCall call, $16.UpdateThreadRequest request);
-  $async.Future<$16.DeleteThreadResponse> deleteThread($grpc.ServiceCall call, $16.DeleteThreadRequest request);
+  $async.Future<$3.Thread> getThread($grpc.ServiceCall call, $18.GetThreadRequest request);
+  $async.Future<$18.GetThreadsInSessionResponse> getThreadsInSession($grpc.ServiceCall call, $18.GetThreadsInSessionRequest request);
+  $async.Future<$18.GetThreadCommentsResponse> getThreadComments($grpc.ServiceCall call, $18.GetThreadCommentsRequest request);
+  $async.Future<$3.Thread> createThread($grpc.ServiceCall call, $18.PostThreadRequest request);
+  $async.Future<$3.Thread> createThreadInSession($grpc.ServiceCall call, $18.PostThreadInSessionRequest request);
+  $async.Future<$3.Thread> updateThreadTitle($grpc.ServiceCall call, $18.UpdateThreadTitleRequest request);
+  $async.Future<$3.Thread> updateThreadDescription($grpc.ServiceCall call, $18.UpdateThreadDescriptionRequest request);
+  $async.Future<$18.DeleteThreadResponse> deleteThread($grpc.ServiceCall call, $18.DeleteThreadRequest request);
 }

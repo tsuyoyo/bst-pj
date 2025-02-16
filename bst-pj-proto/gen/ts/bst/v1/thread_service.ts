@@ -46,9 +46,19 @@ export interface PostThreadInSessionRequest {
   sessionId: number;
 }
 
+export interface UpdateThreadTitleRequest {
+  id: number;
+  title: string;
+}
+
 export interface UpdateThreadRequest {
   id: number;
   title: string;
+  description: string;
+}
+
+export interface UpdateThreadDescriptionRequest {
+  id: number;
   description: string;
 }
 
@@ -589,6 +599,80 @@ export const PostThreadInSessionRequest = {
   },
 };
 
+function createBaseUpdateThreadTitleRequest(): UpdateThreadTitleRequest {
+  return { id: 0, title: "" };
+}
+
+export const UpdateThreadTitleRequest = {
+  encode(message: UpdateThreadTitleRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.id !== 0) {
+      writer.uint32(8).int32(message.id);
+    }
+    if (message.title !== "") {
+      writer.uint32(18).string(message.title);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateThreadTitleRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUpdateThreadTitleRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.id = reader.int32();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.title = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UpdateThreadTitleRequest {
+    return {
+      id: isSet(object.id) ? globalThis.Number(object.id) : 0,
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+    };
+  },
+
+  toJSON(message: UpdateThreadTitleRequest): unknown {
+    const obj: any = {};
+    if (message.id !== 0) {
+      obj.id = Math.round(message.id);
+    }
+    if (message.title !== "") {
+      obj.title = message.title;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UpdateThreadTitleRequest>, I>>(base?: I): UpdateThreadTitleRequest {
+    return UpdateThreadTitleRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UpdateThreadTitleRequest>, I>>(object: I): UpdateThreadTitleRequest {
+    const message = createBaseUpdateThreadTitleRequest();
+    message.id = object.id ?? 0;
+    message.title = object.title ?? "";
+    return message;
+  },
+};
+
 function createBaseUpdateThreadRequest(): UpdateThreadRequest {
   return { id: 0, title: "", description: "" };
 }
@@ -673,6 +757,82 @@ export const UpdateThreadRequest = {
     const message = createBaseUpdateThreadRequest();
     message.id = object.id ?? 0;
     message.title = object.title ?? "";
+    message.description = object.description ?? "";
+    return message;
+  },
+};
+
+function createBaseUpdateThreadDescriptionRequest(): UpdateThreadDescriptionRequest {
+  return { id: 0, description: "" };
+}
+
+export const UpdateThreadDescriptionRequest = {
+  encode(message: UpdateThreadDescriptionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.id !== 0) {
+      writer.uint32(8).int32(message.id);
+    }
+    if (message.description !== "") {
+      writer.uint32(18).string(message.description);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateThreadDescriptionRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUpdateThreadDescriptionRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.id = reader.int32();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.description = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UpdateThreadDescriptionRequest {
+    return {
+      id: isSet(object.id) ? globalThis.Number(object.id) : 0,
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+    };
+  },
+
+  toJSON(message: UpdateThreadDescriptionRequest): unknown {
+    const obj: any = {};
+    if (message.id !== 0) {
+      obj.id = Math.round(message.id);
+    }
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UpdateThreadDescriptionRequest>, I>>(base?: I): UpdateThreadDescriptionRequest {
+    return UpdateThreadDescriptionRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UpdateThreadDescriptionRequest>, I>>(
+    object: I,
+  ): UpdateThreadDescriptionRequest {
+    const message = createBaseUpdateThreadDescriptionRequest();
+    message.id = object.id ?? 0;
     message.description = object.description ?? "";
     return message;
   },
@@ -798,7 +958,8 @@ export interface ThreadService {
   GetThreadComments(request: GetThreadCommentsRequest): Promise<GetThreadCommentsResponse>;
   CreateThread(request: PostThreadRequest): Promise<Thread>;
   CreateThreadInSession(request: PostThreadInSessionRequest): Promise<Thread>;
-  UpdateThread(request: UpdateThreadRequest): Promise<Thread>;
+  UpdateThreadTitle(request: UpdateThreadTitleRequest): Promise<Thread>;
+  UpdateThreadDescription(request: UpdateThreadDescriptionRequest): Promise<Thread>;
   DeleteThread(request: DeleteThreadRequest): Promise<DeleteThreadResponse>;
 }
 
@@ -814,7 +975,8 @@ export class ThreadServiceClientImpl implements ThreadService {
     this.GetThreadComments = this.GetThreadComments.bind(this);
     this.CreateThread = this.CreateThread.bind(this);
     this.CreateThreadInSession = this.CreateThreadInSession.bind(this);
-    this.UpdateThread = this.UpdateThread.bind(this);
+    this.UpdateThreadTitle = this.UpdateThreadTitle.bind(this);
+    this.UpdateThreadDescription = this.UpdateThreadDescription.bind(this);
     this.DeleteThread = this.DeleteThread.bind(this);
   }
   GetThread(request: GetThreadRequest): Promise<Thread> {
@@ -847,9 +1009,15 @@ export class ThreadServiceClientImpl implements ThreadService {
     return promise.then((data) => Thread.decode(_m0.Reader.create(data)));
   }
 
-  UpdateThread(request: UpdateThreadRequest): Promise<Thread> {
-    const data = UpdateThreadRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "UpdateThread", data);
+  UpdateThreadTitle(request: UpdateThreadTitleRequest): Promise<Thread> {
+    const data = UpdateThreadTitleRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "UpdateThreadTitle", data);
+    return promise.then((data) => Thread.decode(_m0.Reader.create(data)));
+  }
+
+  UpdateThreadDescription(request: UpdateThreadDescriptionRequest): Promise<Thread> {
+    const data = UpdateThreadDescriptionRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "UpdateThreadDescription", data);
     return promise.then((data) => Thread.decode(_m0.Reader.create(data)));
   }
 

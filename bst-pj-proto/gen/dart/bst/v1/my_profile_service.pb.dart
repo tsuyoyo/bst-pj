@@ -13,11 +13,11 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'user.pb.dart' as $23;
+import 'user.pb.dart' as $25;
 
 class GetMyProfileResponse extends $pb.GeneratedMessage {
   factory GetMyProfileResponse({
-    $23.UserProfile? profile,
+    $25.UserProfile? profile,
     $core.String? email,
   }) {
     final $result = create();
@@ -34,7 +34,7 @@ class GetMyProfileResponse extends $pb.GeneratedMessage {
   factory GetMyProfileResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMyProfileResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$23.UserProfile>(1, _omitFieldNames ? '' : 'profile', subBuilder: $23.UserProfile.create)
+    ..aOM<$25.UserProfile>(1, _omitFieldNames ? '' : 'profile', subBuilder: $25.UserProfile.create)
     ..aOS(2, _omitFieldNames ? '' : 'email')
     ..hasRequiredFields = false
   ;
@@ -61,15 +61,15 @@ class GetMyProfileResponse extends $pb.GeneratedMessage {
   static GetMyProfileResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $23.UserProfile get profile => $_getN(0);
+  $25.UserProfile get profile => $_getN(0);
   @$pb.TagNumber(1)
-  set profile($23.UserProfile v) { setField(1, v); }
+  set profile($25.UserProfile v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasProfile() => $_has(0);
   @$pb.TagNumber(1)
   void clearProfile() => clearField(1);
   @$pb.TagNumber(1)
-  $23.UserProfile ensureProfile() => $_ensure(0);
+  $25.UserProfile ensureProfile() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get email => $_getSZ(1);
@@ -416,7 +416,7 @@ class UpdateUserAreaRequest extends $pb.GeneratedMessage {
 class UpdateResponse extends $pb.GeneratedMessage {
   factory UpdateResponse({
     $core.bool? success,
-    $23.UserProfile? profile,
+    $25.UserProfile? profile,
   }) {
     final $result = create();
     if (success != null) {
@@ -433,7 +433,7 @@ class UpdateResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'success')
-    ..aOM<$23.UserProfile>(2, _omitFieldNames ? '' : 'profile', subBuilder: $23.UserProfile.create)
+    ..aOM<$25.UserProfile>(2, _omitFieldNames ? '' : 'profile', subBuilder: $25.UserProfile.create)
     ..hasRequiredFields = false
   ;
 
@@ -468,15 +468,15 @@ class UpdateResponse extends $pb.GeneratedMessage {
   void clearSuccess() => clearField(1);
 
   @$pb.TagNumber(2)
-  $23.UserProfile get profile => $_getN(1);
+  $25.UserProfile get profile => $_getN(1);
   @$pb.TagNumber(2)
-  set profile($23.UserProfile v) { setField(2, v); }
+  set profile($25.UserProfile v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasProfile() => $_has(1);
   @$pb.TagNumber(2)
   void clearProfile() => clearField(2);
   @$pb.TagNumber(2)
-  $23.UserProfile ensureProfile() => $_ensure(1);
+  $25.UserProfile ensureProfile() => $_ensure(1);
 }
 
 

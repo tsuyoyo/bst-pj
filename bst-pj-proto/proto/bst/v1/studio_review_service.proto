@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "bst/v1/location.proto";
+
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+service StudioReviewService {
+  // POST /studios/{id}/reviews
+  rpc CreateStudioReview(CreateStudioReviewRequest)
+      returns (CreateStudioReviewResponse);
+  // GET /studios/{id}/reviews
+  rpc ListStudioReviews(ListStudioReviewsRequest)
+      returns (ListStudioReviewsResponse);
+  // DELETE /studios/{id}/reviews/{reviewId}
+  rpc DeleteStudioReview(DeleteStudioReviewRequest)
+      returns (DeleteStudioReviewResponse);
+}
+
+message CreateStudioReviewRequest {
+  int32  studio_id = 1;
+  string comment   = 2;
+}
+
+message CreateStudioReviewResponse {
+  StudioReview review = 1;
+}
+
+message ListStudioReviewsRequest {
+  int32 studio_id  = 1;
+  int32 page_size  = 2;
+  int32 page_token = 3;
+}
+
+message ListStudioReviewsResponse {
+  repeated StudioReview reviews         = 1;
+  string                next_page_token = 2;
+  int32                 total_size      = 3;
+}
+
+message DeleteStudioReviewRequest {
+  int32 studio_id = 1;
+  int32 review_id = 2;
+}
+
+message DeleteStudioReviewResponse {
+  bool success = 1;
+}

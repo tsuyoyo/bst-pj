@@ -59,6 +59,7 @@ describe('StudioService', () => {
       mapUrl: 'https://maps.google.com',
     },
     overallRating: 0,
+    rooms: [],
   };
 
   beforeEach(async () => {

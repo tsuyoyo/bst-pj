@@ -112,6 +112,20 @@ final $typed_data.Uint8List postThreadInSessionRequestDescriptor = $convert.base
     'VzY3JpcHRpb24YAiABKAlSC2Rlc2NyaXB0aW9uEhYKBnVzZXJJZBgDIAEoBVIGdXNlcklkEhwK'
     'CXNlc3Npb25JZBgEIAEoBVIJc2Vzc2lvbklk');
 
+@$core.Deprecated('Use updateThreadTitleRequestDescriptor instead')
+const UpdateThreadTitleRequest$json = {
+  '1': 'UpdateThreadTitleRequest',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
+  ],
+};
+
+/// Descriptor for `UpdateThreadTitleRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateThreadTitleRequestDescriptor = $convert.base64Decode(
+    'ChhVcGRhdGVUaHJlYWRUaXRsZVJlcXVlc3QSDgoCaWQYASABKAVSAmlkEhQKBXRpdGxlGAIgAS'
+    'gJUgV0aXRsZQ==');
+
 @$core.Deprecated('Use updateThreadRequestDescriptor instead')
 const UpdateThreadRequest$json = {
   '1': 'UpdateThreadRequest',
@@ -126,6 +140,20 @@ const UpdateThreadRequest$json = {
 final $typed_data.Uint8List updateThreadRequestDescriptor = $convert.base64Decode(
     'ChNVcGRhdGVUaHJlYWRSZXF1ZXN0Eg4KAmlkGAEgASgFUgJpZBIUCgV0aXRsZRgCIAEoCVIFdG'
     'l0bGUSIAoLZGVzY3JpcHRpb24YAyABKAlSC2Rlc2NyaXB0aW9u');
+
+@$core.Deprecated('Use updateThreadDescriptionRequestDescriptor instead')
+const UpdateThreadDescriptionRequest$json = {
+  '1': 'UpdateThreadDescriptionRequest',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    {'1': 'description', '3': 2, '4': 1, '5': 9, '10': 'description'},
+  ],
+};
+
+/// Descriptor for `UpdateThreadDescriptionRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateThreadDescriptionRequestDescriptor = $convert.base64Decode(
+    'Ch5VcGRhdGVUaHJlYWREZXNjcmlwdGlvblJlcXVlc3QSDgoCaWQYASABKAVSAmlkEiAKC2Rlc2'
+    'NyaXB0aW9uGAIgASgJUgtkZXNjcmlwdGlvbg==');
 
 @$core.Deprecated('Use deleteThreadRequestDescriptor instead')
 const DeleteThreadRequest$json = {

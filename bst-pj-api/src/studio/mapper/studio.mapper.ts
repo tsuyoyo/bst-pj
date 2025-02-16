@@ -10,6 +10,7 @@ export class StudioMapper {
         ? LocationMapper.toProto(entity.location)
         : undefined,
       overallRating: 0, // TODO: 評価の計算ロジックを実装
+      rooms: [],
     };
   }
 

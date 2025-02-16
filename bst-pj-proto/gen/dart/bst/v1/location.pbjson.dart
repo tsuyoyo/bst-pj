@@ -57,11 +57,47 @@ const Studio$json = {
     {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
     {'1': 'location', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.Location', '10': 'location'},
     {'1': 'overall_rating', '3': 3, '4': 1, '5': 5, '10': 'overallRating'},
+    {'1': 'rooms', '3': 4, '4': 3, '5': 11, '6': '.bst.v1.StudioRoom', '10': 'rooms'},
   ],
 };
 
 /// Descriptor for `Studio`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List studioDescriptor = $convert.base64Decode(
     'CgZTdHVkaW8SDgoCaWQYASABKAVSAmlkEiwKCGxvY2F0aW9uGAIgASgLMhAuYnN0LnYxLkxvY2'
-    'F0aW9uUghsb2NhdGlvbhIlCg5vdmVyYWxsX3JhdGluZxgDIAEoBVINb3ZlcmFsbFJhdGluZw==');
+    'F0aW9uUghsb2NhdGlvbhIlCg5vdmVyYWxsX3JhdGluZxgDIAEoBVINb3ZlcmFsbFJhdGluZxIo'
+    'CgVyb29tcxgEIAMoCzISLmJzdC52MS5TdHVkaW9Sb29tUgVyb29tcw==');
+
+@$core.Deprecated('Use studioRoomDescriptor instead')
+const StudioRoom$json = {
+  '1': 'StudioRoom',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'capacity', '3': 3, '4': 1, '5': 5, '10': 'capacity'},
+    {'1': 'price', '3': 4, '4': 1, '5': 5, '10': 'price'},
+    {'1': 'infos', '3': 5, '4': 3, '5': 11, '6': '.bst.v1.StudioRoomInfo', '10': 'infos'},
+  ],
+};
+
+/// Descriptor for `StudioRoom`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List studioRoomDescriptor = $convert.base64Decode(
+    'CgpTdHVkaW9Sb29tEg4KAmlkGAEgASgFUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEhoKCGNhcG'
+    'FjaXR5GAMgASgFUghjYXBhY2l0eRIUCgVwcmljZRgEIAEoBVIFcHJpY2USLAoFaW5mb3MYBSAD'
+    'KAsyFi5ic3QudjEuU3R1ZGlvUm9vbUluZm9SBWluZm9z');
+
+@$core.Deprecated('Use studioRoomInfoDescriptor instead')
+const StudioRoomInfo$json = {
+  '1': 'StudioRoomInfo',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    {'1': 'type', '3': 2, '4': 1, '5': 9, '10': 'type'},
+    {'1': 'key', '3': 3, '4': 1, '5': 9, '10': 'key'},
+    {'1': 'value', '3': 4, '4': 1, '5': 9, '10': 'value'},
+  ],
+};
+
+/// Descriptor for `StudioRoomInfo`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List studioRoomInfoDescriptor = $convert.base64Decode(
+    'Cg5TdHVkaW9Sb29tSW5mbxIOCgJpZBgBIAEoBVICaWQSEgoEdHlwZRgCIAEoCVIEdHlwZRIQCg'
+    'NrZXkYAyABKAlSA2tleRIUCgV2YWx1ZRgEIAEoCVIFdmFsdWU=');
 
