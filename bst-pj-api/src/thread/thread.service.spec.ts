@@ -8,7 +8,7 @@ import { Comment } from '../entities/comment.entity';
 import { UserService } from '../user/user.service';
 import { ThreadContextType } from '../entities/thread.entity';
 import { CommentTargetType } from '../entities/comment.entity';
-import { NotFoundException } from '@nestjs/common';
+import { NotFoundException, ForbiddenException } from '@nestjs/common';
 import { User } from '../entities/user.entity';
 
 describe('ThreadService', () => {
@@ -57,6 +57,7 @@ describe('ThreadService', () => {
     save: jest.fn().mockResolvedValue(mockThread),
     findOne: jest.fn().mockResolvedValue(mockThread),
     find: jest.fn().mockResolvedValue([mockThread]),
+    delete: jest.fn().mockResolvedValue({ affected: 1 }),
   };
 
   const mockCommentRepository = {
@@ -278,6 +279,45 @@ describe('ThreadService', () => {
       await expect(
         service.updateThreadDescription(999, 'Updated Thread Description'),
       ).rejects.toThrow(NotFoundException);
+    });
+  });
+
+  describe('deleteThread', () => {
+    it('should delete a thread', async () => {
+      const request = {
+        id: 1,
+        userId: 1,
+      };
+
+      const result = await service.deleteThread(request.id, request.userId);
+
+      expect(result).toBeDefined();
+      expect(result.success).toBe(true);
+      expect(threadRepository.delete).toHaveBeenCalledWith(request.id);
+    });
+
+    it('should throw NotFoundException when thread not found', async () => {
+      jest.spyOn(threadRepository, 'findOne').mockResolvedValueOnce(null);
+
+      await expect(service.deleteThread(999, 1)).rejects.toThrow(
+        NotFoundException,
+      );
+    });
+
+    it('should throw ForbiddenException when user is not the creator', async () => {
+      const request = {
+        id: 1,
+        userId: 2,
+      };
+
+      jest.spyOn(threadRepository, 'findOne').mockResolvedValueOnce({
+        ...mockThread,
+        createdBy: 1,
+      });
+
+      await expect(
+        service.deleteThread(request.id, request.userId),
+      ).rejects.toThrow(ForbiddenException);
     });
   });
 });

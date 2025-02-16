@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Thread } from '../entities/thread.entity';
@@ -11,6 +15,7 @@ import {
   GetThreadCommentsResponse,
   GetThreadsInSessionResponse,
   UpdateThreadRequest,
+  DeleteThreadResponse,
 } from '../proto/bst/v1/thread_service';
 import { Thread as ThreadProto } from '../proto/bst/v1/communication';
 import { ThreadContextType } from '../entities/thread.entity';
@@ -176,6 +181,28 @@ export class ThreadService {
       createdBy: this.userService.mapUserToProto(thread.creator),
       createdAt: thread.createdAt,
       updatedAt: thread.updatedAt,
+    };
+  }
+
+  async deleteThread(
+    id: number,
+    userId: number,
+  ): Promise<DeleteThreadResponse> {
+    const thread = await this.threadRepository.findOne({
+      where: { id },
+    });
+    if (!thread) {
+      throw new NotFoundException('Thread not found');
+    }
+
+    if (thread.createdBy !== userId) {
+      throw new ForbiddenException('You are not allowed to delete this thread');
+    }
+
+    const result = await this.threadRepository.delete(id);
+
+    return {
+      success: result.affected ? result.affected > 0 : false,
     };
   }
 }

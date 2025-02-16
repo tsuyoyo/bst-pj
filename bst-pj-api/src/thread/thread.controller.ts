@@ -8,6 +8,7 @@ import {
   Query,
   UseGuards,
   Put,
+  Delete,
 } from '@nestjs/common';
 import { ThreadService } from './thread.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -19,6 +20,7 @@ import { Thread } from '../proto/bst/v1/communication';
 import {
   GetThreadCommentsResponse,
   GetThreadsInSessionResponse,
+  DeleteThreadResponse,
 } from '../proto/bst/v1/thread_service';
 import { UpdateThreadDto } from './dto/update-thread.dto';
 import { UpdateThreadTitleDto } from './dto/update-thread-title.dto';
@@ -101,5 +103,14 @@ export class ThreadController {
       id,
       request.description,
     );
+  }
+
+  @Delete(':id')
+  @UseGuards(JwtAuthGuard)
+  async deleteThread(
+    @Param('id', ParseIntPipe) id: number,
+    @CurrentUser() user: User,
+  ): Promise<DeleteThreadResponse> {
+    return await this.threadService.deleteThread(id, user.id);
   }
 }
