@@ -80,7 +80,7 @@ describe('CommentService', () => {
 
   describe('postComment', () => {
     it('should create and return a comment', async () => {
-      const createCommentDto = {
+      const postCommentDto = {
         content: 'Test comment',
         threadId: 1,
         userId: 1,
@@ -89,13 +89,13 @@ describe('CommentService', () => {
       mockRepository.create.mockReturnValue(mockComment);
       mockRepository.save.mockResolvedValue(mockComment);
 
-      const result = await service.postComment(createCommentDto);
+      const result = await service.postComment(postCommentDto);
       expect(result).toEqual(mockComment);
       expect(repository.create).toHaveBeenCalledWith({
-        content: createCommentDto.content,
+        content: postCommentDto.content,
         targetType: CommentTargetType.Thread,
-        targetId: createCommentDto.threadId,
-        userId: createCommentDto.userId,
+        targetId: postCommentDto.threadId,
+        userId: postCommentDto.userId,
       });
       expect(repository.save).toHaveBeenCalledWith(mockComment);
     });
