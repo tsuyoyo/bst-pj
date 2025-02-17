@@ -22,7 +22,10 @@ export class StudioRoom {
   @Column({ type: 'varchar', length: 255, nullable: false })
   name: string;
 
-  @Column({ type: 'integer', nullable: false })
+  @Column({ type: 'integer', nullable: true })
+  size: number;
+
+  @Column({ type: 'integer', nullable: true })
   capacity: number;
 
   @Column({ type: 'integer', nullable: false })

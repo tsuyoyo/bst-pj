@@ -17,6 +17,9 @@ export class StudioRoomInfo {
   @Column({ name: 'studio_room_id', type: 'integer', nullable: false })
   studioRoomId: number;
 
+  @Column({ name: 'studio_id', type: 'integer', nullable: false })
+  studioId: number;
+
   @Column({
     type: 'varchar',
     length: 50,
