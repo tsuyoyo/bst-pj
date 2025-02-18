@@ -6,8 +6,6 @@ import {
   Post,
   Put,
   Delete,
-  HttpCode,
-  HttpStatus,
 } from '@nestjs/common';
 import { StudioRoomService } from './studio-room.service';
 import { CreateStudioRoomDto } from './dto/create-studio-room.dto';
@@ -105,7 +103,6 @@ export class StudioRoomController {
     );
   }
 
-  @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':studioId/rooms/:roomId')
   async deleteStudioRoom(
     @Param('studioId') studioId: number,
@@ -114,7 +111,6 @@ export class StudioRoomController {
     return this.studioRoomService.deleteStudioRoom(studioId, roomId);
   }
 
-  @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':studioId/rooms/:roomId/infos/:infoId')
   async deleteStudioRoomInfo(
     @Param('studioId') studioId: number,

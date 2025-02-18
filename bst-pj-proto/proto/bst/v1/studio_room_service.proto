@@ -34,93 +34,72 @@ service StudioRoomService {
 }
 
 message CreateStudioRoomRequest {
-  int32  studio_id = 1;
-  string name      = 2;
-  int32  capacity  = 3;
-  int32  price     = 4;
+  string name     = 1;
+  int32  capacity = 2;
+  int32  price    = 3;
 }
 
 message CreateStudioRoomResponse {
-  repeated StudioRoom rooms = 1;
+  StudioRoom room = 1;
 }
 
 message ListStudioRoomsRequest {
-  int32 studio_id  = 1;
-  int32 page_size  = 2;
-  int32 page_token = 3;
+  int32 studio_id = 1;
 }
 
+message GetStudioRoomResponse {
+  StudioRoom room = 1;
+}
 message ListStudioRoomsResponse {
-  repeated StudioRoom rooms           = 1;
-  string              next_page_token = 2;
-  int32               total_size      = 3;
+  repeated StudioRoom rooms = 1;
 }
 
+// PUT /studios/{studio_id}/rooms/{roomId}
 message UpdateStudioRoomRequest {
-  int32  studio_id = 1;
-  int32  room_id   = 2;
-  string name      = 3;
-  int32  capacity  = 4;
-  int32  price     = 5;
+  string name     = 1;
+  int32  capacity = 2;
+  int32  size     = 3;
+  int32  price    = 4;
 }
 
 message UpdateStudioRoomResponse {
-  repeated StudioRoom rooms = 1;
+  StudioRoom room = 1;
 }
 
-message DeleteStudioRoomRequest {
-  int32 studio_id = 1;
-  int32 room_id   = 2;
-}
+message DeleteStudioRoomRequest {}
 
 message DeleteStudioRoomResponse {
-  repeated StudioRoom rooms = 1;
+  bool success = 1;
 }
 
 message CreateStudioRoomInfoRequest {
-  int32  studio_id = 1;
-  int32  room_id   = 2;
-  string type      = 3;
-  string key       = 4;
-  string value     = 5;
+  string type  = 1;
+  string key   = 2;
+  string value = 3;
 }
 
 message CreateStudioRoomInfoResponse {
-  repeated StudioRoomInfo infos = 1;
+  StudioRoomInfo info = 1;
 }
 
-message ListStudioRoomInfosRequest {
-  int32 studio_id  = 1;
-  int32 room_id    = 2;
-  int32 page_size  = 3;
-  int32 page_token = 4;
-}
+message ListStudioRoomInfosRequest {}
 
 message ListStudioRoomInfosResponse {
-  repeated StudioRoomInfo infos           = 1;
-  string                  next_page_token = 2;
-  int32                   total_size      = 3;
+  repeated StudioRoomInfo infos = 1;
 }
 
 message UpdateStudioRoomInfoRequest {
-  int32  studio_id = 1;
-  int32  room_id   = 2;
-  int32  info_id   = 3;
-  string type      = 4;
-  string key       = 5;
-  string value     = 6;
+  string type  = 1;
+  string key   = 2;
+  string value = 3;
 }
 
 message UpdateStudioRoomInfoResponse {
-  repeated StudioRoomInfo infos = 1;
+  StudioRoomInfo info = 1;
 }
 
-message DeleteStudioRoomInfoRequest {
-  int32 studio_id = 1;
-  int32 room_id   = 2;
-  int32 info_id   = 3;
-}
+message DeleteStudioRoomInfoRequest {}
 
 message DeleteStudioRoomInfoResponse {
-  repeated StudioRoomInfo infos = 1;
+  bool success = 1;
 }

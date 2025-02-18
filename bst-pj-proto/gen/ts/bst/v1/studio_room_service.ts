@@ -11,114 +11,94 @@ import { StudioRoom, StudioRoomInfo } from "./location";
 export const protobufPackage = "bst.v1";
 
 export interface CreateStudioRoomRequest {
-  studioId: number;
   name: string;
   capacity: number;
   price: number;
 }
 
 export interface CreateStudioRoomResponse {
-  rooms: StudioRoom[];
+  room: StudioRoom | undefined;
 }
 
 export interface ListStudioRoomsRequest {
   studioId: number;
-  pageSize: number;
-  pageToken: number;
+}
+
+export interface GetStudioRoomResponse {
+  room: StudioRoom | undefined;
 }
 
 export interface ListStudioRoomsResponse {
   rooms: StudioRoom[];
-  nextPageToken: string;
-  totalSize: number;
 }
 
+/** PUT /studios/{studio_id}/rooms/{roomId} */
 export interface UpdateStudioRoomRequest {
-  studioId: number;
-  roomId: number;
   name: string;
   capacity: number;
+  size: number;
   price: number;
 }
 
 export interface UpdateStudioRoomResponse {
-  rooms: StudioRoom[];
+  room: StudioRoom | undefined;
 }
 
 export interface DeleteStudioRoomRequest {
-  studioId: number;
-  roomId: number;
 }
 
 export interface DeleteStudioRoomResponse {
-  rooms: StudioRoom[];
+  success: boolean;
 }
 
 export interface CreateStudioRoomInfoRequest {
-  studioId: number;
-  roomId: number;
   type: string;
   key: string;
   value: string;
 }
 
 export interface CreateStudioRoomInfoResponse {
-  infos: StudioRoomInfo[];
+  info: StudioRoomInfo | undefined;
 }
 
 export interface ListStudioRoomInfosRequest {
-  studioId: number;
-  roomId: number;
-  pageSize: number;
-  pageToken: number;
 }
 
 export interface ListStudioRoomInfosResponse {
   infos: StudioRoomInfo[];
-  nextPageToken: string;
-  totalSize: number;
 }
 
 export interface UpdateStudioRoomInfoRequest {
-  studioId: number;
-  roomId: number;
-  infoId: number;
   type: string;
   key: string;
   value: string;
 }
 
 export interface UpdateStudioRoomInfoResponse {
-  infos: StudioRoomInfo[];
+  info: StudioRoomInfo | undefined;
 }
 
 export interface DeleteStudioRoomInfoRequest {
-  studioId: number;
-  roomId: number;
-  infoId: number;
 }
 
 export interface DeleteStudioRoomInfoResponse {
-  infos: StudioRoomInfo[];
+  success: boolean;
 }
 
 function createBaseCreateStudioRoomRequest(): CreateStudioRoomRequest {
-  return { studioId: 0, name: "", capacity: 0, price: 0 };
+  return { name: "", capacity: 0, price: 0 };
 }
 
 export const CreateStudioRoomRequest = {
   encode(message: CreateStudioRoomRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.studioId !== 0) {
-      writer.uint32(8).int32(message.studioId);
-    }
     if (message.name !== "") {
-      writer.uint32(18).string(message.name);
+      writer.uint32(10).string(message.name);
     }
     if (message.capacity !== 0) {
-      writer.uint32(24).int32(message.capacity);
+      writer.uint32(16).int32(message.capacity);
     }
     if (message.price !== 0) {
-      writer.uint32(32).int32(message.price);
+      writer.uint32(24).int32(message.price);
     }
     return writer;
   },
@@ -131,28 +111,21 @@ export const CreateStudioRoomRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.studioId = reader.int32();
-          continue;
-        case 2:
-          if (tag !== 18) {
+          if (tag !== 10) {
             break;
           }
 
           message.name = reader.string();
           continue;
-        case 3:
-          if (tag !== 24) {
+        case 2:
+          if (tag !== 16) {
             break;
           }
 
           message.capacity = reader.int32();
           continue;
-        case 4:
-          if (tag !== 32) {
+        case 3:
+          if (tag !== 24) {
             break;
           }
 
@@ -169,7 +142,6 @@ export const CreateStudioRoomRequest = {
 
   fromJSON(object: any): CreateStudioRoomRequest {
     return {
-      studioId: isSet(object.studioId) ? globalThis.Number(object.studioId) : 0,
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       capacity: isSet(object.capacity) ? globalThis.Number(object.capacity) : 0,
       price: isSet(object.price) ? globalThis.Number(object.price) : 0,
@@ -178,9 +150,6 @@ export const CreateStudioRoomRequest = {
 
   toJSON(message: CreateStudioRoomRequest): unknown {
     const obj: any = {};
-    if (message.studioId !== 0) {
-      obj.studioId = Math.round(message.studioId);
-    }
     if (message.name !== "") {
       obj.name = message.name;
     }
@@ -198,7 +167,6 @@ export const CreateStudioRoomRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<CreateStudioRoomRequest>, I>>(object: I): CreateStudioRoomRequest {
     const message = createBaseCreateStudioRoomRequest();
-    message.studioId = object.studioId ?? 0;
     message.name = object.name ?? "";
     message.capacity = object.capacity ?? 0;
     message.price = object.price ?? 0;
@@ -207,13 +175,13 @@ export const CreateStudioRoomRequest = {
 };
 
 function createBaseCreateStudioRoomResponse(): CreateStudioRoomResponse {
-  return { rooms: [] };
+  return { room: undefined };
 }
 
 export const CreateStudioRoomResponse = {
   encode(message: CreateStudioRoomResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.rooms) {
-      StudioRoom.encode(v!, writer.uint32(10).fork()).ldelim();
+    if (message.room !== undefined) {
+      StudioRoom.encode(message.room, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -230,7 +198,7 @@ export const CreateStudioRoomResponse = {
             break;
           }
 
-          message.rooms.push(StudioRoom.decode(reader, reader.uint32()));
+          message.room = StudioRoom.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -242,15 +210,13 @@ export const CreateStudioRoomResponse = {
   },
 
   fromJSON(object: any): CreateStudioRoomResponse {
-    return {
-      rooms: globalThis.Array.isArray(object?.rooms) ? object.rooms.map((e: any) => StudioRoom.fromJSON(e)) : [],
-    };
+    return { room: isSet(object.room) ? StudioRoom.fromJSON(object.room) : undefined };
   },
 
   toJSON(message: CreateStudioRoomResponse): unknown {
     const obj: any = {};
-    if (message.rooms?.length) {
-      obj.rooms = message.rooms.map((e) => StudioRoom.toJSON(e));
+    if (message.room !== undefined) {
+      obj.room = StudioRoom.toJSON(message.room);
     }
     return obj;
   },
@@ -260,25 +226,21 @@ export const CreateStudioRoomResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<CreateStudioRoomResponse>, I>>(object: I): CreateStudioRoomResponse {
     const message = createBaseCreateStudioRoomResponse();
-    message.rooms = object.rooms?.map((e) => StudioRoom.fromPartial(e)) || [];
+    message.room = (object.room !== undefined && object.room !== null)
+      ? StudioRoom.fromPartial(object.room)
+      : undefined;
     return message;
   },
 };
 
 function createBaseListStudioRoomsRequest(): ListStudioRoomsRequest {
-  return { studioId: 0, pageSize: 0, pageToken: 0 };
+  return { studioId: 0 };
 }
 
 export const ListStudioRoomsRequest = {
   encode(message: ListStudioRoomsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.studioId !== 0) {
       writer.uint32(8).int32(message.studioId);
-    }
-    if (message.pageSize !== 0) {
-      writer.uint32(16).int32(message.pageSize);
-    }
-    if (message.pageToken !== 0) {
-      writer.uint32(24).int32(message.pageToken);
     }
     return writer;
   },
@@ -297,20 +259,6 @@ export const ListStudioRoomsRequest = {
 
           message.studioId = reader.int32();
           continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.pageSize = reader.int32();
-          continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.pageToken = reader.int32();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -321,23 +269,13 @@ export const ListStudioRoomsRequest = {
   },
 
   fromJSON(object: any): ListStudioRoomsRequest {
-    return {
-      studioId: isSet(object.studioId) ? globalThis.Number(object.studioId) : 0,
-      pageSize: isSet(object.pageSize) ? globalThis.Number(object.pageSize) : 0,
-      pageToken: isSet(object.pageToken) ? globalThis.Number(object.pageToken) : 0,
-    };
+    return { studioId: isSet(object.studioId) ? globalThis.Number(object.studioId) : 0 };
   },
 
   toJSON(message: ListStudioRoomsRequest): unknown {
     const obj: any = {};
     if (message.studioId !== 0) {
       obj.studioId = Math.round(message.studioId);
-    }
-    if (message.pageSize !== 0) {
-      obj.pageSize = Math.round(message.pageSize);
-    }
-    if (message.pageToken !== 0) {
-      obj.pageToken = Math.round(message.pageToken);
     }
     return obj;
   },
@@ -348,26 +286,77 @@ export const ListStudioRoomsRequest = {
   fromPartial<I extends Exact<DeepPartial<ListStudioRoomsRequest>, I>>(object: I): ListStudioRoomsRequest {
     const message = createBaseListStudioRoomsRequest();
     message.studioId = object.studioId ?? 0;
-    message.pageSize = object.pageSize ?? 0;
-    message.pageToken = object.pageToken ?? 0;
+    return message;
+  },
+};
+
+function createBaseGetStudioRoomResponse(): GetStudioRoomResponse {
+  return { room: undefined };
+}
+
+export const GetStudioRoomResponse = {
+  encode(message: GetStudioRoomResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.room !== undefined) {
+      StudioRoom.encode(message.room, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetStudioRoomResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetStudioRoomResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.room = StudioRoom.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetStudioRoomResponse {
+    return { room: isSet(object.room) ? StudioRoom.fromJSON(object.room) : undefined };
+  },
+
+  toJSON(message: GetStudioRoomResponse): unknown {
+    const obj: any = {};
+    if (message.room !== undefined) {
+      obj.room = StudioRoom.toJSON(message.room);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetStudioRoomResponse>, I>>(base?: I): GetStudioRoomResponse {
+    return GetStudioRoomResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetStudioRoomResponse>, I>>(object: I): GetStudioRoomResponse {
+    const message = createBaseGetStudioRoomResponse();
+    message.room = (object.room !== undefined && object.room !== null)
+      ? StudioRoom.fromPartial(object.room)
+      : undefined;
     return message;
   },
 };
 
 function createBaseListStudioRoomsResponse(): ListStudioRoomsResponse {
-  return { rooms: [], nextPageToken: "", totalSize: 0 };
+  return { rooms: [] };
 }
 
 export const ListStudioRoomsResponse = {
   encode(message: ListStudioRoomsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rooms) {
       StudioRoom.encode(v!, writer.uint32(10).fork()).ldelim();
-    }
-    if (message.nextPageToken !== "") {
-      writer.uint32(18).string(message.nextPageToken);
-    }
-    if (message.totalSize !== 0) {
-      writer.uint32(24).int32(message.totalSize);
     }
     return writer;
   },
@@ -386,20 +375,6 @@ export const ListStudioRoomsResponse = {
 
           message.rooms.push(StudioRoom.decode(reader, reader.uint32()));
           continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.nextPageToken = reader.string();
-          continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.totalSize = reader.int32();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -412,8 +387,6 @@ export const ListStudioRoomsResponse = {
   fromJSON(object: any): ListStudioRoomsResponse {
     return {
       rooms: globalThis.Array.isArray(object?.rooms) ? object.rooms.map((e: any) => StudioRoom.fromJSON(e)) : [],
-      nextPageToken: isSet(object.nextPageToken) ? globalThis.String(object.nextPageToken) : "",
-      totalSize: isSet(object.totalSize) ? globalThis.Number(object.totalSize) : 0,
     };
   },
 
@@ -421,12 +394,6 @@ export const ListStudioRoomsResponse = {
     const obj: any = {};
     if (message.rooms?.length) {
       obj.rooms = message.rooms.map((e) => StudioRoom.toJSON(e));
-    }
-    if (message.nextPageToken !== "") {
-      obj.nextPageToken = message.nextPageToken;
-    }
-    if (message.totalSize !== 0) {
-      obj.totalSize = Math.round(message.totalSize);
     }
     return obj;
   },
@@ -437,32 +404,27 @@ export const ListStudioRoomsResponse = {
   fromPartial<I extends Exact<DeepPartial<ListStudioRoomsResponse>, I>>(object: I): ListStudioRoomsResponse {
     const message = createBaseListStudioRoomsResponse();
     message.rooms = object.rooms?.map((e) => StudioRoom.fromPartial(e)) || [];
-    message.nextPageToken = object.nextPageToken ?? "";
-    message.totalSize = object.totalSize ?? 0;
     return message;
   },
 };
 
 function createBaseUpdateStudioRoomRequest(): UpdateStudioRoomRequest {
-  return { studioId: 0, roomId: 0, name: "", capacity: 0, price: 0 };
+  return { name: "", capacity: 0, size: 0, price: 0 };
 }
 
 export const UpdateStudioRoomRequest = {
   encode(message: UpdateStudioRoomRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.studioId !== 0) {
-      writer.uint32(8).int32(message.studioId);
-    }
-    if (message.roomId !== 0) {
-      writer.uint32(16).int32(message.roomId);
-    }
     if (message.name !== "") {
-      writer.uint32(26).string(message.name);
+      writer.uint32(10).string(message.name);
     }
     if (message.capacity !== 0) {
-      writer.uint32(32).int32(message.capacity);
+      writer.uint32(16).int32(message.capacity);
+    }
+    if (message.size !== 0) {
+      writer.uint32(24).int32(message.size);
     }
     if (message.price !== 0) {
-      writer.uint32(40).int32(message.price);
+      writer.uint32(32).int32(message.price);
     }
     return writer;
   },
@@ -475,35 +437,28 @@ export const UpdateStudioRoomRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag !== 8) {
+          if (tag !== 10) {
             break;
           }
 
-          message.studioId = reader.int32();
+          message.name = reader.string();
           continue;
         case 2:
           if (tag !== 16) {
             break;
           }
 
-          message.roomId = reader.int32();
+          message.capacity = reader.int32();
           continue;
         case 3:
-          if (tag !== 26) {
+          if (tag !== 24) {
             break;
           }
 
-          message.name = reader.string();
+          message.size = reader.int32();
           continue;
         case 4:
           if (tag !== 32) {
-            break;
-          }
-
-          message.capacity = reader.int32();
-          continue;
-        case 5:
-          if (tag !== 40) {
             break;
           }
 
@@ -520,27 +475,23 @@ export const UpdateStudioRoomRequest = {
 
   fromJSON(object: any): UpdateStudioRoomRequest {
     return {
-      studioId: isSet(object.studioId) ? globalThis.Number(object.studioId) : 0,
-      roomId: isSet(object.roomId) ? globalThis.Number(object.roomId) : 0,
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       capacity: isSet(object.capacity) ? globalThis.Number(object.capacity) : 0,
+      size: isSet(object.size) ? globalThis.Number(object.size) : 0,
       price: isSet(object.price) ? globalThis.Number(object.price) : 0,
     };
   },
 
   toJSON(message: UpdateStudioRoomRequest): unknown {
     const obj: any = {};
-    if (message.studioId !== 0) {
-      obj.studioId = Math.round(message.studioId);
-    }
-    if (message.roomId !== 0) {
-      obj.roomId = Math.round(message.roomId);
-    }
     if (message.name !== "") {
       obj.name = message.name;
     }
     if (message.capacity !== 0) {
       obj.capacity = Math.round(message.capacity);
+    }
+    if (message.size !== 0) {
+      obj.size = Math.round(message.size);
     }
     if (message.price !== 0) {
       obj.price = Math.round(message.price);
@@ -553,23 +504,22 @@ export const UpdateStudioRoomRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<UpdateStudioRoomRequest>, I>>(object: I): UpdateStudioRoomRequest {
     const message = createBaseUpdateStudioRoomRequest();
-    message.studioId = object.studioId ?? 0;
-    message.roomId = object.roomId ?? 0;
     message.name = object.name ?? "";
     message.capacity = object.capacity ?? 0;
+    message.size = object.size ?? 0;
     message.price = object.price ?? 0;
     return message;
   },
 };
 
 function createBaseUpdateStudioRoomResponse(): UpdateStudioRoomResponse {
-  return { rooms: [] };
+  return { room: undefined };
 }
 
 export const UpdateStudioRoomResponse = {
   encode(message: UpdateStudioRoomResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.rooms) {
-      StudioRoom.encode(v!, writer.uint32(10).fork()).ldelim();
+    if (message.room !== undefined) {
+      StudioRoom.encode(message.room, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -586,7 +536,7 @@ export const UpdateStudioRoomResponse = {
             break;
           }
 
-          message.rooms.push(StudioRoom.decode(reader, reader.uint32()));
+          message.room = StudioRoom.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -598,15 +548,13 @@ export const UpdateStudioRoomResponse = {
   },
 
   fromJSON(object: any): UpdateStudioRoomResponse {
-    return {
-      rooms: globalThis.Array.isArray(object?.rooms) ? object.rooms.map((e: any) => StudioRoom.fromJSON(e)) : [],
-    };
+    return { room: isSet(object.room) ? StudioRoom.fromJSON(object.room) : undefined };
   },
 
   toJSON(message: UpdateStudioRoomResponse): unknown {
     const obj: any = {};
-    if (message.rooms?.length) {
-      obj.rooms = message.rooms.map((e) => StudioRoom.toJSON(e));
+    if (message.room !== undefined) {
+      obj.room = StudioRoom.toJSON(message.room);
     }
     return obj;
   },
@@ -616,23 +564,19 @@ export const UpdateStudioRoomResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<UpdateStudioRoomResponse>, I>>(object: I): UpdateStudioRoomResponse {
     const message = createBaseUpdateStudioRoomResponse();
-    message.rooms = object.rooms?.map((e) => StudioRoom.fromPartial(e)) || [];
+    message.room = (object.room !== undefined && object.room !== null)
+      ? StudioRoom.fromPartial(object.room)
+      : undefined;
     return message;
   },
 };
 
 function createBaseDeleteStudioRoomRequest(): DeleteStudioRoomRequest {
-  return { studioId: 0, roomId: 0 };
+  return {};
 }
 
 export const DeleteStudioRoomRequest = {
-  encode(message: DeleteStudioRoomRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.studioId !== 0) {
-      writer.uint32(8).int32(message.studioId);
-    }
-    if (message.roomId !== 0) {
-      writer.uint32(16).int32(message.roomId);
-    }
+  encode(_: DeleteStudioRoomRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -643,20 +587,6 @@ export const DeleteStudioRoomRequest = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.studioId = reader.int32();
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.roomId = reader.int32();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -666,43 +596,32 @@ export const DeleteStudioRoomRequest = {
     return message;
   },
 
-  fromJSON(object: any): DeleteStudioRoomRequest {
-    return {
-      studioId: isSet(object.studioId) ? globalThis.Number(object.studioId) : 0,
-      roomId: isSet(object.roomId) ? globalThis.Number(object.roomId) : 0,
-    };
+  fromJSON(_: any): DeleteStudioRoomRequest {
+    return {};
   },
 
-  toJSON(message: DeleteStudioRoomRequest): unknown {
+  toJSON(_: DeleteStudioRoomRequest): unknown {
     const obj: any = {};
-    if (message.studioId !== 0) {
-      obj.studioId = Math.round(message.studioId);
-    }
-    if (message.roomId !== 0) {
-      obj.roomId = Math.round(message.roomId);
-    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<DeleteStudioRoomRequest>, I>>(base?: I): DeleteStudioRoomRequest {
     return DeleteStudioRoomRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DeleteStudioRoomRequest>, I>>(object: I): DeleteStudioRoomRequest {
+  fromPartial<I extends Exact<DeepPartial<DeleteStudioRoomRequest>, I>>(_: I): DeleteStudioRoomRequest {
     const message = createBaseDeleteStudioRoomRequest();
-    message.studioId = object.studioId ?? 0;
-    message.roomId = object.roomId ?? 0;
     return message;
   },
 };
 
 function createBaseDeleteStudioRoomResponse(): DeleteStudioRoomResponse {
-  return { rooms: [] };
+  return { success: false };
 }
 
 export const DeleteStudioRoomResponse = {
   encode(message: DeleteStudioRoomResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.rooms) {
-      StudioRoom.encode(v!, writer.uint32(10).fork()).ldelim();
+    if (message.success !== false) {
+      writer.uint32(8).bool(message.success);
     }
     return writer;
   },
@@ -715,11 +634,11 @@ export const DeleteStudioRoomResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag !== 10) {
+          if (tag !== 8) {
             break;
           }
 
-          message.rooms.push(StudioRoom.decode(reader, reader.uint32()));
+          message.success = reader.bool();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -731,15 +650,13 @@ export const DeleteStudioRoomResponse = {
   },
 
   fromJSON(object: any): DeleteStudioRoomResponse {
-    return {
-      rooms: globalThis.Array.isArray(object?.rooms) ? object.rooms.map((e: any) => StudioRoom.fromJSON(e)) : [],
-    };
+    return { success: isSet(object.success) ? globalThis.Boolean(object.success) : false };
   },
 
   toJSON(message: DeleteStudioRoomResponse): unknown {
     const obj: any = {};
-    if (message.rooms?.length) {
-      obj.rooms = message.rooms.map((e) => StudioRoom.toJSON(e));
+    if (message.success !== false) {
+      obj.success = message.success;
     }
     return obj;
   },
@@ -749,31 +666,25 @@ export const DeleteStudioRoomResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<DeleteStudioRoomResponse>, I>>(object: I): DeleteStudioRoomResponse {
     const message = createBaseDeleteStudioRoomResponse();
-    message.rooms = object.rooms?.map((e) => StudioRoom.fromPartial(e)) || [];
+    message.success = object.success ?? false;
     return message;
   },
 };
 
 function createBaseCreateStudioRoomInfoRequest(): CreateStudioRoomInfoRequest {
-  return { studioId: 0, roomId: 0, type: "", key: "", value: "" };
+  return { type: "", key: "", value: "" };
 }
 
 export const CreateStudioRoomInfoRequest = {
   encode(message: CreateStudioRoomInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.studioId !== 0) {
-      writer.uint32(8).int32(message.studioId);
-    }
-    if (message.roomId !== 0) {
-      writer.uint32(16).int32(message.roomId);
-    }
     if (message.type !== "") {
-      writer.uint32(26).string(message.type);
+      writer.uint32(10).string(message.type);
     }
     if (message.key !== "") {
-      writer.uint32(34).string(message.key);
+      writer.uint32(18).string(message.key);
     }
     if (message.value !== "") {
-      writer.uint32(42).string(message.value);
+      writer.uint32(26).string(message.value);
     }
     return writer;
   },
@@ -786,35 +697,21 @@ export const CreateStudioRoomInfoRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.studioId = reader.int32();
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.roomId = reader.int32();
-          continue;
-        case 3:
-          if (tag !== 26) {
+          if (tag !== 10) {
             break;
           }
 
           message.type = reader.string();
           continue;
-        case 4:
-          if (tag !== 34) {
+        case 2:
+          if (tag !== 18) {
             break;
           }
 
           message.key = reader.string();
           continue;
-        case 5:
-          if (tag !== 42) {
+        case 3:
+          if (tag !== 26) {
             break;
           }
 
@@ -831,8 +728,6 @@ export const CreateStudioRoomInfoRequest = {
 
   fromJSON(object: any): CreateStudioRoomInfoRequest {
     return {
-      studioId: isSet(object.studioId) ? globalThis.Number(object.studioId) : 0,
-      roomId: isSet(object.roomId) ? globalThis.Number(object.roomId) : 0,
       type: isSet(object.type) ? globalThis.String(object.type) : "",
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? globalThis.String(object.value) : "",
@@ -841,12 +736,6 @@ export const CreateStudioRoomInfoRequest = {
 
   toJSON(message: CreateStudioRoomInfoRequest): unknown {
     const obj: any = {};
-    if (message.studioId !== 0) {
-      obj.studioId = Math.round(message.studioId);
-    }
-    if (message.roomId !== 0) {
-      obj.roomId = Math.round(message.roomId);
-    }
     if (message.type !== "") {
       obj.type = message.type;
     }
@@ -864,8 +753,6 @@ export const CreateStudioRoomInfoRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<CreateStudioRoomInfoRequest>, I>>(object: I): CreateStudioRoomInfoRequest {
     const message = createBaseCreateStudioRoomInfoRequest();
-    message.studioId = object.studioId ?? 0;
-    message.roomId = object.roomId ?? 0;
     message.type = object.type ?? "";
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -874,13 +761,13 @@ export const CreateStudioRoomInfoRequest = {
 };
 
 function createBaseCreateStudioRoomInfoResponse(): CreateStudioRoomInfoResponse {
-  return { infos: [] };
+  return { info: undefined };
 }
 
 export const CreateStudioRoomInfoResponse = {
   encode(message: CreateStudioRoomInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.infos) {
-      StudioRoomInfo.encode(v!, writer.uint32(10).fork()).ldelim();
+    if (message.info !== undefined) {
+      StudioRoomInfo.encode(message.info, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -897,7 +784,7 @@ export const CreateStudioRoomInfoResponse = {
             break;
           }
 
-          message.infos.push(StudioRoomInfo.decode(reader, reader.uint32()));
+          message.info = StudioRoomInfo.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -909,15 +796,13 @@ export const CreateStudioRoomInfoResponse = {
   },
 
   fromJSON(object: any): CreateStudioRoomInfoResponse {
-    return {
-      infos: globalThis.Array.isArray(object?.infos) ? object.infos.map((e: any) => StudioRoomInfo.fromJSON(e)) : [],
-    };
+    return { info: isSet(object.info) ? StudioRoomInfo.fromJSON(object.info) : undefined };
   },
 
   toJSON(message: CreateStudioRoomInfoResponse): unknown {
     const obj: any = {};
-    if (message.infos?.length) {
-      obj.infos = message.infos.map((e) => StudioRoomInfo.toJSON(e));
+    if (message.info !== undefined) {
+      obj.info = StudioRoomInfo.toJSON(message.info);
     }
     return obj;
   },
@@ -927,29 +812,19 @@ export const CreateStudioRoomInfoResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<CreateStudioRoomInfoResponse>, I>>(object: I): CreateStudioRoomInfoResponse {
     const message = createBaseCreateStudioRoomInfoResponse();
-    message.infos = object.infos?.map((e) => StudioRoomInfo.fromPartial(e)) || [];
+    message.info = (object.info !== undefined && object.info !== null)
+      ? StudioRoomInfo.fromPartial(object.info)
+      : undefined;
     return message;
   },
 };
 
 function createBaseListStudioRoomInfosRequest(): ListStudioRoomInfosRequest {
-  return { studioId: 0, roomId: 0, pageSize: 0, pageToken: 0 };
+  return {};
 }
 
 export const ListStudioRoomInfosRequest = {
-  encode(message: ListStudioRoomInfosRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.studioId !== 0) {
-      writer.uint32(8).int32(message.studioId);
-    }
-    if (message.roomId !== 0) {
-      writer.uint32(16).int32(message.roomId);
-    }
-    if (message.pageSize !== 0) {
-      writer.uint32(24).int32(message.pageSize);
-    }
-    if (message.pageToken !== 0) {
-      writer.uint32(32).int32(message.pageToken);
-    }
+  encode(_: ListStudioRoomInfosRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -960,34 +835,6 @@ export const ListStudioRoomInfosRequest = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.studioId = reader.int32();
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.roomId = reader.int32();
-          continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.pageSize = reader.int32();
-          continue;
-        case 4:
-          if (tag !== 32) {
-            break;
-          }
-
-          message.pageToken = reader.int32();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -997,59 +844,32 @@ export const ListStudioRoomInfosRequest = {
     return message;
   },
 
-  fromJSON(object: any): ListStudioRoomInfosRequest {
-    return {
-      studioId: isSet(object.studioId) ? globalThis.Number(object.studioId) : 0,
-      roomId: isSet(object.roomId) ? globalThis.Number(object.roomId) : 0,
-      pageSize: isSet(object.pageSize) ? globalThis.Number(object.pageSize) : 0,
-      pageToken: isSet(object.pageToken) ? globalThis.Number(object.pageToken) : 0,
-    };
+  fromJSON(_: any): ListStudioRoomInfosRequest {
+    return {};
   },
 
-  toJSON(message: ListStudioRoomInfosRequest): unknown {
+  toJSON(_: ListStudioRoomInfosRequest): unknown {
     const obj: any = {};
-    if (message.studioId !== 0) {
-      obj.studioId = Math.round(message.studioId);
-    }
-    if (message.roomId !== 0) {
-      obj.roomId = Math.round(message.roomId);
-    }
-    if (message.pageSize !== 0) {
-      obj.pageSize = Math.round(message.pageSize);
-    }
-    if (message.pageToken !== 0) {
-      obj.pageToken = Math.round(message.pageToken);
-    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ListStudioRoomInfosRequest>, I>>(base?: I): ListStudioRoomInfosRequest {
     return ListStudioRoomInfosRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ListStudioRoomInfosRequest>, I>>(object: I): ListStudioRoomInfosRequest {
+  fromPartial<I extends Exact<DeepPartial<ListStudioRoomInfosRequest>, I>>(_: I): ListStudioRoomInfosRequest {
     const message = createBaseListStudioRoomInfosRequest();
-    message.studioId = object.studioId ?? 0;
-    message.roomId = object.roomId ?? 0;
-    message.pageSize = object.pageSize ?? 0;
-    message.pageToken = object.pageToken ?? 0;
     return message;
   },
 };
 
 function createBaseListStudioRoomInfosResponse(): ListStudioRoomInfosResponse {
-  return { infos: [], nextPageToken: "", totalSize: 0 };
+  return { infos: [] };
 }
 
 export const ListStudioRoomInfosResponse = {
   encode(message: ListStudioRoomInfosResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.infos) {
       StudioRoomInfo.encode(v!, writer.uint32(10).fork()).ldelim();
-    }
-    if (message.nextPageToken !== "") {
-      writer.uint32(18).string(message.nextPageToken);
-    }
-    if (message.totalSize !== 0) {
-      writer.uint32(24).int32(message.totalSize);
     }
     return writer;
   },
@@ -1068,20 +888,6 @@ export const ListStudioRoomInfosResponse = {
 
           message.infos.push(StudioRoomInfo.decode(reader, reader.uint32()));
           continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.nextPageToken = reader.string();
-          continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.totalSize = reader.int32();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1094,8 +900,6 @@ export const ListStudioRoomInfosResponse = {
   fromJSON(object: any): ListStudioRoomInfosResponse {
     return {
       infos: globalThis.Array.isArray(object?.infos) ? object.infos.map((e: any) => StudioRoomInfo.fromJSON(e)) : [],
-      nextPageToken: isSet(object.nextPageToken) ? globalThis.String(object.nextPageToken) : "",
-      totalSize: isSet(object.totalSize) ? globalThis.Number(object.totalSize) : 0,
     };
   },
 
@@ -1103,12 +907,6 @@ export const ListStudioRoomInfosResponse = {
     const obj: any = {};
     if (message.infos?.length) {
       obj.infos = message.infos.map((e) => StudioRoomInfo.toJSON(e));
-    }
-    if (message.nextPageToken !== "") {
-      obj.nextPageToken = message.nextPageToken;
-    }
-    if (message.totalSize !== 0) {
-      obj.totalSize = Math.round(message.totalSize);
     }
     return obj;
   },
@@ -1119,35 +917,24 @@ export const ListStudioRoomInfosResponse = {
   fromPartial<I extends Exact<DeepPartial<ListStudioRoomInfosResponse>, I>>(object: I): ListStudioRoomInfosResponse {
     const message = createBaseListStudioRoomInfosResponse();
     message.infos = object.infos?.map((e) => StudioRoomInfo.fromPartial(e)) || [];
-    message.nextPageToken = object.nextPageToken ?? "";
-    message.totalSize = object.totalSize ?? 0;
     return message;
   },
 };
 
 function createBaseUpdateStudioRoomInfoRequest(): UpdateStudioRoomInfoRequest {
-  return { studioId: 0, roomId: 0, infoId: 0, type: "", key: "", value: "" };
+  return { type: "", key: "", value: "" };
 }
 
 export const UpdateStudioRoomInfoRequest = {
   encode(message: UpdateStudioRoomInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.studioId !== 0) {
-      writer.uint32(8).int32(message.studioId);
-    }
-    if (message.roomId !== 0) {
-      writer.uint32(16).int32(message.roomId);
-    }
-    if (message.infoId !== 0) {
-      writer.uint32(24).int32(message.infoId);
-    }
     if (message.type !== "") {
-      writer.uint32(34).string(message.type);
+      writer.uint32(10).string(message.type);
     }
     if (message.key !== "") {
-      writer.uint32(42).string(message.key);
+      writer.uint32(18).string(message.key);
     }
     if (message.value !== "") {
-      writer.uint32(50).string(message.value);
+      writer.uint32(26).string(message.value);
     }
     return writer;
   },
@@ -1160,42 +947,21 @@ export const UpdateStudioRoomInfoRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.studioId = reader.int32();
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.roomId = reader.int32();
-          continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.infoId = reader.int32();
-          continue;
-        case 4:
-          if (tag !== 34) {
+          if (tag !== 10) {
             break;
           }
 
           message.type = reader.string();
           continue;
-        case 5:
-          if (tag !== 42) {
+        case 2:
+          if (tag !== 18) {
             break;
           }
 
           message.key = reader.string();
           continue;
-        case 6:
-          if (tag !== 50) {
+        case 3:
+          if (tag !== 26) {
             break;
           }
 
@@ -1212,9 +978,6 @@ export const UpdateStudioRoomInfoRequest = {
 
   fromJSON(object: any): UpdateStudioRoomInfoRequest {
     return {
-      studioId: isSet(object.studioId) ? globalThis.Number(object.studioId) : 0,
-      roomId: isSet(object.roomId) ? globalThis.Number(object.roomId) : 0,
-      infoId: isSet(object.infoId) ? globalThis.Number(object.infoId) : 0,
       type: isSet(object.type) ? globalThis.String(object.type) : "",
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? globalThis.String(object.value) : "",
@@ -1223,15 +986,6 @@ export const UpdateStudioRoomInfoRequest = {
 
   toJSON(message: UpdateStudioRoomInfoRequest): unknown {
     const obj: any = {};
-    if (message.studioId !== 0) {
-      obj.studioId = Math.round(message.studioId);
-    }
-    if (message.roomId !== 0) {
-      obj.roomId = Math.round(message.roomId);
-    }
-    if (message.infoId !== 0) {
-      obj.infoId = Math.round(message.infoId);
-    }
     if (message.type !== "") {
       obj.type = message.type;
     }
@@ -1249,9 +1003,6 @@ export const UpdateStudioRoomInfoRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<UpdateStudioRoomInfoRequest>, I>>(object: I): UpdateStudioRoomInfoRequest {
     const message = createBaseUpdateStudioRoomInfoRequest();
-    message.studioId = object.studioId ?? 0;
-    message.roomId = object.roomId ?? 0;
-    message.infoId = object.infoId ?? 0;
     message.type = object.type ?? "";
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -1260,13 +1011,13 @@ export const UpdateStudioRoomInfoRequest = {
 };
 
 function createBaseUpdateStudioRoomInfoResponse(): UpdateStudioRoomInfoResponse {
-  return { infos: [] };
+  return { info: undefined };
 }
 
 export const UpdateStudioRoomInfoResponse = {
   encode(message: UpdateStudioRoomInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.infos) {
-      StudioRoomInfo.encode(v!, writer.uint32(10).fork()).ldelim();
+    if (message.info !== undefined) {
+      StudioRoomInfo.encode(message.info, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -1283,7 +1034,7 @@ export const UpdateStudioRoomInfoResponse = {
             break;
           }
 
-          message.infos.push(StudioRoomInfo.decode(reader, reader.uint32()));
+          message.info = StudioRoomInfo.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1295,15 +1046,13 @@ export const UpdateStudioRoomInfoResponse = {
   },
 
   fromJSON(object: any): UpdateStudioRoomInfoResponse {
-    return {
-      infos: globalThis.Array.isArray(object?.infos) ? object.infos.map((e: any) => StudioRoomInfo.fromJSON(e)) : [],
-    };
+    return { info: isSet(object.info) ? StudioRoomInfo.fromJSON(object.info) : undefined };
   },
 
   toJSON(message: UpdateStudioRoomInfoResponse): unknown {
     const obj: any = {};
-    if (message.infos?.length) {
-      obj.infos = message.infos.map((e) => StudioRoomInfo.toJSON(e));
+    if (message.info !== undefined) {
+      obj.info = StudioRoomInfo.toJSON(message.info);
     }
     return obj;
   },
@@ -1313,26 +1062,19 @@ export const UpdateStudioRoomInfoResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<UpdateStudioRoomInfoResponse>, I>>(object: I): UpdateStudioRoomInfoResponse {
     const message = createBaseUpdateStudioRoomInfoResponse();
-    message.infos = object.infos?.map((e) => StudioRoomInfo.fromPartial(e)) || [];
+    message.info = (object.info !== undefined && object.info !== null)
+      ? StudioRoomInfo.fromPartial(object.info)
+      : undefined;
     return message;
   },
 };
 
 function createBaseDeleteStudioRoomInfoRequest(): DeleteStudioRoomInfoRequest {
-  return { studioId: 0, roomId: 0, infoId: 0 };
+  return {};
 }
 
 export const DeleteStudioRoomInfoRequest = {
-  encode(message: DeleteStudioRoomInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.studioId !== 0) {
-      writer.uint32(8).int32(message.studioId);
-    }
-    if (message.roomId !== 0) {
-      writer.uint32(16).int32(message.roomId);
-    }
-    if (message.infoId !== 0) {
-      writer.uint32(24).int32(message.infoId);
-    }
+  encode(_: DeleteStudioRoomInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1343,27 +1085,6 @@ export const DeleteStudioRoomInfoRequest = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.studioId = reader.int32();
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.roomId = reader.int32();
-          continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.infoId = reader.int32();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1373,48 +1094,32 @@ export const DeleteStudioRoomInfoRequest = {
     return message;
   },
 
-  fromJSON(object: any): DeleteStudioRoomInfoRequest {
-    return {
-      studioId: isSet(object.studioId) ? globalThis.Number(object.studioId) : 0,
-      roomId: isSet(object.roomId) ? globalThis.Number(object.roomId) : 0,
-      infoId: isSet(object.infoId) ? globalThis.Number(object.infoId) : 0,
-    };
+  fromJSON(_: any): DeleteStudioRoomInfoRequest {
+    return {};
   },
 
-  toJSON(message: DeleteStudioRoomInfoRequest): unknown {
+  toJSON(_: DeleteStudioRoomInfoRequest): unknown {
     const obj: any = {};
-    if (message.studioId !== 0) {
-      obj.studioId = Math.round(message.studioId);
-    }
-    if (message.roomId !== 0) {
-      obj.roomId = Math.round(message.roomId);
-    }
-    if (message.infoId !== 0) {
-      obj.infoId = Math.round(message.infoId);
-    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<DeleteStudioRoomInfoRequest>, I>>(base?: I): DeleteStudioRoomInfoRequest {
     return DeleteStudioRoomInfoRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DeleteStudioRoomInfoRequest>, I>>(object: I): DeleteStudioRoomInfoRequest {
+  fromPartial<I extends Exact<DeepPartial<DeleteStudioRoomInfoRequest>, I>>(_: I): DeleteStudioRoomInfoRequest {
     const message = createBaseDeleteStudioRoomInfoRequest();
-    message.studioId = object.studioId ?? 0;
-    message.roomId = object.roomId ?? 0;
-    message.infoId = object.infoId ?? 0;
     return message;
   },
 };
 
 function createBaseDeleteStudioRoomInfoResponse(): DeleteStudioRoomInfoResponse {
-  return { infos: [] };
+  return { success: false };
 }
 
 export const DeleteStudioRoomInfoResponse = {
   encode(message: DeleteStudioRoomInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.infos) {
-      StudioRoomInfo.encode(v!, writer.uint32(10).fork()).ldelim();
+    if (message.success !== false) {
+      writer.uint32(8).bool(message.success);
     }
     return writer;
   },
@@ -1427,11 +1132,11 @@ export const DeleteStudioRoomInfoResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag !== 10) {
+          if (tag !== 8) {
             break;
           }
 
-          message.infos.push(StudioRoomInfo.decode(reader, reader.uint32()));
+          message.success = reader.bool();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1443,15 +1148,13 @@ export const DeleteStudioRoomInfoResponse = {
   },
 
   fromJSON(object: any): DeleteStudioRoomInfoResponse {
-    return {
-      infos: globalThis.Array.isArray(object?.infos) ? object.infos.map((e: any) => StudioRoomInfo.fromJSON(e)) : [],
-    };
+    return { success: isSet(object.success) ? globalThis.Boolean(object.success) : false };
   },
 
   toJSON(message: DeleteStudioRoomInfoResponse): unknown {
     const obj: any = {};
-    if (message.infos?.length) {
-      obj.infos = message.infos.map((e) => StudioRoomInfo.toJSON(e));
+    if (message.success !== false) {
+      obj.success = message.success;
     }
     return obj;
   },
@@ -1461,7 +1164,7 @@ export const DeleteStudioRoomInfoResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<DeleteStudioRoomInfoResponse>, I>>(object: I): DeleteStudioRoomInfoResponse {
     const message = createBaseDeleteStudioRoomInfoResponse();
-    message.infos = object.infos?.map((e) => StudioRoomInfo.fromPartial(e)) || [];
+    message.success = object.success ?? false;
     return message;
   },
 };

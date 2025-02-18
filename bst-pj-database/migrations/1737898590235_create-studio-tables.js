@@ -47,6 +47,10 @@ exports.up = (pgm) => {
       type: "integer",
       notNull: true,
     },
+    size: {
+      type: "integer",
+      notNull: true,
+    },
     price: {
       type: "integer",
       notNull: true,
@@ -71,6 +75,12 @@ exports.up = (pgm) => {
       type: "integer",
       notNull: true,
       references: "studio_rooms",
+      onDelete: "CASCADE",
+    },
+    studio_id: {
+      type: "integer",
+      notNull: true,
+      references: "studios",
       onDelete: "CASCADE",
     },
     type: {
