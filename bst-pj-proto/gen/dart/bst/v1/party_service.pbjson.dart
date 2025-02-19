@@ -19,19 +19,17 @@ const CreatePartyRequest$json = {
   '2': [
     {'1': 'locationId', '3': 1, '4': 1, '5': 5, '10': 'locationId'},
     {'1': 'fee', '3': 2, '4': 1, '5': 5, '10': 'fee'},
-    {'1': 'role', '3': 3, '4': 1, '5': 14, '6': '.bst.v1.PartyParticipantRole', '10': 'role'},
-    {'1': 'startAt', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'startAt'},
-    {'1': 'endAt', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'endAt'},
+    {'1': 'startAt', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'startAt'},
+    {'1': 'endAt', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'endAt'},
   ],
 };
 
 /// Descriptor for `CreatePartyRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createPartyRequestDescriptor = $convert.base64Decode(
     'ChJDcmVhdGVQYXJ0eVJlcXVlc3QSHgoKbG9jYXRpb25JZBgBIAEoBVIKbG9jYXRpb25JZBIQCg'
-    'NmZWUYAiABKAVSA2ZlZRIwCgRyb2xlGAMgASgOMhwuYnN0LnYxLlBhcnR5UGFydGljaXBhbnRS'
-    'b2xlUgRyb2xlEjQKB3N0YXJ0QXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUg'
-    'dzdGFydEF0EjAKBWVuZEF0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIFZW5k'
-    'QXQ=');
+    'NmZWUYAiABKAVSA2ZlZRI0CgdzdGFydEF0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVz'
+    'dGFtcFIHc3RhcnRBdBIwCgVlbmRBdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbX'
+    'BSBWVuZEF0');
 
 @$core.Deprecated('Use createPartyResponseDescriptor instead')
 const CreatePartyResponse$json = {

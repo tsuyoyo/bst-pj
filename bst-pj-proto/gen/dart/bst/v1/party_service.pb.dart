@@ -21,7 +21,6 @@ class CreatePartyRequest extends $pb.GeneratedMessage {
   factory CreatePartyRequest({
     $core.int? locationId,
     $core.int? fee,
-    $28.PartyParticipantRole? role,
     $25.Timestamp? startAt,
     $25.Timestamp? endAt,
   }) {
@@ -31,9 +30,6 @@ class CreatePartyRequest extends $pb.GeneratedMessage {
     }
     if (fee != null) {
       $result.fee = fee;
-    }
-    if (role != null) {
-      $result.role = role;
     }
     if (startAt != null) {
       $result.startAt = startAt;
@@ -50,9 +46,8 @@ class CreatePartyRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreatePartyRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'locationId', $pb.PbFieldType.O3, protoName: 'locationId')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'fee', $pb.PbFieldType.O3)
-    ..e<$28.PartyParticipantRole>(3, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: $28.PartyParticipantRole.PARTY_PARTICIPANT_ROLE_UNSPECIFIED, valueOf: $28.PartyParticipantRole.valueOf, enumValues: $28.PartyParticipantRole.values)
-    ..aOM<$25.Timestamp>(4, _omitFieldNames ? '' : 'startAt', protoName: 'startAt', subBuilder: $25.Timestamp.create)
-    ..aOM<$25.Timestamp>(5, _omitFieldNames ? '' : 'endAt', protoName: 'endAt', subBuilder: $25.Timestamp.create)
+    ..aOM<$25.Timestamp>(3, _omitFieldNames ? '' : 'startAt', protoName: 'startAt', subBuilder: $25.Timestamp.create)
+    ..aOM<$25.Timestamp>(4, _omitFieldNames ? '' : 'endAt', protoName: 'endAt', subBuilder: $25.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -96,35 +91,26 @@ class CreatePartyRequest extends $pb.GeneratedMessage {
   void clearFee() => clearField(2);
 
   @$pb.TagNumber(3)
-  $28.PartyParticipantRole get role => $_getN(2);
+  $25.Timestamp get startAt => $_getN(2);
   @$pb.TagNumber(3)
-  set role($28.PartyParticipantRole v) { setField(3, v); }
+  set startAt($25.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
-  $core.bool hasRole() => $_has(2);
+  $core.bool hasStartAt() => $_has(2);
   @$pb.TagNumber(3)
-  void clearRole() => clearField(3);
+  void clearStartAt() => clearField(3);
+  @$pb.TagNumber(3)
+  $25.Timestamp ensureStartAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $25.Timestamp get startAt => $_getN(3);
+  $25.Timestamp get endAt => $_getN(3);
   @$pb.TagNumber(4)
-  set startAt($25.Timestamp v) { setField(4, v); }
+  set endAt($25.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
-  $core.bool hasStartAt() => $_has(3);
+  $core.bool hasEndAt() => $_has(3);
   @$pb.TagNumber(4)
-  void clearStartAt() => clearField(4);
+  void clearEndAt() => clearField(4);
   @$pb.TagNumber(4)
-  $25.Timestamp ensureStartAt() => $_ensure(3);
-
-  @$pb.TagNumber(5)
-  $25.Timestamp get endAt => $_getN(4);
-  @$pb.TagNumber(5)
-  set endAt($25.Timestamp v) { setField(5, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasEndAt() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearEndAt() => clearField(5);
-  @$pb.TagNumber(5)
-  $25.Timestamp ensureEndAt() => $_ensure(4);
+  $25.Timestamp ensureEndAt() => $_ensure(3);
 }
 
 class CreatePartyResponse extends $pb.GeneratedMessage {

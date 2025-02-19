@@ -22,7 +22,6 @@ export const protobufPackage = "bst.v1";
 export interface CreatePartyRequest {
   locationId: number;
   fee: number;
-  role: PartyParticipantRole;
   startAt: Date | undefined;
   endAt: Date | undefined;
 }
@@ -85,7 +84,7 @@ export interface RemovePartyParticipantResponse {
 }
 
 function createBaseCreatePartyRequest(): CreatePartyRequest {
-  return { locationId: 0, fee: 0, role: 0, startAt: undefined, endAt: undefined };
+  return { locationId: 0, fee: 0, startAt: undefined, endAt: undefined };
 }
 
 export const CreatePartyRequest = {
@@ -96,14 +95,11 @@ export const CreatePartyRequest = {
     if (message.fee !== 0) {
       writer.uint32(16).int32(message.fee);
     }
-    if (message.role !== 0) {
-      writer.uint32(24).int32(message.role);
-    }
     if (message.startAt !== undefined) {
-      Timestamp.encode(toTimestamp(message.startAt), writer.uint32(34).fork()).ldelim();
+      Timestamp.encode(toTimestamp(message.startAt), writer.uint32(26).fork()).ldelim();
     }
     if (message.endAt !== undefined) {
-      Timestamp.encode(toTimestamp(message.endAt), writer.uint32(42).fork()).ldelim();
+      Timestamp.encode(toTimestamp(message.endAt), writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
@@ -130,21 +126,14 @@ export const CreatePartyRequest = {
           message.fee = reader.int32();
           continue;
         case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.role = reader.int32() as any;
-          continue;
-        case 4:
-          if (tag !== 34) {
+          if (tag !== 26) {
             break;
           }
 
           message.startAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
-        case 5:
-          if (tag !== 42) {
+        case 4:
+          if (tag !== 34) {
             break;
           }
 
@@ -163,7 +152,6 @@ export const CreatePartyRequest = {
     return {
       locationId: isSet(object.locationId) ? globalThis.Number(object.locationId) : 0,
       fee: isSet(object.fee) ? globalThis.Number(object.fee) : 0,
-      role: isSet(object.role) ? partyParticipantRoleFromJSON(object.role) : 0,
       startAt: isSet(object.startAt) ? fromJsonTimestamp(object.startAt) : undefined,
       endAt: isSet(object.endAt) ? fromJsonTimestamp(object.endAt) : undefined,
     };
@@ -176,9 +164,6 @@ export const CreatePartyRequest = {
     }
     if (message.fee !== 0) {
       obj.fee = Math.round(message.fee);
-    }
-    if (message.role !== 0) {
-      obj.role = partyParticipantRoleToJSON(message.role);
     }
     if (message.startAt !== undefined) {
       obj.startAt = message.startAt.toISOString();
@@ -196,7 +181,6 @@ export const CreatePartyRequest = {
     const message = createBaseCreatePartyRequest();
     message.locationId = object.locationId ?? 0;
     message.fee = object.fee ?? 0;
-    message.role = object.role ?? 0;
     message.startAt = object.startAt ?? undefined;
     message.endAt = object.endAt ?? undefined;
     return message;

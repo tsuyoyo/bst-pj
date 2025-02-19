@@ -21,9 +21,8 @@ service PartyService {
 message CreatePartyRequest {
   int32                     locationId = 1;
   int32                     fee        = 2;
-  PartyParticipantRole      role       = 3;
-  google.protobuf.Timestamp startAt    = 4;
-  google.protobuf.Timestamp endAt      = 5;
+  google.protobuf.Timestamp startAt    = 3;
+  google.protobuf.Timestamp endAt      = 4;
 }
 
 message CreatePartyResponse {

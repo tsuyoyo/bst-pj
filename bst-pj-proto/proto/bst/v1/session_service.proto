@@ -5,7 +5,6 @@ package bst.v1;
 import "bst/v1/communication.proto";
 import "bst/v1/content.proto";
 import "bst/v1/location.proto";
-import "bst/v1/party.proto";
 import "bst/v1/session.proto";
 import "google/protobuf/timestamp.proto";
 
