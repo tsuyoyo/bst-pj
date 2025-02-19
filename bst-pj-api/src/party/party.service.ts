@@ -62,7 +62,7 @@ export class PartyService {
       PartyParticipantStatus.CONFIRMED,
       user,
     );
-
+    console.log(savedParty);
     const partyProto = await this.mapPartyToProto(sessionId, savedParty);
     return {
       party: partyProto,
@@ -98,7 +98,9 @@ export class PartyService {
     });
 
     if (!updatedParty) {
-      return { party: undefined };
+      throw new NotFoundException(
+        `Party with session ID ${sessionId} not found`,
+      );
     }
 
     const partyProto = await this.mapPartyToProto(sessionId, updatedParty);
