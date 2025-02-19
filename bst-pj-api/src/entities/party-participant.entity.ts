@@ -10,6 +10,7 @@ import {
 import { Party } from './party.entity';
 import { SessionParticipant } from './session-participant.entity';
 import { PartyParticipantStatus } from './types/party-participant-status.enum';
+import { PartyParticipantRole } from './types/party-participant-role.enum';
 
 @Entity('party_participants')
 export class PartyParticipant {
@@ -29,6 +30,14 @@ export class PartyParticipant {
     nullable: false,
   })
   status: PartyParticipantStatus;
+
+  @Column({
+    type: 'enum',
+    enum: PartyParticipantRole,
+    default: PartyParticipantRole.PARTICIPANT,
+    nullable: false,
+  })
+  role: PartyParticipantRole;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

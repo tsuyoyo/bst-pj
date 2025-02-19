@@ -13,13 +13,13 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'rating.pb.dart' as $9;
-import 'rating.pbenum.dart' as $9;
+import 'rating.pb.dart' as $10;
+import 'rating.pbenum.dart' as $10;
 
 class CreateRatingRequest extends $pb.GeneratedMessage {
   factory CreateRatingRequest({
     $core.int? userId,
-    $9.RatingTargetType? targetType,
+    $10.RatingTargetType? targetType,
     $core.int? targetId,
     $core.int? rating,
     $core.String? comment,
@@ -48,7 +48,7 @@ class CreateRatingRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateRatingRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'userId', $pb.PbFieldType.O3, protoName: 'userId')
-    ..e<$9.RatingTargetType>(2, _omitFieldNames ? '' : 'targetType', $pb.PbFieldType.OE, protoName: 'targetType', defaultOrMaker: $9.RatingTargetType.RATING_TARGET_TYPE_UNSPECIFIED, valueOf: $9.RatingTargetType.valueOf, enumValues: $9.RatingTargetType.values)
+    ..e<$10.RatingTargetType>(2, _omitFieldNames ? '' : 'targetType', $pb.PbFieldType.OE, protoName: 'targetType', defaultOrMaker: $10.RatingTargetType.RATING_TARGET_TYPE_UNSPECIFIED, valueOf: $10.RatingTargetType.valueOf, enumValues: $10.RatingTargetType.values)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'targetId', $pb.PbFieldType.O3, protoName: 'targetId')
     ..a<$core.int>(4, _omitFieldNames ? '' : 'rating', $pb.PbFieldType.O3)
     ..aOS(5, _omitFieldNames ? '' : 'comment')
@@ -86,9 +86,9 @@ class CreateRatingRequest extends $pb.GeneratedMessage {
   void clearUserId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $9.RatingTargetType get targetType => $_getN(1);
+  $10.RatingTargetType get targetType => $_getN(1);
   @$pb.TagNumber(2)
-  set targetType($9.RatingTargetType v) { setField(2, v); }
+  set targetType($10.RatingTargetType v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasTargetType() => $_has(1);
   @$pb.TagNumber(2)
@@ -124,7 +124,7 @@ class CreateRatingRequest extends $pb.GeneratedMessage {
 
 class ListRatingsRequest extends $pb.GeneratedMessage {
   factory ListRatingsRequest({
-    $9.RatingTargetType? targetType,
+    $10.RatingTargetType? targetType,
     $core.int? targetId,
     $core.int? userId,
     $core.int? page,
@@ -153,7 +153,7 @@ class ListRatingsRequest extends $pb.GeneratedMessage {
   factory ListRatingsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListRatingsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..e<$9.RatingTargetType>(1, _omitFieldNames ? '' : 'targetType', $pb.PbFieldType.OE, protoName: 'targetType', defaultOrMaker: $9.RatingTargetType.RATING_TARGET_TYPE_UNSPECIFIED, valueOf: $9.RatingTargetType.valueOf, enumValues: $9.RatingTargetType.values)
+    ..e<$10.RatingTargetType>(1, _omitFieldNames ? '' : 'targetType', $pb.PbFieldType.OE, protoName: 'targetType', defaultOrMaker: $10.RatingTargetType.RATING_TARGET_TYPE_UNSPECIFIED, valueOf: $10.RatingTargetType.valueOf, enumValues: $10.RatingTargetType.values)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'targetId', $pb.PbFieldType.O3, protoName: 'targetId')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'userId', $pb.PbFieldType.O3, protoName: 'userId')
     ..a<$core.int>(4, _omitFieldNames ? '' : 'page', $pb.PbFieldType.O3)
@@ -183,9 +183,9 @@ class ListRatingsRequest extends $pb.GeneratedMessage {
   static ListRatingsRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.RatingTargetType get targetType => $_getN(0);
+  $10.RatingTargetType get targetType => $_getN(0);
   @$pb.TagNumber(1)
-  set targetType($9.RatingTargetType v) { setField(1, v); }
+  set targetType($10.RatingTargetType v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTargetType() => $_has(0);
   @$pb.TagNumber(1)
@@ -230,7 +230,7 @@ class ListRatingsRequest extends $pb.GeneratedMessage {
 
 class ListRatingsResponse extends $pb.GeneratedMessage {
   factory ListRatingsResponse({
-    $core.Iterable<$9.Rating>? ratings,
+    $core.Iterable<$10.Rating>? ratings,
     $core.int? totalCount,
     $core.int? currentPage,
     $core.int? totalPages,
@@ -255,7 +255,7 @@ class ListRatingsResponse extends $pb.GeneratedMessage {
   factory ListRatingsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListRatingsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$9.Rating>(1, _omitFieldNames ? '' : 'ratings', $pb.PbFieldType.PM, subBuilder: $9.Rating.create)
+    ..pc<$10.Rating>(1, _omitFieldNames ? '' : 'ratings', $pb.PbFieldType.PM, subBuilder: $10.Rating.create)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'totalCount', $pb.PbFieldType.O3, protoName: 'totalCount')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'currentPage', $pb.PbFieldType.O3, protoName: 'currentPage')
     ..a<$core.int>(4, _omitFieldNames ? '' : 'totalPages', $pb.PbFieldType.O3, protoName: 'totalPages')
@@ -284,7 +284,7 @@ class ListRatingsResponse extends $pb.GeneratedMessage {
   static ListRatingsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$9.Rating> get ratings => $_getList(0);
+  $core.List<$10.Rating> get ratings => $_getList(0);
 
   @$pb.TagNumber(2)
   $core.int get totalCount => $_getIZ(1);

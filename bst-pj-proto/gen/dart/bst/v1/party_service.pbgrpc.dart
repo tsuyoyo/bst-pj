@@ -1,0 +1,179 @@
+//
+//  Generated code. Do not modify.
+//  source: bst/v1/party_service.proto
+//
+// @dart = 2.12
+
+// ignore_for_file: annotate_overrides, camel_case_types, comment_references
+// ignore_for_file: constant_identifier_names, library_prefixes
+// ignore_for_file: non_constant_identifier_names, prefer_final_fields
+// ignore_for_file: unnecessary_import, unnecessary_this, unused_import
+
+import 'dart:async' as $async;
+import 'dart:core' as $core;
+
+import 'package:grpc/service_api.dart' as $grpc;
+import 'package:protobuf/protobuf.dart' as $pb;
+
+import 'party_service.pb.dart' as $8;
+
+export 'party_service.pb.dart';
+
+@$pb.GrpcServiceName('bst.v1.PartyService')
+class PartyServiceClient extends $grpc.Client {
+  static final _$createParty = $grpc.ClientMethod<$8.CreatePartyRequest, $8.CreatePartyResponse>(
+      '/bst.v1.PartyService/CreateParty',
+      ($8.CreatePartyRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $8.CreatePartyResponse.fromBuffer(value));
+  static final _$getParty = $grpc.ClientMethod<$8.GetPartyRequest, $8.GetPartyRequest>(
+      '/bst.v1.PartyService/GetParty',
+      ($8.GetPartyRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $8.GetPartyRequest.fromBuffer(value));
+  static final _$updateParty = $grpc.ClientMethod<$8.UpdatePartyRequest, $8.UpdatePartyResponse>(
+      '/bst.v1.PartyService/UpdateParty',
+      ($8.UpdatePartyRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $8.UpdatePartyResponse.fromBuffer(value));
+  static final _$deleteParty = $grpc.ClientMethod<$8.DeletePartyRequest, $8.DeletePartyResponse>(
+      '/bst.v1.PartyService/DeleteParty',
+      ($8.DeletePartyRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $8.DeletePartyResponse.fromBuffer(value));
+  static final _$addPartyParticipant = $grpc.ClientMethod<$8.AddPartyParticipantRequest, $8.AddPartyParticipantResponse>(
+      '/bst.v1.PartyService/AddPartyParticipant',
+      ($8.AddPartyParticipantRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $8.AddPartyParticipantResponse.fromBuffer(value));
+  static final _$updatePartyParticipant = $grpc.ClientMethod<$8.UpdatePartyParticipantRequest, $8.UpdatePartyParticipantResponse>(
+      '/bst.v1.PartyService/UpdatePartyParticipant',
+      ($8.UpdatePartyParticipantRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $8.UpdatePartyParticipantResponse.fromBuffer(value));
+  static final _$removePartyParticipant = $grpc.ClientMethod<$8.RemovePartyParticipantRequest, $8.RemovePartyParticipantResponse>(
+      '/bst.v1.PartyService/RemovePartyParticipant',
+      ($8.RemovePartyParticipantRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $8.RemovePartyParticipantResponse.fromBuffer(value));
+
+  PartyServiceClient($grpc.ClientChannel channel,
+      {$grpc.CallOptions? options,
+      $core.Iterable<$grpc.ClientInterceptor>? interceptors})
+      : super(channel, options: options,
+        interceptors: interceptors);
+
+  $grpc.ResponseFuture<$8.CreatePartyResponse> createParty($8.CreatePartyRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$createParty, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$8.GetPartyRequest> getParty($8.GetPartyRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getParty, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$8.UpdatePartyResponse> updateParty($8.UpdatePartyRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateParty, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$8.DeletePartyResponse> deleteParty($8.DeletePartyRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$deleteParty, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$8.AddPartyParticipantResponse> addPartyParticipant($8.AddPartyParticipantRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$addPartyParticipant, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$8.UpdatePartyParticipantResponse> updatePartyParticipant($8.UpdatePartyParticipantRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updatePartyParticipant, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$8.RemovePartyParticipantResponse> removePartyParticipant($8.RemovePartyParticipantRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$removePartyParticipant, request, options: options);
+  }
+}
+
+@$pb.GrpcServiceName('bst.v1.PartyService')
+abstract class PartyServiceBase extends $grpc.Service {
+  $core.String get $name => 'bst.v1.PartyService';
+
+  PartyServiceBase() {
+    $addMethod($grpc.ServiceMethod<$8.CreatePartyRequest, $8.CreatePartyResponse>(
+        'CreateParty',
+        createParty_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $8.CreatePartyRequest.fromBuffer(value),
+        ($8.CreatePartyResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$8.GetPartyRequest, $8.GetPartyRequest>(
+        'GetParty',
+        getParty_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $8.GetPartyRequest.fromBuffer(value),
+        ($8.GetPartyRequest value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$8.UpdatePartyRequest, $8.UpdatePartyResponse>(
+        'UpdateParty',
+        updateParty_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $8.UpdatePartyRequest.fromBuffer(value),
+        ($8.UpdatePartyResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$8.DeletePartyRequest, $8.DeletePartyResponse>(
+        'DeleteParty',
+        deleteParty_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $8.DeletePartyRequest.fromBuffer(value),
+        ($8.DeletePartyResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$8.AddPartyParticipantRequest, $8.AddPartyParticipantResponse>(
+        'AddPartyParticipant',
+        addPartyParticipant_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $8.AddPartyParticipantRequest.fromBuffer(value),
+        ($8.AddPartyParticipantResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$8.UpdatePartyParticipantRequest, $8.UpdatePartyParticipantResponse>(
+        'UpdatePartyParticipant',
+        updatePartyParticipant_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $8.UpdatePartyParticipantRequest.fromBuffer(value),
+        ($8.UpdatePartyParticipantResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$8.RemovePartyParticipantRequest, $8.RemovePartyParticipantResponse>(
+        'RemovePartyParticipant',
+        removePartyParticipant_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $8.RemovePartyParticipantRequest.fromBuffer(value),
+        ($8.RemovePartyParticipantResponse value) => value.writeToBuffer()));
+  }
+
+  $async.Future<$8.CreatePartyResponse> createParty_Pre($grpc.ServiceCall call, $async.Future<$8.CreatePartyRequest> request) async {
+    return createParty(call, await request);
+  }
+
+  $async.Future<$8.GetPartyRequest> getParty_Pre($grpc.ServiceCall call, $async.Future<$8.GetPartyRequest> request) async {
+    return getParty(call, await request);
+  }
+
+  $async.Future<$8.UpdatePartyResponse> updateParty_Pre($grpc.ServiceCall call, $async.Future<$8.UpdatePartyRequest> request) async {
+    return updateParty(call, await request);
+  }
+
+  $async.Future<$8.DeletePartyResponse> deleteParty_Pre($grpc.ServiceCall call, $async.Future<$8.DeletePartyRequest> request) async {
+    return deleteParty(call, await request);
+  }
+
+  $async.Future<$8.AddPartyParticipantResponse> addPartyParticipant_Pre($grpc.ServiceCall call, $async.Future<$8.AddPartyParticipantRequest> request) async {
+    return addPartyParticipant(call, await request);
+  }
+
+  $async.Future<$8.UpdatePartyParticipantResponse> updatePartyParticipant_Pre($grpc.ServiceCall call, $async.Future<$8.UpdatePartyParticipantRequest> request) async {
+    return updatePartyParticipant(call, await request);
+  }
+
+  $async.Future<$8.RemovePartyParticipantResponse> removePartyParticipant_Pre($grpc.ServiceCall call, $async.Future<$8.RemovePartyParticipantRequest> request) async {
+    return removePartyParticipant(call, await request);
+  }
+
+  $async.Future<$8.CreatePartyResponse> createParty($grpc.ServiceCall call, $8.CreatePartyRequest request);
+  $async.Future<$8.GetPartyRequest> getParty($grpc.ServiceCall call, $8.GetPartyRequest request);
+  $async.Future<$8.UpdatePartyResponse> updateParty($grpc.ServiceCall call, $8.UpdatePartyRequest request);
+  $async.Future<$8.DeletePartyResponse> deleteParty($grpc.ServiceCall call, $8.DeletePartyRequest request);
+  $async.Future<$8.AddPartyParticipantResponse> addPartyParticipant($grpc.ServiceCall call, $8.AddPartyParticipantRequest request);
+  $async.Future<$8.UpdatePartyParticipantResponse> updatePartyParticipant($grpc.ServiceCall call, $8.UpdatePartyParticipantRequest request);
+  $async.Future<$8.RemovePartyParticipantResponse> removePartyParticipant($grpc.ServiceCall call, $8.RemovePartyParticipantRequest request);
+}

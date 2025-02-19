@@ -15,14 +15,23 @@ export class Party {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ name: 'activity_id', type: 'integer', nullable: false })
+  @Column({ name: 'session_id', type: 'integer' })
+  sessionId: number;
+
+  @Column({ name: 'activity_id', type: 'integer', nullable: true })
   activityId: number;
 
-  @Column({ name: 'location_id', type: 'integer', nullable: false })
+  @Column({ name: 'location_id', type: 'integer', nullable: true })
   locationId: number;
 
-  @Column({ type: 'integer', nullable: false })
+  @Column({ type: 'integer', nullable: true })
   fee: number;
+
+  @Column({ name: 'start_at', type: 'timestamp', nullable: true })
+  startAt: Date;
+
+  @Column({ name: 'end_at', type: 'timestamp', nullable: true })
+  endAt: Date;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

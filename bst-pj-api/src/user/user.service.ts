@@ -20,6 +20,14 @@ export class UserService {
     };
   }
 
+  async getUser(userId: number): Promise<ProtoUser> {
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+    if (!user) {
+      throw new NotFoundException(`User with ID ${userId} not found`);
+    }
+    return this.mapUserToProto(user);
+  }
+
   async create(createUserDto: {
     name: string;
     email: string;

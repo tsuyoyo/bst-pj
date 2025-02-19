@@ -10,25 +10,41 @@ exports.up = (pgm) => {
     "Cancelled",
   ]);
 
+  pgm.createType("party_participant_role", ["PartyParticipant", "PartyHost"]);
+
   // Create parties table
   pgm.createTable("parties", {
     id: "id",
-    activity_id: {
+    session_id: {
       type: "integer",
       notNull: true,
+      references: "sessions",
+      onDelete: "CASCADE",
+    },
+    activity_id: {
+      type: "integer",
+      notNull: false,
       references: "activities",
       onDelete: "CASCADE",
     },
     location_id: {
       type: "integer",
-      notNull: true,
+      notNull: false,
       references: "locations",
       onDelete: "CASCADE",
     },
     fee: {
       type: "integer",
-      notNull: true,
+      notNull: false,
       comment: "参加費（円）",
+    },
+    start_at: {
+      type: "timestamp",
+      notNull: false,
+    },
+    end_at: {
+      type: "timestamp",
+      notNull: false,
     },
     created_at: {
       type: "timestamp",
@@ -87,6 +103,11 @@ exports.up = (pgm) => {
       notNull: true,
       references: "session_participants",
       onDelete: "CASCADE",
+    },
+    role: {
+      type: "party_participant_role",
+      notNull: true,
+      default: "PartyParticipant",
     },
     status: {
       type: "party_participant_status",

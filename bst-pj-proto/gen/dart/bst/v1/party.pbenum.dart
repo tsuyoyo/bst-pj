@@ -17,13 +17,11 @@ class PartyParticipantRole extends $pb.ProtobufEnum {
   static const PartyParticipantRole PARTY_PARTICIPANT_ROLE_UNSPECIFIED = PartyParticipantRole._(0, _omitEnumNames ? '' : 'PARTY_PARTICIPANT_ROLE_UNSPECIFIED');
   static const PartyParticipantRole PARTY_PARTICIPANT_ROLE_HOST = PartyParticipantRole._(1, _omitEnumNames ? '' : 'PARTY_PARTICIPANT_ROLE_HOST');
   static const PartyParticipantRole PARTY_PARTICIPANT_ROLE_PARTICIPANT = PartyParticipantRole._(2, _omitEnumNames ? '' : 'PARTY_PARTICIPANT_ROLE_PARTICIPANT');
-  static const PartyParticipantRole PARTY_PARTICIPANT_ROLE_OBSERVER = PartyParticipantRole._(3, _omitEnumNames ? '' : 'PARTY_PARTICIPANT_ROLE_OBSERVER');
 
   static const $core.List<PartyParticipantRole> values = <PartyParticipantRole> [
     PARTY_PARTICIPANT_ROLE_UNSPECIFIED,
     PARTY_PARTICIPANT_ROLE_HOST,
     PARTY_PARTICIPANT_ROLE_PARTICIPANT,
-    PARTY_PARTICIPANT_ROLE_OBSERVER,
   ];
 
   static final $core.Map<$core.int, PartyParticipantRole> _byValue = $pb.ProtobufEnum.initByValue(values);

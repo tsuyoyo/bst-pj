@@ -15,32 +15,32 @@ import 'dart:core' as $core;
 import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'studio_service.pb.dart' as $17;
+import 'studio_service.pb.dart' as $18;
 
 export 'studio_service.pb.dart';
 
 @$pb.GrpcServiceName('bst.v1.StudioService')
 class StudioServiceClient extends $grpc.Client {
-  static final _$createStudio = $grpc.ClientMethod<$17.CreateStudioRequest, $17.CreateStudioResponse>(
+  static final _$createStudio = $grpc.ClientMethod<$18.CreateStudioRequest, $18.CreateStudioResponse>(
       '/bst.v1.StudioService/CreateStudio',
-      ($17.CreateStudioRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $17.CreateStudioResponse.fromBuffer(value));
-  static final _$listStudios = $grpc.ClientMethod<$17.ListStudiosRequest, $17.ListStudiosResponse>(
+      ($18.CreateStudioRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.CreateStudioResponse.fromBuffer(value));
+  static final _$listStudios = $grpc.ClientMethod<$18.ListStudiosRequest, $18.ListStudiosResponse>(
       '/bst.v1.StudioService/ListStudios',
-      ($17.ListStudiosRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $17.ListStudiosResponse.fromBuffer(value));
-  static final _$getStudio = $grpc.ClientMethod<$17.GetStudioRequest, $17.GetStudioResponse>(
+      ($18.ListStudiosRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.ListStudiosResponse.fromBuffer(value));
+  static final _$getStudio = $grpc.ClientMethod<$18.GetStudioRequest, $18.GetStudioResponse>(
       '/bst.v1.StudioService/GetStudio',
-      ($17.GetStudioRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $17.GetStudioResponse.fromBuffer(value));
-  static final _$updateStudio = $grpc.ClientMethod<$17.UpdateStudioRequest, $17.UpdateStudioResponse>(
+      ($18.GetStudioRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.GetStudioResponse.fromBuffer(value));
+  static final _$updateStudio = $grpc.ClientMethod<$18.UpdateStudioRequest, $18.UpdateStudioResponse>(
       '/bst.v1.StudioService/UpdateStudio',
-      ($17.UpdateStudioRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $17.UpdateStudioResponse.fromBuffer(value));
-  static final _$deleteStudio = $grpc.ClientMethod<$17.DeleteStudioRequest, $17.DeleteStudioResponse>(
+      ($18.UpdateStudioRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.UpdateStudioResponse.fromBuffer(value));
+  static final _$deleteStudio = $grpc.ClientMethod<$18.DeleteStudioRequest, $18.DeleteStudioResponse>(
       '/bst.v1.StudioService/DeleteStudio',
-      ($17.DeleteStudioRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $17.DeleteStudioResponse.fromBuffer(value));
+      ($18.DeleteStudioRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.DeleteStudioResponse.fromBuffer(value));
 
   StudioServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -48,23 +48,23 @@ class StudioServiceClient extends $grpc.Client {
       : super(channel, options: options,
         interceptors: interceptors);
 
-  $grpc.ResponseFuture<$17.CreateStudioResponse> createStudio($17.CreateStudioRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$18.CreateStudioResponse> createStudio($18.CreateStudioRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createStudio, request, options: options);
   }
 
-  $grpc.ResponseFuture<$17.ListStudiosResponse> listStudios($17.ListStudiosRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$18.ListStudiosResponse> listStudios($18.ListStudiosRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$listStudios, request, options: options);
   }
 
-  $grpc.ResponseFuture<$17.GetStudioResponse> getStudio($17.GetStudioRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$18.GetStudioResponse> getStudio($18.GetStudioRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getStudio, request, options: options);
   }
 
-  $grpc.ResponseFuture<$17.UpdateStudioResponse> updateStudio($17.UpdateStudioRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$18.UpdateStudioResponse> updateStudio($18.UpdateStudioRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateStudio, request, options: options);
   }
 
-  $grpc.ResponseFuture<$17.DeleteStudioResponse> deleteStudio($17.DeleteStudioRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$18.DeleteStudioResponse> deleteStudio($18.DeleteStudioRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteStudio, request, options: options);
   }
 }
@@ -74,66 +74,66 @@ abstract class StudioServiceBase extends $grpc.Service {
   $core.String get $name => 'bst.v1.StudioService';
 
   StudioServiceBase() {
-    $addMethod($grpc.ServiceMethod<$17.CreateStudioRequest, $17.CreateStudioResponse>(
+    $addMethod($grpc.ServiceMethod<$18.CreateStudioRequest, $18.CreateStudioResponse>(
         'CreateStudio',
         createStudio_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $17.CreateStudioRequest.fromBuffer(value),
-        ($17.CreateStudioResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$17.ListStudiosRequest, $17.ListStudiosResponse>(
+        ($core.List<$core.int> value) => $18.CreateStudioRequest.fromBuffer(value),
+        ($18.CreateStudioResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$18.ListStudiosRequest, $18.ListStudiosResponse>(
         'ListStudios',
         listStudios_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $17.ListStudiosRequest.fromBuffer(value),
-        ($17.ListStudiosResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$17.GetStudioRequest, $17.GetStudioResponse>(
+        ($core.List<$core.int> value) => $18.ListStudiosRequest.fromBuffer(value),
+        ($18.ListStudiosResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$18.GetStudioRequest, $18.GetStudioResponse>(
         'GetStudio',
         getStudio_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $17.GetStudioRequest.fromBuffer(value),
-        ($17.GetStudioResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$17.UpdateStudioRequest, $17.UpdateStudioResponse>(
+        ($core.List<$core.int> value) => $18.GetStudioRequest.fromBuffer(value),
+        ($18.GetStudioResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$18.UpdateStudioRequest, $18.UpdateStudioResponse>(
         'UpdateStudio',
         updateStudio_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $17.UpdateStudioRequest.fromBuffer(value),
-        ($17.UpdateStudioResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$17.DeleteStudioRequest, $17.DeleteStudioResponse>(
+        ($core.List<$core.int> value) => $18.UpdateStudioRequest.fromBuffer(value),
+        ($18.UpdateStudioResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$18.DeleteStudioRequest, $18.DeleteStudioResponse>(
         'DeleteStudio',
         deleteStudio_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $17.DeleteStudioRequest.fromBuffer(value),
-        ($17.DeleteStudioResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $18.DeleteStudioRequest.fromBuffer(value),
+        ($18.DeleteStudioResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$17.CreateStudioResponse> createStudio_Pre($grpc.ServiceCall call, $async.Future<$17.CreateStudioRequest> request) async {
+  $async.Future<$18.CreateStudioResponse> createStudio_Pre($grpc.ServiceCall call, $async.Future<$18.CreateStudioRequest> request) async {
     return createStudio(call, await request);
   }
 
-  $async.Future<$17.ListStudiosResponse> listStudios_Pre($grpc.ServiceCall call, $async.Future<$17.ListStudiosRequest> request) async {
+  $async.Future<$18.ListStudiosResponse> listStudios_Pre($grpc.ServiceCall call, $async.Future<$18.ListStudiosRequest> request) async {
     return listStudios(call, await request);
   }
 
-  $async.Future<$17.GetStudioResponse> getStudio_Pre($grpc.ServiceCall call, $async.Future<$17.GetStudioRequest> request) async {
+  $async.Future<$18.GetStudioResponse> getStudio_Pre($grpc.ServiceCall call, $async.Future<$18.GetStudioRequest> request) async {
     return getStudio(call, await request);
   }
 
-  $async.Future<$17.UpdateStudioResponse> updateStudio_Pre($grpc.ServiceCall call, $async.Future<$17.UpdateStudioRequest> request) async {
+  $async.Future<$18.UpdateStudioResponse> updateStudio_Pre($grpc.ServiceCall call, $async.Future<$18.UpdateStudioRequest> request) async {
     return updateStudio(call, await request);
   }
 
-  $async.Future<$17.DeleteStudioResponse> deleteStudio_Pre($grpc.ServiceCall call, $async.Future<$17.DeleteStudioRequest> request) async {
+  $async.Future<$18.DeleteStudioResponse> deleteStudio_Pre($grpc.ServiceCall call, $async.Future<$18.DeleteStudioRequest> request) async {
     return deleteStudio(call, await request);
   }
 
-  $async.Future<$17.CreateStudioResponse> createStudio($grpc.ServiceCall call, $17.CreateStudioRequest request);
-  $async.Future<$17.ListStudiosResponse> listStudios($grpc.ServiceCall call, $17.ListStudiosRequest request);
-  $async.Future<$17.GetStudioResponse> getStudio($grpc.ServiceCall call, $17.GetStudioRequest request);
-  $async.Future<$17.UpdateStudioResponse> updateStudio($grpc.ServiceCall call, $17.UpdateStudioRequest request);
-  $async.Future<$17.DeleteStudioResponse> deleteStudio($grpc.ServiceCall call, $17.DeleteStudioRequest request);
+  $async.Future<$18.CreateStudioResponse> createStudio($grpc.ServiceCall call, $18.CreateStudioRequest request);
+  $async.Future<$18.ListStudiosResponse> listStudios($grpc.ServiceCall call, $18.ListStudiosRequest request);
+  $async.Future<$18.GetStudioResponse> getStudio($grpc.ServiceCall call, $18.GetStudioRequest request);
+  $async.Future<$18.UpdateStudioResponse> updateStudio($grpc.ServiceCall call, $18.UpdateStudioRequest request);
+  $async.Future<$18.DeleteStudioResponse> deleteStudio($grpc.ServiceCall call, $18.DeleteStudioRequest request);
 }

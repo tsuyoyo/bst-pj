@@ -13,9 +13,9 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/protobuf/timestamp.pb.dart' as $24;
-import 'area.pb.dart' as $23;
-import 'content.pb.dart' as $22;
+import '../../google/protobuf/timestamp.pb.dart' as $25;
+import 'area.pb.dart' as $24;
+import 'content.pb.dart' as $23;
 
 /// User model
 class User extends $pb.GeneratedMessage {
@@ -98,9 +98,9 @@ class User extends $pb.GeneratedMessage {
 
 class UserFavorite extends $pb.GeneratedMessage {
   factory UserFavorite({
-    $core.Iterable<$22.Genre>? genres,
-    $core.Iterable<$22.Artist>? artists,
-    $core.Iterable<$22.Part>? parts,
+    $core.Iterable<$23.Genre>? genres,
+    $core.Iterable<$23.Artist>? artists,
+    $core.Iterable<$23.Part>? parts,
   }) {
     final $result = create();
     if (genres != null) {
@@ -119,9 +119,9 @@ class UserFavorite extends $pb.GeneratedMessage {
   factory UserFavorite.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UserFavorite', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$22.Genre>(1, _omitFieldNames ? '' : 'genres', $pb.PbFieldType.PM, subBuilder: $22.Genre.create)
-    ..pc<$22.Artist>(2, _omitFieldNames ? '' : 'artists', $pb.PbFieldType.PM, subBuilder: $22.Artist.create)
-    ..pc<$22.Part>(3, _omitFieldNames ? '' : 'parts', $pb.PbFieldType.PM, subBuilder: $22.Part.create)
+    ..pc<$23.Genre>(1, _omitFieldNames ? '' : 'genres', $pb.PbFieldType.PM, subBuilder: $23.Genre.create)
+    ..pc<$23.Artist>(2, _omitFieldNames ? '' : 'artists', $pb.PbFieldType.PM, subBuilder: $23.Artist.create)
+    ..pc<$23.Part>(3, _omitFieldNames ? '' : 'parts', $pb.PbFieldType.PM, subBuilder: $23.Part.create)
     ..hasRequiredFields = false
   ;
 
@@ -147,22 +147,22 @@ class UserFavorite extends $pb.GeneratedMessage {
   static UserFavorite? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$22.Genre> get genres => $_getList(0);
+  $core.List<$23.Genre> get genres => $_getList(0);
 
   @$pb.TagNumber(2)
-  $core.List<$22.Artist> get artists => $_getList(1);
+  $core.List<$23.Artist> get artists => $_getList(1);
 
   @$pb.TagNumber(3)
-  $core.List<$22.Part> get parts => $_getList(2);
+  $core.List<$23.Part> get parts => $_getList(2);
 }
 
 class UserProfile extends $pb.GeneratedMessage {
   factory UserProfile({
     User? user,
     $core.String? introduction,
-    $23.Area? area,
+    $24.Area? area,
     UserFavorite? favorite,
-    $24.Timestamp? createdAt,
+    $25.Timestamp? createdAt,
     $core.Iterable<UserRatingBadge>? badges,
   }) {
     final $result = create();
@@ -193,9 +193,9 @@ class UserProfile extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UserProfile', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..aOM<User>(1, _omitFieldNames ? '' : 'user', subBuilder: User.create)
     ..aOS(2, _omitFieldNames ? '' : 'introduction')
-    ..aOM<$23.Area>(3, _omitFieldNames ? '' : 'area', subBuilder: $23.Area.create)
+    ..aOM<$24.Area>(3, _omitFieldNames ? '' : 'area', subBuilder: $24.Area.create)
     ..aOM<UserFavorite>(4, _omitFieldNames ? '' : 'favorite', subBuilder: UserFavorite.create)
-    ..aOM<$24.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $24.Timestamp.create)
+    ..aOM<$25.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $25.Timestamp.create)
     ..pc<UserRatingBadge>(6, _omitFieldNames ? '' : 'badges', $pb.PbFieldType.PM, subBuilder: UserRatingBadge.create)
     ..hasRequiredFields = false
   ;
@@ -242,15 +242,15 @@ class UserProfile extends $pb.GeneratedMessage {
   void clearIntroduction() => clearField(2);
 
   @$pb.TagNumber(3)
-  $23.Area get area => $_getN(2);
+  $24.Area get area => $_getN(2);
   @$pb.TagNumber(3)
-  set area($23.Area v) { setField(3, v); }
+  set area($24.Area v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasArea() => $_has(2);
   @$pb.TagNumber(3)
   void clearArea() => clearField(3);
   @$pb.TagNumber(3)
-  $23.Area ensureArea() => $_ensure(2);
+  $24.Area ensureArea() => $_ensure(2);
 
   @$pb.TagNumber(4)
   UserFavorite get favorite => $_getN(3);
@@ -264,15 +264,15 @@ class UserProfile extends $pb.GeneratedMessage {
   UserFavorite ensureFavorite() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  $24.Timestamp get createdAt => $_getN(4);
+  $25.Timestamp get createdAt => $_getN(4);
   @$pb.TagNumber(5)
-  set createdAt($24.Timestamp v) { setField(5, v); }
+  set createdAt($25.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCreatedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearCreatedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $24.Timestamp ensureCreatedAt() => $_ensure(4);
+  $25.Timestamp ensureCreatedAt() => $_ensure(4);
 
   /// When the user is well evaluated, the badge is given.
   @$pb.TagNumber(6)

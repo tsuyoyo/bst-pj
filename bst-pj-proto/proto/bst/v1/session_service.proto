@@ -161,25 +161,6 @@ service SessionService {
   // POST /sessions/{id}/related-sessions
   rpc AddRelatedSession(AddRelatedSessionRequest)
       returns (AddRelatedSessionResponse);
-
-  // Party Management
-  // POST /sessions/{id}/party
-  rpc CreateSessionParty(CreateSessionPartyRequest)
-      returns (CreateSessionPartyResponse);
-  // GET /sessions/{id}/party
-  rpc GetSessionParty(GetSessionPartyRequest) returns (GetSessionPartyResponse);
-  // POST /sessions/{id}/party/participants
-  rpc AddPartyParticipant(AddPartyParticipantRequest)
-      returns (AddPartyParticipantResponse);
-  // GET /sessions/{id}/party/participants
-  rpc ListPartyParticipants(ListPartyParticipantsRequest)
-      returns (ListPartyParticipantsResponse);
-  // PUT /sessions/{id}/party/participants/{participantId}
-  rpc UpdatePartyParticipant(UpdatePartyParticipantRequest)
-      returns (UpdatePartyParticipantResponse);
-  // DELETE /sessions/{id}/party/participants/{participantId}
-  rpc DeletePartyParticipant(DeletePartyParticipantRequest)
-      returns (DeletePartyParticipantResponse);
 }
 
 // Session Management
@@ -595,56 +576,4 @@ message AddRelatedSessionResponse {
   bool success = 1;
 }
 
-// Party Management
-message CreateSessionPartyRequest {
-  int32 session_id = 1;
-  Party party      = 2;
-}
 
-message CreateSessionPartyResponse {
-  Party party = 1;
-}
-
-message GetSessionPartyRequest {
-  int32 session_id = 1;
-}
-
-message GetSessionPartyResponse {
-  Party party = 1;
-}
-
-message AddPartyParticipantRequest {
-  int32            session_id  = 1;
-  PartyParticipant participant = 2;
-}
-
-message AddPartyParticipantResponse {
-  PartyParticipant participant = 1;
-}
-
-message ListPartyParticipantsRequest {
-  int32 session_id = 1;
-}
-
-message ListPartyParticipantsResponse {
-  repeated PartyParticipant participants = 1;
-}
-
-message UpdatePartyParticipantRequest {
-  int32            session_id     = 1;
-  int32            participant_id = 2;
-  PartyParticipant participant    = 3;
-}
-
-message UpdatePartyParticipantResponse {
-  PartyParticipant participant = 1;
-}
-
-message DeletePartyParticipantRequest {
-  int32 session_id     = 1;
-  int32 participant_id = 2;
-}
-
-message DeletePartyParticipantResponse {
-  bool success = 1;
-}

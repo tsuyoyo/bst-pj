@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+package bst.v1;
+
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+import "bst/v1/party.proto";
+import "google/protobuf/timestamp.proto";
+
+service PartyService {
+  rpc CreateParty(CreatePartyRequest) returns (CreatePartyResponse) {}
+  rpc GetParty(GetPartyRequest) returns (GetPartyRequest) {}
+  rpc UpdateParty(UpdatePartyRequest) returns (UpdatePartyResponse) {}
+  rpc DeleteParty(DeletePartyRequest) returns (DeletePartyResponse) {}
+
+  rpc AddPartyParticipant(AddPartyParticipantRequest) returns (AddPartyParticipantResponse) {}
+  rpc UpdatePartyParticipant(UpdatePartyParticipantRequest) returns (UpdatePartyParticipantResponse) {}
+  rpc RemovePartyParticipant(RemovePartyParticipantRequest) returns (RemovePartyParticipantResponse) {}
+}
+
+message CreatePartyRequest {
+  int32                     locationId = 1;
+  int32                     fee        = 2;
+  PartyParticipantRole      role       = 3;
+  google.protobuf.Timestamp startAt    = 4;
+  google.protobuf.Timestamp endAt      = 5;
+}
+
+message CreatePartyResponse {
+  Party party = 1;
+}
+
+message GetPartyRequest {
+  int32 sessionId = 1;
+}
+
+message GetPartyResponse {
+  Party party = 1;
+}
+
+message UpdatePartyRequest {
+  int32                     locationId = 1;
+  int32                     fee        = 2;
+  google.protobuf.Timestamp startAt    = 3;
+  google.protobuf.Timestamp endAt      = 4;
+}
+
+message UpdatePartyResponse {
+  Party party = 1;
+}
+
+message DeletePartyRequest {
+  int32 sessionId = 1;
+}
+
+message DeletePartyResponse {
+  bool success = 1;
+}
+
+message AddPartyParticipantRequest {
+  PartyParticipantRole role = 1;
+  PartyParticipantStatus status = 2;
+}
+
+message AddPartyParticipantResponse {
+  bool success = 1;
+}
+
+message UpdatePartyParticipantRequest {
+  PartyParticipantRole role = 1;
+  PartyParticipantStatus status = 2;
+}
+
+message UpdatePartyParticipantResponse {
+  bool success = 1;
+}
+
+message RemovePartyParticipantRequest {
+  int32 userId = 1;
+}
+
+message RemovePartyParticipantResponse {
+  bool success = 1;
+}
