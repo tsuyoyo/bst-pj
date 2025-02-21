@@ -65,10 +65,10 @@ exports.up = (pgm) => {
   // Create song_performances table
   pgm.createTable("song_performances", {
     id: "id",
-    activity_id: {
+    session_id: {
       type: "integer",
       notNull: true,
-      references: "activities",
+      references: "sessions",
       onDelete: "CASCADE",
     },
     song_id: {

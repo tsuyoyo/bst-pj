@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'user.pb.dart' as $27;
+import 'user.pb.dart' as $28;
 
 class GetUserProfileRequest extends $pb.GeneratedMessage {
   factory GetUserProfileRequest({
@@ -67,7 +67,7 @@ class GetUserProfileRequest extends $pb.GeneratedMessage {
 
 class GetUserProfileResponse extends $pb.GeneratedMessage {
   factory GetUserProfileResponse({
-    $27.UserProfile? profile,
+    $28.UserProfile? profile,
   }) {
     final $result = create();
     if (profile != null) {
@@ -80,7 +80,7 @@ class GetUserProfileResponse extends $pb.GeneratedMessage {
   factory GetUserProfileResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetUserProfileResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$27.UserProfile>(1, _omitFieldNames ? '' : 'profile', subBuilder: $27.UserProfile.create)
+    ..aOM<$28.UserProfile>(1, _omitFieldNames ? '' : 'profile', subBuilder: $28.UserProfile.create)
     ..hasRequiredFields = false
   ;
 
@@ -106,15 +106,15 @@ class GetUserProfileResponse extends $pb.GeneratedMessage {
   static GetUserProfileResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $27.UserProfile get profile => $_getN(0);
+  $28.UserProfile get profile => $_getN(0);
   @$pb.TagNumber(1)
-  set profile($27.UserProfile v) { setField(1, v); }
+  set profile($28.UserProfile v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasProfile() => $_has(0);
   @$pb.TagNumber(1)
   void clearProfile() => clearField(1);
   @$pb.TagNumber(1)
-  $27.UserProfile ensureProfile() => $_ensure(0);
+  $28.UserProfile ensureProfile() => $_ensure(0);
 }
 
 

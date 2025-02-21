@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'session.pb.dart' as $30;
+import 'session.pb.dart' as $31;
 
 /// GET /sessions/{id}/parts
 class ListSessionPartsRequest extends $pb.GeneratedMessage {
@@ -50,7 +50,7 @@ class ListSessionPartsRequest extends $pb.GeneratedMessage {
 
 class ListSessionPartsResponse extends $pb.GeneratedMessage {
   factory ListSessionPartsResponse({
-    $core.Iterable<$30.SessionPart>? parts,
+    $core.Iterable<$31.SessionPart>? parts,
   }) {
     final $result = create();
     if (parts != null) {
@@ -63,7 +63,7 @@ class ListSessionPartsResponse extends $pb.GeneratedMessage {
   factory ListSessionPartsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSessionPartsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$30.SessionPart>(1, _omitFieldNames ? '' : 'parts', $pb.PbFieldType.PM, subBuilder: $30.SessionPart.create)
+    ..pc<$31.SessionPart>(1, _omitFieldNames ? '' : 'parts', $pb.PbFieldType.PM, subBuilder: $31.SessionPart.create)
     ..hasRequiredFields = false
   ;
 
@@ -89,7 +89,7 @@ class ListSessionPartsResponse extends $pb.GeneratedMessage {
   static ListSessionPartsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$30.SessionPart> get parts => $_getList(0);
+  $core.List<$31.SessionPart> get parts => $_getList(0);
 }
 
 /// POST /sessions/{id}/parts
@@ -201,7 +201,7 @@ class AddSessionPartRequest extends $pb.GeneratedMessage {
 
 class AddSessionPartResponse extends $pb.GeneratedMessage {
   factory AddSessionPartResponse({
-    $30.SessionPart? part,
+    $31.SessionPart? part,
   }) {
     final $result = create();
     if (part != null) {
@@ -214,7 +214,7 @@ class AddSessionPartResponse extends $pb.GeneratedMessage {
   factory AddSessionPartResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSessionPartResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.SessionPart>(1, _omitFieldNames ? '' : 'part', subBuilder: $30.SessionPart.create)
+    ..aOM<$31.SessionPart>(1, _omitFieldNames ? '' : 'part', subBuilder: $31.SessionPart.create)
     ..hasRequiredFields = false
   ;
 
@@ -240,15 +240,15 @@ class AddSessionPartResponse extends $pb.GeneratedMessage {
   static AddSessionPartResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.SessionPart get part => $_getN(0);
+  $31.SessionPart get part => $_getN(0);
   @$pb.TagNumber(1)
-  set part($30.SessionPart v) { setField(1, v); }
+  set part($31.SessionPart v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPart() => $_has(0);
   @$pb.TagNumber(1)
   void clearPart() => clearField(1);
   @$pb.TagNumber(1)
-  $30.SessionPart ensurePart() => $_ensure(0);
+  $31.SessionPart ensurePart() => $_ensure(0);
 }
 
 /// PUT /sessions/{id}/parts/{sessionPartId}
@@ -346,7 +346,7 @@ class UpdateSessionPartRequest extends $pb.GeneratedMessage {
 
 class UpdateSessionPartResponse extends $pb.GeneratedMessage {
   factory UpdateSessionPartResponse({
-    $30.SessionPart? part,
+    $31.SessionPart? part,
   }) {
     final $result = create();
     if (part != null) {
@@ -359,7 +359,7 @@ class UpdateSessionPartResponse extends $pb.GeneratedMessage {
   factory UpdateSessionPartResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionPartResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.SessionPart>(1, _omitFieldNames ? '' : 'part', subBuilder: $30.SessionPart.create)
+    ..aOM<$31.SessionPart>(1, _omitFieldNames ? '' : 'part', subBuilder: $31.SessionPart.create)
     ..hasRequiredFields = false
   ;
 
@@ -385,15 +385,15 @@ class UpdateSessionPartResponse extends $pb.GeneratedMessage {
   static UpdateSessionPartResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.SessionPart get part => $_getN(0);
+  $31.SessionPart get part => $_getN(0);
   @$pb.TagNumber(1)
-  set part($30.SessionPart v) { setField(1, v); }
+  set part($31.SessionPart v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPart() => $_has(0);
   @$pb.TagNumber(1)
   void clearPart() => clearField(1);
   @$pb.TagNumber(1)
-  $30.SessionPart ensurePart() => $_ensure(0);
+  $31.SessionPart ensurePart() => $_ensure(0);
 }
 
 /// DELETE /sessions/{id}/parts/{sessionPartId}

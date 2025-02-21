@@ -13,19 +13,19 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/protobuf/timestamp.pb.dart' as $26;
+import '../../google/protobuf/timestamp.pb.dart' as $27;
 import 'communication.pb.dart' as $3;
-import 'content.pb.dart' as $24;
-import 'location.pb.dart' as $28;
-import 'session.pb.dart' as $30;
-import 'session.pbenum.dart' as $30;
+import 'content.pb.dart' as $25;
+import 'location.pb.dart' as $29;
+import 'session.pb.dart' as $31;
+import 'session.pbenum.dart' as $31;
 
 /// Session Management
 class CreateSessionRequest extends $pb.GeneratedMessage {
   factory CreateSessionRequest({
     $core.String? title,
     $core.String? description,
-    $26.Timestamp? eventDate,
+    $27.Timestamp? eventDate,
   }) {
     final $result = create();
     if (title != null) {
@@ -46,7 +46,7 @@ class CreateSessionRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateSessionRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'title')
     ..aOS(2, _omitFieldNames ? '' : 'description')
-    ..aOM<$26.Timestamp>(3, _omitFieldNames ? '' : 'eventDate', subBuilder: $26.Timestamp.create)
+    ..aOM<$27.Timestamp>(3, _omitFieldNames ? '' : 'eventDate', subBuilder: $27.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -90,20 +90,20 @@ class CreateSessionRequest extends $pb.GeneratedMessage {
   void clearDescription() => clearField(2);
 
   @$pb.TagNumber(3)
-  $26.Timestamp get eventDate => $_getN(2);
+  $27.Timestamp get eventDate => $_getN(2);
   @$pb.TagNumber(3)
-  set eventDate($26.Timestamp v) { setField(3, v); }
+  set eventDate($27.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasEventDate() => $_has(2);
   @$pb.TagNumber(3)
   void clearEventDate() => clearField(3);
   @$pb.TagNumber(3)
-  $26.Timestamp ensureEventDate() => $_ensure(2);
+  $27.Timestamp ensureEventDate() => $_ensure(2);
 }
 
 class CreateSessionResponse extends $pb.GeneratedMessage {
   factory CreateSessionResponse({
-    $30.Session? session,
+    $31.Session? session,
   }) {
     final $result = create();
     if (session != null) {
@@ -116,7 +116,7 @@ class CreateSessionResponse extends $pb.GeneratedMessage {
   factory CreateSessionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateSessionResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.Session>(1, _omitFieldNames ? '' : 'session', subBuilder: $30.Session.create)
+    ..aOM<$31.Session>(1, _omitFieldNames ? '' : 'session', subBuilder: $31.Session.create)
     ..hasRequiredFields = false
   ;
 
@@ -142,15 +142,15 @@ class CreateSessionResponse extends $pb.GeneratedMessage {
   static CreateSessionResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.Session get session => $_getN(0);
+  $31.Session get session => $_getN(0);
   @$pb.TagNumber(1)
-  set session($30.Session v) { setField(1, v); }
+  set session($31.Session v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSession() => $_has(0);
   @$pb.TagNumber(1)
   void clearSession() => clearField(1);
   @$pb.TagNumber(1)
-  $30.Session ensureSession() => $_ensure(0);
+  $31.Session ensureSession() => $_ensure(0);
 }
 
 class GetSessionRequest extends $pb.GeneratedMessage {
@@ -205,7 +205,7 @@ class GetSessionRequest extends $pb.GeneratedMessage {
 
 class GetSessionResponse extends $pb.GeneratedMessage {
   factory GetSessionResponse({
-    $30.SessionDetail? session,
+    $31.SessionDetail? session,
   }) {
     final $result = create();
     if (session != null) {
@@ -218,7 +218,7 @@ class GetSessionResponse extends $pb.GeneratedMessage {
   factory GetSessionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSessionResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.SessionDetail>(1, _omitFieldNames ? '' : 'session', subBuilder: $30.SessionDetail.create)
+    ..aOM<$31.SessionDetail>(1, _omitFieldNames ? '' : 'session', subBuilder: $31.SessionDetail.create)
     ..hasRequiredFields = false
   ;
 
@@ -244,15 +244,15 @@ class GetSessionResponse extends $pb.GeneratedMessage {
   static GetSessionResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.SessionDetail get session => $_getN(0);
+  $31.SessionDetail get session => $_getN(0);
   @$pb.TagNumber(1)
-  set session($30.SessionDetail v) { setField(1, v); }
+  set session($31.SessionDetail v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSession() => $_has(0);
   @$pb.TagNumber(1)
   void clearSession() => clearField(1);
   @$pb.TagNumber(1)
-  $30.SessionDetail ensureSession() => $_ensure(0);
+  $31.SessionDetail ensureSession() => $_ensure(0);
 }
 
 class UpdateSessionRequest extends $pb.GeneratedMessage {
@@ -260,7 +260,7 @@ class UpdateSessionRequest extends $pb.GeneratedMessage {
     $core.int? sessionId,
     $core.String? title,
     $core.String? description,
-    $26.Timestamp? eventDate,
+    $27.Timestamp? eventDate,
   }) {
     final $result = create();
     if (sessionId != null) {
@@ -285,7 +285,7 @@ class UpdateSessionRequest extends $pb.GeneratedMessage {
     ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'title')
     ..aOS(3, _omitFieldNames ? '' : 'description')
-    ..aOM<$26.Timestamp>(4, _omitFieldNames ? '' : 'eventDate', subBuilder: $26.Timestamp.create)
+    ..aOM<$27.Timestamp>(4, _omitFieldNames ? '' : 'eventDate', subBuilder: $27.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -338,20 +338,20 @@ class UpdateSessionRequest extends $pb.GeneratedMessage {
   void clearDescription() => clearField(3);
 
   @$pb.TagNumber(4)
-  $26.Timestamp get eventDate => $_getN(3);
+  $27.Timestamp get eventDate => $_getN(3);
   @$pb.TagNumber(4)
-  set eventDate($26.Timestamp v) { setField(4, v); }
+  set eventDate($27.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasEventDate() => $_has(3);
   @$pb.TagNumber(4)
   void clearEventDate() => clearField(4);
   @$pb.TagNumber(4)
-  $26.Timestamp ensureEventDate() => $_ensure(3);
+  $27.Timestamp ensureEventDate() => $_ensure(3);
 }
 
 class UpdateSessionResponse extends $pb.GeneratedMessage {
   factory UpdateSessionResponse({
-    $30.SessionDetail? session,
+    $31.SessionDetail? session,
   }) {
     final $result = create();
     if (session != null) {
@@ -364,7 +364,7 @@ class UpdateSessionResponse extends $pb.GeneratedMessage {
   factory UpdateSessionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.SessionDetail>(1, _omitFieldNames ? '' : 'session', subBuilder: $30.SessionDetail.create)
+    ..aOM<$31.SessionDetail>(1, _omitFieldNames ? '' : 'session', subBuilder: $31.SessionDetail.create)
     ..hasRequiredFields = false
   ;
 
@@ -390,21 +390,21 @@ class UpdateSessionResponse extends $pb.GeneratedMessage {
   static UpdateSessionResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.SessionDetail get session => $_getN(0);
+  $31.SessionDetail get session => $_getN(0);
   @$pb.TagNumber(1)
-  set session($30.SessionDetail v) { setField(1, v); }
+  set session($31.SessionDetail v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSession() => $_has(0);
   @$pb.TagNumber(1)
   void clearSession() => clearField(1);
   @$pb.TagNumber(1)
-  $30.SessionDetail ensureSession() => $_ensure(0);
+  $31.SessionDetail ensureSession() => $_ensure(0);
 }
 
 class UpdateSessionStatusRequest extends $pb.GeneratedMessage {
   factory UpdateSessionStatusRequest({
     $core.int? sessionId,
-    $30.SessionStatus? status,
+    $31.SessionStatus? status,
   }) {
     final $result = create();
     if (sessionId != null) {
@@ -421,7 +421,7 @@ class UpdateSessionStatusRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionStatusRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
-    ..e<$30.SessionStatus>(2, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: $30.SessionStatus.SESSION_STATUS_UNSPECIFIED, valueOf: $30.SessionStatus.valueOf, enumValues: $30.SessionStatus.values)
+    ..e<$31.SessionStatus>(2, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: $31.SessionStatus.SESSION_STATUS_UNSPECIFIED, valueOf: $31.SessionStatus.valueOf, enumValues: $31.SessionStatus.values)
     ..hasRequiredFields = false
   ;
 
@@ -456,9 +456,9 @@ class UpdateSessionStatusRequest extends $pb.GeneratedMessage {
   void clearSessionId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $30.SessionStatus get status => $_getN(1);
+  $31.SessionStatus get status => $_getN(1);
   @$pb.TagNumber(2)
-  set status($30.SessionStatus v) { setField(2, v); }
+  set status($31.SessionStatus v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasStatus() => $_has(1);
   @$pb.TagNumber(2)
@@ -467,7 +467,7 @@ class UpdateSessionStatusRequest extends $pb.GeneratedMessage {
 
 class UpdateSessionStatusResponse extends $pb.GeneratedMessage {
   factory UpdateSessionStatusResponse({
-    $30.SessionDetail? session,
+    $31.SessionDetail? session,
   }) {
     final $result = create();
     if (session != null) {
@@ -480,7 +480,7 @@ class UpdateSessionStatusResponse extends $pb.GeneratedMessage {
   factory UpdateSessionStatusResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionStatusResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.SessionDetail>(1, _omitFieldNames ? '' : 'session', subBuilder: $30.SessionDetail.create)
+    ..aOM<$31.SessionDetail>(1, _omitFieldNames ? '' : 'session', subBuilder: $31.SessionDetail.create)
     ..hasRequiredFields = false
   ;
 
@@ -506,15 +506,15 @@ class UpdateSessionStatusResponse extends $pb.GeneratedMessage {
   static UpdateSessionStatusResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.SessionDetail get session => $_getN(0);
+  $31.SessionDetail get session => $_getN(0);
   @$pb.TagNumber(1)
-  set session($30.SessionDetail v) { setField(1, v); }
+  set session($31.SessionDetail v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSession() => $_has(0);
   @$pb.TagNumber(1)
   void clearSession() => clearField(1);
   @$pb.TagNumber(1)
-  $30.SessionDetail ensureSession() => $_ensure(0);
+  $31.SessionDetail ensureSession() => $_ensure(0);
 }
 
 class CancelSessionRequest extends $pb.GeneratedMessage {
@@ -583,7 +583,7 @@ class CancelSessionRequest extends $pb.GeneratedMessage {
 
 class CancelSessionResponse extends $pb.GeneratedMessage {
   factory CancelSessionResponse({
-    $30.SessionDetail? session,
+    $31.SessionDetail? session,
   }) {
     final $result = create();
     if (session != null) {
@@ -596,7 +596,7 @@ class CancelSessionResponse extends $pb.GeneratedMessage {
   factory CancelSessionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CancelSessionResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.SessionDetail>(1, _omitFieldNames ? '' : 'session', subBuilder: $30.SessionDetail.create)
+    ..aOM<$31.SessionDetail>(1, _omitFieldNames ? '' : 'session', subBuilder: $31.SessionDetail.create)
     ..hasRequiredFields = false
   ;
 
@@ -622,21 +622,21 @@ class CancelSessionResponse extends $pb.GeneratedMessage {
   static CancelSessionResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.SessionDetail get session => $_getN(0);
+  $31.SessionDetail get session => $_getN(0);
   @$pb.TagNumber(1)
-  set session($30.SessionDetail v) { setField(1, v); }
+  set session($31.SessionDetail v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSession() => $_has(0);
   @$pb.TagNumber(1)
   void clearSession() => clearField(1);
   @$pb.TagNumber(1)
-  $30.SessionDetail ensureSession() => $_ensure(0);
+  $31.SessionDetail ensureSession() => $_ensure(0);
 }
 
 class DuplicateSessionRequest extends $pb.GeneratedMessage {
   factory DuplicateSessionRequest({
     $core.int? sessionId,
-    $26.Timestamp? newEventDate,
+    $27.Timestamp? newEventDate,
   }) {
     final $result = create();
     if (sessionId != null) {
@@ -653,7 +653,7 @@ class DuplicateSessionRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DuplicateSessionRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
-    ..aOM<$26.Timestamp>(2, _omitFieldNames ? '' : 'newEventDate', subBuilder: $26.Timestamp.create)
+    ..aOM<$27.Timestamp>(2, _omitFieldNames ? '' : 'newEventDate', subBuilder: $27.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -688,20 +688,20 @@ class DuplicateSessionRequest extends $pb.GeneratedMessage {
   void clearSessionId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $26.Timestamp get newEventDate => $_getN(1);
+  $27.Timestamp get newEventDate => $_getN(1);
   @$pb.TagNumber(2)
-  set newEventDate($26.Timestamp v) { setField(2, v); }
+  set newEventDate($27.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasNewEventDate() => $_has(1);
   @$pb.TagNumber(2)
   void clearNewEventDate() => clearField(2);
   @$pb.TagNumber(2)
-  $26.Timestamp ensureNewEventDate() => $_ensure(1);
+  $27.Timestamp ensureNewEventDate() => $_ensure(1);
 }
 
 class DuplicateSessionResponse extends $pb.GeneratedMessage {
   factory DuplicateSessionResponse({
-    $30.SessionDetail? session,
+    $31.SessionDetail? session,
   }) {
     final $result = create();
     if (session != null) {
@@ -714,7 +714,7 @@ class DuplicateSessionResponse extends $pb.GeneratedMessage {
   factory DuplicateSessionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DuplicateSessionResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.SessionDetail>(1, _omitFieldNames ? '' : 'session', subBuilder: $30.SessionDetail.create)
+    ..aOM<$31.SessionDetail>(1, _omitFieldNames ? '' : 'session', subBuilder: $31.SessionDetail.create)
     ..hasRequiredFields = false
   ;
 
@@ -740,22 +740,22 @@ class DuplicateSessionResponse extends $pb.GeneratedMessage {
   static DuplicateSessionResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.SessionDetail get session => $_getN(0);
+  $31.SessionDetail get session => $_getN(0);
   @$pb.TagNumber(1)
-  set session($30.SessionDetail v) { setField(1, v); }
+  set session($31.SessionDetail v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSession() => $_has(0);
   @$pb.TagNumber(1)
   void clearSession() => clearField(1);
   @$pb.TagNumber(1)
-  $30.SessionDetail ensureSession() => $_ensure(0);
+  $31.SessionDetail ensureSession() => $_ensure(0);
 }
 
 /// Schedule & Location
 class UpdateSessionScheduleRequest extends $pb.GeneratedMessage {
   factory UpdateSessionScheduleRequest({
     $core.int? sessionId,
-    $30.Timetable? timetable,
+    $31.Timetable? timetable,
   }) {
     final $result = create();
     if (sessionId != null) {
@@ -772,7 +772,7 @@ class UpdateSessionScheduleRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionScheduleRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
-    ..aOM<$30.Timetable>(2, _omitFieldNames ? '' : 'timetable', subBuilder: $30.Timetable.create)
+    ..aOM<$31.Timetable>(2, _omitFieldNames ? '' : 'timetable', subBuilder: $31.Timetable.create)
     ..hasRequiredFields = false
   ;
 
@@ -807,20 +807,20 @@ class UpdateSessionScheduleRequest extends $pb.GeneratedMessage {
   void clearSessionId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $30.Timetable get timetable => $_getN(1);
+  $31.Timetable get timetable => $_getN(1);
   @$pb.TagNumber(2)
-  set timetable($30.Timetable v) { setField(2, v); }
+  set timetable($31.Timetable v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasTimetable() => $_has(1);
   @$pb.TagNumber(2)
   void clearTimetable() => clearField(2);
   @$pb.TagNumber(2)
-  $30.Timetable ensureTimetable() => $_ensure(1);
+  $31.Timetable ensureTimetable() => $_ensure(1);
 }
 
 class UpdateSessionScheduleResponse extends $pb.GeneratedMessage {
   factory UpdateSessionScheduleResponse({
-    $30.Timetable? timetable,
+    $31.Timetable? timetable,
   }) {
     final $result = create();
     if (timetable != null) {
@@ -833,7 +833,7 @@ class UpdateSessionScheduleResponse extends $pb.GeneratedMessage {
   factory UpdateSessionScheduleResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionScheduleResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.Timetable>(1, _omitFieldNames ? '' : 'timetable', subBuilder: $30.Timetable.create)
+    ..aOM<$31.Timetable>(1, _omitFieldNames ? '' : 'timetable', subBuilder: $31.Timetable.create)
     ..hasRequiredFields = false
   ;
 
@@ -859,21 +859,21 @@ class UpdateSessionScheduleResponse extends $pb.GeneratedMessage {
   static UpdateSessionScheduleResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.Timetable get timetable => $_getN(0);
+  $31.Timetable get timetable => $_getN(0);
   @$pb.TagNumber(1)
-  set timetable($30.Timetable v) { setField(1, v); }
+  set timetable($31.Timetable v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTimetable() => $_has(0);
   @$pb.TagNumber(1)
   void clearTimetable() => clearField(1);
   @$pb.TagNumber(1)
-  $30.Timetable ensureTimetable() => $_ensure(0);
+  $31.Timetable ensureTimetable() => $_ensure(0);
 }
 
 class UpdateSessionLocationRequest extends $pb.GeneratedMessage {
   factory UpdateSessionLocationRequest({
     $core.int? sessionId,
-    $28.Location? location,
+    $29.Location? location,
   }) {
     final $result = create();
     if (sessionId != null) {
@@ -890,7 +890,7 @@ class UpdateSessionLocationRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionLocationRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
-    ..aOM<$28.Location>(2, _omitFieldNames ? '' : 'location', subBuilder: $28.Location.create)
+    ..aOM<$29.Location>(2, _omitFieldNames ? '' : 'location', subBuilder: $29.Location.create)
     ..hasRequiredFields = false
   ;
 
@@ -925,20 +925,20 @@ class UpdateSessionLocationRequest extends $pb.GeneratedMessage {
   void clearSessionId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $28.Location get location => $_getN(1);
+  $29.Location get location => $_getN(1);
   @$pb.TagNumber(2)
-  set location($28.Location v) { setField(2, v); }
+  set location($29.Location v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasLocation() => $_has(1);
   @$pb.TagNumber(2)
   void clearLocation() => clearField(2);
   @$pb.TagNumber(2)
-  $28.Location ensureLocation() => $_ensure(1);
+  $29.Location ensureLocation() => $_ensure(1);
 }
 
 class UpdateSessionLocationResponse extends $pb.GeneratedMessage {
   factory UpdateSessionLocationResponse({
-    $28.Location? location,
+    $29.Location? location,
   }) {
     final $result = create();
     if (location != null) {
@@ -951,7 +951,7 @@ class UpdateSessionLocationResponse extends $pb.GeneratedMessage {
   factory UpdateSessionLocationResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionLocationResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$28.Location>(1, _omitFieldNames ? '' : 'location', subBuilder: $28.Location.create)
+    ..aOM<$29.Location>(1, _omitFieldNames ? '' : 'location', subBuilder: $29.Location.create)
     ..hasRequiredFields = false
   ;
 
@@ -977,15 +977,15 @@ class UpdateSessionLocationResponse extends $pb.GeneratedMessage {
   static UpdateSessionLocationResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $28.Location get location => $_getN(0);
+  $29.Location get location => $_getN(0);
   @$pb.TagNumber(1)
-  set location($28.Location v) { setField(1, v); }
+  set location($29.Location v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasLocation() => $_has(0);
   @$pb.TagNumber(1)
   void clearLocation() => clearField(1);
   @$pb.TagNumber(1)
-  $28.Location ensureLocation() => $_ensure(0);
+  $29.Location ensureLocation() => $_ensure(0);
 }
 
 /// Participants
@@ -1041,7 +1041,7 @@ class ListSessionParticipantsRequest extends $pb.GeneratedMessage {
 
 class ListSessionParticipantsResponse extends $pb.GeneratedMessage {
   factory ListSessionParticipantsResponse({
-    $core.Iterable<$30.SessionParticipant>? participants,
+    $core.Iterable<$31.SessionParticipant>? participants,
   }) {
     final $result = create();
     if (participants != null) {
@@ -1054,7 +1054,7 @@ class ListSessionParticipantsResponse extends $pb.GeneratedMessage {
   factory ListSessionParticipantsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSessionParticipantsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$30.SessionParticipant>(1, _omitFieldNames ? '' : 'participants', $pb.PbFieldType.PM, subBuilder: $30.SessionParticipant.create)
+    ..pc<$31.SessionParticipant>(1, _omitFieldNames ? '' : 'participants', $pb.PbFieldType.PM, subBuilder: $31.SessionParticipant.create)
     ..hasRequiredFields = false
   ;
 
@@ -1080,13 +1080,13 @@ class ListSessionParticipantsResponse extends $pb.GeneratedMessage {
   static ListSessionParticipantsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$30.SessionParticipant> get participants => $_getList(0);
+  $core.List<$31.SessionParticipant> get participants => $_getList(0);
 }
 
 class AddSessionParticipantRequest extends $pb.GeneratedMessage {
   factory AddSessionParticipantRequest({
     $core.int? sessionId,
-    $30.SessionParticipant? participant,
+    $31.SessionParticipant? participant,
   }) {
     final $result = create();
     if (sessionId != null) {
@@ -1103,7 +1103,7 @@ class AddSessionParticipantRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSessionParticipantRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
-    ..aOM<$30.SessionParticipant>(2, _omitFieldNames ? '' : 'participant', subBuilder: $30.SessionParticipant.create)
+    ..aOM<$31.SessionParticipant>(2, _omitFieldNames ? '' : 'participant', subBuilder: $31.SessionParticipant.create)
     ..hasRequiredFields = false
   ;
 
@@ -1138,20 +1138,20 @@ class AddSessionParticipantRequest extends $pb.GeneratedMessage {
   void clearSessionId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $30.SessionParticipant get participant => $_getN(1);
+  $31.SessionParticipant get participant => $_getN(1);
   @$pb.TagNumber(2)
-  set participant($30.SessionParticipant v) { setField(2, v); }
+  set participant($31.SessionParticipant v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasParticipant() => $_has(1);
   @$pb.TagNumber(2)
   void clearParticipant() => clearField(2);
   @$pb.TagNumber(2)
-  $30.SessionParticipant ensureParticipant() => $_ensure(1);
+  $31.SessionParticipant ensureParticipant() => $_ensure(1);
 }
 
 class AddSessionParticipantResponse extends $pb.GeneratedMessage {
   factory AddSessionParticipantResponse({
-    $30.SessionParticipant? participant,
+    $31.SessionParticipant? participant,
   }) {
     final $result = create();
     if (participant != null) {
@@ -1164,7 +1164,7 @@ class AddSessionParticipantResponse extends $pb.GeneratedMessage {
   factory AddSessionParticipantResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSessionParticipantResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.SessionParticipant>(1, _omitFieldNames ? '' : 'participant', subBuilder: $30.SessionParticipant.create)
+    ..aOM<$31.SessionParticipant>(1, _omitFieldNames ? '' : 'participant', subBuilder: $31.SessionParticipant.create)
     ..hasRequiredFields = false
   ;
 
@@ -1190,22 +1190,22 @@ class AddSessionParticipantResponse extends $pb.GeneratedMessage {
   static AddSessionParticipantResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.SessionParticipant get participant => $_getN(0);
+  $31.SessionParticipant get participant => $_getN(0);
   @$pb.TagNumber(1)
-  set participant($30.SessionParticipant v) { setField(1, v); }
+  set participant($31.SessionParticipant v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasParticipant() => $_has(0);
   @$pb.TagNumber(1)
   void clearParticipant() => clearField(1);
   @$pb.TagNumber(1)
-  $30.SessionParticipant ensureParticipant() => $_ensure(0);
+  $31.SessionParticipant ensureParticipant() => $_ensure(0);
 }
 
 class UpdateSessionParticipantRequest extends $pb.GeneratedMessage {
   factory UpdateSessionParticipantRequest({
     $core.int? sessionId,
     $core.int? participantId,
-    $30.SessionParticipant? participant,
+    $31.SessionParticipant? participant,
   }) {
     final $result = create();
     if (sessionId != null) {
@@ -1226,7 +1226,7 @@ class UpdateSessionParticipantRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionParticipantRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'participantId', $pb.PbFieldType.O3)
-    ..aOM<$30.SessionParticipant>(3, _omitFieldNames ? '' : 'participant', subBuilder: $30.SessionParticipant.create)
+    ..aOM<$31.SessionParticipant>(3, _omitFieldNames ? '' : 'participant', subBuilder: $31.SessionParticipant.create)
     ..hasRequiredFields = false
   ;
 
@@ -1270,20 +1270,20 @@ class UpdateSessionParticipantRequest extends $pb.GeneratedMessage {
   void clearParticipantId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $30.SessionParticipant get participant => $_getN(2);
+  $31.SessionParticipant get participant => $_getN(2);
   @$pb.TagNumber(3)
-  set participant($30.SessionParticipant v) { setField(3, v); }
+  set participant($31.SessionParticipant v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasParticipant() => $_has(2);
   @$pb.TagNumber(3)
   void clearParticipant() => clearField(3);
   @$pb.TagNumber(3)
-  $30.SessionParticipant ensureParticipant() => $_ensure(2);
+  $31.SessionParticipant ensureParticipant() => $_ensure(2);
 }
 
 class UpdateSessionParticipantResponse extends $pb.GeneratedMessage {
   factory UpdateSessionParticipantResponse({
-    $30.SessionParticipant? participant,
+    $31.SessionParticipant? participant,
   }) {
     final $result = create();
     if (participant != null) {
@@ -1296,7 +1296,7 @@ class UpdateSessionParticipantResponse extends $pb.GeneratedMessage {
   factory UpdateSessionParticipantResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionParticipantResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.SessionParticipant>(1, _omitFieldNames ? '' : 'participant', subBuilder: $30.SessionParticipant.create)
+    ..aOM<$31.SessionParticipant>(1, _omitFieldNames ? '' : 'participant', subBuilder: $31.SessionParticipant.create)
     ..hasRequiredFields = false
   ;
 
@@ -1322,472 +1322,15 @@ class UpdateSessionParticipantResponse extends $pb.GeneratedMessage {
   static UpdateSessionParticipantResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.SessionParticipant get participant => $_getN(0);
+  $31.SessionParticipant get participant => $_getN(0);
   @$pb.TagNumber(1)
-  set participant($30.SessionParticipant v) { setField(1, v); }
+  set participant($31.SessionParticipant v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasParticipant() => $_has(0);
   @$pb.TagNumber(1)
   void clearParticipant() => clearField(1);
   @$pb.TagNumber(1)
-  $30.SessionParticipant ensureParticipant() => $_ensure(0);
-}
-
-/// Song Management
-class ListSessionSongsRequest extends $pb.GeneratedMessage {
-  factory ListSessionSongsRequest({
-    $core.int? sessionId,
-  }) {
-    final $result = create();
-    if (sessionId != null) {
-      $result.sessionId = sessionId;
-    }
-    return $result;
-  }
-  ListSessionSongsRequest._() : super();
-  factory ListSessionSongsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ListSessionSongsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSessionSongsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  ListSessionSongsRequest clone() => ListSessionSongsRequest()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  ListSessionSongsRequest copyWith(void Function(ListSessionSongsRequest) updates) => super.copyWith((message) => updates(message as ListSessionSongsRequest)) as ListSessionSongsRequest;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static ListSessionSongsRequest create() => ListSessionSongsRequest._();
-  ListSessionSongsRequest createEmptyInstance() => create();
-  static $pb.PbList<ListSessionSongsRequest> createRepeated() => $pb.PbList<ListSessionSongsRequest>();
-  @$core.pragma('dart2js:noInline')
-  static ListSessionSongsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListSessionSongsRequest>(create);
-  static ListSessionSongsRequest? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.int get sessionId => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set sessionId($core.int v) { $_setSignedInt32(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasSessionId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSessionId() => clearField(1);
-}
-
-class ListSessionSongsResponse extends $pb.GeneratedMessage {
-  factory ListSessionSongsResponse({
-    $core.Iterable<$30.SongPerformance>? songs,
-  }) {
-    final $result = create();
-    if (songs != null) {
-      $result.songs.addAll(songs);
-    }
-    return $result;
-  }
-  ListSessionSongsResponse._() : super();
-  factory ListSessionSongsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ListSessionSongsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSessionSongsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$30.SongPerformance>(1, _omitFieldNames ? '' : 'songs', $pb.PbFieldType.PM, subBuilder: $30.SongPerformance.create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  ListSessionSongsResponse clone() => ListSessionSongsResponse()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  ListSessionSongsResponse copyWith(void Function(ListSessionSongsResponse) updates) => super.copyWith((message) => updates(message as ListSessionSongsResponse)) as ListSessionSongsResponse;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static ListSessionSongsResponse create() => ListSessionSongsResponse._();
-  ListSessionSongsResponse createEmptyInstance() => create();
-  static $pb.PbList<ListSessionSongsResponse> createRepeated() => $pb.PbList<ListSessionSongsResponse>();
-  @$core.pragma('dart2js:noInline')
-  static ListSessionSongsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListSessionSongsResponse>(create);
-  static ListSessionSongsResponse? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.List<$30.SongPerformance> get songs => $_getList(0);
-}
-
-class GetSessionSongRequest extends $pb.GeneratedMessage {
-  factory GetSessionSongRequest({
-    $core.int? sessionId,
-    $core.int? songId,
-  }) {
-    final $result = create();
-    if (sessionId != null) {
-      $result.sessionId = sessionId;
-    }
-    if (songId != null) {
-      $result.songId = songId;
-    }
-    return $result;
-  }
-  GetSessionSongRequest._() : super();
-  factory GetSessionSongRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory GetSessionSongRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSessionSongRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  GetSessionSongRequest clone() => GetSessionSongRequest()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  GetSessionSongRequest copyWith(void Function(GetSessionSongRequest) updates) => super.copyWith((message) => updates(message as GetSessionSongRequest)) as GetSessionSongRequest;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static GetSessionSongRequest create() => GetSessionSongRequest._();
-  GetSessionSongRequest createEmptyInstance() => create();
-  static $pb.PbList<GetSessionSongRequest> createRepeated() => $pb.PbList<GetSessionSongRequest>();
-  @$core.pragma('dart2js:noInline')
-  static GetSessionSongRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetSessionSongRequest>(create);
-  static GetSessionSongRequest? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.int get sessionId => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set sessionId($core.int v) { $_setSignedInt32(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasSessionId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSessionId() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.int get songId => $_getIZ(1);
-  @$pb.TagNumber(2)
-  set songId($core.int v) { $_setSignedInt32(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasSongId() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearSongId() => clearField(2);
-}
-
-class GetSessionSongResponse extends $pb.GeneratedMessage {
-  factory GetSessionSongResponse({
-    $30.SongPerformance? song,
-  }) {
-    final $result = create();
-    if (song != null) {
-      $result.song = song;
-    }
-    return $result;
-  }
-  GetSessionSongResponse._() : super();
-  factory GetSessionSongResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory GetSessionSongResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSessionSongResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.SongPerformance>(1, _omitFieldNames ? '' : 'song', subBuilder: $30.SongPerformance.create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  GetSessionSongResponse clone() => GetSessionSongResponse()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  GetSessionSongResponse copyWith(void Function(GetSessionSongResponse) updates) => super.copyWith((message) => updates(message as GetSessionSongResponse)) as GetSessionSongResponse;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static GetSessionSongResponse create() => GetSessionSongResponse._();
-  GetSessionSongResponse createEmptyInstance() => create();
-  static $pb.PbList<GetSessionSongResponse> createRepeated() => $pb.PbList<GetSessionSongResponse>();
-  @$core.pragma('dart2js:noInline')
-  static GetSessionSongResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetSessionSongResponse>(create);
-  static GetSessionSongResponse? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $30.SongPerformance get song => $_getN(0);
-  @$pb.TagNumber(1)
-  set song($30.SongPerformance v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasSong() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSong() => clearField(1);
-  @$pb.TagNumber(1)
-  $30.SongPerformance ensureSong() => $_ensure(0);
-}
-
-class UpdateSessionSongRequest extends $pb.GeneratedMessage {
-  factory UpdateSessionSongRequest({
-    $core.int? sessionId,
-    $core.int? songId,
-    $30.SongPerformance? song,
-  }) {
-    final $result = create();
-    if (sessionId != null) {
-      $result.sessionId = sessionId;
-    }
-    if (songId != null) {
-      $result.songId = songId;
-    }
-    if (song != null) {
-      $result.song = song;
-    }
-    return $result;
-  }
-  UpdateSessionSongRequest._() : super();
-  factory UpdateSessionSongRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory UpdateSessionSongRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionSongRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3)
-    ..aOM<$30.SongPerformance>(3, _omitFieldNames ? '' : 'song', subBuilder: $30.SongPerformance.create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  UpdateSessionSongRequest clone() => UpdateSessionSongRequest()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  UpdateSessionSongRequest copyWith(void Function(UpdateSessionSongRequest) updates) => super.copyWith((message) => updates(message as UpdateSessionSongRequest)) as UpdateSessionSongRequest;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static UpdateSessionSongRequest create() => UpdateSessionSongRequest._();
-  UpdateSessionSongRequest createEmptyInstance() => create();
-  static $pb.PbList<UpdateSessionSongRequest> createRepeated() => $pb.PbList<UpdateSessionSongRequest>();
-  @$core.pragma('dart2js:noInline')
-  static UpdateSessionSongRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateSessionSongRequest>(create);
-  static UpdateSessionSongRequest? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.int get sessionId => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set sessionId($core.int v) { $_setSignedInt32(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasSessionId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSessionId() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.int get songId => $_getIZ(1);
-  @$pb.TagNumber(2)
-  set songId($core.int v) { $_setSignedInt32(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasSongId() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearSongId() => clearField(2);
-
-  @$pb.TagNumber(3)
-  $30.SongPerformance get song => $_getN(2);
-  @$pb.TagNumber(3)
-  set song($30.SongPerformance v) { setField(3, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasSong() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearSong() => clearField(3);
-  @$pb.TagNumber(3)
-  $30.SongPerformance ensureSong() => $_ensure(2);
-}
-
-class UpdateSessionSongResponse extends $pb.GeneratedMessage {
-  factory UpdateSessionSongResponse({
-    $30.SongPerformance? song,
-  }) {
-    final $result = create();
-    if (song != null) {
-      $result.song = song;
-    }
-    return $result;
-  }
-  UpdateSessionSongResponse._() : super();
-  factory UpdateSessionSongResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory UpdateSessionSongResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionSongResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.SongPerformance>(1, _omitFieldNames ? '' : 'song', subBuilder: $30.SongPerformance.create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  UpdateSessionSongResponse clone() => UpdateSessionSongResponse()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  UpdateSessionSongResponse copyWith(void Function(UpdateSessionSongResponse) updates) => super.copyWith((message) => updates(message as UpdateSessionSongResponse)) as UpdateSessionSongResponse;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static UpdateSessionSongResponse create() => UpdateSessionSongResponse._();
-  UpdateSessionSongResponse createEmptyInstance() => create();
-  static $pb.PbList<UpdateSessionSongResponse> createRepeated() => $pb.PbList<UpdateSessionSongResponse>();
-  @$core.pragma('dart2js:noInline')
-  static UpdateSessionSongResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateSessionSongResponse>(create);
-  static UpdateSessionSongResponse? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $30.SongPerformance get song => $_getN(0);
-  @$pb.TagNumber(1)
-  set song($30.SongPerformance v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasSong() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSong() => clearField(1);
-  @$pb.TagNumber(1)
-  $30.SongPerformance ensureSong() => $_ensure(0);
-}
-
-class DeleteSessionSongRequest extends $pb.GeneratedMessage {
-  factory DeleteSessionSongRequest({
-    $core.int? sessionId,
-    $core.int? songId,
-  }) {
-    final $result = create();
-    if (sessionId != null) {
-      $result.sessionId = sessionId;
-    }
-    if (songId != null) {
-      $result.songId = songId;
-    }
-    return $result;
-  }
-  DeleteSessionSongRequest._() : super();
-  factory DeleteSessionSongRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory DeleteSessionSongRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteSessionSongRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  DeleteSessionSongRequest clone() => DeleteSessionSongRequest()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  DeleteSessionSongRequest copyWith(void Function(DeleteSessionSongRequest) updates) => super.copyWith((message) => updates(message as DeleteSessionSongRequest)) as DeleteSessionSongRequest;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static DeleteSessionSongRequest create() => DeleteSessionSongRequest._();
-  DeleteSessionSongRequest createEmptyInstance() => create();
-  static $pb.PbList<DeleteSessionSongRequest> createRepeated() => $pb.PbList<DeleteSessionSongRequest>();
-  @$core.pragma('dart2js:noInline')
-  static DeleteSessionSongRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteSessionSongRequest>(create);
-  static DeleteSessionSongRequest? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.int get sessionId => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set sessionId($core.int v) { $_setSignedInt32(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasSessionId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSessionId() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.int get songId => $_getIZ(1);
-  @$pb.TagNumber(2)
-  set songId($core.int v) { $_setSignedInt32(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasSongId() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearSongId() => clearField(2);
-}
-
-class DeleteSessionSongResponse extends $pb.GeneratedMessage {
-  factory DeleteSessionSongResponse({
-    $core.bool? success,
-  }) {
-    final $result = create();
-    if (success != null) {
-      $result.success = success;
-    }
-    return $result;
-  }
-  DeleteSessionSongResponse._() : super();
-  factory DeleteSessionSongResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory DeleteSessionSongResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteSessionSongResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOB(1, _omitFieldNames ? '' : 'success')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  DeleteSessionSongResponse clone() => DeleteSessionSongResponse()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  DeleteSessionSongResponse copyWith(void Function(DeleteSessionSongResponse) updates) => super.copyWith((message) => updates(message as DeleteSessionSongResponse)) as DeleteSessionSongResponse;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static DeleteSessionSongResponse create() => DeleteSessionSongResponse._();
-  DeleteSessionSongResponse createEmptyInstance() => create();
-  static $pb.PbList<DeleteSessionSongResponse> createRepeated() => $pb.PbList<DeleteSessionSongResponse>();
-  @$core.pragma('dart2js:noInline')
-  static DeleteSessionSongResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteSessionSongResponse>(create);
-  static DeleteSessionSongResponse? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.bool get success => $_getBF(0);
-  @$pb.TagNumber(1)
-  set success($core.bool v) { $_setBool(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasSuccess() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSuccess() => clearField(1);
+  $31.SessionParticipant ensureParticipant() => $_ensure(0);
 }
 
 /// Song Entries
@@ -1795,7 +1338,7 @@ class AddSongEntryRequest extends $pb.GeneratedMessage {
   factory AddSongEntryRequest({
     $core.int? sessionId,
     $core.int? songId,
-    $30.SongPerformanceEntry? entry,
+    $31.SongPerformanceEntry? entry,
   }) {
     final $result = create();
     if (sessionId != null) {
@@ -1816,7 +1359,7 @@ class AddSongEntryRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSongEntryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3)
-    ..aOM<$30.SongPerformanceEntry>(3, _omitFieldNames ? '' : 'entry', subBuilder: $30.SongPerformanceEntry.create)
+    ..aOM<$31.SongPerformanceEntry>(3, _omitFieldNames ? '' : 'entry', subBuilder: $31.SongPerformanceEntry.create)
     ..hasRequiredFields = false
   ;
 
@@ -1860,20 +1403,20 @@ class AddSongEntryRequest extends $pb.GeneratedMessage {
   void clearSongId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $30.SongPerformanceEntry get entry => $_getN(2);
+  $31.SongPerformanceEntry get entry => $_getN(2);
   @$pb.TagNumber(3)
-  set entry($30.SongPerformanceEntry v) { setField(3, v); }
+  set entry($31.SongPerformanceEntry v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasEntry() => $_has(2);
   @$pb.TagNumber(3)
   void clearEntry() => clearField(3);
   @$pb.TagNumber(3)
-  $30.SongPerformanceEntry ensureEntry() => $_ensure(2);
+  $31.SongPerformanceEntry ensureEntry() => $_ensure(2);
 }
 
 class AddSongEntryResponse extends $pb.GeneratedMessage {
   factory AddSongEntryResponse({
-    $30.SongPerformanceEntry? entry,
+    $31.SongPerformanceEntry? entry,
   }) {
     final $result = create();
     if (entry != null) {
@@ -1886,7 +1429,7 @@ class AddSongEntryResponse extends $pb.GeneratedMessage {
   factory AddSongEntryResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSongEntryResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.SongPerformanceEntry>(1, _omitFieldNames ? '' : 'entry', subBuilder: $30.SongPerformanceEntry.create)
+    ..aOM<$31.SongPerformanceEntry>(1, _omitFieldNames ? '' : 'entry', subBuilder: $31.SongPerformanceEntry.create)
     ..hasRequiredFields = false
   ;
 
@@ -1912,15 +1455,15 @@ class AddSongEntryResponse extends $pb.GeneratedMessage {
   static AddSongEntryResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.SongPerformanceEntry get entry => $_getN(0);
+  $31.SongPerformanceEntry get entry => $_getN(0);
   @$pb.TagNumber(1)
-  set entry($30.SongPerformanceEntry v) { setField(1, v); }
+  set entry($31.SongPerformanceEntry v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasEntry() => $_has(0);
   @$pb.TagNumber(1)
   void clearEntry() => clearField(1);
   @$pb.TagNumber(1)
-  $30.SongPerformanceEntry ensureEntry() => $_ensure(0);
+  $31.SongPerformanceEntry ensureEntry() => $_ensure(0);
 }
 
 class DeleteSongEntryRequest extends $pb.GeneratedMessage {
@@ -2056,7 +1599,7 @@ class AddSessionSongResourceRequest extends $pb.GeneratedMessage {
   factory AddSessionSongResourceRequest({
     $core.int? sessionId,
     $core.int? songId,
-    $24.Resource? resource,
+    $25.Resource? resource,
   }) {
     final $result = create();
     if (sessionId != null) {
@@ -2077,7 +1620,7 @@ class AddSessionSongResourceRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSessionSongResourceRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3)
-    ..aOM<$24.Resource>(3, _omitFieldNames ? '' : 'resource', subBuilder: $24.Resource.create)
+    ..aOM<$25.Resource>(3, _omitFieldNames ? '' : 'resource', subBuilder: $25.Resource.create)
     ..hasRequiredFields = false
   ;
 
@@ -2121,20 +1664,20 @@ class AddSessionSongResourceRequest extends $pb.GeneratedMessage {
   void clearSongId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $24.Resource get resource => $_getN(2);
+  $25.Resource get resource => $_getN(2);
   @$pb.TagNumber(3)
-  set resource($24.Resource v) { setField(3, v); }
+  set resource($25.Resource v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasResource() => $_has(2);
   @$pb.TagNumber(3)
   void clearResource() => clearField(3);
   @$pb.TagNumber(3)
-  $24.Resource ensureResource() => $_ensure(2);
+  $25.Resource ensureResource() => $_ensure(2);
 }
 
 class AddSessionSongResourceResponse extends $pb.GeneratedMessage {
   factory AddSessionSongResourceResponse({
-    $24.Resource? resource,
+    $25.Resource? resource,
   }) {
     final $result = create();
     if (resource != null) {
@@ -2147,7 +1690,7 @@ class AddSessionSongResourceResponse extends $pb.GeneratedMessage {
   factory AddSessionSongResourceResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSessionSongResourceResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$24.Resource>(1, _omitFieldNames ? '' : 'resource', subBuilder: $24.Resource.create)
+    ..aOM<$25.Resource>(1, _omitFieldNames ? '' : 'resource', subBuilder: $25.Resource.create)
     ..hasRequiredFields = false
   ;
 
@@ -2173,15 +1716,15 @@ class AddSessionSongResourceResponse extends $pb.GeneratedMessage {
   static AddSessionSongResourceResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $24.Resource get resource => $_getN(0);
+  $25.Resource get resource => $_getN(0);
   @$pb.TagNumber(1)
-  set resource($24.Resource v) { setField(1, v); }
+  set resource($25.Resource v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasResource() => $_has(0);
   @$pb.TagNumber(1)
   void clearResource() => clearField(1);
   @$pb.TagNumber(1)
-  $24.Resource ensureResource() => $_ensure(0);
+  $25.Resource ensureResource() => $_ensure(0);
 }
 
 class ListSessionSongResourcesRequest extends $pb.GeneratedMessage {
@@ -2250,7 +1793,7 @@ class ListSessionSongResourcesRequest extends $pb.GeneratedMessage {
 
 class ListSessionSongResourcesResponse extends $pb.GeneratedMessage {
   factory ListSessionSongResourcesResponse({
-    $core.Iterable<$24.Resource>? resources,
+    $core.Iterable<$25.Resource>? resources,
     $core.String? nextPageToken,
     $core.int? totalSize,
   }) {
@@ -2271,7 +1814,7 @@ class ListSessionSongResourcesResponse extends $pb.GeneratedMessage {
   factory ListSessionSongResourcesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSessionSongResourcesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$24.Resource>(1, _omitFieldNames ? '' : 'resources', $pb.PbFieldType.PM, subBuilder: $24.Resource.create)
+    ..pc<$25.Resource>(1, _omitFieldNames ? '' : 'resources', $pb.PbFieldType.PM, subBuilder: $25.Resource.create)
     ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'totalSize', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -2299,7 +1842,7 @@ class ListSessionSongResourcesResponse extends $pb.GeneratedMessage {
   static ListSessionSongResourcesResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$24.Resource> get resources => $_getList(0);
+  $core.List<$25.Resource> get resources => $_getList(0);
 
   @$pb.TagNumber(2)
   $core.String get nextPageToken => $_getSZ(1);
@@ -2501,7 +2044,7 @@ class ListSessionOrganizersRequest extends $pb.GeneratedMessage {
 
 class ListSessionOrganizersResponse extends $pb.GeneratedMessage {
   factory ListSessionOrganizersResponse({
-    $core.Iterable<$30.SessionParticipant>? organizers,
+    $core.Iterable<$31.SessionParticipant>? organizers,
   }) {
     final $result = create();
     if (organizers != null) {
@@ -2514,7 +2057,7 @@ class ListSessionOrganizersResponse extends $pb.GeneratedMessage {
   factory ListSessionOrganizersResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSessionOrganizersResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$30.SessionParticipant>(1, _omitFieldNames ? '' : 'organizers', $pb.PbFieldType.PM, subBuilder: $30.SessionParticipant.create)
+    ..pc<$31.SessionParticipant>(1, _omitFieldNames ? '' : 'organizers', $pb.PbFieldType.PM, subBuilder: $31.SessionParticipant.create)
     ..hasRequiredFields = false
   ;
 
@@ -2540,7 +2083,7 @@ class ListSessionOrganizersResponse extends $pb.GeneratedMessage {
   static ListSessionOrganizersResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$30.SessionParticipant> get organizers => $_getList(0);
+  $core.List<$31.SessionParticipant> get organizers => $_getList(0);
 }
 
 class AddSessionOrganizerRequest extends $pb.GeneratedMessage {
@@ -2609,7 +2152,7 @@ class AddSessionOrganizerRequest extends $pb.GeneratedMessage {
 
 class AddSessionOrganizerResponse extends $pb.GeneratedMessage {
   factory AddSessionOrganizerResponse({
-    $30.SessionParticipant? organizer,
+    $31.SessionParticipant? organizer,
   }) {
     final $result = create();
     if (organizer != null) {
@@ -2622,7 +2165,7 @@ class AddSessionOrganizerResponse extends $pb.GeneratedMessage {
   factory AddSessionOrganizerResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSessionOrganizerResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.SessionParticipant>(1, _omitFieldNames ? '' : 'organizer', subBuilder: $30.SessionParticipant.create)
+    ..aOM<$31.SessionParticipant>(1, _omitFieldNames ? '' : 'organizer', subBuilder: $31.SessionParticipant.create)
     ..hasRequiredFields = false
   ;
 
@@ -2648,15 +2191,15 @@ class AddSessionOrganizerResponse extends $pb.GeneratedMessage {
   static AddSessionOrganizerResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.SessionParticipant get organizer => $_getN(0);
+  $31.SessionParticipant get organizer => $_getN(0);
   @$pb.TagNumber(1)
-  set organizer($30.SessionParticipant v) { setField(1, v); }
+  set organizer($31.SessionParticipant v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasOrganizer() => $_has(0);
   @$pb.TagNumber(1)
   void clearOrganizer() => clearField(1);
   @$pb.TagNumber(1)
-  $30.SessionParticipant ensureOrganizer() => $_ensure(0);
+  $31.SessionParticipant ensureOrganizer() => $_ensure(0);
 }
 
 class DeleteSessionOrganizerRequest extends $pb.GeneratedMessage {
@@ -3523,7 +3066,7 @@ class GetSessionTimetableRequest extends $pb.GeneratedMessage {
 
 class GetSessionTimetableResponse extends $pb.GeneratedMessage {
   factory GetSessionTimetableResponse({
-    $30.Timetable? timetable,
+    $31.Timetable? timetable,
   }) {
     final $result = create();
     if (timetable != null) {
@@ -3536,7 +3079,7 @@ class GetSessionTimetableResponse extends $pb.GeneratedMessage {
   factory GetSessionTimetableResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSessionTimetableResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.Timetable>(1, _omitFieldNames ? '' : 'timetable', subBuilder: $30.Timetable.create)
+    ..aOM<$31.Timetable>(1, _omitFieldNames ? '' : 'timetable', subBuilder: $31.Timetable.create)
     ..hasRequiredFields = false
   ;
 
@@ -3562,21 +3105,21 @@ class GetSessionTimetableResponse extends $pb.GeneratedMessage {
   static GetSessionTimetableResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.Timetable get timetable => $_getN(0);
+  $31.Timetable get timetable => $_getN(0);
   @$pb.TagNumber(1)
-  set timetable($30.Timetable v) { setField(1, v); }
+  set timetable($31.Timetable v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTimetable() => $_has(0);
   @$pb.TagNumber(1)
   void clearTimetable() => clearField(1);
   @$pb.TagNumber(1)
-  $30.Timetable ensureTimetable() => $_ensure(0);
+  $31.Timetable ensureTimetable() => $_ensure(0);
 }
 
 class UpdateSessionTimetableRequest extends $pb.GeneratedMessage {
   factory UpdateSessionTimetableRequest({
     $core.int? sessionId,
-    $30.Timetable? timetable,
+    $31.Timetable? timetable,
   }) {
     final $result = create();
     if (sessionId != null) {
@@ -3593,7 +3136,7 @@ class UpdateSessionTimetableRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionTimetableRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
-    ..aOM<$30.Timetable>(2, _omitFieldNames ? '' : 'timetable', subBuilder: $30.Timetable.create)
+    ..aOM<$31.Timetable>(2, _omitFieldNames ? '' : 'timetable', subBuilder: $31.Timetable.create)
     ..hasRequiredFields = false
   ;
 
@@ -3628,20 +3171,20 @@ class UpdateSessionTimetableRequest extends $pb.GeneratedMessage {
   void clearSessionId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $30.Timetable get timetable => $_getN(1);
+  $31.Timetable get timetable => $_getN(1);
   @$pb.TagNumber(2)
-  set timetable($30.Timetable v) { setField(2, v); }
+  set timetable($31.Timetable v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasTimetable() => $_has(1);
   @$pb.TagNumber(2)
   void clearTimetable() => clearField(2);
   @$pb.TagNumber(2)
-  $30.Timetable ensureTimetable() => $_ensure(1);
+  $31.Timetable ensureTimetable() => $_ensure(1);
 }
 
 class UpdateSessionTimetableResponse extends $pb.GeneratedMessage {
   factory UpdateSessionTimetableResponse({
-    $30.Timetable? timetable,
+    $31.Timetable? timetable,
   }) {
     final $result = create();
     if (timetable != null) {
@@ -3654,7 +3197,7 @@ class UpdateSessionTimetableResponse extends $pb.GeneratedMessage {
   factory UpdateSessionTimetableResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionTimetableResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.Timetable>(1, _omitFieldNames ? '' : 'timetable', subBuilder: $30.Timetable.create)
+    ..aOM<$31.Timetable>(1, _omitFieldNames ? '' : 'timetable', subBuilder: $31.Timetable.create)
     ..hasRequiredFields = false
   ;
 
@@ -3680,15 +3223,15 @@ class UpdateSessionTimetableResponse extends $pb.GeneratedMessage {
   static UpdateSessionTimetableResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.Timetable get timetable => $_getN(0);
+  $31.Timetable get timetable => $_getN(0);
   @$pb.TagNumber(1)
-  set timetable($30.Timetable v) { setField(1, v); }
+  set timetable($31.Timetable v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTimetable() => $_has(0);
   @$pb.TagNumber(1)
   void clearTimetable() => clearField(1);
   @$pb.TagNumber(1)
-  $30.Timetable ensureTimetable() => $_ensure(0);
+  $31.Timetable ensureTimetable() => $_ensure(0);
 }
 
 class GetOptimizedTimetableRequest extends $pb.GeneratedMessage {
@@ -3751,7 +3294,7 @@ class GetOptimizedTimetableRequest extends $pb.GeneratedMessage {
 
 class GetOptimizedTimetableResponse extends $pb.GeneratedMessage {
   factory GetOptimizedTimetableResponse({
-    $30.Timetable? timetable,
+    $31.Timetable? timetable,
   }) {
     final $result = create();
     if (timetable != null) {
@@ -3764,7 +3307,7 @@ class GetOptimizedTimetableResponse extends $pb.GeneratedMessage {
   factory GetOptimizedTimetableResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetOptimizedTimetableResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.Timetable>(1, _omitFieldNames ? '' : 'timetable', subBuilder: $30.Timetable.create)
+    ..aOM<$31.Timetable>(1, _omitFieldNames ? '' : 'timetable', subBuilder: $31.Timetable.create)
     ..hasRequiredFields = false
   ;
 
@@ -3790,15 +3333,15 @@ class GetOptimizedTimetableResponse extends $pb.GeneratedMessage {
   static GetOptimizedTimetableResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.Timetable get timetable => $_getN(0);
+  $31.Timetable get timetable => $_getN(0);
   @$pb.TagNumber(1)
-  set timetable($30.Timetable v) { setField(1, v); }
+  set timetable($31.Timetable v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTimetable() => $_has(0);
   @$pb.TagNumber(1)
   void clearTimetable() => clearField(1);
   @$pb.TagNumber(1)
-  $30.Timetable ensureTimetable() => $_ensure(0);
+  $31.Timetable ensureTimetable() => $_ensure(0);
 }
 
 class GetTimetableProgressRequest extends $pb.GeneratedMessage {
@@ -3853,8 +3396,8 @@ class GetTimetableProgressRequest extends $pb.GeneratedMessage {
 
 class GetTimetableProgressResponse extends $pb.GeneratedMessage {
   factory GetTimetableProgressResponse({
-    $core.Iterable<$30.TimetableEntry>? completedEntries,
-    $30.TimetableEntry? currentEntry,
+    $core.Iterable<$31.TimetableEntry>? completedEntries,
+    $31.TimetableEntry? currentEntry,
   }) {
     final $result = create();
     if (completedEntries != null) {
@@ -3870,8 +3413,8 @@ class GetTimetableProgressResponse extends $pb.GeneratedMessage {
   factory GetTimetableProgressResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetTimetableProgressResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$30.TimetableEntry>(1, _omitFieldNames ? '' : 'completedEntries', $pb.PbFieldType.PM, subBuilder: $30.TimetableEntry.create)
-    ..aOM<$30.TimetableEntry>(2, _omitFieldNames ? '' : 'currentEntry', subBuilder: $30.TimetableEntry.create)
+    ..pc<$31.TimetableEntry>(1, _omitFieldNames ? '' : 'completedEntries', $pb.PbFieldType.PM, subBuilder: $31.TimetableEntry.create)
+    ..aOM<$31.TimetableEntry>(2, _omitFieldNames ? '' : 'currentEntry', subBuilder: $31.TimetableEntry.create)
     ..hasRequiredFields = false
   ;
 
@@ -3897,18 +3440,18 @@ class GetTimetableProgressResponse extends $pb.GeneratedMessage {
   static GetTimetableProgressResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$30.TimetableEntry> get completedEntries => $_getList(0);
+  $core.List<$31.TimetableEntry> get completedEntries => $_getList(0);
 
   @$pb.TagNumber(2)
-  $30.TimetableEntry get currentEntry => $_getN(1);
+  $31.TimetableEntry get currentEntry => $_getN(1);
   @$pb.TagNumber(2)
-  set currentEntry($30.TimetableEntry v) { setField(2, v); }
+  set currentEntry($31.TimetableEntry v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCurrentEntry() => $_has(1);
   @$pb.TagNumber(2)
   void clearCurrentEntry() => clearField(2);
   @$pb.TagNumber(2)
-  $30.TimetableEntry ensureCurrentEntry() => $_ensure(1);
+  $31.TimetableEntry ensureCurrentEntry() => $_ensure(1);
 }
 
 class UpdateTimetableProgressRequest extends $pb.GeneratedMessage {
@@ -4029,7 +3572,7 @@ class UpdateTimetableProgressResponse extends $pb.GeneratedMessage {
 class AddSessionResourceRequest extends $pb.GeneratedMessage {
   factory AddSessionResourceRequest({
     $core.int? sessionId,
-    $24.Resource? resource,
+    $25.Resource? resource,
   }) {
     final $result = create();
     if (sessionId != null) {
@@ -4046,7 +3589,7 @@ class AddSessionResourceRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSessionResourceRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
-    ..aOM<$24.Resource>(2, _omitFieldNames ? '' : 'resource', subBuilder: $24.Resource.create)
+    ..aOM<$25.Resource>(2, _omitFieldNames ? '' : 'resource', subBuilder: $25.Resource.create)
     ..hasRequiredFields = false
   ;
 
@@ -4081,20 +3624,20 @@ class AddSessionResourceRequest extends $pb.GeneratedMessage {
   void clearSessionId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $24.Resource get resource => $_getN(1);
+  $25.Resource get resource => $_getN(1);
   @$pb.TagNumber(2)
-  set resource($24.Resource v) { setField(2, v); }
+  set resource($25.Resource v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasResource() => $_has(1);
   @$pb.TagNumber(2)
   void clearResource() => clearField(2);
   @$pb.TagNumber(2)
-  $24.Resource ensureResource() => $_ensure(1);
+  $25.Resource ensureResource() => $_ensure(1);
 }
 
 class AddSessionResourceResponse extends $pb.GeneratedMessage {
   factory AddSessionResourceResponse({
-    $24.Resource? resource,
+    $25.Resource? resource,
   }) {
     final $result = create();
     if (resource != null) {
@@ -4107,7 +3650,7 @@ class AddSessionResourceResponse extends $pb.GeneratedMessage {
   factory AddSessionResourceResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSessionResourceResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$24.Resource>(1, _omitFieldNames ? '' : 'resource', subBuilder: $24.Resource.create)
+    ..aOM<$25.Resource>(1, _omitFieldNames ? '' : 'resource', subBuilder: $25.Resource.create)
     ..hasRequiredFields = false
   ;
 
@@ -4133,15 +3676,15 @@ class AddSessionResourceResponse extends $pb.GeneratedMessage {
   static AddSessionResourceResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $24.Resource get resource => $_getN(0);
+  $25.Resource get resource => $_getN(0);
   @$pb.TagNumber(1)
-  set resource($24.Resource v) { setField(1, v); }
+  set resource($25.Resource v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasResource() => $_has(0);
   @$pb.TagNumber(1)
   void clearResource() => clearField(1);
   @$pb.TagNumber(1)
-  $24.Resource ensureResource() => $_ensure(0);
+  $25.Resource ensureResource() => $_ensure(0);
 }
 
 class ListSessionResourcesRequest extends $pb.GeneratedMessage {
@@ -4196,7 +3739,7 @@ class ListSessionResourcesRequest extends $pb.GeneratedMessage {
 
 class ListSessionResourcesResponse extends $pb.GeneratedMessage {
   factory ListSessionResourcesResponse({
-    $core.Iterable<$24.Resource>? resources,
+    $core.Iterable<$25.Resource>? resources,
   }) {
     final $result = create();
     if (resources != null) {
@@ -4209,7 +3752,7 @@ class ListSessionResourcesResponse extends $pb.GeneratedMessage {
   factory ListSessionResourcesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSessionResourcesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$24.Resource>(1, _omitFieldNames ? '' : 'resources', $pb.PbFieldType.PM, subBuilder: $24.Resource.create)
+    ..pc<$25.Resource>(1, _omitFieldNames ? '' : 'resources', $pb.PbFieldType.PM, subBuilder: $25.Resource.create)
     ..hasRequiredFields = false
   ;
 
@@ -4235,7 +3778,7 @@ class ListSessionResourcesResponse extends $pb.GeneratedMessage {
   static ListSessionResourcesResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$24.Resource> get resources => $_getList(0);
+  $core.List<$25.Resource> get resources => $_getList(0);
 }
 
 class DeleteSessionResourceRequest extends $pb.GeneratedMessage {
@@ -4355,7 +3898,7 @@ class DeleteSessionResourceResponse extends $pb.GeneratedMessage {
 /// Ratings
 class AddSessionFeedbackRequest extends $pb.GeneratedMessage {
   factory AddSessionFeedbackRequest({
-    $30.SessionFeedback? feedback,
+    $31.SessionFeedback? feedback,
   }) {
     final $result = create();
     if (feedback != null) {
@@ -4368,7 +3911,7 @@ class AddSessionFeedbackRequest extends $pb.GeneratedMessage {
   factory AddSessionFeedbackRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSessionFeedbackRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.SessionFeedback>(1, _omitFieldNames ? '' : 'feedback', subBuilder: $30.SessionFeedback.create)
+    ..aOM<$31.SessionFeedback>(1, _omitFieldNames ? '' : 'feedback', subBuilder: $31.SessionFeedback.create)
     ..hasRequiredFields = false
   ;
 
@@ -4394,15 +3937,15 @@ class AddSessionFeedbackRequest extends $pb.GeneratedMessage {
   static AddSessionFeedbackRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.SessionFeedback get feedback => $_getN(0);
+  $31.SessionFeedback get feedback => $_getN(0);
   @$pb.TagNumber(1)
-  set feedback($30.SessionFeedback v) { setField(1, v); }
+  set feedback($31.SessionFeedback v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasFeedback() => $_has(0);
   @$pb.TagNumber(1)
   void clearFeedback() => clearField(1);
   @$pb.TagNumber(1)
-  $30.SessionFeedback ensureFeedback() => $_ensure(0);
+  $31.SessionFeedback ensureFeedback() => $_ensure(0);
 }
 
 class AddSessionFeedbackResponse extends $pb.GeneratedMessage {
@@ -4507,7 +4050,7 @@ class ListSessionFeedbacksRequest extends $pb.GeneratedMessage {
 
 class ListSessionFeedbacksResponse extends $pb.GeneratedMessage {
   factory ListSessionFeedbacksResponse({
-    $core.Iterable<$30.SessionFeedback>? feedbacks,
+    $core.Iterable<$31.SessionFeedback>? feedbacks,
   }) {
     final $result = create();
     if (feedbacks != null) {
@@ -4520,7 +4063,7 @@ class ListSessionFeedbacksResponse extends $pb.GeneratedMessage {
   factory ListSessionFeedbacksResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSessionFeedbacksResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$30.SessionFeedback>(1, _omitFieldNames ? '' : 'feedbacks', $pb.PbFieldType.PM, subBuilder: $30.SessionFeedback.create)
+    ..pc<$31.SessionFeedback>(1, _omitFieldNames ? '' : 'feedbacks', $pb.PbFieldType.PM, subBuilder: $31.SessionFeedback.create)
     ..hasRequiredFields = false
   ;
 
@@ -4546,7 +4089,7 @@ class ListSessionFeedbacksResponse extends $pb.GeneratedMessage {
   static ListSessionFeedbacksResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$30.SessionFeedback> get feedbacks => $_getList(0);
+  $core.List<$31.SessionFeedback> get feedbacks => $_getList(0);
 }
 
 /// Related Sessions
@@ -4602,7 +4145,7 @@ class ListRelatedSessionsRequest extends $pb.GeneratedMessage {
 
 class ListRelatedSessionsResponse extends $pb.GeneratedMessage {
   factory ListRelatedSessionsResponse({
-    $core.Iterable<$30.Session>? sessions,
+    $core.Iterable<$31.Session>? sessions,
   }) {
     final $result = create();
     if (sessions != null) {
@@ -4615,7 +4158,7 @@ class ListRelatedSessionsResponse extends $pb.GeneratedMessage {
   factory ListRelatedSessionsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListRelatedSessionsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$30.Session>(1, _omitFieldNames ? '' : 'sessions', $pb.PbFieldType.PM, subBuilder: $30.Session.create)
+    ..pc<$31.Session>(1, _omitFieldNames ? '' : 'sessions', $pb.PbFieldType.PM, subBuilder: $31.Session.create)
     ..hasRequiredFields = false
   ;
 
@@ -4641,7 +4184,7 @@ class ListRelatedSessionsResponse extends $pb.GeneratedMessage {
   static ListRelatedSessionsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$30.Session> get sessions => $_getList(0);
+  $core.List<$31.Session> get sessions => $_getList(0);
 }
 
 class AddRelatedSessionRequest extends $pb.GeneratedMessage {

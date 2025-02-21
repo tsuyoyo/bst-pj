@@ -46,19 +46,6 @@ service SessionService {
   rpc UpdateSessionParticipant(UpdateSessionParticipantRequest)
       returns (UpdateSessionParticipantResponse);
 
-  // Song Management
-  // GET /sessions/{id}/songs
-  rpc ListSessionSongs(ListSessionSongsRequest)
-      returns (ListSessionSongsResponse);
-  // GET /sessions/{id}/songs/{songId}
-  rpc GetSessionSong(GetSessionSongRequest) returns (GetSessionSongResponse);
-  // PUT /sessions/{id}/songs/{songId}
-  rpc UpdateSessionSong(UpdateSessionSongRequest)
-      returns (UpdateSessionSongResponse);
-  // DELETE /sessions/{id}/songs/{songId}
-  rpc DeleteSessionSong(DeleteSessionSongRequest)
-      returns (DeleteSessionSongResponse);
-
   // Song Entries
   // POST /sessions/{id}/songs/{songId}/entries
   rpc AddSongEntry(AddSongEntryRequest) returns (AddSongEntryResponse);
@@ -254,43 +241,6 @@ message UpdateSessionParticipantRequest {
 
 message UpdateSessionParticipantResponse {
   SessionParticipant participant = 1;
-}
-
-// Song Management
-message ListSessionSongsRequest {
-  int32 session_id = 1;
-}
-
-message ListSessionSongsResponse {
-  repeated SongPerformance songs = 1;
-}
-
-message GetSessionSongRequest {
-  int32 session_id = 1;
-  int32 song_id    = 2;
-}
-
-message GetSessionSongResponse {
-  SongPerformance song = 1;
-}
-
-message UpdateSessionSongRequest {
-  int32           session_id = 1;
-  int32           song_id    = 2;
-  SongPerformance song       = 3;
-}
-
-message UpdateSessionSongResponse {
-  SongPerformance song = 1;
-}
-
-message DeleteSessionSongRequest {
-  int32 session_id = 1;
-  int32 song_id    = 2;
-}
-
-message DeleteSessionSongResponse {
-  bool success = 1;
 }
 
 // Song Entries

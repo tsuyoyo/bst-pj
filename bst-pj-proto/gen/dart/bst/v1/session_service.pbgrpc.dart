@@ -65,22 +65,6 @@ class SessionServiceClient extends $grpc.Client {
       '/bst.v1.SessionService/UpdateSessionParticipant',
       ($15.UpdateSessionParticipantRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $15.UpdateSessionParticipantResponse.fromBuffer(value));
-  static final _$listSessionSongs = $grpc.ClientMethod<$15.ListSessionSongsRequest, $15.ListSessionSongsResponse>(
-      '/bst.v1.SessionService/ListSessionSongs',
-      ($15.ListSessionSongsRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.ListSessionSongsResponse.fromBuffer(value));
-  static final _$getSessionSong = $grpc.ClientMethod<$15.GetSessionSongRequest, $15.GetSessionSongResponse>(
-      '/bst.v1.SessionService/GetSessionSong',
-      ($15.GetSessionSongRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.GetSessionSongResponse.fromBuffer(value));
-  static final _$updateSessionSong = $grpc.ClientMethod<$15.UpdateSessionSongRequest, $15.UpdateSessionSongResponse>(
-      '/bst.v1.SessionService/UpdateSessionSong',
-      ($15.UpdateSessionSongRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.UpdateSessionSongResponse.fromBuffer(value));
-  static final _$deleteSessionSong = $grpc.ClientMethod<$15.DeleteSessionSongRequest, $15.DeleteSessionSongResponse>(
-      '/bst.v1.SessionService/DeleteSessionSong',
-      ($15.DeleteSessionSongRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.DeleteSessionSongResponse.fromBuffer(value));
   static final _$addSongEntry = $grpc.ClientMethod<$15.AddSongEntryRequest, $15.AddSongEntryResponse>(
       '/bst.v1.SessionService/AddSongEntry',
       ($15.AddSongEntryRequest value) => value.writeToBuffer(),
@@ -234,22 +218,6 @@ class SessionServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$15.UpdateSessionParticipantResponse> updateSessionParticipant($15.UpdateSessionParticipantRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateSessionParticipant, request, options: options);
-  }
-
-  $grpc.ResponseFuture<$15.ListSessionSongsResponse> listSessionSongs($15.ListSessionSongsRequest request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$listSessionSongs, request, options: options);
-  }
-
-  $grpc.ResponseFuture<$15.GetSessionSongResponse> getSessionSong($15.GetSessionSongRequest request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$getSessionSong, request, options: options);
-  }
-
-  $grpc.ResponseFuture<$15.UpdateSessionSongResponse> updateSessionSong($15.UpdateSessionSongRequest request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$updateSessionSong, request, options: options);
-  }
-
-  $grpc.ResponseFuture<$15.DeleteSessionSongResponse> deleteSessionSong($15.DeleteSessionSongRequest request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$deleteSessionSong, request, options: options);
   }
 
   $grpc.ResponseFuture<$15.AddSongEntryResponse> addSongEntry($15.AddSongEntryRequest request, {$grpc.CallOptions? options}) {
@@ -439,34 +407,6 @@ abstract class SessionServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $15.UpdateSessionParticipantRequest.fromBuffer(value),
         ($15.UpdateSessionParticipantResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.ListSessionSongsRequest, $15.ListSessionSongsResponse>(
-        'ListSessionSongs',
-        listSessionSongs_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $15.ListSessionSongsRequest.fromBuffer(value),
-        ($15.ListSessionSongsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.GetSessionSongRequest, $15.GetSessionSongResponse>(
-        'GetSessionSong',
-        getSessionSong_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $15.GetSessionSongRequest.fromBuffer(value),
-        ($15.GetSessionSongResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.UpdateSessionSongRequest, $15.UpdateSessionSongResponse>(
-        'UpdateSessionSong',
-        updateSessionSong_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $15.UpdateSessionSongRequest.fromBuffer(value),
-        ($15.UpdateSessionSongResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.DeleteSessionSongRequest, $15.DeleteSessionSongResponse>(
-        'DeleteSessionSong',
-        deleteSessionSong_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $15.DeleteSessionSongRequest.fromBuffer(value),
-        ($15.DeleteSessionSongResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$15.AddSongEntryRequest, $15.AddSongEntryResponse>(
         'AddSongEntry',
         addSongEntry_Pre,
@@ -695,22 +635,6 @@ abstract class SessionServiceBase extends $grpc.Service {
     return updateSessionParticipant(call, await request);
   }
 
-  $async.Future<$15.ListSessionSongsResponse> listSessionSongs_Pre($grpc.ServiceCall call, $async.Future<$15.ListSessionSongsRequest> request) async {
-    return listSessionSongs(call, await request);
-  }
-
-  $async.Future<$15.GetSessionSongResponse> getSessionSong_Pre($grpc.ServiceCall call, $async.Future<$15.GetSessionSongRequest> request) async {
-    return getSessionSong(call, await request);
-  }
-
-  $async.Future<$15.UpdateSessionSongResponse> updateSessionSong_Pre($grpc.ServiceCall call, $async.Future<$15.UpdateSessionSongRequest> request) async {
-    return updateSessionSong(call, await request);
-  }
-
-  $async.Future<$15.DeleteSessionSongResponse> deleteSessionSong_Pre($grpc.ServiceCall call, $async.Future<$15.DeleteSessionSongRequest> request) async {
-    return deleteSessionSong(call, await request);
-  }
-
   $async.Future<$15.AddSongEntryResponse> addSongEntry_Pre($grpc.ServiceCall call, $async.Future<$15.AddSongEntryRequest> request) async {
     return addSongEntry(call, await request);
   }
@@ -826,10 +750,6 @@ abstract class SessionServiceBase extends $grpc.Service {
   $async.Future<$15.ListSessionParticipantsResponse> listSessionParticipants($grpc.ServiceCall call, $15.ListSessionParticipantsRequest request);
   $async.Future<$15.AddSessionParticipantResponse> addSessionParticipant($grpc.ServiceCall call, $15.AddSessionParticipantRequest request);
   $async.Future<$15.UpdateSessionParticipantResponse> updateSessionParticipant($grpc.ServiceCall call, $15.UpdateSessionParticipantRequest request);
-  $async.Future<$15.ListSessionSongsResponse> listSessionSongs($grpc.ServiceCall call, $15.ListSessionSongsRequest request);
-  $async.Future<$15.GetSessionSongResponse> getSessionSong($grpc.ServiceCall call, $15.GetSessionSongRequest request);
-  $async.Future<$15.UpdateSessionSongResponse> updateSessionSong($grpc.ServiceCall call, $15.UpdateSessionSongRequest request);
-  $async.Future<$15.DeleteSessionSongResponse> deleteSessionSong($grpc.ServiceCall call, $15.DeleteSessionSongRequest request);
   $async.Future<$15.AddSongEntryResponse> addSongEntry($grpc.ServiceCall call, $15.AddSongEntryRequest request);
   $async.Future<$15.DeleteSongEntryResponse> deleteSongEntry($grpc.ServiceCall call, $15.DeleteSongEntryRequest request);
   $async.Future<$15.AddSessionSongResourceResponse> addSessionSongResource($grpc.ServiceCall call, $15.AddSessionSongResourceRequest request);

@@ -23,6 +23,16 @@ export class SessionPartService {
     private readonly partService: PartService,
   ) {}
 
+  async getSessionPart(sessionPartId: number): Promise<SessionPart> {
+    const sessionPart = await this.sessionPartRepository.findOne({
+      where: { id: sessionPartId },
+    });
+    if (!sessionPart) {
+      throw new NotFoundException(`Session part ${sessionPartId} not found`);
+    }
+    return sessionPart;
+  }
+
   async listSessionParts(
     sessionId: number,
     user: User,

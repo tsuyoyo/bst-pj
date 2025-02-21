@@ -15,8 +15,8 @@ export class SongPerformance {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ name: 'activity_id', type: 'integer', nullable: false })
-  activityId: number;
+  @Column({ name: 'session_id', type: 'integer', nullable: false })
+  sessionId: number;
 
   @Column({ name: 'song_id', type: 'integer', nullable: false })
   songId: number;
@@ -26,10 +26,6 @@ export class SongPerformance {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
-
-  @ManyToOne(() => Activity, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'activity_id' })
-  activity: Activity;
 
   @ManyToOne(() => Song, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'song_id' })

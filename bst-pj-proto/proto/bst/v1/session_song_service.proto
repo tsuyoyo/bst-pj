@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "bst/v1/session.proto";
+
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+// Session Song Service
+service SessionSongService {
+  // GET /sessions/{id}/songs
+  rpc ListSessionSongs(ListSessionSongsRequest)
+      returns (ListSessionSongsResponse);
+  // GET /sessions/{id}/songs/{songId}
+  rpc GetSessionSong(GetSessionSongRequest) returns (GetSessionSongResponse);
+  // POST /sessions/{id}/songs
+  rpc AddSessionSong(AddSessionSongRequest) returns (AddSessionSongResponse);
+  // PUT /sessions/{id}/songs/{songId}
+  rpc UpdateSessionSong(UpdateSessionSongRequest)
+      returns (UpdateSessionSongResponse);
+  // DELETE /sessions/{id}/songs/{songId}
+  rpc DeleteSessionSong(DeleteSessionSongRequest)
+      returns (DeleteSessionSongResponse);
+}
+
+// List Session Songs
+message ListSessionSongsRequest {}
+
+message ListSessionSongsResponse {
+  repeated SongPerformance songs = 1;
+}
+
+// Add Session Song
+message AddSessionSongRequest {
+  int32 song_id = 1;
+  repeated int32 mandatory_part_ids = 2;
+}
+
+message AddSessionSongResponse {
+  SongPerformance song = 1;
+}
+
+// Get Session Song
+message GetSessionSongRequest {}
+
+message GetSessionSongResponse {
+  SongPerformance song = 1;
+}
+
+// Update Session Song
+message UpdateSessionSongRequest {
+  SongPerformance song = 1;
+}
+
+message UpdateSessionSongResponse {
+  SongPerformance song = 1;
+}
+
+// Delete Session Song
+message DeleteSessionSongRequest {}
+
+message DeleteSessionSongResponse {
+  bool success = 1;
+}

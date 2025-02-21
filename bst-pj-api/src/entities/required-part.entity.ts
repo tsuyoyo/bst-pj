@@ -8,7 +8,6 @@ import {
   JoinColumn,
   Unique,
 } from 'typeorm';
-import { SongPerformance } from './song-performance.entity';
 import { SessionPart } from './session-part.entity';
 
 @Entity('required_parts')
@@ -28,10 +27,6 @@ export class RequiredPart {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
-
-  @ManyToOne(() => SongPerformance, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'song_performance_id' })
-  songPerformance: SongPerformance;
 
   @ManyToOne(() => SessionPart, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'session_part_id' })
