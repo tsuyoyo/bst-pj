@@ -27,16 +27,6 @@ service SessionService {
   rpc DuplicateSession(DuplicateSessionRequest)
       returns (DuplicateSessionResponse);
 
-  // Parts Management
-  // POST /sessions/{id}/parts
-  rpc AddSessionPart(AddSessionPartRequest) returns (AddSessionPartResponse);
-  // PUT /sessions/{id}/parts/{partId}
-  rpc UpdateSessionPart(UpdateSessionPartRequest)
-      returns (UpdateSessionPartResponse);
-  // DELETE /sessions/{id}/parts/{partId}
-  rpc DeleteSessionPart(DeleteSessionPartRequest)
-      returns (DeleteSessionPartResponse);
-
   // Schedule & Location
   // PUT /sessions/{id}/schedule
   rpc UpdateSessionSchedule(UpdateSessionScheduleRequest)
@@ -217,35 +207,6 @@ message DuplicateSessionRequest {
 
 message DuplicateSessionResponse {
   SessionDetail session = 1;
-}
-
-// Parts Management
-message AddSessionPartRequest {
-  int32       session_id = 1;
-  SessionPart part       = 2;
-}
-
-message AddSessionPartResponse {
-  SessionPart part = 1;
-}
-
-message UpdateSessionPartRequest {
-  int32       session_id = 1;
-  int32       part_id    = 2;
-  SessionPart part       = 3;
-}
-
-message UpdateSessionPartResponse {
-  SessionPart part = 1;
-}
-
-message DeleteSessionPartRequest {
-  int32 session_id = 1;
-  int32 part_id    = 2;
-}
-
-message DeleteSessionPartResponse {
-  bool success = 1;
 }
 
 // Schedule & Location
@@ -574,5 +535,3 @@ message AddRelatedSessionRequest {
 message AddRelatedSessionResponse {
   bool success = 1;
 }
-
-

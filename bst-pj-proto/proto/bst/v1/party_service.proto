@@ -13,9 +13,12 @@ service PartyService {
   rpc UpdateParty(UpdatePartyRequest) returns (UpdatePartyResponse) {}
   rpc DeleteParty(DeletePartyRequest) returns (DeletePartyResponse) {}
 
-  rpc AddPartyParticipant(AddPartyParticipantRequest) returns (AddPartyParticipantResponse) {}
-  rpc UpdatePartyParticipant(UpdatePartyParticipantRequest) returns (UpdatePartyParticipantResponse) {}
-  rpc RemovePartyParticipant(RemovePartyParticipantRequest) returns (RemovePartyParticipantResponse) {}
+  rpc AddPartyParticipant(AddPartyParticipantRequest)
+      returns (AddPartyParticipantResponse) {}
+  rpc UpdatePartyParticipant(UpdatePartyParticipantRequest)
+      returns (UpdatePartyParticipantResponse) {}
+  rpc RemovePartyParticipant(RemovePartyParticipantRequest)
+      returns (RemovePartyParticipantResponse) {}
 }
 
 message CreatePartyRequest {
@@ -57,7 +60,7 @@ message DeletePartyResponse {
 }
 
 message AddPartyParticipantRequest {
-  PartyParticipantRole role = 1;
+  PartyParticipantRole   role   = 1;
   PartyParticipantStatus status = 2;
 }
 
@@ -66,7 +69,7 @@ message AddPartyParticipantResponse {
 }
 
 message UpdatePartyParticipantRequest {
-  PartyParticipantRole role = 1;
+  PartyParticipantRole   role   = 1;
   PartyParticipantStatus status = 2;
 }
 

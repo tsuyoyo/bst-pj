@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "bst/v1/session.proto";
+
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+// Session Part Service
+service SessionPartService {
+  // GET /sessions/{id}/parts
+  rpc ListSessionParts(ListSessionPartsRequest)
+      returns (ListSessionPartsResponse);
+  // POST /sessions/{id}/parts
+  rpc AddSessionPart(AddSessionPartRequest) returns (AddSessionPartResponse);
+  // PUT /sessions/{id}/parts/{partId}
+  rpc UpdateSessionPart(UpdateSessionPartRequest)
+      returns (UpdateSessionPartResponse);
+  // DELETE /sessions/{id}/parts/{partId}
+  rpc DeleteSessionPart(DeleteSessionPartRequest)
+      returns (DeleteSessionPartResponse);
+}
+
+// GET /sessions/{id}/parts
+message ListSessionPartsRequest {}
+
+message ListSessionPartsResponse {
+  repeated SessionPart parts = 1;
+}
+
+// POST /sessions/{id}/parts
+message AddSessionPartRequest {
+  int32  part_id         = 1;
+  string name            = 2;  // Part name in the session (e.g. "Gt1", "Gt2")
+  int32  display_order   = 3;  // Display order in the session
+  int32  max_entry       = 4;  // Max number of entries user can make
+  int32  transition_cost = 5;  // Setting up the equipment...etc
+}
+
+message AddSessionPartResponse {
+  SessionPart part = 1;
+}
+
+// PUT /sessions/{id}/parts/{sessionPartId}
+message UpdateSessionPartRequest {
+  int32  part_id       = 1;
+  string name          = 2;
+  int32  display_order = 3;
+  int32  max_entry     = 4;
+}
+
+message UpdateSessionPartResponse {
+  SessionPart part = 1;
+}
+
+// DELETE /sessions/{id}/parts/{sessionPartId}
+message DeleteSessionPartRequest {}
+
+message DeleteSessionPartResponse {
+  bool success = 1;
+}

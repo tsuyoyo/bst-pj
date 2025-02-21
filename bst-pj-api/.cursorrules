@@ -1,0 +1,5 @@
+* Entityはsrc/entities/に作成すること
+* Endpointを作るときは、DTOを作成してvalidationを行うようにすること
+* DTO作成の際、protoの型を参考にすること。protoの型はsrc/proto/に置かれている
+* UnitTestを作成するとき、Entityが必要な場合は src/entities/ に作成したEntityを参照すること
+* UnitTestを作成するとき、Protoの型が必要な場合は src/proto/ に置かれているProtoを参照すること

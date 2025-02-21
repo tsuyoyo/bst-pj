@@ -15,44 +15,44 @@ import 'dart:core' as $core;
 import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'studio_room_service.pb.dart' as $17;
+import 'studio_room_service.pb.dart' as $18;
 
 export 'studio_room_service.pb.dart';
 
 @$pb.GrpcServiceName('bst.v1.StudioRoomService')
 class StudioRoomServiceClient extends $grpc.Client {
-  static final _$createStudioRoom = $grpc.ClientMethod<$17.CreateStudioRoomRequest, $17.CreateStudioRoomResponse>(
+  static final _$createStudioRoom = $grpc.ClientMethod<$18.CreateStudioRoomRequest, $18.CreateStudioRoomResponse>(
       '/bst.v1.StudioRoomService/CreateStudioRoom',
-      ($17.CreateStudioRoomRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $17.CreateStudioRoomResponse.fromBuffer(value));
-  static final _$listStudioRooms = $grpc.ClientMethod<$17.ListStudioRoomsRequest, $17.ListStudioRoomsResponse>(
+      ($18.CreateStudioRoomRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.CreateStudioRoomResponse.fromBuffer(value));
+  static final _$listStudioRooms = $grpc.ClientMethod<$18.ListStudioRoomsRequest, $18.ListStudioRoomsResponse>(
       '/bst.v1.StudioRoomService/ListStudioRooms',
-      ($17.ListStudioRoomsRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $17.ListStudioRoomsResponse.fromBuffer(value));
-  static final _$updateStudioRoom = $grpc.ClientMethod<$17.UpdateStudioRoomRequest, $17.UpdateStudioRoomResponse>(
+      ($18.ListStudioRoomsRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.ListStudioRoomsResponse.fromBuffer(value));
+  static final _$updateStudioRoom = $grpc.ClientMethod<$18.UpdateStudioRoomRequest, $18.UpdateStudioRoomResponse>(
       '/bst.v1.StudioRoomService/UpdateStudioRoom',
-      ($17.UpdateStudioRoomRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $17.UpdateStudioRoomResponse.fromBuffer(value));
-  static final _$deleteStudioRoom = $grpc.ClientMethod<$17.DeleteStudioRoomRequest, $17.DeleteStudioRoomResponse>(
+      ($18.UpdateStudioRoomRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.UpdateStudioRoomResponse.fromBuffer(value));
+  static final _$deleteStudioRoom = $grpc.ClientMethod<$18.DeleteStudioRoomRequest, $18.DeleteStudioRoomResponse>(
       '/bst.v1.StudioRoomService/DeleteStudioRoom',
-      ($17.DeleteStudioRoomRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $17.DeleteStudioRoomResponse.fromBuffer(value));
-  static final _$createStudioRoomInfo = $grpc.ClientMethod<$17.CreateStudioRoomInfoRequest, $17.CreateStudioRoomInfoResponse>(
+      ($18.DeleteStudioRoomRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.DeleteStudioRoomResponse.fromBuffer(value));
+  static final _$createStudioRoomInfo = $grpc.ClientMethod<$18.CreateStudioRoomInfoRequest, $18.CreateStudioRoomInfoResponse>(
       '/bst.v1.StudioRoomService/CreateStudioRoomInfo',
-      ($17.CreateStudioRoomInfoRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $17.CreateStudioRoomInfoResponse.fromBuffer(value));
-  static final _$listStudioRoomInfos = $grpc.ClientMethod<$17.ListStudioRoomInfosRequest, $17.ListStudioRoomInfosResponse>(
+      ($18.CreateStudioRoomInfoRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.CreateStudioRoomInfoResponse.fromBuffer(value));
+  static final _$listStudioRoomInfos = $grpc.ClientMethod<$18.ListStudioRoomInfosRequest, $18.ListStudioRoomInfosResponse>(
       '/bst.v1.StudioRoomService/ListStudioRoomInfos',
-      ($17.ListStudioRoomInfosRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $17.ListStudioRoomInfosResponse.fromBuffer(value));
-  static final _$updateStudioRoomInfo = $grpc.ClientMethod<$17.UpdateStudioRoomInfoRequest, $17.UpdateStudioRoomInfoResponse>(
+      ($18.ListStudioRoomInfosRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.ListStudioRoomInfosResponse.fromBuffer(value));
+  static final _$updateStudioRoomInfo = $grpc.ClientMethod<$18.UpdateStudioRoomInfoRequest, $18.UpdateStudioRoomInfoResponse>(
       '/bst.v1.StudioRoomService/UpdateStudioRoomInfo',
-      ($17.UpdateStudioRoomInfoRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $17.UpdateStudioRoomInfoResponse.fromBuffer(value));
-  static final _$deleteStudioRoomInfo = $grpc.ClientMethod<$17.DeleteStudioRoomInfoRequest, $17.DeleteStudioRoomInfoResponse>(
+      ($18.UpdateStudioRoomInfoRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.UpdateStudioRoomInfoResponse.fromBuffer(value));
+  static final _$deleteStudioRoomInfo = $grpc.ClientMethod<$18.DeleteStudioRoomInfoRequest, $18.DeleteStudioRoomInfoResponse>(
       '/bst.v1.StudioRoomService/DeleteStudioRoomInfo',
-      ($17.DeleteStudioRoomInfoRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $17.DeleteStudioRoomInfoResponse.fromBuffer(value));
+      ($18.DeleteStudioRoomInfoRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.DeleteStudioRoomInfoResponse.fromBuffer(value));
 
   StudioRoomServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -60,35 +60,35 @@ class StudioRoomServiceClient extends $grpc.Client {
       : super(channel, options: options,
         interceptors: interceptors);
 
-  $grpc.ResponseFuture<$17.CreateStudioRoomResponse> createStudioRoom($17.CreateStudioRoomRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$18.CreateStudioRoomResponse> createStudioRoom($18.CreateStudioRoomRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createStudioRoom, request, options: options);
   }
 
-  $grpc.ResponseFuture<$17.ListStudioRoomsResponse> listStudioRooms($17.ListStudioRoomsRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$18.ListStudioRoomsResponse> listStudioRooms($18.ListStudioRoomsRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$listStudioRooms, request, options: options);
   }
 
-  $grpc.ResponseFuture<$17.UpdateStudioRoomResponse> updateStudioRoom($17.UpdateStudioRoomRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$18.UpdateStudioRoomResponse> updateStudioRoom($18.UpdateStudioRoomRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateStudioRoom, request, options: options);
   }
 
-  $grpc.ResponseFuture<$17.DeleteStudioRoomResponse> deleteStudioRoom($17.DeleteStudioRoomRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$18.DeleteStudioRoomResponse> deleteStudioRoom($18.DeleteStudioRoomRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteStudioRoom, request, options: options);
   }
 
-  $grpc.ResponseFuture<$17.CreateStudioRoomInfoResponse> createStudioRoomInfo($17.CreateStudioRoomInfoRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$18.CreateStudioRoomInfoResponse> createStudioRoomInfo($18.CreateStudioRoomInfoRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createStudioRoomInfo, request, options: options);
   }
 
-  $grpc.ResponseFuture<$17.ListStudioRoomInfosResponse> listStudioRoomInfos($17.ListStudioRoomInfosRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$18.ListStudioRoomInfosResponse> listStudioRoomInfos($18.ListStudioRoomInfosRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$listStudioRoomInfos, request, options: options);
   }
 
-  $grpc.ResponseFuture<$17.UpdateStudioRoomInfoResponse> updateStudioRoomInfo($17.UpdateStudioRoomInfoRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$18.UpdateStudioRoomInfoResponse> updateStudioRoomInfo($18.UpdateStudioRoomInfoRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateStudioRoomInfo, request, options: options);
   }
 
-  $grpc.ResponseFuture<$17.DeleteStudioRoomInfoResponse> deleteStudioRoomInfo($17.DeleteStudioRoomInfoRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$18.DeleteStudioRoomInfoResponse> deleteStudioRoomInfo($18.DeleteStudioRoomInfoRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteStudioRoomInfo, request, options: options);
   }
 }
@@ -98,102 +98,102 @@ abstract class StudioRoomServiceBase extends $grpc.Service {
   $core.String get $name => 'bst.v1.StudioRoomService';
 
   StudioRoomServiceBase() {
-    $addMethod($grpc.ServiceMethod<$17.CreateStudioRoomRequest, $17.CreateStudioRoomResponse>(
+    $addMethod($grpc.ServiceMethod<$18.CreateStudioRoomRequest, $18.CreateStudioRoomResponse>(
         'CreateStudioRoom',
         createStudioRoom_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $17.CreateStudioRoomRequest.fromBuffer(value),
-        ($17.CreateStudioRoomResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$17.ListStudioRoomsRequest, $17.ListStudioRoomsResponse>(
+        ($core.List<$core.int> value) => $18.CreateStudioRoomRequest.fromBuffer(value),
+        ($18.CreateStudioRoomResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$18.ListStudioRoomsRequest, $18.ListStudioRoomsResponse>(
         'ListStudioRooms',
         listStudioRooms_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $17.ListStudioRoomsRequest.fromBuffer(value),
-        ($17.ListStudioRoomsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$17.UpdateStudioRoomRequest, $17.UpdateStudioRoomResponse>(
+        ($core.List<$core.int> value) => $18.ListStudioRoomsRequest.fromBuffer(value),
+        ($18.ListStudioRoomsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$18.UpdateStudioRoomRequest, $18.UpdateStudioRoomResponse>(
         'UpdateStudioRoom',
         updateStudioRoom_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $17.UpdateStudioRoomRequest.fromBuffer(value),
-        ($17.UpdateStudioRoomResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$17.DeleteStudioRoomRequest, $17.DeleteStudioRoomResponse>(
+        ($core.List<$core.int> value) => $18.UpdateStudioRoomRequest.fromBuffer(value),
+        ($18.UpdateStudioRoomResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$18.DeleteStudioRoomRequest, $18.DeleteStudioRoomResponse>(
         'DeleteStudioRoom',
         deleteStudioRoom_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $17.DeleteStudioRoomRequest.fromBuffer(value),
-        ($17.DeleteStudioRoomResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$17.CreateStudioRoomInfoRequest, $17.CreateStudioRoomInfoResponse>(
+        ($core.List<$core.int> value) => $18.DeleteStudioRoomRequest.fromBuffer(value),
+        ($18.DeleteStudioRoomResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$18.CreateStudioRoomInfoRequest, $18.CreateStudioRoomInfoResponse>(
         'CreateStudioRoomInfo',
         createStudioRoomInfo_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $17.CreateStudioRoomInfoRequest.fromBuffer(value),
-        ($17.CreateStudioRoomInfoResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$17.ListStudioRoomInfosRequest, $17.ListStudioRoomInfosResponse>(
+        ($core.List<$core.int> value) => $18.CreateStudioRoomInfoRequest.fromBuffer(value),
+        ($18.CreateStudioRoomInfoResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$18.ListStudioRoomInfosRequest, $18.ListStudioRoomInfosResponse>(
         'ListStudioRoomInfos',
         listStudioRoomInfos_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $17.ListStudioRoomInfosRequest.fromBuffer(value),
-        ($17.ListStudioRoomInfosResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$17.UpdateStudioRoomInfoRequest, $17.UpdateStudioRoomInfoResponse>(
+        ($core.List<$core.int> value) => $18.ListStudioRoomInfosRequest.fromBuffer(value),
+        ($18.ListStudioRoomInfosResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$18.UpdateStudioRoomInfoRequest, $18.UpdateStudioRoomInfoResponse>(
         'UpdateStudioRoomInfo',
         updateStudioRoomInfo_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $17.UpdateStudioRoomInfoRequest.fromBuffer(value),
-        ($17.UpdateStudioRoomInfoResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$17.DeleteStudioRoomInfoRequest, $17.DeleteStudioRoomInfoResponse>(
+        ($core.List<$core.int> value) => $18.UpdateStudioRoomInfoRequest.fromBuffer(value),
+        ($18.UpdateStudioRoomInfoResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$18.DeleteStudioRoomInfoRequest, $18.DeleteStudioRoomInfoResponse>(
         'DeleteStudioRoomInfo',
         deleteStudioRoomInfo_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $17.DeleteStudioRoomInfoRequest.fromBuffer(value),
-        ($17.DeleteStudioRoomInfoResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $18.DeleteStudioRoomInfoRequest.fromBuffer(value),
+        ($18.DeleteStudioRoomInfoResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$17.CreateStudioRoomResponse> createStudioRoom_Pre($grpc.ServiceCall call, $async.Future<$17.CreateStudioRoomRequest> request) async {
+  $async.Future<$18.CreateStudioRoomResponse> createStudioRoom_Pre($grpc.ServiceCall call, $async.Future<$18.CreateStudioRoomRequest> request) async {
     return createStudioRoom(call, await request);
   }
 
-  $async.Future<$17.ListStudioRoomsResponse> listStudioRooms_Pre($grpc.ServiceCall call, $async.Future<$17.ListStudioRoomsRequest> request) async {
+  $async.Future<$18.ListStudioRoomsResponse> listStudioRooms_Pre($grpc.ServiceCall call, $async.Future<$18.ListStudioRoomsRequest> request) async {
     return listStudioRooms(call, await request);
   }
 
-  $async.Future<$17.UpdateStudioRoomResponse> updateStudioRoom_Pre($grpc.ServiceCall call, $async.Future<$17.UpdateStudioRoomRequest> request) async {
+  $async.Future<$18.UpdateStudioRoomResponse> updateStudioRoom_Pre($grpc.ServiceCall call, $async.Future<$18.UpdateStudioRoomRequest> request) async {
     return updateStudioRoom(call, await request);
   }
 
-  $async.Future<$17.DeleteStudioRoomResponse> deleteStudioRoom_Pre($grpc.ServiceCall call, $async.Future<$17.DeleteStudioRoomRequest> request) async {
+  $async.Future<$18.DeleteStudioRoomResponse> deleteStudioRoom_Pre($grpc.ServiceCall call, $async.Future<$18.DeleteStudioRoomRequest> request) async {
     return deleteStudioRoom(call, await request);
   }
 
-  $async.Future<$17.CreateStudioRoomInfoResponse> createStudioRoomInfo_Pre($grpc.ServiceCall call, $async.Future<$17.CreateStudioRoomInfoRequest> request) async {
+  $async.Future<$18.CreateStudioRoomInfoResponse> createStudioRoomInfo_Pre($grpc.ServiceCall call, $async.Future<$18.CreateStudioRoomInfoRequest> request) async {
     return createStudioRoomInfo(call, await request);
   }
 
-  $async.Future<$17.ListStudioRoomInfosResponse> listStudioRoomInfos_Pre($grpc.ServiceCall call, $async.Future<$17.ListStudioRoomInfosRequest> request) async {
+  $async.Future<$18.ListStudioRoomInfosResponse> listStudioRoomInfos_Pre($grpc.ServiceCall call, $async.Future<$18.ListStudioRoomInfosRequest> request) async {
     return listStudioRoomInfos(call, await request);
   }
 
-  $async.Future<$17.UpdateStudioRoomInfoResponse> updateStudioRoomInfo_Pre($grpc.ServiceCall call, $async.Future<$17.UpdateStudioRoomInfoRequest> request) async {
+  $async.Future<$18.UpdateStudioRoomInfoResponse> updateStudioRoomInfo_Pre($grpc.ServiceCall call, $async.Future<$18.UpdateStudioRoomInfoRequest> request) async {
     return updateStudioRoomInfo(call, await request);
   }
 
-  $async.Future<$17.DeleteStudioRoomInfoResponse> deleteStudioRoomInfo_Pre($grpc.ServiceCall call, $async.Future<$17.DeleteStudioRoomInfoRequest> request) async {
+  $async.Future<$18.DeleteStudioRoomInfoResponse> deleteStudioRoomInfo_Pre($grpc.ServiceCall call, $async.Future<$18.DeleteStudioRoomInfoRequest> request) async {
     return deleteStudioRoomInfo(call, await request);
   }
 
-  $async.Future<$17.CreateStudioRoomResponse> createStudioRoom($grpc.ServiceCall call, $17.CreateStudioRoomRequest request);
-  $async.Future<$17.ListStudioRoomsResponse> listStudioRooms($grpc.ServiceCall call, $17.ListStudioRoomsRequest request);
-  $async.Future<$17.UpdateStudioRoomResponse> updateStudioRoom($grpc.ServiceCall call, $17.UpdateStudioRoomRequest request);
-  $async.Future<$17.DeleteStudioRoomResponse> deleteStudioRoom($grpc.ServiceCall call, $17.DeleteStudioRoomRequest request);
-  $async.Future<$17.CreateStudioRoomInfoResponse> createStudioRoomInfo($grpc.ServiceCall call, $17.CreateStudioRoomInfoRequest request);
-  $async.Future<$17.ListStudioRoomInfosResponse> listStudioRoomInfos($grpc.ServiceCall call, $17.ListStudioRoomInfosRequest request);
-  $async.Future<$17.UpdateStudioRoomInfoResponse> updateStudioRoomInfo($grpc.ServiceCall call, $17.UpdateStudioRoomInfoRequest request);
-  $async.Future<$17.DeleteStudioRoomInfoResponse> deleteStudioRoomInfo($grpc.ServiceCall call, $17.DeleteStudioRoomInfoRequest request);
+  $async.Future<$18.CreateStudioRoomResponse> createStudioRoom($grpc.ServiceCall call, $18.CreateStudioRoomRequest request);
+  $async.Future<$18.ListStudioRoomsResponse> listStudioRooms($grpc.ServiceCall call, $18.ListStudioRoomsRequest request);
+  $async.Future<$18.UpdateStudioRoomResponse> updateStudioRoom($grpc.ServiceCall call, $18.UpdateStudioRoomRequest request);
+  $async.Future<$18.DeleteStudioRoomResponse> deleteStudioRoom($grpc.ServiceCall call, $18.DeleteStudioRoomRequest request);
+  $async.Future<$18.CreateStudioRoomInfoResponse> createStudioRoomInfo($grpc.ServiceCall call, $18.CreateStudioRoomInfoRequest request);
+  $async.Future<$18.ListStudioRoomInfosResponse> listStudioRoomInfos($grpc.ServiceCall call, $18.ListStudioRoomInfosRequest request);
+  $async.Future<$18.UpdateStudioRoomInfoResponse> updateStudioRoomInfo($grpc.ServiceCall call, $18.UpdateStudioRoomInfoRequest request);
+  $async.Future<$18.DeleteStudioRoomInfoResponse> deleteStudioRoomInfo($grpc.ServiceCall call, $18.DeleteStudioRoomInfoRequest request);
 }

@@ -63,10 +63,6 @@ export class SessionPart {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
-  @ManyToOne(() => Session, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'session_id' })
-  session: Session;
-
   @ManyToOne(() => Part, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'part_id' })
   part: Part;
