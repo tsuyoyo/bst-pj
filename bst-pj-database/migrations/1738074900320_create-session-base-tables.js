@@ -63,36 +63,8 @@ exports.up = (pgm) => {
     },
   });
 
-  // Create session_roles table
-  pgm.createTable("session_roles", {
-    id: "id",
-    name: {
-      type: "varchar(100)",
-      notNull: true,
-      comment: "役割 (例: カメラ撮影係などセッションに応じて設定)",
-    },
-    description: { type: "text" },
-    created_at: {
-      type: "timestamp",
-      notNull: true,
-      default: pgm.func("current_timestamp"),
-    },
-    updated_at: {
-      type: "timestamp",
-      notNull: true,
-      default: pgm.func("current_timestamp"),
-    },
-  });
-
   // Create triggers for updating updated_at
   pgm.createTrigger("sessions", "update_updated_at_trigger", {
-    when: "BEFORE",
-    operation: "UPDATE",
-    function: "update_updated_at",
-    level: "ROW",
-  });
-
-  pgm.createTrigger("session_roles", "update_updated_at_trigger", {
     when: "BEFORE",
     operation: "UPDATE",
     function: "update_updated_at",
@@ -106,15 +78,11 @@ exports.up = (pgm) => {
   pgm.createIndex("sessions", ["entry_close_date"]);
   pgm.createIndex("sessions", ["organizer_id"]);
   pgm.createIndex("sessions", ["location_id"]);
-  pgm.createIndex("session_roles", ["name"]);
 };
 
 exports.down = (pgm) => {
   // Drop triggers
   pgm.dropTrigger("sessions", "update_updated_at_trigger", { ifExists: true });
-  pgm.dropTrigger("session_roles", "update_updated_at_trigger", {
-    ifExists: true,
-  });
 
   // Drop indexes
   pgm.dropIndex("sessions", ["status"], { ifExists: true });
@@ -123,10 +91,9 @@ exports.down = (pgm) => {
   pgm.dropIndex("sessions", ["entry_close_date"], { ifExists: true });
   pgm.dropIndex("sessions", ["organizer_id"], { ifExists: true });
   pgm.dropIndex("sessions", ["location_id"], { ifExists: true });
-  pgm.dropIndex("session_roles", ["name"], { ifExists: true });
 
   // Drop tables
-  pgm.dropTable("session_roles", { ifExists: true });
+
   pgm.dropTable("sessions", { ifExists: true });
 
   // Drop enum type

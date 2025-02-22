@@ -35,17 +35,6 @@ service SessionService {
   rpc UpdateSessionLocation(UpdateSessionLocationRequest)
       returns (UpdateSessionLocationResponse);
 
-  // Participants
-  // GET /sessions/{id}/participants
-  rpc ListSessionParticipants(ListSessionParticipantsRequest)
-      returns (ListSessionParticipantsResponse);
-  // POST /sessions/{id}/participants
-  rpc AddSessionParticipant(AddSessionParticipantRequest)
-      returns (AddSessionParticipantResponse);
-  // PUT /sessions/{id}/participants/{participantId}
-  rpc UpdateSessionParticipant(UpdateSessionParticipantRequest)
-      returns (UpdateSessionParticipantResponse);
-
   // Song Resources
   // POST /sessions/{id}/songs/{songId}/resources
   rpc AddSessionSongResource(AddSessionSongResourceRequest)
@@ -207,34 +196,6 @@ message UpdateSessionLocationRequest {
 
 message UpdateSessionLocationResponse {
   Location location = 1;
-}
-
-// Participants
-message ListSessionParticipantsRequest {
-  int32 session_id = 1;
-}
-
-message ListSessionParticipantsResponse {
-  repeated SessionParticipant participants = 1;
-}
-
-message AddSessionParticipantRequest {
-  int32              session_id  = 1;
-  SessionParticipant participant = 2;
-}
-
-message AddSessionParticipantResponse {
-  SessionParticipant participant = 1;
-}
-
-message UpdateSessionParticipantRequest {
-  int32              session_id     = 1;
-  int32              participant_id = 2;
-  SessionParticipant participant    = 3;
-}
-
-message UpdateSessionParticipantResponse {
-  SessionParticipant participant = 1;
 }
 
 // Song Resources

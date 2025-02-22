@@ -25,12 +25,6 @@ exports.up = (pgm) => {
       references: "users",
       onDelete: "CASCADE",
     },
-    role_id: {
-      type: "integer",
-      references: "session_roles",
-      onDelete: "SET NULL",
-      comment: "Optional",
-    },
     status: {
       type: "session_participant_status",
       notNull: true,
@@ -43,11 +37,11 @@ exports.up = (pgm) => {
       default: false,
       comment: "管理者フラグ",
     },
-    is_observer: {
+    is_player: {
       type: "boolean",
       notNull: true,
       default: false,
-      comment: "観察者フラグ (演奏しない)",
+      comment: "falseだったら「演奏はしないけど参加する人」",
     },
     created_at: {
       type: "timestamp",
@@ -61,8 +55,8 @@ exports.up = (pgm) => {
     },
   });
 
-  // Create participant_parts table
-  pgm.createTable("participant_parts", {
+  // Create session_participant_parts table
+  pgm.createTable("session_participant_parts", {
     id: "id",
     session_participant_id: {
       type: "integer",
@@ -115,6 +109,11 @@ exports.up = (pgm) => {
       references: "session_parts",
       onDelete: "CASCADE",
     },
+    comment: {
+      type: "text",
+      comment: "コメント",
+      default: "",
+    },
     created_at: {
       type: "timestamp",
       notNull: true,
@@ -135,7 +134,7 @@ exports.up = (pgm) => {
     level: "ROW",
   });
 
-  pgm.createTrigger("participant_parts", "update_updated_at_trigger", {
+  pgm.createTrigger("session_participant_parts", "update_updated_at_trigger", {
     when: "BEFORE",
     operation: "UPDATE",
     function: "update_updated_at",
@@ -152,10 +151,9 @@ exports.up = (pgm) => {
   // Create indexes
   pgm.createIndex("session_participants", ["session_id"]);
   pgm.createIndex("session_participants", ["user_id"]);
-  pgm.createIndex("session_participants", ["role_id"]);
   pgm.createIndex("session_participants", ["status"]);
-  pgm.createIndex("participant_parts", ["session_participant_id"]);
-  pgm.createIndex("participant_parts", ["session_part_id"]);
+  pgm.createIndex("session_participant_parts", ["session_participant_id"]);
+  pgm.createIndex("session_participant_parts", ["session_part_id"]);
   pgm.createIndex("session_song_entries", ["session_song_id"]);
   pgm.createIndex("session_song_entries", ["session_participant_id"]);
   pgm.createIndex("session_song_entries", ["session_part_id"]);
@@ -169,8 +167,8 @@ exports.up = (pgm) => {
     }
   );
   pgm.createConstraint(
-    "participant_parts",
-    "participant_parts_session_participant_id_session_part_id_key",
+    "session_participant_parts",
+    "session_participant_parts_session_participant_id_session_part_id_key",
     {
       unique: ["session_participant_id", "session_part_id"],
     }
@@ -189,7 +187,7 @@ exports.down = (pgm) => {
   pgm.dropTrigger("session_participants", "update_updated_at_trigger", {
     ifExists: true,
   });
-  pgm.dropTrigger("participant_parts", "update_updated_at_trigger", {
+  pgm.dropTrigger("session_participant_parts", "update_updated_at_trigger", {
     ifExists: true,
   });
   pgm.dropTrigger("session_song_entries", "update_updated_at_trigger", {
@@ -203,8 +201,8 @@ exports.down = (pgm) => {
     { ifExists: true }
   );
   pgm.dropConstraint(
-    "participant_parts",
-    "participant_parts_session_participant_id_session_part_id_key",
+    "session_participant_parts",
+    "session_participant_parts_session_participant_id_session_part_id_key",
     { ifExists: true }
   );
   pgm.dropConstraint(
@@ -216,12 +214,13 @@ exports.down = (pgm) => {
   // Drop indexes
   pgm.dropIndex("session_participants", ["session_id"], { ifExists: true });
   pgm.dropIndex("session_participants", ["user_id"], { ifExists: true });
-  pgm.dropIndex("session_participants", ["role_id"], { ifExists: true });
   pgm.dropIndex("session_participants", ["status"], { ifExists: true });
-  pgm.dropIndex("participant_parts", ["session_participant_id"], {
+  pgm.dropIndex("session_participant_parts", ["session_participant_id"], {
     ifExists: true,
   });
-  pgm.dropIndex("participant_parts", ["session_part_id"], { ifExists: true });
+  pgm.dropIndex("session_participant_parts", ["session_part_id"], {
+    ifExists: true,
+  });
   pgm.dropIndex("session_song_entries", ["session_song_id"], {
     ifExists: true,
   });
@@ -234,7 +233,7 @@ exports.down = (pgm) => {
 
   // Drop tables
   pgm.dropTable("session_song_entries", { ifExists: true });
-  pgm.dropTable("participant_parts", { ifExists: true });
+  pgm.dropTable("session_participant_parts", { ifExists: true });
   pgm.dropTable("session_participants", { ifExists: true });
 
   // Drop enum type

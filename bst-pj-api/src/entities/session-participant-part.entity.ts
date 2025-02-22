@@ -11,9 +11,9 @@ import {
 import { SessionParticipant } from './session-participant.entity';
 import { SessionPart } from './session-part.entity';
 
-@Entity('participant_parts')
+@Entity('session_participant_parts')
 @Unique(['sessionParticipantId', 'sessionPartId'])
-export class ParticipantPart {
+export class SessionParticipantPart {
   @PrimaryGeneratedColumn()
   id: number;
 

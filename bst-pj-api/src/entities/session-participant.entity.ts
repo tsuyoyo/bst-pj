@@ -10,11 +10,9 @@ import {
 } from 'typeorm';
 import { Session } from './session.entity';
 import { User } from './user.entity';
-import { SessionRole } from './session-role.entity';
 
 export enum SessionParticipantStatus {
   Confirmed = 'Confirmed',
-  Pending = 'Pending',
   Cancelled = 'Cancelled',
 }
 
@@ -29,14 +27,6 @@ export class SessionParticipant {
 
   @Column({ name: 'user_id', type: 'integer', nullable: false })
   userId: number;
-
-  @Column({
-    name: 'role_id',
-    type: 'integer',
-    nullable: true,
-    comment: 'Optional',
-  })
-  roleId: number;
 
   @Column({
     type: 'enum',
@@ -78,8 +68,4 @@ export class SessionParticipant {
   @ManyToOne(() => User, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
   user: User;
-
-  @ManyToOne(() => SessionRole, { onDelete: 'SET NULL' })
-  @JoinColumn({ name: 'role_id' })
-  role: SessionRole;
 }

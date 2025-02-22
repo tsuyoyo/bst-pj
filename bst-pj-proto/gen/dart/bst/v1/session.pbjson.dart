@@ -35,21 +35,21 @@ final $typed_data.Uint8List sessionStatusDescriptor = $convert.base64Decode(
     'oYU0VTU0lPTl9TVEFUVVNfQ09NUExFVEVEEAUSHAoYU0VTU0lPTl9TVEFUVVNfQ0FOQ0VMTEVE'
     'EAY=');
 
-@$core.Deprecated('Use sessionParticipantRoleDescriptor instead')
-const SessionParticipantRole$json = {
-  '1': 'SessionParticipantRole',
+@$core.Deprecated('Use sessionParticipantStatusDescriptor instead')
+const SessionParticipantStatus$json = {
+  '1': 'SessionParticipantStatus',
   '2': [
-    {'1': 'SESSION_PARTICIPANT_ROLE_UNSPECIFIED', '2': 0},
-    {'1': 'SESSION_PARTICIPANT_ROLE_ORGANIZER', '2': 1},
-    {'1': 'SESSION_PARTICIPANT_ROLE_PLAYER', '2': 2},
+    {'1': 'SESSION_PARTICIPANT_STATUS_UNSPECIFIED', '2': 0},
+    {'1': 'SESSION_PARTICIPANT_STATUS_CONFIRMED', '2': 1},
+    {'1': 'SESSION_PARTICIPANT_STATUS_CANCELLED', '2': 2},
   ],
 };
 
-/// Descriptor for `SessionParticipantRole`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List sessionParticipantRoleDescriptor = $convert.base64Decode(
-    'ChZTZXNzaW9uUGFydGljaXBhbnRSb2xlEigKJFNFU1NJT05fUEFSVElDSVBBTlRfUk9MRV9VTl'
-    'NQRUNJRklFRBAAEiYKIlNFU1NJT05fUEFSVElDSVBBTlRfUk9MRV9PUkdBTklaRVIQARIjCh9T'
-    'RVNTSU9OX1BBUlRJQ0lQQU5UX1JPTEVfUExBWUVSEAI=');
+/// Descriptor for `SessionParticipantStatus`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List sessionParticipantStatusDescriptor = $convert.base64Decode(
+    'ChhTZXNzaW9uUGFydGljaXBhbnRTdGF0dXMSKgomU0VTU0lPTl9QQVJUSUNJUEFOVF9TVEFUVV'
+    'NfVU5TUEVDSUZJRUQQABIoCiRTRVNTSU9OX1BBUlRJQ0lQQU5UX1NUQVRVU19DT05GSVJNRUQQ'
+    'ARIoCiRTRVNTSU9OX1BBUlRJQ0lQQU5UX1NUQVRVU19DQU5DRUxMRUQQAg==');
 
 @$core.Deprecated('Use sessionTimelineDateDescriptor instead')
 const SessionTimelineDate$json = {
@@ -143,17 +143,22 @@ const SessionParticipant$json = {
   '1': 'SessionParticipant',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
-    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'role', '3': 3, '4': 1, '5': 14, '6': '.bst.v1.SessionParticipantRole', '10': 'role'},
-    {'1': 'user', '3': 4, '4': 1, '5': 11, '6': '.bst.v1.User', '10': 'user'},
+    {'1': 'user', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.User', '10': 'user'},
+    {'1': 'parts', '3': 3, '4': 3, '5': 11, '6': '.bst.v1.SessionPart', '10': 'parts'},
+    {'1': 'primary_part_id', '3': 4, '4': 1, '5': 5, '10': 'primaryPartId'},
+    {'1': 'status', '3': 5, '4': 1, '5': 14, '6': '.bst.v1.SessionParticipantStatus', '10': 'status'},
+    {'1': 'is_organizer', '3': 6, '4': 1, '5': 8, '10': 'isOrganizer'},
+    {'1': 'is_player', '3': 7, '4': 1, '5': 8, '10': 'isPlayer'},
   ],
 };
 
 /// Descriptor for `SessionParticipant`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List sessionParticipantDescriptor = $convert.base64Decode(
-    'ChJTZXNzaW9uUGFydGljaXBhbnQSDgoCaWQYASABKAVSAmlkEhIKBG5hbWUYAiABKAlSBG5hbW'
-    'USMgoEcm9sZRgDIAEoDjIeLmJzdC52MS5TZXNzaW9uUGFydGljaXBhbnRSb2xlUgRyb2xlEiAK'
-    'BHVzZXIYBCABKAsyDC5ic3QudjEuVXNlclIEdXNlcg==');
+    'ChJTZXNzaW9uUGFydGljaXBhbnQSDgoCaWQYASABKAVSAmlkEiAKBHVzZXIYAiABKAsyDC5ic3'
+    'QudjEuVXNlclIEdXNlchIpCgVwYXJ0cxgDIAMoCzITLmJzdC52MS5TZXNzaW9uUGFydFIFcGFy'
+    'dHMSJgoPcHJpbWFyeV9wYXJ0X2lkGAQgASgFUg1wcmltYXJ5UGFydElkEjgKBnN0YXR1cxgFIA'
+    'EoDjIgLmJzdC52MS5TZXNzaW9uUGFydGljaXBhbnRTdGF0dXNSBnN0YXR1cxIhCgxpc19vcmdh'
+    'bml6ZXIYBiABKAhSC2lzT3JnYW5pemVyEhsKCWlzX3BsYXllchgHIAEoCFIIaXNQbGF5ZXI=');
 
 @$core.Deprecated('Use sessionSongEntryDescriptor instead')
 const SessionSongEntry$json = {
@@ -161,13 +166,15 @@ const SessionSongEntry$json = {
   '2': [
     {'1': 'user', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.User', '10': 'user'},
     {'1': 'part', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.SessionPart', '10': 'part'},
+    {'1': 'comment', '3': 3, '4': 1, '5': 9, '10': 'comment'},
   ],
 };
 
 /// Descriptor for `SessionSongEntry`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List sessionSongEntryDescriptor = $convert.base64Decode(
     'ChBTZXNzaW9uU29uZ0VudHJ5EiAKBHVzZXIYASABKAsyDC5ic3QudjEuVXNlclIEdXNlchInCg'
-    'RwYXJ0GAIgASgLMhMuYnN0LnYxLlNlc3Npb25QYXJ0UgRwYXJ0');
+    'RwYXJ0GAIgASgLMhMuYnN0LnYxLlNlc3Npb25QYXJ0UgRwYXJ0EhgKB2NvbW1lbnQYAyABKAlS'
+    'B2NvbW1lbnQ=');
 
 @$core.Deprecated('Use sessionSongPartDescriptor instead')
 const SessionSongPart$json = {

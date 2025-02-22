@@ -26,6 +26,9 @@ export class SessionSongEntry {
   @Column({ name: 'session_part_id', type: 'integer', nullable: false })
   sessionPartId: number;
 
+  @Column({ type: 'text', nullable: true })
+  comment: string;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 

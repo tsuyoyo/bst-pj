@@ -10,14 +10,6 @@ import { SessionSong } from "./session";
 
 export const protobufPackage = "bst.v1";
 
-/** List Session Songs */
-export interface ListSessionSongsRequest {
-}
-
-export interface ListSessionSongsResponse {
-  songs: SessionSong[];
-}
-
 /** Add Session Song */
 export interface AddSessionSongRequest {
   songId: number;
@@ -26,6 +18,14 @@ export interface AddSessionSongRequest {
 
 export interface AddSessionSongResponse {
   song: SessionSong | undefined;
+}
+
+/** List Session Songs */
+export interface ListSessionSongsRequest {
+}
+
+export interface ListSessionSongsResponse {
+  songs: SessionSong[];
 }
 
 /** Get Session Song */
@@ -52,108 +52,6 @@ export interface DeleteSessionSongRequest {
 export interface DeleteSessionSongResponse {
   success: boolean;
 }
-
-function createBaseListSessionSongsRequest(): ListSessionSongsRequest {
-  return {};
-}
-
-export const ListSessionSongsRequest = {
-  encode(_: ListSessionSongsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListSessionSongsRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseListSessionSongsRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(_: any): ListSessionSongsRequest {
-    return {};
-  },
-
-  toJSON(_: ListSessionSongsRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<ListSessionSongsRequest>, I>>(base?: I): ListSessionSongsRequest {
-    return ListSessionSongsRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<ListSessionSongsRequest>, I>>(_: I): ListSessionSongsRequest {
-    const message = createBaseListSessionSongsRequest();
-    return message;
-  },
-};
-
-function createBaseListSessionSongsResponse(): ListSessionSongsResponse {
-  return { songs: [] };
-}
-
-export const ListSessionSongsResponse = {
-  encode(message: ListSessionSongsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.songs) {
-      SessionSong.encode(v!, writer.uint32(10).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListSessionSongsResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseListSessionSongsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.songs.push(SessionSong.decode(reader, reader.uint32()));
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): ListSessionSongsResponse {
-    return {
-      songs: globalThis.Array.isArray(object?.songs) ? object.songs.map((e: any) => SessionSong.fromJSON(e)) : [],
-    };
-  },
-
-  toJSON(message: ListSessionSongsResponse): unknown {
-    const obj: any = {};
-    if (message.songs?.length) {
-      obj.songs = message.songs.map((e) => SessionSong.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<ListSessionSongsResponse>, I>>(base?: I): ListSessionSongsResponse {
-    return ListSessionSongsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<ListSessionSongsResponse>, I>>(object: I): ListSessionSongsResponse {
-    const message = createBaseListSessionSongsResponse();
-    message.songs = object.songs?.map((e) => SessionSong.fromPartial(e)) || [];
-    return message;
-  },
-};
 
 function createBaseAddSessionSongRequest(): AddSessionSongRequest {
   return { songId: 0, mandatoryPartIds: [] };
@@ -298,6 +196,108 @@ export const AddSessionSongResponse = {
     message.song = (object.song !== undefined && object.song !== null)
       ? SessionSong.fromPartial(object.song)
       : undefined;
+    return message;
+  },
+};
+
+function createBaseListSessionSongsRequest(): ListSessionSongsRequest {
+  return {};
+}
+
+export const ListSessionSongsRequest = {
+  encode(_: ListSessionSongsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListSessionSongsRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseListSessionSongsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): ListSessionSongsRequest {
+    return {};
+  },
+
+  toJSON(_: ListSessionSongsRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ListSessionSongsRequest>, I>>(base?: I): ListSessionSongsRequest {
+    return ListSessionSongsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ListSessionSongsRequest>, I>>(_: I): ListSessionSongsRequest {
+    const message = createBaseListSessionSongsRequest();
+    return message;
+  },
+};
+
+function createBaseListSessionSongsResponse(): ListSessionSongsResponse {
+  return { songs: [] };
+}
+
+export const ListSessionSongsResponse = {
+  encode(message: ListSessionSongsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.songs) {
+      SessionSong.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListSessionSongsResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseListSessionSongsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.songs.push(SessionSong.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ListSessionSongsResponse {
+    return {
+      songs: globalThis.Array.isArray(object?.songs) ? object.songs.map((e: any) => SessionSong.fromJSON(e)) : [],
+    };
+  },
+
+  toJSON(message: ListSessionSongsResponse): unknown {
+    const obj: any = {};
+    if (message.songs?.length) {
+      obj.songs = message.songs.map((e) => SessionSong.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ListSessionSongsResponse>, I>>(base?: I): ListSessionSongsResponse {
+    return ListSessionSongsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ListSessionSongsResponse>, I>>(object: I): ListSessionSongsResponse {
+    const message = createBaseListSessionSongsResponse();
+    message.songs = object.songs?.map((e) => SessionSong.fromPartial(e)) || [];
     return message;
   },
 };

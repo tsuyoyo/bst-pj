@@ -15,152 +15,140 @@ import 'dart:core' as $core;
 import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'session_service.pb.dart' as $15;
+import 'session_service.pb.dart' as $16;
 
 export 'session_service.pb.dart';
 
 @$pb.GrpcServiceName('bst.v1.SessionService')
 class SessionServiceClient extends $grpc.Client {
-  static final _$createSession = $grpc.ClientMethod<$15.CreateSessionRequest, $15.CreateSessionResponse>(
+  static final _$createSession = $grpc.ClientMethod<$16.CreateSessionRequest, $16.CreateSessionResponse>(
       '/bst.v1.SessionService/CreateSession',
-      ($15.CreateSessionRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.CreateSessionResponse.fromBuffer(value));
-  static final _$getSession = $grpc.ClientMethod<$15.GetSessionRequest, $15.GetSessionResponse>(
+      ($16.CreateSessionRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.CreateSessionResponse.fromBuffer(value));
+  static final _$getSession = $grpc.ClientMethod<$16.GetSessionRequest, $16.GetSessionResponse>(
       '/bst.v1.SessionService/GetSession',
-      ($15.GetSessionRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.GetSessionResponse.fromBuffer(value));
-  static final _$updateSession = $grpc.ClientMethod<$15.UpdateSessionRequest, $15.UpdateSessionResponse>(
+      ($16.GetSessionRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.GetSessionResponse.fromBuffer(value));
+  static final _$updateSession = $grpc.ClientMethod<$16.UpdateSessionRequest, $16.UpdateSessionResponse>(
       '/bst.v1.SessionService/UpdateSession',
-      ($15.UpdateSessionRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.UpdateSessionResponse.fromBuffer(value));
-  static final _$updateSessionStatus = $grpc.ClientMethod<$15.UpdateSessionStatusRequest, $15.UpdateSessionStatusResponse>(
+      ($16.UpdateSessionRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.UpdateSessionResponse.fromBuffer(value));
+  static final _$updateSessionStatus = $grpc.ClientMethod<$16.UpdateSessionStatusRequest, $16.UpdateSessionStatusResponse>(
       '/bst.v1.SessionService/UpdateSessionStatus',
-      ($15.UpdateSessionStatusRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.UpdateSessionStatusResponse.fromBuffer(value));
-  static final _$cancelSession = $grpc.ClientMethod<$15.CancelSessionRequest, $15.CancelSessionResponse>(
+      ($16.UpdateSessionStatusRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.UpdateSessionStatusResponse.fromBuffer(value));
+  static final _$cancelSession = $grpc.ClientMethod<$16.CancelSessionRequest, $16.CancelSessionResponse>(
       '/bst.v1.SessionService/CancelSession',
-      ($15.CancelSessionRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.CancelSessionResponse.fromBuffer(value));
-  static final _$duplicateSession = $grpc.ClientMethod<$15.DuplicateSessionRequest, $15.DuplicateSessionResponse>(
+      ($16.CancelSessionRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.CancelSessionResponse.fromBuffer(value));
+  static final _$duplicateSession = $grpc.ClientMethod<$16.DuplicateSessionRequest, $16.DuplicateSessionResponse>(
       '/bst.v1.SessionService/DuplicateSession',
-      ($15.DuplicateSessionRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.DuplicateSessionResponse.fromBuffer(value));
-  static final _$updateSessionSchedule = $grpc.ClientMethod<$15.UpdateSessionScheduleRequest, $15.UpdateSessionScheduleResponse>(
+      ($16.DuplicateSessionRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.DuplicateSessionResponse.fromBuffer(value));
+  static final _$updateSessionSchedule = $grpc.ClientMethod<$16.UpdateSessionScheduleRequest, $16.UpdateSessionScheduleResponse>(
       '/bst.v1.SessionService/UpdateSessionSchedule',
-      ($15.UpdateSessionScheduleRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.UpdateSessionScheduleResponse.fromBuffer(value));
-  static final _$updateSessionLocation = $grpc.ClientMethod<$15.UpdateSessionLocationRequest, $15.UpdateSessionLocationResponse>(
+      ($16.UpdateSessionScheduleRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.UpdateSessionScheduleResponse.fromBuffer(value));
+  static final _$updateSessionLocation = $grpc.ClientMethod<$16.UpdateSessionLocationRequest, $16.UpdateSessionLocationResponse>(
       '/bst.v1.SessionService/UpdateSessionLocation',
-      ($15.UpdateSessionLocationRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.UpdateSessionLocationResponse.fromBuffer(value));
-  static final _$listSessionParticipants = $grpc.ClientMethod<$15.ListSessionParticipantsRequest, $15.ListSessionParticipantsResponse>(
-      '/bst.v1.SessionService/ListSessionParticipants',
-      ($15.ListSessionParticipantsRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.ListSessionParticipantsResponse.fromBuffer(value));
-  static final _$addSessionParticipant = $grpc.ClientMethod<$15.AddSessionParticipantRequest, $15.AddSessionParticipantResponse>(
-      '/bst.v1.SessionService/AddSessionParticipant',
-      ($15.AddSessionParticipantRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.AddSessionParticipantResponse.fromBuffer(value));
-  static final _$updateSessionParticipant = $grpc.ClientMethod<$15.UpdateSessionParticipantRequest, $15.UpdateSessionParticipantResponse>(
-      '/bst.v1.SessionService/UpdateSessionParticipant',
-      ($15.UpdateSessionParticipantRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.UpdateSessionParticipantResponse.fromBuffer(value));
-  static final _$addSessionSongResource = $grpc.ClientMethod<$15.AddSessionSongResourceRequest, $15.AddSessionSongResourceResponse>(
+      ($16.UpdateSessionLocationRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.UpdateSessionLocationResponse.fromBuffer(value));
+  static final _$addSessionSongResource = $grpc.ClientMethod<$16.AddSessionSongResourceRequest, $16.AddSessionSongResourceResponse>(
       '/bst.v1.SessionService/AddSessionSongResource',
-      ($15.AddSessionSongResourceRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.AddSessionSongResourceResponse.fromBuffer(value));
-  static final _$listSessionSongResources = $grpc.ClientMethod<$15.ListSessionSongResourcesRequest, $15.ListSessionSongResourcesResponse>(
+      ($16.AddSessionSongResourceRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.AddSessionSongResourceResponse.fromBuffer(value));
+  static final _$listSessionSongResources = $grpc.ClientMethod<$16.ListSessionSongResourcesRequest, $16.ListSessionSongResourcesResponse>(
       '/bst.v1.SessionService/ListSessionSongResources',
-      ($15.ListSessionSongResourcesRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.ListSessionSongResourcesResponse.fromBuffer(value));
-  static final _$deleteSessionSongResource = $grpc.ClientMethod<$15.DeleteSessionSongResourceRequest, $15.DeleteSessionSongResourceResponse>(
+      ($16.ListSessionSongResourcesRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.ListSessionSongResourcesResponse.fromBuffer(value));
+  static final _$deleteSessionSongResource = $grpc.ClientMethod<$16.DeleteSessionSongResourceRequest, $16.DeleteSessionSongResourceResponse>(
       '/bst.v1.SessionService/DeleteSessionSongResource',
-      ($15.DeleteSessionSongResourceRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.DeleteSessionSongResourceResponse.fromBuffer(value));
-  static final _$listSessionOrganizers = $grpc.ClientMethod<$15.ListSessionOrganizersRequest, $15.ListSessionOrganizersResponse>(
+      ($16.DeleteSessionSongResourceRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.DeleteSessionSongResourceResponse.fromBuffer(value));
+  static final _$listSessionOrganizers = $grpc.ClientMethod<$16.ListSessionOrganizersRequest, $16.ListSessionOrganizersResponse>(
       '/bst.v1.SessionService/ListSessionOrganizers',
-      ($15.ListSessionOrganizersRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.ListSessionOrganizersResponse.fromBuffer(value));
-  static final _$addSessionOrganizer = $grpc.ClientMethod<$15.AddSessionOrganizerRequest, $15.AddSessionOrganizerResponse>(
+      ($16.ListSessionOrganizersRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.ListSessionOrganizersResponse.fromBuffer(value));
+  static final _$addSessionOrganizer = $grpc.ClientMethod<$16.AddSessionOrganizerRequest, $16.AddSessionOrganizerResponse>(
       '/bst.v1.SessionService/AddSessionOrganizer',
-      ($15.AddSessionOrganizerRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.AddSessionOrganizerResponse.fromBuffer(value));
-  static final _$deleteSessionOrganizer = $grpc.ClientMethod<$15.DeleteSessionOrganizerRequest, $15.DeleteSessionOrganizerResponse>(
+      ($16.AddSessionOrganizerRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.AddSessionOrganizerResponse.fromBuffer(value));
+  static final _$deleteSessionOrganizer = $grpc.ClientMethod<$16.DeleteSessionOrganizerRequest, $16.DeleteSessionOrganizerResponse>(
       '/bst.v1.SessionService/DeleteSessionOrganizer',
-      ($15.DeleteSessionOrganizerRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.DeleteSessionOrganizerResponse.fromBuffer(value));
-  static final _$createSessionThread = $grpc.ClientMethod<$15.CreateSessionThreadRequest, $15.CreateSessionThreadResponse>(
+      ($16.DeleteSessionOrganizerRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.DeleteSessionOrganizerResponse.fromBuffer(value));
+  static final _$createSessionThread = $grpc.ClientMethod<$16.CreateSessionThreadRequest, $16.CreateSessionThreadResponse>(
       '/bst.v1.SessionService/CreateSessionThread',
-      ($15.CreateSessionThreadRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.CreateSessionThreadResponse.fromBuffer(value));
-  static final _$listSessionThreads = $grpc.ClientMethod<$15.ListSessionThreadsRequest, $15.ListSessionThreadsResponse>(
+      ($16.CreateSessionThreadRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.CreateSessionThreadResponse.fromBuffer(value));
+  static final _$listSessionThreads = $grpc.ClientMethod<$16.ListSessionThreadsRequest, $16.ListSessionThreadsResponse>(
       '/bst.v1.SessionService/ListSessionThreads',
-      ($15.ListSessionThreadsRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.ListSessionThreadsResponse.fromBuffer(value));
-  static final _$createSongThread = $grpc.ClientMethod<$15.CreateSongThreadRequest, $15.CreateSongThreadResponse>(
+      ($16.ListSessionThreadsRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.ListSessionThreadsResponse.fromBuffer(value));
+  static final _$createSongThread = $grpc.ClientMethod<$16.CreateSongThreadRequest, $16.CreateSongThreadResponse>(
       '/bst.v1.SessionService/CreateSongThread',
-      ($15.CreateSongThreadRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.CreateSongThreadResponse.fromBuffer(value));
-  static final _$getSessionThread = $grpc.ClientMethod<$15.GetSessionThreadRequest, $15.GetSessionThreadResponse>(
+      ($16.CreateSongThreadRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.CreateSongThreadResponse.fromBuffer(value));
+  static final _$getSessionThread = $grpc.ClientMethod<$16.GetSessionThreadRequest, $16.GetSessionThreadResponse>(
       '/bst.v1.SessionService/GetSessionThread',
-      ($15.GetSessionThreadRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.GetSessionThreadResponse.fromBuffer(value));
-  static final _$deleteSessionThread = $grpc.ClientMethod<$15.DeleteSessionThreadRequest, $15.DeleteSessionThreadResponse>(
+      ($16.GetSessionThreadRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.GetSessionThreadResponse.fromBuffer(value));
+  static final _$deleteSessionThread = $grpc.ClientMethod<$16.DeleteSessionThreadRequest, $16.DeleteSessionThreadResponse>(
       '/bst.v1.SessionService/DeleteSessionThread',
-      ($15.DeleteSessionThreadRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.DeleteSessionThreadResponse.fromBuffer(value));
-  static final _$createSessionNotification = $grpc.ClientMethod<$15.CreateSessionNotificationRequest, $15.CreateSessionNotificationResponse>(
+      ($16.DeleteSessionThreadRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.DeleteSessionThreadResponse.fromBuffer(value));
+  static final _$createSessionNotification = $grpc.ClientMethod<$16.CreateSessionNotificationRequest, $16.CreateSessionNotificationResponse>(
       '/bst.v1.SessionService/CreateSessionNotification',
-      ($15.CreateSessionNotificationRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.CreateSessionNotificationResponse.fromBuffer(value));
-  static final _$getSessionTimetable = $grpc.ClientMethod<$15.GetSessionTimetableRequest, $15.GetSessionTimetableResponse>(
+      ($16.CreateSessionNotificationRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.CreateSessionNotificationResponse.fromBuffer(value));
+  static final _$getSessionTimetable = $grpc.ClientMethod<$16.GetSessionTimetableRequest, $16.GetSessionTimetableResponse>(
       '/bst.v1.SessionService/GetSessionTimetable',
-      ($15.GetSessionTimetableRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.GetSessionTimetableResponse.fromBuffer(value));
-  static final _$updateSessionTimetable = $grpc.ClientMethod<$15.UpdateSessionTimetableRequest, $15.UpdateSessionTimetableResponse>(
+      ($16.GetSessionTimetableRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.GetSessionTimetableResponse.fromBuffer(value));
+  static final _$updateSessionTimetable = $grpc.ClientMethod<$16.UpdateSessionTimetableRequest, $16.UpdateSessionTimetableResponse>(
       '/bst.v1.SessionService/UpdateSessionTimetable',
-      ($15.UpdateSessionTimetableRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.UpdateSessionTimetableResponse.fromBuffer(value));
-  static final _$getOptimizedTimetable = $grpc.ClientMethod<$15.GetOptimizedTimetableRequest, $15.GetOptimizedTimetableResponse>(
+      ($16.UpdateSessionTimetableRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.UpdateSessionTimetableResponse.fromBuffer(value));
+  static final _$getOptimizedTimetable = $grpc.ClientMethod<$16.GetOptimizedTimetableRequest, $16.GetOptimizedTimetableResponse>(
       '/bst.v1.SessionService/GetOptimizedTimetable',
-      ($15.GetOptimizedTimetableRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.GetOptimizedTimetableResponse.fromBuffer(value));
-  static final _$getTimetableProgress = $grpc.ClientMethod<$15.GetTimetableProgressRequest, $15.GetTimetableProgressResponse>(
+      ($16.GetOptimizedTimetableRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.GetOptimizedTimetableResponse.fromBuffer(value));
+  static final _$getTimetableProgress = $grpc.ClientMethod<$16.GetTimetableProgressRequest, $16.GetTimetableProgressResponse>(
       '/bst.v1.SessionService/GetTimetableProgress',
-      ($15.GetTimetableProgressRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.GetTimetableProgressResponse.fromBuffer(value));
-  static final _$updateTimetableProgress = $grpc.ClientMethod<$15.UpdateTimetableProgressRequest, $15.UpdateTimetableProgressResponse>(
+      ($16.GetTimetableProgressRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.GetTimetableProgressResponse.fromBuffer(value));
+  static final _$updateTimetableProgress = $grpc.ClientMethod<$16.UpdateTimetableProgressRequest, $16.UpdateTimetableProgressResponse>(
       '/bst.v1.SessionService/UpdateTimetableProgress',
-      ($15.UpdateTimetableProgressRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.UpdateTimetableProgressResponse.fromBuffer(value));
-  static final _$addSessionResource = $grpc.ClientMethod<$15.AddSessionResourceRequest, $15.AddSessionResourceResponse>(
+      ($16.UpdateTimetableProgressRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.UpdateTimetableProgressResponse.fromBuffer(value));
+  static final _$addSessionResource = $grpc.ClientMethod<$16.AddSessionResourceRequest, $16.AddSessionResourceResponse>(
       '/bst.v1.SessionService/AddSessionResource',
-      ($15.AddSessionResourceRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.AddSessionResourceResponse.fromBuffer(value));
-  static final _$listSessionResources = $grpc.ClientMethod<$15.ListSessionResourcesRequest, $15.ListSessionResourcesResponse>(
+      ($16.AddSessionResourceRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.AddSessionResourceResponse.fromBuffer(value));
+  static final _$listSessionResources = $grpc.ClientMethod<$16.ListSessionResourcesRequest, $16.ListSessionResourcesResponse>(
       '/bst.v1.SessionService/ListSessionResources',
-      ($15.ListSessionResourcesRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.ListSessionResourcesResponse.fromBuffer(value));
-  static final _$deleteSessionResource = $grpc.ClientMethod<$15.DeleteSessionResourceRequest, $15.DeleteSessionResourceResponse>(
+      ($16.ListSessionResourcesRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.ListSessionResourcesResponse.fromBuffer(value));
+  static final _$deleteSessionResource = $grpc.ClientMethod<$16.DeleteSessionResourceRequest, $16.DeleteSessionResourceResponse>(
       '/bst.v1.SessionService/DeleteSessionResource',
-      ($15.DeleteSessionResourceRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.DeleteSessionResourceResponse.fromBuffer(value));
-  static final _$addSessionFeedback = $grpc.ClientMethod<$15.AddSessionFeedbackRequest, $15.AddSessionFeedbackResponse>(
+      ($16.DeleteSessionResourceRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.DeleteSessionResourceResponse.fromBuffer(value));
+  static final _$addSessionFeedback = $grpc.ClientMethod<$16.AddSessionFeedbackRequest, $16.AddSessionFeedbackResponse>(
       '/bst.v1.SessionService/AddSessionFeedback',
-      ($15.AddSessionFeedbackRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.AddSessionFeedbackResponse.fromBuffer(value));
-  static final _$listSessionFeedbacks = $grpc.ClientMethod<$15.ListSessionFeedbacksRequest, $15.ListSessionFeedbacksResponse>(
+      ($16.AddSessionFeedbackRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.AddSessionFeedbackResponse.fromBuffer(value));
+  static final _$listSessionFeedbacks = $grpc.ClientMethod<$16.ListSessionFeedbacksRequest, $16.ListSessionFeedbacksResponse>(
       '/bst.v1.SessionService/ListSessionFeedbacks',
-      ($15.ListSessionFeedbacksRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.ListSessionFeedbacksResponse.fromBuffer(value));
-  static final _$listRelatedSessions = $grpc.ClientMethod<$15.ListRelatedSessionsRequest, $15.ListRelatedSessionsResponse>(
+      ($16.ListSessionFeedbacksRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.ListSessionFeedbacksResponse.fromBuffer(value));
+  static final _$listRelatedSessions = $grpc.ClientMethod<$16.ListRelatedSessionsRequest, $16.ListRelatedSessionsResponse>(
       '/bst.v1.SessionService/ListRelatedSessions',
-      ($15.ListRelatedSessionsRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.ListRelatedSessionsResponse.fromBuffer(value));
-  static final _$addRelatedSession = $grpc.ClientMethod<$15.AddRelatedSessionRequest, $15.AddRelatedSessionResponse>(
+      ($16.ListRelatedSessionsRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.ListRelatedSessionsResponse.fromBuffer(value));
+  static final _$addRelatedSession = $grpc.ClientMethod<$16.AddRelatedSessionRequest, $16.AddRelatedSessionResponse>(
       '/bst.v1.SessionService/AddRelatedSession',
-      ($15.AddRelatedSessionRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.AddRelatedSessionResponse.fromBuffer(value));
+      ($16.AddRelatedSessionRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.AddRelatedSessionResponse.fromBuffer(value));
 
   SessionServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -168,143 +156,131 @@ class SessionServiceClient extends $grpc.Client {
       : super(channel, options: options,
         interceptors: interceptors);
 
-  $grpc.ResponseFuture<$15.CreateSessionResponse> createSession($15.CreateSessionRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.CreateSessionResponse> createSession($16.CreateSessionRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createSession, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.GetSessionResponse> getSession($15.GetSessionRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.GetSessionResponse> getSession($16.GetSessionRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getSession, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.UpdateSessionResponse> updateSession($15.UpdateSessionRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.UpdateSessionResponse> updateSession($16.UpdateSessionRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateSession, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.UpdateSessionStatusResponse> updateSessionStatus($15.UpdateSessionStatusRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.UpdateSessionStatusResponse> updateSessionStatus($16.UpdateSessionStatusRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateSessionStatus, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.CancelSessionResponse> cancelSession($15.CancelSessionRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.CancelSessionResponse> cancelSession($16.CancelSessionRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$cancelSession, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.DuplicateSessionResponse> duplicateSession($15.DuplicateSessionRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.DuplicateSessionResponse> duplicateSession($16.DuplicateSessionRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$duplicateSession, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.UpdateSessionScheduleResponse> updateSessionSchedule($15.UpdateSessionScheduleRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.UpdateSessionScheduleResponse> updateSessionSchedule($16.UpdateSessionScheduleRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateSessionSchedule, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.UpdateSessionLocationResponse> updateSessionLocation($15.UpdateSessionLocationRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.UpdateSessionLocationResponse> updateSessionLocation($16.UpdateSessionLocationRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateSessionLocation, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.ListSessionParticipantsResponse> listSessionParticipants($15.ListSessionParticipantsRequest request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$listSessionParticipants, request, options: options);
-  }
-
-  $grpc.ResponseFuture<$15.AddSessionParticipantResponse> addSessionParticipant($15.AddSessionParticipantRequest request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$addSessionParticipant, request, options: options);
-  }
-
-  $grpc.ResponseFuture<$15.UpdateSessionParticipantResponse> updateSessionParticipant($15.UpdateSessionParticipantRequest request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$updateSessionParticipant, request, options: options);
-  }
-
-  $grpc.ResponseFuture<$15.AddSessionSongResourceResponse> addSessionSongResource($15.AddSessionSongResourceRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.AddSessionSongResourceResponse> addSessionSongResource($16.AddSessionSongResourceRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$addSessionSongResource, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.ListSessionSongResourcesResponse> listSessionSongResources($15.ListSessionSongResourcesRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.ListSessionSongResourcesResponse> listSessionSongResources($16.ListSessionSongResourcesRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$listSessionSongResources, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.DeleteSessionSongResourceResponse> deleteSessionSongResource($15.DeleteSessionSongResourceRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.DeleteSessionSongResourceResponse> deleteSessionSongResource($16.DeleteSessionSongResourceRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteSessionSongResource, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.ListSessionOrganizersResponse> listSessionOrganizers($15.ListSessionOrganizersRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.ListSessionOrganizersResponse> listSessionOrganizers($16.ListSessionOrganizersRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$listSessionOrganizers, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.AddSessionOrganizerResponse> addSessionOrganizer($15.AddSessionOrganizerRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.AddSessionOrganizerResponse> addSessionOrganizer($16.AddSessionOrganizerRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$addSessionOrganizer, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.DeleteSessionOrganizerResponse> deleteSessionOrganizer($15.DeleteSessionOrganizerRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.DeleteSessionOrganizerResponse> deleteSessionOrganizer($16.DeleteSessionOrganizerRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteSessionOrganizer, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.CreateSessionThreadResponse> createSessionThread($15.CreateSessionThreadRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.CreateSessionThreadResponse> createSessionThread($16.CreateSessionThreadRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createSessionThread, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.ListSessionThreadsResponse> listSessionThreads($15.ListSessionThreadsRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.ListSessionThreadsResponse> listSessionThreads($16.ListSessionThreadsRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$listSessionThreads, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.CreateSongThreadResponse> createSongThread($15.CreateSongThreadRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.CreateSongThreadResponse> createSongThread($16.CreateSongThreadRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createSongThread, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.GetSessionThreadResponse> getSessionThread($15.GetSessionThreadRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.GetSessionThreadResponse> getSessionThread($16.GetSessionThreadRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getSessionThread, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.DeleteSessionThreadResponse> deleteSessionThread($15.DeleteSessionThreadRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.DeleteSessionThreadResponse> deleteSessionThread($16.DeleteSessionThreadRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteSessionThread, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.CreateSessionNotificationResponse> createSessionNotification($15.CreateSessionNotificationRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.CreateSessionNotificationResponse> createSessionNotification($16.CreateSessionNotificationRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createSessionNotification, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.GetSessionTimetableResponse> getSessionTimetable($15.GetSessionTimetableRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.GetSessionTimetableResponse> getSessionTimetable($16.GetSessionTimetableRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getSessionTimetable, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.UpdateSessionTimetableResponse> updateSessionTimetable($15.UpdateSessionTimetableRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.UpdateSessionTimetableResponse> updateSessionTimetable($16.UpdateSessionTimetableRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateSessionTimetable, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.GetOptimizedTimetableResponse> getOptimizedTimetable($15.GetOptimizedTimetableRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.GetOptimizedTimetableResponse> getOptimizedTimetable($16.GetOptimizedTimetableRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getOptimizedTimetable, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.GetTimetableProgressResponse> getTimetableProgress($15.GetTimetableProgressRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.GetTimetableProgressResponse> getTimetableProgress($16.GetTimetableProgressRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getTimetableProgress, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.UpdateTimetableProgressResponse> updateTimetableProgress($15.UpdateTimetableProgressRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.UpdateTimetableProgressResponse> updateTimetableProgress($16.UpdateTimetableProgressRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateTimetableProgress, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.AddSessionResourceResponse> addSessionResource($15.AddSessionResourceRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.AddSessionResourceResponse> addSessionResource($16.AddSessionResourceRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$addSessionResource, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.ListSessionResourcesResponse> listSessionResources($15.ListSessionResourcesRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.ListSessionResourcesResponse> listSessionResources($16.ListSessionResourcesRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$listSessionResources, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.DeleteSessionResourceResponse> deleteSessionResource($15.DeleteSessionResourceRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.DeleteSessionResourceResponse> deleteSessionResource($16.DeleteSessionResourceRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteSessionResource, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.AddSessionFeedbackResponse> addSessionFeedback($15.AddSessionFeedbackRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.AddSessionFeedbackResponse> addSessionFeedback($16.AddSessionFeedbackRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$addSessionFeedback, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.ListSessionFeedbacksResponse> listSessionFeedbacks($15.ListSessionFeedbacksRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.ListSessionFeedbacksResponse> listSessionFeedbacks($16.ListSessionFeedbacksRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$listSessionFeedbacks, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.ListRelatedSessionsResponse> listRelatedSessions($15.ListRelatedSessionsRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.ListRelatedSessionsResponse> listRelatedSessions($16.ListRelatedSessionsRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$listRelatedSessions, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.AddRelatedSessionResponse> addRelatedSession($15.AddRelatedSessionRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.AddRelatedSessionResponse> addRelatedSession($16.AddRelatedSessionRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$addRelatedSession, request, options: options);
   }
 }
@@ -314,426 +290,390 @@ abstract class SessionServiceBase extends $grpc.Service {
   $core.String get $name => 'bst.v1.SessionService';
 
   SessionServiceBase() {
-    $addMethod($grpc.ServiceMethod<$15.CreateSessionRequest, $15.CreateSessionResponse>(
+    $addMethod($grpc.ServiceMethod<$16.CreateSessionRequest, $16.CreateSessionResponse>(
         'CreateSession',
         createSession_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.CreateSessionRequest.fromBuffer(value),
-        ($15.CreateSessionResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.GetSessionRequest, $15.GetSessionResponse>(
+        ($core.List<$core.int> value) => $16.CreateSessionRequest.fromBuffer(value),
+        ($16.CreateSessionResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.GetSessionRequest, $16.GetSessionResponse>(
         'GetSession',
         getSession_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.GetSessionRequest.fromBuffer(value),
-        ($15.GetSessionResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.UpdateSessionRequest, $15.UpdateSessionResponse>(
+        ($core.List<$core.int> value) => $16.GetSessionRequest.fromBuffer(value),
+        ($16.GetSessionResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.UpdateSessionRequest, $16.UpdateSessionResponse>(
         'UpdateSession',
         updateSession_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.UpdateSessionRequest.fromBuffer(value),
-        ($15.UpdateSessionResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.UpdateSessionStatusRequest, $15.UpdateSessionStatusResponse>(
+        ($core.List<$core.int> value) => $16.UpdateSessionRequest.fromBuffer(value),
+        ($16.UpdateSessionResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.UpdateSessionStatusRequest, $16.UpdateSessionStatusResponse>(
         'UpdateSessionStatus',
         updateSessionStatus_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.UpdateSessionStatusRequest.fromBuffer(value),
-        ($15.UpdateSessionStatusResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.CancelSessionRequest, $15.CancelSessionResponse>(
+        ($core.List<$core.int> value) => $16.UpdateSessionStatusRequest.fromBuffer(value),
+        ($16.UpdateSessionStatusResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.CancelSessionRequest, $16.CancelSessionResponse>(
         'CancelSession',
         cancelSession_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.CancelSessionRequest.fromBuffer(value),
-        ($15.CancelSessionResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.DuplicateSessionRequest, $15.DuplicateSessionResponse>(
+        ($core.List<$core.int> value) => $16.CancelSessionRequest.fromBuffer(value),
+        ($16.CancelSessionResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.DuplicateSessionRequest, $16.DuplicateSessionResponse>(
         'DuplicateSession',
         duplicateSession_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.DuplicateSessionRequest.fromBuffer(value),
-        ($15.DuplicateSessionResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.UpdateSessionScheduleRequest, $15.UpdateSessionScheduleResponse>(
+        ($core.List<$core.int> value) => $16.DuplicateSessionRequest.fromBuffer(value),
+        ($16.DuplicateSessionResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.UpdateSessionScheduleRequest, $16.UpdateSessionScheduleResponse>(
         'UpdateSessionSchedule',
         updateSessionSchedule_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.UpdateSessionScheduleRequest.fromBuffer(value),
-        ($15.UpdateSessionScheduleResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.UpdateSessionLocationRequest, $15.UpdateSessionLocationResponse>(
+        ($core.List<$core.int> value) => $16.UpdateSessionScheduleRequest.fromBuffer(value),
+        ($16.UpdateSessionScheduleResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.UpdateSessionLocationRequest, $16.UpdateSessionLocationResponse>(
         'UpdateSessionLocation',
         updateSessionLocation_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.UpdateSessionLocationRequest.fromBuffer(value),
-        ($15.UpdateSessionLocationResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.ListSessionParticipantsRequest, $15.ListSessionParticipantsResponse>(
-        'ListSessionParticipants',
-        listSessionParticipants_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $15.ListSessionParticipantsRequest.fromBuffer(value),
-        ($15.ListSessionParticipantsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.AddSessionParticipantRequest, $15.AddSessionParticipantResponse>(
-        'AddSessionParticipant',
-        addSessionParticipant_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $15.AddSessionParticipantRequest.fromBuffer(value),
-        ($15.AddSessionParticipantResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.UpdateSessionParticipantRequest, $15.UpdateSessionParticipantResponse>(
-        'UpdateSessionParticipant',
-        updateSessionParticipant_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $15.UpdateSessionParticipantRequest.fromBuffer(value),
-        ($15.UpdateSessionParticipantResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.AddSessionSongResourceRequest, $15.AddSessionSongResourceResponse>(
+        ($core.List<$core.int> value) => $16.UpdateSessionLocationRequest.fromBuffer(value),
+        ($16.UpdateSessionLocationResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.AddSessionSongResourceRequest, $16.AddSessionSongResourceResponse>(
         'AddSessionSongResource',
         addSessionSongResource_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.AddSessionSongResourceRequest.fromBuffer(value),
-        ($15.AddSessionSongResourceResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.ListSessionSongResourcesRequest, $15.ListSessionSongResourcesResponse>(
+        ($core.List<$core.int> value) => $16.AddSessionSongResourceRequest.fromBuffer(value),
+        ($16.AddSessionSongResourceResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.ListSessionSongResourcesRequest, $16.ListSessionSongResourcesResponse>(
         'ListSessionSongResources',
         listSessionSongResources_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.ListSessionSongResourcesRequest.fromBuffer(value),
-        ($15.ListSessionSongResourcesResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.DeleteSessionSongResourceRequest, $15.DeleteSessionSongResourceResponse>(
+        ($core.List<$core.int> value) => $16.ListSessionSongResourcesRequest.fromBuffer(value),
+        ($16.ListSessionSongResourcesResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.DeleteSessionSongResourceRequest, $16.DeleteSessionSongResourceResponse>(
         'DeleteSessionSongResource',
         deleteSessionSongResource_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.DeleteSessionSongResourceRequest.fromBuffer(value),
-        ($15.DeleteSessionSongResourceResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.ListSessionOrganizersRequest, $15.ListSessionOrganizersResponse>(
+        ($core.List<$core.int> value) => $16.DeleteSessionSongResourceRequest.fromBuffer(value),
+        ($16.DeleteSessionSongResourceResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.ListSessionOrganizersRequest, $16.ListSessionOrganizersResponse>(
         'ListSessionOrganizers',
         listSessionOrganizers_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.ListSessionOrganizersRequest.fromBuffer(value),
-        ($15.ListSessionOrganizersResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.AddSessionOrganizerRequest, $15.AddSessionOrganizerResponse>(
+        ($core.List<$core.int> value) => $16.ListSessionOrganizersRequest.fromBuffer(value),
+        ($16.ListSessionOrganizersResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.AddSessionOrganizerRequest, $16.AddSessionOrganizerResponse>(
         'AddSessionOrganizer',
         addSessionOrganizer_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.AddSessionOrganizerRequest.fromBuffer(value),
-        ($15.AddSessionOrganizerResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.DeleteSessionOrganizerRequest, $15.DeleteSessionOrganizerResponse>(
+        ($core.List<$core.int> value) => $16.AddSessionOrganizerRequest.fromBuffer(value),
+        ($16.AddSessionOrganizerResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.DeleteSessionOrganizerRequest, $16.DeleteSessionOrganizerResponse>(
         'DeleteSessionOrganizer',
         deleteSessionOrganizer_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.DeleteSessionOrganizerRequest.fromBuffer(value),
-        ($15.DeleteSessionOrganizerResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.CreateSessionThreadRequest, $15.CreateSessionThreadResponse>(
+        ($core.List<$core.int> value) => $16.DeleteSessionOrganizerRequest.fromBuffer(value),
+        ($16.DeleteSessionOrganizerResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.CreateSessionThreadRequest, $16.CreateSessionThreadResponse>(
         'CreateSessionThread',
         createSessionThread_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.CreateSessionThreadRequest.fromBuffer(value),
-        ($15.CreateSessionThreadResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.ListSessionThreadsRequest, $15.ListSessionThreadsResponse>(
+        ($core.List<$core.int> value) => $16.CreateSessionThreadRequest.fromBuffer(value),
+        ($16.CreateSessionThreadResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.ListSessionThreadsRequest, $16.ListSessionThreadsResponse>(
         'ListSessionThreads',
         listSessionThreads_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.ListSessionThreadsRequest.fromBuffer(value),
-        ($15.ListSessionThreadsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.CreateSongThreadRequest, $15.CreateSongThreadResponse>(
+        ($core.List<$core.int> value) => $16.ListSessionThreadsRequest.fromBuffer(value),
+        ($16.ListSessionThreadsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.CreateSongThreadRequest, $16.CreateSongThreadResponse>(
         'CreateSongThread',
         createSongThread_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.CreateSongThreadRequest.fromBuffer(value),
-        ($15.CreateSongThreadResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.GetSessionThreadRequest, $15.GetSessionThreadResponse>(
+        ($core.List<$core.int> value) => $16.CreateSongThreadRequest.fromBuffer(value),
+        ($16.CreateSongThreadResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.GetSessionThreadRequest, $16.GetSessionThreadResponse>(
         'GetSessionThread',
         getSessionThread_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.GetSessionThreadRequest.fromBuffer(value),
-        ($15.GetSessionThreadResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.DeleteSessionThreadRequest, $15.DeleteSessionThreadResponse>(
+        ($core.List<$core.int> value) => $16.GetSessionThreadRequest.fromBuffer(value),
+        ($16.GetSessionThreadResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.DeleteSessionThreadRequest, $16.DeleteSessionThreadResponse>(
         'DeleteSessionThread',
         deleteSessionThread_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.DeleteSessionThreadRequest.fromBuffer(value),
-        ($15.DeleteSessionThreadResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.CreateSessionNotificationRequest, $15.CreateSessionNotificationResponse>(
+        ($core.List<$core.int> value) => $16.DeleteSessionThreadRequest.fromBuffer(value),
+        ($16.DeleteSessionThreadResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.CreateSessionNotificationRequest, $16.CreateSessionNotificationResponse>(
         'CreateSessionNotification',
         createSessionNotification_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.CreateSessionNotificationRequest.fromBuffer(value),
-        ($15.CreateSessionNotificationResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.GetSessionTimetableRequest, $15.GetSessionTimetableResponse>(
+        ($core.List<$core.int> value) => $16.CreateSessionNotificationRequest.fromBuffer(value),
+        ($16.CreateSessionNotificationResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.GetSessionTimetableRequest, $16.GetSessionTimetableResponse>(
         'GetSessionTimetable',
         getSessionTimetable_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.GetSessionTimetableRequest.fromBuffer(value),
-        ($15.GetSessionTimetableResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.UpdateSessionTimetableRequest, $15.UpdateSessionTimetableResponse>(
+        ($core.List<$core.int> value) => $16.GetSessionTimetableRequest.fromBuffer(value),
+        ($16.GetSessionTimetableResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.UpdateSessionTimetableRequest, $16.UpdateSessionTimetableResponse>(
         'UpdateSessionTimetable',
         updateSessionTimetable_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.UpdateSessionTimetableRequest.fromBuffer(value),
-        ($15.UpdateSessionTimetableResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.GetOptimizedTimetableRequest, $15.GetOptimizedTimetableResponse>(
+        ($core.List<$core.int> value) => $16.UpdateSessionTimetableRequest.fromBuffer(value),
+        ($16.UpdateSessionTimetableResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.GetOptimizedTimetableRequest, $16.GetOptimizedTimetableResponse>(
         'GetOptimizedTimetable',
         getOptimizedTimetable_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.GetOptimizedTimetableRequest.fromBuffer(value),
-        ($15.GetOptimizedTimetableResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.GetTimetableProgressRequest, $15.GetTimetableProgressResponse>(
+        ($core.List<$core.int> value) => $16.GetOptimizedTimetableRequest.fromBuffer(value),
+        ($16.GetOptimizedTimetableResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.GetTimetableProgressRequest, $16.GetTimetableProgressResponse>(
         'GetTimetableProgress',
         getTimetableProgress_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.GetTimetableProgressRequest.fromBuffer(value),
-        ($15.GetTimetableProgressResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.UpdateTimetableProgressRequest, $15.UpdateTimetableProgressResponse>(
+        ($core.List<$core.int> value) => $16.GetTimetableProgressRequest.fromBuffer(value),
+        ($16.GetTimetableProgressResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.UpdateTimetableProgressRequest, $16.UpdateTimetableProgressResponse>(
         'UpdateTimetableProgress',
         updateTimetableProgress_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.UpdateTimetableProgressRequest.fromBuffer(value),
-        ($15.UpdateTimetableProgressResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.AddSessionResourceRequest, $15.AddSessionResourceResponse>(
+        ($core.List<$core.int> value) => $16.UpdateTimetableProgressRequest.fromBuffer(value),
+        ($16.UpdateTimetableProgressResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.AddSessionResourceRequest, $16.AddSessionResourceResponse>(
         'AddSessionResource',
         addSessionResource_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.AddSessionResourceRequest.fromBuffer(value),
-        ($15.AddSessionResourceResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.ListSessionResourcesRequest, $15.ListSessionResourcesResponse>(
+        ($core.List<$core.int> value) => $16.AddSessionResourceRequest.fromBuffer(value),
+        ($16.AddSessionResourceResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.ListSessionResourcesRequest, $16.ListSessionResourcesResponse>(
         'ListSessionResources',
         listSessionResources_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.ListSessionResourcesRequest.fromBuffer(value),
-        ($15.ListSessionResourcesResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.DeleteSessionResourceRequest, $15.DeleteSessionResourceResponse>(
+        ($core.List<$core.int> value) => $16.ListSessionResourcesRequest.fromBuffer(value),
+        ($16.ListSessionResourcesResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.DeleteSessionResourceRequest, $16.DeleteSessionResourceResponse>(
         'DeleteSessionResource',
         deleteSessionResource_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.DeleteSessionResourceRequest.fromBuffer(value),
-        ($15.DeleteSessionResourceResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.AddSessionFeedbackRequest, $15.AddSessionFeedbackResponse>(
+        ($core.List<$core.int> value) => $16.DeleteSessionResourceRequest.fromBuffer(value),
+        ($16.DeleteSessionResourceResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.AddSessionFeedbackRequest, $16.AddSessionFeedbackResponse>(
         'AddSessionFeedback',
         addSessionFeedback_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.AddSessionFeedbackRequest.fromBuffer(value),
-        ($15.AddSessionFeedbackResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.ListSessionFeedbacksRequest, $15.ListSessionFeedbacksResponse>(
+        ($core.List<$core.int> value) => $16.AddSessionFeedbackRequest.fromBuffer(value),
+        ($16.AddSessionFeedbackResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.ListSessionFeedbacksRequest, $16.ListSessionFeedbacksResponse>(
         'ListSessionFeedbacks',
         listSessionFeedbacks_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.ListSessionFeedbacksRequest.fromBuffer(value),
-        ($15.ListSessionFeedbacksResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.ListRelatedSessionsRequest, $15.ListRelatedSessionsResponse>(
+        ($core.List<$core.int> value) => $16.ListSessionFeedbacksRequest.fromBuffer(value),
+        ($16.ListSessionFeedbacksResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.ListRelatedSessionsRequest, $16.ListRelatedSessionsResponse>(
         'ListRelatedSessions',
         listRelatedSessions_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.ListRelatedSessionsRequest.fromBuffer(value),
-        ($15.ListRelatedSessionsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.AddRelatedSessionRequest, $15.AddRelatedSessionResponse>(
+        ($core.List<$core.int> value) => $16.ListRelatedSessionsRequest.fromBuffer(value),
+        ($16.ListRelatedSessionsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.AddRelatedSessionRequest, $16.AddRelatedSessionResponse>(
         'AddRelatedSession',
         addRelatedSession_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.AddRelatedSessionRequest.fromBuffer(value),
-        ($15.AddRelatedSessionResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $16.AddRelatedSessionRequest.fromBuffer(value),
+        ($16.AddRelatedSessionResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$15.CreateSessionResponse> createSession_Pre($grpc.ServiceCall call, $async.Future<$15.CreateSessionRequest> request) async {
+  $async.Future<$16.CreateSessionResponse> createSession_Pre($grpc.ServiceCall call, $async.Future<$16.CreateSessionRequest> request) async {
     return createSession(call, await request);
   }
 
-  $async.Future<$15.GetSessionResponse> getSession_Pre($grpc.ServiceCall call, $async.Future<$15.GetSessionRequest> request) async {
+  $async.Future<$16.GetSessionResponse> getSession_Pre($grpc.ServiceCall call, $async.Future<$16.GetSessionRequest> request) async {
     return getSession(call, await request);
   }
 
-  $async.Future<$15.UpdateSessionResponse> updateSession_Pre($grpc.ServiceCall call, $async.Future<$15.UpdateSessionRequest> request) async {
+  $async.Future<$16.UpdateSessionResponse> updateSession_Pre($grpc.ServiceCall call, $async.Future<$16.UpdateSessionRequest> request) async {
     return updateSession(call, await request);
   }
 
-  $async.Future<$15.UpdateSessionStatusResponse> updateSessionStatus_Pre($grpc.ServiceCall call, $async.Future<$15.UpdateSessionStatusRequest> request) async {
+  $async.Future<$16.UpdateSessionStatusResponse> updateSessionStatus_Pre($grpc.ServiceCall call, $async.Future<$16.UpdateSessionStatusRequest> request) async {
     return updateSessionStatus(call, await request);
   }
 
-  $async.Future<$15.CancelSessionResponse> cancelSession_Pre($grpc.ServiceCall call, $async.Future<$15.CancelSessionRequest> request) async {
+  $async.Future<$16.CancelSessionResponse> cancelSession_Pre($grpc.ServiceCall call, $async.Future<$16.CancelSessionRequest> request) async {
     return cancelSession(call, await request);
   }
 
-  $async.Future<$15.DuplicateSessionResponse> duplicateSession_Pre($grpc.ServiceCall call, $async.Future<$15.DuplicateSessionRequest> request) async {
+  $async.Future<$16.DuplicateSessionResponse> duplicateSession_Pre($grpc.ServiceCall call, $async.Future<$16.DuplicateSessionRequest> request) async {
     return duplicateSession(call, await request);
   }
 
-  $async.Future<$15.UpdateSessionScheduleResponse> updateSessionSchedule_Pre($grpc.ServiceCall call, $async.Future<$15.UpdateSessionScheduleRequest> request) async {
+  $async.Future<$16.UpdateSessionScheduleResponse> updateSessionSchedule_Pre($grpc.ServiceCall call, $async.Future<$16.UpdateSessionScheduleRequest> request) async {
     return updateSessionSchedule(call, await request);
   }
 
-  $async.Future<$15.UpdateSessionLocationResponse> updateSessionLocation_Pre($grpc.ServiceCall call, $async.Future<$15.UpdateSessionLocationRequest> request) async {
+  $async.Future<$16.UpdateSessionLocationResponse> updateSessionLocation_Pre($grpc.ServiceCall call, $async.Future<$16.UpdateSessionLocationRequest> request) async {
     return updateSessionLocation(call, await request);
   }
 
-  $async.Future<$15.ListSessionParticipantsResponse> listSessionParticipants_Pre($grpc.ServiceCall call, $async.Future<$15.ListSessionParticipantsRequest> request) async {
-    return listSessionParticipants(call, await request);
-  }
-
-  $async.Future<$15.AddSessionParticipantResponse> addSessionParticipant_Pre($grpc.ServiceCall call, $async.Future<$15.AddSessionParticipantRequest> request) async {
-    return addSessionParticipant(call, await request);
-  }
-
-  $async.Future<$15.UpdateSessionParticipantResponse> updateSessionParticipant_Pre($grpc.ServiceCall call, $async.Future<$15.UpdateSessionParticipantRequest> request) async {
-    return updateSessionParticipant(call, await request);
-  }
-
-  $async.Future<$15.AddSessionSongResourceResponse> addSessionSongResource_Pre($grpc.ServiceCall call, $async.Future<$15.AddSessionSongResourceRequest> request) async {
+  $async.Future<$16.AddSessionSongResourceResponse> addSessionSongResource_Pre($grpc.ServiceCall call, $async.Future<$16.AddSessionSongResourceRequest> request) async {
     return addSessionSongResource(call, await request);
   }
 
-  $async.Future<$15.ListSessionSongResourcesResponse> listSessionSongResources_Pre($grpc.ServiceCall call, $async.Future<$15.ListSessionSongResourcesRequest> request) async {
+  $async.Future<$16.ListSessionSongResourcesResponse> listSessionSongResources_Pre($grpc.ServiceCall call, $async.Future<$16.ListSessionSongResourcesRequest> request) async {
     return listSessionSongResources(call, await request);
   }
 
-  $async.Future<$15.DeleteSessionSongResourceResponse> deleteSessionSongResource_Pre($grpc.ServiceCall call, $async.Future<$15.DeleteSessionSongResourceRequest> request) async {
+  $async.Future<$16.DeleteSessionSongResourceResponse> deleteSessionSongResource_Pre($grpc.ServiceCall call, $async.Future<$16.DeleteSessionSongResourceRequest> request) async {
     return deleteSessionSongResource(call, await request);
   }
 
-  $async.Future<$15.ListSessionOrganizersResponse> listSessionOrganizers_Pre($grpc.ServiceCall call, $async.Future<$15.ListSessionOrganizersRequest> request) async {
+  $async.Future<$16.ListSessionOrganizersResponse> listSessionOrganizers_Pre($grpc.ServiceCall call, $async.Future<$16.ListSessionOrganizersRequest> request) async {
     return listSessionOrganizers(call, await request);
   }
 
-  $async.Future<$15.AddSessionOrganizerResponse> addSessionOrganizer_Pre($grpc.ServiceCall call, $async.Future<$15.AddSessionOrganizerRequest> request) async {
+  $async.Future<$16.AddSessionOrganizerResponse> addSessionOrganizer_Pre($grpc.ServiceCall call, $async.Future<$16.AddSessionOrganizerRequest> request) async {
     return addSessionOrganizer(call, await request);
   }
 
-  $async.Future<$15.DeleteSessionOrganizerResponse> deleteSessionOrganizer_Pre($grpc.ServiceCall call, $async.Future<$15.DeleteSessionOrganizerRequest> request) async {
+  $async.Future<$16.DeleteSessionOrganizerResponse> deleteSessionOrganizer_Pre($grpc.ServiceCall call, $async.Future<$16.DeleteSessionOrganizerRequest> request) async {
     return deleteSessionOrganizer(call, await request);
   }
 
-  $async.Future<$15.CreateSessionThreadResponse> createSessionThread_Pre($grpc.ServiceCall call, $async.Future<$15.CreateSessionThreadRequest> request) async {
+  $async.Future<$16.CreateSessionThreadResponse> createSessionThread_Pre($grpc.ServiceCall call, $async.Future<$16.CreateSessionThreadRequest> request) async {
     return createSessionThread(call, await request);
   }
 
-  $async.Future<$15.ListSessionThreadsResponse> listSessionThreads_Pre($grpc.ServiceCall call, $async.Future<$15.ListSessionThreadsRequest> request) async {
+  $async.Future<$16.ListSessionThreadsResponse> listSessionThreads_Pre($grpc.ServiceCall call, $async.Future<$16.ListSessionThreadsRequest> request) async {
     return listSessionThreads(call, await request);
   }
 
-  $async.Future<$15.CreateSongThreadResponse> createSongThread_Pre($grpc.ServiceCall call, $async.Future<$15.CreateSongThreadRequest> request) async {
+  $async.Future<$16.CreateSongThreadResponse> createSongThread_Pre($grpc.ServiceCall call, $async.Future<$16.CreateSongThreadRequest> request) async {
     return createSongThread(call, await request);
   }
 
-  $async.Future<$15.GetSessionThreadResponse> getSessionThread_Pre($grpc.ServiceCall call, $async.Future<$15.GetSessionThreadRequest> request) async {
+  $async.Future<$16.GetSessionThreadResponse> getSessionThread_Pre($grpc.ServiceCall call, $async.Future<$16.GetSessionThreadRequest> request) async {
     return getSessionThread(call, await request);
   }
 
-  $async.Future<$15.DeleteSessionThreadResponse> deleteSessionThread_Pre($grpc.ServiceCall call, $async.Future<$15.DeleteSessionThreadRequest> request) async {
+  $async.Future<$16.DeleteSessionThreadResponse> deleteSessionThread_Pre($grpc.ServiceCall call, $async.Future<$16.DeleteSessionThreadRequest> request) async {
     return deleteSessionThread(call, await request);
   }
 
-  $async.Future<$15.CreateSessionNotificationResponse> createSessionNotification_Pre($grpc.ServiceCall call, $async.Future<$15.CreateSessionNotificationRequest> request) async {
+  $async.Future<$16.CreateSessionNotificationResponse> createSessionNotification_Pre($grpc.ServiceCall call, $async.Future<$16.CreateSessionNotificationRequest> request) async {
     return createSessionNotification(call, await request);
   }
 
-  $async.Future<$15.GetSessionTimetableResponse> getSessionTimetable_Pre($grpc.ServiceCall call, $async.Future<$15.GetSessionTimetableRequest> request) async {
+  $async.Future<$16.GetSessionTimetableResponse> getSessionTimetable_Pre($grpc.ServiceCall call, $async.Future<$16.GetSessionTimetableRequest> request) async {
     return getSessionTimetable(call, await request);
   }
 
-  $async.Future<$15.UpdateSessionTimetableResponse> updateSessionTimetable_Pre($grpc.ServiceCall call, $async.Future<$15.UpdateSessionTimetableRequest> request) async {
+  $async.Future<$16.UpdateSessionTimetableResponse> updateSessionTimetable_Pre($grpc.ServiceCall call, $async.Future<$16.UpdateSessionTimetableRequest> request) async {
     return updateSessionTimetable(call, await request);
   }
 
-  $async.Future<$15.GetOptimizedTimetableResponse> getOptimizedTimetable_Pre($grpc.ServiceCall call, $async.Future<$15.GetOptimizedTimetableRequest> request) async {
+  $async.Future<$16.GetOptimizedTimetableResponse> getOptimizedTimetable_Pre($grpc.ServiceCall call, $async.Future<$16.GetOptimizedTimetableRequest> request) async {
     return getOptimizedTimetable(call, await request);
   }
 
-  $async.Future<$15.GetTimetableProgressResponse> getTimetableProgress_Pre($grpc.ServiceCall call, $async.Future<$15.GetTimetableProgressRequest> request) async {
+  $async.Future<$16.GetTimetableProgressResponse> getTimetableProgress_Pre($grpc.ServiceCall call, $async.Future<$16.GetTimetableProgressRequest> request) async {
     return getTimetableProgress(call, await request);
   }
 
-  $async.Future<$15.UpdateTimetableProgressResponse> updateTimetableProgress_Pre($grpc.ServiceCall call, $async.Future<$15.UpdateTimetableProgressRequest> request) async {
+  $async.Future<$16.UpdateTimetableProgressResponse> updateTimetableProgress_Pre($grpc.ServiceCall call, $async.Future<$16.UpdateTimetableProgressRequest> request) async {
     return updateTimetableProgress(call, await request);
   }
 
-  $async.Future<$15.AddSessionResourceResponse> addSessionResource_Pre($grpc.ServiceCall call, $async.Future<$15.AddSessionResourceRequest> request) async {
+  $async.Future<$16.AddSessionResourceResponse> addSessionResource_Pre($grpc.ServiceCall call, $async.Future<$16.AddSessionResourceRequest> request) async {
     return addSessionResource(call, await request);
   }
 
-  $async.Future<$15.ListSessionResourcesResponse> listSessionResources_Pre($grpc.ServiceCall call, $async.Future<$15.ListSessionResourcesRequest> request) async {
+  $async.Future<$16.ListSessionResourcesResponse> listSessionResources_Pre($grpc.ServiceCall call, $async.Future<$16.ListSessionResourcesRequest> request) async {
     return listSessionResources(call, await request);
   }
 
-  $async.Future<$15.DeleteSessionResourceResponse> deleteSessionResource_Pre($grpc.ServiceCall call, $async.Future<$15.DeleteSessionResourceRequest> request) async {
+  $async.Future<$16.DeleteSessionResourceResponse> deleteSessionResource_Pre($grpc.ServiceCall call, $async.Future<$16.DeleteSessionResourceRequest> request) async {
     return deleteSessionResource(call, await request);
   }
 
-  $async.Future<$15.AddSessionFeedbackResponse> addSessionFeedback_Pre($grpc.ServiceCall call, $async.Future<$15.AddSessionFeedbackRequest> request) async {
+  $async.Future<$16.AddSessionFeedbackResponse> addSessionFeedback_Pre($grpc.ServiceCall call, $async.Future<$16.AddSessionFeedbackRequest> request) async {
     return addSessionFeedback(call, await request);
   }
 
-  $async.Future<$15.ListSessionFeedbacksResponse> listSessionFeedbacks_Pre($grpc.ServiceCall call, $async.Future<$15.ListSessionFeedbacksRequest> request) async {
+  $async.Future<$16.ListSessionFeedbacksResponse> listSessionFeedbacks_Pre($grpc.ServiceCall call, $async.Future<$16.ListSessionFeedbacksRequest> request) async {
     return listSessionFeedbacks(call, await request);
   }
 
-  $async.Future<$15.ListRelatedSessionsResponse> listRelatedSessions_Pre($grpc.ServiceCall call, $async.Future<$15.ListRelatedSessionsRequest> request) async {
+  $async.Future<$16.ListRelatedSessionsResponse> listRelatedSessions_Pre($grpc.ServiceCall call, $async.Future<$16.ListRelatedSessionsRequest> request) async {
     return listRelatedSessions(call, await request);
   }
 
-  $async.Future<$15.AddRelatedSessionResponse> addRelatedSession_Pre($grpc.ServiceCall call, $async.Future<$15.AddRelatedSessionRequest> request) async {
+  $async.Future<$16.AddRelatedSessionResponse> addRelatedSession_Pre($grpc.ServiceCall call, $async.Future<$16.AddRelatedSessionRequest> request) async {
     return addRelatedSession(call, await request);
   }
 
-  $async.Future<$15.CreateSessionResponse> createSession($grpc.ServiceCall call, $15.CreateSessionRequest request);
-  $async.Future<$15.GetSessionResponse> getSession($grpc.ServiceCall call, $15.GetSessionRequest request);
-  $async.Future<$15.UpdateSessionResponse> updateSession($grpc.ServiceCall call, $15.UpdateSessionRequest request);
-  $async.Future<$15.UpdateSessionStatusResponse> updateSessionStatus($grpc.ServiceCall call, $15.UpdateSessionStatusRequest request);
-  $async.Future<$15.CancelSessionResponse> cancelSession($grpc.ServiceCall call, $15.CancelSessionRequest request);
-  $async.Future<$15.DuplicateSessionResponse> duplicateSession($grpc.ServiceCall call, $15.DuplicateSessionRequest request);
-  $async.Future<$15.UpdateSessionScheduleResponse> updateSessionSchedule($grpc.ServiceCall call, $15.UpdateSessionScheduleRequest request);
-  $async.Future<$15.UpdateSessionLocationResponse> updateSessionLocation($grpc.ServiceCall call, $15.UpdateSessionLocationRequest request);
-  $async.Future<$15.ListSessionParticipantsResponse> listSessionParticipants($grpc.ServiceCall call, $15.ListSessionParticipantsRequest request);
-  $async.Future<$15.AddSessionParticipantResponse> addSessionParticipant($grpc.ServiceCall call, $15.AddSessionParticipantRequest request);
-  $async.Future<$15.UpdateSessionParticipantResponse> updateSessionParticipant($grpc.ServiceCall call, $15.UpdateSessionParticipantRequest request);
-  $async.Future<$15.AddSessionSongResourceResponse> addSessionSongResource($grpc.ServiceCall call, $15.AddSessionSongResourceRequest request);
-  $async.Future<$15.ListSessionSongResourcesResponse> listSessionSongResources($grpc.ServiceCall call, $15.ListSessionSongResourcesRequest request);
-  $async.Future<$15.DeleteSessionSongResourceResponse> deleteSessionSongResource($grpc.ServiceCall call, $15.DeleteSessionSongResourceRequest request);
-  $async.Future<$15.ListSessionOrganizersResponse> listSessionOrganizers($grpc.ServiceCall call, $15.ListSessionOrganizersRequest request);
-  $async.Future<$15.AddSessionOrganizerResponse> addSessionOrganizer($grpc.ServiceCall call, $15.AddSessionOrganizerRequest request);
-  $async.Future<$15.DeleteSessionOrganizerResponse> deleteSessionOrganizer($grpc.ServiceCall call, $15.DeleteSessionOrganizerRequest request);
-  $async.Future<$15.CreateSessionThreadResponse> createSessionThread($grpc.ServiceCall call, $15.CreateSessionThreadRequest request);
-  $async.Future<$15.ListSessionThreadsResponse> listSessionThreads($grpc.ServiceCall call, $15.ListSessionThreadsRequest request);
-  $async.Future<$15.CreateSongThreadResponse> createSongThread($grpc.ServiceCall call, $15.CreateSongThreadRequest request);
-  $async.Future<$15.GetSessionThreadResponse> getSessionThread($grpc.ServiceCall call, $15.GetSessionThreadRequest request);
-  $async.Future<$15.DeleteSessionThreadResponse> deleteSessionThread($grpc.ServiceCall call, $15.DeleteSessionThreadRequest request);
-  $async.Future<$15.CreateSessionNotificationResponse> createSessionNotification($grpc.ServiceCall call, $15.CreateSessionNotificationRequest request);
-  $async.Future<$15.GetSessionTimetableResponse> getSessionTimetable($grpc.ServiceCall call, $15.GetSessionTimetableRequest request);
-  $async.Future<$15.UpdateSessionTimetableResponse> updateSessionTimetable($grpc.ServiceCall call, $15.UpdateSessionTimetableRequest request);
-  $async.Future<$15.GetOptimizedTimetableResponse> getOptimizedTimetable($grpc.ServiceCall call, $15.GetOptimizedTimetableRequest request);
-  $async.Future<$15.GetTimetableProgressResponse> getTimetableProgress($grpc.ServiceCall call, $15.GetTimetableProgressRequest request);
-  $async.Future<$15.UpdateTimetableProgressResponse> updateTimetableProgress($grpc.ServiceCall call, $15.UpdateTimetableProgressRequest request);
-  $async.Future<$15.AddSessionResourceResponse> addSessionResource($grpc.ServiceCall call, $15.AddSessionResourceRequest request);
-  $async.Future<$15.ListSessionResourcesResponse> listSessionResources($grpc.ServiceCall call, $15.ListSessionResourcesRequest request);
-  $async.Future<$15.DeleteSessionResourceResponse> deleteSessionResource($grpc.ServiceCall call, $15.DeleteSessionResourceRequest request);
-  $async.Future<$15.AddSessionFeedbackResponse> addSessionFeedback($grpc.ServiceCall call, $15.AddSessionFeedbackRequest request);
-  $async.Future<$15.ListSessionFeedbacksResponse> listSessionFeedbacks($grpc.ServiceCall call, $15.ListSessionFeedbacksRequest request);
-  $async.Future<$15.ListRelatedSessionsResponse> listRelatedSessions($grpc.ServiceCall call, $15.ListRelatedSessionsRequest request);
-  $async.Future<$15.AddRelatedSessionResponse> addRelatedSession($grpc.ServiceCall call, $15.AddRelatedSessionRequest request);
+  $async.Future<$16.CreateSessionResponse> createSession($grpc.ServiceCall call, $16.CreateSessionRequest request);
+  $async.Future<$16.GetSessionResponse> getSession($grpc.ServiceCall call, $16.GetSessionRequest request);
+  $async.Future<$16.UpdateSessionResponse> updateSession($grpc.ServiceCall call, $16.UpdateSessionRequest request);
+  $async.Future<$16.UpdateSessionStatusResponse> updateSessionStatus($grpc.ServiceCall call, $16.UpdateSessionStatusRequest request);
+  $async.Future<$16.CancelSessionResponse> cancelSession($grpc.ServiceCall call, $16.CancelSessionRequest request);
+  $async.Future<$16.DuplicateSessionResponse> duplicateSession($grpc.ServiceCall call, $16.DuplicateSessionRequest request);
+  $async.Future<$16.UpdateSessionScheduleResponse> updateSessionSchedule($grpc.ServiceCall call, $16.UpdateSessionScheduleRequest request);
+  $async.Future<$16.UpdateSessionLocationResponse> updateSessionLocation($grpc.ServiceCall call, $16.UpdateSessionLocationRequest request);
+  $async.Future<$16.AddSessionSongResourceResponse> addSessionSongResource($grpc.ServiceCall call, $16.AddSessionSongResourceRequest request);
+  $async.Future<$16.ListSessionSongResourcesResponse> listSessionSongResources($grpc.ServiceCall call, $16.ListSessionSongResourcesRequest request);
+  $async.Future<$16.DeleteSessionSongResourceResponse> deleteSessionSongResource($grpc.ServiceCall call, $16.DeleteSessionSongResourceRequest request);
+  $async.Future<$16.ListSessionOrganizersResponse> listSessionOrganizers($grpc.ServiceCall call, $16.ListSessionOrganizersRequest request);
+  $async.Future<$16.AddSessionOrganizerResponse> addSessionOrganizer($grpc.ServiceCall call, $16.AddSessionOrganizerRequest request);
+  $async.Future<$16.DeleteSessionOrganizerResponse> deleteSessionOrganizer($grpc.ServiceCall call, $16.DeleteSessionOrganizerRequest request);
+  $async.Future<$16.CreateSessionThreadResponse> createSessionThread($grpc.ServiceCall call, $16.CreateSessionThreadRequest request);
+  $async.Future<$16.ListSessionThreadsResponse> listSessionThreads($grpc.ServiceCall call, $16.ListSessionThreadsRequest request);
+  $async.Future<$16.CreateSongThreadResponse> createSongThread($grpc.ServiceCall call, $16.CreateSongThreadRequest request);
+  $async.Future<$16.GetSessionThreadResponse> getSessionThread($grpc.ServiceCall call, $16.GetSessionThreadRequest request);
+  $async.Future<$16.DeleteSessionThreadResponse> deleteSessionThread($grpc.ServiceCall call, $16.DeleteSessionThreadRequest request);
+  $async.Future<$16.CreateSessionNotificationResponse> createSessionNotification($grpc.ServiceCall call, $16.CreateSessionNotificationRequest request);
+  $async.Future<$16.GetSessionTimetableResponse> getSessionTimetable($grpc.ServiceCall call, $16.GetSessionTimetableRequest request);
+  $async.Future<$16.UpdateSessionTimetableResponse> updateSessionTimetable($grpc.ServiceCall call, $16.UpdateSessionTimetableRequest request);
+  $async.Future<$16.GetOptimizedTimetableResponse> getOptimizedTimetable($grpc.ServiceCall call, $16.GetOptimizedTimetableRequest request);
+  $async.Future<$16.GetTimetableProgressResponse> getTimetableProgress($grpc.ServiceCall call, $16.GetTimetableProgressRequest request);
+  $async.Future<$16.UpdateTimetableProgressResponse> updateTimetableProgress($grpc.ServiceCall call, $16.UpdateTimetableProgressRequest request);
+  $async.Future<$16.AddSessionResourceResponse> addSessionResource($grpc.ServiceCall call, $16.AddSessionResourceRequest request);
+  $async.Future<$16.ListSessionResourcesResponse> listSessionResources($grpc.ServiceCall call, $16.ListSessionResourcesRequest request);
+  $async.Future<$16.DeleteSessionResourceResponse> deleteSessionResource($grpc.ServiceCall call, $16.DeleteSessionResourceRequest request);
+  $async.Future<$16.AddSessionFeedbackResponse> addSessionFeedback($grpc.ServiceCall call, $16.AddSessionFeedbackRequest request);
+  $async.Future<$16.ListSessionFeedbacksResponse> listSessionFeedbacks($grpc.ServiceCall call, $16.ListSessionFeedbacksRequest request);
+  $async.Future<$16.ListRelatedSessionsResponse> listRelatedSessions($grpc.ServiceCall call, $16.ListRelatedSessionsRequest request);
+  $async.Future<$16.AddRelatedSessionResponse> addRelatedSession($grpc.ServiceCall call, $16.AddRelatedSessionRequest request);
 }

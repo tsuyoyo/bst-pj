@@ -1,0 +1,96 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "bst/v1/session.proto";
+
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+service SessionParticipantService {
+  // GET /sessions/{id}/participants
+  rpc ListSessionParticipants(ListSessionParticipantsRequest)
+      returns (ListSessionParticipantsResponse);
+  // POST /sessions/{id}/participants
+  rpc AddSessionParticipant(AddSessionParticipantRequest)
+      returns (AddSessionParticipantResponse);
+  // POST /sessions/{id}/participants/{participantId}/is_organizer
+  rpc SetSessionParticipantIsOrganizer(SetSessionParticipantIsOrganizerRequest)
+      returns (SetSessionParticipantIsOrganizerResponse);
+  // POST /sessions/{id}/participants/{participantId}/parts
+  rpc AddSessionParticipantParts(AddSessionParticipantPartsRequest)
+      returns (AddSessionParticipantPartsResponse);
+  // PUT /sessions/{id}/participants/{participantId}
+  rpc UpdateSessionParticipant(UpdateSessionParticipantRequest)
+      returns (UpdateSessionParticipantResponse);
+  // PUT /sessions/{id}/participants/{participantId}/status
+  rpc UpdateSessionParticipantStatus(UpdateSessionParticipantStatusRequest)
+      returns (UpdateSessionParticipantStatusResponse);
+  // DELETE /sessions/{id}/participants/{participantId}
+  rpc DeleteSessionParticipant(DeleteSessionParticipantRequest)
+      returns (DeleteSessionParticipantResponse);
+
+  // ----------------
+  // NOTE: Won't　make "Change primary part" for a while due to complexity.
+  // ----------------
+}
+
+message ListSessionParticipantsRequest {}
+
+message ListSessionParticipantsResponse {
+  repeated SessionParticipant participants = 1;
+}
+
+message AddSessionParticipantRequest {
+  message SessionParticipantPart {
+    int32 session_part_id = 1;
+    bool  is_primary      = 2;
+  }
+  int32 user_id = 1;
+
+  // When it's empty, the participant is NOT player (organizer or observer)
+  repeated SessionParticipantPart parts = 2;
+}
+
+message AddSessionParticipantResponse {
+  SessionParticipant sessionParticipant = 1;
+}
+
+message UpdateSessionParticipantRequest {
+  string comment = 1;
+}
+
+message UpdateSessionParticipantResponse {
+  SessionParticipant sessionParticipant = 1;
+}
+
+message SetSessionParticipantIsOrganizerRequest {
+  bool is_organizer = 1;
+}
+
+message SetSessionParticipantIsOrganizerResponse {
+  SessionParticipant sessionParticipant = 1;
+}
+
+message AddSessionParticipantPartsRequest {
+  int32 session_part_id = 1;
+}
+
+message AddSessionParticipantPartsResponse {
+  SessionParticipant sessionParticipant = 1;
+}
+
+message UpdateSessionParticipantStatusRequest {
+  SessionParticipantStatus status = 1;
+}
+
+message UpdateSessionParticipantStatusResponse {
+  SessionParticipant sessionParticipant = 1;
+}
+
+message DeleteSessionParticipantRequest {
+  int32 participant_id = 1;
+}
+
+message DeleteSessionParticipantResponse {
+  bool success = 1;
+}

@@ -10,21 +10,30 @@ option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
 service SessionSongEntryService {
   // POST /sessions/{id}/songs/{songId}/entries
   rpc AddSongEntry(AddSongEntryRequest) returns (AddSongEntryResponse);
+  // PUT /sessions/{id}/songs/{songId}/entries/{entryId}
+  rpc UpdateSongEntry(UpdateSongEntryRequest) returns (UpdateSongEntryResponse);
   // DELETE /sessions/{id}/songs/{songId}/entries/{entryId}
   rpc DeleteSongEntry(DeleteSongEntryRequest) returns (DeleteSongEntryResponse);
 }
 
 message AddSongEntryRequest {
-  int32 session_part_id = 1;
+  int32  session_part_id = 1;
+  string comment         = 2;
 }
 
 message AddSongEntryResponse {
-  bool success = 1;
+  SessionSongEntry entry = 1;
 }
 
-message DeleteSongEntryRequest {
-  int32 session_part_id = 1;
+message UpdateSongEntryRequest {
+  string comment = 1;
 }
+
+message UpdateSongEntryResponse {
+  SessionSongEntry entry = 1;
+}
+
+message DeleteSongEntryRequest {}
 
 message DeleteSongEntryResponse {
   bool success = 1;

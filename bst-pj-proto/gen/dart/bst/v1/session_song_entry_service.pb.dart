@@ -13,13 +13,19 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'session.pb.dart' as $33;
+
 class AddSongEntryRequest extends $pb.GeneratedMessage {
   factory AddSongEntryRequest({
     $core.int? sessionPartId,
+    $core.String? comment,
   }) {
     final $result = create();
     if (sessionPartId != null) {
       $result.sessionPartId = sessionPartId;
+    }
+    if (comment != null) {
+      $result.comment = comment;
     }
     return $result;
   }
@@ -29,6 +35,7 @@ class AddSongEntryRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSongEntryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionPartId', $pb.PbFieldType.O3)
+    ..aOS(2, _omitFieldNames ? '' : 'comment')
     ..hasRequiredFields = false
   ;
 
@@ -61,15 +68,24 @@ class AddSongEntryRequest extends $pb.GeneratedMessage {
   $core.bool hasSessionPartId() => $_has(0);
   @$pb.TagNumber(1)
   void clearSessionPartId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get comment => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set comment($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasComment() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearComment() => clearField(2);
 }
 
 class AddSongEntryResponse extends $pb.GeneratedMessage {
   factory AddSongEntryResponse({
-    $core.bool? success,
+    $33.SessionSongEntry? entry,
   }) {
     final $result = create();
-    if (success != null) {
-      $result.success = success;
+    if (entry != null) {
+      $result.entry = entry;
     }
     return $result;
   }
@@ -78,7 +94,7 @@ class AddSongEntryResponse extends $pb.GeneratedMessage {
   factory AddSongEntryResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSongEntryResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOB(1, _omitFieldNames ? '' : 'success')
+    ..aOM<$33.SessionSongEntry>(1, _omitFieldNames ? '' : 'entry', subBuilder: $33.SessionSongEntry.create)
     ..hasRequiredFields = false
   ;
 
@@ -104,31 +120,126 @@ class AddSongEntryResponse extends $pb.GeneratedMessage {
   static AddSongEntryResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.bool get success => $_getBF(0);
+  $33.SessionSongEntry get entry => $_getN(0);
   @$pb.TagNumber(1)
-  set success($core.bool v) { $_setBool(0, v); }
+  set entry($33.SessionSongEntry v) { setField(1, v); }
   @$pb.TagNumber(1)
-  $core.bool hasSuccess() => $_has(0);
+  $core.bool hasEntry() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSuccess() => clearField(1);
+  void clearEntry() => clearField(1);
+  @$pb.TagNumber(1)
+  $33.SessionSongEntry ensureEntry() => $_ensure(0);
 }
 
-class DeleteSongEntryRequest extends $pb.GeneratedMessage {
-  factory DeleteSongEntryRequest({
-    $core.int? sessionPartId,
+class UpdateSongEntryRequest extends $pb.GeneratedMessage {
+  factory UpdateSongEntryRequest({
+    $core.String? comment,
   }) {
     final $result = create();
-    if (sessionPartId != null) {
-      $result.sessionPartId = sessionPartId;
+    if (comment != null) {
+      $result.comment = comment;
     }
     return $result;
   }
+  UpdateSongEntryRequest._() : super();
+  factory UpdateSongEntryRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateSongEntryRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSongEntryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'comment')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateSongEntryRequest clone() => UpdateSongEntryRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateSongEntryRequest copyWith(void Function(UpdateSongEntryRequest) updates) => super.copyWith((message) => updates(message as UpdateSongEntryRequest)) as UpdateSongEntryRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateSongEntryRequest create() => UpdateSongEntryRequest._();
+  UpdateSongEntryRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateSongEntryRequest> createRepeated() => $pb.PbList<UpdateSongEntryRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateSongEntryRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateSongEntryRequest>(create);
+  static UpdateSongEntryRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get comment => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set comment($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasComment() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearComment() => clearField(1);
+}
+
+class UpdateSongEntryResponse extends $pb.GeneratedMessage {
+  factory UpdateSongEntryResponse({
+    $33.SessionSongEntry? entry,
+  }) {
+    final $result = create();
+    if (entry != null) {
+      $result.entry = entry;
+    }
+    return $result;
+  }
+  UpdateSongEntryResponse._() : super();
+  factory UpdateSongEntryResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateSongEntryResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSongEntryResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+    ..aOM<$33.SessionSongEntry>(1, _omitFieldNames ? '' : 'entry', subBuilder: $33.SessionSongEntry.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateSongEntryResponse clone() => UpdateSongEntryResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateSongEntryResponse copyWith(void Function(UpdateSongEntryResponse) updates) => super.copyWith((message) => updates(message as UpdateSongEntryResponse)) as UpdateSongEntryResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateSongEntryResponse create() => UpdateSongEntryResponse._();
+  UpdateSongEntryResponse createEmptyInstance() => create();
+  static $pb.PbList<UpdateSongEntryResponse> createRepeated() => $pb.PbList<UpdateSongEntryResponse>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateSongEntryResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateSongEntryResponse>(create);
+  static UpdateSongEntryResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $33.SessionSongEntry get entry => $_getN(0);
+  @$pb.TagNumber(1)
+  set entry($33.SessionSongEntry v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasEntry() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEntry() => clearField(1);
+  @$pb.TagNumber(1)
+  $33.SessionSongEntry ensureEntry() => $_ensure(0);
+}
+
+class DeleteSongEntryRequest extends $pb.GeneratedMessage {
+  factory DeleteSongEntryRequest() => create();
   DeleteSongEntryRequest._() : super();
   factory DeleteSongEntryRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory DeleteSongEntryRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteSongEntryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionPartId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -152,15 +263,6 @@ class DeleteSongEntryRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static DeleteSongEntryRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteSongEntryRequest>(create);
   static DeleteSongEntryRequest? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.int get sessionPartId => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set sessionPartId($core.int v) { $_setSignedInt32(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasSessionPartId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSessionPartId() => clearField(1);
 }
 
 class DeleteSongEntryResponse extends $pb.GeneratedMessage {

@@ -13,84 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'session.pb.dart' as $32;
-
-/// List Session Songs
-class ListSessionSongsRequest extends $pb.GeneratedMessage {
-  factory ListSessionSongsRequest() => create();
-  ListSessionSongsRequest._() : super();
-  factory ListSessionSongsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ListSessionSongsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSessionSongsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  ListSessionSongsRequest clone() => ListSessionSongsRequest()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  ListSessionSongsRequest copyWith(void Function(ListSessionSongsRequest) updates) => super.copyWith((message) => updates(message as ListSessionSongsRequest)) as ListSessionSongsRequest;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static ListSessionSongsRequest create() => ListSessionSongsRequest._();
-  ListSessionSongsRequest createEmptyInstance() => create();
-  static $pb.PbList<ListSessionSongsRequest> createRepeated() => $pb.PbList<ListSessionSongsRequest>();
-  @$core.pragma('dart2js:noInline')
-  static ListSessionSongsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListSessionSongsRequest>(create);
-  static ListSessionSongsRequest? _defaultInstance;
-}
-
-class ListSessionSongsResponse extends $pb.GeneratedMessage {
-  factory ListSessionSongsResponse({
-    $core.Iterable<$32.SessionSong>? songs,
-  }) {
-    final $result = create();
-    if (songs != null) {
-      $result.songs.addAll(songs);
-    }
-    return $result;
-  }
-  ListSessionSongsResponse._() : super();
-  factory ListSessionSongsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ListSessionSongsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSessionSongsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$32.SessionSong>(1, _omitFieldNames ? '' : 'songs', $pb.PbFieldType.PM, subBuilder: $32.SessionSong.create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  ListSessionSongsResponse clone() => ListSessionSongsResponse()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  ListSessionSongsResponse copyWith(void Function(ListSessionSongsResponse) updates) => super.copyWith((message) => updates(message as ListSessionSongsResponse)) as ListSessionSongsResponse;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static ListSessionSongsResponse create() => ListSessionSongsResponse._();
-  ListSessionSongsResponse createEmptyInstance() => create();
-  static $pb.PbList<ListSessionSongsResponse> createRepeated() => $pb.PbList<ListSessionSongsResponse>();
-  @$core.pragma('dart2js:noInline')
-  static ListSessionSongsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListSessionSongsResponse>(create);
-  static ListSessionSongsResponse? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.List<$32.SessionSong> get songs => $_getList(0);
-}
+import 'session.pb.dart' as $33;
 
 /// Add Session Song
 class AddSessionSongRequest extends $pb.GeneratedMessage {
@@ -153,7 +76,7 @@ class AddSessionSongRequest extends $pb.GeneratedMessage {
 
 class AddSessionSongResponse extends $pb.GeneratedMessage {
   factory AddSessionSongResponse({
-    $32.SessionSong? song,
+    $33.SessionSong? song,
   }) {
     final $result = create();
     if (song != null) {
@@ -166,7 +89,7 @@ class AddSessionSongResponse extends $pb.GeneratedMessage {
   factory AddSessionSongResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSessionSongResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$32.SessionSong>(1, _omitFieldNames ? '' : 'song', subBuilder: $32.SessionSong.create)
+    ..aOM<$33.SessionSong>(1, _omitFieldNames ? '' : 'song', subBuilder: $33.SessionSong.create)
     ..hasRequiredFields = false
   ;
 
@@ -192,15 +115,92 @@ class AddSessionSongResponse extends $pb.GeneratedMessage {
   static AddSessionSongResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $32.SessionSong get song => $_getN(0);
+  $33.SessionSong get song => $_getN(0);
   @$pb.TagNumber(1)
-  set song($32.SessionSong v) { setField(1, v); }
+  set song($33.SessionSong v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSong() => $_has(0);
   @$pb.TagNumber(1)
   void clearSong() => clearField(1);
   @$pb.TagNumber(1)
-  $32.SessionSong ensureSong() => $_ensure(0);
+  $33.SessionSong ensureSong() => $_ensure(0);
+}
+
+/// List Session Songs
+class ListSessionSongsRequest extends $pb.GeneratedMessage {
+  factory ListSessionSongsRequest() => create();
+  ListSessionSongsRequest._() : super();
+  factory ListSessionSongsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListSessionSongsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSessionSongsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListSessionSongsRequest clone() => ListSessionSongsRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListSessionSongsRequest copyWith(void Function(ListSessionSongsRequest) updates) => super.copyWith((message) => updates(message as ListSessionSongsRequest)) as ListSessionSongsRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListSessionSongsRequest create() => ListSessionSongsRequest._();
+  ListSessionSongsRequest createEmptyInstance() => create();
+  static $pb.PbList<ListSessionSongsRequest> createRepeated() => $pb.PbList<ListSessionSongsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListSessionSongsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListSessionSongsRequest>(create);
+  static ListSessionSongsRequest? _defaultInstance;
+}
+
+class ListSessionSongsResponse extends $pb.GeneratedMessage {
+  factory ListSessionSongsResponse({
+    $core.Iterable<$33.SessionSong>? songs,
+  }) {
+    final $result = create();
+    if (songs != null) {
+      $result.songs.addAll(songs);
+    }
+    return $result;
+  }
+  ListSessionSongsResponse._() : super();
+  factory ListSessionSongsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListSessionSongsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSessionSongsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+    ..pc<$33.SessionSong>(1, _omitFieldNames ? '' : 'songs', $pb.PbFieldType.PM, subBuilder: $33.SessionSong.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListSessionSongsResponse clone() => ListSessionSongsResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListSessionSongsResponse copyWith(void Function(ListSessionSongsResponse) updates) => super.copyWith((message) => updates(message as ListSessionSongsResponse)) as ListSessionSongsResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListSessionSongsResponse create() => ListSessionSongsResponse._();
+  ListSessionSongsResponse createEmptyInstance() => create();
+  static $pb.PbList<ListSessionSongsResponse> createRepeated() => $pb.PbList<ListSessionSongsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListSessionSongsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListSessionSongsResponse>(create);
+  static ListSessionSongsResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$33.SessionSong> get songs => $_getList(0);
 }
 
 /// Get Session Song
@@ -238,7 +238,7 @@ class GetSessionSongRequest extends $pb.GeneratedMessage {
 
 class GetSessionSongResponse extends $pb.GeneratedMessage {
   factory GetSessionSongResponse({
-    $32.SessionSong? song,
+    $33.SessionSong? song,
   }) {
     final $result = create();
     if (song != null) {
@@ -251,7 +251,7 @@ class GetSessionSongResponse extends $pb.GeneratedMessage {
   factory GetSessionSongResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSessionSongResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$32.SessionSong>(1, _omitFieldNames ? '' : 'song', subBuilder: $32.SessionSong.create)
+    ..aOM<$33.SessionSong>(1, _omitFieldNames ? '' : 'song', subBuilder: $33.SessionSong.create)
     ..hasRequiredFields = false
   ;
 
@@ -277,21 +277,21 @@ class GetSessionSongResponse extends $pb.GeneratedMessage {
   static GetSessionSongResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $32.SessionSong get song => $_getN(0);
+  $33.SessionSong get song => $_getN(0);
   @$pb.TagNumber(1)
-  set song($32.SessionSong v) { setField(1, v); }
+  set song($33.SessionSong v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSong() => $_has(0);
   @$pb.TagNumber(1)
   void clearSong() => clearField(1);
   @$pb.TagNumber(1)
-  $32.SessionSong ensureSong() => $_ensure(0);
+  $33.SessionSong ensureSong() => $_ensure(0);
 }
 
 /// Update Session Song
 class UpdateSessionSongRequest extends $pb.GeneratedMessage {
   factory UpdateSessionSongRequest({
-    $32.SessionSong? song,
+    $33.SessionSong? song,
   }) {
     final $result = create();
     if (song != null) {
@@ -304,7 +304,7 @@ class UpdateSessionSongRequest extends $pb.GeneratedMessage {
   factory UpdateSessionSongRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionSongRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$32.SessionSong>(1, _omitFieldNames ? '' : 'song', subBuilder: $32.SessionSong.create)
+    ..aOM<$33.SessionSong>(1, _omitFieldNames ? '' : 'song', subBuilder: $33.SessionSong.create)
     ..hasRequiredFields = false
   ;
 
@@ -330,20 +330,20 @@ class UpdateSessionSongRequest extends $pb.GeneratedMessage {
   static UpdateSessionSongRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $32.SessionSong get song => $_getN(0);
+  $33.SessionSong get song => $_getN(0);
   @$pb.TagNumber(1)
-  set song($32.SessionSong v) { setField(1, v); }
+  set song($33.SessionSong v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSong() => $_has(0);
   @$pb.TagNumber(1)
   void clearSong() => clearField(1);
   @$pb.TagNumber(1)
-  $32.SessionSong ensureSong() => $_ensure(0);
+  $33.SessionSong ensureSong() => $_ensure(0);
 }
 
 class UpdateSessionSongResponse extends $pb.GeneratedMessage {
   factory UpdateSessionSongResponse({
-    $32.SessionSong? song,
+    $33.SessionSong? song,
   }) {
     final $result = create();
     if (song != null) {
@@ -356,7 +356,7 @@ class UpdateSessionSongResponse extends $pb.GeneratedMessage {
   factory UpdateSessionSongResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionSongResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$32.SessionSong>(1, _omitFieldNames ? '' : 'song', subBuilder: $32.SessionSong.create)
+    ..aOM<$33.SessionSong>(1, _omitFieldNames ? '' : 'song', subBuilder: $33.SessionSong.create)
     ..hasRequiredFields = false
   ;
 
@@ -382,15 +382,15 @@ class UpdateSessionSongResponse extends $pb.GeneratedMessage {
   static UpdateSessionSongResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $32.SessionSong get song => $_getN(0);
+  $33.SessionSong get song => $_getN(0);
   @$pb.TagNumber(1)
-  set song($32.SessionSong v) { setField(1, v); }
+  set song($33.SessionSong v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSong() => $_has(0);
   @$pb.TagNumber(1)
   void clearSong() => clearField(1);
   @$pb.TagNumber(1)
-  $32.SessionSong ensureSong() => $_ensure(0);
+  $33.SessionSong ensureSong() => $_ensure(0);
 }
 
 /// Delete Session Song

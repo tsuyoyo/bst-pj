@@ -13,28 +13,6 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-@$core.Deprecated('Use listSessionSongsRequestDescriptor instead')
-const ListSessionSongsRequest$json = {
-  '1': 'ListSessionSongsRequest',
-};
-
-/// Descriptor for `ListSessionSongsRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listSessionSongsRequestDescriptor = $convert.base64Decode(
-    'ChdMaXN0U2Vzc2lvblNvbmdzUmVxdWVzdA==');
-
-@$core.Deprecated('Use listSessionSongsResponseDescriptor instead')
-const ListSessionSongsResponse$json = {
-  '1': 'ListSessionSongsResponse',
-  '2': [
-    {'1': 'songs', '3': 1, '4': 3, '5': 11, '6': '.bst.v1.SessionSong', '10': 'songs'},
-  ],
-};
-
-/// Descriptor for `ListSessionSongsResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listSessionSongsResponseDescriptor = $convert.base64Decode(
-    'ChhMaXN0U2Vzc2lvblNvbmdzUmVzcG9uc2USKQoFc29uZ3MYASADKAsyEy5ic3QudjEuU2Vzc2'
-    'lvblNvbmdSBXNvbmdz');
-
 @$core.Deprecated('Use addSessionSongRequestDescriptor instead')
 const AddSessionSongRequest$json = {
   '1': 'AddSessionSongRequest',
@@ -61,6 +39,28 @@ const AddSessionSongResponse$json = {
 final $typed_data.Uint8List addSessionSongResponseDescriptor = $convert.base64Decode(
     'ChZBZGRTZXNzaW9uU29uZ1Jlc3BvbnNlEicKBHNvbmcYASABKAsyEy5ic3QudjEuU2Vzc2lvbl'
     'NvbmdSBHNvbmc=');
+
+@$core.Deprecated('Use listSessionSongsRequestDescriptor instead')
+const ListSessionSongsRequest$json = {
+  '1': 'ListSessionSongsRequest',
+};
+
+/// Descriptor for `ListSessionSongsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listSessionSongsRequestDescriptor = $convert.base64Decode(
+    'ChdMaXN0U2Vzc2lvblNvbmdzUmVxdWVzdA==');
+
+@$core.Deprecated('Use listSessionSongsResponseDescriptor instead')
+const ListSessionSongsResponse$json = {
+  '1': 'ListSessionSongsResponse',
+  '2': [
+    {'1': 'songs', '3': 1, '4': 3, '5': 11, '6': '.bst.v1.SessionSong', '10': 'songs'},
+  ],
+};
+
+/// Descriptor for `ListSessionSongsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listSessionSongsResponseDescriptor = $convert.base64Decode(
+    'ChhMaXN0U2Vzc2lvblNvbmdzUmVzcG9uc2USKQoFc29uZ3MYASADKAsyEy5ic3QudjEuU2Vzc2'
+    'lvblNvbmdSBXNvbmdz');
 
 @$core.Deprecated('Use getSessionSongRequestDescriptor instead')
 const GetSessionSongRequest$json = {

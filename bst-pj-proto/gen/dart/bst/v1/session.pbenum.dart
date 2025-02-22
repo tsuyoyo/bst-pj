@@ -40,21 +40,21 @@ class SessionStatus extends $pb.ProtobufEnum {
 }
 
 /// Participant model
-class SessionParticipantRole extends $pb.ProtobufEnum {
-  static const SessionParticipantRole SESSION_PARTICIPANT_ROLE_UNSPECIFIED = SessionParticipantRole._(0, _omitEnumNames ? '' : 'SESSION_PARTICIPANT_ROLE_UNSPECIFIED');
-  static const SessionParticipantRole SESSION_PARTICIPANT_ROLE_ORGANIZER = SessionParticipantRole._(1, _omitEnumNames ? '' : 'SESSION_PARTICIPANT_ROLE_ORGANIZER');
-  static const SessionParticipantRole SESSION_PARTICIPANT_ROLE_PLAYER = SessionParticipantRole._(2, _omitEnumNames ? '' : 'SESSION_PARTICIPANT_ROLE_PLAYER');
+class SessionParticipantStatus extends $pb.ProtobufEnum {
+  static const SessionParticipantStatus SESSION_PARTICIPANT_STATUS_UNSPECIFIED = SessionParticipantStatus._(0, _omitEnumNames ? '' : 'SESSION_PARTICIPANT_STATUS_UNSPECIFIED');
+  static const SessionParticipantStatus SESSION_PARTICIPANT_STATUS_CONFIRMED = SessionParticipantStatus._(1, _omitEnumNames ? '' : 'SESSION_PARTICIPANT_STATUS_CONFIRMED');
+  static const SessionParticipantStatus SESSION_PARTICIPANT_STATUS_CANCELLED = SessionParticipantStatus._(2, _omitEnumNames ? '' : 'SESSION_PARTICIPANT_STATUS_CANCELLED');
 
-  static const $core.List<SessionParticipantRole> values = <SessionParticipantRole> [
-    SESSION_PARTICIPANT_ROLE_UNSPECIFIED,
-    SESSION_PARTICIPANT_ROLE_ORGANIZER,
-    SESSION_PARTICIPANT_ROLE_PLAYER,
+  static const $core.List<SessionParticipantStatus> values = <SessionParticipantStatus> [
+    SESSION_PARTICIPANT_STATUS_UNSPECIFIED,
+    SESSION_PARTICIPANT_STATUS_CONFIRMED,
+    SESSION_PARTICIPANT_STATUS_CANCELLED,
   ];
 
-  static final $core.Map<$core.int, SessionParticipantRole> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static SessionParticipantRole? valueOf($core.int value) => _byValue[value];
+  static final $core.Map<$core.int, SessionParticipantStatus> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static SessionParticipantStatus? valueOf($core.int value) => _byValue[value];
 
-  const SessionParticipantRole._($core.int v, $core.String n) : super(v, n);
+  const SessionParticipantStatus._($core.int v, $core.String n) : super(v, n);
 }
 
 class TimetableEntry_TimetableEntryType extends $pb.ProtobufEnum {

@@ -56,23 +56,26 @@ message SessionTask {
 }
 
 // Participant model
-enum SessionParticipantRole {
-  SESSION_PARTICIPANT_ROLE_UNSPECIFIED = 0;
-  SESSION_PARTICIPANT_ROLE_ORGANIZER =
-      1;  // Organizer role contains player role.
-  SESSION_PARTICIPANT_ROLE_PLAYER = 2;
+enum SessionParticipantStatus {
+  SESSION_PARTICIPANT_STATUS_UNSPECIFIED = 0;
+  SESSION_PARTICIPANT_STATUS_CONFIRMED   = 1;
+  SESSION_PARTICIPANT_STATUS_CANCELLED   = 2;
 }
 
 message SessionParticipant {
-  int32                  id   = 1;
-  string                 name = 2;
-  SessionParticipantRole role = 3;
-  User                   user = 4;
+  int32                    id              = 1;
+  User                     user            = 2;
+  repeated SessionPart     parts           = 3;
+  int32                    primary_part_id = 4;
+  SessionParticipantStatus status          = 5;
+  bool                     is_organizer    = 6;
+  bool                     is_player       = 7;
 }
 
 message SessionSongEntry {
-  User        user = 1;
-  SessionPart part = 2;
+  User        user    = 1;
+  SessionPart part    = 2;
+  string      comment = 3;
 }
 
 message SessionSongPart {

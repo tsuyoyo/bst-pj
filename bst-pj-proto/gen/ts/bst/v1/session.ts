@@ -78,41 +78,40 @@ export function sessionStatusToJSON(object: SessionStatus): string {
 }
 
 /** Participant model */
-export enum SessionParticipantRole {
-  SESSION_PARTICIPANT_ROLE_UNSPECIFIED = 0,
-  /** SESSION_PARTICIPANT_ROLE_ORGANIZER - Organizer role contains player role. */
-  SESSION_PARTICIPANT_ROLE_ORGANIZER = 1,
-  SESSION_PARTICIPANT_ROLE_PLAYER = 2,
+export enum SessionParticipantStatus {
+  SESSION_PARTICIPANT_STATUS_UNSPECIFIED = 0,
+  SESSION_PARTICIPANT_STATUS_CONFIRMED = 1,
+  SESSION_PARTICIPANT_STATUS_CANCELLED = 2,
   UNRECOGNIZED = -1,
 }
 
-export function sessionParticipantRoleFromJSON(object: any): SessionParticipantRole {
+export function sessionParticipantStatusFromJSON(object: any): SessionParticipantStatus {
   switch (object) {
     case 0:
-    case "SESSION_PARTICIPANT_ROLE_UNSPECIFIED":
-      return SessionParticipantRole.SESSION_PARTICIPANT_ROLE_UNSPECIFIED;
+    case "SESSION_PARTICIPANT_STATUS_UNSPECIFIED":
+      return SessionParticipantStatus.SESSION_PARTICIPANT_STATUS_UNSPECIFIED;
     case 1:
-    case "SESSION_PARTICIPANT_ROLE_ORGANIZER":
-      return SessionParticipantRole.SESSION_PARTICIPANT_ROLE_ORGANIZER;
+    case "SESSION_PARTICIPANT_STATUS_CONFIRMED":
+      return SessionParticipantStatus.SESSION_PARTICIPANT_STATUS_CONFIRMED;
     case 2:
-    case "SESSION_PARTICIPANT_ROLE_PLAYER":
-      return SessionParticipantRole.SESSION_PARTICIPANT_ROLE_PLAYER;
+    case "SESSION_PARTICIPANT_STATUS_CANCELLED":
+      return SessionParticipantStatus.SESSION_PARTICIPANT_STATUS_CANCELLED;
     case -1:
     case "UNRECOGNIZED":
     default:
-      return SessionParticipantRole.UNRECOGNIZED;
+      return SessionParticipantStatus.UNRECOGNIZED;
   }
 }
 
-export function sessionParticipantRoleToJSON(object: SessionParticipantRole): string {
+export function sessionParticipantStatusToJSON(object: SessionParticipantStatus): string {
   switch (object) {
-    case SessionParticipantRole.SESSION_PARTICIPANT_ROLE_UNSPECIFIED:
-      return "SESSION_PARTICIPANT_ROLE_UNSPECIFIED";
-    case SessionParticipantRole.SESSION_PARTICIPANT_ROLE_ORGANIZER:
-      return "SESSION_PARTICIPANT_ROLE_ORGANIZER";
-    case SessionParticipantRole.SESSION_PARTICIPANT_ROLE_PLAYER:
-      return "SESSION_PARTICIPANT_ROLE_PLAYER";
-    case SessionParticipantRole.UNRECOGNIZED:
+    case SessionParticipantStatus.SESSION_PARTICIPANT_STATUS_UNSPECIFIED:
+      return "SESSION_PARTICIPANT_STATUS_UNSPECIFIED";
+    case SessionParticipantStatus.SESSION_PARTICIPANT_STATUS_CONFIRMED:
+      return "SESSION_PARTICIPANT_STATUS_CONFIRMED";
+    case SessionParticipantStatus.SESSION_PARTICIPANT_STATUS_CANCELLED:
+      return "SESSION_PARTICIPANT_STATUS_CANCELLED";
+    case SessionParticipantStatus.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
@@ -161,14 +160,18 @@ export interface SessionTask {
 
 export interface SessionParticipant {
   id: number;
-  name: string;
-  role: SessionParticipantRole;
   user: User | undefined;
+  parts: SessionPart[];
+  primaryPartId: number;
+  status: SessionParticipantStatus;
+  isOrganizer: boolean;
+  isPlayer: boolean;
 }
 
 export interface SessionSongEntry {
   user: User | undefined;
   part: SessionPart | undefined;
+  comment: string;
 }
 
 export interface SessionSongPart {
@@ -767,7 +770,7 @@ export const SessionTask = {
 };
 
 function createBaseSessionParticipant(): SessionParticipant {
-  return { id: 0, name: "", role: 0, user: undefined };
+  return { id: 0, user: undefined, parts: [], primaryPartId: 0, status: 0, isOrganizer: false, isPlayer: false };
 }
 
 export const SessionParticipant = {
@@ -775,14 +778,23 @@ export const SessionParticipant = {
     if (message.id !== 0) {
       writer.uint32(8).int32(message.id);
     }
-    if (message.name !== "") {
-      writer.uint32(18).string(message.name);
-    }
-    if (message.role !== 0) {
-      writer.uint32(24).int32(message.role);
-    }
     if (message.user !== undefined) {
-      User.encode(message.user, writer.uint32(34).fork()).ldelim();
+      User.encode(message.user, writer.uint32(18).fork()).ldelim();
+    }
+    for (const v of message.parts) {
+      SessionPart.encode(v!, writer.uint32(26).fork()).ldelim();
+    }
+    if (message.primaryPartId !== 0) {
+      writer.uint32(32).int32(message.primaryPartId);
+    }
+    if (message.status !== 0) {
+      writer.uint32(40).int32(message.status);
+    }
+    if (message.isOrganizer !== false) {
+      writer.uint32(48).bool(message.isOrganizer);
+    }
+    if (message.isPlayer !== false) {
+      writer.uint32(56).bool(message.isPlayer);
     }
     return writer;
   },
@@ -806,21 +818,42 @@ export const SessionParticipant = {
             break;
           }
 
-          message.name = reader.string();
+          message.user = User.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag !== 24) {
+          if (tag !== 26) {
             break;
           }
 
-          message.role = reader.int32() as any;
+          message.parts.push(SessionPart.decode(reader, reader.uint32()));
           continue;
         case 4:
-          if (tag !== 34) {
+          if (tag !== 32) {
             break;
           }
 
-          message.user = User.decode(reader, reader.uint32());
+          message.primaryPartId = reader.int32();
+          continue;
+        case 5:
+          if (tag !== 40) {
+            break;
+          }
+
+          message.status = reader.int32() as any;
+          continue;
+        case 6:
+          if (tag !== 48) {
+            break;
+          }
+
+          message.isOrganizer = reader.bool();
+          continue;
+        case 7:
+          if (tag !== 56) {
+            break;
+          }
+
+          message.isPlayer = reader.bool();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -834,9 +867,12 @@ export const SessionParticipant = {
   fromJSON(object: any): SessionParticipant {
     return {
       id: isSet(object.id) ? globalThis.Number(object.id) : 0,
-      name: isSet(object.name) ? globalThis.String(object.name) : "",
-      role: isSet(object.role) ? sessionParticipantRoleFromJSON(object.role) : 0,
       user: isSet(object.user) ? User.fromJSON(object.user) : undefined,
+      parts: globalThis.Array.isArray(object?.parts) ? object.parts.map((e: any) => SessionPart.fromJSON(e)) : [],
+      primaryPartId: isSet(object.primaryPartId) ? globalThis.Number(object.primaryPartId) : 0,
+      status: isSet(object.status) ? sessionParticipantStatusFromJSON(object.status) : 0,
+      isOrganizer: isSet(object.isOrganizer) ? globalThis.Boolean(object.isOrganizer) : false,
+      isPlayer: isSet(object.isPlayer) ? globalThis.Boolean(object.isPlayer) : false,
     };
   },
 
@@ -845,14 +881,23 @@ export const SessionParticipant = {
     if (message.id !== 0) {
       obj.id = Math.round(message.id);
     }
-    if (message.name !== "") {
-      obj.name = message.name;
-    }
-    if (message.role !== 0) {
-      obj.role = sessionParticipantRoleToJSON(message.role);
-    }
     if (message.user !== undefined) {
       obj.user = User.toJSON(message.user);
+    }
+    if (message.parts?.length) {
+      obj.parts = message.parts.map((e) => SessionPart.toJSON(e));
+    }
+    if (message.primaryPartId !== 0) {
+      obj.primaryPartId = Math.round(message.primaryPartId);
+    }
+    if (message.status !== 0) {
+      obj.status = sessionParticipantStatusToJSON(message.status);
+    }
+    if (message.isOrganizer !== false) {
+      obj.isOrganizer = message.isOrganizer;
+    }
+    if (message.isPlayer !== false) {
+      obj.isPlayer = message.isPlayer;
     }
     return obj;
   },
@@ -863,15 +908,18 @@ export const SessionParticipant = {
   fromPartial<I extends Exact<DeepPartial<SessionParticipant>, I>>(object: I): SessionParticipant {
     const message = createBaseSessionParticipant();
     message.id = object.id ?? 0;
-    message.name = object.name ?? "";
-    message.role = object.role ?? 0;
     message.user = (object.user !== undefined && object.user !== null) ? User.fromPartial(object.user) : undefined;
+    message.parts = object.parts?.map((e) => SessionPart.fromPartial(e)) || [];
+    message.primaryPartId = object.primaryPartId ?? 0;
+    message.status = object.status ?? 0;
+    message.isOrganizer = object.isOrganizer ?? false;
+    message.isPlayer = object.isPlayer ?? false;
     return message;
   },
 };
 
 function createBaseSessionSongEntry(): SessionSongEntry {
-  return { user: undefined, part: undefined };
+  return { user: undefined, part: undefined, comment: "" };
 }
 
 export const SessionSongEntry = {
@@ -881,6 +929,9 @@ export const SessionSongEntry = {
     }
     if (message.part !== undefined) {
       SessionPart.encode(message.part, writer.uint32(18).fork()).ldelim();
+    }
+    if (message.comment !== "") {
+      writer.uint32(26).string(message.comment);
     }
     return writer;
   },
@@ -906,6 +957,13 @@ export const SessionSongEntry = {
 
           message.part = SessionPart.decode(reader, reader.uint32());
           continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.comment = reader.string();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -919,6 +977,7 @@ export const SessionSongEntry = {
     return {
       user: isSet(object.user) ? User.fromJSON(object.user) : undefined,
       part: isSet(object.part) ? SessionPart.fromJSON(object.part) : undefined,
+      comment: isSet(object.comment) ? globalThis.String(object.comment) : "",
     };
   },
 
@@ -929,6 +988,9 @@ export const SessionSongEntry = {
     }
     if (message.part !== undefined) {
       obj.part = SessionPart.toJSON(message.part);
+    }
+    if (message.comment !== "") {
+      obj.comment = message.comment;
     }
     return obj;
   },
@@ -942,6 +1004,7 @@ export const SessionSongEntry = {
     message.part = (object.part !== undefined && object.part !== null)
       ? SessionPart.fromPartial(object.part)
       : undefined;
+    message.comment = object.comment ?? "";
     return message;
   },
 };
