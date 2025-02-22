@@ -31,7 +31,7 @@ export class SessionParticipant {
   @Column({
     type: 'enum',
     enum: SessionParticipantStatus,
-    default: SessionParticipantStatus.Pending,
+    default: SessionParticipantStatus.Confirmed,
     nullable: false,
     comment: '参加ステータス（例: 確定、キャンセル）',
   })

@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "bst/v1/session.proto";
+
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+service SessionOrganizerService {
+  // GET /sessions/{id}/organizers
+  rpc ListSessionOrganizers(ListSessionOrganizersRequest)
+      returns (ListSessionOrganizersResponse);
+
+  // POST /sessions/{id}/organizers
+  rpc AddSessionOrganizer(AddSessionOrganizerRequest)
+      returns (AddSessionOrganizerResponse);
+
+  // DELETE /sessions/{id}/organizers/
+  rpc DeleteSessionOrganizer(DeleteSessionOrganizerRequest)
+      returns (DeleteSessionOrganizerResponse);
+}
+
+message ListSessionOrganizersRequest {}
+
+message ListSessionOrganizersResponse {
+  repeated SessionParticipant organizers = 1;
+}
+
+message AddSessionOrganizerRequest {
+  int32 user_id = 1;
+}
+
+message AddSessionOrganizerResponse {
+  SessionParticipant organizer = 1;
+}
+
+message DeleteSessionOrganizerRequest {
+  int32 user_id = 1;
+}
+
+message DeleteSessionOrganizerResponse {
+  bool success = 1;
+}

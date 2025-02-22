@@ -13,17 +13,17 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/protobuf/timestamp.pb.dart' as $29;
-import 'area.pb.dart' as $28;
-import 'content.pb.dart' as $27;
-import 'user.pb.dart' as $30;
+import '../../google/protobuf/timestamp.pb.dart' as $32;
+import 'area.pb.dart' as $31;
+import 'content.pb.dart' as $30;
+import 'user.pb.dart' as $33;
 
 class Location extends $pb.GeneratedMessage {
   factory Location({
     $core.int? id,
     $core.String? name,
     $core.String? additionalInfo,
-    $28.Area? area,
+    $31.Area? area,
     $core.String? mapUrl,
   }) {
     final $result = create();
@@ -52,7 +52,7 @@ class Location extends $pb.GeneratedMessage {
     ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'additionalInfo')
-    ..aOM<$28.Area>(4, _omitFieldNames ? '' : 'area', subBuilder: $28.Area.create)
+    ..aOM<$31.Area>(4, _omitFieldNames ? '' : 'area', subBuilder: $31.Area.create)
     ..aOS(5, _omitFieldNames ? '' : 'mapUrl')
     ..hasRequiredFields = false
   ;
@@ -106,15 +106,15 @@ class Location extends $pb.GeneratedMessage {
   void clearAdditionalInfo() => clearField(3);
 
   @$pb.TagNumber(4)
-  $28.Area get area => $_getN(3);
+  $31.Area get area => $_getN(3);
   @$pb.TagNumber(4)
-  set area($28.Area v) { setField(4, v); }
+  set area($31.Area v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasArea() => $_has(3);
   @$pb.TagNumber(4)
   void clearArea() => clearField(4);
   @$pb.TagNumber(4)
-  $28.Area ensureArea() => $_ensure(3);
+  $31.Area ensureArea() => $_ensure(3);
 
   @$pb.TagNumber(5)
   $core.String get mapUrl => $_getSZ(4);
@@ -129,11 +129,11 @@ class Location extends $pb.GeneratedMessage {
 /// Note: Will add more fields later (e.g. capacity, price, etc)
 class StudioReview extends $pb.GeneratedMessage {
   factory StudioReview({
-    $30.User? user,
+    $33.User? user,
     $core.String? review,
     $core.int? rating,
-    $core.Iterable<$27.Resource>? resources,
-    $29.Timestamp? createdAt,
+    $core.Iterable<$30.Resource>? resources,
+    $32.Timestamp? createdAt,
   }) {
     final $result = create();
     if (user != null) {
@@ -158,11 +158,11 @@ class StudioReview extends $pb.GeneratedMessage {
   factory StudioReview.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StudioReview', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $30.User.create)
+    ..aOM<$33.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $33.User.create)
     ..aOS(2, _omitFieldNames ? '' : 'review')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'rating', $pb.PbFieldType.O3)
-    ..pc<$27.Resource>(4, _omitFieldNames ? '' : 'resources', $pb.PbFieldType.PM, subBuilder: $27.Resource.create)
-    ..aOM<$29.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $29.Timestamp.create)
+    ..pc<$30.Resource>(4, _omitFieldNames ? '' : 'resources', $pb.PbFieldType.PM, subBuilder: $30.Resource.create)
+    ..aOM<$32.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $32.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -188,15 +188,15 @@ class StudioReview extends $pb.GeneratedMessage {
   static StudioReview? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.User get user => $_getN(0);
+  $33.User get user => $_getN(0);
   @$pb.TagNumber(1)
-  set user($30.User v) { setField(1, v); }
+  set user($33.User v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasUser() => $_has(0);
   @$pb.TagNumber(1)
   void clearUser() => clearField(1);
   @$pb.TagNumber(1)
-  $30.User ensureUser() => $_ensure(0);
+  $33.User ensureUser() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get review => $_getSZ(1);
@@ -217,18 +217,18 @@ class StudioReview extends $pb.GeneratedMessage {
   void clearRating() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.List<$27.Resource> get resources => $_getList(3);
+  $core.List<$30.Resource> get resources => $_getList(3);
 
   @$pb.TagNumber(5)
-  $29.Timestamp get createdAt => $_getN(4);
+  $32.Timestamp get createdAt => $_getN(4);
   @$pb.TagNumber(5)
-  set createdAt($29.Timestamp v) { setField(5, v); }
+  set createdAt($32.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCreatedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearCreatedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $29.Timestamp ensureCreatedAt() => $_ensure(4);
+  $32.Timestamp ensureCreatedAt() => $_ensure(4);
 }
 
 class Studio extends $pb.GeneratedMessage {

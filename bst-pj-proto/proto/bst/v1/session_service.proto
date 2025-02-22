@@ -35,83 +35,10 @@ service SessionService {
   rpc UpdateSessionLocation(UpdateSessionLocationRequest)
       returns (UpdateSessionLocationResponse);
 
-  // Song Resources
-  // POST /sessions/{id}/songs/{songId}/resources
-  rpc AddSessionSongResource(AddSessionSongResourceRequest)
-      returns (AddSessionSongResourceResponse);
-  // GET /sessions/{id}/songs/{songId}/resources
-  rpc ListSessionSongResources(ListSessionSongResourcesRequest)
-      returns (ListSessionSongResourcesResponse);
-  // DELETE /sessions/{id}/songs/{songId}/resources
-  rpc DeleteSessionSongResource(DeleteSessionSongResourceRequest)
-      returns (DeleteSessionSongResourceResponse);
-
-  // Organizers
-  // GET /sessions/{id}/organizers
-  rpc ListSessionOrganizers(ListSessionOrganizersRequest)
-      returns (ListSessionOrganizersResponse);
-  // POST /sessions/{id}/organizers
-  rpc AddSessionOrganizer(AddSessionOrganizerRequest)
-      returns (AddSessionOrganizerResponse);
-  // DELETE /sessions/{id}/organizers/{userId}
-  rpc DeleteSessionOrganizer(DeleteSessionOrganizerRequest)
-      returns (DeleteSessionOrganizerResponse);
-
   // Communication
-  // POST /sessions/{id}/threads
-  rpc CreateSessionThread(CreateSessionThreadRequest)
-      returns (CreateSessionThreadResponse);
-  // GET /sessions/{id}/threads
-  rpc ListSessionThreads(ListSessionThreadsRequest)
-      returns (ListSessionThreadsResponse);
-  // POST /sessions/{id}/songs/{songId}/threads
-  rpc CreateSongThread(CreateSongThreadRequest)
-      returns (CreateSongThreadResponse);
-  // GET /sessions/{id}/threads/{id}
-  rpc GetSessionThread(GetSessionThreadRequest)
-      returns (GetSessionThreadResponse);
-  // DELETE /sessions/{id}/threads/{id}
-  rpc DeleteSessionThread(DeleteSessionThreadRequest)
-      returns (DeleteSessionThreadResponse);
   // POST /sessions/{id}/notifications
   rpc CreateSessionNotification(CreateSessionNotificationRequest)
       returns (CreateSessionNotificationResponse);
-
-  // Timetable
-  // GET /sessions/{id}/timetable
-  rpc GetSessionTimetable(GetSessionTimetableRequest)
-      returns (GetSessionTimetableResponse);
-  // PUT /sessions/{id}/timetable
-  rpc UpdateSessionTimetable(UpdateSessionTimetableRequest)
-      returns (UpdateSessionTimetableResponse);
-  // GET /sessions/{id}/timetable/optimized
-  rpc GetOptimizedTimetable(GetOptimizedTimetableRequest)
-      returns (GetOptimizedTimetableResponse);
-  // GET /sessions/{id}/timetable/progress
-  rpc GetTimetableProgress(GetTimetableProgressRequest)
-      returns (GetTimetableProgressResponse);
-  // PUT /sessions/{id}/timetable/progress
-  rpc UpdateTimetableProgress(UpdateTimetableProgressRequest)
-      returns (UpdateTimetableProgressResponse);
-
-  // Session Resources
-  // POST /sessions/{id}/resources
-  rpc AddSessionResource(AddSessionResourceRequest)
-      returns (AddSessionResourceResponse);
-  // GET /sessions/{id}/resources
-  rpc ListSessionResources(ListSessionResourcesRequest)
-      returns (ListSessionResourcesResponse);
-  // DELETE /sessions/{id}/resources
-  rpc DeleteSessionResource(DeleteSessionResourceRequest)
-      returns (DeleteSessionResourceResponse);
-
-  // Feedbacks
-  // POST /sessions/{id}/feedbacks
-  rpc AddSessionFeedback(AddSessionFeedbackRequest)
-      returns (AddSessionFeedbackResponse);
-  // GET /sessions/{id}/ratings
-  rpc ListSessionFeedbacks(ListSessionFeedbacksRequest)
-      returns (ListSessionFeedbacksResponse);
 
   // Related Sessions
   // GET /sessions/{id}/related-sessions
@@ -230,79 +157,7 @@ message DeleteSessionSongResourceResponse {
   bool success = 1;
 }
 
-// Organizers
-message ListSessionOrganizersRequest {
-  int32 session_id = 1;
-}
-
-message ListSessionOrganizersResponse {
-  repeated SessionParticipant organizers = 1;
-}
-
-message AddSessionOrganizerRequest {
-  int32 session_id = 1;
-  int32 user_id    = 2;
-}
-
-message AddSessionOrganizerResponse {
-  SessionParticipant organizer = 1;
-}
-
-message DeleteSessionOrganizerRequest {
-  int32 session_id = 1;
-  int32 user_id    = 2;
-}
-
-message DeleteSessionOrganizerResponse {
-  bool success = 1;
-}
-
 // Communication
-message CreateSessionThreadRequest {
-  int32  session_id = 1;
-  Thread thread     = 2;
-}
-
-message CreateSessionThreadResponse {
-  Thread thread = 1;
-}
-
-message ListSessionThreadsRequest {
-  int32 session_id = 1;
-}
-
-message ListSessionThreadsResponse {
-  repeated Thread threads = 1;
-}
-
-message CreateSongThreadRequest {
-  int32  session_id = 1;
-  int32  song_id    = 2;
-  Thread thread     = 3;
-}
-
-message CreateSongThreadResponse {
-  Thread thread = 1;
-}
-
-message GetSessionThreadRequest {
-  int32 session_id = 1;
-  int32 thread_id  = 2;
-}
-
-message GetSessionThreadResponse {
-  Thread thread = 1;
-}
-
-message DeleteSessionThreadRequest {
-  int32 session_id = 1;
-  int32 thread_id  = 2;
-}
-
-message DeleteSessionThreadResponse {
-  bool success = 1;
-}
-
 message CreateSessionNotificationRequest {
   int32          session_id = 1;
   string         content    = 2;
@@ -310,51 +165,6 @@ message CreateSessionNotificationRequest {
 }
 
 message CreateSessionNotificationResponse {
-  bool success = 1;
-}
-
-// Timetable
-message GetSessionTimetableRequest {
-  int32 session_id = 1;
-}
-
-message GetSessionTimetableResponse {
-  Timetable timetable = 1;
-}
-
-message UpdateSessionTimetableRequest {
-  int32     session_id = 1;
-  Timetable timetable  = 2;
-}
-
-message UpdateSessionTimetableResponse {
-  Timetable timetable = 1;
-}
-
-message GetOptimizedTimetableRequest {
-  int32           session_id         = 1;
-  repeated string optimization_rules = 2;
-}
-
-message GetOptimizedTimetableResponse {
-  Timetable timetable = 1;
-}
-
-message GetTimetableProgressRequest {
-  int32 session_id = 1;
-}
-
-message GetTimetableProgressResponse {
-  repeated TimetableEntry completed_entries = 1;
-  TimetableEntry          current_entry     = 2;
-}
-
-message UpdateTimetableProgressRequest {
-  int32 session_id       = 1;
-  int32 current_entry_id = 2;
-}
-
-message UpdateTimetableProgressResponse {
   bool success = 1;
 }
 
@@ -383,23 +193,6 @@ message DeleteSessionResourceRequest {
 
 message DeleteSessionResourceResponse {
   bool success = 1;
-}
-
-// Ratings
-message AddSessionFeedbackRequest {
-  SessionFeedback feedback = 1;
-}
-
-message AddSessionFeedbackResponse {
-  bool success = 1;
-}
-
-message ListSessionFeedbacksRequest {
-  int32 session_id = 1;
-}
-
-message ListSessionFeedbacksResponse {
-  repeated SessionFeedback feedbacks = 1;
 }
 
 // Related Sessions

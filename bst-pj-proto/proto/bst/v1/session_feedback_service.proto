@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "bst/v1/session.proto";
+
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+service SessionFeedbackService {
+  // POST /sessions/{id}/feedbacks
+  rpc AddSessionFeedback(AddSessionFeedbackRequest)
+      returns (AddSessionFeedbackResponse);
+  // GET /sessions/{id}/ratings
+  rpc ListSessionFeedbacks(ListSessionFeedbacksRequest)
+      returns (ListSessionFeedbacksResponse);
+}
+
+message AddSessionFeedbackRequest {
+  SessionFeedback feedback = 1;
+}
+
+message AddSessionFeedbackResponse {
+  bool success = 1;
+}
+
+message ListSessionFeedbacksRequest {
+  int32 session_id = 1;
+}
+
+message ListSessionFeedbacksResponse {
+  repeated SessionFeedback feedbacks = 1;
+}

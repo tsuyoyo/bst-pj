@@ -15,28 +15,28 @@ import 'dart:core' as $core;
 import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'session_part_service.pb.dart' as $14;
+import 'session_part_service.pb.dart' as $16;
 
 export 'session_part_service.pb.dart';
 
 @$pb.GrpcServiceName('bst.v1.SessionPartService')
 class SessionPartServiceClient extends $grpc.Client {
-  static final _$listSessionParts = $grpc.ClientMethod<$14.ListSessionPartsRequest, $14.ListSessionPartsResponse>(
+  static final _$listSessionParts = $grpc.ClientMethod<$16.ListSessionPartsRequest, $16.ListSessionPartsResponse>(
       '/bst.v1.SessionPartService/ListSessionParts',
-      ($14.ListSessionPartsRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $14.ListSessionPartsResponse.fromBuffer(value));
-  static final _$addSessionPart = $grpc.ClientMethod<$14.AddSessionPartRequest, $14.AddSessionPartResponse>(
+      ($16.ListSessionPartsRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.ListSessionPartsResponse.fromBuffer(value));
+  static final _$addSessionPart = $grpc.ClientMethod<$16.AddSessionPartRequest, $16.AddSessionPartResponse>(
       '/bst.v1.SessionPartService/AddSessionPart',
-      ($14.AddSessionPartRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $14.AddSessionPartResponse.fromBuffer(value));
-  static final _$updateSessionPart = $grpc.ClientMethod<$14.UpdateSessionPartRequest, $14.UpdateSessionPartResponse>(
+      ($16.AddSessionPartRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.AddSessionPartResponse.fromBuffer(value));
+  static final _$updateSessionPart = $grpc.ClientMethod<$16.UpdateSessionPartRequest, $16.UpdateSessionPartResponse>(
       '/bst.v1.SessionPartService/UpdateSessionPart',
-      ($14.UpdateSessionPartRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $14.UpdateSessionPartResponse.fromBuffer(value));
-  static final _$deleteSessionPart = $grpc.ClientMethod<$14.DeleteSessionPartRequest, $14.DeleteSessionPartResponse>(
+      ($16.UpdateSessionPartRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.UpdateSessionPartResponse.fromBuffer(value));
+  static final _$deleteSessionPart = $grpc.ClientMethod<$16.DeleteSessionPartRequest, $16.DeleteSessionPartResponse>(
       '/bst.v1.SessionPartService/DeleteSessionPart',
-      ($14.DeleteSessionPartRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $14.DeleteSessionPartResponse.fromBuffer(value));
+      ($16.DeleteSessionPartRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.DeleteSessionPartResponse.fromBuffer(value));
 
   SessionPartServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -44,19 +44,19 @@ class SessionPartServiceClient extends $grpc.Client {
       : super(channel, options: options,
         interceptors: interceptors);
 
-  $grpc.ResponseFuture<$14.ListSessionPartsResponse> listSessionParts($14.ListSessionPartsRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.ListSessionPartsResponse> listSessionParts($16.ListSessionPartsRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$listSessionParts, request, options: options);
   }
 
-  $grpc.ResponseFuture<$14.AddSessionPartResponse> addSessionPart($14.AddSessionPartRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.AddSessionPartResponse> addSessionPart($16.AddSessionPartRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$addSessionPart, request, options: options);
   }
 
-  $grpc.ResponseFuture<$14.UpdateSessionPartResponse> updateSessionPart($14.UpdateSessionPartRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.UpdateSessionPartResponse> updateSessionPart($16.UpdateSessionPartRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateSessionPart, request, options: options);
   }
 
-  $grpc.ResponseFuture<$14.DeleteSessionPartResponse> deleteSessionPart($14.DeleteSessionPartRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.DeleteSessionPartResponse> deleteSessionPart($16.DeleteSessionPartRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteSessionPart, request, options: options);
   }
 }
@@ -66,54 +66,54 @@ abstract class SessionPartServiceBase extends $grpc.Service {
   $core.String get $name => 'bst.v1.SessionPartService';
 
   SessionPartServiceBase() {
-    $addMethod($grpc.ServiceMethod<$14.ListSessionPartsRequest, $14.ListSessionPartsResponse>(
+    $addMethod($grpc.ServiceMethod<$16.ListSessionPartsRequest, $16.ListSessionPartsResponse>(
         'ListSessionParts',
         listSessionParts_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $14.ListSessionPartsRequest.fromBuffer(value),
-        ($14.ListSessionPartsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$14.AddSessionPartRequest, $14.AddSessionPartResponse>(
+        ($core.List<$core.int> value) => $16.ListSessionPartsRequest.fromBuffer(value),
+        ($16.ListSessionPartsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.AddSessionPartRequest, $16.AddSessionPartResponse>(
         'AddSessionPart',
         addSessionPart_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $14.AddSessionPartRequest.fromBuffer(value),
-        ($14.AddSessionPartResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$14.UpdateSessionPartRequest, $14.UpdateSessionPartResponse>(
+        ($core.List<$core.int> value) => $16.AddSessionPartRequest.fromBuffer(value),
+        ($16.AddSessionPartResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.UpdateSessionPartRequest, $16.UpdateSessionPartResponse>(
         'UpdateSessionPart',
         updateSessionPart_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $14.UpdateSessionPartRequest.fromBuffer(value),
-        ($14.UpdateSessionPartResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$14.DeleteSessionPartRequest, $14.DeleteSessionPartResponse>(
+        ($core.List<$core.int> value) => $16.UpdateSessionPartRequest.fromBuffer(value),
+        ($16.UpdateSessionPartResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.DeleteSessionPartRequest, $16.DeleteSessionPartResponse>(
         'DeleteSessionPart',
         deleteSessionPart_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $14.DeleteSessionPartRequest.fromBuffer(value),
-        ($14.DeleteSessionPartResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $16.DeleteSessionPartRequest.fromBuffer(value),
+        ($16.DeleteSessionPartResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$14.ListSessionPartsResponse> listSessionParts_Pre($grpc.ServiceCall call, $async.Future<$14.ListSessionPartsRequest> request) async {
+  $async.Future<$16.ListSessionPartsResponse> listSessionParts_Pre($grpc.ServiceCall call, $async.Future<$16.ListSessionPartsRequest> request) async {
     return listSessionParts(call, await request);
   }
 
-  $async.Future<$14.AddSessionPartResponse> addSessionPart_Pre($grpc.ServiceCall call, $async.Future<$14.AddSessionPartRequest> request) async {
+  $async.Future<$16.AddSessionPartResponse> addSessionPart_Pre($grpc.ServiceCall call, $async.Future<$16.AddSessionPartRequest> request) async {
     return addSessionPart(call, await request);
   }
 
-  $async.Future<$14.UpdateSessionPartResponse> updateSessionPart_Pre($grpc.ServiceCall call, $async.Future<$14.UpdateSessionPartRequest> request) async {
+  $async.Future<$16.UpdateSessionPartResponse> updateSessionPart_Pre($grpc.ServiceCall call, $async.Future<$16.UpdateSessionPartRequest> request) async {
     return updateSessionPart(call, await request);
   }
 
-  $async.Future<$14.DeleteSessionPartResponse> deleteSessionPart_Pre($grpc.ServiceCall call, $async.Future<$14.DeleteSessionPartRequest> request) async {
+  $async.Future<$16.DeleteSessionPartResponse> deleteSessionPart_Pre($grpc.ServiceCall call, $async.Future<$16.DeleteSessionPartRequest> request) async {
     return deleteSessionPart(call, await request);
   }
 
-  $async.Future<$14.ListSessionPartsResponse> listSessionParts($grpc.ServiceCall call, $14.ListSessionPartsRequest request);
-  $async.Future<$14.AddSessionPartResponse> addSessionPart($grpc.ServiceCall call, $14.AddSessionPartRequest request);
-  $async.Future<$14.UpdateSessionPartResponse> updateSessionPart($grpc.ServiceCall call, $14.UpdateSessionPartRequest request);
-  $async.Future<$14.DeleteSessionPartResponse> deleteSessionPart($grpc.ServiceCall call, $14.DeleteSessionPartRequest request);
+  $async.Future<$16.ListSessionPartsResponse> listSessionParts($grpc.ServiceCall call, $16.ListSessionPartsRequest request);
+  $async.Future<$16.AddSessionPartResponse> addSessionPart($grpc.ServiceCall call, $16.AddSessionPartRequest request);
+  $async.Future<$16.UpdateSessionPartResponse> updateSessionPart($grpc.ServiceCall call, $16.UpdateSessionPartRequest request);
+  $async.Future<$16.DeleteSessionPartResponse> deleteSessionPart($grpc.ServiceCall call, $16.DeleteSessionPartRequest request);
 }

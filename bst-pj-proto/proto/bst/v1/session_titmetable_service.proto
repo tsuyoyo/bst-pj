@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "bst/v1/session.proto";
+
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+service SessionTimetableService {
+  // GET /sessions/{id}/timetable
+  rpc GetSessionTimetable(GetSessionTimetableRequest)
+      returns (GetSessionTimetableResponse);
+
+  // PUT /sessions/{id}/timetable
+  rpc UpdateSessionTimetable(UpdateSessionTimetableRequest)
+      returns (UpdateSessionTimetableResponse);
+
+  // GET /sessions/{id}/timetable/optimized
+  rpc GetOptimizedTimetable(GetOptimizedTimetableRequest)
+      returns (GetOptimizedTimetableResponse);
+
+  // GET /sessions/{id}/timetable/progress
+  rpc GetTimetableProgress(GetTimetableProgressRequest)
+      returns (GetTimetableProgressResponse);
+
+  // PUT /sessions/{id}/timetable/progress
+  rpc UpdateTimetableProgress(UpdateTimetableProgressRequest)
+      returns (UpdateTimetableProgressResponse);
+}
+
+message GetSessionTimetableRequest {
+  int32 session_id = 1;
+}
+
+message GetSessionTimetableResponse {
+  Timetable timetable = 1;
+}
+
+message UpdateSessionTimetableRequest {
+  int32     session_id = 1;
+  Timetable timetable  = 2;
+}
+
+message UpdateSessionTimetableResponse {
+  Timetable timetable = 1;
+}
+
+message GetOptimizedTimetableRequest {
+  int32           session_id         = 1;
+  repeated string optimization_rules = 2;
+}
+
+message GetOptimizedTimetableResponse {
+  Timetable timetable = 1;
+}
+
+message GetTimetableProgressRequest {
+  int32 session_id = 1;
+}
+
+message GetTimetableProgressResponse {
+  repeated TimetableEntry completed_entries = 1;
+  TimetableEntry          current_entry     = 2;
+}
+
+message UpdateTimetableProgressRequest {
+  int32 session_id       = 1;
+  int32 current_entry_id = 2;
+}
+
+message UpdateTimetableProgressResponse {
+  bool success = 1;
+}
