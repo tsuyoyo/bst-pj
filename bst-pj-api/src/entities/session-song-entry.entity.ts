@@ -8,13 +8,12 @@ import {
   JoinColumn,
   Unique,
 } from 'typeorm';
-import { SessionSong } from './session-song';
 import { SessionParticipant } from './session-participant.entity';
 import { SessionPart } from './session-part.entity';
 
-@Entity('entries')
+@Entity('session_song_entries')
 @Unique(['sessionSongId', 'sessionParticipantId', 'sessionPartId'])
-export class Entry {
+export class SessionSongEntry {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -32,10 +31,6 @@ export class Entry {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
-
-  @ManyToOne(() => SessionSong, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'session_song_id' })
-  sessionSong: SessionSong;
 
   @ManyToOne(() => SessionParticipant, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'session_participant_id' })

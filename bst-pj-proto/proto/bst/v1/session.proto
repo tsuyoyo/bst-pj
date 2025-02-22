@@ -81,9 +81,9 @@ message SessionSongPart {
 }
 
 message SessionSong {
-  Song                          song    = 1;
+  Song                      song    = 1;
   repeated SessionSongEntry entries = 2;
-  repeated SessionSongPart      parts   = 3;
+  repeated SessionSongPart  parts   = 3;
 }
 
 message TimetableEntry {

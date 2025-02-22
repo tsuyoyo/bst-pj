@@ -23,13 +23,6 @@ service SessionSongService {
       returns (DeleteSessionSongResponse);
 }
 
-// List Session Songs
-message ListSessionSongsRequest {}
-
-message ListSessionSongsResponse {
-  repeated SessionSong songs = 1;
-}
-
 // Add Session Song
 message AddSessionSongRequest {
   int32          song_id            = 1;
@@ -38,6 +31,13 @@ message AddSessionSongRequest {
 
 message AddSessionSongResponse {
   SessionSong song = 1;
+}
+
+// List Session Songs
+message ListSessionSongsRequest {}
+
+message ListSessionSongsResponse {
+  repeated SessionSong songs = 1;
 }
 
 // Get Session Song

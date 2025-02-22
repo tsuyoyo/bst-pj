@@ -7,7 +7,6 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { Session } from './session.entity';
 import { Part } from './part.entity';
 
 @Entity('session_parts')

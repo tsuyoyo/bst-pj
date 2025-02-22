@@ -13,14 +13,14 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'area.pb.dart' as $26;
-import 'location.pb.dart' as $29;
+import 'area.pb.dart' as $27;
+import 'location.pb.dart' as $30;
 
 class CreateStudioRequest extends $pb.GeneratedMessage {
   factory CreateStudioRequest({
     $core.String? name,
     $core.String? description,
-    $29.Location? location,
+    $30.Location? location,
   }) {
     final $result = create();
     if (name != null) {
@@ -41,7 +41,7 @@ class CreateStudioRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateStudioRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..aOS(2, _omitFieldNames ? '' : 'description')
-    ..aOM<$29.Location>(3, _omitFieldNames ? '' : 'location', subBuilder: $29.Location.create)
+    ..aOM<$30.Location>(3, _omitFieldNames ? '' : 'location', subBuilder: $30.Location.create)
     ..hasRequiredFields = false
   ;
 
@@ -85,20 +85,20 @@ class CreateStudioRequest extends $pb.GeneratedMessage {
   void clearDescription() => clearField(2);
 
   @$pb.TagNumber(3)
-  $29.Location get location => $_getN(2);
+  $30.Location get location => $_getN(2);
   @$pb.TagNumber(3)
-  set location($29.Location v) { setField(3, v); }
+  set location($30.Location v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasLocation() => $_has(2);
   @$pb.TagNumber(3)
   void clearLocation() => clearField(3);
   @$pb.TagNumber(3)
-  $29.Location ensureLocation() => $_ensure(2);
+  $30.Location ensureLocation() => $_ensure(2);
 }
 
 class CreateStudioResponse extends $pb.GeneratedMessage {
   factory CreateStudioResponse({
-    $29.Studio? studio,
+    $30.Studio? studio,
   }) {
     final $result = create();
     if (studio != null) {
@@ -111,7 +111,7 @@ class CreateStudioResponse extends $pb.GeneratedMessage {
   factory CreateStudioResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateStudioResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$29.Studio>(1, _omitFieldNames ? '' : 'studio', subBuilder: $29.Studio.create)
+    ..aOM<$30.Studio>(1, _omitFieldNames ? '' : 'studio', subBuilder: $30.Studio.create)
     ..hasRequiredFields = false
   ;
 
@@ -137,22 +137,22 @@ class CreateStudioResponse extends $pb.GeneratedMessage {
   static CreateStudioResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $29.Studio get studio => $_getN(0);
+  $30.Studio get studio => $_getN(0);
   @$pb.TagNumber(1)
-  set studio($29.Studio v) { setField(1, v); }
+  set studio($30.Studio v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasStudio() => $_has(0);
   @$pb.TagNumber(1)
   void clearStudio() => clearField(1);
   @$pb.TagNumber(1)
-  $29.Studio ensureStudio() => $_ensure(0);
+  $30.Studio ensureStudio() => $_ensure(0);
 }
 
 class ListStudiosRequest extends $pb.GeneratedMessage {
   factory ListStudiosRequest({
     $core.int? pageSize,
     $core.int? pageToken,
-    $26.Area? area,
+    $27.Area? area,
   }) {
     final $result = create();
     if (pageSize != null) {
@@ -173,7 +173,7 @@ class ListStudiosRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListStudiosRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.O3)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'pageToken', $pb.PbFieldType.O3)
-    ..aOM<$26.Area>(3, _omitFieldNames ? '' : 'area', subBuilder: $26.Area.create)
+    ..aOM<$27.Area>(3, _omitFieldNames ? '' : 'area', subBuilder: $27.Area.create)
     ..hasRequiredFields = false
   ;
 
@@ -217,20 +217,20 @@ class ListStudiosRequest extends $pb.GeneratedMessage {
   void clearPageToken() => clearField(2);
 
   @$pb.TagNumber(3)
-  $26.Area get area => $_getN(2);
+  $27.Area get area => $_getN(2);
   @$pb.TagNumber(3)
-  set area($26.Area v) { setField(3, v); }
+  set area($27.Area v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasArea() => $_has(2);
   @$pb.TagNumber(3)
   void clearArea() => clearField(3);
   @$pb.TagNumber(3)
-  $26.Area ensureArea() => $_ensure(2);
+  $27.Area ensureArea() => $_ensure(2);
 }
 
 class ListStudiosResponse extends $pb.GeneratedMessage {
   factory ListStudiosResponse({
-    $core.Iterable<$29.Studio>? studios,
+    $core.Iterable<$30.Studio>? studios,
     $core.String? nextPageToken,
     $core.int? totalSize,
   }) {
@@ -251,7 +251,7 @@ class ListStudiosResponse extends $pb.GeneratedMessage {
   factory ListStudiosResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListStudiosResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$29.Studio>(1, _omitFieldNames ? '' : 'studios', $pb.PbFieldType.PM, subBuilder: $29.Studio.create)
+    ..pc<$30.Studio>(1, _omitFieldNames ? '' : 'studios', $pb.PbFieldType.PM, subBuilder: $30.Studio.create)
     ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'totalSize', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -279,7 +279,7 @@ class ListStudiosResponse extends $pb.GeneratedMessage {
   static ListStudiosResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$29.Studio> get studios => $_getList(0);
+  $core.List<$30.Studio> get studios => $_getList(0);
 
   @$pb.TagNumber(2)
   $core.String get nextPageToken => $_getSZ(1);
@@ -352,7 +352,7 @@ class GetStudioRequest extends $pb.GeneratedMessage {
 
 class GetStudioResponse extends $pb.GeneratedMessage {
   factory GetStudioResponse({
-    $29.Studio? studio,
+    $30.Studio? studio,
   }) {
     final $result = create();
     if (studio != null) {
@@ -365,7 +365,7 @@ class GetStudioResponse extends $pb.GeneratedMessage {
   factory GetStudioResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetStudioResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$29.Studio>(1, _omitFieldNames ? '' : 'studio', subBuilder: $29.Studio.create)
+    ..aOM<$30.Studio>(1, _omitFieldNames ? '' : 'studio', subBuilder: $30.Studio.create)
     ..hasRequiredFields = false
   ;
 
@@ -391,15 +391,15 @@ class GetStudioResponse extends $pb.GeneratedMessage {
   static GetStudioResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $29.Studio get studio => $_getN(0);
+  $30.Studio get studio => $_getN(0);
   @$pb.TagNumber(1)
-  set studio($29.Studio v) { setField(1, v); }
+  set studio($30.Studio v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasStudio() => $_has(0);
   @$pb.TagNumber(1)
   void clearStudio() => clearField(1);
   @$pb.TagNumber(1)
-  $29.Studio ensureStudio() => $_ensure(0);
+  $30.Studio ensureStudio() => $_ensure(0);
 }
 
 class UpdateStudioRequest extends $pb.GeneratedMessage {
@@ -407,7 +407,7 @@ class UpdateStudioRequest extends $pb.GeneratedMessage {
     $core.int? studioId,
     $core.String? name,
     $core.String? description,
-    $29.Location? location,
+    $30.Location? location,
   }) {
     final $result = create();
     if (studioId != null) {
@@ -432,7 +432,7 @@ class UpdateStudioRequest extends $pb.GeneratedMessage {
     ..a<$core.int>(1, _omitFieldNames ? '' : 'studioId', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'description')
-    ..aOM<$29.Location>(4, _omitFieldNames ? '' : 'location', subBuilder: $29.Location.create)
+    ..aOM<$30.Location>(4, _omitFieldNames ? '' : 'location', subBuilder: $30.Location.create)
     ..hasRequiredFields = false
   ;
 
@@ -485,20 +485,20 @@ class UpdateStudioRequest extends $pb.GeneratedMessage {
   void clearDescription() => clearField(3);
 
   @$pb.TagNumber(4)
-  $29.Location get location => $_getN(3);
+  $30.Location get location => $_getN(3);
   @$pb.TagNumber(4)
-  set location($29.Location v) { setField(4, v); }
+  set location($30.Location v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasLocation() => $_has(3);
   @$pb.TagNumber(4)
   void clearLocation() => clearField(4);
   @$pb.TagNumber(4)
-  $29.Location ensureLocation() => $_ensure(3);
+  $30.Location ensureLocation() => $_ensure(3);
 }
 
 class UpdateStudioResponse extends $pb.GeneratedMessage {
   factory UpdateStudioResponse({
-    $29.Studio? studio,
+    $30.Studio? studio,
   }) {
     final $result = create();
     if (studio != null) {
@@ -511,7 +511,7 @@ class UpdateStudioResponse extends $pb.GeneratedMessage {
   factory UpdateStudioResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateStudioResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$29.Studio>(1, _omitFieldNames ? '' : 'studio', subBuilder: $29.Studio.create)
+    ..aOM<$30.Studio>(1, _omitFieldNames ? '' : 'studio', subBuilder: $30.Studio.create)
     ..hasRequiredFields = false
   ;
 
@@ -537,15 +537,15 @@ class UpdateStudioResponse extends $pb.GeneratedMessage {
   static UpdateStudioResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $29.Studio get studio => $_getN(0);
+  $30.Studio get studio => $_getN(0);
   @$pb.TagNumber(1)
-  set studio($29.Studio v) { setField(1, v); }
+  set studio($30.Studio v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasStudio() => $_has(0);
   @$pb.TagNumber(1)
   void clearStudio() => clearField(1);
   @$pb.TagNumber(1)
-  $29.Studio ensureStudio() => $_ensure(0);
+  $30.Studio ensureStudio() => $_ensure(0);
 }
 
 class DeleteStudioRequest extends $pb.GeneratedMessage {

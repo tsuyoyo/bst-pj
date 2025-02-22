@@ -317,62 +317,6 @@ final $typed_data.Uint8List updateSessionParticipantResponseDescriptor = $conver
     'CiBVcGRhdGVTZXNzaW9uUGFydGljaXBhbnRSZXNwb25zZRI8CgtwYXJ0aWNpcGFudBgBIAEoCz'
     'IaLmJzdC52MS5TZXNzaW9uUGFydGljaXBhbnRSC3BhcnRpY2lwYW50');
 
-@$core.Deprecated('Use addSongEntryRequestDescriptor instead')
-const AddSongEntryRequest$json = {
-  '1': 'AddSongEntryRequest',
-  '2': [
-    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'song_id', '3': 2, '4': 1, '5': 5, '10': 'songId'},
-    {'1': 'entry', '3': 3, '4': 1, '5': 11, '6': '.bst.v1.SessionSongEntry', '10': 'entry'},
-  ],
-};
-
-/// Descriptor for `AddSongEntryRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List addSongEntryRequestDescriptor = $convert.base64Decode(
-    'ChNBZGRTb25nRW50cnlSZXF1ZXN0Eh0KCnNlc3Npb25faWQYASABKAVSCXNlc3Npb25JZBIXCg'
-    'dzb25nX2lkGAIgASgFUgZzb25nSWQSLgoFZW50cnkYAyABKAsyGC5ic3QudjEuU2Vzc2lvblNv'
-    'bmdFbnRyeVIFZW50cnk=');
-
-@$core.Deprecated('Use addSongEntryResponseDescriptor instead')
-const AddSongEntryResponse$json = {
-  '1': 'AddSongEntryResponse',
-  '2': [
-    {'1': 'entry', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.SessionSongEntry', '10': 'entry'},
-  ],
-};
-
-/// Descriptor for `AddSongEntryResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List addSongEntryResponseDescriptor = $convert.base64Decode(
-    'ChRBZGRTb25nRW50cnlSZXNwb25zZRIuCgVlbnRyeRgBIAEoCzIYLmJzdC52MS5TZXNzaW9uU2'
-    '9uZ0VudHJ5UgVlbnRyeQ==');
-
-@$core.Deprecated('Use deleteSongEntryRequestDescriptor instead')
-const DeleteSongEntryRequest$json = {
-  '1': 'DeleteSongEntryRequest',
-  '2': [
-    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'song_id', '3': 2, '4': 1, '5': 5, '10': 'songId'},
-    {'1': 'entry_id', '3': 3, '4': 1, '5': 5, '10': 'entryId'},
-  ],
-};
-
-/// Descriptor for `DeleteSongEntryRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List deleteSongEntryRequestDescriptor = $convert.base64Decode(
-    'ChZEZWxldGVTb25nRW50cnlSZXF1ZXN0Eh0KCnNlc3Npb25faWQYASABKAVSCXNlc3Npb25JZB'
-    'IXCgdzb25nX2lkGAIgASgFUgZzb25nSWQSGQoIZW50cnlfaWQYAyABKAVSB2VudHJ5SWQ=');
-
-@$core.Deprecated('Use deleteSongEntryResponseDescriptor instead')
-const DeleteSongEntryResponse$json = {
-  '1': 'DeleteSongEntryResponse',
-  '2': [
-    {'1': 'success', '3': 1, '4': 1, '5': 8, '10': 'success'},
-  ],
-};
-
-/// Descriptor for `DeleteSongEntryResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List deleteSongEntryResponseDescriptor = $convert.base64Decode(
-    'ChdEZWxldGVTb25nRW50cnlSZXNwb25zZRIYCgdzdWNjZXNzGAEgASgIUgdzdWNjZXNz');
-
 @$core.Deprecated('Use addSessionSongResourceRequestDescriptor instead')
 const AddSessionSongResourceRequest$json = {
   '1': 'AddSessionSongResourceRequest',

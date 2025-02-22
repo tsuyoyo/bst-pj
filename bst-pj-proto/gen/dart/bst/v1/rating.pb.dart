@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/protobuf/timestamp.pb.dart' as $27;
+import '../../google/protobuf/timestamp.pb.dart' as $28;
 import 'rating.pbenum.dart';
 
 export 'rating.pbenum.dart';
@@ -26,8 +26,8 @@ class Rating extends $pb.GeneratedMessage {
     $core.int? targetId,
     $core.int? rating,
     $core.String? comment,
-    $27.Timestamp? createdAt,
-    $27.Timestamp? updatedAt,
+    $28.Timestamp? createdAt,
+    $28.Timestamp? updatedAt,
   }) {
     final $result = create();
     if (id != null) {
@@ -67,8 +67,8 @@ class Rating extends $pb.GeneratedMessage {
     ..a<$core.int>(4, _omitFieldNames ? '' : 'targetId', $pb.PbFieldType.O3, protoName: 'targetId')
     ..a<$core.int>(5, _omitFieldNames ? '' : 'rating', $pb.PbFieldType.O3)
     ..aOS(6, _omitFieldNames ? '' : 'comment')
-    ..aOM<$27.Timestamp>(7, _omitFieldNames ? '' : 'createdAt', protoName: 'createdAt', subBuilder: $27.Timestamp.create)
-    ..aOM<$27.Timestamp>(8, _omitFieldNames ? '' : 'updatedAt', protoName: 'updatedAt', subBuilder: $27.Timestamp.create)
+    ..aOM<$28.Timestamp>(7, _omitFieldNames ? '' : 'createdAt', protoName: 'createdAt', subBuilder: $28.Timestamp.create)
+    ..aOM<$28.Timestamp>(8, _omitFieldNames ? '' : 'updatedAt', protoName: 'updatedAt', subBuilder: $28.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -148,26 +148,26 @@ class Rating extends $pb.GeneratedMessage {
   void clearComment() => clearField(6);
 
   @$pb.TagNumber(7)
-  $27.Timestamp get createdAt => $_getN(6);
+  $28.Timestamp get createdAt => $_getN(6);
   @$pb.TagNumber(7)
-  set createdAt($27.Timestamp v) { setField(7, v); }
+  set createdAt($28.Timestamp v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasCreatedAt() => $_has(6);
   @$pb.TagNumber(7)
   void clearCreatedAt() => clearField(7);
   @$pb.TagNumber(7)
-  $27.Timestamp ensureCreatedAt() => $_ensure(6);
+  $28.Timestamp ensureCreatedAt() => $_ensure(6);
 
   @$pb.TagNumber(8)
-  $27.Timestamp get updatedAt => $_getN(7);
+  $28.Timestamp get updatedAt => $_getN(7);
   @$pb.TagNumber(8)
-  set updatedAt($27.Timestamp v) { setField(8, v); }
+  set updatedAt($28.Timestamp v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasUpdatedAt() => $_has(7);
   @$pb.TagNumber(8)
   void clearUpdatedAt() => clearField(8);
   @$pb.TagNumber(8)
-  $27.Timestamp ensureUpdatedAt() => $_ensure(7);
+  $28.Timestamp ensureUpdatedAt() => $_ensure(7);
 }
 
 

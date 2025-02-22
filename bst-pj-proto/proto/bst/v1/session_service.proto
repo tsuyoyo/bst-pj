@@ -46,12 +46,6 @@ service SessionService {
   rpc UpdateSessionParticipant(UpdateSessionParticipantRequest)
       returns (UpdateSessionParticipantResponse);
 
-  // Song Entries
-  // POST /sessions/{id}/songs/{songId}/entries
-  rpc AddSongEntry(AddSongEntryRequest) returns (AddSongEntryResponse);
-  // DELETE /sessions/{id}/songs/{songId}/entries/{entryId}
-  rpc DeleteSongEntry(DeleteSongEntryRequest) returns (DeleteSongEntryResponse);
-
   // Song Resources
   // POST /sessions/{id}/songs/{songId}/resources
   rpc AddSessionSongResource(AddSessionSongResourceRequest)
@@ -241,27 +235,6 @@ message UpdateSessionParticipantRequest {
 
 message UpdateSessionParticipantResponse {
   SessionParticipant participant = 1;
-}
-
-// Song Entries
-message AddSongEntryRequest {
-  int32                session_id = 1;
-  int32                song_id    = 2;
-  SessionSongEntry entry      = 3;
-}
-
-message AddSongEntryResponse {
-  SessionSongEntry entry = 1;
-}
-
-message DeleteSongEntryRequest {
-  int32 session_id = 1;
-  int32 song_id    = 2;
-  int32 entry_id   = 3;
-}
-
-message DeleteSongEntryResponse {
-  bool success = 1;
 }
 
 // Song Resources

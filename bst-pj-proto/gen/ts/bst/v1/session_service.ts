@@ -15,7 +15,6 @@ import {
   SessionDetail,
   SessionFeedback,
   SessionParticipant,
-  SessionSongEntry,
   SessionStatus,
   sessionStatusFromJSON,
   sessionStatusToJSON,
@@ -127,27 +126,6 @@ export interface UpdateSessionParticipantRequest {
 
 export interface UpdateSessionParticipantResponse {
   participant: SessionParticipant | undefined;
-}
-
-/** Song Entries */
-export interface AddSongEntryRequest {
-  sessionId: number;
-  songId: number;
-  entry: SessionSongEntry | undefined;
-}
-
-export interface AddSongEntryResponse {
-  entry: SessionSongEntry | undefined;
-}
-
-export interface DeleteSongEntryRequest {
-  sessionId: number;
-  songId: number;
-  entryId: number;
-}
-
-export interface DeleteSongEntryResponse {
-  success: boolean;
 }
 
 /** Song Resources */
@@ -1883,302 +1861,6 @@ export const UpdateSessionParticipantResponse = {
     message.participant = (object.participant !== undefined && object.participant !== null)
       ? SessionParticipant.fromPartial(object.participant)
       : undefined;
-    return message;
-  },
-};
-
-function createBaseAddSongEntryRequest(): AddSongEntryRequest {
-  return { sessionId: 0, songId: 0, entry: undefined };
-}
-
-export const AddSongEntryRequest = {
-  encode(message: AddSongEntryRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.sessionId !== 0) {
-      writer.uint32(8).int32(message.sessionId);
-    }
-    if (message.songId !== 0) {
-      writer.uint32(16).int32(message.songId);
-    }
-    if (message.entry !== undefined) {
-      SessionSongEntry.encode(message.entry, writer.uint32(26).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): AddSongEntryRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAddSongEntryRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.sessionId = reader.int32();
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.songId = reader.int32();
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.entry = SessionSongEntry.decode(reader, reader.uint32());
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): AddSongEntryRequest {
-    return {
-      sessionId: isSet(object.sessionId) ? globalThis.Number(object.sessionId) : 0,
-      songId: isSet(object.songId) ? globalThis.Number(object.songId) : 0,
-      entry: isSet(object.entry) ? SessionSongEntry.fromJSON(object.entry) : undefined,
-    };
-  },
-
-  toJSON(message: AddSongEntryRequest): unknown {
-    const obj: any = {};
-    if (message.sessionId !== 0) {
-      obj.sessionId = Math.round(message.sessionId);
-    }
-    if (message.songId !== 0) {
-      obj.songId = Math.round(message.songId);
-    }
-    if (message.entry !== undefined) {
-      obj.entry = SessionSongEntry.toJSON(message.entry);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<AddSongEntryRequest>, I>>(base?: I): AddSongEntryRequest {
-    return AddSongEntryRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<AddSongEntryRequest>, I>>(object: I): AddSongEntryRequest {
-    const message = createBaseAddSongEntryRequest();
-    message.sessionId = object.sessionId ?? 0;
-    message.songId = object.songId ?? 0;
-    message.entry = (object.entry !== undefined && object.entry !== null)
-      ? SessionSongEntry.fromPartial(object.entry)
-      : undefined;
-    return message;
-  },
-};
-
-function createBaseAddSongEntryResponse(): AddSongEntryResponse {
-  return { entry: undefined };
-}
-
-export const AddSongEntryResponse = {
-  encode(message: AddSongEntryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.entry !== undefined) {
-      SessionSongEntry.encode(message.entry, writer.uint32(10).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): AddSongEntryResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAddSongEntryResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.entry = SessionSongEntry.decode(reader, reader.uint32());
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): AddSongEntryResponse {
-    return { entry: isSet(object.entry) ? SessionSongEntry.fromJSON(object.entry) : undefined };
-  },
-
-  toJSON(message: AddSongEntryResponse): unknown {
-    const obj: any = {};
-    if (message.entry !== undefined) {
-      obj.entry = SessionSongEntry.toJSON(message.entry);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<AddSongEntryResponse>, I>>(base?: I): AddSongEntryResponse {
-    return AddSongEntryResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<AddSongEntryResponse>, I>>(object: I): AddSongEntryResponse {
-    const message = createBaseAddSongEntryResponse();
-    message.entry = (object.entry !== undefined && object.entry !== null)
-      ? SessionSongEntry.fromPartial(object.entry)
-      : undefined;
-    return message;
-  },
-};
-
-function createBaseDeleteSongEntryRequest(): DeleteSongEntryRequest {
-  return { sessionId: 0, songId: 0, entryId: 0 };
-}
-
-export const DeleteSongEntryRequest = {
-  encode(message: DeleteSongEntryRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.sessionId !== 0) {
-      writer.uint32(8).int32(message.sessionId);
-    }
-    if (message.songId !== 0) {
-      writer.uint32(16).int32(message.songId);
-    }
-    if (message.entryId !== 0) {
-      writer.uint32(24).int32(message.entryId);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteSongEntryRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseDeleteSongEntryRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.sessionId = reader.int32();
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.songId = reader.int32();
-          continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.entryId = reader.int32();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): DeleteSongEntryRequest {
-    return {
-      sessionId: isSet(object.sessionId) ? globalThis.Number(object.sessionId) : 0,
-      songId: isSet(object.songId) ? globalThis.Number(object.songId) : 0,
-      entryId: isSet(object.entryId) ? globalThis.Number(object.entryId) : 0,
-    };
-  },
-
-  toJSON(message: DeleteSongEntryRequest): unknown {
-    const obj: any = {};
-    if (message.sessionId !== 0) {
-      obj.sessionId = Math.round(message.sessionId);
-    }
-    if (message.songId !== 0) {
-      obj.songId = Math.round(message.songId);
-    }
-    if (message.entryId !== 0) {
-      obj.entryId = Math.round(message.entryId);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<DeleteSongEntryRequest>, I>>(base?: I): DeleteSongEntryRequest {
-    return DeleteSongEntryRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<DeleteSongEntryRequest>, I>>(object: I): DeleteSongEntryRequest {
-    const message = createBaseDeleteSongEntryRequest();
-    message.sessionId = object.sessionId ?? 0;
-    message.songId = object.songId ?? 0;
-    message.entryId = object.entryId ?? 0;
-    return message;
-  },
-};
-
-function createBaseDeleteSongEntryResponse(): DeleteSongEntryResponse {
-  return { success: false };
-}
-
-export const DeleteSongEntryResponse = {
-  encode(message: DeleteSongEntryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.success !== false) {
-      writer.uint32(8).bool(message.success);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteSongEntryResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseDeleteSongEntryResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.success = reader.bool();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): DeleteSongEntryResponse {
-    return { success: isSet(object.success) ? globalThis.Boolean(object.success) : false };
-  },
-
-  toJSON(message: DeleteSongEntryResponse): unknown {
-    const obj: any = {};
-    if (message.success !== false) {
-      obj.success = message.success;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<DeleteSongEntryResponse>, I>>(base?: I): DeleteSongEntryResponse {
-    return DeleteSongEntryResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<DeleteSongEntryResponse>, I>>(object: I): DeleteSongEntryResponse {
-    const message = createBaseDeleteSongEntryResponse();
-    message.success = object.success ?? false;
     return message;
   },
 };
@@ -5443,13 +5125,6 @@ export interface SessionService {
   /** PUT /sessions/{id}/participants/{participantId} */
   UpdateSessionParticipant(request: UpdateSessionParticipantRequest): Promise<UpdateSessionParticipantResponse>;
   /**
-   * Song Entries
-   * POST /sessions/{id}/songs/{songId}/entries
-   */
-  AddSongEntry(request: AddSongEntryRequest): Promise<AddSongEntryResponse>;
-  /** DELETE /sessions/{id}/songs/{songId}/entries/{entryId} */
-  DeleteSongEntry(request: DeleteSongEntryRequest): Promise<DeleteSongEntryResponse>;
-  /**
    * Song Resources
    * POST /sessions/{id}/songs/{songId}/resources
    */
@@ -5538,8 +5213,6 @@ export class SessionServiceClientImpl implements SessionService {
     this.ListSessionParticipants = this.ListSessionParticipants.bind(this);
     this.AddSessionParticipant = this.AddSessionParticipant.bind(this);
     this.UpdateSessionParticipant = this.UpdateSessionParticipant.bind(this);
-    this.AddSongEntry = this.AddSongEntry.bind(this);
-    this.DeleteSongEntry = this.DeleteSongEntry.bind(this);
     this.AddSessionSongResource = this.AddSessionSongResource.bind(this);
     this.ListSessionSongResources = this.ListSessionSongResources.bind(this);
     this.DeleteSessionSongResource = this.DeleteSessionSongResource.bind(this);
@@ -5629,18 +5302,6 @@ export class SessionServiceClientImpl implements SessionService {
     const data = UpdateSessionParticipantRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "UpdateSessionParticipant", data);
     return promise.then((data) => UpdateSessionParticipantResponse.decode(_m0.Reader.create(data)));
-  }
-
-  AddSongEntry(request: AddSongEntryRequest): Promise<AddSongEntryResponse> {
-    const data = AddSongEntryRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "AddSongEntry", data);
-    return promise.then((data) => AddSongEntryResponse.decode(_m0.Reader.create(data)));
-  }
-
-  DeleteSongEntry(request: DeleteSongEntryRequest): Promise<DeleteSongEntryResponse> {
-    const data = DeleteSongEntryRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "DeleteSongEntry", data);
-    return promise.then((data) => DeleteSongEntryResponse.decode(_m0.Reader.create(data)));
   }
 
   AddSessionSongResource(request: AddSessionSongResourceRequest): Promise<AddSessionSongResourceResponse> {

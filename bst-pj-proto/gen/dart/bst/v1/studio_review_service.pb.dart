@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'location.pb.dart' as $29;
+import 'location.pb.dart' as $30;
 
 class CreateStudioReviewRequest extends $pb.GeneratedMessage {
   factory CreateStudioReviewRequest({
@@ -81,7 +81,7 @@ class CreateStudioReviewRequest extends $pb.GeneratedMessage {
 
 class CreateStudioReviewResponse extends $pb.GeneratedMessage {
   factory CreateStudioReviewResponse({
-    $29.StudioReview? review,
+    $30.StudioReview? review,
   }) {
     final $result = create();
     if (review != null) {
@@ -94,7 +94,7 @@ class CreateStudioReviewResponse extends $pb.GeneratedMessage {
   factory CreateStudioReviewResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateStudioReviewResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$29.StudioReview>(1, _omitFieldNames ? '' : 'review', subBuilder: $29.StudioReview.create)
+    ..aOM<$30.StudioReview>(1, _omitFieldNames ? '' : 'review', subBuilder: $30.StudioReview.create)
     ..hasRequiredFields = false
   ;
 
@@ -120,15 +120,15 @@ class CreateStudioReviewResponse extends $pb.GeneratedMessage {
   static CreateStudioReviewResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $29.StudioReview get review => $_getN(0);
+  $30.StudioReview get review => $_getN(0);
   @$pb.TagNumber(1)
-  set review($29.StudioReview v) { setField(1, v); }
+  set review($30.StudioReview v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasReview() => $_has(0);
   @$pb.TagNumber(1)
   void clearReview() => clearField(1);
   @$pb.TagNumber(1)
-  $29.StudioReview ensureReview() => $_ensure(0);
+  $30.StudioReview ensureReview() => $_ensure(0);
 }
 
 class ListStudioReviewsRequest extends $pb.GeneratedMessage {
@@ -211,7 +211,7 @@ class ListStudioReviewsRequest extends $pb.GeneratedMessage {
 
 class ListStudioReviewsResponse extends $pb.GeneratedMessage {
   factory ListStudioReviewsResponse({
-    $core.Iterable<$29.StudioReview>? reviews,
+    $core.Iterable<$30.StudioReview>? reviews,
     $core.String? nextPageToken,
     $core.int? totalSize,
   }) {
@@ -232,7 +232,7 @@ class ListStudioReviewsResponse extends $pb.GeneratedMessage {
   factory ListStudioReviewsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListStudioReviewsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$29.StudioReview>(1, _omitFieldNames ? '' : 'reviews', $pb.PbFieldType.PM, subBuilder: $29.StudioReview.create)
+    ..pc<$30.StudioReview>(1, _omitFieldNames ? '' : 'reviews', $pb.PbFieldType.PM, subBuilder: $30.StudioReview.create)
     ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'totalSize', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -260,7 +260,7 @@ class ListStudioReviewsResponse extends $pb.GeneratedMessage {
   static ListStudioReviewsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$29.StudioReview> get reviews => $_getList(0);
+  $core.List<$30.StudioReview> get reviews => $_getList(0);
 
   @$pb.TagNumber(2)
   $core.String get nextPageToken => $_getSZ(1);

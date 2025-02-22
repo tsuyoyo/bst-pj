@@ -94,8 +94,8 @@ exports.up = (pgm) => {
     },
   });
 
-  // Create entries table
-  pgm.createTable("entries", {
+  // Create session_song_entries table
+  pgm.createTable("session_song_entries", {
     id: "id",
     session_song_id: {
       type: "integer",
@@ -142,7 +142,7 @@ exports.up = (pgm) => {
     level: "ROW",
   });
 
-  pgm.createTrigger("entries", "update_updated_at_trigger", {
+  pgm.createTrigger("session_song_entries", "update_updated_at_trigger", {
     when: "BEFORE",
     operation: "UPDATE",
     function: "update_updated_at",
@@ -156,9 +156,9 @@ exports.up = (pgm) => {
   pgm.createIndex("session_participants", ["status"]);
   pgm.createIndex("participant_parts", ["session_participant_id"]);
   pgm.createIndex("participant_parts", ["session_part_id"]);
-  pgm.createIndex("entries", ["session_song_id"]);
-  pgm.createIndex("entries", ["session_participant_id"]);
-  pgm.createIndex("entries", ["session_part_id"]);
+  pgm.createIndex("session_song_entries", ["session_song_id"]);
+  pgm.createIndex("session_song_entries", ["session_participant_id"]);
+  pgm.createIndex("session_song_entries", ["session_part_id"]);
 
   // Create unique constraints
   pgm.createConstraint(
@@ -176,8 +176,8 @@ exports.up = (pgm) => {
     }
   );
   pgm.createConstraint(
-    "entries",
-    "entries_session_song_id_session_participant_id_session_part_id_key",
+    "session_song_entries",
+    "session_song_entries_session_song_id_session_participant_id_session_part_id_key",
     {
       unique: ["session_song_id", "session_participant_id", "session_part_id"],
     }
@@ -192,7 +192,9 @@ exports.down = (pgm) => {
   pgm.dropTrigger("participant_parts", "update_updated_at_trigger", {
     ifExists: true,
   });
-  pgm.dropTrigger("entries", "update_updated_at_trigger", { ifExists: true });
+  pgm.dropTrigger("session_song_entries", "update_updated_at_trigger", {
+    ifExists: true,
+  });
 
   // Drop constraints
   pgm.dropConstraint(
@@ -206,8 +208,8 @@ exports.down = (pgm) => {
     { ifExists: true }
   );
   pgm.dropConstraint(
-    "entries",
-    "entries_session_song_id_session_participant_id_session_part_id_key",
+    "session_song_entries",
+    "session_song_entries_session_song_id_session_participant_id_session_part_id_key",
     { ifExists: true }
   );
 
@@ -220,12 +222,18 @@ exports.down = (pgm) => {
     ifExists: true,
   });
   pgm.dropIndex("participant_parts", ["session_part_id"], { ifExists: true });
-  pgm.dropIndex("entries", ["session_song_id"], { ifExists: true });
-  pgm.dropIndex("entries", ["session_participant_id"], { ifExists: true });
-  pgm.dropIndex("entries", ["session_part_id"], { ifExists: true });
+  pgm.dropIndex("session_song_entries", ["session_song_id"], {
+    ifExists: true,
+  });
+  pgm.dropIndex("session_song_entries", ["session_participant_id"], {
+    ifExists: true,
+  });
+  pgm.dropIndex("session_song_entries", ["session_part_id"], {
+    ifExists: true,
+  });
 
   // Drop tables
-  pgm.dropTable("entries", { ifExists: true });
+  pgm.dropTable("session_song_entries", { ifExists: true });
   pgm.dropTable("participant_parts", { ifExists: true });
   pgm.dropTable("session_participants", { ifExists: true });
 

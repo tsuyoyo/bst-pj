@@ -26,7 +26,7 @@ export class Activity {
     type: 'enum',
     enum: ActivityType,
     nullable: false,
-    comment: '活動の種類 (例: SongPerformance, Party)',
+    comment: '活動の種類 (例: 曲の演奏, Party)',
   })
   type: ActivityType;
 

@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package bst.v1;
+
+import "bst/v1/session.proto";
+
+option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
+
+// Session Song Entry Service
+service SessionSongEntryService {
+  // POST /sessions/{id}/songs/{songId}/entries
+  rpc AddSongEntry(AddSongEntryRequest) returns (AddSongEntryResponse);
+  // DELETE /sessions/{id}/songs/{songId}/entries/{entryId}
+  rpc DeleteSongEntry(DeleteSongEntryRequest) returns (DeleteSongEntryResponse);
+}
+
+message AddSongEntryRequest {
+  int32 session_part_id = 1;
+}
+
+message AddSongEntryResponse {
+  bool success = 1;
+}
+
+message DeleteSongEntryRequest {
+  int32 session_part_id = 1;
+}
+
+message DeleteSongEntryResponse {
+  bool success = 1;
+}
