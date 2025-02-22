@@ -32,6 +32,15 @@ export class SessionParticipantPart {
   })
   isPrimary: boolean;
 
+  @Column({ name: 'display_order', type: 'integer', nullable: false })
+  displayOrder: number;
+
+  @Column({ name: 'max_entry_count', type: 'integer', nullable: false })
+  maxEntryCount: number;
+
+  @Column({ name: 'transition_cost', type: 'integer', nullable: true })
+  transitionCost: number;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 

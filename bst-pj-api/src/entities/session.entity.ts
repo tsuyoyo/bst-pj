@@ -9,15 +9,7 @@ import {
 } from 'typeorm';
 import { User } from './user.entity';
 import { Location } from './location.entity';
-
-export enum SessionStatus {
-  BeforeEntry = 'BeforeEntry',
-  EntryOpen = 'EntryOpen',
-  EntryClosed = 'EntryClosed',
-  Approaching = 'Approaching',
-  Ongoing = 'Ongoing',
-  Completed = 'Completed',
-}
+import { SessionStatus } from './types/session-status.enum';
 
 @Entity('sessions')
 export class Session {
@@ -41,21 +33,21 @@ export class Session {
   @Column({ type: 'timestamp', nullable: false })
   date: Date;
 
-  @Column({ name: 'entry_open_date', type: 'timestamp', nullable: false })
+  @Column({ name: 'entry_open_date', type: 'timestamp', nullable: true })
   entryOpenDate: Date;
 
-  @Column({ name: 'entry_close_date', type: 'timestamp', nullable: false })
+  @Column({ name: 'entry_close_date', type: 'timestamp', nullable: true })
   entryCloseDate: Date;
 
   @Column({
-    name: 'organizer_id',
+    name: 'creator_id',
     type: 'integer',
     nullable: false,
     comment: '作成者のUserID',
   })
-  organizerId: number;
+  creatorId: number;
 
-  @Column({ name: 'location_id', type: 'integer', nullable: false })
+  @Column({ name: 'location_id', type: 'integer', nullable: true })
   locationId: number;
 
   @CreateDateColumn({ name: 'created_at' })
@@ -65,8 +57,8 @@ export class Session {
   updatedAt: Date;
 
   @ManyToOne(() => User, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'organizer_id' })
-  organizer: User;
+  @JoinColumn({ name: 'creator_id' })
+  creator: User;
 
   @ManyToOne(() => Location, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'location_id' })
