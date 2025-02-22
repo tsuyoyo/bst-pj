@@ -70,20 +70,20 @@ message SessionParticipant {
   User                   user = 4;
 }
 
-message SongPerformanceEntry {
+message SessionSongEntry {
   User        user = 1;
   SessionPart part = 2;
 }
 
-message SongPerformancePart {
+message SessionSongPart {
   SessionPart part        = 1;
   bool        is_required = 2;  // Is required to play the song
 }
 
-message SongPerformance {
+message SessionSong {
   Song                          song    = 1;
-  repeated SongPerformanceEntry entries = 2;
-  repeated SongPerformancePart  parts   = 3;
+  repeated SessionSongEntry entries = 2;
+  repeated SessionSongPart      parts   = 3;
 }
 
 message TimetableEntry {
@@ -103,10 +103,9 @@ message Timetable {
   repeated TimetableEntry entries = 1;
 
   // Entities of each timetable entry
-  repeated SessionTask     tasks = 2;  // For TimetableEntryType.TASK
-  repeated SongPerformance song_performances =
-      3;                       // For TimetableEntryType.PERFORMANCE
-  repeated Party parties = 4;  // For TimetableEntryType.PARTY
+  repeated SessionTask tasks         = 2;  // For TimetableEntryType.TASK
+  repeated SessionSong session_songs = 3;  // For TimetableEntryType.PERFORMANCE
+  repeated Party       parties       = 4;  // For TimetableEntryType.PARTY
 }
 
 message SessionFeedback {

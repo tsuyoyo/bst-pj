@@ -10,7 +10,7 @@ import {
 import { SessionTimetable } from './session-timetable.entity';
 
 export enum ActivityType {
-  SongPerformance = 'SongPerformance',
+  SessionSong = 'SessionSong',
   Party = 'Party',
 }
 

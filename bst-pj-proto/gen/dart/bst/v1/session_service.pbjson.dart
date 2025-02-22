@@ -323,28 +323,28 @@ const AddSongEntryRequest$json = {
   '2': [
     {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
     {'1': 'song_id', '3': 2, '4': 1, '5': 5, '10': 'songId'},
-    {'1': 'entry', '3': 3, '4': 1, '5': 11, '6': '.bst.v1.SongPerformanceEntry', '10': 'entry'},
+    {'1': 'entry', '3': 3, '4': 1, '5': 11, '6': '.bst.v1.SessionSongEntry', '10': 'entry'},
   ],
 };
 
 /// Descriptor for `AddSongEntryRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addSongEntryRequestDescriptor = $convert.base64Decode(
     'ChNBZGRTb25nRW50cnlSZXF1ZXN0Eh0KCnNlc3Npb25faWQYASABKAVSCXNlc3Npb25JZBIXCg'
-    'dzb25nX2lkGAIgASgFUgZzb25nSWQSMgoFZW50cnkYAyABKAsyHC5ic3QudjEuU29uZ1BlcmZv'
-    'cm1hbmNlRW50cnlSBWVudHJ5');
+    'dzb25nX2lkGAIgASgFUgZzb25nSWQSLgoFZW50cnkYAyABKAsyGC5ic3QudjEuU2Vzc2lvblNv'
+    'bmdFbnRyeVIFZW50cnk=');
 
 @$core.Deprecated('Use addSongEntryResponseDescriptor instead')
 const AddSongEntryResponse$json = {
   '1': 'AddSongEntryResponse',
   '2': [
-    {'1': 'entry', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.SongPerformanceEntry', '10': 'entry'},
+    {'1': 'entry', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.SessionSongEntry', '10': 'entry'},
   ],
 };
 
 /// Descriptor for `AddSongEntryResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addSongEntryResponseDescriptor = $convert.base64Decode(
-    'ChRBZGRTb25nRW50cnlSZXNwb25zZRIyCgVlbnRyeRgBIAEoCzIcLmJzdC52MS5Tb25nUGVyZm'
-    '9ybWFuY2VFbnRyeVIFZW50cnk=');
+    'ChRBZGRTb25nRW50cnlSZXNwb25zZRIuCgVlbnRyeRgBIAEoCzIYLmJzdC52MS5TZXNzaW9uU2'
+    '9uZ0VudHJ5UgVlbnRyeQ==');
 
 @$core.Deprecated('Use deleteSongEntryRequestDescriptor instead')
 const DeleteSongEntryRequest$json = {

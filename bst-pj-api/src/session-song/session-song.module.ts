@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { SongPerformance } from '../entities/song-performance.entity';
+import { SessionSong } from '../entities/session-song';
 import { RequiredPart } from '../entities/required-part.entity';
 import { SessionSongController } from './session-song.controller';
 import { SessionSongService } from './session-song.service';
@@ -10,7 +10,7 @@ import { PartModule } from '../part/part.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([SongPerformance, RequiredPart]),
+    TypeOrmModule.forFeature([SessionSong, RequiredPart]),
     SessionModule,
     SongModule,
     PartModule,

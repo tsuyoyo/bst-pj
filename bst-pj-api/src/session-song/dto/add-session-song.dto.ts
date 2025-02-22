@@ -1,4 +1,4 @@
-import { IsArray, IsInt, IsNotEmpty } from 'class-validator';
+import { IsArray, IsInt, IsNotEmpty, IsNumber } from 'class-validator';
 import { AddSessionSongRequest } from '../../proto/bst/v1/session_song_service';
 
 export class RequiredPartDto {
@@ -12,8 +12,8 @@ export class RequiredPartDto {
 }
 
 export class AddSessionSongDto implements AddSessionSongRequest {
-  @IsInt()
   @IsNotEmpty()
+  @IsNumber()
   songId: number;
 
   @IsArray()

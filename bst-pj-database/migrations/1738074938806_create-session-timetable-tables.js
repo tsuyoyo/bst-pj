@@ -62,8 +62,8 @@ exports.up = (pgm) => {
     },
   });
 
-  // Create song_performances table
-  pgm.createTable("song_performances", {
+  // Create session_songs table
+  pgm.createTable("session_songs", {
     id: "id",
     session_id: {
       type: "integer",
@@ -104,7 +104,7 @@ exports.up = (pgm) => {
     level: "ROW",
   });
 
-  pgm.createTrigger("song_performances", "update_updated_at_trigger", {
+  pgm.createTrigger("session_songs", "update_updated_at_trigger", {
     when: "BEFORE",
     operation: "UPDATE",
     function: "update_updated_at",
@@ -117,8 +117,7 @@ exports.up = (pgm) => {
   pgm.createIndex("activities", ["type"]);
   pgm.createIndex("activities", ["start_time"]);
   pgm.createIndex("activities", ["end_time"]);
-  pgm.createIndex("song_performances", ["activity_id"]);
-  pgm.createIndex("song_performances", ["song_id"]);
+  pgm.createIndex("session_songs", ["song_id"]);
 };
 
 exports.down = (pgm) => {
@@ -129,7 +128,7 @@ exports.down = (pgm) => {
   pgm.dropTrigger("activities", "update_updated_at_trigger", {
     ifExists: true,
   });
-  pgm.dropTrigger("song_performances", "update_updated_at_trigger", {
+  pgm.dropTrigger("session_songs", "update_updated_at_trigger", {
     ifExists: true,
   });
 
@@ -139,11 +138,10 @@ exports.down = (pgm) => {
   pgm.dropIndex("activities", ["type"], { ifExists: true });
   pgm.dropIndex("activities", ["start_time"], { ifExists: true });
   pgm.dropIndex("activities", ["end_time"], { ifExists: true });
-  pgm.dropIndex("song_performances", ["activity_id"], { ifExists: true });
-  pgm.dropIndex("song_performances", ["song_id"], { ifExists: true });
+  pgm.dropIndex("session_songs", ["song_id"], { ifExists: true });
 
   // Drop tables
-  pgm.dropTable("song_performances", { ifExists: true });
+  pgm.dropTable("session_songs", { ifExists: true });
   pgm.dropTable("activities", { ifExists: true });
   pgm.dropTable("session_timetables", { ifExists: true });
 

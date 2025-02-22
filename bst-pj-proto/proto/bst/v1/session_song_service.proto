@@ -27,33 +27,33 @@ service SessionSongService {
 message ListSessionSongsRequest {}
 
 message ListSessionSongsResponse {
-  repeated SongPerformance songs = 1;
+  repeated SessionSong songs = 1;
 }
 
 // Add Session Song
 message AddSessionSongRequest {
-  int32 song_id = 1;
+  int32          song_id            = 1;
   repeated int32 mandatory_part_ids = 2;
 }
 
 message AddSessionSongResponse {
-  SongPerformance song = 1;
+  SessionSong song = 1;
 }
 
 // Get Session Song
 message GetSessionSongRequest {}
 
 message GetSessionSongResponse {
-  SongPerformance song = 1;
+  SessionSong song = 1;
 }
 
 // Update Session Song
 message UpdateSessionSongRequest {
-  SongPerformance song = 1;
+  SessionSong song = 1;
 }
 
 message UpdateSessionSongResponse {
-  SongPerformance song = 1;
+  SessionSong song = 1;
 }
 
 // Delete Session Song

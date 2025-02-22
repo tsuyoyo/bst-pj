@@ -15,10 +15,10 @@ import {
   SessionDetail,
   SessionFeedback,
   SessionParticipant,
+  SessionSongEntry,
   SessionStatus,
   sessionStatusFromJSON,
   sessionStatusToJSON,
-  SongPerformanceEntry,
   Timetable,
   TimetableEntry,
 } from "./session";
@@ -133,11 +133,11 @@ export interface UpdateSessionParticipantResponse {
 export interface AddSongEntryRequest {
   sessionId: number;
   songId: number;
-  entry: SongPerformanceEntry | undefined;
+  entry: SessionSongEntry | undefined;
 }
 
 export interface AddSongEntryResponse {
-  entry: SongPerformanceEntry | undefined;
+  entry: SessionSongEntry | undefined;
 }
 
 export interface DeleteSongEntryRequest {
@@ -1900,7 +1900,7 @@ export const AddSongEntryRequest = {
       writer.uint32(16).int32(message.songId);
     }
     if (message.entry !== undefined) {
-      SongPerformanceEntry.encode(message.entry, writer.uint32(26).fork()).ldelim();
+      SessionSongEntry.encode(message.entry, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -1931,7 +1931,7 @@ export const AddSongEntryRequest = {
             break;
           }
 
-          message.entry = SongPerformanceEntry.decode(reader, reader.uint32());
+          message.entry = SessionSongEntry.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1946,7 +1946,7 @@ export const AddSongEntryRequest = {
     return {
       sessionId: isSet(object.sessionId) ? globalThis.Number(object.sessionId) : 0,
       songId: isSet(object.songId) ? globalThis.Number(object.songId) : 0,
-      entry: isSet(object.entry) ? SongPerformanceEntry.fromJSON(object.entry) : undefined,
+      entry: isSet(object.entry) ? SessionSongEntry.fromJSON(object.entry) : undefined,
     };
   },
 
@@ -1959,7 +1959,7 @@ export const AddSongEntryRequest = {
       obj.songId = Math.round(message.songId);
     }
     if (message.entry !== undefined) {
-      obj.entry = SongPerformanceEntry.toJSON(message.entry);
+      obj.entry = SessionSongEntry.toJSON(message.entry);
     }
     return obj;
   },
@@ -1972,7 +1972,7 @@ export const AddSongEntryRequest = {
     message.sessionId = object.sessionId ?? 0;
     message.songId = object.songId ?? 0;
     message.entry = (object.entry !== undefined && object.entry !== null)
-      ? SongPerformanceEntry.fromPartial(object.entry)
+      ? SessionSongEntry.fromPartial(object.entry)
       : undefined;
     return message;
   },
@@ -1985,7 +1985,7 @@ function createBaseAddSongEntryResponse(): AddSongEntryResponse {
 export const AddSongEntryResponse = {
   encode(message: AddSongEntryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.entry !== undefined) {
-      SongPerformanceEntry.encode(message.entry, writer.uint32(10).fork()).ldelim();
+      SessionSongEntry.encode(message.entry, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -2002,7 +2002,7 @@ export const AddSongEntryResponse = {
             break;
           }
 
-          message.entry = SongPerformanceEntry.decode(reader, reader.uint32());
+          message.entry = SessionSongEntry.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -2014,13 +2014,13 @@ export const AddSongEntryResponse = {
   },
 
   fromJSON(object: any): AddSongEntryResponse {
-    return { entry: isSet(object.entry) ? SongPerformanceEntry.fromJSON(object.entry) : undefined };
+    return { entry: isSet(object.entry) ? SessionSongEntry.fromJSON(object.entry) : undefined };
   },
 
   toJSON(message: AddSongEntryResponse): unknown {
     const obj: any = {};
     if (message.entry !== undefined) {
-      obj.entry = SongPerformanceEntry.toJSON(message.entry);
+      obj.entry = SessionSongEntry.toJSON(message.entry);
     }
     return obj;
   },
@@ -2031,7 +2031,7 @@ export const AddSongEntryResponse = {
   fromPartial<I extends Exact<DeepPartial<AddSongEntryResponse>, I>>(object: I): AddSongEntryResponse {
     const message = createBaseAddSongEntryResponse();
     message.entry = (object.entry !== undefined && object.entry !== null)
-      ? SongPerformanceEntry.fromPartial(object.entry)
+      ? SessionSongEntry.fromPartial(object.entry)
       : undefined;
     return message;
   },

@@ -1338,7 +1338,7 @@ class AddSongEntryRequest extends $pb.GeneratedMessage {
   factory AddSongEntryRequest({
     $core.int? sessionId,
     $core.int? songId,
-    $31.SongPerformanceEntry? entry,
+    $31.SessionSongEntry? entry,
   }) {
     final $result = create();
     if (sessionId != null) {
@@ -1359,7 +1359,7 @@ class AddSongEntryRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSongEntryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'songId', $pb.PbFieldType.O3)
-    ..aOM<$31.SongPerformanceEntry>(3, _omitFieldNames ? '' : 'entry', subBuilder: $31.SongPerformanceEntry.create)
+    ..aOM<$31.SessionSongEntry>(3, _omitFieldNames ? '' : 'entry', subBuilder: $31.SessionSongEntry.create)
     ..hasRequiredFields = false
   ;
 
@@ -1403,20 +1403,20 @@ class AddSongEntryRequest extends $pb.GeneratedMessage {
   void clearSongId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $31.SongPerformanceEntry get entry => $_getN(2);
+  $31.SessionSongEntry get entry => $_getN(2);
   @$pb.TagNumber(3)
-  set entry($31.SongPerformanceEntry v) { setField(3, v); }
+  set entry($31.SessionSongEntry v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasEntry() => $_has(2);
   @$pb.TagNumber(3)
   void clearEntry() => clearField(3);
   @$pb.TagNumber(3)
-  $31.SongPerformanceEntry ensureEntry() => $_ensure(2);
+  $31.SessionSongEntry ensureEntry() => $_ensure(2);
 }
 
 class AddSongEntryResponse extends $pb.GeneratedMessage {
   factory AddSongEntryResponse({
-    $31.SongPerformanceEntry? entry,
+    $31.SessionSongEntry? entry,
   }) {
     final $result = create();
     if (entry != null) {
@@ -1429,7 +1429,7 @@ class AddSongEntryResponse extends $pb.GeneratedMessage {
   factory AddSongEntryResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSongEntryResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$31.SongPerformanceEntry>(1, _omitFieldNames ? '' : 'entry', subBuilder: $31.SongPerformanceEntry.create)
+    ..aOM<$31.SessionSongEntry>(1, _omitFieldNames ? '' : 'entry', subBuilder: $31.SessionSongEntry.create)
     ..hasRequiredFields = false
   ;
 
@@ -1455,15 +1455,15 @@ class AddSongEntryResponse extends $pb.GeneratedMessage {
   static AddSongEntryResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $31.SongPerformanceEntry get entry => $_getN(0);
+  $31.SessionSongEntry get entry => $_getN(0);
   @$pb.TagNumber(1)
-  set entry($31.SongPerformanceEntry v) { setField(1, v); }
+  set entry($31.SessionSongEntry v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasEntry() => $_has(0);
   @$pb.TagNumber(1)
   void clearEntry() => clearField(1);
   @$pb.TagNumber(1)
-  $31.SongPerformanceEntry ensureEntry() => $_ensure(0);
+  $31.SessionSongEntry ensureEntry() => $_ensure(0);
 }
 
 class DeleteSongEntryRequest extends $pb.GeneratedMessage {

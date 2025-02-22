@@ -11,13 +11,13 @@ import {
 import { SessionPart } from './session-part.entity';
 
 @Entity('required_parts')
-@Unique(['songPerformanceId', 'sessionPartId'])
+@Unique(['sessionSongId', 'sessionPartId'])
 export class RequiredPart {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ name: 'song_performance_id', type: 'integer', nullable: false })
-  songPerformanceId: number;
+  @Column({ name: 'session_song_id', type: 'integer', nullable: false })
+  sessionSongId: number;
 
   @Column({ name: 'session_part_id', type: 'integer', nullable: false })
   sessionPartId: number;

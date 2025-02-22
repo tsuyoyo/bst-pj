@@ -6,7 +6,7 @@
 
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
-import { SongPerformance } from "./session";
+import { SessionSong } from "./session";
 
 export const protobufPackage = "bst.v1";
 
@@ -15,7 +15,7 @@ export interface ListSessionSongsRequest {
 }
 
 export interface ListSessionSongsResponse {
-  songs: SongPerformance[];
+  songs: SessionSong[];
 }
 
 /** Add Session Song */
@@ -25,7 +25,7 @@ export interface AddSessionSongRequest {
 }
 
 export interface AddSessionSongResponse {
-  song: SongPerformance | undefined;
+  song: SessionSong | undefined;
 }
 
 /** Get Session Song */
@@ -33,16 +33,16 @@ export interface GetSessionSongRequest {
 }
 
 export interface GetSessionSongResponse {
-  song: SongPerformance | undefined;
+  song: SessionSong | undefined;
 }
 
 /** Update Session Song */
 export interface UpdateSessionSongRequest {
-  song: SongPerformance | undefined;
+  song: SessionSong | undefined;
 }
 
 export interface UpdateSessionSongResponse {
-  song: SongPerformance | undefined;
+  song: SessionSong | undefined;
 }
 
 /** Delete Session Song */
@@ -103,7 +103,7 @@ function createBaseListSessionSongsResponse(): ListSessionSongsResponse {
 export const ListSessionSongsResponse = {
   encode(message: ListSessionSongsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.songs) {
-      SongPerformance.encode(v!, writer.uint32(10).fork()).ldelim();
+      SessionSong.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -120,7 +120,7 @@ export const ListSessionSongsResponse = {
             break;
           }
 
-          message.songs.push(SongPerformance.decode(reader, reader.uint32()));
+          message.songs.push(SessionSong.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -133,14 +133,14 @@ export const ListSessionSongsResponse = {
 
   fromJSON(object: any): ListSessionSongsResponse {
     return {
-      songs: globalThis.Array.isArray(object?.songs) ? object.songs.map((e: any) => SongPerformance.fromJSON(e)) : [],
+      songs: globalThis.Array.isArray(object?.songs) ? object.songs.map((e: any) => SessionSong.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: ListSessionSongsResponse): unknown {
     const obj: any = {};
     if (message.songs?.length) {
-      obj.songs = message.songs.map((e) => SongPerformance.toJSON(e));
+      obj.songs = message.songs.map((e) => SessionSong.toJSON(e));
     }
     return obj;
   },
@@ -150,7 +150,7 @@ export const ListSessionSongsResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<ListSessionSongsResponse>, I>>(object: I): ListSessionSongsResponse {
     const message = createBaseListSessionSongsResponse();
-    message.songs = object.songs?.map((e) => SongPerformance.fromPartial(e)) || [];
+    message.songs = object.songs?.map((e) => SessionSong.fromPartial(e)) || [];
     return message;
   },
 };
@@ -250,7 +250,7 @@ function createBaseAddSessionSongResponse(): AddSessionSongResponse {
 export const AddSessionSongResponse = {
   encode(message: AddSessionSongResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.song !== undefined) {
-      SongPerformance.encode(message.song, writer.uint32(10).fork()).ldelim();
+      SessionSong.encode(message.song, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -267,7 +267,7 @@ export const AddSessionSongResponse = {
             break;
           }
 
-          message.song = SongPerformance.decode(reader, reader.uint32());
+          message.song = SessionSong.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -279,13 +279,13 @@ export const AddSessionSongResponse = {
   },
 
   fromJSON(object: any): AddSessionSongResponse {
-    return { song: isSet(object.song) ? SongPerformance.fromJSON(object.song) : undefined };
+    return { song: isSet(object.song) ? SessionSong.fromJSON(object.song) : undefined };
   },
 
   toJSON(message: AddSessionSongResponse): unknown {
     const obj: any = {};
     if (message.song !== undefined) {
-      obj.song = SongPerformance.toJSON(message.song);
+      obj.song = SessionSong.toJSON(message.song);
     }
     return obj;
   },
@@ -296,7 +296,7 @@ export const AddSessionSongResponse = {
   fromPartial<I extends Exact<DeepPartial<AddSessionSongResponse>, I>>(object: I): AddSessionSongResponse {
     const message = createBaseAddSessionSongResponse();
     message.song = (object.song !== undefined && object.song !== null)
-      ? SongPerformance.fromPartial(object.song)
+      ? SessionSong.fromPartial(object.song)
       : undefined;
     return message;
   },
@@ -352,7 +352,7 @@ function createBaseGetSessionSongResponse(): GetSessionSongResponse {
 export const GetSessionSongResponse = {
   encode(message: GetSessionSongResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.song !== undefined) {
-      SongPerformance.encode(message.song, writer.uint32(10).fork()).ldelim();
+      SessionSong.encode(message.song, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -369,7 +369,7 @@ export const GetSessionSongResponse = {
             break;
           }
 
-          message.song = SongPerformance.decode(reader, reader.uint32());
+          message.song = SessionSong.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -381,13 +381,13 @@ export const GetSessionSongResponse = {
   },
 
   fromJSON(object: any): GetSessionSongResponse {
-    return { song: isSet(object.song) ? SongPerformance.fromJSON(object.song) : undefined };
+    return { song: isSet(object.song) ? SessionSong.fromJSON(object.song) : undefined };
   },
 
   toJSON(message: GetSessionSongResponse): unknown {
     const obj: any = {};
     if (message.song !== undefined) {
-      obj.song = SongPerformance.toJSON(message.song);
+      obj.song = SessionSong.toJSON(message.song);
     }
     return obj;
   },
@@ -398,7 +398,7 @@ export const GetSessionSongResponse = {
   fromPartial<I extends Exact<DeepPartial<GetSessionSongResponse>, I>>(object: I): GetSessionSongResponse {
     const message = createBaseGetSessionSongResponse();
     message.song = (object.song !== undefined && object.song !== null)
-      ? SongPerformance.fromPartial(object.song)
+      ? SessionSong.fromPartial(object.song)
       : undefined;
     return message;
   },
@@ -411,7 +411,7 @@ function createBaseUpdateSessionSongRequest(): UpdateSessionSongRequest {
 export const UpdateSessionSongRequest = {
   encode(message: UpdateSessionSongRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.song !== undefined) {
-      SongPerformance.encode(message.song, writer.uint32(10).fork()).ldelim();
+      SessionSong.encode(message.song, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -428,7 +428,7 @@ export const UpdateSessionSongRequest = {
             break;
           }
 
-          message.song = SongPerformance.decode(reader, reader.uint32());
+          message.song = SessionSong.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -440,13 +440,13 @@ export const UpdateSessionSongRequest = {
   },
 
   fromJSON(object: any): UpdateSessionSongRequest {
-    return { song: isSet(object.song) ? SongPerformance.fromJSON(object.song) : undefined };
+    return { song: isSet(object.song) ? SessionSong.fromJSON(object.song) : undefined };
   },
 
   toJSON(message: UpdateSessionSongRequest): unknown {
     const obj: any = {};
     if (message.song !== undefined) {
-      obj.song = SongPerformance.toJSON(message.song);
+      obj.song = SessionSong.toJSON(message.song);
     }
     return obj;
   },
@@ -457,7 +457,7 @@ export const UpdateSessionSongRequest = {
   fromPartial<I extends Exact<DeepPartial<UpdateSessionSongRequest>, I>>(object: I): UpdateSessionSongRequest {
     const message = createBaseUpdateSessionSongRequest();
     message.song = (object.song !== undefined && object.song !== null)
-      ? SongPerformance.fromPartial(object.song)
+      ? SessionSong.fromPartial(object.song)
       : undefined;
     return message;
   },
@@ -470,7 +470,7 @@ function createBaseUpdateSessionSongResponse(): UpdateSessionSongResponse {
 export const UpdateSessionSongResponse = {
   encode(message: UpdateSessionSongResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.song !== undefined) {
-      SongPerformance.encode(message.song, writer.uint32(10).fork()).ldelim();
+      SessionSong.encode(message.song, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -487,7 +487,7 @@ export const UpdateSessionSongResponse = {
             break;
           }
 
-          message.song = SongPerformance.decode(reader, reader.uint32());
+          message.song = SessionSong.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -499,13 +499,13 @@ export const UpdateSessionSongResponse = {
   },
 
   fromJSON(object: any): UpdateSessionSongResponse {
-    return { song: isSet(object.song) ? SongPerformance.fromJSON(object.song) : undefined };
+    return { song: isSet(object.song) ? SessionSong.fromJSON(object.song) : undefined };
   },
 
   toJSON(message: UpdateSessionSongResponse): unknown {
     const obj: any = {};
     if (message.song !== undefined) {
-      obj.song = SongPerformance.toJSON(message.song);
+      obj.song = SessionSong.toJSON(message.song);
     }
     return obj;
   },
@@ -516,7 +516,7 @@ export const UpdateSessionSongResponse = {
   fromPartial<I extends Exact<DeepPartial<UpdateSessionSongResponse>, I>>(object: I): UpdateSessionSongResponse {
     const message = createBaseUpdateSessionSongResponse();
     message.song = (object.song !== undefined && object.song !== null)
-      ? SongPerformance.fromPartial(object.song)
+      ? SessionSong.fromPartial(object.song)
       : undefined;
     return message;
   },

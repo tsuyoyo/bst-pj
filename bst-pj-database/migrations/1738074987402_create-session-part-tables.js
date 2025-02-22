@@ -55,10 +55,10 @@ exports.up = (pgm) => {
   // Create required_parts table
   pgm.createTable("required_parts", {
     id: "id",
-    song_performance_id: {
+    session_song_id: {
       type: "integer",
       notNull: true,
-      references: "song_performances",
+      references: "session_songs",
       onDelete: "CASCADE",
     },
     session_part_id: {
@@ -98,15 +98,15 @@ exports.up = (pgm) => {
   pgm.createIndex("session_parts", ["session_id"]);
   pgm.createIndex("session_parts", ["part_id"]);
   pgm.createIndex("session_parts", ["display_order"]);
-  pgm.createIndex("required_parts", ["song_performance_id"]);
+  pgm.createIndex("required_parts", ["session_song_id"]);
   pgm.createIndex("required_parts", ["session_part_id"]);
 
-  // Create unique constraint for song_performance and session_part combination
+  // Create unique constraint for session_song and session_part combination
   pgm.createConstraint(
     "required_parts",
-    "required_parts_song_performance_id_session_part_id_key",
+    "required_parts_session_song_id_session_part_id_key",
     {
-      unique: ["song_performance_id", "session_part_id"],
+      unique: ["session_song_id", "session_part_id"],
     }
   );
 };
@@ -123,7 +123,7 @@ exports.down = (pgm) => {
   // Drop constraint
   pgm.dropConstraint(
     "required_parts",
-    "required_parts_song_performance_id_session_part_id_key",
+    "required_parts_session_song_id_session_part_id_key",
     { ifExists: true }
   );
 
@@ -131,7 +131,7 @@ exports.down = (pgm) => {
   pgm.dropIndex("session_parts", ["session_id"], { ifExists: true });
   pgm.dropIndex("session_parts", ["part_id"], { ifExists: true });
   pgm.dropIndex("session_parts", ["display_order"], { ifExists: true });
-  pgm.dropIndex("required_parts", ["song_performance_id"], { ifExists: true });
+  pgm.dropIndex("required_parts", ["session_song_id"], { ifExists: true });
   pgm.dropIndex("required_parts", ["session_part_id"], { ifExists: true });
 
   // Drop tables

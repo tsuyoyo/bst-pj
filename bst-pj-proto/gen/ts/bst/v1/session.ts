@@ -166,12 +166,12 @@ export interface SessionParticipant {
   user: User | undefined;
 }
 
-export interface SongPerformanceEntry {
+export interface SessionSongEntry {
   user: User | undefined;
   part: SessionPart | undefined;
 }
 
-export interface SongPerformancePart {
+export interface SessionSongPart {
   part:
     | SessionPart
     | undefined;
@@ -179,10 +179,10 @@ export interface SongPerformancePart {
   isRequired: boolean;
 }
 
-export interface SongPerformance {
+export interface SessionSong {
   song: Song | undefined;
-  entries: SongPerformanceEntry[];
-  parts: SongPerformancePart[];
+  entries: SessionSongEntry[];
+  parts: SessionSongPart[];
 }
 
 export interface TimetableEntry {
@@ -243,7 +243,7 @@ export interface Timetable {
   /** Entities of each timetable entry */
   tasks: SessionTask[];
   /** For TimetableEntryType.PERFORMANCE */
-  songPerformances: SongPerformance[];
+  sessionSongs: SessionSong[];
   /** For TimetableEntryType.PARTY */
   parties: Party[];
 }
@@ -870,12 +870,12 @@ export const SessionParticipant = {
   },
 };
 
-function createBaseSongPerformanceEntry(): SongPerformanceEntry {
+function createBaseSessionSongEntry(): SessionSongEntry {
   return { user: undefined, part: undefined };
 }
 
-export const SongPerformanceEntry = {
-  encode(message: SongPerformanceEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const SessionSongEntry = {
+  encode(message: SessionSongEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.user !== undefined) {
       User.encode(message.user, writer.uint32(10).fork()).ldelim();
     }
@@ -885,10 +885,10 @@ export const SongPerformanceEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): SongPerformanceEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SessionSongEntry {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSongPerformanceEntry();
+    const message = createBaseSessionSongEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -915,14 +915,14 @@ export const SongPerformanceEntry = {
     return message;
   },
 
-  fromJSON(object: any): SongPerformanceEntry {
+  fromJSON(object: any): SessionSongEntry {
     return {
       user: isSet(object.user) ? User.fromJSON(object.user) : undefined,
       part: isSet(object.part) ? SessionPart.fromJSON(object.part) : undefined,
     };
   },
 
-  toJSON(message: SongPerformanceEntry): unknown {
+  toJSON(message: SessionSongEntry): unknown {
     const obj: any = {};
     if (message.user !== undefined) {
       obj.user = User.toJSON(message.user);
@@ -933,11 +933,11 @@ export const SongPerformanceEntry = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SongPerformanceEntry>, I>>(base?: I): SongPerformanceEntry {
-    return SongPerformanceEntry.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<SessionSongEntry>, I>>(base?: I): SessionSongEntry {
+    return SessionSongEntry.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SongPerformanceEntry>, I>>(object: I): SongPerformanceEntry {
-    const message = createBaseSongPerformanceEntry();
+  fromPartial<I extends Exact<DeepPartial<SessionSongEntry>, I>>(object: I): SessionSongEntry {
+    const message = createBaseSessionSongEntry();
     message.user = (object.user !== undefined && object.user !== null) ? User.fromPartial(object.user) : undefined;
     message.part = (object.part !== undefined && object.part !== null)
       ? SessionPart.fromPartial(object.part)
@@ -946,12 +946,12 @@ export const SongPerformanceEntry = {
   },
 };
 
-function createBaseSongPerformancePart(): SongPerformancePart {
+function createBaseSessionSongPart(): SessionSongPart {
   return { part: undefined, isRequired: false };
 }
 
-export const SongPerformancePart = {
-  encode(message: SongPerformancePart, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const SessionSongPart = {
+  encode(message: SessionSongPart, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.part !== undefined) {
       SessionPart.encode(message.part, writer.uint32(10).fork()).ldelim();
     }
@@ -961,10 +961,10 @@ export const SongPerformancePart = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): SongPerformancePart {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SessionSongPart {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSongPerformancePart();
+    const message = createBaseSessionSongPart();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -991,14 +991,14 @@ export const SongPerformancePart = {
     return message;
   },
 
-  fromJSON(object: any): SongPerformancePart {
+  fromJSON(object: any): SessionSongPart {
     return {
       part: isSet(object.part) ? SessionPart.fromJSON(object.part) : undefined,
       isRequired: isSet(object.isRequired) ? globalThis.Boolean(object.isRequired) : false,
     };
   },
 
-  toJSON(message: SongPerformancePart): unknown {
+  toJSON(message: SessionSongPart): unknown {
     const obj: any = {};
     if (message.part !== undefined) {
       obj.part = SessionPart.toJSON(message.part);
@@ -1009,11 +1009,11 @@ export const SongPerformancePart = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SongPerformancePart>, I>>(base?: I): SongPerformancePart {
-    return SongPerformancePart.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<SessionSongPart>, I>>(base?: I): SessionSongPart {
+    return SessionSongPart.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SongPerformancePart>, I>>(object: I): SongPerformancePart {
-    const message = createBaseSongPerformancePart();
+  fromPartial<I extends Exact<DeepPartial<SessionSongPart>, I>>(object: I): SessionSongPart {
+    const message = createBaseSessionSongPart();
     message.part = (object.part !== undefined && object.part !== null)
       ? SessionPart.fromPartial(object.part)
       : undefined;
@@ -1022,28 +1022,28 @@ export const SongPerformancePart = {
   },
 };
 
-function createBaseSongPerformance(): SongPerformance {
+function createBaseSessionSong(): SessionSong {
   return { song: undefined, entries: [], parts: [] };
 }
 
-export const SongPerformance = {
-  encode(message: SongPerformance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const SessionSong = {
+  encode(message: SessionSong, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.song !== undefined) {
       Song.encode(message.song, writer.uint32(10).fork()).ldelim();
     }
     for (const v of message.entries) {
-      SongPerformanceEntry.encode(v!, writer.uint32(18).fork()).ldelim();
+      SessionSongEntry.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     for (const v of message.parts) {
-      SongPerformancePart.encode(v!, writer.uint32(26).fork()).ldelim();
+      SessionSongPart.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): SongPerformance {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SessionSong {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSongPerformance();
+    const message = createBaseSessionSong();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -1059,14 +1059,14 @@ export const SongPerformance = {
             break;
           }
 
-          message.entries.push(SongPerformanceEntry.decode(reader, reader.uint32()));
+          message.entries.push(SessionSongEntry.decode(reader, reader.uint32()));
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.parts.push(SongPerformancePart.decode(reader, reader.uint32()));
+          message.parts.push(SessionSongPart.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1077,40 +1077,38 @@ export const SongPerformance = {
     return message;
   },
 
-  fromJSON(object: any): SongPerformance {
+  fromJSON(object: any): SessionSong {
     return {
       song: isSet(object.song) ? Song.fromJSON(object.song) : undefined,
       entries: globalThis.Array.isArray(object?.entries)
-        ? object.entries.map((e: any) => SongPerformanceEntry.fromJSON(e))
+        ? object.entries.map((e: any) => SessionSongEntry.fromJSON(e))
         : [],
-      parts: globalThis.Array.isArray(object?.parts)
-        ? object.parts.map((e: any) => SongPerformancePart.fromJSON(e))
-        : [],
+      parts: globalThis.Array.isArray(object?.parts) ? object.parts.map((e: any) => SessionSongPart.fromJSON(e)) : [],
     };
   },
 
-  toJSON(message: SongPerformance): unknown {
+  toJSON(message: SessionSong): unknown {
     const obj: any = {};
     if (message.song !== undefined) {
       obj.song = Song.toJSON(message.song);
     }
     if (message.entries?.length) {
-      obj.entries = message.entries.map((e) => SongPerformanceEntry.toJSON(e));
+      obj.entries = message.entries.map((e) => SessionSongEntry.toJSON(e));
     }
     if (message.parts?.length) {
-      obj.parts = message.parts.map((e) => SongPerformancePart.toJSON(e));
+      obj.parts = message.parts.map((e) => SessionSongPart.toJSON(e));
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SongPerformance>, I>>(base?: I): SongPerformance {
-    return SongPerformance.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<SessionSong>, I>>(base?: I): SessionSong {
+    return SessionSong.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SongPerformance>, I>>(object: I): SongPerformance {
-    const message = createBaseSongPerformance();
+  fromPartial<I extends Exact<DeepPartial<SessionSong>, I>>(object: I): SessionSong {
+    const message = createBaseSessionSong();
     message.song = (object.song !== undefined && object.song !== null) ? Song.fromPartial(object.song) : undefined;
-    message.entries = object.entries?.map((e) => SongPerformanceEntry.fromPartial(e)) || [];
-    message.parts = object.parts?.map((e) => SongPerformancePart.fromPartial(e)) || [];
+    message.entries = object.entries?.map((e) => SessionSongEntry.fromPartial(e)) || [];
+    message.parts = object.parts?.map((e) => SessionSongPart.fromPartial(e)) || [];
     return message;
   },
 };
@@ -1220,7 +1218,7 @@ export const TimetableEntry = {
 };
 
 function createBaseTimetable(): Timetable {
-  return { entries: [], tasks: [], songPerformances: [], parties: [] };
+  return { entries: [], tasks: [], sessionSongs: [], parties: [] };
 }
 
 export const Timetable = {
@@ -1231,8 +1229,8 @@ export const Timetable = {
     for (const v of message.tasks) {
       SessionTask.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    for (const v of message.songPerformances) {
-      SongPerformance.encode(v!, writer.uint32(26).fork()).ldelim();
+    for (const v of message.sessionSongs) {
+      SessionSong.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     for (const v of message.parties) {
       Party.encode(v!, writer.uint32(34).fork()).ldelim();
@@ -1266,7 +1264,7 @@ export const Timetable = {
             break;
           }
 
-          message.songPerformances.push(SongPerformance.decode(reader, reader.uint32()));
+          message.sessionSongs.push(SessionSong.decode(reader, reader.uint32()));
           continue;
         case 4:
           if (tag !== 34) {
@@ -1290,8 +1288,8 @@ export const Timetable = {
         ? object.entries.map((e: any) => TimetableEntry.fromJSON(e))
         : [],
       tasks: globalThis.Array.isArray(object?.tasks) ? object.tasks.map((e: any) => SessionTask.fromJSON(e)) : [],
-      songPerformances: globalThis.Array.isArray(object?.songPerformances)
-        ? object.songPerformances.map((e: any) => SongPerformance.fromJSON(e))
+      sessionSongs: globalThis.Array.isArray(object?.sessionSongs)
+        ? object.sessionSongs.map((e: any) => SessionSong.fromJSON(e))
         : [],
       parties: globalThis.Array.isArray(object?.parties) ? object.parties.map((e: any) => Party.fromJSON(e)) : [],
     };
@@ -1305,8 +1303,8 @@ export const Timetable = {
     if (message.tasks?.length) {
       obj.tasks = message.tasks.map((e) => SessionTask.toJSON(e));
     }
-    if (message.songPerformances?.length) {
-      obj.songPerformances = message.songPerformances.map((e) => SongPerformance.toJSON(e));
+    if (message.sessionSongs?.length) {
+      obj.sessionSongs = message.sessionSongs.map((e) => SessionSong.toJSON(e));
     }
     if (message.parties?.length) {
       obj.parties = message.parties.map((e) => Party.toJSON(e));
@@ -1321,7 +1319,7 @@ export const Timetable = {
     const message = createBaseTimetable();
     message.entries = object.entries?.map((e) => TimetableEntry.fromPartial(e)) || [];
     message.tasks = object.tasks?.map((e) => SessionTask.fromPartial(e)) || [];
-    message.songPerformances = object.songPerformances?.map((e) => SongPerformance.fromPartial(e)) || [];
+    message.sessionSongs = object.sessionSongs?.map((e) => SessionSong.fromPartial(e)) || [];
     message.parties = object.parties?.map((e) => Party.fromPartial(e)) || [];
     return message;
   },

@@ -566,8 +566,8 @@ class SessionParticipant extends $pb.GeneratedMessage {
   $28.User ensureUser() => $_ensure(3);
 }
 
-class SongPerformanceEntry extends $pb.GeneratedMessage {
-  factory SongPerformanceEntry({
+class SessionSongEntry extends $pb.GeneratedMessage {
+  factory SessionSongEntry({
     $28.User? user,
     SessionPart? part,
   }) {
@@ -580,11 +580,11 @@ class SongPerformanceEntry extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  SongPerformanceEntry._() : super();
-  factory SongPerformanceEntry.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SongPerformanceEntry.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  SessionSongEntry._() : super();
+  factory SessionSongEntry.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SessionSongEntry.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SongPerformanceEntry', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SessionSongEntry', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..aOM<$28.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $28.User.create)
     ..aOM<SessionPart>(2, _omitFieldNames ? '' : 'part', subBuilder: SessionPart.create)
     ..hasRequiredFields = false
@@ -594,22 +594,22 @@ class SongPerformanceEntry extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  SongPerformanceEntry clone() => SongPerformanceEntry()..mergeFromMessage(this);
+  SessionSongEntry clone() => SessionSongEntry()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  SongPerformanceEntry copyWith(void Function(SongPerformanceEntry) updates) => super.copyWith((message) => updates(message as SongPerformanceEntry)) as SongPerformanceEntry;
+  SessionSongEntry copyWith(void Function(SessionSongEntry) updates) => super.copyWith((message) => updates(message as SessionSongEntry)) as SessionSongEntry;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static SongPerformanceEntry create() => SongPerformanceEntry._();
-  SongPerformanceEntry createEmptyInstance() => create();
-  static $pb.PbList<SongPerformanceEntry> createRepeated() => $pb.PbList<SongPerformanceEntry>();
+  static SessionSongEntry create() => SessionSongEntry._();
+  SessionSongEntry createEmptyInstance() => create();
+  static $pb.PbList<SessionSongEntry> createRepeated() => $pb.PbList<SessionSongEntry>();
   @$core.pragma('dart2js:noInline')
-  static SongPerformanceEntry getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SongPerformanceEntry>(create);
-  static SongPerformanceEntry? _defaultInstance;
+  static SessionSongEntry getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SessionSongEntry>(create);
+  static SessionSongEntry? _defaultInstance;
 
   @$pb.TagNumber(1)
   $28.User get user => $_getN(0);
@@ -634,8 +634,8 @@ class SongPerformanceEntry extends $pb.GeneratedMessage {
   SessionPart ensurePart() => $_ensure(1);
 }
 
-class SongPerformancePart extends $pb.GeneratedMessage {
-  factory SongPerformancePart({
+class SessionSongPart extends $pb.GeneratedMessage {
+  factory SessionSongPart({
     SessionPart? part,
     $core.bool? isRequired,
   }) {
@@ -648,11 +648,11 @@ class SongPerformancePart extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  SongPerformancePart._() : super();
-  factory SongPerformancePart.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SongPerformancePart.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  SessionSongPart._() : super();
+  factory SessionSongPart.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SessionSongPart.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SongPerformancePart', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SessionSongPart', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..aOM<SessionPart>(1, _omitFieldNames ? '' : 'part', subBuilder: SessionPart.create)
     ..aOB(2, _omitFieldNames ? '' : 'isRequired')
     ..hasRequiredFields = false
@@ -662,22 +662,22 @@ class SongPerformancePart extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  SongPerformancePart clone() => SongPerformancePart()..mergeFromMessage(this);
+  SessionSongPart clone() => SessionSongPart()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  SongPerformancePart copyWith(void Function(SongPerformancePart) updates) => super.copyWith((message) => updates(message as SongPerformancePart)) as SongPerformancePart;
+  SessionSongPart copyWith(void Function(SessionSongPart) updates) => super.copyWith((message) => updates(message as SessionSongPart)) as SessionSongPart;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static SongPerformancePart create() => SongPerformancePart._();
-  SongPerformancePart createEmptyInstance() => create();
-  static $pb.PbList<SongPerformancePart> createRepeated() => $pb.PbList<SongPerformancePart>();
+  static SessionSongPart create() => SessionSongPart._();
+  SessionSongPart createEmptyInstance() => create();
+  static $pb.PbList<SessionSongPart> createRepeated() => $pb.PbList<SessionSongPart>();
   @$core.pragma('dart2js:noInline')
-  static SongPerformancePart getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SongPerformancePart>(create);
-  static SongPerformancePart? _defaultInstance;
+  static SessionSongPart getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SessionSongPart>(create);
+  static SessionSongPart? _defaultInstance;
 
   @$pb.TagNumber(1)
   SessionPart get part => $_getN(0);
@@ -700,11 +700,11 @@ class SongPerformancePart extends $pb.GeneratedMessage {
   void clearIsRequired() => clearField(2);
 }
 
-class SongPerformance extends $pb.GeneratedMessage {
-  factory SongPerformance({
+class SessionSong extends $pb.GeneratedMessage {
+  factory SessionSong({
     $25.Song? song,
-    $core.Iterable<SongPerformanceEntry>? entries,
-    $core.Iterable<SongPerformancePart>? parts,
+    $core.Iterable<SessionSongEntry>? entries,
+    $core.Iterable<SessionSongPart>? parts,
   }) {
     final $result = create();
     if (song != null) {
@@ -718,14 +718,14 @@ class SongPerformance extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  SongPerformance._() : super();
-  factory SongPerformance.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SongPerformance.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  SessionSong._() : super();
+  factory SessionSong.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SessionSong.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SongPerformance', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SessionSong', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..aOM<$25.Song>(1, _omitFieldNames ? '' : 'song', subBuilder: $25.Song.create)
-    ..pc<SongPerformanceEntry>(2, _omitFieldNames ? '' : 'entries', $pb.PbFieldType.PM, subBuilder: SongPerformanceEntry.create)
-    ..pc<SongPerformancePart>(3, _omitFieldNames ? '' : 'parts', $pb.PbFieldType.PM, subBuilder: SongPerformancePart.create)
+    ..pc<SessionSongEntry>(2, _omitFieldNames ? '' : 'entries', $pb.PbFieldType.PM, subBuilder: SessionSongEntry.create)
+    ..pc<SessionSongPart>(3, _omitFieldNames ? '' : 'parts', $pb.PbFieldType.PM, subBuilder: SessionSongPart.create)
     ..hasRequiredFields = false
   ;
 
@@ -733,22 +733,22 @@ class SongPerformance extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  SongPerformance clone() => SongPerformance()..mergeFromMessage(this);
+  SessionSong clone() => SessionSong()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  SongPerformance copyWith(void Function(SongPerformance) updates) => super.copyWith((message) => updates(message as SongPerformance)) as SongPerformance;
+  SessionSong copyWith(void Function(SessionSong) updates) => super.copyWith((message) => updates(message as SessionSong)) as SessionSong;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static SongPerformance create() => SongPerformance._();
-  SongPerformance createEmptyInstance() => create();
-  static $pb.PbList<SongPerformance> createRepeated() => $pb.PbList<SongPerformance>();
+  static SessionSong create() => SessionSong._();
+  SessionSong createEmptyInstance() => create();
+  static $pb.PbList<SessionSong> createRepeated() => $pb.PbList<SessionSong>();
   @$core.pragma('dart2js:noInline')
-  static SongPerformance getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SongPerformance>(create);
-  static SongPerformance? _defaultInstance;
+  static SessionSong getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SessionSong>(create);
+  static SessionSong? _defaultInstance;
 
   @$pb.TagNumber(1)
   $25.Song get song => $_getN(0);
@@ -762,10 +762,10 @@ class SongPerformance extends $pb.GeneratedMessage {
   $25.Song ensureSong() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $core.List<SongPerformanceEntry> get entries => $_getList(1);
+  $core.List<SessionSongEntry> get entries => $_getList(1);
 
   @$pb.TagNumber(3)
-  $core.List<SongPerformancePart> get parts => $_getList(2);
+  $core.List<SessionSongPart> get parts => $_getList(2);
 }
 
 class TimetableEntry extends $pb.GeneratedMessage {
@@ -868,7 +868,7 @@ class Timetable extends $pb.GeneratedMessage {
   factory Timetable({
     $core.Iterable<TimetableEntry>? entries,
     $core.Iterable<SessionTask>? tasks,
-    $core.Iterable<SongPerformance>? songPerformances,
+    $core.Iterable<SessionSong>? sessionSongs,
     $core.Iterable<$30.Party>? parties,
   }) {
     final $result = create();
@@ -878,8 +878,8 @@ class Timetable extends $pb.GeneratedMessage {
     if (tasks != null) {
       $result.tasks.addAll(tasks);
     }
-    if (songPerformances != null) {
-      $result.songPerformances.addAll(songPerformances);
+    if (sessionSongs != null) {
+      $result.sessionSongs.addAll(sessionSongs);
     }
     if (parties != null) {
       $result.parties.addAll(parties);
@@ -893,7 +893,7 @@ class Timetable extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Timetable', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..pc<TimetableEntry>(1, _omitFieldNames ? '' : 'entries', $pb.PbFieldType.PM, subBuilder: TimetableEntry.create)
     ..pc<SessionTask>(2, _omitFieldNames ? '' : 'tasks', $pb.PbFieldType.PM, subBuilder: SessionTask.create)
-    ..pc<SongPerformance>(3, _omitFieldNames ? '' : 'songPerformances', $pb.PbFieldType.PM, subBuilder: SongPerformance.create)
+    ..pc<SessionSong>(3, _omitFieldNames ? '' : 'sessionSongs', $pb.PbFieldType.PM, subBuilder: SessionSong.create)
     ..pc<$30.Party>(4, _omitFieldNames ? '' : 'parties', $pb.PbFieldType.PM, subBuilder: $30.Party.create)
     ..hasRequiredFields = false
   ;
@@ -927,7 +927,7 @@ class Timetable extends $pb.GeneratedMessage {
   $core.List<SessionTask> get tasks => $_getList(1);
 
   @$pb.TagNumber(3)
-  $core.List<SongPerformance> get songPerformances => $_getList(2);
+  $core.List<SessionSong> get sessionSongs => $_getList(2);
 
   @$pb.TagNumber(4)
   $core.List<$30.Party> get parties => $_getList(3);

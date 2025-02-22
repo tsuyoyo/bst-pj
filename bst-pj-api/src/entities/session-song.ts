@@ -7,11 +7,10 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { Activity } from './activity.entity';
 import { Song } from './song.entity';
 
-@Entity('song_performances')
-export class SongPerformance {
+@Entity('session_songs')
+export class SessionSong {
   @PrimaryGeneratedColumn()
   id: number;
 

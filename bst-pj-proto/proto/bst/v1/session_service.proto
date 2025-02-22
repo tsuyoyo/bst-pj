@@ -247,11 +247,11 @@ message UpdateSessionParticipantResponse {
 message AddSongEntryRequest {
   int32                session_id = 1;
   int32                song_id    = 2;
-  SongPerformanceEntry entry      = 3;
+  SessionSongEntry entry      = 3;
 }
 
 message AddSongEntryResponse {
-  SongPerformanceEntry entry = 1;
+  SessionSongEntry entry = 1;
 }
 
 message DeleteSongEntryRequest {
