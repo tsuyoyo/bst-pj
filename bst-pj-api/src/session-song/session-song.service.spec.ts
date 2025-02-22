@@ -3,7 +3,7 @@ import { SessionSongService } from './session-song.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { SessionSong } from '../entities/session-song';
 import { RequiredPart } from '../entities/required-part.entity';
-import { SessionService } from '../session/session.service';
+import { SessionVerifyAccessService } from '../session/session-verify-access.service';
 import { SessionPartService } from '../session-part/session-part.service';
 import { SongService } from '../song/song.service';
 import { PartService } from '../part/part.service';
@@ -41,7 +41,7 @@ describe('SessionSongService', () => {
     delete: jest.fn(),
   };
 
-  const mockSessionService = {
+  const mockSessionVerifyAccessService = {
     verifySessionAccess: jest.fn(),
   };
 
@@ -71,8 +71,8 @@ describe('SessionSongService', () => {
           useValue: mockRequiredPartRepository,
         },
         {
-          provide: SessionService,
-          useValue: mockSessionService,
+          provide: SessionVerifyAccessService,
+          useValue: mockSessionVerifyAccessService,
         },
         {
           provide: SessionPartService,
@@ -117,7 +117,9 @@ describe('SessionSongService', () => {
         songId: dto.songId,
       };
 
-      mockSessionService.verifySessionAccess.mockResolvedValue(undefined);
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
       mockSongService.getSong.mockResolvedValue(mockSong);
       mockSessionSongRepository.create.mockReturnValue(mockSessionSong);
       mockSessionSongRepository.save.mockResolvedValue(mockSessionSong);
@@ -160,7 +162,9 @@ describe('SessionSongService', () => {
         mandatoryPartIds: [1],
       };
 
-      mockSessionService.verifySessionAccess.mockResolvedValue(undefined);
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
       mockSongService.getSong.mockResolvedValue({ song: null });
 
       await expect(
@@ -181,7 +185,9 @@ describe('SessionSongService', () => {
         },
       ];
 
-      mockSessionService.verifySessionAccess.mockResolvedValue(undefined);
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
       mockSessionSongRepository.find.mockResolvedValue(mockSessionSongs);
       mockSongService.getSong.mockResolvedValue({
         song: {
@@ -214,7 +220,9 @@ describe('SessionSongService', () => {
         song: { id: 1 },
       };
 
-      mockSessionService.verifySessionAccess.mockResolvedValue(undefined);
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
       mockSessionSongRepository.findOne.mockResolvedValue(mockSessionSong);
       mockRequiredPartRepository.find.mockResolvedValue([]);
       mockRequiredPartRepository.delete.mockResolvedValue({ affected: 1 });
@@ -245,7 +253,9 @@ describe('SessionSongService', () => {
         mandatoryPartIds: [1],
       };
 
-      mockSessionService.verifySessionAccess.mockResolvedValue(undefined);
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
       mockSessionSongRepository.findOne.mockResolvedValue(null);
 
       await expect(
@@ -263,7 +273,9 @@ describe('SessionSongService', () => {
         sessionId,
       };
 
-      mockSessionService.verifySessionAccess.mockResolvedValue(undefined);
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
       mockSessionSongRepository.findOne.mockResolvedValue(mockSessionSong);
       mockSessionSongRepository.delete.mockResolvedValue({ affected: 1 });
 
@@ -279,7 +291,9 @@ describe('SessionSongService', () => {
       const sessionId = 1;
       const songId = 1;
 
-      mockSessionService.verifySessionAccess.mockResolvedValue(undefined);
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
       mockSessionSongRepository.findOne.mockResolvedValue(null);
 
       await expect(

@@ -36,7 +36,7 @@ exports.up = (pgm) => {
     },
     transition_cost: {
       type: "integer",
-      notNull: true,
+      notNull: false,
       comment: "転換コスト (セッションごとに変わる)",
     },
     notes: { type: "text" },

@@ -13,13 +13,14 @@ import {
 } from '../proto/bst/v1/session_part_service';
 import { PartService } from '../part/part.service';
 import { SessionService } from '../session/session.service';
-
+import { SessionVerifyAccessService } from '../session/session-verify-access.service';
 @Injectable()
 export class SessionPartService {
   constructor(
     @InjectRepository(SessionPart)
     private readonly sessionPartRepository: Repository<SessionPart>,
     private readonly sessionService: SessionService,
+    private readonly sessionVerifyAccessService: SessionVerifyAccessService,
     private readonly partService: PartService,
   ) {}
 
@@ -37,7 +38,7 @@ export class SessionPartService {
     sessionId: number,
     user: User,
   ): Promise<ListSessionPartsResponse> {
-    await this.sessionService.verifySessionAccess(sessionId, user);
+    await this.sessionVerifyAccessService.verifySessionAccess(sessionId, user);
 
     const sessionParts = await this.sessionPartRepository.find({
       where: { sessionId },
@@ -64,7 +65,10 @@ export class SessionPartService {
     user: User,
   ): Promise<AddSessionPartResponse> {
     // When the user hasn't registered the session, exception is thrown.
-    await this.sessionService.verifySessionAccess(Number(sessionId), user);
+    await this.sessionVerifyAccessService.verifySessionAccess(
+      Number(sessionId),
+      user,
+    );
 
     const sessionPart = this.sessionPartRepository.create({
       sessionId: Number(sessionId),
@@ -97,7 +101,7 @@ export class SessionPartService {
     request: UpdateSessionPartDto,
     user: User,
   ): Promise<UpdateSessionPartResponse> {
-    await this.sessionService.verifySessionAccess(sessionId, user);
+    await this.sessionVerifyAccessService.verifySessionAccess(sessionId, user);
 
     const sessionPart = await this.sessionPartRepository.findOne({
       where: { id: sessionPartId, sessionId },
@@ -135,7 +139,7 @@ export class SessionPartService {
     sessionPartId: number,
     user: User,
   ): Promise<DeleteSessionPartResponse> {
-    await this.sessionService.verifySessionAccess(sessionId, user);
+    await this.sessionVerifyAccessService.verifySessionAccess(sessionId, user);
 
     const sessionPart = await this.sessionPartRepository.findOne({
       where: { id: sessionPartId, sessionId },

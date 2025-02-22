@@ -12,7 +12,6 @@ import {
   ListSessionSongsResponse,
   UpdateSessionSongResponse,
 } from '../proto/bst/v1/session_song_service';
-import { SessionService } from '../session/session.service';
 import { SongService } from '../song/song.service';
 import { PartService } from '../part/part.service';
 import { SessionPartService } from '../session-part/session-part.service';
@@ -21,6 +20,7 @@ import {
   SessionSongPart as ProtoSessionSongPart,
   SessionSong as ProtoSessionSong,
 } from '../proto/bst/v1/session';
+import { SessionVerifyAccessService } from '../session/session-verify-access.service';
 
 @Injectable()
 export class SessionSongService {
@@ -29,7 +29,7 @@ export class SessionSongService {
     private readonly sessionSongRepository: Repository<SessionSong>,
     @InjectRepository(RequiredPart)
     private readonly requiredPartRepository: Repository<RequiredPart>,
-    private readonly sessionService: SessionService,
+    private readonly sessionVerifyAccessService: SessionVerifyAccessService,
     private readonly sessionPartService: SessionPartService,
     private readonly songService: SongService,
     private readonly partService: PartService,
@@ -40,7 +40,7 @@ export class SessionSongService {
     request: AddSessionSongDto,
     user: User,
   ): Promise<AddSessionSongResponse> {
-    await this.sessionService.verifySessionAccess(sessionId, user);
+    await this.sessionVerifyAccessService.verifySessionAccess(sessionId, user);
 
     // Save SessionSong to DB
     const { song } = await this.songService.getSong(request.songId);
@@ -78,7 +78,7 @@ export class SessionSongService {
     sessionId: number,
     user: User,
   ): Promise<ListSessionSongsResponse> {
-    await this.sessionService.verifySessionAccess(sessionId, user);
+    await this.sessionVerifyAccessService.verifySessionAccess(sessionId, user);
     const sessionSongs = await this.sessionSongRepository.find({
       where: { sessionId },
     });
@@ -96,7 +96,7 @@ export class SessionSongService {
     updateSessionSongDto: UpdateSessionSongDto,
     user: User,
   ): Promise<UpdateSessionSongResponse> {
-    await this.sessionService.verifySessionAccess(sessionId, user);
+    await this.sessionVerifyAccessService.verifySessionAccess(sessionId, user);
     const sessionSong = await this.sessionSongRepository.findOne({
       where: { id: songId, sessionId },
     });
@@ -139,7 +139,7 @@ export class SessionSongService {
     songId: number,
     user: User,
   ): Promise<DeleteSessionSongResponse> {
-    await this.sessionService.verifySessionAccess(sessionId, user);
+    await this.sessionVerifyAccessService.verifySessionAccess(sessionId, user);
     const sessionSong = await this.sessionSongRepository.findOne({
       where: { id: songId, sessionId },
     });

@@ -45,6 +45,14 @@ class SessionServiceClient extends $grpc.Client {
       '/bst.v1.SessionService/DuplicateSession',
       ($18.DuplicateSessionRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $18.DuplicateSessionResponse.fromBuffer(value));
+  static final _$updateSessionEntryStartDate = $grpc.ClientMethod<$18.UpdateSessionEntryStartDateRequest, $18.UpdateSessionEntryStartDateResponse>(
+      '/bst.v1.SessionService/UpdateSessionEntryStartDate',
+      ($18.UpdateSessionEntryStartDateRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.UpdateSessionEntryStartDateResponse.fromBuffer(value));
+  static final _$updateSessionEntryEndDate = $grpc.ClientMethod<$18.UpdateSessionEntryEndDateRequest, $18.UpdateSessionEntryEndDateResponse>(
+      '/bst.v1.SessionService/UpdateSessionEntryEndDate',
+      ($18.UpdateSessionEntryEndDateRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.UpdateSessionEntryEndDateResponse.fromBuffer(value));
   static final _$updateSessionSchedule = $grpc.ClientMethod<$18.UpdateSessionScheduleRequest, $18.UpdateSessionScheduleResponse>(
       '/bst.v1.SessionService/UpdateSessionSchedule',
       ($18.UpdateSessionScheduleRequest value) => value.writeToBuffer(),
@@ -94,6 +102,14 @@ class SessionServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$18.DuplicateSessionResponse> duplicateSession($18.DuplicateSessionRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$duplicateSession, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$18.UpdateSessionEntryStartDateResponse> updateSessionEntryStartDate($18.UpdateSessionEntryStartDateRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateSessionEntryStartDate, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$18.UpdateSessionEntryEndDateResponse> updateSessionEntryEndDate($18.UpdateSessionEntryEndDateRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateSessionEntryEndDate, request, options: options);
   }
 
   $grpc.ResponseFuture<$18.UpdateSessionScheduleResponse> updateSessionSchedule($18.UpdateSessionScheduleRequest request, {$grpc.CallOptions? options}) {
@@ -164,6 +180,20 @@ abstract class SessionServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $18.DuplicateSessionRequest.fromBuffer(value),
         ($18.DuplicateSessionResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$18.UpdateSessionEntryStartDateRequest, $18.UpdateSessionEntryStartDateResponse>(
+        'UpdateSessionEntryStartDate',
+        updateSessionEntryStartDate_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $18.UpdateSessionEntryStartDateRequest.fromBuffer(value),
+        ($18.UpdateSessionEntryStartDateResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$18.UpdateSessionEntryEndDateRequest, $18.UpdateSessionEntryEndDateResponse>(
+        'UpdateSessionEntryEndDate',
+        updateSessionEntryEndDate_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $18.UpdateSessionEntryEndDateRequest.fromBuffer(value),
+        ($18.UpdateSessionEntryEndDateResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$18.UpdateSessionScheduleRequest, $18.UpdateSessionScheduleResponse>(
         'UpdateSessionSchedule',
         updateSessionSchedule_Pre,
@@ -225,6 +255,14 @@ abstract class SessionServiceBase extends $grpc.Service {
     return duplicateSession(call, await request);
   }
 
+  $async.Future<$18.UpdateSessionEntryStartDateResponse> updateSessionEntryStartDate_Pre($grpc.ServiceCall call, $async.Future<$18.UpdateSessionEntryStartDateRequest> request) async {
+    return updateSessionEntryStartDate(call, await request);
+  }
+
+  $async.Future<$18.UpdateSessionEntryEndDateResponse> updateSessionEntryEndDate_Pre($grpc.ServiceCall call, $async.Future<$18.UpdateSessionEntryEndDateRequest> request) async {
+    return updateSessionEntryEndDate(call, await request);
+  }
+
   $async.Future<$18.UpdateSessionScheduleResponse> updateSessionSchedule_Pre($grpc.ServiceCall call, $async.Future<$18.UpdateSessionScheduleRequest> request) async {
     return updateSessionSchedule(call, await request);
   }
@@ -251,6 +289,8 @@ abstract class SessionServiceBase extends $grpc.Service {
   $async.Future<$18.UpdateSessionStatusResponse> updateSessionStatus($grpc.ServiceCall call, $18.UpdateSessionStatusRequest request);
   $async.Future<$18.CancelSessionResponse> cancelSession($grpc.ServiceCall call, $18.CancelSessionRequest request);
   $async.Future<$18.DuplicateSessionResponse> duplicateSession($grpc.ServiceCall call, $18.DuplicateSessionRequest request);
+  $async.Future<$18.UpdateSessionEntryStartDateResponse> updateSessionEntryStartDate($grpc.ServiceCall call, $18.UpdateSessionEntryStartDateRequest request);
+  $async.Future<$18.UpdateSessionEntryEndDateResponse> updateSessionEntryEndDate($grpc.ServiceCall call, $18.UpdateSessionEntryEndDateRequest request);
   $async.Future<$18.UpdateSessionScheduleResponse> updateSessionSchedule($grpc.ServiceCall call, $18.UpdateSessionScheduleRequest request);
   $async.Future<$18.UpdateSessionLocationResponse> updateSessionLocation($grpc.ServiceCall call, $18.UpdateSessionLocationRequest request);
   $async.Future<$18.CreateSessionNotificationResponse> createSessionNotification($grpc.ServiceCall call, $18.CreateSessionNotificationRequest request);

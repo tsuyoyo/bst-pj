@@ -3,6 +3,7 @@ import { Session } from '../entities/session.entity';
 import {
   Session as ProtoSession,
   SessionStatus as ProtoSessionStatus,
+  SessionDetail as ProtoSessionDetail,
 } from '../proto/bst/v1/session';
 import { User } from '../entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -11,7 +12,8 @@ import { SessionParticipant } from '../entities/session-participant.entity';
 import { CreateSessionDto } from './dto/create-session.dto';
 import { CreateSessionResponse } from '../proto/bst/v1/session_service';
 import { SessionStatus } from '../entities/types/session-status.enum';
-
+import { SessionPartService } from '../session-part/session-part.service';
+import { SessionParticipantService } from '../session-participant/session-participant.service';
 @Injectable()
 export class SessionService {
   constructor(
@@ -19,6 +21,8 @@ export class SessionService {
     private readonly sessionRepository: Repository<Session>,
     @InjectRepository(SessionParticipant)
     private readonly sessionParticipantRepository: Repository<SessionParticipant>,
+    private readonly sessionPartService: SessionPartService,
+    private readonly sessionParticipantService: SessionParticipantService,
   ) {}
 
   async createSession(
@@ -41,19 +45,10 @@ export class SessionService {
     });
     await this.sessionParticipantRepository.save(sessionParticipant);
 
-    const protoSession = await this.mapEntityToProto(savedSession);
+    const protoSession = await this.mapSessionToProto(savedSession);
     return {
       session: protoSession,
     };
-  }
-
-  async verifySessionAccess(sessionId: number, user: User): Promise<void> {
-    const sessionParticipant = await this.sessionParticipantRepository.findOne({
-      where: { sessionId, userId: user.id },
-    });
-    if (!sessionParticipant) {
-      throw new Error('User does not have access to this session');
-    }
   }
 
   private async getSessionParticipantsNum(sessionId: number): Promise<number> {
@@ -62,19 +57,38 @@ export class SessionService {
     });
   }
 
-  private async mapEntityToProto(session: Session): Promise<ProtoSession> {
+  private async mapSessionToProto(session: Session): Promise<ProtoSession> {
     const participantsNum = await this.getSessionParticipantsNum(session.id);
     return {
       id: session.id,
       title: session.title,
-      timeline: {
-        createdAt: session.createdAt,
-        entryOpen: session.entryOpenDate,
-        entryClose: session.entryCloseDate,
-        eventDate: session.date,
-      },
+      createdAt: session.createdAt,
+      entryOpen: session.entryOpenDate,
+      entryClose: session.entryCloseDate,
+      eventDate: session.date,
       status: this.mapEntitySessionStatusToProto(session.status),
       participantsNum: participantsNum,
+    };
+  }
+
+  private async mapSessionToProtoDetail(
+    session: Session,
+    user: User,
+  ): Promise<ProtoSessionDetail> {
+    const { parts } = await this.sessionPartService.listSessionParts(
+      session.id,
+      user,
+    );
+    const { participants } =
+      await this.sessionParticipantService.listSessionParticipants(
+        session.id,
+        user,
+      );
+    return {
+      session: await this.mapSessionToProto(session),
+      description: session.description,
+      parts,
+      participants,
     };
   }
 

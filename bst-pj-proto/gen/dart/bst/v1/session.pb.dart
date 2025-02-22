@@ -22,14 +22,24 @@ import 'user.pb.dart' as $33;
 export 'session.pbenum.dart';
 
 /// Session model
-class SessionTimelineDate extends $pb.GeneratedMessage {
-  factory SessionTimelineDate({
+class Session extends $pb.GeneratedMessage {
+  factory Session({
+    $core.int? id,
+    $core.String? title,
     $32.Timestamp? createdAt,
     $32.Timestamp? entryOpen,
     $32.Timestamp? entryClose,
     $32.Timestamp? eventDate,
+    SessionStatus? status,
+    $core.int? participantsNum,
   }) {
     final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
+    if (title != null) {
+      $result.title = title;
+    }
     if (createdAt != null) {
       $result.createdAt = createdAt;
     }
@@ -41,104 +51,6 @@ class SessionTimelineDate extends $pb.GeneratedMessage {
     }
     if (eventDate != null) {
       $result.eventDate = eventDate;
-    }
-    return $result;
-  }
-  SessionTimelineDate._() : super();
-  factory SessionTimelineDate.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SessionTimelineDate.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SessionTimelineDate', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$32.Timestamp>(1, _omitFieldNames ? '' : 'createdAt', subBuilder: $32.Timestamp.create)
-    ..aOM<$32.Timestamp>(2, _omitFieldNames ? '' : 'entryOpen', subBuilder: $32.Timestamp.create)
-    ..aOM<$32.Timestamp>(3, _omitFieldNames ? '' : 'entryClose', subBuilder: $32.Timestamp.create)
-    ..aOM<$32.Timestamp>(4, _omitFieldNames ? '' : 'eventDate', subBuilder: $32.Timestamp.create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  SessionTimelineDate clone() => SessionTimelineDate()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  SessionTimelineDate copyWith(void Function(SessionTimelineDate) updates) => super.copyWith((message) => updates(message as SessionTimelineDate)) as SessionTimelineDate;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static SessionTimelineDate create() => SessionTimelineDate._();
-  SessionTimelineDate createEmptyInstance() => create();
-  static $pb.PbList<SessionTimelineDate> createRepeated() => $pb.PbList<SessionTimelineDate>();
-  @$core.pragma('dart2js:noInline')
-  static SessionTimelineDate getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SessionTimelineDate>(create);
-  static SessionTimelineDate? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $32.Timestamp get createdAt => $_getN(0);
-  @$pb.TagNumber(1)
-  set createdAt($32.Timestamp v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasCreatedAt() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearCreatedAt() => clearField(1);
-  @$pb.TagNumber(1)
-  $32.Timestamp ensureCreatedAt() => $_ensure(0);
-
-  @$pb.TagNumber(2)
-  $32.Timestamp get entryOpen => $_getN(1);
-  @$pb.TagNumber(2)
-  set entryOpen($32.Timestamp v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasEntryOpen() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearEntryOpen() => clearField(2);
-  @$pb.TagNumber(2)
-  $32.Timestamp ensureEntryOpen() => $_ensure(1);
-
-  @$pb.TagNumber(3)
-  $32.Timestamp get entryClose => $_getN(2);
-  @$pb.TagNumber(3)
-  set entryClose($32.Timestamp v) { setField(3, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasEntryClose() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearEntryClose() => clearField(3);
-  @$pb.TagNumber(3)
-  $32.Timestamp ensureEntryClose() => $_ensure(2);
-
-  @$pb.TagNumber(4)
-  $32.Timestamp get eventDate => $_getN(3);
-  @$pb.TagNumber(4)
-  set eventDate($32.Timestamp v) { setField(4, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasEventDate() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearEventDate() => clearField(4);
-  @$pb.TagNumber(4)
-  $32.Timestamp ensureEventDate() => $_ensure(3);
-}
-
-class Session extends $pb.GeneratedMessage {
-  factory Session({
-    $core.int? id,
-    $core.String? title,
-    SessionTimelineDate? timeline,
-    SessionStatus? status,
-    $core.int? participantsNum,
-  }) {
-    final $result = create();
-    if (id != null) {
-      $result.id = id;
-    }
-    if (title != null) {
-      $result.title = title;
-    }
-    if (timeline != null) {
-      $result.timeline = timeline;
     }
     if (status != null) {
       $result.status = status;
@@ -155,9 +67,12 @@ class Session extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Session', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'title')
-    ..aOM<SessionTimelineDate>(3, _omitFieldNames ? '' : 'timeline', subBuilder: SessionTimelineDate.create)
-    ..e<SessionStatus>(4, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: SessionStatus.SESSION_STATUS_UNSPECIFIED, valueOf: SessionStatus.valueOf, enumValues: SessionStatus.values)
-    ..a<$core.int>(5, _omitFieldNames ? '' : 'participantsNum', $pb.PbFieldType.O3)
+    ..aOM<$32.Timestamp>(3, _omitFieldNames ? '' : 'createdAt', subBuilder: $32.Timestamp.create)
+    ..aOM<$32.Timestamp>(4, _omitFieldNames ? '' : 'entryOpen', subBuilder: $32.Timestamp.create)
+    ..aOM<$32.Timestamp>(5, _omitFieldNames ? '' : 'entryClose', subBuilder: $32.Timestamp.create)
+    ..aOM<$32.Timestamp>(6, _omitFieldNames ? '' : 'eventDate', subBuilder: $32.Timestamp.create)
+    ..e<SessionStatus>(7, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: SessionStatus.SESSION_STATUS_UNSPECIFIED, valueOf: SessionStatus.valueOf, enumValues: SessionStatus.values)
+    ..a<$core.int>(8, _omitFieldNames ? '' : 'participantsNum', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -201,33 +116,66 @@ class Session extends $pb.GeneratedMessage {
   void clearTitle() => clearField(2);
 
   @$pb.TagNumber(3)
-  SessionTimelineDate get timeline => $_getN(2);
+  $32.Timestamp get createdAt => $_getN(2);
   @$pb.TagNumber(3)
-  set timeline(SessionTimelineDate v) { setField(3, v); }
+  set createdAt($32.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
-  $core.bool hasTimeline() => $_has(2);
+  $core.bool hasCreatedAt() => $_has(2);
   @$pb.TagNumber(3)
-  void clearTimeline() => clearField(3);
+  void clearCreatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  SessionTimelineDate ensureTimeline() => $_ensure(2);
+  $32.Timestamp ensureCreatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  SessionStatus get status => $_getN(3);
+  $32.Timestamp get entryOpen => $_getN(3);
   @$pb.TagNumber(4)
-  set status(SessionStatus v) { setField(4, v); }
+  set entryOpen($32.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
-  $core.bool hasStatus() => $_has(3);
+  $core.bool hasEntryOpen() => $_has(3);
   @$pb.TagNumber(4)
-  void clearStatus() => clearField(4);
+  void clearEntryOpen() => clearField(4);
+  @$pb.TagNumber(4)
+  $32.Timestamp ensureEntryOpen() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  $core.int get participantsNum => $_getIZ(4);
+  $32.Timestamp get entryClose => $_getN(4);
   @$pb.TagNumber(5)
-  set participantsNum($core.int v) { $_setSignedInt32(4, v); }
+  set entryClose($32.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
-  $core.bool hasParticipantsNum() => $_has(4);
+  $core.bool hasEntryClose() => $_has(4);
   @$pb.TagNumber(5)
-  void clearParticipantsNum() => clearField(5);
+  void clearEntryClose() => clearField(5);
+  @$pb.TagNumber(5)
+  $32.Timestamp ensureEntryClose() => $_ensure(4);
+
+  @$pb.TagNumber(6)
+  $32.Timestamp get eventDate => $_getN(5);
+  @$pb.TagNumber(6)
+  set eventDate($32.Timestamp v) { setField(6, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasEventDate() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearEventDate() => clearField(6);
+  @$pb.TagNumber(6)
+  $32.Timestamp ensureEventDate() => $_ensure(5);
+
+  @$pb.TagNumber(7)
+  SessionStatus get status => $_getN(6);
+  @$pb.TagNumber(7)
+  set status(SessionStatus v) { setField(7, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasStatus() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearStatus() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.int get participantsNum => $_getIZ(7);
+  @$pb.TagNumber(8)
+  set participantsNum($core.int v) { $_setSignedInt32(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasParticipantsNum() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearParticipantsNum() => clearField(8);
 }
 
 class SessionDetail extends $pb.GeneratedMessage {
@@ -236,7 +184,6 @@ class SessionDetail extends $pb.GeneratedMessage {
     $core.String? description,
     $core.Iterable<SessionPart>? parts,
     $core.Iterable<SessionParticipant>? participants,
-    Timetable? timetable,
   }) {
     final $result = create();
     if (session != null) {
@@ -251,9 +198,6 @@ class SessionDetail extends $pb.GeneratedMessage {
     if (participants != null) {
       $result.participants.addAll(participants);
     }
-    if (timetable != null) {
-      $result.timetable = timetable;
-    }
     return $result;
   }
   SessionDetail._() : super();
@@ -265,7 +209,6 @@ class SessionDetail extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'description')
     ..pc<SessionPart>(3, _omitFieldNames ? '' : 'parts', $pb.PbFieldType.PM, subBuilder: SessionPart.create)
     ..pc<SessionParticipant>(4, _omitFieldNames ? '' : 'participants', $pb.PbFieldType.PM, subBuilder: SessionParticipant.create)
-    ..aOM<Timetable>(5, _omitFieldNames ? '' : 'timetable', subBuilder: Timetable.create)
     ..hasRequiredFields = false
   ;
 
@@ -315,17 +258,6 @@ class SessionDetail extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(4)
   $core.List<SessionParticipant> get participants => $_getList(3);
-
-  @$pb.TagNumber(5)
-  Timetable get timetable => $_getN(4);
-  @$pb.TagNumber(5)
-  set timetable(Timetable v) { setField(5, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasTimetable() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearTimetable() => clearField(5);
-  @$pb.TagNumber(5)
-  Timetable ensureTimetable() => $_ensure(4);
 }
 
 class SessionPart extends $pb.GeneratedMessage {

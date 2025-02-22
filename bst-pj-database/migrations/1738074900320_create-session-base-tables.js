@@ -11,6 +11,7 @@ exports.up = (pgm) => {
     "Approaching",
     "Ongoing",
     "Completed",
+    "Cancelled",
   ]);
 
   // Create sessions table
@@ -32,22 +33,20 @@ exports.up = (pgm) => {
     },
     entry_open_date: {
       type: "timestamp",
-      notNull: true,
     },
     entry_close_date: {
       type: "timestamp",
-      notNull: true,
     },
-    organizer_id: {
+    creator_id: {
       type: "integer",
       notNull: true,
       references: "users",
       onDelete: "CASCADE",
       comment: "作成者のUserID",
     },
+    // Nullable until location is set.
     location_id: {
       type: "integer",
-      notNull: true,
       references: "locations",
       onDelete: "CASCADE",
     },
@@ -76,7 +75,7 @@ exports.up = (pgm) => {
   pgm.createIndex("sessions", ["date"]);
   pgm.createIndex("sessions", ["entry_open_date"]);
   pgm.createIndex("sessions", ["entry_close_date"]);
-  pgm.createIndex("sessions", ["organizer_id"]);
+  pgm.createIndex("sessions", ["creator_id"]);
   pgm.createIndex("sessions", ["location_id"]);
 };
 
@@ -89,7 +88,7 @@ exports.down = (pgm) => {
   pgm.dropIndex("sessions", ["date"], { ifExists: true });
   pgm.dropIndex("sessions", ["entry_open_date"], { ifExists: true });
   pgm.dropIndex("sessions", ["entry_close_date"], { ifExists: true });
-  pgm.dropIndex("sessions", ["organizer_id"], { ifExists: true });
+  pgm.dropIndex("sessions", ["creator_id"], { ifExists: true });
   pgm.dropIndex("sessions", ["location_id"], { ifExists: true });
 
   // Drop tables

@@ -2,10 +2,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { SessionPartService } from './session-part.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { SessionPart } from '../entities/session-part.entity';
-import { SessionService } from '../session/session.service';
+import { SessionVerifyAccessService } from '../session/session-verify-access.service';
 import { PartService } from '../part/part.service';
 import { User } from '../entities/user.entity';
 import { NotFoundException } from '@nestjs/common';
+import { SessionService } from '../session/session.service';
 
 describe('SessionPartService', () => {
   let service: SessionPartService;
@@ -31,12 +32,16 @@ describe('SessionPartService', () => {
     remove: jest.fn(),
   };
 
-  const mockSessionService = {
+  const mockSessionVerifyAccessService = {
     verifySessionAccess: jest.fn(),
   };
 
   const mockPartService = {
     getPart: jest.fn(),
+  };
+
+  const mockSessionService = {
+    // SessionServiceのモックを作成
   };
 
   beforeEach(async () => {
@@ -48,12 +53,16 @@ describe('SessionPartService', () => {
           useValue: mockSessionPartRepository,
         },
         {
-          provide: SessionService,
-          useValue: mockSessionService,
+          provide: SessionVerifyAccessService,
+          useValue: mockSessionVerifyAccessService,
         },
         {
           provide: PartService,
           useValue: mockPartService,
+        },
+        {
+          provide: SessionService,
+          useValue: mockSessionService,
         },
       ],
     }).compile();
@@ -78,7 +87,9 @@ describe('SessionPartService', () => {
         },
       ];
 
-      mockSessionService.verifySessionAccess.mockResolvedValue(undefined);
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
       mockSessionPartRepository.find.mockResolvedValue(mockSessionParts);
       mockPartService.getPart.mockResolvedValue({
         part: {
@@ -89,10 +100,9 @@ describe('SessionPartService', () => {
 
       const result = await service.listSessionParts(sessionId, mockUser);
       expect(result.parts).toHaveLength(1);
-      expect(mockSessionService.verifySessionAccess).toHaveBeenCalledWith(
-        sessionId,
-        mockUser,
-      );
+      expect(
+        mockSessionVerifyAccessService.verifySessionAccess,
+      ).toHaveBeenCalledWith(sessionId, mockUser);
     });
   });
 
@@ -112,7 +122,9 @@ describe('SessionPartService', () => {
         ...dto,
       };
 
-      mockSessionService.verifySessionAccess.mockResolvedValue(undefined);
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
       mockSessionPartRepository.create.mockReturnValue(mockSessionPart);
       mockSessionPartRepository.save.mockResolvedValue(mockSessionPart);
       mockPartService.getPart.mockResolvedValue({
@@ -145,7 +157,9 @@ describe('SessionPartService', () => {
         ...dto,
       };
 
-      mockSessionService.verifySessionAccess.mockResolvedValue(undefined);
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
       mockSessionPartRepository.findOne.mockResolvedValue(mockSessionPart);
       mockSessionPartRepository.save.mockResolvedValue(mockSessionPart);
       mockPartService.getPart.mockResolvedValue({
@@ -174,7 +188,9 @@ describe('SessionPartService', () => {
         maxEntry: 1,
       };
 
-      mockSessionService.verifySessionAccess.mockResolvedValue(undefined);
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
       mockSessionPartRepository.findOne.mockResolvedValue(null);
 
       await expect(
@@ -192,7 +208,9 @@ describe('SessionPartService', () => {
         sessionId,
       };
 
-      mockSessionService.verifySessionAccess.mockResolvedValue(undefined);
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
       mockSessionPartRepository.findOne.mockResolvedValue(mockSessionPart);
       mockSessionPartRepository.remove.mockResolvedValue(mockSessionPart);
 
@@ -208,7 +226,9 @@ describe('SessionPartService', () => {
       const sessionId = 1;
       const sessionPartId = 1;
 
-      mockSessionService.verifySessionAccess.mockResolvedValue(undefined);
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
       mockSessionPartRepository.findOne.mockResolvedValue(null);
 
       const result = await service.deleteSessionPart(

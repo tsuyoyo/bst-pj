@@ -18,22 +18,23 @@ const SessionStatus$json = {
   '1': 'SessionStatus',
   '2': [
     {'1': 'SESSION_STATUS_UNSPECIFIED', '2': 0},
-    {'1': 'SESSION_STATUS_IN_DRAFT', '2': 1},
-    {'1': 'SESSION_STATUS_OPEN', '2': 2},
-    {'1': 'SESSION_STATUS_ENTRY_OPEN', '2': 3},
-    {'1': 'SESSION_STATUS_ENTRY_CLOSE', '2': 4},
-    {'1': 'SESSION_STATUS_COMPLETED', '2': 5},
-    {'1': 'SESSION_STATUS_CANCELLED', '2': 6},
+    {'1': 'SESSION_STATUS_BEFORE_ENTRY', '2': 1},
+    {'1': 'SESSION_STATUS_ENTRY_OPEN', '2': 2},
+    {'1': 'SESSION_STATUS_ENTRY_CLOSE', '2': 3},
+    {'1': 'SESSION_STATUS_APPROACHING', '2': 4},
+    {'1': 'SESSION_STATUS_ONGOING', '2': 5},
+    {'1': 'SESSION_STATUS_COMPLETED', '2': 6},
+    {'1': 'SESSION_STATUS_CANCELLED', '2': 7},
   ],
 };
 
 /// Descriptor for `SessionStatus`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List sessionStatusDescriptor = $convert.base64Decode(
-    'Cg1TZXNzaW9uU3RhdHVzEh4KGlNFU1NJT05fU1RBVFVTX1VOU1BFQ0lGSUVEEAASGwoXU0VTU0'
-    'lPTl9TVEFUVVNfSU5fRFJBRlQQARIXChNTRVNTSU9OX1NUQVRVU19PUEVOEAISHQoZU0VTU0lP'
-    'Tl9TVEFUVVNfRU5UUllfT1BFThADEh4KGlNFU1NJT05fU1RBVFVTX0VOVFJZX0NMT1NFEAQSHA'
-    'oYU0VTU0lPTl9TVEFUVVNfQ09NUExFVEVEEAUSHAoYU0VTU0lPTl9TVEFUVVNfQ0FOQ0VMTEVE'
-    'EAY=');
+    'Cg1TZXNzaW9uU3RhdHVzEh4KGlNFU1NJT05fU1RBVFVTX1VOU1BFQ0lGSUVEEAASHwobU0VTU0'
+    'lPTl9TVEFUVVNfQkVGT1JFX0VOVFJZEAESHQoZU0VTU0lPTl9TVEFUVVNfRU5UUllfT1BFThAC'
+    'Eh4KGlNFU1NJT05fU1RBVFVTX0VOVFJZX0NMT1NFEAMSHgoaU0VTU0lPTl9TVEFUVVNfQVBQUk'
+    '9BQ0hJTkcQBBIaChZTRVNTSU9OX1NUQVRVU19PTkdPSU5HEAUSHAoYU0VTU0lPTl9TVEFUVVNf'
+    'Q09NUExFVEVEEAYSHAoYU0VTU0lPTl9TVEFUVVNfQ0FOQ0VMTEVEEAc=');
 
 @$core.Deprecated('Use sessionParticipantStatusDescriptor instead')
 const SessionParticipantStatus$json = {
@@ -51,43 +52,30 @@ final $typed_data.Uint8List sessionParticipantStatusDescriptor = $convert.base64
     'NfVU5TUEVDSUZJRUQQABIoCiRTRVNTSU9OX1BBUlRJQ0lQQU5UX1NUQVRVU19DT05GSVJNRUQQ'
     'ARIoCiRTRVNTSU9OX1BBUlRJQ0lQQU5UX1NUQVRVU19DQU5DRUxMRUQQAg==');
 
-@$core.Deprecated('Use sessionTimelineDateDescriptor instead')
-const SessionTimelineDate$json = {
-  '1': 'SessionTimelineDate',
-  '2': [
-    {'1': 'created_at', '3': 1, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
-    {'1': 'entry_open', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'entryOpen'},
-    {'1': 'entry_close', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'entryClose'},
-    {'1': 'event_date', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'eventDate'},
-  ],
-};
-
-/// Descriptor for `SessionTimelineDate`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List sessionTimelineDateDescriptor = $convert.base64Decode(
-    'ChNTZXNzaW9uVGltZWxpbmVEYXRlEjkKCmNyZWF0ZWRfYXQYASABKAsyGi5nb29nbGUucHJvdG'
-    '9idWYuVGltZXN0YW1wUgljcmVhdGVkQXQSOQoKZW50cnlfb3BlbhgCIAEoCzIaLmdvb2dsZS5w'
-    'cm90b2J1Zi5UaW1lc3RhbXBSCWVudHJ5T3BlbhI7CgtlbnRyeV9jbG9zZRgDIAEoCzIaLmdvb2'
-    'dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCmVudHJ5Q2xvc2USOQoKZXZlbnRfZGF0ZRgEIAEoCzIa'
-    'Lmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWV2ZW50RGF0ZQ==');
-
 @$core.Deprecated('Use sessionDescriptor instead')
 const Session$json = {
   '1': 'Session',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
     {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
-    {'1': 'timeline', '3': 3, '4': 1, '5': 11, '6': '.bst.v1.SessionTimelineDate', '10': 'timeline'},
-    {'1': 'status', '3': 4, '4': 1, '5': 14, '6': '.bst.v1.SessionStatus', '10': 'status'},
-    {'1': 'participants_num', '3': 5, '4': 1, '5': 5, '10': 'participantsNum'},
+    {'1': 'created_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+    {'1': 'entry_open', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'entryOpen'},
+    {'1': 'entry_close', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'entryClose'},
+    {'1': 'event_date', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'eventDate'},
+    {'1': 'status', '3': 7, '4': 1, '5': 14, '6': '.bst.v1.SessionStatus', '10': 'status'},
+    {'1': 'participants_num', '3': 8, '4': 1, '5': 5, '10': 'participantsNum'},
   ],
 };
 
 /// Descriptor for `Session`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List sessionDescriptor = $convert.base64Decode(
-    'CgdTZXNzaW9uEg4KAmlkGAEgASgFUgJpZBIUCgV0aXRsZRgCIAEoCVIFdGl0bGUSNwoIdGltZW'
-    'xpbmUYAyABKAsyGy5ic3QudjEuU2Vzc2lvblRpbWVsaW5lRGF0ZVIIdGltZWxpbmUSLQoGc3Rh'
-    'dHVzGAQgASgOMhUuYnN0LnYxLlNlc3Npb25TdGF0dXNSBnN0YXR1cxIpChBwYXJ0aWNpcGFudH'
-    'NfbnVtGAUgASgFUg9wYXJ0aWNpcGFudHNOdW0=');
+    'CgdTZXNzaW9uEg4KAmlkGAEgASgFUgJpZBIUCgV0aXRsZRgCIAEoCVIFdGl0bGUSOQoKY3JlYX'
+    'RlZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWNyZWF0ZWRBdBI5Cgpl'
+    'bnRyeV9vcGVuGAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIJZW50cnlPcGVuEj'
+    'sKC2VudHJ5X2Nsb3NlGAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIKZW50cnlD'
+    'bG9zZRI5CgpldmVudF9kYXRlGAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIJZX'
+    'ZlbnREYXRlEi0KBnN0YXR1cxgHIAEoDjIVLmJzdC52MS5TZXNzaW9uU3RhdHVzUgZzdGF0dXMS'
+    'KQoQcGFydGljaXBhbnRzX251bRgIIAEoBVIPcGFydGljaXBhbnRzTnVt');
 
 @$core.Deprecated('Use sessionDetailDescriptor instead')
 const SessionDetail$json = {
@@ -97,7 +85,6 @@ const SessionDetail$json = {
     {'1': 'description', '3': 2, '4': 1, '5': 9, '10': 'description'},
     {'1': 'parts', '3': 3, '4': 3, '5': 11, '6': '.bst.v1.SessionPart', '10': 'parts'},
     {'1': 'participants', '3': 4, '4': 3, '5': 11, '6': '.bst.v1.SessionParticipant', '10': 'participants'},
-    {'1': 'timetable', '3': 5, '4': 1, '5': 11, '6': '.bst.v1.Timetable', '10': 'timetable'},
   ],
 };
 
@@ -106,8 +93,7 @@ final $typed_data.Uint8List sessionDetailDescriptor = $convert.base64Decode(
     'Cg1TZXNzaW9uRGV0YWlsEikKB3Nlc3Npb24YASABKAsyDy5ic3QudjEuU2Vzc2lvblIHc2Vzc2'
     'lvbhIgCgtkZXNjcmlwdGlvbhgCIAEoCVILZGVzY3JpcHRpb24SKQoFcGFydHMYAyADKAsyEy5i'
     'c3QudjEuU2Vzc2lvblBhcnRSBXBhcnRzEj4KDHBhcnRpY2lwYW50cxgEIAMoCzIaLmJzdC52MS'
-    '5TZXNzaW9uUGFydGljaXBhbnRSDHBhcnRpY2lwYW50cxIvCgl0aW1ldGFibGUYBSABKAsyES5i'
-    'c3QudjEuVGltZXRhYmxlUgl0aW1ldGFibGU=');
+    '5TZXNzaW9uUGFydGljaXBhbnRSDHBhcnRpY2lwYW50cw==');
 
 @$core.Deprecated('Use sessionPartDescriptor instead')
 const SessionPart$json = {

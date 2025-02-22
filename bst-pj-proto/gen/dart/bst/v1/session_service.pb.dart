@@ -751,6 +751,242 @@ class DuplicateSessionResponse extends $pb.GeneratedMessage {
 }
 
 /// Schedule & Location
+class UpdateSessionEntryStartDateRequest extends $pb.GeneratedMessage {
+  factory UpdateSessionEntryStartDateRequest({
+    $core.int? sessionId,
+    $32.Timestamp? date,
+  }) {
+    final $result = create();
+    if (sessionId != null) {
+      $result.sessionId = sessionId;
+    }
+    if (date != null) {
+      $result.date = date;
+    }
+    return $result;
+  }
+  UpdateSessionEntryStartDateRequest._() : super();
+  factory UpdateSessionEntryStartDateRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateSessionEntryStartDateRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionEntryStartDateRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..aOM<$32.Timestamp>(2, _omitFieldNames ? '' : 'date', subBuilder: $32.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateSessionEntryStartDateRequest clone() => UpdateSessionEntryStartDateRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateSessionEntryStartDateRequest copyWith(void Function(UpdateSessionEntryStartDateRequest) updates) => super.copyWith((message) => updates(message as UpdateSessionEntryStartDateRequest)) as UpdateSessionEntryStartDateRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateSessionEntryStartDateRequest create() => UpdateSessionEntryStartDateRequest._();
+  UpdateSessionEntryStartDateRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateSessionEntryStartDateRequest> createRepeated() => $pb.PbList<UpdateSessionEntryStartDateRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateSessionEntryStartDateRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateSessionEntryStartDateRequest>(create);
+  static UpdateSessionEntryStartDateRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get sessionId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set sessionId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSessionId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSessionId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $32.Timestamp get date => $_getN(1);
+  @$pb.TagNumber(2)
+  set date($32.Timestamp v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasDate() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDate() => clearField(2);
+  @$pb.TagNumber(2)
+  $32.Timestamp ensureDate() => $_ensure(1);
+}
+
+class UpdateSessionEntryStartDateResponse extends $pb.GeneratedMessage {
+  factory UpdateSessionEntryStartDateResponse({
+    $36.SessionDetail? session,
+  }) {
+    final $result = create();
+    if (session != null) {
+      $result.session = session;
+    }
+    return $result;
+  }
+  UpdateSessionEntryStartDateResponse._() : super();
+  factory UpdateSessionEntryStartDateResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateSessionEntryStartDateResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionEntryStartDateResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+    ..aOM<$36.SessionDetail>(1, _omitFieldNames ? '' : 'session', subBuilder: $36.SessionDetail.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateSessionEntryStartDateResponse clone() => UpdateSessionEntryStartDateResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateSessionEntryStartDateResponse copyWith(void Function(UpdateSessionEntryStartDateResponse) updates) => super.copyWith((message) => updates(message as UpdateSessionEntryStartDateResponse)) as UpdateSessionEntryStartDateResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateSessionEntryStartDateResponse create() => UpdateSessionEntryStartDateResponse._();
+  UpdateSessionEntryStartDateResponse createEmptyInstance() => create();
+  static $pb.PbList<UpdateSessionEntryStartDateResponse> createRepeated() => $pb.PbList<UpdateSessionEntryStartDateResponse>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateSessionEntryStartDateResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateSessionEntryStartDateResponse>(create);
+  static UpdateSessionEntryStartDateResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $36.SessionDetail get session => $_getN(0);
+  @$pb.TagNumber(1)
+  set session($36.SessionDetail v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSession() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSession() => clearField(1);
+  @$pb.TagNumber(1)
+  $36.SessionDetail ensureSession() => $_ensure(0);
+}
+
+class UpdateSessionEntryEndDateRequest extends $pb.GeneratedMessage {
+  factory UpdateSessionEntryEndDateRequest({
+    $core.int? sessionId,
+    $32.Timestamp? date,
+  }) {
+    final $result = create();
+    if (sessionId != null) {
+      $result.sessionId = sessionId;
+    }
+    if (date != null) {
+      $result.date = date;
+    }
+    return $result;
+  }
+  UpdateSessionEntryEndDateRequest._() : super();
+  factory UpdateSessionEntryEndDateRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateSessionEntryEndDateRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionEntryEndDateRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..aOM<$32.Timestamp>(2, _omitFieldNames ? '' : 'date', subBuilder: $32.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateSessionEntryEndDateRequest clone() => UpdateSessionEntryEndDateRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateSessionEntryEndDateRequest copyWith(void Function(UpdateSessionEntryEndDateRequest) updates) => super.copyWith((message) => updates(message as UpdateSessionEntryEndDateRequest)) as UpdateSessionEntryEndDateRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateSessionEntryEndDateRequest create() => UpdateSessionEntryEndDateRequest._();
+  UpdateSessionEntryEndDateRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateSessionEntryEndDateRequest> createRepeated() => $pb.PbList<UpdateSessionEntryEndDateRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateSessionEntryEndDateRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateSessionEntryEndDateRequest>(create);
+  static UpdateSessionEntryEndDateRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get sessionId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set sessionId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSessionId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSessionId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $32.Timestamp get date => $_getN(1);
+  @$pb.TagNumber(2)
+  set date($32.Timestamp v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasDate() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDate() => clearField(2);
+  @$pb.TagNumber(2)
+  $32.Timestamp ensureDate() => $_ensure(1);
+}
+
+class UpdateSessionEntryEndDateResponse extends $pb.GeneratedMessage {
+  factory UpdateSessionEntryEndDateResponse({
+    $36.SessionDetail? session,
+  }) {
+    final $result = create();
+    if (session != null) {
+      $result.session = session;
+    }
+    return $result;
+  }
+  UpdateSessionEntryEndDateResponse._() : super();
+  factory UpdateSessionEntryEndDateResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateSessionEntryEndDateResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionEntryEndDateResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+    ..aOM<$36.SessionDetail>(1, _omitFieldNames ? '' : 'session', subBuilder: $36.SessionDetail.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateSessionEntryEndDateResponse clone() => UpdateSessionEntryEndDateResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateSessionEntryEndDateResponse copyWith(void Function(UpdateSessionEntryEndDateResponse) updates) => super.copyWith((message) => updates(message as UpdateSessionEntryEndDateResponse)) as UpdateSessionEntryEndDateResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateSessionEntryEndDateResponse create() => UpdateSessionEntryEndDateResponse._();
+  UpdateSessionEntryEndDateResponse createEmptyInstance() => create();
+  static $pb.PbList<UpdateSessionEntryEndDateResponse> createRepeated() => $pb.PbList<UpdateSessionEntryEndDateResponse>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateSessionEntryEndDateResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateSessionEntryEndDateResponse>(create);
+  static UpdateSessionEntryEndDateResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $36.SessionDetail get session => $_getN(0);
+  @$pb.TagNumber(1)
+  set session($36.SessionDetail v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSession() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSession() => clearField(1);
+  @$pb.TagNumber(1)
+  $36.SessionDetail ensureSession() => $_ensure(0);
+}
+
 class UpdateSessionScheduleRequest extends $pb.GeneratedMessage {
   factory UpdateSessionScheduleRequest({
     $core.int? sessionId,

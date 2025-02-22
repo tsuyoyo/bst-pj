@@ -28,6 +28,12 @@ service SessionService {
       returns (DuplicateSessionResponse);
 
   // Schedule & Location
+  // PUT /sessions/{id}/entry-start-date
+  rpc UpdateSessionEntryStartDate(UpdateSessionEntryStartDateRequest)
+      returns (UpdateSessionEntryStartDateResponse);
+  // PUT /sessions/{id}/entry-end-date
+  rpc UpdateSessionEntryEndDate(UpdateSessionEntryEndDateRequest)
+      returns (UpdateSessionEntryEndDateResponse);
   // PUT /sessions/{id}/schedule
   rpc UpdateSessionSchedule(UpdateSessionScheduleRequest)
       returns (UpdateSessionScheduleResponse);
@@ -107,6 +113,24 @@ message DuplicateSessionResponse {
 }
 
 // Schedule & Location
+message UpdateSessionEntryStartDateRequest {
+  int32                     session_id = 1;
+  google.protobuf.Timestamp date       = 2;
+}
+
+message UpdateSessionEntryStartDateResponse {
+  SessionDetail session = 1;
+}
+
+message UpdateSessionEntryEndDateRequest {
+  int32                     session_id = 1;
+  google.protobuf.Timestamp date       = 2;
+}
+
+message UpdateSessionEntryEndDateResponse {
+  SessionDetail session = 1;
+}
+
 message UpdateSessionScheduleRequest {
   int32     session_id = 1;
   Timetable timetable  = 2;

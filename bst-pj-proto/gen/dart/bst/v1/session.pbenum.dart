@@ -13,22 +13,23 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-/// Common status enumeration
 class SessionStatus extends $pb.ProtobufEnum {
   static const SessionStatus SESSION_STATUS_UNSPECIFIED = SessionStatus._(0, _omitEnumNames ? '' : 'SESSION_STATUS_UNSPECIFIED');
-  static const SessionStatus SESSION_STATUS_IN_DRAFT = SessionStatus._(1, _omitEnumNames ? '' : 'SESSION_STATUS_IN_DRAFT');
-  static const SessionStatus SESSION_STATUS_OPEN = SessionStatus._(2, _omitEnumNames ? '' : 'SESSION_STATUS_OPEN');
-  static const SessionStatus SESSION_STATUS_ENTRY_OPEN = SessionStatus._(3, _omitEnumNames ? '' : 'SESSION_STATUS_ENTRY_OPEN');
-  static const SessionStatus SESSION_STATUS_ENTRY_CLOSE = SessionStatus._(4, _omitEnumNames ? '' : 'SESSION_STATUS_ENTRY_CLOSE');
-  static const SessionStatus SESSION_STATUS_COMPLETED = SessionStatus._(5, _omitEnumNames ? '' : 'SESSION_STATUS_COMPLETED');
-  static const SessionStatus SESSION_STATUS_CANCELLED = SessionStatus._(6, _omitEnumNames ? '' : 'SESSION_STATUS_CANCELLED');
+  static const SessionStatus SESSION_STATUS_BEFORE_ENTRY = SessionStatus._(1, _omitEnumNames ? '' : 'SESSION_STATUS_BEFORE_ENTRY');
+  static const SessionStatus SESSION_STATUS_ENTRY_OPEN = SessionStatus._(2, _omitEnumNames ? '' : 'SESSION_STATUS_ENTRY_OPEN');
+  static const SessionStatus SESSION_STATUS_ENTRY_CLOSE = SessionStatus._(3, _omitEnumNames ? '' : 'SESSION_STATUS_ENTRY_CLOSE');
+  static const SessionStatus SESSION_STATUS_APPROACHING = SessionStatus._(4, _omitEnumNames ? '' : 'SESSION_STATUS_APPROACHING');
+  static const SessionStatus SESSION_STATUS_ONGOING = SessionStatus._(5, _omitEnumNames ? '' : 'SESSION_STATUS_ONGOING');
+  static const SessionStatus SESSION_STATUS_COMPLETED = SessionStatus._(6, _omitEnumNames ? '' : 'SESSION_STATUS_COMPLETED');
+  static const SessionStatus SESSION_STATUS_CANCELLED = SessionStatus._(7, _omitEnumNames ? '' : 'SESSION_STATUS_CANCELLED');
 
   static const $core.List<SessionStatus> values = <SessionStatus> [
     SESSION_STATUS_UNSPECIFIED,
-    SESSION_STATUS_IN_DRAFT,
-    SESSION_STATUS_OPEN,
+    SESSION_STATUS_BEFORE_ENTRY,
     SESSION_STATUS_ENTRY_OPEN,
     SESSION_STATUS_ENTRY_CLOSE,
+    SESSION_STATUS_APPROACHING,
+    SESSION_STATUS_ONGOING,
     SESSION_STATUS_COMPLETED,
     SESSION_STATUS_CANCELLED,
   ];

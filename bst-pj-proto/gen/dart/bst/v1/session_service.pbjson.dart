@@ -180,6 +180,62 @@ final $typed_data.Uint8List duplicateSessionResponseDescriptor = $convert.base64
     'ChhEdXBsaWNhdGVTZXNzaW9uUmVzcG9uc2USLwoHc2Vzc2lvbhgBIAEoCzIVLmJzdC52MS5TZX'
     'NzaW9uRGV0YWlsUgdzZXNzaW9u');
 
+@$core.Deprecated('Use updateSessionEntryStartDateRequestDescriptor instead')
+const UpdateSessionEntryStartDateRequest$json = {
+  '1': 'UpdateSessionEntryStartDateRequest',
+  '2': [
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'date', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'date'},
+  ],
+};
+
+/// Descriptor for `UpdateSessionEntryStartDateRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateSessionEntryStartDateRequestDescriptor = $convert.base64Decode(
+    'CiJVcGRhdGVTZXNzaW9uRW50cnlTdGFydERhdGVSZXF1ZXN0Eh0KCnNlc3Npb25faWQYASABKA'
+    'VSCXNlc3Npb25JZBIuCgRkYXRlGAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIE'
+    'ZGF0ZQ==');
+
+@$core.Deprecated('Use updateSessionEntryStartDateResponseDescriptor instead')
+const UpdateSessionEntryStartDateResponse$json = {
+  '1': 'UpdateSessionEntryStartDateResponse',
+  '2': [
+    {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.SessionDetail', '10': 'session'},
+  ],
+};
+
+/// Descriptor for `UpdateSessionEntryStartDateResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateSessionEntryStartDateResponseDescriptor = $convert.base64Decode(
+    'CiNVcGRhdGVTZXNzaW9uRW50cnlTdGFydERhdGVSZXNwb25zZRIvCgdzZXNzaW9uGAEgASgLMh'
+    'UuYnN0LnYxLlNlc3Npb25EZXRhaWxSB3Nlc3Npb24=');
+
+@$core.Deprecated('Use updateSessionEntryEndDateRequestDescriptor instead')
+const UpdateSessionEntryEndDateRequest$json = {
+  '1': 'UpdateSessionEntryEndDateRequest',
+  '2': [
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'date', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'date'},
+  ],
+};
+
+/// Descriptor for `UpdateSessionEntryEndDateRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateSessionEntryEndDateRequestDescriptor = $convert.base64Decode(
+    'CiBVcGRhdGVTZXNzaW9uRW50cnlFbmREYXRlUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUg'
+    'lzZXNzaW9uSWQSLgoEZGF0ZRgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSBGRh'
+    'dGU=');
+
+@$core.Deprecated('Use updateSessionEntryEndDateResponseDescriptor instead')
+const UpdateSessionEntryEndDateResponse$json = {
+  '1': 'UpdateSessionEntryEndDateResponse',
+  '2': [
+    {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.SessionDetail', '10': 'session'},
+  ],
+};
+
+/// Descriptor for `UpdateSessionEntryEndDateResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateSessionEntryEndDateResponseDescriptor = $convert.base64Decode(
+    'CiFVcGRhdGVTZXNzaW9uRW50cnlFbmREYXRlUmVzcG9uc2USLwoHc2Vzc2lvbhgBIAEoCzIVLm'
+    'JzdC52MS5TZXNzaW9uRGV0YWlsUgdzZXNzaW9u');
+
 @$core.Deprecated('Use updateSessionScheduleRequestDescriptor instead')
 const UpdateSessionScheduleRequest$json = {
   '1': 'UpdateSessionScheduleRequest',

@@ -5,8 +5,8 @@ import { Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
 import { User as ProtoUser } from '../proto/bst/v1/user';
 import * as bcrypt from 'bcrypt';
-import { UserProfile } from 'src/entities/user-profile.entity';
-import { UserService } from 'src/user/user.service';
+import { UserProfile } from '../entities/user-profile.entity';
+import { UserService } from '../user/user.service';
 @Injectable()
 export class AuthService {
   constructor(

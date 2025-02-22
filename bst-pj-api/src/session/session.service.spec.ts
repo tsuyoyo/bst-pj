@@ -6,6 +6,8 @@ import { SessionParticipant } from '../entities/session-participant.entity';
 import { User } from '../entities/user.entity';
 import { SessionStatus } from '../entities/types/session-status.enum';
 import { CreateSessionDto } from './dto/create-session.dto';
+import { SessionPartService } from '../session-part/session-part.service';
+import { SessionParticipantService } from '../session-participant/session-participant.service';
 
 describe('SessionService', () => {
   let service: SessionService;
@@ -36,6 +38,14 @@ describe('SessionService', () => {
     count: jest.fn(),
   };
 
+  const mockSessionPartService = {
+    listSessionParts: jest.fn(),
+  };
+
+  const mockSessionParticipantService = {
+    listSessionParticipants: jest.fn(),
+  };
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -47,6 +57,14 @@ describe('SessionService', () => {
         {
           provide: getRepositoryToken(SessionParticipant),
           useValue: mockSessionParticipantRepository,
+        },
+        {
+          provide: SessionPartService,
+          useValue: mockSessionPartService,
+        },
+        {
+          provide: SessionParticipantService,
+          useValue: mockSessionParticipantService,
         },
       ],
     }).compile();
@@ -101,30 +119,6 @@ describe('SessionService', () => {
       expect(result?.session?.title).toBe(mockSession.title);
       expect(mockSessionRepository.save).toHaveBeenCalled();
       expect(mockSessionParticipantRepository.save).toHaveBeenCalled();
-    });
-  });
-
-  describe('verifySessionAccess', () => {
-    it('should verify session access successfully', async () => {
-      const sessionId = 1;
-      mockSessionParticipantRepository.findOne.mockResolvedValue({
-        id: 1,
-        sessionId,
-        userId: mockUser.id,
-      });
-
-      await expect(
-        service.verifySessionAccess(sessionId, mockUser),
-      ).resolves.not.toThrow();
-    });
-
-    it('should throw error when user does not have access', async () => {
-      const sessionId = 1;
-      mockSessionParticipantRepository.findOne.mockResolvedValue(null);
-
-      await expect(
-        service.verifySessionAccess(sessionId, mockUser),
-      ).rejects.toThrow('User does not have access to this session');
     });
   });
 

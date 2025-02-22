@@ -19,7 +19,7 @@ import {
 import { CurrentUser } from '../auth/user.decorator';
 import { User } from '../entities/user.entity';
 import { Genre as ProtoGenre } from 'src/proto/bst/v1/content';
-import { Genre } from 'src/entities/genre.entity';
+import { Genre } from '../entities/genre.entity';
 
 @Controller('genres')
 export class GenreController {

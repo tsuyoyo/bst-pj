@@ -9,31 +9,27 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
 
-// Common status enumeration
 enum SessionStatus {
-  SESSION_STATUS_UNSPECIFIED = 0;
-  SESSION_STATUS_IN_DRAFT    = 1;
-  SESSION_STATUS_OPEN        = 2;
-  SESSION_STATUS_ENTRY_OPEN  = 3;
-  SESSION_STATUS_ENTRY_CLOSE = 4;
-  SESSION_STATUS_COMPLETED   = 5;
-  SESSION_STATUS_CANCELLED   = 6;
+  SESSION_STATUS_UNSPECIFIED  = 0;
+  SESSION_STATUS_BEFORE_ENTRY = 1;
+  SESSION_STATUS_ENTRY_OPEN   = 2;
+  SESSION_STATUS_ENTRY_CLOSE  = 3;
+  SESSION_STATUS_APPROACHING  = 4;
+  SESSION_STATUS_ONGOING      = 5;
+  SESSION_STATUS_COMPLETED    = 6;
+  SESSION_STATUS_CANCELLED    = 7;
 }
 
 // Session model
-message SessionTimelineDate {
-  google.protobuf.Timestamp created_at  = 1;
-  google.protobuf.Timestamp entry_open  = 2;
-  google.protobuf.Timestamp entry_close = 3;
-  google.protobuf.Timestamp event_date  = 4;
-}
-
 message Session {
-  int32               id               = 1;
-  string              title            = 2;
-  SessionTimelineDate timeline         = 3;
-  SessionStatus       status           = 4;
-  int32               participants_num = 5;
+  int32                     id               = 1;
+  string                    title            = 2;
+  google.protobuf.Timestamp created_at       = 3;
+  google.protobuf.Timestamp entry_open       = 4;
+  google.protobuf.Timestamp entry_close      = 5;
+  google.protobuf.Timestamp event_date       = 6;
+  SessionStatus             status           = 7;
+  int32                     participants_num = 8;
 }
 
 message SessionDetail {
@@ -41,7 +37,6 @@ message SessionDetail {
   string                      description  = 2;
   repeated SessionPart        parts        = 3;
   repeated SessionParticipant participants = 4;
-  Timetable                   timetable    = 5;
 }
 
 message SessionPart {

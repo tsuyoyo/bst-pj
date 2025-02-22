@@ -13,15 +13,15 @@ import { User } from "./user";
 
 export const protobufPackage = "bst.v1";
 
-/** Common status enumeration */
 export enum SessionStatus {
   SESSION_STATUS_UNSPECIFIED = 0,
-  SESSION_STATUS_IN_DRAFT = 1,
-  SESSION_STATUS_OPEN = 2,
-  SESSION_STATUS_ENTRY_OPEN = 3,
-  SESSION_STATUS_ENTRY_CLOSE = 4,
-  SESSION_STATUS_COMPLETED = 5,
-  SESSION_STATUS_CANCELLED = 6,
+  SESSION_STATUS_BEFORE_ENTRY = 1,
+  SESSION_STATUS_ENTRY_OPEN = 2,
+  SESSION_STATUS_ENTRY_CLOSE = 3,
+  SESSION_STATUS_APPROACHING = 4,
+  SESSION_STATUS_ONGOING = 5,
+  SESSION_STATUS_COMPLETED = 6,
+  SESSION_STATUS_CANCELLED = 7,
   UNRECOGNIZED = -1,
 }
 
@@ -31,21 +31,24 @@ export function sessionStatusFromJSON(object: any): SessionStatus {
     case "SESSION_STATUS_UNSPECIFIED":
       return SessionStatus.SESSION_STATUS_UNSPECIFIED;
     case 1:
-    case "SESSION_STATUS_IN_DRAFT":
-      return SessionStatus.SESSION_STATUS_IN_DRAFT;
+    case "SESSION_STATUS_BEFORE_ENTRY":
+      return SessionStatus.SESSION_STATUS_BEFORE_ENTRY;
     case 2:
-    case "SESSION_STATUS_OPEN":
-      return SessionStatus.SESSION_STATUS_OPEN;
-    case 3:
     case "SESSION_STATUS_ENTRY_OPEN":
       return SessionStatus.SESSION_STATUS_ENTRY_OPEN;
-    case 4:
+    case 3:
     case "SESSION_STATUS_ENTRY_CLOSE":
       return SessionStatus.SESSION_STATUS_ENTRY_CLOSE;
+    case 4:
+    case "SESSION_STATUS_APPROACHING":
+      return SessionStatus.SESSION_STATUS_APPROACHING;
     case 5:
+    case "SESSION_STATUS_ONGOING":
+      return SessionStatus.SESSION_STATUS_ONGOING;
+    case 6:
     case "SESSION_STATUS_COMPLETED":
       return SessionStatus.SESSION_STATUS_COMPLETED;
-    case 6:
+    case 7:
     case "SESSION_STATUS_CANCELLED":
       return SessionStatus.SESSION_STATUS_CANCELLED;
     case -1:
@@ -59,14 +62,16 @@ export function sessionStatusToJSON(object: SessionStatus): string {
   switch (object) {
     case SessionStatus.SESSION_STATUS_UNSPECIFIED:
       return "SESSION_STATUS_UNSPECIFIED";
-    case SessionStatus.SESSION_STATUS_IN_DRAFT:
-      return "SESSION_STATUS_IN_DRAFT";
-    case SessionStatus.SESSION_STATUS_OPEN:
-      return "SESSION_STATUS_OPEN";
+    case SessionStatus.SESSION_STATUS_BEFORE_ENTRY:
+      return "SESSION_STATUS_BEFORE_ENTRY";
     case SessionStatus.SESSION_STATUS_ENTRY_OPEN:
       return "SESSION_STATUS_ENTRY_OPEN";
     case SessionStatus.SESSION_STATUS_ENTRY_CLOSE:
       return "SESSION_STATUS_ENTRY_CLOSE";
+    case SessionStatus.SESSION_STATUS_APPROACHING:
+      return "SESSION_STATUS_APPROACHING";
+    case SessionStatus.SESSION_STATUS_ONGOING:
+      return "SESSION_STATUS_ONGOING";
     case SessionStatus.SESSION_STATUS_COMPLETED:
       return "SESSION_STATUS_COMPLETED";
     case SessionStatus.SESSION_STATUS_CANCELLED:
@@ -118,17 +123,13 @@ export function sessionParticipantStatusToJSON(object: SessionParticipantStatus)
 }
 
 /** Session model */
-export interface SessionTimelineDate {
+export interface Session {
+  id: number;
+  title: string;
   createdAt: Date | undefined;
   entryOpen: Date | undefined;
   entryClose: Date | undefined;
   eventDate: Date | undefined;
-}
-
-export interface Session {
-  id: number;
-  title: string;
-  timeline: SessionTimelineDate | undefined;
   status: SessionStatus;
   participantsNum: number;
 }
@@ -138,7 +139,6 @@ export interface SessionDetail {
   description: string;
   parts: SessionPart[];
   participants: SessionParticipant[];
-  timetable: Timetable | undefined;
 }
 
 export interface SessionPart {
@@ -258,112 +258,17 @@ export interface SessionFeedback {
   createdAt: Date | undefined;
 }
 
-function createBaseSessionTimelineDate(): SessionTimelineDate {
-  return { createdAt: undefined, entryOpen: undefined, entryClose: undefined, eventDate: undefined };
-}
-
-export const SessionTimelineDate = {
-  encode(message: SessionTimelineDate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.createdAt !== undefined) {
-      Timestamp.encode(toTimestamp(message.createdAt), writer.uint32(10).fork()).ldelim();
-    }
-    if (message.entryOpen !== undefined) {
-      Timestamp.encode(toTimestamp(message.entryOpen), writer.uint32(18).fork()).ldelim();
-    }
-    if (message.entryClose !== undefined) {
-      Timestamp.encode(toTimestamp(message.entryClose), writer.uint32(26).fork()).ldelim();
-    }
-    if (message.eventDate !== undefined) {
-      Timestamp.encode(toTimestamp(message.eventDate), writer.uint32(34).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): SessionTimelineDate {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSessionTimelineDate();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.createdAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.entryOpen = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.entryClose = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          continue;
-        case 4:
-          if (tag !== 34) {
-            break;
-          }
-
-          message.eventDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): SessionTimelineDate {
-    return {
-      createdAt: isSet(object.createdAt) ? fromJsonTimestamp(object.createdAt) : undefined,
-      entryOpen: isSet(object.entryOpen) ? fromJsonTimestamp(object.entryOpen) : undefined,
-      entryClose: isSet(object.entryClose) ? fromJsonTimestamp(object.entryClose) : undefined,
-      eventDate: isSet(object.eventDate) ? fromJsonTimestamp(object.eventDate) : undefined,
-    };
-  },
-
-  toJSON(message: SessionTimelineDate): unknown {
-    const obj: any = {};
-    if (message.createdAt !== undefined) {
-      obj.createdAt = message.createdAt.toISOString();
-    }
-    if (message.entryOpen !== undefined) {
-      obj.entryOpen = message.entryOpen.toISOString();
-    }
-    if (message.entryClose !== undefined) {
-      obj.entryClose = message.entryClose.toISOString();
-    }
-    if (message.eventDate !== undefined) {
-      obj.eventDate = message.eventDate.toISOString();
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<SessionTimelineDate>, I>>(base?: I): SessionTimelineDate {
-    return SessionTimelineDate.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<SessionTimelineDate>, I>>(object: I): SessionTimelineDate {
-    const message = createBaseSessionTimelineDate();
-    message.createdAt = object.createdAt ?? undefined;
-    message.entryOpen = object.entryOpen ?? undefined;
-    message.entryClose = object.entryClose ?? undefined;
-    message.eventDate = object.eventDate ?? undefined;
-    return message;
-  },
-};
-
 function createBaseSession(): Session {
-  return { id: 0, title: "", timeline: undefined, status: 0, participantsNum: 0 };
+  return {
+    id: 0,
+    title: "",
+    createdAt: undefined,
+    entryOpen: undefined,
+    entryClose: undefined,
+    eventDate: undefined,
+    status: 0,
+    participantsNum: 0,
+  };
 }
 
 export const Session = {
@@ -374,14 +279,23 @@ export const Session = {
     if (message.title !== "") {
       writer.uint32(18).string(message.title);
     }
-    if (message.timeline !== undefined) {
-      SessionTimelineDate.encode(message.timeline, writer.uint32(26).fork()).ldelim();
+    if (message.createdAt !== undefined) {
+      Timestamp.encode(toTimestamp(message.createdAt), writer.uint32(26).fork()).ldelim();
+    }
+    if (message.entryOpen !== undefined) {
+      Timestamp.encode(toTimestamp(message.entryOpen), writer.uint32(34).fork()).ldelim();
+    }
+    if (message.entryClose !== undefined) {
+      Timestamp.encode(toTimestamp(message.entryClose), writer.uint32(42).fork()).ldelim();
+    }
+    if (message.eventDate !== undefined) {
+      Timestamp.encode(toTimestamp(message.eventDate), writer.uint32(50).fork()).ldelim();
     }
     if (message.status !== 0) {
-      writer.uint32(32).int32(message.status);
+      writer.uint32(56).int32(message.status);
     }
     if (message.participantsNum !== 0) {
-      writer.uint32(40).int32(message.participantsNum);
+      writer.uint32(64).int32(message.participantsNum);
     }
     return writer;
   },
@@ -412,17 +326,38 @@ export const Session = {
             break;
           }
 
-          message.timeline = SessionTimelineDate.decode(reader, reader.uint32());
+          message.createdAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
         case 4:
-          if (tag !== 32) {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.entryOpen = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.entryClose = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        case 6:
+          if (tag !== 50) {
+            break;
+          }
+
+          message.eventDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        case 7:
+          if (tag !== 56) {
             break;
           }
 
           message.status = reader.int32() as any;
           continue;
-        case 5:
-          if (tag !== 40) {
+        case 8:
+          if (tag !== 64) {
             break;
           }
 
@@ -441,7 +376,10 @@ export const Session = {
     return {
       id: isSet(object.id) ? globalThis.Number(object.id) : 0,
       title: isSet(object.title) ? globalThis.String(object.title) : "",
-      timeline: isSet(object.timeline) ? SessionTimelineDate.fromJSON(object.timeline) : undefined,
+      createdAt: isSet(object.createdAt) ? fromJsonTimestamp(object.createdAt) : undefined,
+      entryOpen: isSet(object.entryOpen) ? fromJsonTimestamp(object.entryOpen) : undefined,
+      entryClose: isSet(object.entryClose) ? fromJsonTimestamp(object.entryClose) : undefined,
+      eventDate: isSet(object.eventDate) ? fromJsonTimestamp(object.eventDate) : undefined,
       status: isSet(object.status) ? sessionStatusFromJSON(object.status) : 0,
       participantsNum: isSet(object.participantsNum) ? globalThis.Number(object.participantsNum) : 0,
     };
@@ -455,8 +393,17 @@ export const Session = {
     if (message.title !== "") {
       obj.title = message.title;
     }
-    if (message.timeline !== undefined) {
-      obj.timeline = SessionTimelineDate.toJSON(message.timeline);
+    if (message.createdAt !== undefined) {
+      obj.createdAt = message.createdAt.toISOString();
+    }
+    if (message.entryOpen !== undefined) {
+      obj.entryOpen = message.entryOpen.toISOString();
+    }
+    if (message.entryClose !== undefined) {
+      obj.entryClose = message.entryClose.toISOString();
+    }
+    if (message.eventDate !== undefined) {
+      obj.eventDate = message.eventDate.toISOString();
     }
     if (message.status !== 0) {
       obj.status = sessionStatusToJSON(message.status);
@@ -474,9 +421,10 @@ export const Session = {
     const message = createBaseSession();
     message.id = object.id ?? 0;
     message.title = object.title ?? "";
-    message.timeline = (object.timeline !== undefined && object.timeline !== null)
-      ? SessionTimelineDate.fromPartial(object.timeline)
-      : undefined;
+    message.createdAt = object.createdAt ?? undefined;
+    message.entryOpen = object.entryOpen ?? undefined;
+    message.entryClose = object.entryClose ?? undefined;
+    message.eventDate = object.eventDate ?? undefined;
     message.status = object.status ?? 0;
     message.participantsNum = object.participantsNum ?? 0;
     return message;
@@ -484,7 +432,7 @@ export const Session = {
 };
 
 function createBaseSessionDetail(): SessionDetail {
-  return { session: undefined, description: "", parts: [], participants: [], timetable: undefined };
+  return { session: undefined, description: "", parts: [], participants: [] };
 }
 
 export const SessionDetail = {
@@ -500,9 +448,6 @@ export const SessionDetail = {
     }
     for (const v of message.participants) {
       SessionParticipant.encode(v!, writer.uint32(34).fork()).ldelim();
-    }
-    if (message.timetable !== undefined) {
-      Timetable.encode(message.timetable, writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
@@ -542,13 +487,6 @@ export const SessionDetail = {
 
           message.participants.push(SessionParticipant.decode(reader, reader.uint32()));
           continue;
-        case 5:
-          if (tag !== 42) {
-            break;
-          }
-
-          message.timetable = Timetable.decode(reader, reader.uint32());
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -566,7 +504,6 @@ export const SessionDetail = {
       participants: globalThis.Array.isArray(object?.participants)
         ? object.participants.map((e: any) => SessionParticipant.fromJSON(e))
         : [],
-      timetable: isSet(object.timetable) ? Timetable.fromJSON(object.timetable) : undefined,
     };
   },
 
@@ -584,9 +521,6 @@ export const SessionDetail = {
     if (message.participants?.length) {
       obj.participants = message.participants.map((e) => SessionParticipant.toJSON(e));
     }
-    if (message.timetable !== undefined) {
-      obj.timetable = Timetable.toJSON(message.timetable);
-    }
     return obj;
   },
 
@@ -601,9 +535,6 @@ export const SessionDetail = {
     message.description = object.description ?? "";
     message.parts = object.parts?.map((e) => SessionPart.fromPartial(e)) || [];
     message.participants = object.participants?.map((e) => SessionParticipant.fromPartial(e)) || [];
-    message.timetable = (object.timetable !== undefined && object.timetable !== null)
-      ? Timetable.fromPartial(object.timetable)
-      : undefined;
     return message;
   },
 };

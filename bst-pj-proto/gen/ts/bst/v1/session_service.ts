@@ -78,6 +78,24 @@ export interface DuplicateSessionResponse {
 }
 
 /** Schedule & Location */
+export interface UpdateSessionEntryStartDateRequest {
+  sessionId: number;
+  date: Date | undefined;
+}
+
+export interface UpdateSessionEntryStartDateResponse {
+  session: SessionDetail | undefined;
+}
+
+export interface UpdateSessionEntryEndDateRequest {
+  sessionId: number;
+  date: Date | undefined;
+}
+
+export interface UpdateSessionEntryEndDateResponse {
+  session: SessionDetail | undefined;
+}
+
 export interface UpdateSessionScheduleRequest {
   sessionId: number;
   timetable: Timetable | undefined;
@@ -1003,6 +1021,288 @@ export const DuplicateSessionResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<DuplicateSessionResponse>, I>>(object: I): DuplicateSessionResponse {
     const message = createBaseDuplicateSessionResponse();
+    message.session = (object.session !== undefined && object.session !== null)
+      ? SessionDetail.fromPartial(object.session)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseUpdateSessionEntryStartDateRequest(): UpdateSessionEntryStartDateRequest {
+  return { sessionId: 0, date: undefined };
+}
+
+export const UpdateSessionEntryStartDateRequest = {
+  encode(message: UpdateSessionEntryStartDateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sessionId !== 0) {
+      writer.uint32(8).int32(message.sessionId);
+    }
+    if (message.date !== undefined) {
+      Timestamp.encode(toTimestamp(message.date), writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateSessionEntryStartDateRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUpdateSessionEntryStartDateRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.sessionId = reader.int32();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.date = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UpdateSessionEntryStartDateRequest {
+    return {
+      sessionId: isSet(object.sessionId) ? globalThis.Number(object.sessionId) : 0,
+      date: isSet(object.date) ? fromJsonTimestamp(object.date) : undefined,
+    };
+  },
+
+  toJSON(message: UpdateSessionEntryStartDateRequest): unknown {
+    const obj: any = {};
+    if (message.sessionId !== 0) {
+      obj.sessionId = Math.round(message.sessionId);
+    }
+    if (message.date !== undefined) {
+      obj.date = message.date.toISOString();
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UpdateSessionEntryStartDateRequest>, I>>(
+    base?: I,
+  ): UpdateSessionEntryStartDateRequest {
+    return UpdateSessionEntryStartDateRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UpdateSessionEntryStartDateRequest>, I>>(
+    object: I,
+  ): UpdateSessionEntryStartDateRequest {
+    const message = createBaseUpdateSessionEntryStartDateRequest();
+    message.sessionId = object.sessionId ?? 0;
+    message.date = object.date ?? undefined;
+    return message;
+  },
+};
+
+function createBaseUpdateSessionEntryStartDateResponse(): UpdateSessionEntryStartDateResponse {
+  return { session: undefined };
+}
+
+export const UpdateSessionEntryStartDateResponse = {
+  encode(message: UpdateSessionEntryStartDateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.session !== undefined) {
+      SessionDetail.encode(message.session, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateSessionEntryStartDateResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUpdateSessionEntryStartDateResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.session = SessionDetail.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UpdateSessionEntryStartDateResponse {
+    return { session: isSet(object.session) ? SessionDetail.fromJSON(object.session) : undefined };
+  },
+
+  toJSON(message: UpdateSessionEntryStartDateResponse): unknown {
+    const obj: any = {};
+    if (message.session !== undefined) {
+      obj.session = SessionDetail.toJSON(message.session);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UpdateSessionEntryStartDateResponse>, I>>(
+    base?: I,
+  ): UpdateSessionEntryStartDateResponse {
+    return UpdateSessionEntryStartDateResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UpdateSessionEntryStartDateResponse>, I>>(
+    object: I,
+  ): UpdateSessionEntryStartDateResponse {
+    const message = createBaseUpdateSessionEntryStartDateResponse();
+    message.session = (object.session !== undefined && object.session !== null)
+      ? SessionDetail.fromPartial(object.session)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseUpdateSessionEntryEndDateRequest(): UpdateSessionEntryEndDateRequest {
+  return { sessionId: 0, date: undefined };
+}
+
+export const UpdateSessionEntryEndDateRequest = {
+  encode(message: UpdateSessionEntryEndDateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sessionId !== 0) {
+      writer.uint32(8).int32(message.sessionId);
+    }
+    if (message.date !== undefined) {
+      Timestamp.encode(toTimestamp(message.date), writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateSessionEntryEndDateRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUpdateSessionEntryEndDateRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.sessionId = reader.int32();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.date = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UpdateSessionEntryEndDateRequest {
+    return {
+      sessionId: isSet(object.sessionId) ? globalThis.Number(object.sessionId) : 0,
+      date: isSet(object.date) ? fromJsonTimestamp(object.date) : undefined,
+    };
+  },
+
+  toJSON(message: UpdateSessionEntryEndDateRequest): unknown {
+    const obj: any = {};
+    if (message.sessionId !== 0) {
+      obj.sessionId = Math.round(message.sessionId);
+    }
+    if (message.date !== undefined) {
+      obj.date = message.date.toISOString();
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UpdateSessionEntryEndDateRequest>, I>>(
+    base?: I,
+  ): UpdateSessionEntryEndDateRequest {
+    return UpdateSessionEntryEndDateRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UpdateSessionEntryEndDateRequest>, I>>(
+    object: I,
+  ): UpdateSessionEntryEndDateRequest {
+    const message = createBaseUpdateSessionEntryEndDateRequest();
+    message.sessionId = object.sessionId ?? 0;
+    message.date = object.date ?? undefined;
+    return message;
+  },
+};
+
+function createBaseUpdateSessionEntryEndDateResponse(): UpdateSessionEntryEndDateResponse {
+  return { session: undefined };
+}
+
+export const UpdateSessionEntryEndDateResponse = {
+  encode(message: UpdateSessionEntryEndDateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.session !== undefined) {
+      SessionDetail.encode(message.session, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateSessionEntryEndDateResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUpdateSessionEntryEndDateResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.session = SessionDetail.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UpdateSessionEntryEndDateResponse {
+    return { session: isSet(object.session) ? SessionDetail.fromJSON(object.session) : undefined };
+  },
+
+  toJSON(message: UpdateSessionEntryEndDateResponse): unknown {
+    const obj: any = {};
+    if (message.session !== undefined) {
+      obj.session = SessionDetail.toJSON(message.session);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UpdateSessionEntryEndDateResponse>, I>>(
+    base?: I,
+  ): UpdateSessionEntryEndDateResponse {
+    return UpdateSessionEntryEndDateResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UpdateSessionEntryEndDateResponse>, I>>(
+    object: I,
+  ): UpdateSessionEntryEndDateResponse {
+    const message = createBaseUpdateSessionEntryEndDateResponse();
     message.session = (object.session !== undefined && object.session !== null)
       ? SessionDetail.fromPartial(object.session)
       : undefined;
@@ -2580,8 +2880,14 @@ export interface SessionService {
   DuplicateSession(request: DuplicateSessionRequest): Promise<DuplicateSessionResponse>;
   /**
    * Schedule & Location
-   * PUT /sessions/{id}/schedule
+   * PUT /sessions/{id}/entry-start-date
    */
+  UpdateSessionEntryStartDate(
+    request: UpdateSessionEntryStartDateRequest,
+  ): Promise<UpdateSessionEntryStartDateResponse>;
+  /** PUT /sessions/{id}/entry-end-date */
+  UpdateSessionEntryEndDate(request: UpdateSessionEntryEndDateRequest): Promise<UpdateSessionEntryEndDateResponse>;
+  /** PUT /sessions/{id}/schedule */
   UpdateSessionSchedule(request: UpdateSessionScheduleRequest): Promise<UpdateSessionScheduleResponse>;
   /** PUT /sessions/{id}/location */
   UpdateSessionLocation(request: UpdateSessionLocationRequest): Promise<UpdateSessionLocationResponse>;
@@ -2612,6 +2918,8 @@ export class SessionServiceClientImpl implements SessionService {
     this.UpdateSessionStatus = this.UpdateSessionStatus.bind(this);
     this.CancelSession = this.CancelSession.bind(this);
     this.DuplicateSession = this.DuplicateSession.bind(this);
+    this.UpdateSessionEntryStartDate = this.UpdateSessionEntryStartDate.bind(this);
+    this.UpdateSessionEntryEndDate = this.UpdateSessionEntryEndDate.bind(this);
     this.UpdateSessionSchedule = this.UpdateSessionSchedule.bind(this);
     this.UpdateSessionLocation = this.UpdateSessionLocation.bind(this);
     this.CreateSessionNotification = this.CreateSessionNotification.bind(this);
@@ -2652,6 +2960,20 @@ export class SessionServiceClientImpl implements SessionService {
     const data = DuplicateSessionRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "DuplicateSession", data);
     return promise.then((data) => DuplicateSessionResponse.decode(_m0.Reader.create(data)));
+  }
+
+  UpdateSessionEntryStartDate(
+    request: UpdateSessionEntryStartDateRequest,
+  ): Promise<UpdateSessionEntryStartDateResponse> {
+    const data = UpdateSessionEntryStartDateRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "UpdateSessionEntryStartDate", data);
+    return promise.then((data) => UpdateSessionEntryStartDateResponse.decode(_m0.Reader.create(data)));
+  }
+
+  UpdateSessionEntryEndDate(request: UpdateSessionEntryEndDateRequest): Promise<UpdateSessionEntryEndDateResponse> {
+    const data = UpdateSessionEntryEndDateRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "UpdateSessionEntryEndDate", data);
+    return promise.then((data) => UpdateSessionEntryEndDateResponse.decode(_m0.Reader.create(data)));
   }
 
   UpdateSessionSchedule(request: UpdateSessionScheduleRequest): Promise<UpdateSessionScheduleResponse> {
