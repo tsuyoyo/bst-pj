@@ -8,7 +8,6 @@ import {
   JoinColumn,
   Unique,
 } from 'typeorm';
-import { Session } from './session.entity';
 import { User } from './user.entity';
 
 export enum SessionParticipantStatus {
@@ -60,10 +59,6 @@ export class SessionParticipant {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
-
-  @ManyToOne(() => Session, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'session_id' })
-  session: Session;
 
   @ManyToOne(() => User, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })

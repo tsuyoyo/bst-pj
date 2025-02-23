@@ -91,7 +91,7 @@ describe('SessionPartController', () => {
         expectedResponse,
       );
 
-      const result = await controller.listSessionParts(sessionId, mockUser);
+      const result = await controller.listSessionParts(sessionId);
       expect(result).toEqual(expectedResponse);
       expect(mockSessionPartService.listSessionParts).toHaveBeenCalledWith(
         sessionId,
