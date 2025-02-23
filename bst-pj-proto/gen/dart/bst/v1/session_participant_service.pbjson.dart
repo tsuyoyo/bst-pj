@@ -101,32 +101,32 @@ final $typed_data.Uint8List updateSessionParticipantResponseDescriptor = $conver
     'CiBVcGRhdGVTZXNzaW9uUGFydGljaXBhbnRSZXNwb25zZRJKChJzZXNzaW9uUGFydGljaXBhbn'
     'QYASABKAsyGi5ic3QudjEuU2Vzc2lvblBhcnRpY2lwYW50UhJzZXNzaW9uUGFydGljaXBhbnQ=');
 
-@$core.Deprecated('Use setSessionParticipantIsOrganizerRequestDescriptor instead')
-const SetSessionParticipantIsOrganizerRequest$json = {
-  '1': 'SetSessionParticipantIsOrganizerRequest',
+@$core.Deprecated('Use setSessionParticipantIsAdminRequestDescriptor instead')
+const SetSessionParticipantIsAdminRequest$json = {
+  '1': 'SetSessionParticipantIsAdminRequest',
   '2': [
-    {'1': 'is_organizer', '3': 1, '4': 1, '5': 8, '10': 'isOrganizer'},
+    {'1': 'is_admin', '3': 1, '4': 1, '5': 8, '10': 'isAdmin'},
   ],
 };
 
-/// Descriptor for `SetSessionParticipantIsOrganizerRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List setSessionParticipantIsOrganizerRequestDescriptor = $convert.base64Decode(
-    'CidTZXRTZXNzaW9uUGFydGljaXBhbnRJc09yZ2FuaXplclJlcXVlc3QSIQoMaXNfb3JnYW5pem'
-    'VyGAEgASgIUgtpc09yZ2FuaXplcg==');
+/// Descriptor for `SetSessionParticipantIsAdminRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List setSessionParticipantIsAdminRequestDescriptor = $convert.base64Decode(
+    'CiNTZXRTZXNzaW9uUGFydGljaXBhbnRJc0FkbWluUmVxdWVzdBIZCghpc19hZG1pbhgBIAEoCF'
+    'IHaXNBZG1pbg==');
 
-@$core.Deprecated('Use setSessionParticipantIsOrganizerResponseDescriptor instead')
-const SetSessionParticipantIsOrganizerResponse$json = {
-  '1': 'SetSessionParticipantIsOrganizerResponse',
+@$core.Deprecated('Use setSessionParticipantIsAdminResponseDescriptor instead')
+const SetSessionParticipantIsAdminResponse$json = {
+  '1': 'SetSessionParticipantIsAdminResponse',
   '2': [
     {'1': 'sessionParticipant', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.SessionParticipant', '10': 'sessionParticipant'},
   ],
 };
 
-/// Descriptor for `SetSessionParticipantIsOrganizerResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List setSessionParticipantIsOrganizerResponseDescriptor = $convert.base64Decode(
-    'CihTZXRTZXNzaW9uUGFydGljaXBhbnRJc09yZ2FuaXplclJlc3BvbnNlEkoKEnNlc3Npb25QYX'
-    'J0aWNpcGFudBgBIAEoCzIaLmJzdC52MS5TZXNzaW9uUGFydGljaXBhbnRSEnNlc3Npb25QYXJ0'
-    'aWNpcGFudA==');
+/// Descriptor for `SetSessionParticipantIsAdminResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List setSessionParticipantIsAdminResponseDescriptor = $convert.base64Decode(
+    'CiRTZXRTZXNzaW9uUGFydGljaXBhbnRJc0FkbWluUmVzcG9uc2USSgoSc2Vzc2lvblBhcnRpY2'
+    'lwYW50GAEgASgLMhouYnN0LnYxLlNlc3Npb25QYXJ0aWNpcGFudFISc2Vzc2lvblBhcnRpY2lw'
+    'YW50');
 
 @$core.Deprecated('Use addSessionParticipantPartsRequestDescriptor instead')
 const AddSessionParticipantPartsRequest$json = {

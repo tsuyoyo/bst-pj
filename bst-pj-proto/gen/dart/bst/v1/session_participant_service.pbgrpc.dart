@@ -29,10 +29,10 @@ class SessionParticipantServiceClient extends $grpc.Client {
       '/bst.v1.SessionParticipantService/AddSessionParticipant',
       ($17.AddSessionParticipantRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $17.AddSessionParticipantResponse.fromBuffer(value));
-  static final _$setSessionParticipantIsOrganizer = $grpc.ClientMethod<$17.SetSessionParticipantIsOrganizerRequest, $17.SetSessionParticipantIsOrganizerResponse>(
-      '/bst.v1.SessionParticipantService/SetSessionParticipantIsOrganizer',
-      ($17.SetSessionParticipantIsOrganizerRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $17.SetSessionParticipantIsOrganizerResponse.fromBuffer(value));
+  static final _$setSessionParticipantIsAdmin = $grpc.ClientMethod<$17.SetSessionParticipantIsAdminRequest, $17.SetSessionParticipantIsAdminResponse>(
+      '/bst.v1.SessionParticipantService/SetSessionParticipantIsAdmin',
+      ($17.SetSessionParticipantIsAdminRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $17.SetSessionParticipantIsAdminResponse.fromBuffer(value));
   static final _$addSessionParticipantParts = $grpc.ClientMethod<$17.AddSessionParticipantPartsRequest, $17.AddSessionParticipantPartsResponse>(
       '/bst.v1.SessionParticipantService/AddSessionParticipantParts',
       ($17.AddSessionParticipantPartsRequest value) => value.writeToBuffer(),
@@ -64,8 +64,8 @@ class SessionParticipantServiceClient extends $grpc.Client {
     return $createUnaryCall(_$addSessionParticipant, request, options: options);
   }
 
-  $grpc.ResponseFuture<$17.SetSessionParticipantIsOrganizerResponse> setSessionParticipantIsOrganizer($17.SetSessionParticipantIsOrganizerRequest request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$setSessionParticipantIsOrganizer, request, options: options);
+  $grpc.ResponseFuture<$17.SetSessionParticipantIsAdminResponse> setSessionParticipantIsAdmin($17.SetSessionParticipantIsAdminRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$setSessionParticipantIsAdmin, request, options: options);
   }
 
   $grpc.ResponseFuture<$17.AddSessionParticipantPartsResponse> addSessionParticipantParts($17.AddSessionParticipantPartsRequest request, {$grpc.CallOptions? options}) {
@@ -104,13 +104,13 @@ abstract class SessionParticipantServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $17.AddSessionParticipantRequest.fromBuffer(value),
         ($17.AddSessionParticipantResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$17.SetSessionParticipantIsOrganizerRequest, $17.SetSessionParticipantIsOrganizerResponse>(
-        'SetSessionParticipantIsOrganizer',
-        setSessionParticipantIsOrganizer_Pre,
+    $addMethod($grpc.ServiceMethod<$17.SetSessionParticipantIsAdminRequest, $17.SetSessionParticipantIsAdminResponse>(
+        'SetSessionParticipantIsAdmin',
+        setSessionParticipantIsAdmin_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $17.SetSessionParticipantIsOrganizerRequest.fromBuffer(value),
-        ($17.SetSessionParticipantIsOrganizerResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $17.SetSessionParticipantIsAdminRequest.fromBuffer(value),
+        ($17.SetSessionParticipantIsAdminResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$17.AddSessionParticipantPartsRequest, $17.AddSessionParticipantPartsResponse>(
         'AddSessionParticipantParts',
         addSessionParticipantParts_Pre,
@@ -149,8 +149,8 @@ abstract class SessionParticipantServiceBase extends $grpc.Service {
     return addSessionParticipant(call, await request);
   }
 
-  $async.Future<$17.SetSessionParticipantIsOrganizerResponse> setSessionParticipantIsOrganizer_Pre($grpc.ServiceCall call, $async.Future<$17.SetSessionParticipantIsOrganizerRequest> request) async {
-    return setSessionParticipantIsOrganizer(call, await request);
+  $async.Future<$17.SetSessionParticipantIsAdminResponse> setSessionParticipantIsAdmin_Pre($grpc.ServiceCall call, $async.Future<$17.SetSessionParticipantIsAdminRequest> request) async {
+    return setSessionParticipantIsAdmin(call, await request);
   }
 
   $async.Future<$17.AddSessionParticipantPartsResponse> addSessionParticipantParts_Pre($grpc.ServiceCall call, $async.Future<$17.AddSessionParticipantPartsRequest> request) async {
@@ -171,7 +171,7 @@ abstract class SessionParticipantServiceBase extends $grpc.Service {
 
   $async.Future<$17.ListSessionParticipantsResponse> listSessionParticipants($grpc.ServiceCall call, $17.ListSessionParticipantsRequest request);
   $async.Future<$17.AddSessionParticipantResponse> addSessionParticipant($grpc.ServiceCall call, $17.AddSessionParticipantRequest request);
-  $async.Future<$17.SetSessionParticipantIsOrganizerResponse> setSessionParticipantIsOrganizer($grpc.ServiceCall call, $17.SetSessionParticipantIsOrganizerRequest request);
+  $async.Future<$17.SetSessionParticipantIsAdminResponse> setSessionParticipantIsAdmin($grpc.ServiceCall call, $17.SetSessionParticipantIsAdminRequest request);
   $async.Future<$17.AddSessionParticipantPartsResponse> addSessionParticipantParts($grpc.ServiceCall call, $17.AddSessionParticipantPartsRequest request);
   $async.Future<$17.UpdateSessionParticipantResponse> updateSessionParticipant($grpc.ServiceCall call, $17.UpdateSessionParticipantRequest request);
   $async.Future<$17.UpdateSessionParticipantStatusResponse> updateSessionParticipantStatus($grpc.ServiceCall call, $17.UpdateSessionParticipantStatusRequest request);

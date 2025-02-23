@@ -45,11 +45,11 @@ export interface UpdateSessionParticipantResponse {
   sessionParticipant: SessionParticipant | undefined;
 }
 
-export interface SetSessionParticipantIsOrganizerRequest {
-  isOrganizer: boolean;
+export interface SetSessionParticipantIsAdminRequest {
+  isAdmin: boolean;
 }
 
-export interface SetSessionParticipantIsOrganizerResponse {
+export interface SetSessionParticipantIsAdminResponse {
   sessionParticipant: SessionParticipant | undefined;
 }
 
@@ -531,22 +531,22 @@ export const UpdateSessionParticipantResponse = {
   },
 };
 
-function createBaseSetSessionParticipantIsOrganizerRequest(): SetSessionParticipantIsOrganizerRequest {
-  return { isOrganizer: false };
+function createBaseSetSessionParticipantIsAdminRequest(): SetSessionParticipantIsAdminRequest {
+  return { isAdmin: false };
 }
 
-export const SetSessionParticipantIsOrganizerRequest = {
-  encode(message: SetSessionParticipantIsOrganizerRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.isOrganizer !== false) {
-      writer.uint32(8).bool(message.isOrganizer);
+export const SetSessionParticipantIsAdminRequest = {
+  encode(message: SetSessionParticipantIsAdminRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.isAdmin !== false) {
+      writer.uint32(8).bool(message.isAdmin);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): SetSessionParticipantIsOrganizerRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SetSessionParticipantIsAdminRequest {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSetSessionParticipantIsOrganizerRequest();
+    const message = createBaseSetSessionParticipantIsAdminRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -555,7 +555,7 @@ export const SetSessionParticipantIsOrganizerRequest = {
             break;
           }
 
-          message.isOrganizer = reader.bool();
+          message.isAdmin = reader.bool();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -566,48 +566,48 @@ export const SetSessionParticipantIsOrganizerRequest = {
     return message;
   },
 
-  fromJSON(object: any): SetSessionParticipantIsOrganizerRequest {
-    return { isOrganizer: isSet(object.isOrganizer) ? globalThis.Boolean(object.isOrganizer) : false };
+  fromJSON(object: any): SetSessionParticipantIsAdminRequest {
+    return { isAdmin: isSet(object.isAdmin) ? globalThis.Boolean(object.isAdmin) : false };
   },
 
-  toJSON(message: SetSessionParticipantIsOrganizerRequest): unknown {
+  toJSON(message: SetSessionParticipantIsAdminRequest): unknown {
     const obj: any = {};
-    if (message.isOrganizer !== false) {
-      obj.isOrganizer = message.isOrganizer;
+    if (message.isAdmin !== false) {
+      obj.isAdmin = message.isAdmin;
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SetSessionParticipantIsOrganizerRequest>, I>>(
+  create<I extends Exact<DeepPartial<SetSessionParticipantIsAdminRequest>, I>>(
     base?: I,
-  ): SetSessionParticipantIsOrganizerRequest {
-    return SetSessionParticipantIsOrganizerRequest.fromPartial(base ?? ({} as any));
+  ): SetSessionParticipantIsAdminRequest {
+    return SetSessionParticipantIsAdminRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SetSessionParticipantIsOrganizerRequest>, I>>(
+  fromPartial<I extends Exact<DeepPartial<SetSessionParticipantIsAdminRequest>, I>>(
     object: I,
-  ): SetSessionParticipantIsOrganizerRequest {
-    const message = createBaseSetSessionParticipantIsOrganizerRequest();
-    message.isOrganizer = object.isOrganizer ?? false;
+  ): SetSessionParticipantIsAdminRequest {
+    const message = createBaseSetSessionParticipantIsAdminRequest();
+    message.isAdmin = object.isAdmin ?? false;
     return message;
   },
 };
 
-function createBaseSetSessionParticipantIsOrganizerResponse(): SetSessionParticipantIsOrganizerResponse {
+function createBaseSetSessionParticipantIsAdminResponse(): SetSessionParticipantIsAdminResponse {
   return { sessionParticipant: undefined };
 }
 
-export const SetSessionParticipantIsOrganizerResponse = {
-  encode(message: SetSessionParticipantIsOrganizerResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const SetSessionParticipantIsAdminResponse = {
+  encode(message: SetSessionParticipantIsAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sessionParticipant !== undefined) {
       SessionParticipant.encode(message.sessionParticipant, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): SetSessionParticipantIsOrganizerResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SetSessionParticipantIsAdminResponse {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSetSessionParticipantIsOrganizerResponse();
+    const message = createBaseSetSessionParticipantIsAdminResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -627,7 +627,7 @@ export const SetSessionParticipantIsOrganizerResponse = {
     return message;
   },
 
-  fromJSON(object: any): SetSessionParticipantIsOrganizerResponse {
+  fromJSON(object: any): SetSessionParticipantIsAdminResponse {
     return {
       sessionParticipant: isSet(object.sessionParticipant)
         ? SessionParticipant.fromJSON(object.sessionParticipant)
@@ -635,7 +635,7 @@ export const SetSessionParticipantIsOrganizerResponse = {
     };
   },
 
-  toJSON(message: SetSessionParticipantIsOrganizerResponse): unknown {
+  toJSON(message: SetSessionParticipantIsAdminResponse): unknown {
     const obj: any = {};
     if (message.sessionParticipant !== undefined) {
       obj.sessionParticipant = SessionParticipant.toJSON(message.sessionParticipant);
@@ -643,15 +643,15 @@ export const SetSessionParticipantIsOrganizerResponse = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SetSessionParticipantIsOrganizerResponse>, I>>(
+  create<I extends Exact<DeepPartial<SetSessionParticipantIsAdminResponse>, I>>(
     base?: I,
-  ): SetSessionParticipantIsOrganizerResponse {
-    return SetSessionParticipantIsOrganizerResponse.fromPartial(base ?? ({} as any));
+  ): SetSessionParticipantIsAdminResponse {
+    return SetSessionParticipantIsAdminResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SetSessionParticipantIsOrganizerResponse>, I>>(
+  fromPartial<I extends Exact<DeepPartial<SetSessionParticipantIsAdminResponse>, I>>(
     object: I,
-  ): SetSessionParticipantIsOrganizerResponse {
-    const message = createBaseSetSessionParticipantIsOrganizerResponse();
+  ): SetSessionParticipantIsAdminResponse {
+    const message = createBaseSetSessionParticipantIsAdminResponse();
     message.sessionParticipant = (object.sessionParticipant !== undefined && object.sessionParticipant !== null)
       ? SessionParticipant.fromPartial(object.sessionParticipant)
       : undefined;
@@ -1040,10 +1040,10 @@ export interface SessionParticipantService {
   ListSessionParticipants(request: ListSessionParticipantsRequest): Promise<ListSessionParticipantsResponse>;
   /** POST /sessions/{id}/participants */
   AddSessionParticipant(request: AddSessionParticipantRequest): Promise<AddSessionParticipantResponse>;
-  /** POST /sessions/{id}/participants/{participantId}/is_organizer */
-  SetSessionParticipantIsOrganizer(
-    request: SetSessionParticipantIsOrganizerRequest,
-  ): Promise<SetSessionParticipantIsOrganizerResponse>;
+  /** POST /sessions/{id}/participants/{participantId}/is_admin */
+  SetSessionParticipantIsAdmin(
+    request: SetSessionParticipantIsAdminRequest,
+  ): Promise<SetSessionParticipantIsAdminResponse>;
   /** POST /sessions/{id}/participants/{participantId}/parts */
   AddSessionParticipantParts(request: AddSessionParticipantPartsRequest): Promise<AddSessionParticipantPartsResponse>;
   /** PUT /sessions/{id}/participants/{participantId} */
@@ -1065,7 +1065,7 @@ export class SessionParticipantServiceClientImpl implements SessionParticipantSe
     this.rpc = rpc;
     this.ListSessionParticipants = this.ListSessionParticipants.bind(this);
     this.AddSessionParticipant = this.AddSessionParticipant.bind(this);
-    this.SetSessionParticipantIsOrganizer = this.SetSessionParticipantIsOrganizer.bind(this);
+    this.SetSessionParticipantIsAdmin = this.SetSessionParticipantIsAdmin.bind(this);
     this.AddSessionParticipantParts = this.AddSessionParticipantParts.bind(this);
     this.UpdateSessionParticipant = this.UpdateSessionParticipant.bind(this);
     this.UpdateSessionParticipantStatus = this.UpdateSessionParticipantStatus.bind(this);
@@ -1083,12 +1083,12 @@ export class SessionParticipantServiceClientImpl implements SessionParticipantSe
     return promise.then((data) => AddSessionParticipantResponse.decode(_m0.Reader.create(data)));
   }
 
-  SetSessionParticipantIsOrganizer(
-    request: SetSessionParticipantIsOrganizerRequest,
-  ): Promise<SetSessionParticipantIsOrganizerResponse> {
-    const data = SetSessionParticipantIsOrganizerRequest.encode(request).finish();
-    const promise = this.rpc.request(this.service, "SetSessionParticipantIsOrganizer", data);
-    return promise.then((data) => SetSessionParticipantIsOrganizerResponse.decode(_m0.Reader.create(data)));
+  SetSessionParticipantIsAdmin(
+    request: SetSessionParticipantIsAdminRequest,
+  ): Promise<SetSessionParticipantIsAdminResponse> {
+    const data = SetSessionParticipantIsAdminRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "SetSessionParticipantIsAdmin", data);
+    return promise.then((data) => SetSessionParticipantIsAdminResponse.decode(_m0.Reader.create(data)));
   }
 
   AddSessionParticipantParts(request: AddSessionParticipantPartsRequest): Promise<AddSessionParticipantPartsResponse> {

@@ -73,16 +73,12 @@ export class SessionService {
 
   private async mapSessionToProtoDetail(
     session: Session,
-    user: User,
   ): Promise<ProtoSessionDetail> {
     const { parts } = await this.sessionPartService.listSessionParts(
       session.id,
     );
     const { participants } =
-      await this.sessionParticipantService.listSessionParticipants(
-        session.id,
-        user,
-      );
+      await this.sessionParticipantService.listSessionParticipants(session.id);
     return {
       session: await this.mapSessionToProto(session),
       description: session.description,

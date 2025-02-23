@@ -15,9 +15,9 @@ service SessionParticipantService {
   rpc AddSessionParticipant(AddSessionParticipantRequest)
       returns (AddSessionParticipantResponse);
 
-  // POST /sessions/{id}/participants/{participantId}/is_organizer
-  rpc SetSessionParticipantIsOrganizer(SetSessionParticipantIsOrganizerRequest)
-      returns (SetSessionParticipantIsOrganizerResponse);
+  // POST /sessions/{id}/participants/{participantId}/is_admin
+  rpc SetSessionParticipantIsAdmin(SetSessionParticipantIsAdminRequest)
+      returns (SetSessionParticipantIsAdminResponse);
 
   // POST /sessions/{id}/participants/{participantId}/parts
   rpc AddSessionParticipantParts(AddSessionParticipantPartsRequest)
@@ -69,11 +69,11 @@ message UpdateSessionParticipantResponse {
   SessionParticipant sessionParticipant = 1;
 }
 
-message SetSessionParticipantIsOrganizerRequest {
-  bool is_organizer = 1;
+message SetSessionParticipantIsAdminRequest {
+  bool is_admin = 1;
 }
 
-message SetSessionParticipantIsOrganizerResponse {
+message SetSessionParticipantIsAdminResponse {
   SessionParticipant sessionParticipant = 1;
 }
 

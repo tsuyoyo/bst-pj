@@ -369,22 +369,22 @@ class UpdateSessionParticipantResponse extends $pb.GeneratedMessage {
   $36.SessionParticipant ensureSessionParticipant() => $_ensure(0);
 }
 
-class SetSessionParticipantIsOrganizerRequest extends $pb.GeneratedMessage {
-  factory SetSessionParticipantIsOrganizerRequest({
-    $core.bool? isOrganizer,
+class SetSessionParticipantIsAdminRequest extends $pb.GeneratedMessage {
+  factory SetSessionParticipantIsAdminRequest({
+    $core.bool? isAdmin,
   }) {
     final $result = create();
-    if (isOrganizer != null) {
-      $result.isOrganizer = isOrganizer;
+    if (isAdmin != null) {
+      $result.isAdmin = isAdmin;
     }
     return $result;
   }
-  SetSessionParticipantIsOrganizerRequest._() : super();
-  factory SetSessionParticipantIsOrganizerRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SetSessionParticipantIsOrganizerRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  SetSessionParticipantIsAdminRequest._() : super();
+  factory SetSessionParticipantIsAdminRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SetSessionParticipantIsAdminRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetSessionParticipantIsOrganizerRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOB(1, _omitFieldNames ? '' : 'isOrganizer')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetSessionParticipantIsAdminRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'isAdmin')
     ..hasRequiredFields = false
   ;
 
@@ -392,35 +392,35 @@ class SetSessionParticipantIsOrganizerRequest extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  SetSessionParticipantIsOrganizerRequest clone() => SetSessionParticipantIsOrganizerRequest()..mergeFromMessage(this);
+  SetSessionParticipantIsAdminRequest clone() => SetSessionParticipantIsAdminRequest()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  SetSessionParticipantIsOrganizerRequest copyWith(void Function(SetSessionParticipantIsOrganizerRequest) updates) => super.copyWith((message) => updates(message as SetSessionParticipantIsOrganizerRequest)) as SetSessionParticipantIsOrganizerRequest;
+  SetSessionParticipantIsAdminRequest copyWith(void Function(SetSessionParticipantIsAdminRequest) updates) => super.copyWith((message) => updates(message as SetSessionParticipantIsAdminRequest)) as SetSessionParticipantIsAdminRequest;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static SetSessionParticipantIsOrganizerRequest create() => SetSessionParticipantIsOrganizerRequest._();
-  SetSessionParticipantIsOrganizerRequest createEmptyInstance() => create();
-  static $pb.PbList<SetSessionParticipantIsOrganizerRequest> createRepeated() => $pb.PbList<SetSessionParticipantIsOrganizerRequest>();
+  static SetSessionParticipantIsAdminRequest create() => SetSessionParticipantIsAdminRequest._();
+  SetSessionParticipantIsAdminRequest createEmptyInstance() => create();
+  static $pb.PbList<SetSessionParticipantIsAdminRequest> createRepeated() => $pb.PbList<SetSessionParticipantIsAdminRequest>();
   @$core.pragma('dart2js:noInline')
-  static SetSessionParticipantIsOrganizerRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetSessionParticipantIsOrganizerRequest>(create);
-  static SetSessionParticipantIsOrganizerRequest? _defaultInstance;
+  static SetSessionParticipantIsAdminRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetSessionParticipantIsAdminRequest>(create);
+  static SetSessionParticipantIsAdminRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.bool get isOrganizer => $_getBF(0);
+  $core.bool get isAdmin => $_getBF(0);
   @$pb.TagNumber(1)
-  set isOrganizer($core.bool v) { $_setBool(0, v); }
+  set isAdmin($core.bool v) { $_setBool(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasIsOrganizer() => $_has(0);
+  $core.bool hasIsAdmin() => $_has(0);
   @$pb.TagNumber(1)
-  void clearIsOrganizer() => clearField(1);
+  void clearIsAdmin() => clearField(1);
 }
 
-class SetSessionParticipantIsOrganizerResponse extends $pb.GeneratedMessage {
-  factory SetSessionParticipantIsOrganizerResponse({
+class SetSessionParticipantIsAdminResponse extends $pb.GeneratedMessage {
+  factory SetSessionParticipantIsAdminResponse({
     $36.SessionParticipant? sessionParticipant,
   }) {
     final $result = create();
@@ -429,11 +429,11 @@ class SetSessionParticipantIsOrganizerResponse extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  SetSessionParticipantIsOrganizerResponse._() : super();
-  factory SetSessionParticipantIsOrganizerResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SetSessionParticipantIsOrganizerResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  SetSessionParticipantIsAdminResponse._() : super();
+  factory SetSessionParticipantIsAdminResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SetSessionParticipantIsAdminResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetSessionParticipantIsOrganizerResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetSessionParticipantIsAdminResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..aOM<$36.SessionParticipant>(1, _omitFieldNames ? '' : 'sessionParticipant', protoName: 'sessionParticipant', subBuilder: $36.SessionParticipant.create)
     ..hasRequiredFields = false
   ;
@@ -442,22 +442,22 @@ class SetSessionParticipantIsOrganizerResponse extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  SetSessionParticipantIsOrganizerResponse clone() => SetSessionParticipantIsOrganizerResponse()..mergeFromMessage(this);
+  SetSessionParticipantIsAdminResponse clone() => SetSessionParticipantIsAdminResponse()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  SetSessionParticipantIsOrganizerResponse copyWith(void Function(SetSessionParticipantIsOrganizerResponse) updates) => super.copyWith((message) => updates(message as SetSessionParticipantIsOrganizerResponse)) as SetSessionParticipantIsOrganizerResponse;
+  SetSessionParticipantIsAdminResponse copyWith(void Function(SetSessionParticipantIsAdminResponse) updates) => super.copyWith((message) => updates(message as SetSessionParticipantIsAdminResponse)) as SetSessionParticipantIsAdminResponse;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static SetSessionParticipantIsOrganizerResponse create() => SetSessionParticipantIsOrganizerResponse._();
-  SetSessionParticipantIsOrganizerResponse createEmptyInstance() => create();
-  static $pb.PbList<SetSessionParticipantIsOrganizerResponse> createRepeated() => $pb.PbList<SetSessionParticipantIsOrganizerResponse>();
+  static SetSessionParticipantIsAdminResponse create() => SetSessionParticipantIsAdminResponse._();
+  SetSessionParticipantIsAdminResponse createEmptyInstance() => create();
+  static $pb.PbList<SetSessionParticipantIsAdminResponse> createRepeated() => $pb.PbList<SetSessionParticipantIsAdminResponse>();
   @$core.pragma('dart2js:noInline')
-  static SetSessionParticipantIsOrganizerResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetSessionParticipantIsOrganizerResponse>(create);
-  static SetSessionParticipantIsOrganizerResponse? _defaultInstance;
+  static SetSessionParticipantIsAdminResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetSessionParticipantIsAdminResponse>(create);
+  static SetSessionParticipantIsAdminResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
   $36.SessionParticipant get sessionParticipant => $_getN(0);

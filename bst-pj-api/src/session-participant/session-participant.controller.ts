@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   UseGuards,
 } from '@nestjs/common';
 import { SessionParticipantService } from './session-participant.service';
@@ -15,8 +16,14 @@ import {
   AddSessionParticipantResponse,
   DeleteSessionParticipantResponse,
   ListSessionParticipantsResponse,
+  SetSessionParticipantIsAdminResponse,
+  AddSessionParticipantPartsResponse,
+  UpdateSessionParticipantStatusResponse,
 } from '../proto/bst/v1/session_participant_service';
 import { AddSessionParticipantDto } from './dto/add-session-participant.dto';
+import { SetSessionParticipantIsAdminDto } from './dto/set-session-participant-is-admin.dto';
+import { AddSessionParticipantPartsDto } from './dto/add-session-participant-parts.dto';
+import { UpdateSessionParticipantStatusDto } from './dto/update-session-participant-status.dto';
 
 @Controller('sessions/:sessionId/participants')
 @UseGuards(JwtAuthGuard)
@@ -56,6 +63,51 @@ export class SessionParticipantController {
     return await this.sessionParticipantService.deleteSessionParticipant(
       sessionId,
       participantId,
+      user,
+    );
+  }
+
+  @Post(':participantId/is_admin')
+  async setSessionParticipantIsAdmin(
+    @Param('sessionId') sessionId: number,
+    @Param('participantId') participantId: number,
+    @Body() dto: SetSessionParticipantIsAdminDto,
+    @CurrentUser() user: User,
+  ): Promise<SetSessionParticipantIsAdminResponse> {
+    return await this.sessionParticipantService.setSessionParticipantIsAdmin(
+      sessionId,
+      participantId,
+      dto,
+      user,
+    );
+  }
+
+  @Post(':participantId/secondary_parts')
+  async addSessionParticipantParts(
+    @Param('sessionId') sessionId: number,
+    @Param('participantId') participantId: number,
+    @Body() dto: AddSessionParticipantPartsDto,
+    @CurrentUser() user: User,
+  ): Promise<AddSessionParticipantPartsResponse> {
+    return await this.sessionParticipantService.addSessionParticipantParts(
+      sessionId,
+      participantId,
+      dto,
+      user,
+    );
+  }
+
+  @Put(':participantId/status')
+  async updateSessionParticipantStatus(
+    @Param('sessionId') sessionId: number,
+    @Param('participantId') participantId: number,
+    @Body() dto: UpdateSessionParticipantStatusDto,
+    @CurrentUser() user: User,
+  ): Promise<UpdateSessionParticipantStatusResponse> {
+    return await this.sessionParticipantService.updateSessionParticipantStatus(
+      sessionId,
+      participantId,
+      dto,
       user,
     );
   }
