@@ -11,6 +11,20 @@ import { User } from '../entities/user.entity';
 export class SessionController {
   constructor(private readonly sessionService: SessionService) {}
 
+  // Memo: 次はこの辺
+  //   // GET /sessions/{id}
+  //   rpc GetSession(GetSessionRequest) returns (GetSessionResponse);
+  //   // PUT /sessions/{id}
+  //   rpc UpdateSession(UpdateSessionRequest) returns (UpdateSessionResponse);
+  //   // PUT /sessions/{id}/status
+  //   rpc UpdateSessionStatus(UpdateSessionStatusRequest)
+  //       returns (UpdateSessionStatusResponse);
+  //   // PUT /sessions/{id}/cancel
+  //   rpc CancelSession(CancelSessionRequest) returns (CancelSessionResponse);
+  //   // POST /sessions/{id}/duplicate
+  //   rpc DuplicateSession(DuplicateSessionRequest)
+  //       returns (DuplicateSessionResponse);
+
   @Post()
   async createSession(
     @Body() createSessionDto: CreateSessionDto,
