@@ -63,7 +63,7 @@ message SessionParticipant {
   repeated SessionPart     parts           = 3;
   int32                    primary_part_id = 4;
   SessionParticipantStatus status          = 5;
-  bool                     is_organizer    = 6;
+  bool                     is_admin        = 6;
   bool                     is_player       = 7;
 }
 

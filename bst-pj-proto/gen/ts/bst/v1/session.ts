@@ -164,7 +164,7 @@ export interface SessionParticipant {
   parts: SessionPart[];
   primaryPartId: number;
   status: SessionParticipantStatus;
-  isOrganizer: boolean;
+  isAdmin: boolean;
   isPlayer: boolean;
 }
 
@@ -701,7 +701,7 @@ export const SessionTask = {
 };
 
 function createBaseSessionParticipant(): SessionParticipant {
-  return { id: 0, user: undefined, parts: [], primaryPartId: 0, status: 0, isOrganizer: false, isPlayer: false };
+  return { id: 0, user: undefined, parts: [], primaryPartId: 0, status: 0, isAdmin: false, isPlayer: false };
 }
 
 export const SessionParticipant = {
@@ -721,8 +721,8 @@ export const SessionParticipant = {
     if (message.status !== 0) {
       writer.uint32(40).int32(message.status);
     }
-    if (message.isOrganizer !== false) {
-      writer.uint32(48).bool(message.isOrganizer);
+    if (message.isAdmin !== false) {
+      writer.uint32(48).bool(message.isAdmin);
     }
     if (message.isPlayer !== false) {
       writer.uint32(56).bool(message.isPlayer);
@@ -777,7 +777,7 @@ export const SessionParticipant = {
             break;
           }
 
-          message.isOrganizer = reader.bool();
+          message.isAdmin = reader.bool();
           continue;
         case 7:
           if (tag !== 56) {
@@ -802,7 +802,7 @@ export const SessionParticipant = {
       parts: globalThis.Array.isArray(object?.parts) ? object.parts.map((e: any) => SessionPart.fromJSON(e)) : [],
       primaryPartId: isSet(object.primaryPartId) ? globalThis.Number(object.primaryPartId) : 0,
       status: isSet(object.status) ? sessionParticipantStatusFromJSON(object.status) : 0,
-      isOrganizer: isSet(object.isOrganizer) ? globalThis.Boolean(object.isOrganizer) : false,
+      isAdmin: isSet(object.isAdmin) ? globalThis.Boolean(object.isAdmin) : false,
       isPlayer: isSet(object.isPlayer) ? globalThis.Boolean(object.isPlayer) : false,
     };
   },
@@ -824,8 +824,8 @@ export const SessionParticipant = {
     if (message.status !== 0) {
       obj.status = sessionParticipantStatusToJSON(message.status);
     }
-    if (message.isOrganizer !== false) {
-      obj.isOrganizer = message.isOrganizer;
+    if (message.isAdmin !== false) {
+      obj.isAdmin = message.isAdmin;
     }
     if (message.isPlayer !== false) {
       obj.isPlayer = message.isPlayer;
@@ -843,7 +843,7 @@ export const SessionParticipant = {
     message.parts = object.parts?.map((e) => SessionPart.fromPartial(e)) || [];
     message.primaryPartId = object.primaryPartId ?? 0;
     message.status = object.status ?? 0;
-    message.isOrganizer = object.isOrganizer ?? false;
+    message.isAdmin = object.isAdmin ?? false;
     message.isPlayer = object.isPlayer ?? false;
     return message;
   },

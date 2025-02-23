@@ -42,9 +42,8 @@ export class SessionSongController {
   @Get()
   async listSessionSongs(
     @Param('sessionId') sessionId: number,
-    @CurrentUser() user: User,
   ): Promise<ListSessionSongsResponse> {
-    return await this.sessionSongService.listSessionSongs(sessionId, user);
+    return await this.sessionSongService.listSessionSongs(sessionId);
   }
 
   @Put(':songId')

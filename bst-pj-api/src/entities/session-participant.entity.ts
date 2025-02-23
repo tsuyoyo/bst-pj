@@ -47,13 +47,13 @@ export class SessionParticipant {
   isAdmin: boolean;
 
   @Column({
-    name: 'is_observer',
+    name: 'is_player',
     type: 'boolean',
-    default: false,
+    default: true,
     nullable: false,
-    comment: '観察者フラグ (演奏しない)',
+    comment: '演奏者フラグ (演奏する)',
   })
-  isObserver: boolean;
+  isPlayer: boolean;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

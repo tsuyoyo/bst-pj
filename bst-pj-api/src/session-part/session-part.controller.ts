@@ -29,9 +29,8 @@ export class SessionPartController {
   @Get()
   async listSessionParts(
     @Param('sessionId') sessionId: number,
-    @CurrentUser() user: User,
   ): Promise<ListSessionPartsResponse> {
-    return await this.sessionPartService.listSessionParts(sessionId, user);
+    return await this.sessionPartService.listSessionParts(sessionId);
   }
 
   @Post()

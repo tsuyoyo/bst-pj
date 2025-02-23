@@ -10,21 +10,27 @@ service SessionParticipantService {
   // GET /sessions/{id}/participants
   rpc ListSessionParticipants(ListSessionParticipantsRequest)
       returns (ListSessionParticipantsResponse);
+
   // POST /sessions/{id}/participants
   rpc AddSessionParticipant(AddSessionParticipantRequest)
       returns (AddSessionParticipantResponse);
+
   // POST /sessions/{id}/participants/{participantId}/is_organizer
   rpc SetSessionParticipantIsOrganizer(SetSessionParticipantIsOrganizerRequest)
       returns (SetSessionParticipantIsOrganizerResponse);
+
   // POST /sessions/{id}/participants/{participantId}/parts
   rpc AddSessionParticipantParts(AddSessionParticipantPartsRequest)
       returns (AddSessionParticipantPartsResponse);
+
   // PUT /sessions/{id}/participants/{participantId}
   rpc UpdateSessionParticipant(UpdateSessionParticipantRequest)
       returns (UpdateSessionParticipantResponse);
+
   // PUT /sessions/{id}/participants/{participantId}/status
   rpc UpdateSessionParticipantStatus(UpdateSessionParticipantStatusRequest)
       returns (UpdateSessionParticipantStatusResponse);
+
   // DELETE /sessions/{id}/participants/{participantId}
   rpc DeleteSessionParticipant(DeleteSessionParticipantRequest)
       returns (DeleteSessionParticipantResponse);

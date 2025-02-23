@@ -200,7 +200,7 @@ describe('SessionSongService', () => {
         parts: [],
       });
 
-      const result = await service.listSessionSongs(sessionId, mockUser);
+      const result = await service.listSessionSongs(sessionId);
       expect(result.songs).toHaveLength(1);
     });
   });

@@ -34,12 +34,7 @@ export class SessionPartService {
     return sessionPart;
   }
 
-  async listSessionParts(
-    sessionId: number,
-    user: User,
-  ): Promise<ListSessionPartsResponse> {
-    await this.sessionVerifyAccessService.verifySessionAccess(sessionId, user);
-
+  async listSessionParts(sessionId: number): Promise<ListSessionPartsResponse> {
     const sessionParts = await this.sessionPartRepository.find({
       where: { sessionId },
       relations: ['part'],

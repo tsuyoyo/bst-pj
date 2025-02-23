@@ -77,7 +77,6 @@ export class SessionService {
   ): Promise<ProtoSessionDetail> {
     const { parts } = await this.sessionPartService.listSessionParts(
       session.id,
-      user,
     );
     const { participants } =
       await this.sessionParticipantService.listSessionParticipants(

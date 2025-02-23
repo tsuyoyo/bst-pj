@@ -62,7 +62,6 @@ export class SessionSongService {
     const sessionParts = await this.mapSessionPartsToProto(
       sessionId,
       requiredParts,
-      user,
     );
 
     return {
@@ -74,17 +73,13 @@ export class SessionSongService {
     };
   }
 
-  async listSessionSongs(
-    sessionId: number,
-    user: User,
-  ): Promise<ListSessionSongsResponse> {
-    await this.sessionVerifyAccessService.verifySessionAccess(sessionId, user);
+  async listSessionSongs(sessionId: number): Promise<ListSessionSongsResponse> {
     const sessionSongs = await this.sessionSongRepository.find({
       where: { sessionId },
     });
     const protoSessionSongs = await Promise.all(
       sessionSongs.map((sessionSong) =>
-        this.mapSessionSongToProto(sessionId, sessionSong, user),
+        this.mapSessionSongToProto(sessionId, sessionSong),
       ),
     );
     return { songs: protoSessionSongs };
@@ -127,7 +122,6 @@ export class SessionSongService {
     const protoSessionSong = await this.mapSessionSongToProto(
       sessionId,
       sessionSong,
-      user,
     );
     return {
       song: protoSessionSong,
@@ -175,19 +169,14 @@ export class SessionSongService {
 
   private async getSessionParts(
     sessionId: number,
-    user: User,
   ): Promise<ProtoSessionPart[]> {
-    const { parts } = await this.sessionPartService.listSessionParts(
-      sessionId,
-      user,
-    );
+    const { parts } = await this.sessionPartService.listSessionParts(sessionId);
     return parts;
   }
 
   private async mapSessionSongToProto(
     sessionId: number,
     sessionSong: SessionSong,
-    user: User,
   ): Promise<ProtoSessionSong> {
     const { song: protoSong } = await this.songService.getSong(
       sessionSong.song.id,
@@ -198,7 +187,6 @@ export class SessionSongService {
     const protoSessionParts = await this.mapSessionPartsToProto(
       sessionId,
       requiredParts,
-      user,
     );
     return {
       song: protoSong,
@@ -210,9 +198,8 @@ export class SessionSongService {
   private async mapSessionPartsToProto(
     sessionId: number,
     requiredParts: RequiredPart[],
-    user: User,
   ): Promise<ProtoSessionSongPart[]> {
-    const sessionParts = await this.getSessionParts(sessionId, user);
+    const sessionParts = await this.getSessionParts(sessionId);
     return sessionParts.map((part) => ({
       part: part,
       isRequired: requiredParts.some(

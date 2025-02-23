@@ -133,7 +133,7 @@ const SessionParticipant$json = {
     {'1': 'parts', '3': 3, '4': 3, '5': 11, '6': '.bst.v1.SessionPart', '10': 'parts'},
     {'1': 'primary_part_id', '3': 4, '4': 1, '5': 5, '10': 'primaryPartId'},
     {'1': 'status', '3': 5, '4': 1, '5': 14, '6': '.bst.v1.SessionParticipantStatus', '10': 'status'},
-    {'1': 'is_organizer', '3': 6, '4': 1, '5': 8, '10': 'isOrganizer'},
+    {'1': 'is_admin', '3': 6, '4': 1, '5': 8, '10': 'isAdmin'},
     {'1': 'is_player', '3': 7, '4': 1, '5': 8, '10': 'isPlayer'},
   ],
 };
@@ -143,8 +143,8 @@ final $typed_data.Uint8List sessionParticipantDescriptor = $convert.base64Decode
     'ChJTZXNzaW9uUGFydGljaXBhbnQSDgoCaWQYASABKAVSAmlkEiAKBHVzZXIYAiABKAsyDC5ic3'
     'QudjEuVXNlclIEdXNlchIpCgVwYXJ0cxgDIAMoCzITLmJzdC52MS5TZXNzaW9uUGFydFIFcGFy'
     'dHMSJgoPcHJpbWFyeV9wYXJ0X2lkGAQgASgFUg1wcmltYXJ5UGFydElkEjgKBnN0YXR1cxgFIA'
-    'EoDjIgLmJzdC52MS5TZXNzaW9uUGFydGljaXBhbnRTdGF0dXNSBnN0YXR1cxIhCgxpc19vcmdh'
-    'bml6ZXIYBiABKAhSC2lzT3JnYW5pemVyEhsKCWlzX3BsYXllchgHIAEoCFIIaXNQbGF5ZXI=');
+    'EoDjIgLmJzdC52MS5TZXNzaW9uUGFydGljaXBhbnRTdGF0dXNSBnN0YXR1cxIZCghpc19hZG1p'
+    'bhgGIAEoCFIHaXNBZG1pbhIbCglpc19wbGF5ZXIYByABKAhSCGlzUGxheWVy');
 
 @$core.Deprecated('Use sessionSongEntryDescriptor instead')
 const SessionSongEntry$json = {

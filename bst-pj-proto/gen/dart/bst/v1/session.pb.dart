@@ -411,7 +411,7 @@ class SessionParticipant extends $pb.GeneratedMessage {
     $core.Iterable<SessionPart>? parts,
     $core.int? primaryPartId,
     SessionParticipantStatus? status,
-    $core.bool? isOrganizer,
+    $core.bool? isAdmin,
     $core.bool? isPlayer,
   }) {
     final $result = create();
@@ -430,8 +430,8 @@ class SessionParticipant extends $pb.GeneratedMessage {
     if (status != null) {
       $result.status = status;
     }
-    if (isOrganizer != null) {
-      $result.isOrganizer = isOrganizer;
+    if (isAdmin != null) {
+      $result.isAdmin = isAdmin;
     }
     if (isPlayer != null) {
       $result.isPlayer = isPlayer;
@@ -448,7 +448,7 @@ class SessionParticipant extends $pb.GeneratedMessage {
     ..pc<SessionPart>(3, _omitFieldNames ? '' : 'parts', $pb.PbFieldType.PM, subBuilder: SessionPart.create)
     ..a<$core.int>(4, _omitFieldNames ? '' : 'primaryPartId', $pb.PbFieldType.O3)
     ..e<SessionParticipantStatus>(5, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: SessionParticipantStatus.SESSION_PARTICIPANT_STATUS_UNSPECIFIED, valueOf: SessionParticipantStatus.valueOf, enumValues: SessionParticipantStatus.values)
-    ..aOB(6, _omitFieldNames ? '' : 'isOrganizer')
+    ..aOB(6, _omitFieldNames ? '' : 'isAdmin')
     ..aOB(7, _omitFieldNames ? '' : 'isPlayer')
     ..hasRequiredFields = false
   ;
@@ -516,13 +516,13 @@ class SessionParticipant extends $pb.GeneratedMessage {
   void clearStatus() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.bool get isOrganizer => $_getBF(5);
+  $core.bool get isAdmin => $_getBF(5);
   @$pb.TagNumber(6)
-  set isOrganizer($core.bool v) { $_setBool(5, v); }
+  set isAdmin($core.bool v) { $_setBool(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasIsOrganizer() => $_has(5);
+  $core.bool hasIsAdmin() => $_has(5);
   @$pb.TagNumber(6)
-  void clearIsOrganizer() => clearField(6);
+  void clearIsAdmin() => clearField(6);
 
   @$pb.TagNumber(7)
   $core.bool get isPlayer => $_getBF(6);
