@@ -6,6 +6,7 @@ import { SessionVerifyAccessService } from '../session/session-verify-access.ser
 import { UserService } from '../user/user.service';
 import { SessionParticipantPartService } from './session-participant-part.service';
 import { User } from '../entities/user.entity';
+import { SessionPartService } from '../session-part/session-part.service';
 import {
   BadRequestException,
   ForbiddenException,
@@ -64,6 +65,16 @@ describe('SessionParticipantService', () => {
   const mockSessionParticipantPartService = {
     create: jest.fn(),
     findBySessionParticipantId: jest.fn(),
+    countParticipantBySessionPartId: jest.fn(),
+  };
+
+  const mockSessionPartService = {
+    listSessionPartEntities: jest.fn(),
+    getSessionPart: jest.fn().mockResolvedValue({
+      id: 1,
+      name: 'Test Part',
+      maxEntry: 2,
+    }),
   };
 
   beforeEach(async () => {
@@ -86,10 +97,17 @@ describe('SessionParticipantService', () => {
           provide: SessionParticipantPartService,
           useValue: mockSessionParticipantPartService,
         },
+        {
+          provide: SessionPartService,
+          useValue: mockSessionPartService,
+        },
       ],
     }).compile();
 
     service = module.get<SessionParticipantService>(SessionParticipantService);
+
+    // Reset all mocks before each test
+    jest.clearAllMocks();
   });
 
   it('should be defined', () => {
@@ -97,7 +115,7 @@ describe('SessionParticipantService', () => {
   });
 
   describe('addSessionParticipant', () => {
-    it('should add a new participant', async () => {
+    it('should add a new participant when slot is available', async () => {
       const sessionId = 1;
       const dto = {
         userId: 2,
@@ -116,6 +134,13 @@ describe('SessionParticipantService', () => {
       mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
         undefined,
       );
+      mockSessionParticipantPartService.countParticipantBySessionPartId.mockResolvedValue(
+        1,
+      );
+      mockSessionPartService.getSessionPart.mockResolvedValue({
+        id: 1,
+        maxEntry: 2,
+      });
       (mockEntityManager.findOne as jest.Mock).mockResolvedValue(null);
       (mockEntityManager.create as jest.Mock).mockReturnValue(mockParticipant);
       (mockEntityManager.save as jest.Mock).mockResolvedValue(mockParticipant);
@@ -137,6 +162,30 @@ describe('SessionParticipantService', () => {
       expect(result.sessionParticipant).toBeDefined();
       expect(mockEntityManager.create).toHaveBeenCalled();
       expect(mockEntityManager.save).toHaveBeenCalled();
+      expect(mockSessionPartService.getSessionPart).toHaveBeenCalledWith(1);
+    });
+
+    it('should throw BadRequestException when part slot is full', async () => {
+      const sessionId = 1;
+      const dto = {
+        userId: 2,
+        parts: [{ sessionPartId: 1, isPrimary: true }],
+      };
+
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
+      mockSessionParticipantPartService.countParticipantBySessionPartId.mockResolvedValue(
+        2,
+      );
+      mockSessionPartService.getSessionPart.mockResolvedValue({
+        id: 1,
+        maxEntry: 2,
+      });
+
+      await expect(
+        service.addSessionParticipant(sessionId, dto, mockUser),
+      ).rejects.toThrow(BadRequestException);
     });
 
     it('should throw BadRequestException if participant already exists', async () => {
@@ -149,6 +198,13 @@ describe('SessionParticipantService', () => {
       mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
         undefined,
       );
+      mockSessionParticipantPartService.countParticipantBySessionPartId.mockResolvedValue(
+        1,
+      );
+      mockSessionPartService.getSessionPart.mockResolvedValue({
+        id: 1,
+        maxEntry: 2,
+      });
       (mockEntityManager.findOne as jest.Mock).mockResolvedValue({
         id: 1,
       });

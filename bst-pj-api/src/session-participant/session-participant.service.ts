@@ -31,7 +31,7 @@ import {
 import { SetSessionParticipantIsAdminDto } from './dto/set-session-participant-is-admin.dto';
 import { AddSessionParticipantPartsDto } from './dto/add-session-participant-parts.dto';
 import { UpdateSessionParticipantStatusDto } from './dto/update-session-participant-status.dto';
-
+import { SessionPartService } from '../session-part/session-part.service';
 @Injectable()
 export class SessionParticipantService {
   constructor(
@@ -40,6 +40,7 @@ export class SessionParticipantService {
     private readonly sessionVerifyAccessService: SessionVerifyAccessService,
     private readonly userService: UserService,
     private readonly sessionParticipantPartService: SessionParticipantPartService,
+    private readonly sessionPartService: SessionPartService,
   ) {}
 
   async addSessionParticipant(
@@ -47,13 +48,10 @@ export class SessionParticipantService {
     dto: AddSessionParticipantDto,
     user: User,
   ): Promise<AddSessionParticipantResponse> {
+    await this.sessionVerifyAccessService.verifySessionAccess(sessionId, user);
+    await this.checkPartSlotAvailable(sessionId, dto);
     return await this.sessionParticipantRepository.manager.transaction(
       async (entityManager: EntityManager) => {
-        await this.sessionVerifyAccessService.verifySessionAccess(
-          sessionId,
-          user,
-        );
-
         // Check if the user is already a participant
         const existingParticipant = await entityManager.findOne(
           SessionParticipant,
@@ -265,6 +263,35 @@ export class SessionParticipantService {
     return {
       sessionParticipant: await this.mapParticipantToProto(savedParticipant),
     };
+  }
+
+  private async checkPartSlotAvailable(
+    sessionId: number,
+    dto: AddSessionParticipantDto,
+  ) {
+    if (dto.parts.length === 0) {
+      throw new BadRequestException(
+        `checkPartSlotAvailable was called with empty parts list`,
+      );
+    }
+    const primarySessionPartId =
+      dto.parts.find((p) => p.isPrimary)?.sessionPartId ??
+      dto.parts[0].sessionPartId;
+
+    const participantCount =
+      await this.sessionParticipantPartService.countParticipantBySessionPartId(
+        primarySessionPartId,
+        true,
+      );
+
+    const primarySessionPart =
+      await this.sessionPartService.getSessionPart(primarySessionPartId);
+
+    if (primarySessionPart && participantCount >= primarySessionPart.maxEntry) {
+      throw new BadRequestException(
+        `Primary part ${primarySessionPartId} has reached the maximum number of participants`,
+      );
+    }
   }
 
   private async mapParticipantToProto(

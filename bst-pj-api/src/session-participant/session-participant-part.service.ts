@@ -57,4 +57,19 @@ export class SessionParticipantPartService {
       primaryPartId: parts.find((p) => p.isPrimary)?.id ?? parts[0].id,
     };
   }
+
+  /**
+   * Count the number of participants in a session part
+   * @param sessionPartId - The ID of the session part
+   * @param isPrimary - true when counting primary part
+   * @returns The number of participants in the session part
+   */
+  async countParticipantBySessionPartId(
+    sessionPartId: number,
+    isPrimary: boolean,
+  ): Promise<number> {
+    return this.sessionParticipantPartRepository.count({
+      where: { sessionPartId, isPrimary },
+    });
+  }
 }

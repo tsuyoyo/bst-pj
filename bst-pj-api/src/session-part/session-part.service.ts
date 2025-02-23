@@ -34,12 +34,18 @@ export class SessionPartService {
     return sessionPart;
   }
 
-  async listSessionParts(sessionId: number): Promise<ListSessionPartsResponse> {
+  async listSessionPartEntities(sessionId: number): Promise<SessionPart[]> {
     const sessionParts = await this.sessionPartRepository.find({
       where: { sessionId },
       relations: ['part'],
       order: { displayOrder: 'ASC' },
     });
+
+    return sessionParts;
+  }
+
+  async listSessionParts(sessionId: number): Promise<ListSessionPartsResponse> {
+    const sessionParts = await this.listSessionPartEntities(sessionId);
 
     return {
       parts: await Promise.all(
