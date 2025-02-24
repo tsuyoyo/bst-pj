@@ -186,6 +186,7 @@ export interface SessionSongPart {
 }
 
 export interface SessionSong {
+  id: number;
   song: Song | undefined;
   entries: SessionSongEntry[];
   parts: SessionSongPart[];
@@ -1065,19 +1066,22 @@ export const SessionSongPart = {
 };
 
 function createBaseSessionSong(): SessionSong {
-  return { song: undefined, entries: [], parts: [] };
+  return { id: 0, song: undefined, entries: [], parts: [] };
 }
 
 export const SessionSong = {
   encode(message: SessionSong, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.id !== 0) {
+      writer.uint32(8).int32(message.id);
+    }
     if (message.song !== undefined) {
-      Song.encode(message.song, writer.uint32(10).fork()).ldelim();
+      Song.encode(message.song, writer.uint32(18).fork()).ldelim();
     }
     for (const v of message.entries) {
-      SessionSongEntry.encode(v!, writer.uint32(18).fork()).ldelim();
+      SessionSongEntry.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     for (const v of message.parts) {
-      SessionSongPart.encode(v!, writer.uint32(26).fork()).ldelim();
+      SessionSongPart.encode(v!, writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
@@ -1090,21 +1094,28 @@ export const SessionSong = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag !== 10) {
+          if (tag !== 8) {
             break;
           }
 
-          message.song = Song.decode(reader, reader.uint32());
+          message.id = reader.int32();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.entries.push(SessionSongEntry.decode(reader, reader.uint32()));
+          message.song = Song.decode(reader, reader.uint32());
           continue;
         case 3:
           if (tag !== 26) {
+            break;
+          }
+
+          message.entries.push(SessionSongEntry.decode(reader, reader.uint32()));
+          continue;
+        case 4:
+          if (tag !== 34) {
             break;
           }
 
@@ -1121,6 +1132,7 @@ export const SessionSong = {
 
   fromJSON(object: any): SessionSong {
     return {
+      id: isSet(object.id) ? globalThis.Number(object.id) : 0,
       song: isSet(object.song) ? Song.fromJSON(object.song) : undefined,
       entries: globalThis.Array.isArray(object?.entries)
         ? object.entries.map((e: any) => SessionSongEntry.fromJSON(e))
@@ -1131,6 +1143,9 @@ export const SessionSong = {
 
   toJSON(message: SessionSong): unknown {
     const obj: any = {};
+    if (message.id !== 0) {
+      obj.id = Math.round(message.id);
+    }
     if (message.song !== undefined) {
       obj.song = Song.toJSON(message.song);
     }
@@ -1148,6 +1163,7 @@ export const SessionSong = {
   },
   fromPartial<I extends Exact<DeepPartial<SessionSong>, I>>(object: I): SessionSong {
     const message = createBaseSessionSong();
+    message.id = object.id ?? 0;
     message.song = (object.song !== undefined && object.song !== null) ? Song.fromPartial(object.song) : undefined;
     message.entries = object.entries?.map((e) => SessionSongEntry.fromPartial(e)) || [];
     message.parts = object.parts?.map((e) => SessionSongPart.fromPartial(e)) || [];

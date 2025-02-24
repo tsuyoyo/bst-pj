@@ -82,9 +82,10 @@ message SessionSongPart {
 }
 
 message SessionSong {
-  Song                      song    = 1;
-  repeated SessionSongEntry entries = 2;
-  repeated SessionSongPart  parts   = 3;
+  int32                     id      = 1;
+  Song                      song    = 2;
+  repeated SessionSongEntry entries = 3;
+  repeated SessionSongPart  parts   = 4;
 }
 
 message TimetableEntry {

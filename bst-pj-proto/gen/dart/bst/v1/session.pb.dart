@@ -726,11 +726,15 @@ class SessionSongPart extends $pb.GeneratedMessage {
 
 class SessionSong extends $pb.GeneratedMessage {
   factory SessionSong({
+    $core.int? id,
     $30.Song? song,
     $core.Iterable<SessionSongEntry>? entries,
     $core.Iterable<SessionSongPart>? parts,
   }) {
     final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
     if (song != null) {
       $result.song = song;
     }
@@ -747,9 +751,10 @@ class SessionSong extends $pb.GeneratedMessage {
   factory SessionSong.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SessionSong', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.Song>(1, _omitFieldNames ? '' : 'song', subBuilder: $30.Song.create)
-    ..pc<SessionSongEntry>(2, _omitFieldNames ? '' : 'entries', $pb.PbFieldType.PM, subBuilder: SessionSongEntry.create)
-    ..pc<SessionSongPart>(3, _omitFieldNames ? '' : 'parts', $pb.PbFieldType.PM, subBuilder: SessionSongPart.create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..aOM<$30.Song>(2, _omitFieldNames ? '' : 'song', subBuilder: $30.Song.create)
+    ..pc<SessionSongEntry>(3, _omitFieldNames ? '' : 'entries', $pb.PbFieldType.PM, subBuilder: SessionSongEntry.create)
+    ..pc<SessionSongPart>(4, _omitFieldNames ? '' : 'parts', $pb.PbFieldType.PM, subBuilder: SessionSongPart.create)
     ..hasRequiredFields = false
   ;
 
@@ -775,21 +780,30 @@ class SessionSong extends $pb.GeneratedMessage {
   static SessionSong? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.Song get song => $_getN(0);
+  $core.int get id => $_getIZ(0);
   @$pb.TagNumber(1)
-  set song($30.Song v) { setField(1, v); }
+  set id($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasSong() => $_has(0);
+  $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSong() => clearField(1);
-  @$pb.TagNumber(1)
-  $30.Song ensureSong() => $_ensure(0);
+  void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.List<SessionSongEntry> get entries => $_getList(1);
+  $30.Song get song => $_getN(1);
+  @$pb.TagNumber(2)
+  set song($30.Song v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasSong() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSong() => clearField(2);
+  @$pb.TagNumber(2)
+  $30.Song ensureSong() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $core.List<SessionSongPart> get parts => $_getList(2);
+  $core.List<SessionSongEntry> get entries => $_getList(2);
+
+  @$pb.TagNumber(4)
+  $core.List<SessionSongPart> get parts => $_getList(3);
 }
 
 class TimetableEntry extends $pb.GeneratedMessage {

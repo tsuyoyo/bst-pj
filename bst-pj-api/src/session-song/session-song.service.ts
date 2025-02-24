@@ -66,6 +66,7 @@ export class SessionSongService {
 
     return {
       song: {
+        id: sessionSongId,
         song,
         entries: [],
         parts: sessionParts,
@@ -189,6 +190,7 @@ export class SessionSongService {
       requiredParts,
     );
     return {
+      id: sessionSong.id,
       song: protoSong,
       entries: [],
       parts: protoSessionParts,

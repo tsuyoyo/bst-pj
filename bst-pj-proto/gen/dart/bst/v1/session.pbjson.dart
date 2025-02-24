@@ -183,17 +183,18 @@ final $typed_data.Uint8List sessionSongPartDescriptor = $convert.base64Decode(
 const SessionSong$json = {
   '1': 'SessionSong',
   '2': [
-    {'1': 'song', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.Song', '10': 'song'},
-    {'1': 'entries', '3': 2, '4': 3, '5': 11, '6': '.bst.v1.SessionSongEntry', '10': 'entries'},
-    {'1': 'parts', '3': 3, '4': 3, '5': 11, '6': '.bst.v1.SessionSongPart', '10': 'parts'},
+    {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    {'1': 'song', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.Song', '10': 'song'},
+    {'1': 'entries', '3': 3, '4': 3, '5': 11, '6': '.bst.v1.SessionSongEntry', '10': 'entries'},
+    {'1': 'parts', '3': 4, '4': 3, '5': 11, '6': '.bst.v1.SessionSongPart', '10': 'parts'},
   ],
 };
 
 /// Descriptor for `SessionSong`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List sessionSongDescriptor = $convert.base64Decode(
-    'CgtTZXNzaW9uU29uZxIgCgRzb25nGAEgASgLMgwuYnN0LnYxLlNvbmdSBHNvbmcSMgoHZW50cm'
-    'llcxgCIAMoCzIYLmJzdC52MS5TZXNzaW9uU29uZ0VudHJ5UgdlbnRyaWVzEi0KBXBhcnRzGAMg'
-    'AygLMhcuYnN0LnYxLlNlc3Npb25Tb25nUGFydFIFcGFydHM=');
+    'CgtTZXNzaW9uU29uZxIOCgJpZBgBIAEoBVICaWQSIAoEc29uZxgCIAEoCzIMLmJzdC52MS5Tb2'
+    '5nUgRzb25nEjIKB2VudHJpZXMYAyADKAsyGC5ic3QudjEuU2Vzc2lvblNvbmdFbnRyeVIHZW50'
+    'cmllcxItCgVwYXJ0cxgEIAMoCzIXLmJzdC52MS5TZXNzaW9uU29uZ1BhcnRSBXBhcnRz');
 
 @$core.Deprecated('Use timetableEntryDescriptor instead')
 const TimetableEntry$json = {
