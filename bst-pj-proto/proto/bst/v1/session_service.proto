@@ -89,8 +89,8 @@ message UpdateSessionResponse {
 }
 
 message UpdateSessionStudioRequest {
-  int32  session_id = 1;
-  Studio studio     = 2;
+  int32 studio_id      = 1;
+  int32 studio_room_id = 2;
 }
 
 message UpdateSessionStudioResponse {

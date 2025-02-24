@@ -16,6 +16,7 @@ import {
   UpdateSessionResponse,
   UpdateSessionStatusResponse,
   CancelSessionResponse,
+  UpdateSessionStudioResponse,
 } from '../proto/bst/v1/session_service';
 import { SessionStatus } from '../entities/types/session-status.enum';
 import { SessionPartService } from '../session-part/session-part.service';
@@ -25,6 +26,7 @@ import { UpdateSessionDto } from './dto/update-session.dto';
 import { UpdateSessionStatusDto } from './dto/update-session-status.dto';
 import { StudioService } from '../studio/studio.service';
 import { StudioRoomService } from '../studio-room/studio-room.service';
+import { UpdateSessionStudioDto } from './dto/update-session-studio.dto';
 @Injectable()
 export class SessionService {
   constructor(
@@ -193,6 +195,54 @@ export class SessionService {
     return {
       session: await this.mapSessionToProto(savedSession),
       detail: await this.mapSessionToProtoDetail(savedSession),
+    };
+  }
+
+  async updateSessionStudio(
+    id: number,
+    request: UpdateSessionStudioDto,
+    user: User,
+  ): Promise<UpdateSessionStudioResponse> {
+    await this.sessionVerifyAccessService.verifySessionAccess(id, user);
+
+    const session = await this.sessionRepository.findOne({
+      where: { id },
+    });
+
+    if (!session) {
+      throw new NotFoundException(`Session with ID ${id} not found`);
+    }
+
+    if (request.studioId) {
+      const { studio } = await this.studioService.getStudio(request.studioId);
+      if (!studio) {
+        throw new NotFoundException(
+          `Studio with ID ${request.studioId} not found`,
+        );
+      }
+    }
+
+    if (request.studioRoomId) {
+      const { room } = await this.studioRoomService.getStudioRoom(
+        request.studioId,
+        request.studioRoomId,
+      );
+      if (!room) {
+        throw new NotFoundException(
+          `Studio room with ID ${request.studioRoomId} not found`,
+        );
+      }
+    }
+
+    const updatedSession = await this.sessionRepository.save({
+      ...session,
+      studioId: request.studioId ?? session.studioId,
+      studioRoomId: request.studioRoomId ?? session.studioRoomId,
+    });
+
+    return {
+      session: await this.mapSessionToProto(updatedSession),
+      detail: await this.mapSessionToProtoDetail(updatedSession),
     };
   }
 

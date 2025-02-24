@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Param,
+  ParseIntPipe,
   Post,
   Put,
   UseGuards,
@@ -16,11 +17,13 @@ import {
   CreateSessionResponse,
   GetSessionResponse,
   UpdateSessionResponse,
+  UpdateSessionStudioResponse,
   UpdateSessionStatusResponse,
   CancelSessionResponse,
 } from '../proto/bst/v1/session_service';
 import { CurrentUser } from '../auth/user.decorator';
 import { User } from '../entities/user.entity';
+import { UpdateSessionStudioDto } from './dto/update-session-studio.dto';
 
 @Controller('sessions')
 @UseGuards(JwtAuthGuard)
@@ -71,6 +74,15 @@ export class SessionController {
     @CurrentUser() user: User,
   ): Promise<CancelSessionResponse> {
     return await this.sessionService.cancelSession(id, user);
+  }
+
+  @Put(':id/studio')
+  async updateSessionStudio(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdateSessionStudioDto,
+    @CurrentUser() user: User,
+  ): Promise<UpdateSessionStudioResponse> {
+    return await this.sessionService.updateSessionStudio(id, dto, user);
   }
 
   // Memo: 次はこの辺

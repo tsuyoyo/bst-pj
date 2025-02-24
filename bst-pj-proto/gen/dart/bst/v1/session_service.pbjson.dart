@@ -103,15 +103,15 @@ final $typed_data.Uint8List updateSessionResponseDescriptor = $convert.base64Dec
 const UpdateSessionStudioRequest$json = {
   '1': 'UpdateSessionStudioRequest',
   '2': [
-    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'studio', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.Studio', '10': 'studio'},
+    {'1': 'studio_id', '3': 1, '4': 1, '5': 5, '10': 'studioId'},
+    {'1': 'studio_room_id', '3': 2, '4': 1, '5': 5, '10': 'studioRoomId'},
   ],
 };
 
 /// Descriptor for `UpdateSessionStudioRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateSessionStudioRequestDescriptor = $convert.base64Decode(
-    'ChpVcGRhdGVTZXNzaW9uU3R1ZGlvUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZXNzaW'
-    '9uSWQSJgoGc3R1ZGlvGAIgASgLMg4uYnN0LnYxLlN0dWRpb1IGc3R1ZGlv');
+    'ChpVcGRhdGVTZXNzaW9uU3R1ZGlvUmVxdWVzdBIbCglzdHVkaW9faWQYASABKAVSCHN0dWRpb0'
+    'lkEiQKDnN0dWRpb19yb29tX2lkGAIgASgFUgxzdHVkaW9Sb29tSWQ=');
 
 @$core.Deprecated('Use updateSessionStudioResponseDescriptor instead')
 const UpdateSessionStudioResponse$json = {

@@ -384,4 +384,112 @@ describe('SessionService', () => {
       );
     });
   });
+
+  describe('updateSessionStudio', () => {
+    it('should update session studio', async () => {
+      const sessionId = 1;
+      const dto = {
+        studioId: 2,
+        studioRoomId: 3,
+      };
+
+      const mockSession = {
+        id: sessionId,
+        title: 'Test Session',
+        description: 'Test Description',
+        date: new Date(),
+        createdAt: new Date(),
+        status: SessionStatus.BeforeEntry,
+        studioId: 1,
+        studioRoomId: 1,
+      };
+
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
+      mockSessionRepository.findOne.mockResolvedValue(mockSession);
+      mockSessionRepository.save.mockResolvedValue({
+        ...mockSession,
+        studioId: dto.studioId,
+        studioRoomId: dto.studioRoomId,
+      });
+      mockSessionParticipantRepository.count.mockResolvedValue(2);
+      mockStudioService.getStudio.mockResolvedValue({
+        studio: {
+          id: dto.studioId,
+          name: 'Updated Studio',
+        },
+      });
+      mockStudioRoomService.getStudioRoom.mockResolvedValue({
+        room: {
+          id: dto.studioRoomId,
+          name: 'Updated Room',
+        },
+      });
+
+      const result = await service.updateSessionStudio(
+        sessionId,
+        dto,
+        mockUser,
+      );
+
+      expect(result.session).toBeDefined();
+      expect(result.detail).toBeDefined();
+      expect(result.detail?.studio).toBeDefined();
+      expect(result.detail?.room).toBeDefined();
+      expect(mockStudioService.getStudio).toHaveBeenCalledWith(dto.studioId);
+      expect(mockStudioRoomService.getStudioRoom).toHaveBeenCalledWith(
+        dto.studioId,
+        dto.studioRoomId,
+      );
+    });
+
+    it('should throw NotFoundException when session not found', async () => {
+      const sessionId = 1;
+      const dto = {
+        studioId: 2,
+        studioRoomId: 3,
+      };
+
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
+      mockSessionRepository.findOne.mockResolvedValue(null);
+
+      await expect(
+        service.updateSessionStudio(sessionId, dto, mockUser),
+      ).rejects.toThrow(NotFoundException);
+    });
+
+    it('should throw NotFoundException when studio not found', async () => {
+      const sessionId = 1;
+      const dto = {
+        studioId: 2,
+        studioRoomId: 3,
+      };
+
+      const mockSession = {
+        id: sessionId,
+        title: 'Test Session',
+        description: 'Test Description',
+        date: new Date(),
+        createdAt: new Date(),
+        status: SessionStatus.BeforeEntry,
+        studioId: 1,
+        studioRoomId: 1,
+      };
+
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
+      mockSessionRepository.findOne.mockResolvedValue(mockSession);
+      mockStudioService.getStudio.mockRejectedValue(
+        new NotFoundException(`Studio not found`),
+      );
+
+      await expect(
+        service.updateSessionStudio(sessionId, dto, mockUser),
+      ).rejects.toThrow(NotFoundException);
+    });
+  });
 });

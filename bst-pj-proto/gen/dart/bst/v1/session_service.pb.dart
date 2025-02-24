@@ -420,15 +420,15 @@ class UpdateSessionResponse extends $pb.GeneratedMessage {
 
 class UpdateSessionStudioRequest extends $pb.GeneratedMessage {
   factory UpdateSessionStudioRequest({
-    $core.int? sessionId,
-    $34.Studio? studio,
+    $core.int? studioId,
+    $core.int? studioRoomId,
   }) {
     final $result = create();
-    if (sessionId != null) {
-      $result.sessionId = sessionId;
+    if (studioId != null) {
+      $result.studioId = studioId;
     }
-    if (studio != null) {
-      $result.studio = studio;
+    if (studioRoomId != null) {
+      $result.studioRoomId = studioRoomId;
     }
     return $result;
   }
@@ -437,8 +437,8 @@ class UpdateSessionStudioRequest extends $pb.GeneratedMessage {
   factory UpdateSessionStudioRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionStudioRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
-    ..aOM<$34.Studio>(2, _omitFieldNames ? '' : 'studio', subBuilder: $34.Studio.create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'studioId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'studioRoomId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -464,24 +464,22 @@ class UpdateSessionStudioRequest extends $pb.GeneratedMessage {
   static UpdateSessionStudioRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get sessionId => $_getIZ(0);
+  $core.int get studioId => $_getIZ(0);
   @$pb.TagNumber(1)
-  set sessionId($core.int v) { $_setSignedInt32(0, v); }
+  set studioId($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasSessionId() => $_has(0);
+  $core.bool hasStudioId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSessionId() => clearField(1);
+  void clearStudioId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $34.Studio get studio => $_getN(1);
+  $core.int get studioRoomId => $_getIZ(1);
   @$pb.TagNumber(2)
-  set studio($34.Studio v) { setField(2, v); }
+  set studioRoomId($core.int v) { $_setSignedInt32(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasStudio() => $_has(1);
+  $core.bool hasStudioRoomId() => $_has(1);
   @$pb.TagNumber(2)
-  void clearStudio() => clearField(2);
-  @$pb.TagNumber(2)
-  $34.Studio ensureStudio() => $_ensure(1);
+  void clearStudioRoomId() => clearField(2);
 }
 
 class UpdateSessionStudioResponse extends $pb.GeneratedMessage {

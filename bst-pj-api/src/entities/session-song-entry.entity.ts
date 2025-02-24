@@ -8,7 +8,6 @@ import {
   JoinColumn,
   Unique,
 } from 'typeorm';
-import { SessionParticipant } from './session-participant.entity';
 import { SessionPart } from './session-part.entity';
 
 @Entity('session_song_entries')

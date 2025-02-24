@@ -8,7 +8,7 @@
 import _m0 from "protobufjs/minimal";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Resource } from "./content";
-import { Location, Studio } from "./location";
+import { Location } from "./location";
 import {
   Session,
   SessionDetail,
@@ -52,8 +52,8 @@ export interface UpdateSessionResponse {
 }
 
 export interface UpdateSessionStudioRequest {
-  sessionId: number;
-  studio: Studio | undefined;
+  studioId: number;
+  studioRoomId: number;
 }
 
 export interface UpdateSessionStudioResponse {
@@ -665,16 +665,16 @@ export const UpdateSessionResponse = {
 };
 
 function createBaseUpdateSessionStudioRequest(): UpdateSessionStudioRequest {
-  return { sessionId: 0, studio: undefined };
+  return { studioId: 0, studioRoomId: 0 };
 }
 
 export const UpdateSessionStudioRequest = {
   encode(message: UpdateSessionStudioRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.sessionId !== 0) {
-      writer.uint32(8).int32(message.sessionId);
+    if (message.studioId !== 0) {
+      writer.uint32(8).int32(message.studioId);
     }
-    if (message.studio !== undefined) {
-      Studio.encode(message.studio, writer.uint32(18).fork()).ldelim();
+    if (message.studioRoomId !== 0) {
+      writer.uint32(16).int32(message.studioRoomId);
     }
     return writer;
   },
@@ -691,14 +691,14 @@ export const UpdateSessionStudioRequest = {
             break;
           }
 
-          message.sessionId = reader.int32();
+          message.studioId = reader.int32();
           continue;
         case 2:
-          if (tag !== 18) {
+          if (tag !== 16) {
             break;
           }
 
-          message.studio = Studio.decode(reader, reader.uint32());
+          message.studioRoomId = reader.int32();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -711,18 +711,18 @@ export const UpdateSessionStudioRequest = {
 
   fromJSON(object: any): UpdateSessionStudioRequest {
     return {
-      sessionId: isSet(object.sessionId) ? globalThis.Number(object.sessionId) : 0,
-      studio: isSet(object.studio) ? Studio.fromJSON(object.studio) : undefined,
+      studioId: isSet(object.studioId) ? globalThis.Number(object.studioId) : 0,
+      studioRoomId: isSet(object.studioRoomId) ? globalThis.Number(object.studioRoomId) : 0,
     };
   },
 
   toJSON(message: UpdateSessionStudioRequest): unknown {
     const obj: any = {};
-    if (message.sessionId !== 0) {
-      obj.sessionId = Math.round(message.sessionId);
+    if (message.studioId !== 0) {
+      obj.studioId = Math.round(message.studioId);
     }
-    if (message.studio !== undefined) {
-      obj.studio = Studio.toJSON(message.studio);
+    if (message.studioRoomId !== 0) {
+      obj.studioRoomId = Math.round(message.studioRoomId);
     }
     return obj;
   },
@@ -732,10 +732,8 @@ export const UpdateSessionStudioRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<UpdateSessionStudioRequest>, I>>(object: I): UpdateSessionStudioRequest {
     const message = createBaseUpdateSessionStudioRequest();
-    message.sessionId = object.sessionId ?? 0;
-    message.studio = (object.studio !== undefined && object.studio !== null)
-      ? Studio.fromPartial(object.studio)
-      : undefined;
+    message.studioId = object.studioId ?? 0;
+    message.studioRoomId = object.studioRoomId ?? 0;
     return message;
   },
 };
