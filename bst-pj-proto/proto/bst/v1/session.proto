@@ -33,10 +33,9 @@ message Session {
 }
 
 message SessionDetail {
-  Session                     session      = 1;
-  string                      description  = 2;
-  repeated SessionPart        parts        = 3;
-  repeated SessionParticipant participants = 4;
+  string                      description  = 1;
+  repeated SessionPart        parts        = 2;
+  repeated SessionParticipant participants = 3;
 }
 
 message SessionPart {

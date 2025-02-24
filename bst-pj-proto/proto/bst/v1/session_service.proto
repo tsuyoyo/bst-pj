@@ -71,27 +71,28 @@ message GetSessionRequest {
 }
 
 message GetSessionResponse {
-  SessionDetail session = 1;
+  Session       session = 1;
+  SessionDetail detail  = 2;
 }
 
 message UpdateSessionRequest {
-  int32                     session_id  = 1;
-  string                    title       = 2;
-  string                    description = 3;
-  google.protobuf.Timestamp event_date  = 4;
+  string                    title       = 1;
+  string                    description = 2;
+  google.protobuf.Timestamp event_date  = 3;
 }
 
 message UpdateSessionResponse {
-  SessionDetail session = 1;
+  Session       session = 1;
+  SessionDetail detail  = 2;
 }
 
 message UpdateSessionStatusRequest {
-  int32         session_id = 1;
-  SessionStatus status     = 2;
+  SessionStatus status     = 1;
 }
 
 message UpdateSessionStatusResponse {
-  SessionDetail session = 1;
+  Session       session = 1;
+  SessionDetail detail  = 2;
 }
 
 message CancelSessionRequest {
@@ -100,7 +101,8 @@ message CancelSessionRequest {
 }
 
 message CancelSessionResponse {
-  SessionDetail session = 1;
+  Session       session = 1;
+  SessionDetail detail  = 2;
 }
 
 message DuplicateSessionRequest {

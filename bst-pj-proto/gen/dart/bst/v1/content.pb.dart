@@ -19,18 +19,18 @@ export 'content.pbenum.dart';
 
 class Resource extends $pb.GeneratedMessage {
   factory Resource({
-    Resource_ResourceType? type,
     $core.int? id,
+    Resource_ResourceType? type,
     $core.String? url,
     $core.String? name,
     $core.String? description,
   }) {
     final $result = create();
-    if (type != null) {
-      $result.type = type;
-    }
     if (id != null) {
       $result.id = id;
+    }
+    if (type != null) {
+      $result.type = type;
     }
     if (url != null) {
       $result.url = url;
@@ -48,8 +48,8 @@ class Resource extends $pb.GeneratedMessage {
   factory Resource.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Resource', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..e<Resource_ResourceType>(1, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: Resource_ResourceType.RESOURCE_TYPE_UNSPECIFIED, valueOf: Resource_ResourceType.valueOf, enumValues: Resource_ResourceType.values)
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..e<Resource_ResourceType>(2, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: Resource_ResourceType.RESOURCE_TYPE_UNSPECIFIED, valueOf: Resource_ResourceType.valueOf, enumValues: Resource_ResourceType.values)
     ..aOS(3, _omitFieldNames ? '' : 'url')
     ..aOS(4, _omitFieldNames ? '' : 'name')
     ..aOS(5, _omitFieldNames ? '' : 'description')
@@ -78,22 +78,22 @@ class Resource extends $pb.GeneratedMessage {
   static Resource? _defaultInstance;
 
   @$pb.TagNumber(1)
-  Resource_ResourceType get type => $_getN(0);
+  $core.int get id => $_getIZ(0);
   @$pb.TagNumber(1)
-  set type(Resource_ResourceType v) { setField(1, v); }
+  set id($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasType() => $_has(0);
+  $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearType() => clearField(1);
+  void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.int get id => $_getIZ(1);
+  Resource_ResourceType get type => $_getN(1);
   @$pb.TagNumber(2)
-  set id($core.int v) { $_setSignedInt32(1, v); }
+  set type(Resource_ResourceType v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasId() => $_has(1);
+  $core.bool hasType() => $_has(1);
   @$pb.TagNumber(2)
-  void clearId() => clearField(2);
+  void clearType() => clearField(2);
 
   @$pb.TagNumber(3)
   $core.String get url => $_getSZ(2);

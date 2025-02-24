@@ -58,72 +58,74 @@ final $typed_data.Uint8List getSessionRequestDescriptor = $convert.base64Decode(
 const GetSessionResponse$json = {
   '1': 'GetSessionResponse',
   '2': [
-    {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.SessionDetail', '10': 'session'},
+    {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.Session', '10': 'session'},
+    {'1': 'detail', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.SessionDetail', '10': 'detail'},
   ],
 };
 
 /// Descriptor for `GetSessionResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getSessionResponseDescriptor = $convert.base64Decode(
-    'ChJHZXRTZXNzaW9uUmVzcG9uc2USLwoHc2Vzc2lvbhgBIAEoCzIVLmJzdC52MS5TZXNzaW9uRG'
-    'V0YWlsUgdzZXNzaW9u');
+    'ChJHZXRTZXNzaW9uUmVzcG9uc2USKQoHc2Vzc2lvbhgBIAEoCzIPLmJzdC52MS5TZXNzaW9uUg'
+    'dzZXNzaW9uEi0KBmRldGFpbBgCIAEoCzIVLmJzdC52MS5TZXNzaW9uRGV0YWlsUgZkZXRhaWw=');
 
 @$core.Deprecated('Use updateSessionRequestDescriptor instead')
 const UpdateSessionRequest$json = {
   '1': 'UpdateSessionRequest',
   '2': [
-    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
-    {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
-    {'1': 'event_date', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'eventDate'},
+    {'1': 'title', '3': 1, '4': 1, '5': 9, '10': 'title'},
+    {'1': 'description', '3': 2, '4': 1, '5': 9, '10': 'description'},
+    {'1': 'event_date', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'eventDate'},
   ],
 };
 
 /// Descriptor for `UpdateSessionRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateSessionRequestDescriptor = $convert.base64Decode(
-    'ChRVcGRhdGVTZXNzaW9uUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZXNzaW9uSWQSFA'
-    'oFdGl0bGUYAiABKAlSBXRpdGxlEiAKC2Rlc2NyaXB0aW9uGAMgASgJUgtkZXNjcmlwdGlvbhI5'
-    'CgpldmVudF9kYXRlGAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIJZXZlbnREYX'
-    'Rl');
+    'ChRVcGRhdGVTZXNzaW9uUmVxdWVzdBIUCgV0aXRsZRgBIAEoCVIFdGl0bGUSIAoLZGVzY3JpcH'
+    'Rpb24YAiABKAlSC2Rlc2NyaXB0aW9uEjkKCmV2ZW50X2RhdGUYAyABKAsyGi5nb29nbGUucHJv'
+    'dG9idWYuVGltZXN0YW1wUglldmVudERhdGU=');
 
 @$core.Deprecated('Use updateSessionResponseDescriptor instead')
 const UpdateSessionResponse$json = {
   '1': 'UpdateSessionResponse',
   '2': [
-    {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.SessionDetail', '10': 'session'},
+    {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.Session', '10': 'session'},
+    {'1': 'detail', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.SessionDetail', '10': 'detail'},
   ],
 };
 
 /// Descriptor for `UpdateSessionResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateSessionResponseDescriptor = $convert.base64Decode(
-    'ChVVcGRhdGVTZXNzaW9uUmVzcG9uc2USLwoHc2Vzc2lvbhgBIAEoCzIVLmJzdC52MS5TZXNzaW'
-    '9uRGV0YWlsUgdzZXNzaW9u');
+    'ChVVcGRhdGVTZXNzaW9uUmVzcG9uc2USKQoHc2Vzc2lvbhgBIAEoCzIPLmJzdC52MS5TZXNzaW'
+    '9uUgdzZXNzaW9uEi0KBmRldGFpbBgCIAEoCzIVLmJzdC52MS5TZXNzaW9uRGV0YWlsUgZkZXRh'
+    'aWw=');
 
 @$core.Deprecated('Use updateSessionStatusRequestDescriptor instead')
 const UpdateSessionStatusRequest$json = {
   '1': 'UpdateSessionStatusRequest',
   '2': [
-    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
-    {'1': 'status', '3': 2, '4': 1, '5': 14, '6': '.bst.v1.SessionStatus', '10': 'status'},
+    {'1': 'status', '3': 1, '4': 1, '5': 14, '6': '.bst.v1.SessionStatus', '10': 'status'},
   ],
 };
 
 /// Descriptor for `UpdateSessionStatusRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateSessionStatusRequestDescriptor = $convert.base64Decode(
-    'ChpVcGRhdGVTZXNzaW9uU3RhdHVzUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZXNzaW'
-    '9uSWQSLQoGc3RhdHVzGAIgASgOMhUuYnN0LnYxLlNlc3Npb25TdGF0dXNSBnN0YXR1cw==');
+    'ChpVcGRhdGVTZXNzaW9uU3RhdHVzUmVxdWVzdBItCgZzdGF0dXMYASABKA4yFS5ic3QudjEuU2'
+    'Vzc2lvblN0YXR1c1IGc3RhdHVz');
 
 @$core.Deprecated('Use updateSessionStatusResponseDescriptor instead')
 const UpdateSessionStatusResponse$json = {
   '1': 'UpdateSessionStatusResponse',
   '2': [
-    {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.SessionDetail', '10': 'session'},
+    {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.Session', '10': 'session'},
+    {'1': 'detail', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.SessionDetail', '10': 'detail'},
   ],
 };
 
 /// Descriptor for `UpdateSessionStatusResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateSessionStatusResponseDescriptor = $convert.base64Decode(
-    'ChtVcGRhdGVTZXNzaW9uU3RhdHVzUmVzcG9uc2USLwoHc2Vzc2lvbhgBIAEoCzIVLmJzdC52MS'
-    '5TZXNzaW9uRGV0YWlsUgdzZXNzaW9u');
+    'ChtVcGRhdGVTZXNzaW9uU3RhdHVzUmVzcG9uc2USKQoHc2Vzc2lvbhgBIAEoCzIPLmJzdC52MS'
+    '5TZXNzaW9uUgdzZXNzaW9uEi0KBmRldGFpbBgCIAEoCzIVLmJzdC52MS5TZXNzaW9uRGV0YWls'
+    'UgZkZXRhaWw=');
 
 @$core.Deprecated('Use cancelSessionRequestDescriptor instead')
 const CancelSessionRequest$json = {
@@ -143,14 +145,16 @@ final $typed_data.Uint8List cancelSessionRequestDescriptor = $convert.base64Deco
 const CancelSessionResponse$json = {
   '1': 'CancelSessionResponse',
   '2': [
-    {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.SessionDetail', '10': 'session'},
+    {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.Session', '10': 'session'},
+    {'1': 'detail', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.SessionDetail', '10': 'detail'},
   ],
 };
 
 /// Descriptor for `CancelSessionResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cancelSessionResponseDescriptor = $convert.base64Decode(
-    'ChVDYW5jZWxTZXNzaW9uUmVzcG9uc2USLwoHc2Vzc2lvbhgBIAEoCzIVLmJzdC52MS5TZXNzaW'
-    '9uRGV0YWlsUgdzZXNzaW9u');
+    'ChVDYW5jZWxTZXNzaW9uUmVzcG9uc2USKQoHc2Vzc2lvbhgBIAEoCzIPLmJzdC52MS5TZXNzaW'
+    '9uUgdzZXNzaW9uEi0KBmRldGFpbBgCIAEoCzIVLmJzdC52MS5TZXNzaW9uRGV0YWlsUgZkZXRh'
+    'aWw=');
 
 @$core.Deprecated('Use duplicateSessionRequestDescriptor instead')
 const DuplicateSessionRequest$json = {

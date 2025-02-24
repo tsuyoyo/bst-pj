@@ -17,6 +17,9 @@ export class SessionSongEntry {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ name: 'session_id', type: 'integer', nullable: false })
+  sessionId: number;
+
   @Column({ name: 'session_song_id', type: 'integer', nullable: false })
   sessionSongId: number;
 

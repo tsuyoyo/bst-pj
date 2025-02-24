@@ -180,15 +180,11 @@ class Session extends $pb.GeneratedMessage {
 
 class SessionDetail extends $pb.GeneratedMessage {
   factory SessionDetail({
-    Session? session,
     $core.String? description,
     $core.Iterable<SessionPart>? parts,
     $core.Iterable<SessionParticipant>? participants,
   }) {
     final $result = create();
-    if (session != null) {
-      $result.session = session;
-    }
     if (description != null) {
       $result.description = description;
     }
@@ -205,10 +201,9 @@ class SessionDetail extends $pb.GeneratedMessage {
   factory SessionDetail.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SessionDetail', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<Session>(1, _omitFieldNames ? '' : 'session', subBuilder: Session.create)
-    ..aOS(2, _omitFieldNames ? '' : 'description')
-    ..pc<SessionPart>(3, _omitFieldNames ? '' : 'parts', $pb.PbFieldType.PM, subBuilder: SessionPart.create)
-    ..pc<SessionParticipant>(4, _omitFieldNames ? '' : 'participants', $pb.PbFieldType.PM, subBuilder: SessionParticipant.create)
+    ..aOS(1, _omitFieldNames ? '' : 'description')
+    ..pc<SessionPart>(2, _omitFieldNames ? '' : 'parts', $pb.PbFieldType.PM, subBuilder: SessionPart.create)
+    ..pc<SessionParticipant>(3, _omitFieldNames ? '' : 'participants', $pb.PbFieldType.PM, subBuilder: SessionParticipant.create)
     ..hasRequiredFields = false
   ;
 
@@ -234,30 +229,19 @@ class SessionDetail extends $pb.GeneratedMessage {
   static SessionDetail? _defaultInstance;
 
   @$pb.TagNumber(1)
-  Session get session => $_getN(0);
+  $core.String get description => $_getSZ(0);
   @$pb.TagNumber(1)
-  set session(Session v) { setField(1, v); }
+  set description($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasSession() => $_has(0);
+  $core.bool hasDescription() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSession() => clearField(1);
-  @$pb.TagNumber(1)
-  Session ensureSession() => $_ensure(0);
+  void clearDescription() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get description => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set description($core.String v) { $_setString(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasDescription() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearDescription() => clearField(2);
+  $core.List<SessionPart> get parts => $_getList(1);
 
   @$pb.TagNumber(3)
-  $core.List<SessionPart> get parts => $_getList(2);
-
-  @$pb.TagNumber(4)
-  $core.List<SessionParticipant> get participants => $_getList(3);
+  $core.List<SessionParticipant> get participants => $_getList(2);
 }
 
 class SessionPart extends $pb.GeneratedMessage {

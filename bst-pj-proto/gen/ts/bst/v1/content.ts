@@ -10,8 +10,8 @@ import _m0 from "protobufjs/minimal";
 export const protobufPackage = "bst.v1";
 
 export interface Resource {
-  type: Resource_ResourceType;
   id: number;
+  type: Resource_ResourceType;
   url: string;
   name: string;
   description: string;
@@ -82,16 +82,16 @@ export interface Part {
 }
 
 function createBaseResource(): Resource {
-  return { type: 0, id: 0, url: "", name: "", description: "" };
+  return { id: 0, type: 0, url: "", name: "", description: "" };
 }
 
 export const Resource = {
   encode(message: Resource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.type !== 0) {
-      writer.uint32(8).int32(message.type);
-    }
     if (message.id !== 0) {
-      writer.uint32(16).int32(message.id);
+      writer.uint32(8).int32(message.id);
+    }
+    if (message.type !== 0) {
+      writer.uint32(16).int32(message.type);
     }
     if (message.url !== "") {
       writer.uint32(26).string(message.url);
@@ -117,14 +117,14 @@ export const Resource = {
             break;
           }
 
-          message.type = reader.int32() as any;
+          message.id = reader.int32();
           continue;
         case 2:
           if (tag !== 16) {
             break;
           }
 
-          message.id = reader.int32();
+          message.type = reader.int32() as any;
           continue;
         case 3:
           if (tag !== 26) {
@@ -158,8 +158,8 @@ export const Resource = {
 
   fromJSON(object: any): Resource {
     return {
-      type: isSet(object.type) ? resource_ResourceTypeFromJSON(object.type) : 0,
       id: isSet(object.id) ? globalThis.Number(object.id) : 0,
+      type: isSet(object.type) ? resource_ResourceTypeFromJSON(object.type) : 0,
       url: isSet(object.url) ? globalThis.String(object.url) : "",
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       description: isSet(object.description) ? globalThis.String(object.description) : "",
@@ -168,11 +168,11 @@ export const Resource = {
 
   toJSON(message: Resource): unknown {
     const obj: any = {};
-    if (message.type !== 0) {
-      obj.type = resource_ResourceTypeToJSON(message.type);
-    }
     if (message.id !== 0) {
       obj.id = Math.round(message.id);
+    }
+    if (message.type !== 0) {
+      obj.type = resource_ResourceTypeToJSON(message.type);
     }
     if (message.url !== "") {
       obj.url = message.url;
@@ -191,8 +191,8 @@ export const Resource = {
   },
   fromPartial<I extends Exact<DeepPartial<Resource>, I>>(object: I): Resource {
     const message = createBaseResource();
-    message.type = object.type ?? 0;
     message.id = object.id ?? 0;
+    message.type = object.type ?? 0;
     message.url = object.url ?? "";
     message.name = object.name ?? "";
     message.description = object.description ?? "";

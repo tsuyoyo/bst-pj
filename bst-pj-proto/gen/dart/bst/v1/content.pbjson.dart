@@ -17,8 +17,8 @@ import 'dart:typed_data' as $typed_data;
 const Resource$json = {
   '1': 'Resource',
   '2': [
-    {'1': 'type', '3': 1, '4': 1, '5': 14, '6': '.bst.v1.Resource.ResourceType', '10': 'type'},
-    {'1': 'id', '3': 2, '4': 1, '5': 5, '10': 'id'},
+    {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    {'1': 'type', '3': 2, '4': 1, '5': 14, '6': '.bst.v1.Resource.ResourceType', '10': 'type'},
     {'1': 'url', '3': 3, '4': 1, '5': 9, '10': 'url'},
     {'1': 'name', '3': 4, '4': 1, '5': 9, '10': 'name'},
     {'1': 'description', '3': 5, '4': 1, '5': 9, '10': 'description'},
@@ -38,8 +38,8 @@ const Resource_ResourceType$json = {
 
 /// Descriptor for `Resource`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List resourceDescriptor = $convert.base64Decode(
-    'CghSZXNvdXJjZRIxCgR0eXBlGAEgASgOMh0uYnN0LnYxLlJlc291cmNlLlJlc291cmNlVHlwZV'
-    'IEdHlwZRIOCgJpZBgCIAEoBVICaWQSEAoDdXJsGAMgASgJUgN1cmwSEgoEbmFtZRgEIAEoCVIE'
+    'CghSZXNvdXJjZRIOCgJpZBgBIAEoBVICaWQSMQoEdHlwZRgCIAEoDjIdLmJzdC52MS5SZXNvdX'
+    'JjZS5SZXNvdXJjZVR5cGVSBHR5cGUSEAoDdXJsGAMgASgJUgN1cmwSEgoEbmFtZRgEIAEoCVIE'
     'bmFtZRIgCgtkZXNjcmlwdGlvbhgFIAEoCVILZGVzY3JpcHRpb24iXwoMUmVzb3VyY2VUeXBlEh'
     '0KGVJFU09VUkNFX1RZUEVfVU5TUEVDSUZJRUQQABIXChNSRVNPVVJDRV9UWVBFX0lNQUdFEAES'
     'FwoTUkVTT1VSQ0VfVFlQRV9WSURFTxAC');

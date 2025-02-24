@@ -74,6 +74,21 @@ export class SessionSongService {
     };
   }
 
+  async getSessionSong(
+    sessionId: number,
+    songId: number,
+  ): Promise<ProtoSessionSong> {
+    const sessionSong = await this.sessionSongRepository.findOne({
+      where: { id: songId, sessionId },
+    });
+    if (!sessionSong) {
+      throw new NotFoundException(
+        `Song ${songId} not found in session ${sessionId}`,
+      );
+    }
+    return this.mapSessionSongToProto(sessionId, sessionSong);
+  }
+
   async listSessionSongs(sessionId: number): Promise<ListSessionSongsResponse> {
     const sessionSongs = await this.sessionSongRepository.find({
       where: { sessionId },

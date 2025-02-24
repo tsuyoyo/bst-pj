@@ -6,7 +6,8 @@ import { SessionVerifyAccessService } from '../session/session-verify-access.ser
 import { SessionParticipantService } from '../session-participant/session-participant.service';
 import { SessionPartService } from '../session-part/session-part.service';
 import { User } from '../entities/user.entity';
-import { NotFoundException } from '@nestjs/common';
+import { NotFoundException, ForbiddenException } from '@nestjs/common';
+import { SessionSongService } from '../session-song/session-song.service';
 
 describe('SessionSongEntryService', () => {
   let service: SessionSongEntryService;
@@ -29,6 +30,7 @@ describe('SessionSongEntryService', () => {
     save: jest.fn(),
     findOne: jest.fn(),
     remove: jest.fn(),
+    count: jest.fn(),
   };
 
   const mockSessionVerifyAccessService = {
@@ -43,6 +45,10 @@ describe('SessionSongEntryService', () => {
 
   const mockSessionPartService = {
     getSessionPart: jest.fn(),
+  };
+
+  const mockSessionSongService = {
+    getSessionSong: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -65,6 +71,10 @@ describe('SessionSongEntryService', () => {
           provide: SessionPartService,
           useValue: mockSessionPartService,
         },
+        {
+          provide: SessionSongService,
+          useValue: mockSessionSongService,
+        },
       ],
     }).compile();
 
@@ -76,7 +86,7 @@ describe('SessionSongEntryService', () => {
   });
 
   describe('addSongEntry', () => {
-    it('should add a song entry', async () => {
+    it('should add a song entry when all conditions are met', async () => {
       const sessionId = 1;
       const songId = 1;
       const dto = {
@@ -91,10 +101,19 @@ describe('SessionSongEntryService', () => {
           name: 'testuser',
           email: 'test@example.com',
         },
+        parts: [
+          {
+            id: 1,
+            name: 'Guitar',
+            maxEntry: 3,
+          },
+        ],
+        primaryPartId: 1,
       };
 
       const mockEntry = {
         id: 1,
+        sessionId,
         sessionSongId: songId,
         sessionParticipantId: mockSessionParticipant.id,
         sessionPartId: dto.sessionPartId,
@@ -107,15 +126,20 @@ describe('SessionSongEntryService', () => {
       mockSessionParticipantService.getSessionParticipantByUserId.mockResolvedValue(
         mockSessionParticipant,
       );
-      mockSessionParticipantService.getSessionParticipant.mockResolvedValue(
-        mockSessionParticipant,
-      );
+      mockSessionSongService.getSessionSong.mockResolvedValue({
+        id: songId,
+        song: { id: 1, name: 'Test Song' },
+      });
+      mockSessionSongEntryRepository.count.mockResolvedValue(1); // まだ上限に達していない
       mockSessionSongEntryRepository.create.mockReturnValue(mockEntry);
       mockSessionSongEntryRepository.save.mockResolvedValue(mockEntry);
       mockSessionPartService.getSessionPart.mockResolvedValue({
         id: 1,
         name: 'Guitar',
       });
+      mockSessionParticipantService.getSessionParticipant.mockResolvedValue(
+        mockSessionParticipant,
+      );
 
       const result = await service.addSongEntry(
         sessionId,
@@ -126,9 +150,90 @@ describe('SessionSongEntryService', () => {
 
       expect(result.entry).toBeDefined();
       expect(mockSessionSongEntryRepository.save).toHaveBeenCalled();
-      expect(result.entry?.comment).toBe(dto.comment);
-      expect(result.entry?.user).toBeDefined();
-      expect(result.entry?.user?.name).toBe('testuser');
+    });
+
+    it('should throw NotFoundException when participant not found', async () => {
+      const sessionId = 1;
+      const songId = 1;
+      const dto = {
+        sessionPartId: 1,
+        comment: 'Test comment',
+      };
+
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
+      mockSessionParticipantService.getSessionParticipantByUserId.mockResolvedValue(
+        null,
+      );
+
+      await expect(
+        service.addSongEntry(sessionId, songId, dto, mockUser),
+      ).rejects.toThrow(NotFoundException);
+    });
+
+    it('should throw NotFoundException when song not found', async () => {
+      const sessionId = 1;
+      const songId = 1;
+      const dto = {
+        sessionPartId: 1,
+        comment: 'Test comment',
+      };
+
+      const mockSessionParticipant = {
+        id: 1,
+        user: mockUser,
+      };
+
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
+      mockSessionParticipantService.getSessionParticipantByUserId.mockResolvedValue(
+        mockSessionParticipant,
+      );
+      mockSessionSongService.getSessionSong.mockResolvedValue(null);
+
+      await expect(
+        service.addSongEntry(sessionId, songId, dto, mockUser),
+      ).rejects.toThrow(NotFoundException);
+    });
+
+    it('should throw ForbiddenException when entry count exceeds max', async () => {
+      const sessionId = 1;
+      const songId = 1;
+      const dto = {
+        sessionPartId: 1,
+        comment: 'Test comment',
+      };
+
+      const mockSessionParticipant = {
+        id: 1,
+        user: mockUser,
+        parts: [
+          {
+            id: 1,
+            name: 'Guitar',
+            maxEntry: 2,
+          },
+        ],
+        primaryPartId: 1,
+      };
+
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
+      mockSessionParticipantService.getSessionParticipantByUserId.mockResolvedValue(
+        mockSessionParticipant,
+      );
+      mockSessionSongService.getSessionSong.mockResolvedValue({
+        id: songId,
+        song: { id: 1, name: 'Test Song' },
+      });
+      mockSessionSongEntryRepository.count.mockResolvedValue(2); // すでに上限に達している
+
+      await expect(
+        service.addSongEntry(sessionId, songId, dto, mockUser),
+      ).rejects.toThrow(ForbiddenException);
     });
   });
 

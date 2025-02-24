@@ -36,27 +36,28 @@ export interface GetSessionRequest {
 }
 
 export interface GetSessionResponse {
-  session: SessionDetail | undefined;
+  session: Session | undefined;
+  detail: SessionDetail | undefined;
 }
 
 export interface UpdateSessionRequest {
-  sessionId: number;
   title: string;
   description: string;
   eventDate: Date | undefined;
 }
 
 export interface UpdateSessionResponse {
-  session: SessionDetail | undefined;
+  session: Session | undefined;
+  detail: SessionDetail | undefined;
 }
 
 export interface UpdateSessionStatusRequest {
-  sessionId: number;
   status: SessionStatus;
 }
 
 export interface UpdateSessionStatusResponse {
-  session: SessionDetail | undefined;
+  session: Session | undefined;
+  detail: SessionDetail | undefined;
 }
 
 export interface CancelSessionRequest {
@@ -65,7 +66,8 @@ export interface CancelSessionRequest {
 }
 
 export interface CancelSessionResponse {
-  session: SessionDetail | undefined;
+  session: Session | undefined;
+  detail: SessionDetail | undefined;
 }
 
 export interface DuplicateSessionRequest {
@@ -408,13 +410,16 @@ export const GetSessionRequest = {
 };
 
 function createBaseGetSessionResponse(): GetSessionResponse {
-  return { session: undefined };
+  return { session: undefined, detail: undefined };
 }
 
 export const GetSessionResponse = {
   encode(message: GetSessionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.session !== undefined) {
-      SessionDetail.encode(message.session, writer.uint32(10).fork()).ldelim();
+      Session.encode(message.session, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.detail !== undefined) {
+      SessionDetail.encode(message.detail, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -431,7 +436,14 @@ export const GetSessionResponse = {
             break;
           }
 
-          message.session = SessionDetail.decode(reader, reader.uint32());
+          message.session = Session.decode(reader, reader.uint32());
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.detail = SessionDetail.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -443,13 +455,19 @@ export const GetSessionResponse = {
   },
 
   fromJSON(object: any): GetSessionResponse {
-    return { session: isSet(object.session) ? SessionDetail.fromJSON(object.session) : undefined };
+    return {
+      session: isSet(object.session) ? Session.fromJSON(object.session) : undefined,
+      detail: isSet(object.detail) ? SessionDetail.fromJSON(object.detail) : undefined,
+    };
   },
 
   toJSON(message: GetSessionResponse): unknown {
     const obj: any = {};
     if (message.session !== undefined) {
-      obj.session = SessionDetail.toJSON(message.session);
+      obj.session = Session.toJSON(message.session);
+    }
+    if (message.detail !== undefined) {
+      obj.detail = SessionDetail.toJSON(message.detail);
     }
     return obj;
   },
@@ -460,29 +478,29 @@ export const GetSessionResponse = {
   fromPartial<I extends Exact<DeepPartial<GetSessionResponse>, I>>(object: I): GetSessionResponse {
     const message = createBaseGetSessionResponse();
     message.session = (object.session !== undefined && object.session !== null)
-      ? SessionDetail.fromPartial(object.session)
+      ? Session.fromPartial(object.session)
+      : undefined;
+    message.detail = (object.detail !== undefined && object.detail !== null)
+      ? SessionDetail.fromPartial(object.detail)
       : undefined;
     return message;
   },
 };
 
 function createBaseUpdateSessionRequest(): UpdateSessionRequest {
-  return { sessionId: 0, title: "", description: "", eventDate: undefined };
+  return { title: "", description: "", eventDate: undefined };
 }
 
 export const UpdateSessionRequest = {
   encode(message: UpdateSessionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.sessionId !== 0) {
-      writer.uint32(8).int32(message.sessionId);
-    }
     if (message.title !== "") {
-      writer.uint32(18).string(message.title);
+      writer.uint32(10).string(message.title);
     }
     if (message.description !== "") {
-      writer.uint32(26).string(message.description);
+      writer.uint32(18).string(message.description);
     }
     if (message.eventDate !== undefined) {
-      Timestamp.encode(toTimestamp(message.eventDate), writer.uint32(34).fork()).ldelim();
+      Timestamp.encode(toTimestamp(message.eventDate), writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -495,28 +513,21 @@ export const UpdateSessionRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag !== 8) {
+          if (tag !== 10) {
             break;
           }
 
-          message.sessionId = reader.int32();
+          message.title = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.title = reader.string();
+          message.description = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
-        case 4:
-          if (tag !== 34) {
             break;
           }
 
@@ -533,7 +544,6 @@ export const UpdateSessionRequest = {
 
   fromJSON(object: any): UpdateSessionRequest {
     return {
-      sessionId: isSet(object.sessionId) ? globalThis.Number(object.sessionId) : 0,
       title: isSet(object.title) ? globalThis.String(object.title) : "",
       description: isSet(object.description) ? globalThis.String(object.description) : "",
       eventDate: isSet(object.eventDate) ? fromJsonTimestamp(object.eventDate) : undefined,
@@ -542,9 +552,6 @@ export const UpdateSessionRequest = {
 
   toJSON(message: UpdateSessionRequest): unknown {
     const obj: any = {};
-    if (message.sessionId !== 0) {
-      obj.sessionId = Math.round(message.sessionId);
-    }
     if (message.title !== "") {
       obj.title = message.title;
     }
@@ -562,7 +569,6 @@ export const UpdateSessionRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<UpdateSessionRequest>, I>>(object: I): UpdateSessionRequest {
     const message = createBaseUpdateSessionRequest();
-    message.sessionId = object.sessionId ?? 0;
     message.title = object.title ?? "";
     message.description = object.description ?? "";
     message.eventDate = object.eventDate ?? undefined;
@@ -571,13 +577,16 @@ export const UpdateSessionRequest = {
 };
 
 function createBaseUpdateSessionResponse(): UpdateSessionResponse {
-  return { session: undefined };
+  return { session: undefined, detail: undefined };
 }
 
 export const UpdateSessionResponse = {
   encode(message: UpdateSessionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.session !== undefined) {
-      SessionDetail.encode(message.session, writer.uint32(10).fork()).ldelim();
+      Session.encode(message.session, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.detail !== undefined) {
+      SessionDetail.encode(message.detail, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -594,7 +603,14 @@ export const UpdateSessionResponse = {
             break;
           }
 
-          message.session = SessionDetail.decode(reader, reader.uint32());
+          message.session = Session.decode(reader, reader.uint32());
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.detail = SessionDetail.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -606,13 +622,19 @@ export const UpdateSessionResponse = {
   },
 
   fromJSON(object: any): UpdateSessionResponse {
-    return { session: isSet(object.session) ? SessionDetail.fromJSON(object.session) : undefined };
+    return {
+      session: isSet(object.session) ? Session.fromJSON(object.session) : undefined,
+      detail: isSet(object.detail) ? SessionDetail.fromJSON(object.detail) : undefined,
+    };
   },
 
   toJSON(message: UpdateSessionResponse): unknown {
     const obj: any = {};
     if (message.session !== undefined) {
-      obj.session = SessionDetail.toJSON(message.session);
+      obj.session = Session.toJSON(message.session);
+    }
+    if (message.detail !== undefined) {
+      obj.detail = SessionDetail.toJSON(message.detail);
     }
     return obj;
   },
@@ -623,23 +645,23 @@ export const UpdateSessionResponse = {
   fromPartial<I extends Exact<DeepPartial<UpdateSessionResponse>, I>>(object: I): UpdateSessionResponse {
     const message = createBaseUpdateSessionResponse();
     message.session = (object.session !== undefined && object.session !== null)
-      ? SessionDetail.fromPartial(object.session)
+      ? Session.fromPartial(object.session)
+      : undefined;
+    message.detail = (object.detail !== undefined && object.detail !== null)
+      ? SessionDetail.fromPartial(object.detail)
       : undefined;
     return message;
   },
 };
 
 function createBaseUpdateSessionStatusRequest(): UpdateSessionStatusRequest {
-  return { sessionId: 0, status: 0 };
+  return { status: 0 };
 }
 
 export const UpdateSessionStatusRequest = {
   encode(message: UpdateSessionStatusRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.sessionId !== 0) {
-      writer.uint32(8).int32(message.sessionId);
-    }
     if (message.status !== 0) {
-      writer.uint32(16).int32(message.status);
+      writer.uint32(8).int32(message.status);
     }
     return writer;
   },
@@ -656,13 +678,6 @@ export const UpdateSessionStatusRequest = {
             break;
           }
 
-          message.sessionId = reader.int32();
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
           message.status = reader.int32() as any;
           continue;
       }
@@ -675,17 +690,11 @@ export const UpdateSessionStatusRequest = {
   },
 
   fromJSON(object: any): UpdateSessionStatusRequest {
-    return {
-      sessionId: isSet(object.sessionId) ? globalThis.Number(object.sessionId) : 0,
-      status: isSet(object.status) ? sessionStatusFromJSON(object.status) : 0,
-    };
+    return { status: isSet(object.status) ? sessionStatusFromJSON(object.status) : 0 };
   },
 
   toJSON(message: UpdateSessionStatusRequest): unknown {
     const obj: any = {};
-    if (message.sessionId !== 0) {
-      obj.sessionId = Math.round(message.sessionId);
-    }
     if (message.status !== 0) {
       obj.status = sessionStatusToJSON(message.status);
     }
@@ -697,20 +706,22 @@ export const UpdateSessionStatusRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<UpdateSessionStatusRequest>, I>>(object: I): UpdateSessionStatusRequest {
     const message = createBaseUpdateSessionStatusRequest();
-    message.sessionId = object.sessionId ?? 0;
     message.status = object.status ?? 0;
     return message;
   },
 };
 
 function createBaseUpdateSessionStatusResponse(): UpdateSessionStatusResponse {
-  return { session: undefined };
+  return { session: undefined, detail: undefined };
 }
 
 export const UpdateSessionStatusResponse = {
   encode(message: UpdateSessionStatusResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.session !== undefined) {
-      SessionDetail.encode(message.session, writer.uint32(10).fork()).ldelim();
+      Session.encode(message.session, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.detail !== undefined) {
+      SessionDetail.encode(message.detail, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -727,7 +738,14 @@ export const UpdateSessionStatusResponse = {
             break;
           }
 
-          message.session = SessionDetail.decode(reader, reader.uint32());
+          message.session = Session.decode(reader, reader.uint32());
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.detail = SessionDetail.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -739,13 +757,19 @@ export const UpdateSessionStatusResponse = {
   },
 
   fromJSON(object: any): UpdateSessionStatusResponse {
-    return { session: isSet(object.session) ? SessionDetail.fromJSON(object.session) : undefined };
+    return {
+      session: isSet(object.session) ? Session.fromJSON(object.session) : undefined,
+      detail: isSet(object.detail) ? SessionDetail.fromJSON(object.detail) : undefined,
+    };
   },
 
   toJSON(message: UpdateSessionStatusResponse): unknown {
     const obj: any = {};
     if (message.session !== undefined) {
-      obj.session = SessionDetail.toJSON(message.session);
+      obj.session = Session.toJSON(message.session);
+    }
+    if (message.detail !== undefined) {
+      obj.detail = SessionDetail.toJSON(message.detail);
     }
     return obj;
   },
@@ -756,7 +780,10 @@ export const UpdateSessionStatusResponse = {
   fromPartial<I extends Exact<DeepPartial<UpdateSessionStatusResponse>, I>>(object: I): UpdateSessionStatusResponse {
     const message = createBaseUpdateSessionStatusResponse();
     message.session = (object.session !== undefined && object.session !== null)
-      ? SessionDetail.fromPartial(object.session)
+      ? Session.fromPartial(object.session)
+      : undefined;
+    message.detail = (object.detail !== undefined && object.detail !== null)
+      ? SessionDetail.fromPartial(object.detail)
       : undefined;
     return message;
   },
@@ -837,13 +864,16 @@ export const CancelSessionRequest = {
 };
 
 function createBaseCancelSessionResponse(): CancelSessionResponse {
-  return { session: undefined };
+  return { session: undefined, detail: undefined };
 }
 
 export const CancelSessionResponse = {
   encode(message: CancelSessionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.session !== undefined) {
-      SessionDetail.encode(message.session, writer.uint32(10).fork()).ldelim();
+      Session.encode(message.session, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.detail !== undefined) {
+      SessionDetail.encode(message.detail, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -860,7 +890,14 @@ export const CancelSessionResponse = {
             break;
           }
 
-          message.session = SessionDetail.decode(reader, reader.uint32());
+          message.session = Session.decode(reader, reader.uint32());
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.detail = SessionDetail.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -872,13 +909,19 @@ export const CancelSessionResponse = {
   },
 
   fromJSON(object: any): CancelSessionResponse {
-    return { session: isSet(object.session) ? SessionDetail.fromJSON(object.session) : undefined };
+    return {
+      session: isSet(object.session) ? Session.fromJSON(object.session) : undefined,
+      detail: isSet(object.detail) ? SessionDetail.fromJSON(object.detail) : undefined,
+    };
   },
 
   toJSON(message: CancelSessionResponse): unknown {
     const obj: any = {};
     if (message.session !== undefined) {
-      obj.session = SessionDetail.toJSON(message.session);
+      obj.session = Session.toJSON(message.session);
+    }
+    if (message.detail !== undefined) {
+      obj.detail = SessionDetail.toJSON(message.detail);
     }
     return obj;
   },
@@ -889,7 +932,10 @@ export const CancelSessionResponse = {
   fromPartial<I extends Exact<DeepPartial<CancelSessionResponse>, I>>(object: I): CancelSessionResponse {
     const message = createBaseCancelSessionResponse();
     message.session = (object.session !== undefined && object.session !== null)
-      ? SessionDetail.fromPartial(object.session)
+      ? Session.fromPartial(object.session)
+      : undefined;
+    message.detail = (object.detail !== undefined && object.detail !== null)
+      ? SessionDetail.fromPartial(object.detail)
       : undefined;
     return message;
   },

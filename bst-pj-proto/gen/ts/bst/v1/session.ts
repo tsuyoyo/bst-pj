@@ -135,7 +135,6 @@ export interface Session {
 }
 
 export interface SessionDetail {
-  session: Session | undefined;
   description: string;
   parts: SessionPart[];
   participants: SessionParticipant[];
@@ -436,22 +435,19 @@ export const Session = {
 };
 
 function createBaseSessionDetail(): SessionDetail {
-  return { session: undefined, description: "", parts: [], participants: [] };
+  return { description: "", parts: [], participants: [] };
 }
 
 export const SessionDetail = {
   encode(message: SessionDetail, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.session !== undefined) {
-      Session.encode(message.session, writer.uint32(10).fork()).ldelim();
-    }
     if (message.description !== "") {
-      writer.uint32(18).string(message.description);
+      writer.uint32(10).string(message.description);
     }
     for (const v of message.parts) {
-      SessionPart.encode(v!, writer.uint32(26).fork()).ldelim();
+      SessionPart.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     for (const v of message.participants) {
-      SessionParticipant.encode(v!, writer.uint32(34).fork()).ldelim();
+      SessionParticipant.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -468,24 +464,17 @@ export const SessionDetail = {
             break;
           }
 
-          message.session = Session.decode(reader, reader.uint32());
+          message.description = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.description = reader.string();
+          message.parts.push(SessionPart.decode(reader, reader.uint32()));
           continue;
         case 3:
           if (tag !== 26) {
-            break;
-          }
-
-          message.parts.push(SessionPart.decode(reader, reader.uint32()));
-          continue;
-        case 4:
-          if (tag !== 34) {
             break;
           }
 
@@ -502,7 +491,6 @@ export const SessionDetail = {
 
   fromJSON(object: any): SessionDetail {
     return {
-      session: isSet(object.session) ? Session.fromJSON(object.session) : undefined,
       description: isSet(object.description) ? globalThis.String(object.description) : "",
       parts: globalThis.Array.isArray(object?.parts) ? object.parts.map((e: any) => SessionPart.fromJSON(e)) : [],
       participants: globalThis.Array.isArray(object?.participants)
@@ -513,9 +501,6 @@ export const SessionDetail = {
 
   toJSON(message: SessionDetail): unknown {
     const obj: any = {};
-    if (message.session !== undefined) {
-      obj.session = Session.toJSON(message.session);
-    }
     if (message.description !== "") {
       obj.description = message.description;
     }
@@ -533,9 +518,6 @@ export const SessionDetail = {
   },
   fromPartial<I extends Exact<DeepPartial<SessionDetail>, I>>(object: I): SessionDetail {
     const message = createBaseSessionDetail();
-    message.session = (object.session !== undefined && object.session !== null)
-      ? Session.fromPartial(object.session)
-      : undefined;
     message.description = object.description ?? "";
     message.parts = object.parts?.map((e) => SessionPart.fromPartial(e)) || [];
     message.participants = object.participants?.map((e) => SessionParticipant.fromPartial(e)) || [];
