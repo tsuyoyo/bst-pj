@@ -5,7 +5,7 @@ import { SessionPart } from '../entities/session-part.entity';
 import { SessionVerifyAccessService } from '../session/session-verify-access.service';
 import { PartService } from '../part/part.service';
 import { User } from '../entities/user.entity';
-import { NotFoundException } from '@nestjs/common';
+import { NotFoundException, BadRequestException } from '@nestjs/common';
 import { SessionService } from '../session/session.service';
 
 describe('SessionPartService', () => {
@@ -138,6 +138,86 @@ describe('SessionPartService', () => {
   });
 
   describe('updateSessionPart', () => {
+    it('should update a session part when maxEntry is increased', async () => {
+      const sessionId = 1;
+      const sessionPartId = 1;
+      const dto = {
+        partId: 1,
+        name: 'Gt2',
+        displayOrder: 2,
+        maxEntry: 3,
+      };
+
+      const mockSessionPart = {
+        id: sessionPartId,
+        sessionId,
+        partId: 1,
+        name: 'Gt1',
+        displayOrder: 1,
+        maxEntry: 2,
+      };
+
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
+      mockSessionPartRepository.findOne.mockResolvedValue(mockSessionPart);
+      mockSessionPartRepository.save.mockResolvedValue({
+        ...mockSessionPart,
+        ...dto,
+      });
+      mockPartService.getPart.mockResolvedValue({
+        part: {
+          id: 1,
+          name: 'Guitar',
+        },
+      });
+
+      const result = await service.updateSessionPart(
+        sessionId,
+        sessionPartId,
+        dto,
+        mockUser,
+      );
+
+      expect(result.part).toBeDefined();
+      expect(result.part?.maxEntry).toBe(dto.maxEntry);
+    });
+
+    it('should throw BadRequestException when trying to reduce maxEntry', async () => {
+      const sessionId = 1;
+      const sessionPartId = 1;
+      const dto = {
+        partId: 1,
+        name: 'Gt2',
+        displayOrder: 2,
+        maxEntry: 1,
+      };
+
+      const mockSessionPart = {
+        id: sessionPartId,
+        sessionId,
+        partId: 1,
+        name: 'Gt1',
+        displayOrder: 1,
+        maxEntry: 2,
+      };
+
+      mockSessionVerifyAccessService.verifySessionAccess.mockResolvedValue(
+        undefined,
+      );
+      mockSessionPartRepository.findOne.mockResolvedValue(mockSessionPart);
+      mockPartService.getPart.mockResolvedValue({
+        part: {
+          id: 1,
+          name: 'Guitar',
+        },
+      });
+
+      await expect(
+        service.updateSessionPart(sessionId, sessionPartId, dto, mockUser),
+      ).rejects.toThrow(BadRequestException);
+    });
+
     it('should update a session part', async () => {
       const sessionId = 1;
       const sessionPartId = 1;

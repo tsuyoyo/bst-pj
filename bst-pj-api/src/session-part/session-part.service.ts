@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { SessionPart } from '../entities/session-part.entity';
@@ -116,6 +120,12 @@ export class SessionPartService {
     const { part } = await this.partService.getPart(request.partId);
     if (!part) {
       throw new NotFoundException(`Part ${sessionPart.partId} not found`);
+    }
+
+    if (request.maxEntry < sessionPart.maxEntry) {
+      throw new BadRequestException(
+        `Not supporting to reduce max entry. Max entry ${request.maxEntry} is less than the current max entry ${sessionPart.maxEntry}`,
+      );
     }
 
     const updatedSessionPart = await this.sessionPartRepository.save({
