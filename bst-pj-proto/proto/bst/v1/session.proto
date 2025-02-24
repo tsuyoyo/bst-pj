@@ -40,10 +40,11 @@ message SessionDetail {
 }
 
 message SessionPart {
-  Part   part          = 1;  // Instruments, Vocals, etc.
-  string name          = 2;  // Part name in the session (e.g. "Gt1", "Gt2")
-  int32  display_order = 3;  // Display order in the session
-  int32  max_entry     = 4;  // Max number of entries user can make
+  int32  id            = 1;
+  Part   part          = 2;  // Instruments, Vocals, etc.
+  string name          = 3;  // Part name in the session (e.g. "Gt1", "Gt2")
+  int32  display_order = 4;  // Display order in the session
+  int32  max_entry     = 5;  // Max number of entries user can make
 }
 
 message SessionTask {
@@ -75,8 +76,9 @@ message SessionSongEntry {
 }
 
 message SessionSongPart {
-  SessionPart part        = 1;
-  bool        is_required = 2;  // Is required to play the song
+  int32       id          = 1;
+  SessionPart part        = 2;
+  bool        is_required = 3;  // Is required to play the song
 }
 
 message SessionSong {

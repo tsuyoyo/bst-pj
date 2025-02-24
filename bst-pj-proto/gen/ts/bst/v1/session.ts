@@ -142,6 +142,7 @@ export interface SessionDetail {
 }
 
 export interface SessionPart {
+  id: number;
   /** Instruments, Vocals, etc. */
   part:
     | Part
@@ -176,6 +177,7 @@ export interface SessionSongEntry {
 }
 
 export interface SessionSongPart {
+  id: number;
   part:
     | SessionPart
     | undefined;
@@ -541,22 +543,25 @@ export const SessionDetail = {
 };
 
 function createBaseSessionPart(): SessionPart {
-  return { part: undefined, name: "", displayOrder: 0, maxEntry: 0 };
+  return { id: 0, part: undefined, name: "", displayOrder: 0, maxEntry: 0 };
 }
 
 export const SessionPart = {
   encode(message: SessionPart, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.id !== 0) {
+      writer.uint32(8).int32(message.id);
+    }
     if (message.part !== undefined) {
-      Part.encode(message.part, writer.uint32(10).fork()).ldelim();
+      Part.encode(message.part, writer.uint32(18).fork()).ldelim();
     }
     if (message.name !== "") {
-      writer.uint32(18).string(message.name);
+      writer.uint32(26).string(message.name);
     }
     if (message.displayOrder !== 0) {
-      writer.uint32(24).int32(message.displayOrder);
+      writer.uint32(32).int32(message.displayOrder);
     }
     if (message.maxEntry !== 0) {
-      writer.uint32(32).int32(message.maxEntry);
+      writer.uint32(40).int32(message.maxEntry);
     }
     return writer;
   },
@@ -569,28 +574,35 @@ export const SessionPart = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag !== 10) {
+          if (tag !== 8) {
             break;
           }
 
-          message.part = Part.decode(reader, reader.uint32());
+          message.id = reader.int32();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.name = reader.string();
+          message.part = Part.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag !== 24) {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        case 4:
+          if (tag !== 32) {
             break;
           }
 
           message.displayOrder = reader.int32();
           continue;
-        case 4:
-          if (tag !== 32) {
+        case 5:
+          if (tag !== 40) {
             break;
           }
 
@@ -607,6 +619,7 @@ export const SessionPart = {
 
   fromJSON(object: any): SessionPart {
     return {
+      id: isSet(object.id) ? globalThis.Number(object.id) : 0,
       part: isSet(object.part) ? Part.fromJSON(object.part) : undefined,
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       displayOrder: isSet(object.displayOrder) ? globalThis.Number(object.displayOrder) : 0,
@@ -616,6 +629,9 @@ export const SessionPart = {
 
   toJSON(message: SessionPart): unknown {
     const obj: any = {};
+    if (message.id !== 0) {
+      obj.id = Math.round(message.id);
+    }
     if (message.part !== undefined) {
       obj.part = Part.toJSON(message.part);
     }
@@ -636,6 +652,7 @@ export const SessionPart = {
   },
   fromPartial<I extends Exact<DeepPartial<SessionPart>, I>>(object: I): SessionPart {
     const message = createBaseSessionPart();
+    message.id = object.id ?? 0;
     message.part = (object.part !== undefined && object.part !== null) ? Part.fromPartial(object.part) : undefined;
     message.name = object.name ?? "";
     message.displayOrder = object.displayOrder ?? 0;
@@ -957,16 +974,19 @@ export const SessionSongEntry = {
 };
 
 function createBaseSessionSongPart(): SessionSongPart {
-  return { part: undefined, isRequired: false };
+  return { id: 0, part: undefined, isRequired: false };
 }
 
 export const SessionSongPart = {
   encode(message: SessionSongPart, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.id !== 0) {
+      writer.uint32(8).int32(message.id);
+    }
     if (message.part !== undefined) {
-      SessionPart.encode(message.part, writer.uint32(10).fork()).ldelim();
+      SessionPart.encode(message.part, writer.uint32(18).fork()).ldelim();
     }
     if (message.isRequired !== false) {
-      writer.uint32(16).bool(message.isRequired);
+      writer.uint32(24).bool(message.isRequired);
     }
     return writer;
   },
@@ -979,14 +999,21 @@ export const SessionSongPart = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag !== 10) {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.id = reader.int32();
+          continue;
+        case 2:
+          if (tag !== 18) {
             break;
           }
 
           message.part = SessionPart.decode(reader, reader.uint32());
           continue;
-        case 2:
-          if (tag !== 16) {
+        case 3:
+          if (tag !== 24) {
             break;
           }
 
@@ -1003,6 +1030,7 @@ export const SessionSongPart = {
 
   fromJSON(object: any): SessionSongPart {
     return {
+      id: isSet(object.id) ? globalThis.Number(object.id) : 0,
       part: isSet(object.part) ? SessionPart.fromJSON(object.part) : undefined,
       isRequired: isSet(object.isRequired) ? globalThis.Boolean(object.isRequired) : false,
     };
@@ -1010,6 +1038,9 @@ export const SessionSongPart = {
 
   toJSON(message: SessionSongPart): unknown {
     const obj: any = {};
+    if (message.id !== 0) {
+      obj.id = Math.round(message.id);
+    }
     if (message.part !== undefined) {
       obj.part = SessionPart.toJSON(message.part);
     }
@@ -1024,6 +1055,7 @@ export const SessionSongPart = {
   },
   fromPartial<I extends Exact<DeepPartial<SessionSongPart>, I>>(object: I): SessionSongPart {
     const message = createBaseSessionSongPart();
+    message.id = object.id ?? 0;
     message.part = (object.part !== undefined && object.part !== null)
       ? SessionPart.fromPartial(object.part)
       : undefined;

@@ -95,7 +95,6 @@ describe('SessionPartController', () => {
       expect(result).toEqual(expectedResponse);
       expect(mockSessionPartService.listSessionParts).toHaveBeenCalledWith(
         sessionId,
-        mockUser,
       );
     });
   });

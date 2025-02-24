@@ -201,6 +201,7 @@ export class SessionSongService {
   ): Promise<ProtoSessionSongPart[]> {
     const sessionParts = await this.getSessionParts(sessionId);
     return sessionParts.map((part) => ({
+      id: part.id,
       part: part,
       isRequired: requiredParts.some(
         (rp) => rp.sessionPartId === part?.part?.id,

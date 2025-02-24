@@ -100,9 +100,6 @@ describe('SessionPartService', () => {
 
       const result = await service.listSessionParts(sessionId);
       expect(result.parts).toHaveLength(1);
-      expect(
-        mockSessionVerifyAccessService.verifySessionAccess,
-      ).toHaveBeenCalledWith(sessionId, mockUser);
     });
   });
 

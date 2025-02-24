@@ -262,12 +262,16 @@ class SessionDetail extends $pb.GeneratedMessage {
 
 class SessionPart extends $pb.GeneratedMessage {
   factory SessionPart({
+    $core.int? id,
     $30.Part? part,
     $core.String? name,
     $core.int? displayOrder,
     $core.int? maxEntry,
   }) {
     final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
     if (part != null) {
       $result.part = part;
     }
@@ -287,10 +291,11 @@ class SessionPart extends $pb.GeneratedMessage {
   factory SessionPart.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SessionPart', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.Part>(1, _omitFieldNames ? '' : 'part', subBuilder: $30.Part.create)
-    ..aOS(2, _omitFieldNames ? '' : 'name')
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'displayOrder', $pb.PbFieldType.O3)
-    ..a<$core.int>(4, _omitFieldNames ? '' : 'maxEntry', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..aOM<$30.Part>(2, _omitFieldNames ? '' : 'part', subBuilder: $30.Part.create)
+    ..aOS(3, _omitFieldNames ? '' : 'name')
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'displayOrder', $pb.PbFieldType.O3)
+    ..a<$core.int>(5, _omitFieldNames ? '' : 'maxEntry', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -316,42 +321,51 @@ class SessionPart extends $pb.GeneratedMessage {
   static SessionPart? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.Part get part => $_getN(0);
+  $core.int get id => $_getIZ(0);
   @$pb.TagNumber(1)
-  set part($30.Part v) { setField(1, v); }
+  set id($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasPart() => $_has(0);
+  $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearPart() => clearField(1);
-  @$pb.TagNumber(1)
-  $30.Part ensurePart() => $_ensure(0);
+  void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get name => $_getSZ(1);
+  $30.Part get part => $_getN(1);
   @$pb.TagNumber(2)
-  set name($core.String v) { $_setString(1, v); }
+  set part($30.Part v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasName() => $_has(1);
+  $core.bool hasPart() => $_has(1);
   @$pb.TagNumber(2)
-  void clearName() => clearField(2);
+  void clearPart() => clearField(2);
+  @$pb.TagNumber(2)
+  $30.Part ensurePart() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $core.int get displayOrder => $_getIZ(2);
+  $core.String get name => $_getSZ(2);
   @$pb.TagNumber(3)
-  set displayOrder($core.int v) { $_setSignedInt32(2, v); }
+  set name($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasDisplayOrder() => $_has(2);
+  $core.bool hasName() => $_has(2);
   @$pb.TagNumber(3)
-  void clearDisplayOrder() => clearField(3);
+  void clearName() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.int get maxEntry => $_getIZ(3);
+  $core.int get displayOrder => $_getIZ(3);
   @$pb.TagNumber(4)
-  set maxEntry($core.int v) { $_setSignedInt32(3, v); }
+  set displayOrder($core.int v) { $_setSignedInt32(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasMaxEntry() => $_has(3);
+  $core.bool hasDisplayOrder() => $_has(3);
   @$pb.TagNumber(4)
-  void clearMaxEntry() => clearField(4);
+  void clearDisplayOrder() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.int get maxEntry => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set maxEntry($core.int v) { $_setSignedInt32(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasMaxEntry() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearMaxEntry() => clearField(5);
 }
 
 class SessionTask extends $pb.GeneratedMessage {
@@ -632,10 +646,14 @@ class SessionSongEntry extends $pb.GeneratedMessage {
 
 class SessionSongPart extends $pb.GeneratedMessage {
   factory SessionSongPart({
+    $core.int? id,
     SessionPart? part,
     $core.bool? isRequired,
   }) {
     final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
     if (part != null) {
       $result.part = part;
     }
@@ -649,8 +667,9 @@ class SessionSongPart extends $pb.GeneratedMessage {
   factory SessionSongPart.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SessionSongPart', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<SessionPart>(1, _omitFieldNames ? '' : 'part', subBuilder: SessionPart.create)
-    ..aOB(2, _omitFieldNames ? '' : 'isRequired')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..aOM<SessionPart>(2, _omitFieldNames ? '' : 'part', subBuilder: SessionPart.create)
+    ..aOB(3, _omitFieldNames ? '' : 'isRequired')
     ..hasRequiredFields = false
   ;
 
@@ -676,24 +695,33 @@ class SessionSongPart extends $pb.GeneratedMessage {
   static SessionSongPart? _defaultInstance;
 
   @$pb.TagNumber(1)
-  SessionPart get part => $_getN(0);
+  $core.int get id => $_getIZ(0);
   @$pb.TagNumber(1)
-  set part(SessionPart v) { setField(1, v); }
+  set id($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasPart() => $_has(0);
+  $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearPart() => clearField(1);
-  @$pb.TagNumber(1)
-  SessionPart ensurePart() => $_ensure(0);
+  void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.bool get isRequired => $_getBF(1);
+  SessionPart get part => $_getN(1);
   @$pb.TagNumber(2)
-  set isRequired($core.bool v) { $_setBool(1, v); }
+  set part(SessionPart v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasIsRequired() => $_has(1);
+  $core.bool hasPart() => $_has(1);
   @$pb.TagNumber(2)
-  void clearIsRequired() => clearField(2);
+  void clearPart() => clearField(2);
+  @$pb.TagNumber(2)
+  SessionPart ensurePart() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $core.bool get isRequired => $_getBF(2);
+  @$pb.TagNumber(3)
+  set isRequired($core.bool v) { $_setBool(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasIsRequired() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearIsRequired() => clearField(3);
 }
 
 class SessionSong extends $pb.GeneratedMessage {

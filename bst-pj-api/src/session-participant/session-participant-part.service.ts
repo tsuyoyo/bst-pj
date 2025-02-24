@@ -46,7 +46,7 @@ export class SessionParticipantPartService {
   ): Promise<{ parts: ProtoSessionPart[]; primaryPartId: number }> {
     const protoSessionParts = await Promise.all(
       parts.map(async (part) => {
-        const sessionPart = await this.sessionPartService.getSessionPartEntity(
+        const sessionPart = await this.sessionPartService.getSessionPart(
           part.sessionPartId,
         );
         return sessionPart;

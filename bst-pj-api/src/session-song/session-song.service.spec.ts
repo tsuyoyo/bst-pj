@@ -47,6 +47,12 @@ describe('SessionSongService', () => {
 
   const mockSessionPartService = {
     getSessionPart: jest.fn(),
+    getSessionPartEntity: jest.fn().mockResolvedValue({
+      id: 1,
+      name: 'Guitar',
+      sessionId: 1,
+      partId: 1,
+    }),
     listSessionParts: jest.fn(),
   };
 

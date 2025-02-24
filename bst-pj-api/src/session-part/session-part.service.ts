@@ -88,6 +88,7 @@ export class SessionPartService {
     }
     return {
       part: {
+        id: savedSessionPart.id,
         part,
         name: savedSessionPart.name,
         displayOrder: savedSessionPart.displayOrder,
@@ -127,6 +128,7 @@ export class SessionPartService {
 
     return {
       part: {
+        id: updatedSessionPart.id,
         part,
         name: updatedSessionPart.name,
         displayOrder: updatedSessionPart.displayOrder,
@@ -158,6 +160,7 @@ export class SessionPartService {
     sessionPart: SessionPart,
   ): Promise<ProtoSessionPart> {
     return {
+      id: sessionPart.id,
       part: (await this.partService.getPart(sessionPart.partId)).part,
       name: sessionPart.name,
       displayOrder: sessionPart.displayOrder,

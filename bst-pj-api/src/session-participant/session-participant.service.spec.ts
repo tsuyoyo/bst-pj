@@ -75,6 +75,11 @@ describe('SessionParticipantService', () => {
       name: 'Test Part',
       maxEntry: 2,
     }),
+    getSessionPartEntity: jest.fn().mockResolvedValue({
+      id: 1,
+      name: 'Test Part',
+      maxEntry: 2,
+    }),
   };
 
   beforeEach(async () => {
@@ -141,6 +146,10 @@ describe('SessionParticipantService', () => {
         id: 1,
         maxEntry: 2,
       });
+      mockSessionPartService.getSessionPartEntity.mockResolvedValue({
+        id: 1,
+        maxEntry: 2,
+      });
       (mockEntityManager.findOne as jest.Mock).mockResolvedValue(null);
       (mockEntityManager.create as jest.Mock).mockReturnValue(mockParticipant);
       (mockEntityManager.save as jest.Mock).mockResolvedValue(mockParticipant);
@@ -162,7 +171,9 @@ describe('SessionParticipantService', () => {
       expect(result.sessionParticipant).toBeDefined();
       expect(mockEntityManager.create).toHaveBeenCalled();
       expect(mockEntityManager.save).toHaveBeenCalled();
-      expect(mockSessionPartService.getSessionPart).toHaveBeenCalledWith(1);
+      expect(
+        mockSessionParticipantPartService.findBySessionParticipantId,
+      ).toHaveBeenCalledWith(mockParticipant.id);
     });
 
     it('should throw BadRequestException when part slot is full', async () => {

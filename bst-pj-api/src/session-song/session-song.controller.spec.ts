@@ -128,11 +128,10 @@ describe('SessionSongController', () => {
         expectedResponse,
       );
 
-      const result = await controller.listSessionSongs(sessionId, mockUser);
+      const result = await controller.listSessionSongs(sessionId);
       expect(result).toEqual(expectedResponse);
       expect(mockSessionSongService.listSessionSongs).toHaveBeenCalledWith(
         sessionId,
-        mockUser,
       );
     });
   });

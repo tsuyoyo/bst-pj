@@ -50,6 +50,7 @@ export class SessionParticipantService {
   ): Promise<AddSessionParticipantResponse> {
     await this.sessionVerifyAccessService.verifySessionAccess(sessionId, user);
     await this.checkPartSlotAvailable(sessionId, dto);
+
     return await this.sessionParticipantRepository.manager.transaction(
       async (entityManager: EntityManager) => {
         // Check if the user is already a participant
