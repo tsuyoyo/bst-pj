@@ -44,10 +44,16 @@ exports.up = (pgm) => {
       onDelete: "CASCADE",
       comment: "作成者のUserID",
     },
-    // Nullable until location is set.
-    location_id: {
+    // Nullable until studio is set.
+    studio_id: {
       type: "integer",
-      references: "locations",
+      references: "studios",
+      onDelete: "CASCADE",
+    },
+    // Nullable until studio_room is set.
+    studio_room_id: {
+      type: "integer",
+      references: "studio_rooms",
       onDelete: "CASCADE",
     },
     created_at: {

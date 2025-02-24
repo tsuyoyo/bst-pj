@@ -6,6 +6,7 @@ import "bst/v1/content.proto";
 import "bst/v1/party.proto";
 import "bst/v1/user.proto";
 import "google/protobuf/timestamp.proto";
+import "bst/v1/location.proto";
 
 option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
 
@@ -36,6 +37,8 @@ message SessionDetail {
   string                      description  = 1;
   repeated SessionPart        parts        = 2;
   repeated SessionParticipant participants = 3;
+  Studio                      studio       = 4;
+  StudioRoom                  room         = 5;
 }
 
 message SessionPart {

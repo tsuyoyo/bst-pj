@@ -33,6 +33,10 @@ class SessionServiceClient extends $grpc.Client {
       '/bst.v1.SessionService/UpdateSession',
       ($18.UpdateSessionRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $18.UpdateSessionResponse.fromBuffer(value));
+  static final _$updateSessionStudio = $grpc.ClientMethod<$18.UpdateSessionStudioRequest, $18.UpdateSessionStudioResponse>(
+      '/bst.v1.SessionService/UpdateSessionStudio',
+      ($18.UpdateSessionStudioRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.UpdateSessionStudioResponse.fromBuffer(value));
   static final _$updateSessionStatus = $grpc.ClientMethod<$18.UpdateSessionStatusRequest, $18.UpdateSessionStatusResponse>(
       '/bst.v1.SessionService/UpdateSessionStatus',
       ($18.UpdateSessionStatusRequest value) => value.writeToBuffer(),
@@ -90,6 +94,10 @@ class SessionServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$18.UpdateSessionResponse> updateSession($18.UpdateSessionRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateSession, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$18.UpdateSessionStudioResponse> updateSessionStudio($18.UpdateSessionStudioRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateSessionStudio, request, options: options);
   }
 
   $grpc.ResponseFuture<$18.UpdateSessionStatusResponse> updateSessionStatus($18.UpdateSessionStatusRequest request, {$grpc.CallOptions? options}) {
@@ -159,6 +167,13 @@ abstract class SessionServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $18.UpdateSessionRequest.fromBuffer(value),
         ($18.UpdateSessionResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$18.UpdateSessionStudioRequest, $18.UpdateSessionStudioResponse>(
+        'UpdateSessionStudio',
+        updateSessionStudio_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $18.UpdateSessionStudioRequest.fromBuffer(value),
+        ($18.UpdateSessionStudioResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$18.UpdateSessionStatusRequest, $18.UpdateSessionStatusResponse>(
         'UpdateSessionStatus',
         updateSessionStatus_Pre,
@@ -243,6 +258,10 @@ abstract class SessionServiceBase extends $grpc.Service {
     return updateSession(call, await request);
   }
 
+  $async.Future<$18.UpdateSessionStudioResponse> updateSessionStudio_Pre($grpc.ServiceCall call, $async.Future<$18.UpdateSessionStudioRequest> request) async {
+    return updateSessionStudio(call, await request);
+  }
+
   $async.Future<$18.UpdateSessionStatusResponse> updateSessionStatus_Pre($grpc.ServiceCall call, $async.Future<$18.UpdateSessionStatusRequest> request) async {
     return updateSessionStatus(call, await request);
   }
@@ -286,6 +305,7 @@ abstract class SessionServiceBase extends $grpc.Service {
   $async.Future<$18.CreateSessionResponse> createSession($grpc.ServiceCall call, $18.CreateSessionRequest request);
   $async.Future<$18.GetSessionResponse> getSession($grpc.ServiceCall call, $18.GetSessionRequest request);
   $async.Future<$18.UpdateSessionResponse> updateSession($grpc.ServiceCall call, $18.UpdateSessionRequest request);
+  $async.Future<$18.UpdateSessionStudioResponse> updateSessionStudio($grpc.ServiceCall call, $18.UpdateSessionStudioRequest request);
   $async.Future<$18.UpdateSessionStatusResponse> updateSessionStatus($grpc.ServiceCall call, $18.UpdateSessionStatusRequest request);
   $async.Future<$18.CancelSessionResponse> cancelSession($grpc.ServiceCall call, $18.CancelSessionRequest request);
   $async.Future<$18.DuplicateSessionResponse> duplicateSession($grpc.ServiceCall call, $18.DuplicateSessionRequest request);

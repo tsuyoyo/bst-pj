@@ -418,6 +418,140 @@ class UpdateSessionResponse extends $pb.GeneratedMessage {
   $36.SessionDetail ensureDetail() => $_ensure(1);
 }
 
+class UpdateSessionStudioRequest extends $pb.GeneratedMessage {
+  factory UpdateSessionStudioRequest({
+    $core.int? sessionId,
+    $34.Studio? studio,
+  }) {
+    final $result = create();
+    if (sessionId != null) {
+      $result.sessionId = sessionId;
+    }
+    if (studio != null) {
+      $result.studio = studio;
+    }
+    return $result;
+  }
+  UpdateSessionStudioRequest._() : super();
+  factory UpdateSessionStudioRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateSessionStudioRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionStudioRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
+    ..aOM<$34.Studio>(2, _omitFieldNames ? '' : 'studio', subBuilder: $34.Studio.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateSessionStudioRequest clone() => UpdateSessionStudioRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateSessionStudioRequest copyWith(void Function(UpdateSessionStudioRequest) updates) => super.copyWith((message) => updates(message as UpdateSessionStudioRequest)) as UpdateSessionStudioRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateSessionStudioRequest create() => UpdateSessionStudioRequest._();
+  UpdateSessionStudioRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateSessionStudioRequest> createRepeated() => $pb.PbList<UpdateSessionStudioRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateSessionStudioRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateSessionStudioRequest>(create);
+  static UpdateSessionStudioRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get sessionId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set sessionId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSessionId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSessionId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $34.Studio get studio => $_getN(1);
+  @$pb.TagNumber(2)
+  set studio($34.Studio v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasStudio() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearStudio() => clearField(2);
+  @$pb.TagNumber(2)
+  $34.Studio ensureStudio() => $_ensure(1);
+}
+
+class UpdateSessionStudioResponse extends $pb.GeneratedMessage {
+  factory UpdateSessionStudioResponse({
+    $36.Session? session,
+    $36.SessionDetail? detail,
+  }) {
+    final $result = create();
+    if (session != null) {
+      $result.session = session;
+    }
+    if (detail != null) {
+      $result.detail = detail;
+    }
+    return $result;
+  }
+  UpdateSessionStudioResponse._() : super();
+  factory UpdateSessionStudioResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateSessionStudioResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionStudioResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+    ..aOM<$36.Session>(1, _omitFieldNames ? '' : 'session', subBuilder: $36.Session.create)
+    ..aOM<$36.SessionDetail>(2, _omitFieldNames ? '' : 'detail', subBuilder: $36.SessionDetail.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateSessionStudioResponse clone() => UpdateSessionStudioResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateSessionStudioResponse copyWith(void Function(UpdateSessionStudioResponse) updates) => super.copyWith((message) => updates(message as UpdateSessionStudioResponse)) as UpdateSessionStudioResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateSessionStudioResponse create() => UpdateSessionStudioResponse._();
+  UpdateSessionStudioResponse createEmptyInstance() => create();
+  static $pb.PbList<UpdateSessionStudioResponse> createRepeated() => $pb.PbList<UpdateSessionStudioResponse>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateSessionStudioResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateSessionStudioResponse>(create);
+  static UpdateSessionStudioResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $36.Session get session => $_getN(0);
+  @$pb.TagNumber(1)
+  set session($36.Session v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSession() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSession() => clearField(1);
+  @$pb.TagNumber(1)
+  $36.Session ensureSession() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $36.SessionDetail get detail => $_getN(1);
+  @$pb.TagNumber(2)
+  set detail($36.SessionDetail v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasDetail() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDetail() => clearField(2);
+  @$pb.TagNumber(2)
+  $36.SessionDetail ensureDetail() => $_ensure(1);
+}
+
 class UpdateSessionStatusRequest extends $pb.GeneratedMessage {
   factory UpdateSessionStatusRequest({
     $36.SessionStatus? status,

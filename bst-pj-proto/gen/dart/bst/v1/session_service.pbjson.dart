@@ -99,6 +99,35 @@ final $typed_data.Uint8List updateSessionResponseDescriptor = $convert.base64Dec
     '9uUgdzZXNzaW9uEi0KBmRldGFpbBgCIAEoCzIVLmJzdC52MS5TZXNzaW9uRGV0YWlsUgZkZXRh'
     'aWw=');
 
+@$core.Deprecated('Use updateSessionStudioRequestDescriptor instead')
+const UpdateSessionStudioRequest$json = {
+  '1': 'UpdateSessionStudioRequest',
+  '2': [
+    {'1': 'session_id', '3': 1, '4': 1, '5': 5, '10': 'sessionId'},
+    {'1': 'studio', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.Studio', '10': 'studio'},
+  ],
+};
+
+/// Descriptor for `UpdateSessionStudioRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateSessionStudioRequestDescriptor = $convert.base64Decode(
+    'ChpVcGRhdGVTZXNzaW9uU3R1ZGlvUmVxdWVzdBIdCgpzZXNzaW9uX2lkGAEgASgFUglzZXNzaW'
+    '9uSWQSJgoGc3R1ZGlvGAIgASgLMg4uYnN0LnYxLlN0dWRpb1IGc3R1ZGlv');
+
+@$core.Deprecated('Use updateSessionStudioResponseDescriptor instead')
+const UpdateSessionStudioResponse$json = {
+  '1': 'UpdateSessionStudioResponse',
+  '2': [
+    {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.Session', '10': 'session'},
+    {'1': 'detail', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.SessionDetail', '10': 'detail'},
+  ],
+};
+
+/// Descriptor for `UpdateSessionStudioResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateSessionStudioResponseDescriptor = $convert.base64Decode(
+    'ChtVcGRhdGVTZXNzaW9uU3R1ZGlvUmVzcG9uc2USKQoHc2Vzc2lvbhgBIAEoCzIPLmJzdC52MS'
+    '5TZXNzaW9uUgdzZXNzaW9uEi0KBmRldGFpbBgCIAEoCzIVLmJzdC52MS5TZXNzaW9uRGV0YWls'
+    'UgZkZXRhaWw=');
+
 @$core.Deprecated('Use updateSessionStatusRequestDescriptor instead')
 const UpdateSessionStatusRequest$json = {
   '1': 'UpdateSessionStatusRequest',

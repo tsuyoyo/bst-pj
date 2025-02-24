@@ -84,6 +84,8 @@ const SessionDetail$json = {
     {'1': 'description', '3': 1, '4': 1, '5': 9, '10': 'description'},
     {'1': 'parts', '3': 2, '4': 3, '5': 11, '6': '.bst.v1.SessionPart', '10': 'parts'},
     {'1': 'participants', '3': 3, '4': 3, '5': 11, '6': '.bst.v1.SessionParticipant', '10': 'participants'},
+    {'1': 'studio', '3': 4, '4': 1, '5': 11, '6': '.bst.v1.Studio', '10': 'studio'},
+    {'1': 'room', '3': 5, '4': 1, '5': 11, '6': '.bst.v1.StudioRoom', '10': 'room'},
   ],
 };
 
@@ -91,7 +93,9 @@ const SessionDetail$json = {
 final $typed_data.Uint8List sessionDetailDescriptor = $convert.base64Decode(
     'Cg1TZXNzaW9uRGV0YWlsEiAKC2Rlc2NyaXB0aW9uGAEgASgJUgtkZXNjcmlwdGlvbhIpCgVwYX'
     'J0cxgCIAMoCzITLmJzdC52MS5TZXNzaW9uUGFydFIFcGFydHMSPgoMcGFydGljaXBhbnRzGAMg'
-    'AygLMhouYnN0LnYxLlNlc3Npb25QYXJ0aWNpcGFudFIMcGFydGljaXBhbnRz');
+    'AygLMhouYnN0LnYxLlNlc3Npb25QYXJ0aWNpcGFudFIMcGFydGljaXBhbnRzEiYKBnN0dWRpbx'
+    'gEIAEoCzIOLmJzdC52MS5TdHVkaW9SBnN0dWRpbxImCgRyb29tGAUgASgLMhIuYnN0LnYxLlN0'
+    'dWRpb1Jvb21SBHJvb20=');
 
 @$core.Deprecated('Use sessionPartDescriptor instead')
 const SessionPart$json = {

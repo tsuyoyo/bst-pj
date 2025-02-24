@@ -26,6 +26,10 @@ describe('SessionController', () => {
 
   const mockSessionService = {
     createSession: jest.fn(),
+    getSession: jest.fn(),
+    updateSession: jest.fn(),
+    updateSessionStatus: jest.fn(),
+    cancelSession: jest.fn(),
   };
 
   const mockJwtService = {
@@ -93,6 +97,117 @@ describe('SessionController', () => {
       expect(result).toEqual(expectedResponse);
       expect(mockSessionService.createSession).toHaveBeenCalledWith(
         createSessionDto,
+        mockUser,
+      );
+    });
+  });
+
+  describe('getSession', () => {
+    it('should return a session', async () => {
+      const sessionId = 1;
+      const expectedResponse = {
+        session: {
+          id: sessionId,
+          title: 'Test Session',
+          description: 'Test Description',
+          timeline: {
+            createdAt: new Date(),
+            eventDate: new Date(),
+          },
+          status: SessionStatus.SESSION_STATUS_BEFORE_ENTRY,
+          participantsNum: 2,
+        },
+      };
+
+      mockSessionService.getSession.mockResolvedValue(expectedResponse);
+
+      const result = await controller.getSession(sessionId, mockUser);
+      expect(result).toEqual(expectedResponse);
+      expect(mockSessionService.getSession).toHaveBeenCalledWith(
+        sessionId,
+        mockUser,
+      );
+    });
+  });
+
+  describe('updateSession', () => {
+    it('should update a session', async () => {
+      const sessionId = 1;
+      const dto = {
+        title: 'Updated Session',
+        description: 'Updated Description',
+        eventDate: new Date(),
+      };
+
+      const expectedResponse = {
+        session: {
+          id: sessionId,
+          title: dto.title,
+          description: dto.description,
+          timeline: {
+            createdAt: new Date(),
+            eventDate: dto.eventDate,
+          },
+          status: SessionStatus.SESSION_STATUS_BEFORE_ENTRY,
+          participantsNum: 2,
+        },
+      };
+
+      mockSessionService.updateSession.mockResolvedValue(expectedResponse);
+
+      const result = await controller.updateSession(sessionId, dto, mockUser);
+      expect(result).toEqual(expectedResponse);
+      expect(mockSessionService.updateSession).toHaveBeenCalledWith(
+        sessionId,
+        dto,
+        mockUser,
+      );
+    });
+  });
+
+  describe('updateSessionStatus', () => {
+    it('should update session status', async () => {
+      const sessionId = 1;
+      const dto = {
+        status: SessionStatus.SESSION_STATUS_ONGOING,
+      };
+
+      const expectedResponse = {
+        session: {
+          id: sessionId,
+          status: dto.status,
+        },
+      };
+
+      mockSessionService.updateSessionStatus.mockResolvedValue(
+        expectedResponse,
+      );
+
+      const result = await controller.updateSessionStatus(
+        sessionId,
+        dto,
+        mockUser,
+      );
+      expect(result).toEqual(expectedResponse);
+      expect(mockSessionService.updateSessionStatus).toHaveBeenCalledWith(
+        sessionId,
+        dto,
+        mockUser,
+      );
+    });
+  });
+
+  describe('cancelSession', () => {
+    it('should cancel a session', async () => {
+      const sessionId = 1;
+      const expectedResponse = { success: true };
+
+      mockSessionService.cancelSession.mockResolvedValue(expectedResponse);
+
+      const result = await controller.cancelSession(sessionId, mockUser);
+      expect(result).toEqual(expectedResponse);
+      expect(mockSessionService.cancelSession).toHaveBeenCalledWith(
+        sessionId,
         mockUser,
       );
     });

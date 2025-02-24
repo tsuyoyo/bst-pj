@@ -8,7 +8,7 @@
 import _m0 from "protobufjs/minimal";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Resource } from "./content";
-import { Location } from "./location";
+import { Location, Studio } from "./location";
 import {
   Session,
   SessionDetail,
@@ -47,6 +47,16 @@ export interface UpdateSessionRequest {
 }
 
 export interface UpdateSessionResponse {
+  session: Session | undefined;
+  detail: SessionDetail | undefined;
+}
+
+export interface UpdateSessionStudioRequest {
+  sessionId: number;
+  studio: Studio | undefined;
+}
+
+export interface UpdateSessionStudioResponse {
   session: Session | undefined;
   detail: SessionDetail | undefined;
 }
@@ -644,6 +654,160 @@ export const UpdateSessionResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<UpdateSessionResponse>, I>>(object: I): UpdateSessionResponse {
     const message = createBaseUpdateSessionResponse();
+    message.session = (object.session !== undefined && object.session !== null)
+      ? Session.fromPartial(object.session)
+      : undefined;
+    message.detail = (object.detail !== undefined && object.detail !== null)
+      ? SessionDetail.fromPartial(object.detail)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseUpdateSessionStudioRequest(): UpdateSessionStudioRequest {
+  return { sessionId: 0, studio: undefined };
+}
+
+export const UpdateSessionStudioRequest = {
+  encode(message: UpdateSessionStudioRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sessionId !== 0) {
+      writer.uint32(8).int32(message.sessionId);
+    }
+    if (message.studio !== undefined) {
+      Studio.encode(message.studio, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateSessionStudioRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUpdateSessionStudioRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.sessionId = reader.int32();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.studio = Studio.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UpdateSessionStudioRequest {
+    return {
+      sessionId: isSet(object.sessionId) ? globalThis.Number(object.sessionId) : 0,
+      studio: isSet(object.studio) ? Studio.fromJSON(object.studio) : undefined,
+    };
+  },
+
+  toJSON(message: UpdateSessionStudioRequest): unknown {
+    const obj: any = {};
+    if (message.sessionId !== 0) {
+      obj.sessionId = Math.round(message.sessionId);
+    }
+    if (message.studio !== undefined) {
+      obj.studio = Studio.toJSON(message.studio);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UpdateSessionStudioRequest>, I>>(base?: I): UpdateSessionStudioRequest {
+    return UpdateSessionStudioRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UpdateSessionStudioRequest>, I>>(object: I): UpdateSessionStudioRequest {
+    const message = createBaseUpdateSessionStudioRequest();
+    message.sessionId = object.sessionId ?? 0;
+    message.studio = (object.studio !== undefined && object.studio !== null)
+      ? Studio.fromPartial(object.studio)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseUpdateSessionStudioResponse(): UpdateSessionStudioResponse {
+  return { session: undefined, detail: undefined };
+}
+
+export const UpdateSessionStudioResponse = {
+  encode(message: UpdateSessionStudioResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.session !== undefined) {
+      Session.encode(message.session, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.detail !== undefined) {
+      SessionDetail.encode(message.detail, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateSessionStudioResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUpdateSessionStudioResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.session = Session.decode(reader, reader.uint32());
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.detail = SessionDetail.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UpdateSessionStudioResponse {
+    return {
+      session: isSet(object.session) ? Session.fromJSON(object.session) : undefined,
+      detail: isSet(object.detail) ? SessionDetail.fromJSON(object.detail) : undefined,
+    };
+  },
+
+  toJSON(message: UpdateSessionStudioResponse): unknown {
+    const obj: any = {};
+    if (message.session !== undefined) {
+      obj.session = Session.toJSON(message.session);
+    }
+    if (message.detail !== undefined) {
+      obj.detail = SessionDetail.toJSON(message.detail);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UpdateSessionStudioResponse>, I>>(base?: I): UpdateSessionStudioResponse {
+    return UpdateSessionStudioResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UpdateSessionStudioResponse>, I>>(object: I): UpdateSessionStudioResponse {
+    const message = createBaseUpdateSessionStudioResponse();
     message.session = (object.session !== undefined && object.session !== null)
       ? Session.fromPartial(object.session)
       : undefined;
@@ -2918,6 +3082,8 @@ export interface SessionService {
   GetSession(request: GetSessionRequest): Promise<GetSessionResponse>;
   /** PUT /sessions/{id} */
   UpdateSession(request: UpdateSessionRequest): Promise<UpdateSessionResponse>;
+  /** PUT /sessions/{id}/studio */
+  UpdateSessionStudio(request: UpdateSessionStudioRequest): Promise<UpdateSessionStudioResponse>;
   /** PUT /sessions/{id}/status */
   UpdateSessionStatus(request: UpdateSessionStatusRequest): Promise<UpdateSessionStatusResponse>;
   /** PUT /sessions/{id}/cancel */
@@ -2961,6 +3127,7 @@ export class SessionServiceClientImpl implements SessionService {
     this.CreateSession = this.CreateSession.bind(this);
     this.GetSession = this.GetSession.bind(this);
     this.UpdateSession = this.UpdateSession.bind(this);
+    this.UpdateSessionStudio = this.UpdateSessionStudio.bind(this);
     this.UpdateSessionStatus = this.UpdateSessionStatus.bind(this);
     this.CancelSession = this.CancelSession.bind(this);
     this.DuplicateSession = this.DuplicateSession.bind(this);
@@ -2988,6 +3155,12 @@ export class SessionServiceClientImpl implements SessionService {
     const data = UpdateSessionRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "UpdateSession", data);
     return promise.then((data) => UpdateSessionResponse.decode(_m0.Reader.create(data)));
+  }
+
+  UpdateSessionStudio(request: UpdateSessionStudioRequest): Promise<UpdateSessionStudioResponse> {
+    const data = UpdateSessionStudioRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "UpdateSessionStudio", data);
+    return promise.then((data) => UpdateSessionStudioResponse.decode(_m0.Reader.create(data)));
   }
 
   UpdateSessionStatus(request: UpdateSessionStatusRequest): Promise<UpdateSessionStatusResponse> {

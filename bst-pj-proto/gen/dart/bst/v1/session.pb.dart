@@ -15,6 +15,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../google/protobuf/timestamp.pb.dart' as $32;
 import 'content.pb.dart' as $30;
+import 'location.pb.dart' as $34;
 import 'party.pb.dart' as $35;
 import 'session.pbenum.dart';
 import 'user.pb.dart' as $33;
@@ -183,6 +184,8 @@ class SessionDetail extends $pb.GeneratedMessage {
     $core.String? description,
     $core.Iterable<SessionPart>? parts,
     $core.Iterable<SessionParticipant>? participants,
+    $34.Studio? studio,
+    $34.StudioRoom? room,
   }) {
     final $result = create();
     if (description != null) {
@@ -194,6 +197,12 @@ class SessionDetail extends $pb.GeneratedMessage {
     if (participants != null) {
       $result.participants.addAll(participants);
     }
+    if (studio != null) {
+      $result.studio = studio;
+    }
+    if (room != null) {
+      $result.room = room;
+    }
     return $result;
   }
   SessionDetail._() : super();
@@ -204,6 +213,8 @@ class SessionDetail extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'description')
     ..pc<SessionPart>(2, _omitFieldNames ? '' : 'parts', $pb.PbFieldType.PM, subBuilder: SessionPart.create)
     ..pc<SessionParticipant>(3, _omitFieldNames ? '' : 'participants', $pb.PbFieldType.PM, subBuilder: SessionParticipant.create)
+    ..aOM<$34.Studio>(4, _omitFieldNames ? '' : 'studio', subBuilder: $34.Studio.create)
+    ..aOM<$34.StudioRoom>(5, _omitFieldNames ? '' : 'room', subBuilder: $34.StudioRoom.create)
     ..hasRequiredFields = false
   ;
 
@@ -242,6 +253,28 @@ class SessionDetail extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(3)
   $core.List<SessionParticipant> get participants => $_getList(2);
+
+  @$pb.TagNumber(4)
+  $34.Studio get studio => $_getN(3);
+  @$pb.TagNumber(4)
+  set studio($34.Studio v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasStudio() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearStudio() => clearField(4);
+  @$pb.TagNumber(4)
+  $34.Studio ensureStudio() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  $34.StudioRoom get room => $_getN(4);
+  @$pb.TagNumber(5)
+  set room($34.StudioRoom v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasRoom() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearRoom() => clearField(5);
+  @$pb.TagNumber(5)
+  $34.StudioRoom ensureRoom() => $_ensure(4);
 }
 
 class SessionPart extends $pb.GeneratedMessage {

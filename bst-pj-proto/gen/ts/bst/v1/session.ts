@@ -8,6 +8,7 @@
 import _m0 from "protobufjs/minimal";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Part, Song } from "./content";
+import { Studio, StudioRoom } from "./location";
 import { Party } from "./party";
 import { User } from "./user";
 
@@ -138,6 +139,8 @@ export interface SessionDetail {
   description: string;
   parts: SessionPart[];
   participants: SessionParticipant[];
+  studio: Studio | undefined;
+  room: StudioRoom | undefined;
 }
 
 export interface SessionPart {
@@ -435,7 +438,7 @@ export const Session = {
 };
 
 function createBaseSessionDetail(): SessionDetail {
-  return { description: "", parts: [], participants: [] };
+  return { description: "", parts: [], participants: [], studio: undefined, room: undefined };
 }
 
 export const SessionDetail = {
@@ -448,6 +451,12 @@ export const SessionDetail = {
     }
     for (const v of message.participants) {
       SessionParticipant.encode(v!, writer.uint32(26).fork()).ldelim();
+    }
+    if (message.studio !== undefined) {
+      Studio.encode(message.studio, writer.uint32(34).fork()).ldelim();
+    }
+    if (message.room !== undefined) {
+      StudioRoom.encode(message.room, writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
@@ -480,6 +489,20 @@ export const SessionDetail = {
 
           message.participants.push(SessionParticipant.decode(reader, reader.uint32()));
           continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.studio = Studio.decode(reader, reader.uint32());
+          continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.room = StudioRoom.decode(reader, reader.uint32());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -496,6 +519,8 @@ export const SessionDetail = {
       participants: globalThis.Array.isArray(object?.participants)
         ? object.participants.map((e: any) => SessionParticipant.fromJSON(e))
         : [],
+      studio: isSet(object.studio) ? Studio.fromJSON(object.studio) : undefined,
+      room: isSet(object.room) ? StudioRoom.fromJSON(object.room) : undefined,
     };
   },
 
@@ -510,6 +535,12 @@ export const SessionDetail = {
     if (message.participants?.length) {
       obj.participants = message.participants.map((e) => SessionParticipant.toJSON(e));
     }
+    if (message.studio !== undefined) {
+      obj.studio = Studio.toJSON(message.studio);
+    }
+    if (message.room !== undefined) {
+      obj.room = StudioRoom.toJSON(message.room);
+    }
     return obj;
   },
 
@@ -521,6 +552,12 @@ export const SessionDetail = {
     message.description = object.description ?? "";
     message.parts = object.parts?.map((e) => SessionPart.fromPartial(e)) || [];
     message.participants = object.participants?.map((e) => SessionParticipant.fromPartial(e)) || [];
+    message.studio = (object.studio !== undefined && object.studio !== null)
+      ? Studio.fromPartial(object.studio)
+      : undefined;
+    message.room = (object.room !== undefined && object.room !== null)
+      ? StudioRoom.fromPartial(object.room)
+      : undefined;
     return message;
   },
 };

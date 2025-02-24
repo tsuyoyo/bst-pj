@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package bst.v1;
 
-import "bst/v1/communication.proto";
 import "bst/v1/content.proto";
 import "bst/v1/location.proto";
 import "bst/v1/session.proto";
@@ -18,6 +17,9 @@ service SessionService {
   rpc GetSession(GetSessionRequest) returns (GetSessionResponse);
   // PUT /sessions/{id}
   rpc UpdateSession(UpdateSessionRequest) returns (UpdateSessionResponse);
+  // PUT /sessions/{id}/studio
+  rpc UpdateSessionStudio(UpdateSessionStudioRequest)
+      returns (UpdateSessionStudioResponse);
   // PUT /sessions/{id}/status
   rpc UpdateSessionStatus(UpdateSessionStatusRequest)
       returns (UpdateSessionStatusResponse);
@@ -86,8 +88,18 @@ message UpdateSessionResponse {
   SessionDetail detail  = 2;
 }
 
+message UpdateSessionStudioRequest {
+  int32  session_id = 1;
+  Studio studio     = 2;
+}
+
+message UpdateSessionStudioResponse {
+  Session       session = 1;
+  SessionDetail detail  = 2;
+}
+
 message UpdateSessionStatusRequest {
-  SessionStatus status     = 1;
+  SessionStatus status = 1;
 }
 
 message UpdateSessionStatusResponse {

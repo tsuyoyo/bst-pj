@@ -23,7 +23,8 @@ import { SessionParticipantService } from '../session-participant/session-partic
 import { SessionVerifyAccessService } from './session-verify-access.service';
 import { UpdateSessionDto } from './dto/update-session.dto';
 import { UpdateSessionStatusDto } from './dto/update-session-status.dto';
-
+import { StudioService } from '../studio/studio.service';
+import { StudioRoomService } from '../studio-room/studio-room.service';
 @Injectable()
 export class SessionService {
   constructor(
@@ -34,6 +35,8 @@ export class SessionService {
     private readonly sessionPartService: SessionPartService,
     private readonly sessionParticipantService: SessionParticipantService,
     private readonly sessionVerifyAccessService: SessionVerifyAccessService,
+    private readonly studioService: StudioService,
+    private readonly studioRoomService: StudioRoomService,
   ) {}
 
   async createSession(
@@ -45,6 +48,7 @@ export class SessionService {
       description: createSessionDto.description,
       date: createSessionDto.eventDate,
       creatorId: user.id,
+      status: SessionStatus.BeforeEntry,
     });
 
     const savedSession = await this.sessionRepository.save(session);
@@ -88,12 +92,19 @@ export class SessionService {
     const { parts } = await this.sessionPartService.listSessionParts(
       session.id,
     );
+    const { studio } = await this.studioService.getStudio(session.studioId);
+    const { room } = await this.studioRoomService.getStudioRoom(
+      session.studioId,
+      session.studioRoomId,
+    );
     const { participants } =
       await this.sessionParticipantService.listSessionParticipants(session.id);
     return {
       description: session.description,
       parts,
       participants,
+      studio,
+      room,
     };
   }
 

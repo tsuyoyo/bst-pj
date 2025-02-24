@@ -8,8 +8,9 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { User } from './user.entity';
-import { Location } from './location.entity';
 import { SessionStatus } from './types/session-status.enum';
+import { Studio } from './studio.entity';
+import { StudioRoom } from './studio-room.entity';
 
 @Entity('sessions')
 export class Session {
@@ -47,8 +48,11 @@ export class Session {
   })
   creatorId: number;
 
-  @Column({ name: 'location_id', type: 'integer', nullable: true })
-  locationId: number;
+  @Column({ name: 'studio_id', type: 'integer', nullable: true })
+  studioId: number;
+
+  @Column({ name: 'studio_room_id', type: 'integer', nullable: true })
+  studioRoomId: number;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
@@ -60,7 +64,11 @@ export class Session {
   @JoinColumn({ name: 'creator_id' })
   creator: User;
 
-  @ManyToOne(() => Location, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'location_id' })
-  location: Location;
+  @ManyToOne(() => Studio, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'studio_id' })
+  studio: Studio;
+
+  @ManyToOne(() => StudioRoom, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'studio_room_id' })
+  studioRoom: StudioRoom;
 }

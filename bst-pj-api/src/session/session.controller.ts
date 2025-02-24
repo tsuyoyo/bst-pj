@@ -27,11 +27,6 @@ import { User } from '../entities/user.entity';
 export class SessionController {
   constructor(private readonly sessionService: SessionService) {}
 
-  // Memo: 次はこの辺
-  //   // POST /sessions/{id}/duplicate
-  //   rpc DuplicateSession(DuplicateSessionRequest)
-  //       returns (DuplicateSessionResponse);
-
   @Post()
   async createSession(
     @Body() createSessionDto: CreateSessionDto,
@@ -77,4 +72,9 @@ export class SessionController {
   ): Promise<CancelSessionResponse> {
     return await this.sessionService.cancelSession(id, user);
   }
+
+  // Memo: 次はこの辺
+  //   // POST /sessions/{id}/duplicate
+  //   rpc DuplicateSession(DuplicateSessionRequest)
+  //       returns (DuplicateSessionResponse);
 }
