@@ -536,11 +536,15 @@ class SessionParticipant extends $pb.GeneratedMessage {
 
 class SessionSongEntry extends $pb.GeneratedMessage {
   factory SessionSongEntry({
+    $core.int? id,
     $33.User? user,
     SessionPart? part,
     $core.String? comment,
   }) {
     final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
     if (user != null) {
       $result.user = user;
     }
@@ -557,9 +561,10 @@ class SessionSongEntry extends $pb.GeneratedMessage {
   factory SessionSongEntry.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SessionSongEntry', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$33.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $33.User.create)
-    ..aOM<SessionPart>(2, _omitFieldNames ? '' : 'part', subBuilder: SessionPart.create)
-    ..aOS(3, _omitFieldNames ? '' : 'comment')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..aOM<$33.User>(2, _omitFieldNames ? '' : 'user', subBuilder: $33.User.create)
+    ..aOM<SessionPart>(3, _omitFieldNames ? '' : 'part', subBuilder: SessionPart.create)
+    ..aOS(4, _omitFieldNames ? '' : 'comment')
     ..hasRequiredFields = false
   ;
 
@@ -585,35 +590,44 @@ class SessionSongEntry extends $pb.GeneratedMessage {
   static SessionSongEntry? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $33.User get user => $_getN(0);
+  $core.int get id => $_getIZ(0);
   @$pb.TagNumber(1)
-  set user($33.User v) { setField(1, v); }
+  set id($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasUser() => $_has(0);
+  $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearUser() => clearField(1);
-  @$pb.TagNumber(1)
-  $33.User ensureUser() => $_ensure(0);
+  void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  SessionPart get part => $_getN(1);
+  $33.User get user => $_getN(1);
   @$pb.TagNumber(2)
-  set part(SessionPart v) { setField(2, v); }
+  set user($33.User v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasPart() => $_has(1);
+  $core.bool hasUser() => $_has(1);
   @$pb.TagNumber(2)
-  void clearPart() => clearField(2);
+  void clearUser() => clearField(2);
   @$pb.TagNumber(2)
-  SessionPart ensurePart() => $_ensure(1);
+  $33.User ensureUser() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $core.String get comment => $_getSZ(2);
+  SessionPart get part => $_getN(2);
   @$pb.TagNumber(3)
-  set comment($core.String v) { $_setString(2, v); }
+  set part(SessionPart v) { setField(3, v); }
   @$pb.TagNumber(3)
-  $core.bool hasComment() => $_has(2);
+  $core.bool hasPart() => $_has(2);
   @$pb.TagNumber(3)
-  void clearComment() => clearField(3);
+  void clearPart() => clearField(3);
+  @$pb.TagNumber(3)
+  SessionPart ensurePart() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $core.String get comment => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set comment($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasComment() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearComment() => clearField(4);
 }
 
 class SessionSongPart extends $pb.GeneratedMessage {

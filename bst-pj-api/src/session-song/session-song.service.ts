@@ -153,7 +153,7 @@ export class SessionSongService {
     mandatorySessionPartIds: number[],
   ): Promise<RequiredPart[]> {
     const verifySessionPartId = async (sessionPartId: number) =>
-      await this.sessionPartService.getSessionPart(sessionPartId);
+      await this.sessionPartService.getSessionPartEntity(sessionPartId);
 
     return await Promise.all(
       mandatorySessionPartIds.map(async (sessionPartId) => {

@@ -68,9 +68,10 @@ message SessionParticipant {
 }
 
 message SessionSongEntry {
-  User        user    = 1;
-  SessionPart part    = 2;
-  string      comment = 3;
+  int32       id      = 1;
+  User        user    = 2;
+  SessionPart part    = 3;
+  string      comment = 4;
 }
 
 message SessionSongPart {

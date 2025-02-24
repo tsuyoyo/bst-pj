@@ -150,17 +150,18 @@ final $typed_data.Uint8List sessionParticipantDescriptor = $convert.base64Decode
 const SessionSongEntry$json = {
   '1': 'SessionSongEntry',
   '2': [
-    {'1': 'user', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.User', '10': 'user'},
-    {'1': 'part', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.SessionPart', '10': 'part'},
-    {'1': 'comment', '3': 3, '4': 1, '5': 9, '10': 'comment'},
+    {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    {'1': 'user', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.User', '10': 'user'},
+    {'1': 'part', '3': 3, '4': 1, '5': 11, '6': '.bst.v1.SessionPart', '10': 'part'},
+    {'1': 'comment', '3': 4, '4': 1, '5': 9, '10': 'comment'},
   ],
 };
 
 /// Descriptor for `SessionSongEntry`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List sessionSongEntryDescriptor = $convert.base64Decode(
-    'ChBTZXNzaW9uU29uZ0VudHJ5EiAKBHVzZXIYASABKAsyDC5ic3QudjEuVXNlclIEdXNlchInCg'
-    'RwYXJ0GAIgASgLMhMuYnN0LnYxLlNlc3Npb25QYXJ0UgRwYXJ0EhgKB2NvbW1lbnQYAyABKAlS'
-    'B2NvbW1lbnQ=');
+    'ChBTZXNzaW9uU29uZ0VudHJ5Eg4KAmlkGAEgASgFUgJpZBIgCgR1c2VyGAIgASgLMgwuYnN0Ln'
+    'YxLlVzZXJSBHVzZXISJwoEcGFydBgDIAEoCzITLmJzdC52MS5TZXNzaW9uUGFydFIEcGFydBIY'
+    'Cgdjb21tZW50GAQgASgJUgdjb21tZW50');
 
 @$core.Deprecated('Use sessionSongPartDescriptor instead')
 const SessionSongPart$json = {

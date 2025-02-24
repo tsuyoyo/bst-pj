@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { SessionPart } from '../entities/session-part.entity';
+import { SessionPart as ProtoSessionPart } from '../proto/bst/v1/session';
 import { AddSessionPartDto } from './dto/add-session-part.dto';
 import { UpdateSessionPartDto } from './dto/update-session-part.dto';
 import { User } from '../entities/user.entity';
@@ -12,19 +13,17 @@ import {
   UpdateSessionPartResponse,
 } from '../proto/bst/v1/session_part_service';
 import { PartService } from '../part/part.service';
-import { SessionService } from '../session/session.service';
 import { SessionVerifyAccessService } from '../session/session-verify-access.service';
 @Injectable()
 export class SessionPartService {
   constructor(
     @InjectRepository(SessionPart)
     private readonly sessionPartRepository: Repository<SessionPart>,
-    private readonly sessionService: SessionService,
     private readonly sessionVerifyAccessService: SessionVerifyAccessService,
     private readonly partService: PartService,
   ) {}
 
-  async getSessionPart(sessionPartId: number): Promise<SessionPart> {
+  async getSessionPartEntity(sessionPartId: number): Promise<SessionPart> {
     const sessionPart = await this.sessionPartRepository.findOne({
       where: { id: sessionPartId },
     });
@@ -32,6 +31,11 @@ export class SessionPartService {
       throw new NotFoundException(`Session part ${sessionPartId} not found`);
     }
     return sessionPart;
+  }
+
+  async getSessionPart(sessionPartId: number): Promise<ProtoSessionPart> {
+    const sessionPart = await this.getSessionPartEntity(sessionPartId);
+    return this.mapSessionPartToProto(sessionPart);
   }
 
   async listSessionPartEntities(sessionId: number): Promise<SessionPart[]> {
@@ -49,13 +53,9 @@ export class SessionPartService {
 
     return {
       parts: await Promise.all(
-        sessionParts.map(async (sp) => ({
-          id: sp.id.toString(),
-          part: (await this.partService.getPart(sp.partId)).part,
-          name: sp.name,
-          displayOrder: sp.displayOrder,
-          maxEntry: sp.maxEntry,
-        })),
+        sessionParts.map((sp) => {
+          return this.mapSessionPartToProto(sp);
+        }),
       ),
     };
   }
@@ -152,5 +152,16 @@ export class SessionPartService {
 
     await this.sessionPartRepository.remove(sessionPart);
     return { success: true };
+  }
+
+  private async mapSessionPartToProto(
+    sessionPart: SessionPart,
+  ): Promise<ProtoSessionPart> {
+    return {
+      part: (await this.partService.getPart(sessionPart.partId)).part,
+      name: sessionPart.name,
+      displayOrder: sessionPart.displayOrder,
+      maxEntry: sessionPart.maxEntry,
+    };
   }
 }

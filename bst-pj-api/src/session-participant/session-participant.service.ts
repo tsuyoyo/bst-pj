@@ -120,6 +120,21 @@ export class SessionParticipantService {
     return this.mapParticipantToProto(sessionParticipant);
   }
 
+  async getSessionParticipantByUserId(
+    sessionId: number,
+    userId: number,
+  ): Promise<ProtoSessionParticipant> {
+    const sessionParticipant = await this.sessionParticipantRepository.findOne({
+      where: { userId, sessionId },
+    });
+    if (!sessionParticipant) {
+      throw new NotFoundException(
+        `Participant with user ID ${userId} not found in session ${sessionId}`,
+      );
+    }
+    return this.mapParticipantToProto(sessionParticipant);
+  }
+
   async listSessionParticipants(
     sessionId: number,
   ): Promise<ListSessionParticipantsResponse> {
@@ -285,7 +300,7 @@ export class SessionParticipantService {
       );
 
     const primarySessionPart =
-      await this.sessionPartService.getSessionPart(primarySessionPartId);
+      await this.sessionPartService.getSessionPartEntity(primarySessionPartId);
 
     if (primarySessionPart && participantCount >= primarySessionPart.maxEntry) {
       throw new BadRequestException(
