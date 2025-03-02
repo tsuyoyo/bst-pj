@@ -3,8 +3,8 @@
 import { useLogout } from "@/features/auth/hooks";
 import { RootState } from "@/store/store";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
   AppBar,
@@ -61,7 +61,7 @@ function NavigationLinks({
   onNavigate,
 }: {
   pathname: string;
-  onNavigate: () => void;
+  onNavigate: (href: string) => void;
 }) {
   return (
     <List>
@@ -73,7 +73,7 @@ function NavigationLinks({
               component={Link}
               href={item.href}
               selected={pathname === item.href}
-              onClick={onNavigate}
+              onClick={() => onNavigate(item.href)}
             >
               <ListItemIcon>
                 <Icon />
@@ -88,14 +88,28 @@ function NavigationLinks({
 }
 
 // ユーザー情報セクション
-function UserSection({ user }: { user: any }) {
-  return (
+function UserSection({
+  user,
+  onNavigate,
+}: {
+  user: any;
+  onNavigate: (href: string) => void;
+}) {
+  return user ? (
     <Box sx={{ display: "flex", alignItems: "center", gap: 2, p: 1 }}>
       <Avatar>
         <PersonIcon />
       </Avatar>
       <Typography variant="body2">{user.name}</Typography>
     </Box>
+  ) : (
+    <ListItemButton
+      component={Link}
+      href="/login"
+      onClick={() => onNavigate("/login")}
+    >
+      <ListItemText primary="ログインまたは新規登録" />
+    </ListItemButton>
   );
 }
 
@@ -108,7 +122,6 @@ function DrawerHeader({ onClose }: { onClose: () => void }) {
         alignItems: "center",
         justifyContent: "flex-end",
         padding: 1,
-        // 必要に応じてスタイルを追加
       }}
     >
       <IconButton onClick={onClose}>
@@ -121,40 +134,32 @@ function DrawerHeader({ onClose }: { onClose: () => void }) {
 export default function Navbar() {
   const { user } = useSelector((state: RootState) => state.auth);
   const pathname = usePathname();
+  const router = useRouter();
   const { mutate: logout } = useLogout();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+  useEffect(() => {
+    setIsDrawerOpen(false);
+  }, [pathname]);
+
   const handleDrawerToggle = () => {
     setIsDrawerOpen(!isDrawerOpen);
+  };
+
+  const handleNavigate = (href: string) => {
+    setIsDrawerOpen(false);
   };
 
   const drawer = (
     <Box sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
       <DrawerHeader onClose={() => setIsDrawerOpen(false)} />
-      <NavigationLinks
-        pathname={pathname}
-        onNavigate={() => {
-          if (isMobile) setIsDrawerOpen(false);
-        }}
-      />
+      <NavigationLinks pathname={pathname} onNavigate={handleNavigate} />
       <Box sx={{ flexGrow: 1 }} />
       <List>
         <ListItem>
-          {user ? (
-            <UserSection user={user} />
-          ) : (
-            <ListItemButton
-              component={Link}
-              href="/login"
-              onClick={() => {
-                if (isMobile) setIsDrawerOpen(false);
-              }}
-            >
-              <ListItemText primary="ログインまたは新規登録" />
-            </ListItemButton>
-          )}
+          <UserSection user={user} onNavigate={handleNavigate} />
         </ListItem>
       </List>
     </Box>
@@ -168,8 +173,8 @@ export default function Navbar() {
       <AppBar
         position="fixed"
         sx={{
-          width: "100%", // 画面横いっぱいに表示
-          zIndex: 1100, // 固定値を使用
+          width: "100%",
+          zIndex: 1100,
           height: appBarHeight,
         }}
       >
@@ -181,20 +186,19 @@ export default function Navbar() {
         </Toolbar>
       </AppBar>
       <Box component="nav">
-        {/* 統一されたドロワー */}
         <Drawer
-          variant={isMobile ? "temporary" : "temporary"} // デスクトップでも一時的に表示
+          variant={isMobile ? "temporary" : "temporary"}
           open={isDrawerOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // モバイルでのパフォーマンス向上
+            keepMounted: true,
           }}
           sx={{
-            zIndex: 1200, // AppBarより高い値を設定
+            zIndex: 1200,
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: DRAWER_WIDTH,
-              zIndex: 1200, // AppBarより高い値を設定
+              zIndex: 1200,
             },
           }}
         >
@@ -206,7 +210,7 @@ export default function Navbar() {
         sx={{
           flexGrow: 1,
           pt: appBarHeight,
-          width: "100%", // 画面横いっぱいに表示
+          width: "100%",
         }}
       >
         {/* メインコンテンツはここに入ります */}
