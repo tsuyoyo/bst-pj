@@ -451,10 +451,14 @@ class RefreshTokenRequest extends $pb.GeneratedMessage {
 
 class RefreshTokenResponse extends $pb.GeneratedMessage {
   factory RefreshTokenResponse({
+    $33.User? user,
     $core.String? accessToken,
     $core.String? refreshToken,
   }) {
     final $result = create();
+    if (user != null) {
+      $result.user = user;
+    }
     if (accessToken != null) {
       $result.accessToken = accessToken;
     }
@@ -468,8 +472,9 @@ class RefreshTokenResponse extends $pb.GeneratedMessage {
   factory RefreshTokenResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RefreshTokenResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'accessToken')
-    ..aOS(2, _omitFieldNames ? '' : 'refreshToken')
+    ..aOM<$33.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $33.User.create)
+    ..aOS(2, _omitFieldNames ? '' : 'accessToken')
+    ..aOS(3, _omitFieldNames ? '' : 'refreshToken')
     ..hasRequiredFields = false
   ;
 
@@ -495,22 +500,33 @@ class RefreshTokenResponse extends $pb.GeneratedMessage {
   static RefreshTokenResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get accessToken => $_getSZ(0);
+  $33.User get user => $_getN(0);
   @$pb.TagNumber(1)
-  set accessToken($core.String v) { $_setString(0, v); }
+  set user($33.User v) { setField(1, v); }
   @$pb.TagNumber(1)
-  $core.bool hasAccessToken() => $_has(0);
+  $core.bool hasUser() => $_has(0);
   @$pb.TagNumber(1)
-  void clearAccessToken() => clearField(1);
+  void clearUser() => clearField(1);
+  @$pb.TagNumber(1)
+  $33.User ensureUser() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $core.String get refreshToken => $_getSZ(1);
+  $core.String get accessToken => $_getSZ(1);
   @$pb.TagNumber(2)
-  set refreshToken($core.String v) { $_setString(1, v); }
+  set accessToken($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasRefreshToken() => $_has(1);
+  $core.bool hasAccessToken() => $_has(1);
   @$pb.TagNumber(2)
-  void clearRefreshToken() => clearField(2);
+  void clearAccessToken() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get refreshToken => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set refreshToken($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasRefreshToken() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearRefreshToken() => clearField(3);
 }
 
 

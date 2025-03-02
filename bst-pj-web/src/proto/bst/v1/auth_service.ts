@@ -46,6 +46,7 @@ export interface RefreshTokenRequest {
 }
 
 export interface RefreshTokenResponse {
+  user: User | undefined;
   accessToken: string;
   refreshToken: string;
 }
@@ -549,16 +550,19 @@ export const RefreshTokenRequest = {
 };
 
 function createBaseRefreshTokenResponse(): RefreshTokenResponse {
-  return { accessToken: "", refreshToken: "" };
+  return { user: undefined, accessToken: "", refreshToken: "" };
 }
 
 export const RefreshTokenResponse = {
   encode(message: RefreshTokenResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.user !== undefined) {
+      User.encode(message.user, writer.uint32(10).fork()).ldelim();
+    }
     if (message.accessToken !== "") {
-      writer.uint32(10).string(message.accessToken);
+      writer.uint32(18).string(message.accessToken);
     }
     if (message.refreshToken !== "") {
-      writer.uint32(18).string(message.refreshToken);
+      writer.uint32(26).string(message.refreshToken);
     }
     return writer;
   },
@@ -575,10 +579,17 @@ export const RefreshTokenResponse = {
             break;
           }
 
-          message.accessToken = reader.string();
+          message.user = User.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
+            break;
+          }
+
+          message.accessToken = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
             break;
           }
 
@@ -595,6 +606,7 @@ export const RefreshTokenResponse = {
 
   fromJSON(object: any): RefreshTokenResponse {
     return {
+      user: isSet(object.user) ? User.fromJSON(object.user) : undefined,
       accessToken: isSet(object.accessToken) ? globalThis.String(object.accessToken) : "",
       refreshToken: isSet(object.refreshToken) ? globalThis.String(object.refreshToken) : "",
     };
@@ -602,6 +614,9 @@ export const RefreshTokenResponse = {
 
   toJSON(message: RefreshTokenResponse): unknown {
     const obj: any = {};
+    if (message.user !== undefined) {
+      obj.user = User.toJSON(message.user);
+    }
     if (message.accessToken !== "") {
       obj.accessToken = message.accessToken;
     }
@@ -616,6 +631,7 @@ export const RefreshTokenResponse = {
   },
   fromPartial<I extends Exact<DeepPartial<RefreshTokenResponse>, I>>(object: I): RefreshTokenResponse {
     const message = createBaseRefreshTokenResponse();
+    message.user = (object.user !== undefined && object.user !== null) ? User.fromPartial(object.user) : undefined;
     message.accessToken = object.accessToken ?? "";
     message.refreshToken = object.refreshToken ?? "";
     return message;

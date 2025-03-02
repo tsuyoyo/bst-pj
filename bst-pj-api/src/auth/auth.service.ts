@@ -98,9 +98,11 @@ export class AuthService {
     };
   }
 
-  async refresh(
-    token: string,
-  ): Promise<{ access_token: string; refresh_token: string }> {
+  async refresh(token: string): Promise<{
+    user: ProtoUser;
+    access_token: string;
+    refresh_token: string;
+  }> {
     try {
       const payload = this.jwtService.verify<JwtPayload>(token, {
         secret: process.env.JWT_REFRESH_SECRET,
@@ -112,9 +114,15 @@ export class AuthService {
       if (!user) {
         throw new UnauthorizedException('User not found');
       }
+      const protoUser = await this.userService.getUser(user.id);
 
       const newPayload = { sub: user.id, email: user.email };
-      return this.generateTokens(newPayload);
+      const { access_token, refresh_token } = this.generateTokens(newPayload);
+      return {
+        user: protoUser,
+        access_token,
+        refresh_token,
+      };
     } catch (error) {
       if (error instanceof TokenExpiredError) {
         throw new UnauthorizedException('Refresh token expired');

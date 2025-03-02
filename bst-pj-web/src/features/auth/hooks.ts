@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setCredentials, logout as logoutAction } from "./authSlice";
 import { useEffect } from "react";
+import { store } from "../../store/store";
 
 export const useRegister = () => {
   const router = useRouter();
@@ -15,6 +16,7 @@ export const useRegister = () => {
       dispatch(
         setCredentials({
           accessToken: data.accessToken,
+          refreshToken: data.refreshToken,
           user: data.user,
         })
       );
@@ -25,6 +27,8 @@ export const useRegister = () => {
 
 export const useRefreshToken = () => {
   const dispatch = useDispatch();
+  const { auth } = store.getState();
+
   const query = useQuery({
     queryKey: ["auth", "refresh"],
     queryFn: refreshAccessToken,
@@ -37,13 +41,24 @@ export const useRefreshToken = () => {
       dispatch(
         setCredentials({
           accessToken: query.data.accessToken,
+          refreshToken: query.data.refreshToken,
           user: query.data.user,
         })
       );
     }
   }, [query.data, dispatch]);
 
-  return query;
+  const conditionalRefetch = () => {
+    if (auth.refreshToken) {
+      return query.refetch();
+    }
+    return Promise.resolve(null);
+  };
+
+  return {
+    ...query,
+    refetch: conditionalRefetch,
+  };
 };
 
 export const useLogout = () => {
@@ -69,6 +84,7 @@ export const useLogin = () => {
       dispatch(
         setCredentials({
           accessToken: data.accessToken,
+          refreshToken: data.refreshToken,
           user: data.user,
         })
       );

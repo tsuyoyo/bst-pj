@@ -4,6 +4,7 @@ import {
   RegisterResponse,
   LoginRequest,
   LoginResponse,
+  RefreshTokenResponse,
 } from "@/proto/bst/v1/auth_service";
 import { TokenResponse } from "./types";
 
@@ -23,11 +24,11 @@ export const register = async (
 };
 
 export const refreshAccessToken = async (): Promise<TokenResponse> => {
-  const { data } = await apiClient.post<LoginResponse>("/auth/refresh");
+  const { data } = await apiClient.post<RefreshTokenResponse>("/auth/refresh");
   return {
     accessToken: data.accessToken,
     refreshToken: data.refreshToken,
-    user: data.user!,
+    user: data.user,
   };
 };
 
