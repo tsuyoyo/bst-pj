@@ -7,6 +7,8 @@ import {
   RefreshTokenResponse,
 } from "@/proto/bst/v1/auth_service";
 import { TokenResponse } from "./types";
+import { store } from "@/store/store";
+import { updateAccessToken } from "./authSlice";
 
 export const register = async (
   request: RegisterRequest
@@ -24,12 +26,25 @@ export const register = async (
 };
 
 export const refreshAccessToken = async (): Promise<TokenResponse> => {
-  const { data } = await apiClient.post<RefreshTokenResponse>("/auth/refresh");
-  return {
-    accessToken: data.accessToken,
-    refreshToken: data.refreshToken,
-    user: data.user,
-  };
+  const { auth } = store.getState();
+
+  if (!auth.refreshToken) {
+    throw new Error("リフレッシュトークンがありません");
+  }
+
+  try {
+    const response = await apiClient.post("/auth/refresh", {
+      refreshToken: auth.refreshToken,
+    });
+
+    // 新しいアクセストークンをストアに保存
+    store.dispatch(updateAccessToken(response.data.accessToken));
+
+    return response.data;
+  } catch (error) {
+    console.error("トークンのリフレッシュに失敗しました", error);
+    throw error;
+  }
 };
 
 export const logout = async (): Promise<void> => {

@@ -1,25 +1,22 @@
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { store } from "@/store/store";
+import { refreshAccessToken } from "@/features/auth/api";
 
+// APIクライアントの作成
 export const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080",
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-// リクエストインターセプターの設定
+// リクエストインターセプター
 apiClient.interceptors.request.use(
   (config) => {
-    // Redux ストアから現在の認証状態を取得
     const { auth } = store.getState();
-    const { accessToken } = auth;
-
-    // アクセストークンが存在する場合、Authorization ヘッダーに追加
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
+    if (auth.accessToken) {
+      config.headers.Authorization = `Bearer ${auth.accessToken}`;
     }
-
     return config;
   },
   (error) => {
@@ -27,32 +24,58 @@ apiClient.interceptors.request.use(
   }
 );
 
-// レスポンスインターセプターの設定
+// レスポンスインターセプター
 apiClient.interceptors.response.use(
-  (response) => response,
-  async (error) => {
+  (response: AxiosResponse) => {
+    return response;
+  },
+  async (error: AxiosError) => {
+    console.error("Response interceptor 1 - ", error);
     const originalRequest = error.config;
 
-    // 401エラーかつリトライフラグがない場合（トークン期限切れの可能性）
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
+    interface ErrorResponse {
+      message?: string;
+    }
 
+    // エラーレスポンスからメッセージを取得
+    const errorResponse = error.response?.data as ErrorResponse;
+    const errorMessage = errorResponse?.message;
+
+    console.error("Response interceptor 2 - ", errorMessage);
+
+    // トークン期限切れの場合
+    if (
+      errorMessage === "TOKEN_EXPIRED" &&
+      originalRequest &&
+      !(originalRequest as any)._retry
+    ) {
       try {
+        // リトライフラグを設定
+        (originalRequest as any)._retry = true;
+
+        // ストアから現在のリフレッシュトークンを取得
         const { auth } = store.getState();
 
-        // refreshTokenプロパティが存在しない場合、user.refreshTokenを確認
-        if (auth.refreshToken) {
-          // リフレッシュトークンがある場合、トークンリフレッシュを試みる
-          // この部分は実際のリフレッシュロジックに合わせて調整が必要
-
-          // リフレッシュ後に再度リクエストを試みる
-          return apiClient(originalRequest);
+        if (!auth.refreshToken) {
+          // リフレッシュトークンがない場合は認証エラーとして処理
+          return Promise.reject(error);
         }
+
+        // トークンをリフレッシュ
+        const response = await refreshAccessToken();
+
+        // 新しいアクセストークンでリクエストを再試行
+        originalRequest.headers.Authorization = `Bearer ${response.accessToken}`;
+
+        return apiClient(originalRequest);
       } catch (refreshError) {
-        return Promise.reject(refreshError);
+        // リフレッシュに失敗した場合は元のエラーを返す
+        console.error("トークンのリフレッシュに失敗しました", refreshError);
+        return Promise.reject(error);
       }
     }
 
+    // その他のエラーはそのまま返す
     return Promise.reject(error);
   }
 );

@@ -2,33 +2,26 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AuthState } from "./types";
 import { User } from "@/proto/bst/v1/user";
 
-// ローカルストレージからの初期状態の読み込み
-const loadAuthState = () => {
+// ローカルストレージからトークンを取得
+const getInitialState = (): AuthState => {
   if (typeof window === "undefined") {
     return {
       user: null,
       accessToken: null,
       refreshToken: null,
+      isLoading: false,
     };
   }
 
-  try {
-    const authState = localStorage.getItem("authState");
-    if (authState) {
-      return JSON.parse(authState);
-    }
-  } catch (e) {
-    console.error("Failed to load auth state from localStorage", e);
-  }
-
   return {
-    user: null,
-    accessToken: null,
-    refreshToken: null,
+    user: JSON.parse(localStorage.getItem("user") || "null"),
+    accessToken: localStorage.getItem("accessToken"),
+    refreshToken: localStorage.getItem("refreshToken"),
+    isLoading: false,
   };
 };
 
-const initialState = loadAuthState();
+const initialState: AuthState = getInitialState();
 
 export const authSlice = createSlice({
   name: "auth",
@@ -42,20 +35,38 @@ export const authSlice = createSlice({
         refreshToken: string;
       }>
     ) => {
-      state.user = action.payload.user;
-      state.accessToken = action.payload.accessToken;
-      state.refreshToken = action.payload.refreshToken;
+      const { user, accessToken, refreshToken } = action.payload;
+      state.user = user;
+      state.accessToken = accessToken;
+      state.refreshToken = refreshToken;
 
       // ローカルストレージに保存
       if (typeof window !== "undefined") {
-        localStorage.setItem(
-          "authState",
-          JSON.stringify({
-            user: action.payload.user,
-            accessToken: action.payload.accessToken,
-            refreshToken: action.payload.refreshToken,
-          })
-        );
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
+      }
+    },
+    updateAccessToken: (state, action: PayloadAction<string>) => {
+      state.accessToken = action.payload;
+
+      // ローカルストレージのアクセストークンを更新
+      if (typeof window !== "undefined") {
+        localStorage.setItem("accessToken", action.payload);
+      }
+    },
+    updateTokens: (
+      state,
+      action: PayloadAction<{ accessToken: string; refreshToken: string }>
+    ) => {
+      const { accessToken, refreshToken } = action.payload;
+      state.accessToken = accessToken;
+      state.refreshToken = refreshToken;
+
+      // ローカルストレージのトークンを更新
+      if (typeof window !== "undefined") {
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
       }
     },
     logout: (state) => {
@@ -65,7 +76,9 @@ export const authSlice = createSlice({
 
       // ローカルストレージから削除
       if (typeof window !== "undefined") {
-        localStorage.removeItem("authState");
+        localStorage.removeItem("user");
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
       }
     },
     startLoading: (state) => {
@@ -74,5 +87,11 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setCredentials, logout, startLoading } = authSlice.actions;
+export const {
+  setCredentials,
+  updateAccessToken,
+  updateTokens,
+  logout,
+  startLoading,
+} = authSlice.actions;
 export default authSlice.reducer;

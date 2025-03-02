@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Box,
   Typography,
@@ -12,33 +12,37 @@ import {
 } from "@mui/material";
 import { Edit as EditIcon } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
-import { apiClient } from "@/lib/axios";
-import { GetPartResponse, Part } from "@/proto/bst/v1/part_service";
+import { GetPartResponse } from "@/proto/bst/v1/part_service";
+import { Part } from "@/proto/bst/v1/content";
+import { useApi } from "@/hooks/useApi";
 
 const PartDetailPage = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
   const [part, setPart] = useState<Part | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const api = useApi<GetPartResponse>();
+  const isMounted = useRef(true);
 
+  // マウント時に一度だけ実行
   useEffect(() => {
+    // コンポーネントがマウントされているかチェック
+    isMounted.current = true;
+
     const fetchPart = async () => {
-      setLoading(true);
-      try {
-        const response = await apiClient.get(`/parts/${params.id}`);
-        const data = response.data as GetPartResponse;
-        setPart(data.part || null);
-        setError(null);
-      } catch (err) {
-        console.error("パートの取得に失敗しました", err);
-        setError("パートの取得に失敗しました。後でもう一度お試しください。");
-      } finally {
-        setLoading(false);
+      console.log("API call ---------");
+      const response = await api.execute("get", `/parts/${params.id}`);
+      // アンマウント後の状態更新を防止
+      if (isMounted.current && response) {
+        setPart(response.part || null);
       }
     };
 
     fetchPart();
-  }, [params.id]);
+
+    // クリーンアップ関数
+    return () => {
+      isMounted.current = false;
+    };
+  }, [params.id]); // api.executeを依存配列から削除
 
   const handleEdit = () => {
     router.push(`/community/parts/${params.id}/edit`);
@@ -48,7 +52,7 @@ const PartDetailPage = ({ params }: { params: { id: string } }) => {
     router.push("/community/parts");
   };
 
-  if (loading) {
+  if (api.loading) {
     return (
       <Container className="page-container">
         <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
@@ -58,11 +62,11 @@ const PartDetailPage = ({ params }: { params: { id: string } }) => {
     );
   }
 
-  if (error || !part) {
+  if (api.error || !part) {
     return (
       <Container className="page-container">
         <Alert severity="error">
-          {error || "パートが見つかりませんでした。"}
+          {api.error || "パートが見つかりませんでした。"}
         </Alert>
         <Button sx={{ mt: 2 }} onClick={handleBack}>
           一覧に戻る

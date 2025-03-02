@@ -80,13 +80,21 @@ export const useLogin = () => {
   const dispatch = useDispatch();
 
   return useMutation({
-    mutationFn: login,
+    mutationFn: async ({
+      email,
+      password,
+    }: {
+      email: string;
+      password: string;
+    }) => {
+      return login({ email, password });
+    },
     onSuccess: (data) => {
       dispatch(
         setCredentials({
+          user: data.user,
           accessToken: data.accessToken,
           refreshToken: data.refreshToken,
-          user: data.user,
         })
       );
       router.push("/");

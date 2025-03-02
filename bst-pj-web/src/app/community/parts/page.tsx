@@ -13,43 +13,37 @@ import {
   Divider,
   CircularProgress,
   Pagination,
+  Alert,
 } from "@mui/material";
 import { Add as AddIcon } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
-import { apiClient } from "@/lib/axios";
 import { Part } from "@/proto/bst/v1/content";
 import { ListPartsResponse } from "@/proto/bst/v1/part_service";
+import { useApi } from "@/hooks/useApi";
 
 const PAGE_SIZE = 10;
 
 const PartsListPage = () => {
   const router = useRouter();
   const [parts, setParts] = useState<Part[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [nextPageToken, setNextPageToken] = useState("");
 
+  const api = useApi<ListPartsResponse>();
+
   const fetchParts = async (pageToken = "") => {
-    setLoading(true);
-    try {
-      const response = await apiClient.get("/parts", {
-        params: {
-          pageSize: PAGE_SIZE,
-          pageToken,
-        },
-      });
-      const data = response.data as ListPartsResponse;
-      setParts(data.parts);
-      setNextPageToken(data.nextPageToken);
-      setTotalPages(Math.ceil(data.totalSize / PAGE_SIZE));
-      setError(null);
-    } catch (err) {
-      console.error("パートの取得に失敗しました", err);
-      setError("パートの取得に失敗しました。後でもう一度お試しください。");
-    } finally {
-      setLoading(false);
+    const response = await api.execute("get", "/parts", {
+      params: {
+        pageSize: PAGE_SIZE,
+        pageToken,
+      },
+    });
+
+    if (response) {
+      setParts(response.parts);
+      setNextPageToken(response.nextPageToken);
+      setTotalPages(Math.ceil(response.totalSize / PAGE_SIZE));
     }
   };
 
@@ -62,8 +56,6 @@ const PartsListPage = () => {
     value: number
   ) => {
     setPage(value);
-    // ページトークンを使用してページネーションを実装
-    // 実際の実装ではページトークンの管理が必要
     fetchParts(nextPageToken);
   };
 
@@ -107,12 +99,16 @@ const PartsListPage = () => {
           演奏パートや楽器の一覧です。新しいパートを登録してコミュニティに貢献しましょう。
         </Typography>
 
-        {loading ? (
+        {api.error && (
+          <Alert severity="error" sx={{ mb: 3 }}>
+            {api.error}
+          </Alert>
+        )}
+
+        {api.loading ? (
           <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
             <CircularProgress />
           </Box>
-        ) : error ? (
-          <Typography color="error">{error}</Typography>
         ) : parts.length === 0 ? (
           <Typography>
             パートが登録されていません。新しいパートを追加してください。

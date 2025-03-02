@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Box,
   Typography,
@@ -17,6 +17,7 @@ import {
   GetPartResponse,
   UpdatePartResponse,
 } from "@/proto/bst/v1/part_service";
+import { useApi } from "@/hooks/useApi";
 
 const EditPartPage = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
@@ -25,27 +26,42 @@ const EditPartPage = ({ params }: { params: { id: string } }) => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const isMounted = useRef(true);
+
+  const getApi = useApi<GetPartResponse>();
+  const updateApi = useApi<UpdatePartResponse>();
 
   useEffect(() => {
+    isMounted.current = true;
+
     const fetchPart = async () => {
       setLoading(true);
       try {
-        const response = await apiClient.get(`/parts/${params.id}`);
-        const data = response.data as GetPartResponse;
-        if (data.part) {
-          setName(data.part.name);
-          setDescription(data.part.description);
+        const response = await getApi.execute("get", `/parts/${params.id}`);
+        if (isMounted.current && response?.part) {
+          setName(response.part.name);
+          setDescription(response.part.description);
         }
-        setError(null);
+        if (isMounted.current) {
+          setError(null);
+        }
       } catch (err) {
         console.error("パートの取得に失敗しました", err);
-        setError("パートの取得に失敗しました。後でもう一度お試しください。");
+        if (isMounted.current) {
+          setError("パートの取得に失敗しました。後でもう一度お試しください。");
+        }
       } finally {
-        setLoading(false);
+        if (isMounted.current) {
+          setLoading(false);
+        }
       }
     };
 
     fetchPart();
+
+    return () => {
+      isMounted.current = false;
+    };
   }, [params.id]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -54,14 +70,18 @@ const EditPartPage = ({ params }: { params: { id: string } }) => {
     setError(null);
 
     try {
-      const response = await apiClient.put(`/parts/${params.id}`, {
-        name,
-        description,
+      const response = await updateApi.execute("put", `/parts/${params.id}`, {
+        data: {
+          name,
+          description,
+        },
       });
-      const data = response.data as UpdatePartResponse;
-      router.push(`/community/parts/${params.id}`);
+
+      if (response) {
+        router.back();
+      }
     } catch (err) {
-      console.error("パートの更新に失敗しました", err);
+      console.error("aaaaaa パートの更新に失敗しました ----- ", err);
       setError("パートの更新に失敗しました。後でもう一度お試しください。");
     } finally {
       setSaving(false);

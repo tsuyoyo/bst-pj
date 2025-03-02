@@ -12,7 +12,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { apiClient } from "@/lib/axios";
+import { useApi } from "@/hooks/useApi";
 import { CreatePartResponse } from "@/proto/bst/v1/part_service";
 
 const NewPartPage = () => {
@@ -21,6 +21,7 @@ const NewPartPage = () => {
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const api = useApi<CreatePartResponse>();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,12 +29,16 @@ const NewPartPage = () => {
     setError(null);
 
     try {
-      const response = await apiClient.post("/parts", {
-        name,
-        description,
+      const response = await api.execute("post", "/parts", {
+        data: {
+          name,
+          description,
+        },
       });
-      const data = response.data as CreatePartResponse;
-      router.push(`/community/parts/${data.part?.id}`);
+
+      if (response) {
+        router.push(`/community/parts/${response.part?.id}`);
+      }
     } catch (err) {
       console.error("パートの登録に失敗しました", err);
       setError("パートの登録に失敗しました。後でもう一度お試しください。");
