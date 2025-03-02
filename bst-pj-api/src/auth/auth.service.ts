@@ -33,12 +33,12 @@ export class AuthService {
   private generateTokens(payload: { sub: number; email: string }) {
     const access_token = this.jwtService.sign(payload, {
       secret: process.env.JWT_SECRET,
-      expiresIn: '15m', // アクセストークンの有効期限
+      expiresIn: '10m',
     });
 
     const refresh_token = this.jwtService.sign(payload, {
       secret: process.env.JWT_REFRESH_SECRET,
-      expiresIn: '7d', // リフレッシュトークンの有効期限
+      expiresIn: '7d',
     });
 
     return { access_token, refresh_token };
@@ -107,7 +107,6 @@ export class AuthService {
       const payload = this.jwtService.verify<JwtPayload>(token, {
         secret: process.env.JWT_REFRESH_SECRET,
       });
-
       const user = await this.userRepository.findOne({
         where: { id: payload.sub },
       });

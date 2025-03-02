@@ -13,6 +13,7 @@ import {
   LoginResponse,
   RefreshTokenResponse,
   LogoutResponse,
+  RefreshTokenRequest,
 } from '../proto/bst/v1/auth_service';
 import { IsEmail, IsNotEmpty, Length } from 'class-validator';
 
@@ -38,6 +39,11 @@ class LoginDto implements LoginRequest {
   password: string;
 }
 
+class RefreshDto implements RefreshTokenRequest {
+  @IsNotEmpty()
+  refreshToken: string;
+}
+
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -45,15 +51,12 @@ export class AuthController {
   @Post('register')
   async register(@Body() registerDto: RegisterDto): Promise<RegisterResponse> {
     const { email, password, name } = registerDto;
-    const { user, access_token } = await this.authService.register(
-      email,
-      password,
-      name,
-    );
+    const { user, access_token, refresh_token } =
+      await this.authService.register(email, password, name);
     return {
       user,
       accessToken: access_token,
-      refreshToken: '',
+      refreshToken: refresh_token,
     };
   }
 
@@ -63,7 +66,7 @@ export class AuthController {
     const result = await this.authService.login(email, password);
     return {
       accessToken: result.access_token,
-      refreshToken: '',
+      refreshToken: result.refresh_token,
       user: result.user,
     };
   }
@@ -71,12 +74,13 @@ export class AuthController {
   @Post('refresh')
   async refresh(
     @Headers('Authorization') auth: string,
+    @Body() refreshDto: RefreshDto,
   ): Promise<RefreshTokenResponse> {
     if (!auth) {
       throw new UnauthorizedException('No token provided');
     }
 
-    const token = auth.replace('Bearer ', '');
+    const token = refreshDto.refreshToken;
     const result = await this.authService.refresh(token);
 
     return {
