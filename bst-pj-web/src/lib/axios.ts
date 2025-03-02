@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { store } from "@/store/store";
 import { refreshAccessToken } from "@/features/auth/api";
 
-// APIクライアントの作成
+// Create API client
 export const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080",
   headers: {
@@ -10,7 +10,7 @@ export const apiClient = axios.create({
   },
 });
 
-// リクエストインターセプター
+// Request interceptor
 apiClient.interceptors.request.use(
   (config) => {
     const { auth } = store.getState();
@@ -24,7 +24,7 @@ apiClient.interceptors.request.use(
   }
 );
 
-// レスポンスインターセプター
+// Response interceptor
 apiClient.interceptors.response.use(
   (response: AxiosResponse) => {
     return response;
@@ -37,45 +37,45 @@ apiClient.interceptors.response.use(
       message?: string;
     }
 
-    // エラーレスポンスからメッセージを取得
+    // Get message from error response
     const errorResponse = error.response?.data as ErrorResponse;
     const errorMessage = errorResponse?.message;
 
     console.error("Response interceptor 2 - ", errorMessage);
 
-    // トークン期限切れの場合
+    // When token is expired
     if (
       errorMessage === "TOKEN_EXPIRED" &&
       originalRequest &&
       !(originalRequest as any)._retry
     ) {
       try {
-        // リトライフラグを設定
+        // Set retry flag
         (originalRequest as any)._retry = true;
 
-        // ストアから現在のリフレッシュトークンを取得
+        // Get current refresh token from store
         const { auth } = store.getState();
 
         if (!auth.refreshToken) {
-          // リフレッシュトークンがない場合は認証エラーとして処理
+          // Handle as authentication error if no refresh token
           return Promise.reject(error);
         }
 
-        // トークンをリフレッシュ
+        // Refresh token
         const response = await refreshAccessToken();
 
-        // 新しいアクセストークンでリクエストを再試行
+        // Retry request with new access token
         originalRequest.headers.Authorization = `Bearer ${response.accessToken}`;
 
         return apiClient(originalRequest);
       } catch (refreshError) {
-        // リフレッシュに失敗した場合は元のエラーを返す
-        console.error("トークンのリフレッシュに失敗しました", refreshError);
+        // Return original error if refresh fails
+        console.error("Failed to refresh token", refreshError);
         return Promise.reject(error);
       }
     }
 
-    // その他のエラーはそのまま返す
+    // Return other errors as is
     return Promise.reject(error);
   }
 );

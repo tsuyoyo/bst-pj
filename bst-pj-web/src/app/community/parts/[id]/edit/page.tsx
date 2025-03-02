@@ -46,9 +46,9 @@ const EditPartPage = ({ params }: { params: { id: string } }) => {
           setError(null);
         }
       } catch (err) {
-        console.error("パートの取得に失敗しました", err);
+        console.error("Failed to fetch part", err);
         if (isMounted.current) {
-          setError("パートの取得に失敗しました。後でもう一度お試しください。");
+          setError("Failed to fetch part. Please try again later.");
         }
       } finally {
         if (isMounted.current) {
@@ -81,8 +81,8 @@ const EditPartPage = ({ params }: { params: { id: string } }) => {
         router.back();
       }
     } catch (err) {
-      console.error("aaaaaa パートの更新に失敗しました ----- ", err);
-      setError("パートの更新に失敗しました。後でもう一度お試しください。");
+      console.error("Failed to update part ----- ", err);
+      setError("Failed to update part. Please try again later.");
     } finally {
       setSaving(false);
     }
@@ -106,18 +106,18 @@ const EditPartPage = ({ params }: { params: { id: string } }) => {
     <Container className="page-container">
       <Paper elevation={2} sx={{ p: 3, mt: 2 }}>
         <Typography variant="h4" component="h1" gutterBottom>
-          パート編集
+          Edit Part
         </Typography>
 
         {error && (
-          <Alert severity="error" sx={{ mb: 3 }}>
+          <Alert severity="error" sx={{ mb: 2 }}>
             {error}
           </Alert>
         )}
 
         <Box component="form" onSubmit={handleSubmit}>
           <TextField
-            label="パート名"
+            label="Name"
             fullWidth
             margin="normal"
             required
@@ -125,8 +125,9 @@ const EditPartPage = ({ params }: { params: { id: string } }) => {
             onChange={(e) => setName(e.target.value)}
             disabled={saving}
           />
+
           <TextField
-            label="説明"
+            label="Description"
             fullWidth
             margin="normal"
             multiline
@@ -144,10 +145,10 @@ const EditPartPage = ({ params }: { params: { id: string } }) => {
               disabled={saving}
               startIcon={saving ? <CircularProgress size={20} /> : null}
             >
-              {saving ? "保存中..." : "保存する"}
+              {saving ? "Saving..." : "Save"}
             </Button>
             <Button variant="outlined" onClick={handleCancel} disabled={saving}>
-              キャンセル
+              Cancel
             </Button>
           </Box>
         </Box>

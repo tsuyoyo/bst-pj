@@ -22,15 +22,15 @@ const PartDetailPage = ({ params }: { params: { id: string } }) => {
   const api = useApi<GetPartResponse>();
   const isMounted = useRef(true);
 
-  // マウント時に一度だけ実行
+  // Execute once on mount
   useEffect(() => {
-    // コンポーネントがマウントされているかチェック
+    // Check if component is mounted
     isMounted.current = true;
 
     const fetchPart = async () => {
       console.log("API call ---------");
       const response = await api.execute("get", `/parts/${params.id}`);
-      // アンマウント後の状態更新を防止
+      // Prevent state updates after unmount
       if (isMounted.current && response) {
         setPart(response.part || null);
       }
@@ -38,11 +38,11 @@ const PartDetailPage = ({ params }: { params: { id: string } }) => {
 
     fetchPart();
 
-    // クリーンアップ関数
+    // Cleanup function
     return () => {
       isMounted.current = false;
     };
-  }, [params.id]); // api.executeを依存配列から削除
+  }, [params.id]); // Remove api.execute from dependency array
 
   const handleEdit = () => {
     router.push(`/community/parts/${params.id}/edit`);
@@ -65,11 +65,9 @@ const PartDetailPage = ({ params }: { params: { id: string } }) => {
   if (api.error || !part) {
     return (
       <Container className="page-container">
-        <Alert severity="error">
-          {api.error || "パートが見つかりませんでした。"}
-        </Alert>
+        <Alert severity="error">{api.error || "Part not found."}</Alert>
         <Button sx={{ mt: 2 }} onClick={handleBack}>
-          一覧に戻る
+          Back to list
         </Button>
       </Container>
     );
@@ -94,19 +92,19 @@ const PartDetailPage = ({ params }: { params: { id: string } }) => {
             startIcon={<EditIcon />}
             onClick={handleEdit}
           >
-            編集
+            Edit
           </Button>
         </Box>
 
         <Typography variant="h6" gutterBottom>
-          説明
+          Description
         </Typography>
         <Typography variant="body1" paragraph>
           {part.description}
         </Typography>
 
         <Button onClick={handleBack} sx={{ mt: 3 }}>
-          一覧に戻る
+          Back to list
         </Button>
       </Paper>
     </Container>

@@ -40,32 +40,33 @@ const NewPartPage = () => {
         router.push(`/community/parts/${response.part?.id}`);
       }
     } catch (err) {
-      console.error("パートの登録に失敗しました", err);
-      setError("パートの登録に失敗しました。後でもう一度お試しください。");
+      console.error("Failed to create part", err);
+      setError("Failed to create part. Please try again later.");
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleCancel = () => {
+    router.push("/community/parts");
   };
 
   return (
     <Container className="page-container">
       <Paper elevation={2} sx={{ p: 3, mt: 2 }}>
         <Typography variant="h4" component="h1" gutterBottom>
-          新規パート登録
-        </Typography>
-        <Typography variant="body1" paragraph>
-          新しい演奏パートや楽器を登録して、コミュニティに貢献しましょう。
+          Add New Part
         </Typography>
 
         {error && (
-          <Alert severity="error" sx={{ mb: 3 }}>
+          <Alert severity="error" sx={{ mb: 2 }}>
             {error}
           </Alert>
         )}
 
         <Box component="form" onSubmit={handleSubmit}>
           <TextField
-            label="パート名"
+            label="Name"
             fullWidth
             margin="normal"
             required
@@ -73,8 +74,9 @@ const NewPartPage = () => {
             onChange={(e) => setName(e.target.value)}
             disabled={loading}
           />
+
           <TextField
-            label="説明"
+            label="Description"
             fullWidth
             margin="normal"
             multiline
@@ -92,14 +94,14 @@ const NewPartPage = () => {
               disabled={loading}
               startIcon={loading ? <CircularProgress size={20} /> : null}
             >
-              {loading ? "登録中..." : "登録する"}
+              {loading ? "Creating..." : "Create"}
             </Button>
             <Button
               variant="outlined"
-              onClick={() => router.push("/community/parts")}
+              onClick={handleCancel}
               disabled={loading}
             >
-              キャンセル
+              Cancel
             </Button>
           </Box>
         </Box>

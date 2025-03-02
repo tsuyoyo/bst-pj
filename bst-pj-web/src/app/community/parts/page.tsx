@@ -32,6 +32,10 @@ const PartsListPage = () => {
 
   const api = useApi<ListPartsResponse>();
 
+  useEffect(() => {
+    fetchParts();
+  }, [page]);
+
   const fetchParts = async (pageToken = "") => {
     const response = await api.execute("get", "/parts", {
       params: {
@@ -47,28 +51,23 @@ const PartsListPage = () => {
     }
   };
 
-  useEffect(() => {
-    fetchParts();
-  }, []);
-
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
     value: number
   ) => {
     setPage(value);
-    fetchParts(nextPageToken);
   };
 
   const handleAddPart = () => {
     router.push("/community/parts/new");
   };
 
-  const handleEditPart = (partId: number) => {
-    router.push(`/community/parts/${partId}/edit`);
+  const handleEditPart = (id: number) => {
+    router.push(`/community/parts/${id}/edit`);
   };
 
-  const handleViewPart = (partId: number) => {
-    router.push(`/community/parts/${partId}`);
+  const handleViewPart = (id: number) => {
+    router.push(`/community/parts/${id}`);
   };
 
   return (
@@ -83,24 +82,19 @@ const PartsListPage = () => {
           }}
         >
           <Typography variant="h4" component="h1">
-            パート一覧
+            Parts
           </Typography>
           <Button
             variant="contained"
-            color="primary"
             startIcon={<AddIcon />}
             onClick={handleAddPart}
           >
-            新規パート登録
+            Add Part
           </Button>
         </Box>
 
-        <Typography variant="body1" paragraph>
-          演奏パートや楽器の一覧です。新しいパートを登録してコミュニティに貢献しましょう。
-        </Typography>
-
         {api.error && (
-          <Alert severity="error" sx={{ mb: 3 }}>
+          <Alert severity="error" sx={{ mb: 2 }}>
             {api.error}
           </Alert>
         )}
@@ -110,9 +104,7 @@ const PartsListPage = () => {
             <CircularProgress />
           </Box>
         ) : parts.length === 0 ? (
-          <Typography>
-            パートが登録されていません。新しいパートを追加してください。
-          </Typography>
+          <Typography>No parts registered. Please add a new part.</Typography>
         ) : (
           <>
             <List>
@@ -134,7 +126,7 @@ const PartsListPage = () => {
                         handleEditPart(part.id);
                       }}
                     >
-                      編集
+                      Edit
                     </Button>
                   </ListItem>
                 </Box>

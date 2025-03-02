@@ -20,7 +20,7 @@ export function useApi<T>() {
 
   const { refetch } = useRefreshToken();
 
-  // useRefを使用して関数の安定した参照を保持
+  // Use useRef to maintain stable function references
   const stableRef = useRef<{
     execute: (
       method: string,
@@ -29,7 +29,7 @@ export function useApi<T>() {
     ) => Promise<T | null>;
   }>();
 
-  // executeメソッドを一度だけ定義
+  // Define execute method only once
   if (!stableRef.current) {
     stableRef.current = {
       execute: async (
@@ -55,7 +55,7 @@ export function useApi<T>() {
 
           return result;
         } catch (err: any) {
-          console.error(`API ${method} ${url} リクエストエラー:`, err);
+          console.error(`API ${method} ${url} request error:`, err);
 
           if (err.response?.data?.message === "TOKEN_EXPIRED") {
             try {
@@ -76,19 +76,18 @@ export function useApi<T>() {
 
               return result;
             } catch (refreshErr) {
-              console.error("トークンのリフレッシュに失敗しました", refreshErr);
+              console.error("Failed to refresh token", refreshErr);
               setState({
                 data: null,
                 loading: false,
-                error: "認証の有効期限が切れました。再度ログインしてください。",
+                error: "Your authentication has expired. Please log in again.",
               });
             }
           } else {
             setState({
               data: null,
               loading: false,
-              error:
-                err.response?.data?.message || "リクエストに失敗しました。",
+              error: err.response?.data?.message || "Request failed.",
             });
           }
           return null;
