@@ -14,7 +14,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body>
+      {/*
+      Important: This is a temporary solution to avoid hydration errors.
+      It should be re-considered when the app is deployed to miss hydration errors.
+      https://nextjs.org/docs/messages/react-hydration-error
+       */}
+      <body suppressHydrationWarning>
         <Providers>
           <Navbar />
           {children}

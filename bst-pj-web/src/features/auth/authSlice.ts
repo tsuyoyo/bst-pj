@@ -2,12 +2,33 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AuthState } from "./types";
 import { User } from "@/proto/bst/v1/user";
 
-const initialState: AuthState = {
-  accessToken: null,
-  refreshToken: null,
-  user: null,
-  isLoading: true,
+// ローカルストレージからの初期状態の読み込み
+const loadAuthState = () => {
+  if (typeof window === "undefined") {
+    return {
+      user: null,
+      accessToken: null,
+      refreshToken: null,
+    };
+  }
+
+  try {
+    const authState = localStorage.getItem("authState");
+    if (authState) {
+      return JSON.parse(authState);
+    }
+  } catch (e) {
+    console.error("Failed to load auth state from localStorage", e);
+  }
+
+  return {
+    user: null,
+    accessToken: null,
+    refreshToken: null,
+  };
 };
+
+const initialState = loadAuthState();
 
 export const authSlice = createSlice({
   name: "auth",
@@ -16,22 +37,36 @@ export const authSlice = createSlice({
     setCredentials: (
       state,
       action: PayloadAction<{
+        user: any;
         accessToken: string;
         refreshToken: string;
-        user: User;
       }>
     ) => {
-      console.log("setCredentials", action.payload);
+      state.user = action.payload.user;
       state.accessToken = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken;
-      state.user = action.payload.user;
-      state.isLoading = false;
+
+      // ローカルストレージに保存
+      if (typeof window !== "undefined") {
+        localStorage.setItem(
+          "authState",
+          JSON.stringify({
+            user: action.payload.user,
+            accessToken: action.payload.accessToken,
+            refreshToken: action.payload.refreshToken,
+          })
+        );
+      }
     },
     logout: (state) => {
+      state.user = null;
       state.accessToken = null;
       state.refreshToken = null;
-      state.user = null;
-      state.isLoading = false;
+
+      // ローカルストレージから削除
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("authState");
+      }
     },
     startLoading: (state) => {
       state.isLoading = true;
