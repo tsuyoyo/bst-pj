@@ -12,10 +12,9 @@ import {
   ListItemText,
   Divider,
   CircularProgress,
-  Pagination,
   Alert,
 } from "@mui/material";
-import { Add as AddIcon } from "@mui/icons-material";
+import { Add as AddIcon, Edit as EditIcon } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import { Genre } from "@/proto/bst/v1/content";
 import { ListGenresResponse } from "@/proto/bst/v1/genre_service";
@@ -23,14 +22,11 @@ import { useApi } from "@/hooks/useApi";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
-const PAGE_SIZE = 10;
-
 const GenresListPage = () => {
   const router = useRouter();
   const [genres, setGenres] = useState<Genre[]>([]);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [nextPageToken, setNextPageToken] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const { user } = useSelector((state: RootState) => state.auth);
   const isMounted = useRef(true);
 
@@ -43,30 +39,24 @@ const GenresListPage = () => {
     return () => {
       isMounted.current = false;
     };
-  }, [page]);
+  }, []);
 
-  const fetchGenres = async (pageToken = "") => {
-    const response = await api.execute("get", "/genres", {
-      params: {
-        pageSize: PAGE_SIZE,
-        pageToken,
-      },
-    });
-
-    if (isMounted.current && response) {
-      setGenres(response.genres || []);
-      setNextPageToken(response.nextPageToken || "");
-      setTotalPages(
-        Math.ceil((response.totalSize || genres.length) / PAGE_SIZE)
-      );
+  const fetchGenres = async () => {
+    try {
+      const response = await api.execute("get", "/genres");
+      if (isMounted.current && response) {
+        setGenres(response.genres || []);
+      }
+    } catch (err) {
+      console.error("Failed to fetch genres", err);
+      if (isMounted.current) {
+        setError("ジャンルの取得に失敗しました。後でもう一度お試しください。");
+      }
+    } finally {
+      if (isMounted.current) {
+        setLoading(false);
+      }
     }
-  };
-
-  const handlePageChange = (
-    event: React.ChangeEvent<unknown>,
-    value: number
-  ) => {
-    setPage(value);
   };
 
   const handleAddGenre = () => {
@@ -75,10 +65,6 @@ const GenresListPage = () => {
 
   const handleEditGenre = (id: number) => {
     router.push(`/community/genres/${id}/edit`);
-  };
-
-  const handleViewGenre = (id: number) => {
-    router.push(`/community/genres/${id}`);
   };
 
   return (
@@ -110,9 +96,9 @@ const GenresListPage = () => {
           音楽ジャンルの一覧です。新しいジャンルを登録してコミュニティに貢献しましょう。
         </Typography>
 
-        {api.error && (
+        {error && (
           <Alert severity="error" sx={{ mb: 2 }}>
-            {api.error}
+            {error}
           </Alert>
         )}
 
@@ -125,46 +111,28 @@ const GenresListPage = () => {
             ジャンルが登録されていません。新しいジャンルを追加してください。
           </Typography>
         ) : (
-          <>
-            <List>
-              {genres.map((genre, index) => (
-                <Box key={genre.id}>
-                  {index > 0 && <Divider />}
-                  <ListItem
-                    sx={{ cursor: "pointer" }}
-                    onClick={() => handleViewGenre(genre.id)}
-                  >
-                    <ListItemText
-                      primary={genre.name}
-                      secondary={genre.description}
-                    />
-                    {user && (
-                      <Button
-                        size="small"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleEditGenre(genre.id);
-                        }}
-                      >
-                        編集
-                      </Button>
-                    )}
-                  </ListItem>
-                </Box>
-              ))}
-            </List>
-
-            {totalPages > 1 && (
-              <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
-                <Pagination
-                  count={totalPages}
-                  page={page}
-                  onChange={handlePageChange}
-                  color="primary"
-                />
+          <List>
+            {genres.map((genre, index) => (
+              <Box key={genre.id}>
+                {index > 0 && <Divider />}
+                <ListItem>
+                  <ListItemText
+                    primary={genre.name}
+                    secondary={genre.description}
+                  />
+                  {user && (
+                    <Button
+                      size="small"
+                      startIcon={<EditIcon />}
+                      onClick={() => handleEditGenre(genre.id)}
+                    >
+                      編集
+                    </Button>
+                  )}
+                </ListItem>
               </Box>
-            )}
-          </>
+            ))}
+          </List>
         )}
       </Paper>
     </Container>

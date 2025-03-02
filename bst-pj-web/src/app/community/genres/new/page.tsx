@@ -13,17 +13,13 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useApi } from "@/hooks/useApi";
-import {
-  CreateGenreRequest,
-  CreateGenreResponse,
-} from "@/proto/bst/v1/genre_service";
+import { CreateGenreResponse } from "@/proto/bst/v1/genre_service";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
 const NewGenrePage = () => {
   const router = useRouter();
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const api = useApi<CreateGenreResponse>();
@@ -49,7 +45,8 @@ const NewGenrePage = () => {
       });
 
       if (response) {
-        router.push(`/community/genres/${response.genre?.id}`);
+        // 一覧ページに遷移するように修正
+        router.push("/community/genres");
       }
     } catch (err) {
       console.error("Failed to create genre", err);
@@ -95,17 +92,6 @@ const NewGenrePage = () => {
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            disabled={loading}
-          />
-
-          <TextField
-            label="説明"
-            fullWidth
-            margin="normal"
-            multiline
-            rows={4}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
             disabled={loading}
           />
 

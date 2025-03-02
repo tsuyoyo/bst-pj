@@ -55,7 +55,7 @@ export class GenreController {
   @UseGuards(JwtAuthGuard)
   async updateGenre(
     @Param('id') id: string,
-    @Body() request: UpdateGenreDto,
+    @Body('data') request: UpdateGenreDto,
     @CurrentUser() user: User,
   ): Promise<UpdateGenreResponse> {
     console.log(`Updating genre by user: ${user.email}`);

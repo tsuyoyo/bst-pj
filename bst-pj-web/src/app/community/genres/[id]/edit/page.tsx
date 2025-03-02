@@ -12,26 +12,22 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
-import {
-  GetGenreResponse,
-  UpdateGenreResponse,
-} from "@/proto/bst/v1/genre_service";
+import { UpdateGenreResponse } from "@/proto/bst/v1/genre_service";
 import { useApi } from "@/hooks/useApi";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { Genre } from "@/proto/bst/v1/content";
 
 const EditGenrePage = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const isMounted = useRef(true);
   const { user } = useSelector((state: RootState) => state.auth);
 
-  const getApi = useApi<GetGenreResponse>();
-  const updateApi = useApi<UpdateGenreResponse>();
+  const api = useApi<UpdateGenreResponse>();
+  const genresApi = useApi<{ genres: Genre[] }>();
 
   // Redirect if not logged in
   useEffect(() => {
@@ -44,15 +40,16 @@ const EditGenrePage = ({ params }: { params: { id: string } }) => {
     isMounted.current = true;
 
     const fetchGenre = async () => {
-      setLoading(true);
       try {
-        const response = await getApi.execute("get", `/genres/${params.id}`);
-        if (isMounted.current && response?.genre) {
-          setName(response.genre.name);
-          setDescription(response.genre.description || "");
-        }
-        if (isMounted.current) {
-          setError(null);
+        // ジャンル一覧から該当のジャンルを取得
+        const response = await genresApi.execute("get", "/genres");
+        if (isMounted.current && response?.genres) {
+          const genre = response.genres.find((g) => g.id === Number(params.id));
+          if (genre) {
+            setName(genre.name);
+          } else {
+            setError("指定されたジャンルが見つかりませんでした。");
+          }
         }
       } catch (err) {
         console.error("Failed to fetch genre", err);
@@ -60,10 +57,6 @@ const EditGenrePage = ({ params }: { params: { id: string } }) => {
           setError(
             "ジャンルの取得に失敗しました。後でもう一度お試しください。"
           );
-        }
-      } finally {
-        if (isMounted.current) {
-          setLoading(false);
         }
       }
     };
@@ -83,15 +76,14 @@ const EditGenrePage = ({ params }: { params: { id: string } }) => {
     setError(null);
 
     try {
-      const response = await updateApi.execute("put", `/genres/${params.id}`, {
+      const response = await api.execute("put", `/genres/${params.id}`, {
         data: {
           name,
-          description,
         },
       });
 
       if (response) {
-        router.push(`/community/genres/${params.id}`);
+        router.push("/community/genres");
       }
     } catch (err) {
       console.error("Failed to update genre", err);
@@ -102,7 +94,7 @@ const EditGenrePage = ({ params }: { params: { id: string } }) => {
   };
 
   const handleCancel = () => {
-    router.push(`/community/genres/${params.id}`);
+    router.push("/community/genres");
   };
 
   if (!user) {
@@ -113,7 +105,7 @@ const EditGenrePage = ({ params }: { params: { id: string } }) => {
     );
   }
 
-  if (loading) {
+  if (genresApi.loading) {
     return (
       <Container className="page-container">
         <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
@@ -144,17 +136,6 @@ const EditGenrePage = ({ params }: { params: { id: string } }) => {
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            disabled={saving}
-          />
-
-          <TextField
-            label="説明"
-            fullWidth
-            margin="normal"
-            multiline
-            rows={4}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
             disabled={saving}
           />
 
