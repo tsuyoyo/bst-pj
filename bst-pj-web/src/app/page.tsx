@@ -16,7 +16,7 @@ export default function Home() {
   const { user } = useSelector((state: RootState) => state.auth);
 
   return (
-    <div className="page-container" style={{ backgroundColor: "blue" }}>
+    <div className="page-container" style={{ backgroundColor: "lightblue" }}>
       <Typography variant="body1">
         これは本文のテキストです。ここに内容を追加します。
       </Typography>

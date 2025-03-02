@@ -33,11 +33,13 @@ import {
   Person as PersonIcon,
   Close as CloseIcon,
   Logout as LogoutIcon,
+  People as PeopleIcon,
 } from "@mui/icons-material";
 
 const navigation = [
   { name: "ホーム", href: "/", icon: HomeIcon },
   { name: "プロジェクト", href: "/projects", icon: FolderIcon },
+  { name: "コミュニティ", href: "/community", icon: PeopleIcon },
   { name: "設定", href: "/settings", icon: SettingsIcon },
 ];
 
