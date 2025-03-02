@@ -35,6 +35,36 @@ const theme = createTheme({
         },
       },
     },
+    // Add custom styles for TextField
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          "& .MuiOutlinedInput-root": {
+            "& fieldset": {
+              borderColor: "orange", // Change border color
+            },
+            "&:hover fieldset": {
+              borderColor: "lightorange", // Change border color on hover
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: "orange", // Change border color when focused
+            },
+          },
+        },
+      },
+    },
+    // Add custom styles for Button
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "darkorange", // Change default background color
+          color: "white", // Change text color
+          "&:hover": {
+            backgroundColor: "orange", // Change background color on hover
+          },
+        },
+      },
+    },
   },
   typography: {
     fontFamily: ["Roboto", "Arial", "Noto Sans JP", "sans-serif"].join(","),

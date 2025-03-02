@@ -3,8 +3,18 @@
 import { useState } from "react";
 import { useLogin } from "@/features/auth/hooks";
 import Link from "next/link";
+import {
+  Box,
+  Button,
+  Container,
+  TextField,
+  Typography,
+  Paper,
+  Alert,
+  Link as MuiLink,
+} from "@mui/material";
 
-export default function LoginPage() {
+const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { mutate: login, isPending, error } = useLogin();
@@ -15,75 +25,76 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            アカウントにログイン
-          </h2>
-        </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded-md shadow-sm space-y-4">
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
-              >
-                メールアドレス
-              </label>
-              <input
-                id="email"
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
-              >
-                パスワード
-              </label>
-              <input
-                id="password"
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
-              />
-            </div>
-          </div>
+    <Container className="page-container" component="main" maxWidth="xs">
+      <Paper
+        elevation={3}
+        sx={{
+          mt: 8,
+          p: 4,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Typography component="h1" variant="h5">
+          アカウントにログイン
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="メールアドレス"
+            name="email"
+            autoComplete="email"
+            autoFocus
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="パスワード"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
           {error && (
-            <div className="text-red-600 text-sm">
+            <Alert severity="error" sx={{ mt: 2 }}>
               ログインに失敗しました。メールアドレスとパスワードを確認してください。
-            </div>
+            </Alert>
           )}
 
-          <div className="flex items-center justify-between">
-            <div className="text-sm">
-              <Link
-                href="/signup"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                アカウントをお持ちでない方はこちら
-              </Link>
-            </div>
-          </div>
+          <Box sx={{ mt: 2, mb: 2 }}>
+            <MuiLink
+              component={Link}
+              href="/signup"
+              variant="body2"
+              underline="hover"
+            >
+              アカウントをお持ちでない方はこちら
+            </MuiLink>
+          </Box>
 
-          <button
+          <Button
             type="submit"
+            fullWidth
+            variant="contained"
             disabled={isPending}
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+            sx={{ mt: 3, mb: 2 }}
           >
             {isPending ? "ログイン中..." : "ログイン"}
-          </button>
-        </form>
-      </div>
-    </div>
+          </Button>
+        </Box>
+      </Paper>
+    </Container>
   );
-}
+};
+
+export default LoginPage;
