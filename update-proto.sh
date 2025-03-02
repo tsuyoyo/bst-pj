@@ -3,6 +3,8 @@ cd bst-pj-proto
 npm run generate
 cd ../bst-pj-api
 npm run copy:proto
+cd ../bst-pj-web
+npm run copy:proto
 
 # !! Note: This is a temporary patch to fix the runtime error !!
 # Apply patch to timestamp.ts to fix the error

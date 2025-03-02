@@ -33,6 +33,10 @@ class AuthServiceClient extends $grpc.Client {
       '/bst.v1.AuthService/Register',
       ($1.RegisterRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $1.RegisterResponse.fromBuffer(value));
+  static final _$refreshToken = $grpc.ClientMethod<$1.RefreshTokenRequest, $1.RefreshTokenResponse>(
+      '/bst.v1.AuthService/RefreshToken',
+      ($1.RefreshTokenRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.RefreshTokenResponse.fromBuffer(value));
 
   AuthServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -50,6 +54,10 @@ class AuthServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$1.RegisterResponse> register($1.RegisterRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$register, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.RefreshTokenResponse> refreshToken($1.RefreshTokenRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$refreshToken, request, options: options);
   }
 }
 
@@ -79,6 +87,13 @@ abstract class AuthServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $1.RegisterRequest.fromBuffer(value),
         ($1.RegisterResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.RefreshTokenRequest, $1.RefreshTokenResponse>(
+        'RefreshToken',
+        refreshToken_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.RefreshTokenRequest.fromBuffer(value),
+        ($1.RefreshTokenResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$1.LoginResponse> login_Pre($grpc.ServiceCall call, $async.Future<$1.LoginRequest> request) async {
@@ -93,7 +108,12 @@ abstract class AuthServiceBase extends $grpc.Service {
     return register(call, await request);
   }
 
+  $async.Future<$1.RefreshTokenResponse> refreshToken_Pre($grpc.ServiceCall call, $async.Future<$1.RefreshTokenRequest> request) async {
+    return refreshToken(call, await request);
+  }
+
   $async.Future<$1.LoginResponse> login($grpc.ServiceCall call, $1.LoginRequest request);
   $async.Future<$1.LogoutResponse> logout($grpc.ServiceCall call, $1.LogoutRequest request);
   $async.Future<$1.RegisterResponse> register($grpc.ServiceCall call, $1.RegisterRequest request);
+  $async.Future<$1.RefreshTokenResponse> refreshToken($grpc.ServiceCall call, $1.RefreshTokenRequest request);
 }

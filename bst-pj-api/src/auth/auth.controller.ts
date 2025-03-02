@@ -1,10 +1,17 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Headers,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import {
   RegisterRequest,
   RegisterResponse,
   LoginRequest,
   LoginResponse,
+  RefreshTokenResponse,
 } from '../proto/bst/v1/auth_service';
 import { IsEmail, IsNotEmpty, Length } from 'class-validator';
 
@@ -56,7 +63,24 @@ export class AuthController {
     return {
       accessToken: result.access_token,
       refreshToken: '',
-      user: undefined,
+      user: result.user,
+    };
+  }
+
+  @Post('refresh')
+  async refresh(
+    @Headers('Authorization') auth: string,
+  ): Promise<RefreshTokenResponse> {
+    if (!auth) {
+      throw new UnauthorizedException('No token provided');
+    }
+
+    const token = auth.replace('Bearer ', '');
+    const result = await this.authService.refresh(token);
+
+    return {
+      accessToken: result.access_token,
+      refreshToken: result.refresh_token,
     };
   }
 }

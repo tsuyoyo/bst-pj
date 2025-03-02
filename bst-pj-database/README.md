@@ -60,13 +60,15 @@ docker exec -it bst_postgres psql -U bst_admin -d bst_db
 \dt
 ```
 
-#### Connect using GUI Client
+#### Connect using GUI Client (pgAdmin)
 
-1. Install [pgAdmin](https://www.pgadmin.org/), [DBeaver](https://dbeaver.io/), or [TablePlus](https://tableplus.com/)
-2. Create a new connection
-3. Enter the connection information above
-4. Test the connection
-5. Save and connect
+- Install [pgAdmin](https://www.pgadmin.org/)
+
+##### How to query data from pgAdmin
+
+<img src="./readme_images/pgAdmin4_how_to_query_01.png" width="500">
+
+<img src="./readme_images/pgAdmin4_how_to_query_02.png" width="500">
 
 ## Migrations
 

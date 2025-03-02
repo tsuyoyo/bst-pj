@@ -1,0 +1,78 @@
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { register, refreshAccessToken, logout, login } from "./api";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setCredentials, logout as logoutAction } from "./authSlice";
+import { useEffect } from "react";
+
+export const useRegister = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  return useMutation({
+    mutationFn: register,
+    onSuccess: (data) => {
+      dispatch(
+        setCredentials({
+          accessToken: data.accessToken,
+          user: data.user,
+        })
+      );
+      router.push("/");
+    },
+  });
+};
+
+export const useRefreshToken = () => {
+  const dispatch = useDispatch();
+  const query = useQuery({
+    queryKey: ["auth", "refresh"],
+    queryFn: refreshAccessToken,
+    retry: 1,
+    enabled: false,
+  });
+
+  useEffect(() => {
+    if (query.data) {
+      dispatch(
+        setCredentials({
+          accessToken: query.data.accessToken,
+          user: query.data.user,
+        })
+      );
+    }
+  }, [query.data, dispatch]);
+
+  return query;
+};
+
+export const useLogout = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  return useMutation({
+    mutationFn: logout,
+    onSuccess: () => {
+      dispatch(logoutAction());
+      router.push("/");
+    },
+  });
+};
+
+export const useLogin = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  return useMutation({
+    mutationFn: login,
+    onSuccess: (data) => {
+      dispatch(
+        setCredentials({
+          accessToken: data.accessToken,
+          user: data.user,
+        })
+      );
+      router.push("/");
+    },
+  });
+};

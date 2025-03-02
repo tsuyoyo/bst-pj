@@ -42,7 +42,6 @@ exports.up = (pgm) => {
       notNull: true,
       references: "users",
       onDelete: "CASCADE",
-      comment: "作成者のUserID",
     },
     // Nullable until studio is set.
     studio_id: {
@@ -82,7 +81,6 @@ exports.up = (pgm) => {
   pgm.createIndex("sessions", ["entry_open_date"]);
   pgm.createIndex("sessions", ["entry_close_date"]);
   pgm.createIndex("sessions", ["creator_id"]);
-  pgm.createIndex("sessions", ["location_id"]);
 };
 
 exports.down = (pgm) => {
@@ -95,10 +93,8 @@ exports.down = (pgm) => {
   pgm.dropIndex("sessions", ["entry_open_date"], { ifExists: true });
   pgm.dropIndex("sessions", ["entry_close_date"], { ifExists: true });
   pgm.dropIndex("sessions", ["creator_id"], { ifExists: true });
-  pgm.dropIndex("sessions", ["location_id"], { ifExists: true });
 
   // Drop tables
-
   pgm.dropTable("sessions", { ifExists: true });
 
   // Drop enum type

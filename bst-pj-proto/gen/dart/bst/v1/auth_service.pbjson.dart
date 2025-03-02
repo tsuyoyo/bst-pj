@@ -95,3 +95,30 @@ final $typed_data.Uint8List registerResponseDescriptor = $convert.base64Decode(
     'xhY2Nlc3NfdG9rZW4YAiABKAlSC2FjY2Vzc1Rva2VuEiMKDXJlZnJlc2hfdG9rZW4YAyABKAlS'
     'DHJlZnJlc2hUb2tlbg==');
 
+@$core.Deprecated('Use refreshTokenRequestDescriptor instead')
+const RefreshTokenRequest$json = {
+  '1': 'RefreshTokenRequest',
+  '2': [
+    {'1': 'refresh_token', '3': 1, '4': 1, '5': 9, '10': 'refreshToken'},
+  ],
+};
+
+/// Descriptor for `RefreshTokenRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List refreshTokenRequestDescriptor = $convert.base64Decode(
+    'ChNSZWZyZXNoVG9rZW5SZXF1ZXN0EiMKDXJlZnJlc2hfdG9rZW4YASABKAlSDHJlZnJlc2hUb2'
+    'tlbg==');
+
+@$core.Deprecated('Use refreshTokenResponseDescriptor instead')
+const RefreshTokenResponse$json = {
+  '1': 'RefreshTokenResponse',
+  '2': [
+    {'1': 'access_token', '3': 1, '4': 1, '5': 9, '10': 'accessToken'},
+    {'1': 'refresh_token', '3': 2, '4': 1, '5': 9, '10': 'refreshToken'},
+  ],
+};
+
+/// Descriptor for `RefreshTokenResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List refreshTokenResponseDescriptor = $convert.base64Decode(
+    'ChRSZWZyZXNoVG9rZW5SZXNwb25zZRIhCgxhY2Nlc3NfdG9rZW4YASABKAlSC2FjY2Vzc1Rva2'
+    'VuEiMKDXJlZnJlc2hfdG9rZW4YAiABKAlSDHJlZnJlc2hUb2tlbg==');
+
