@@ -130,4 +130,24 @@ export class AuthService {
       throw new BadRequestException('Invalid refresh token');
     }
   }
+
+  async logout(token: string): Promise<boolean> {
+    try {
+      // トークンを検証
+      const payload = this.jwtService.verify<JwtPayload>(token, {
+        secret: process.env.JWT_SECRET,
+      });
+
+      // 実際の実装では、ここでトークンをブラックリストに追加するなどの処理を行う
+      // 例: Redis等を使用してトークンを無効化リストに追加
+
+      // このシンプルな実装では特に何もしない
+      // クライアント側でトークンを削除することが主な対応となる
+
+      return new Promise((resolve) => resolve(true));
+    } catch (error) {
+      console.error(error);
+      return new Promise((resolve) => resolve(false));
+    }
+  }
 }

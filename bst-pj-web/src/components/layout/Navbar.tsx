@@ -21,6 +21,8 @@ import {
   Typography,
   Avatar,
   useMediaQuery,
+  Button,
+  Divider,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import {
@@ -30,6 +32,7 @@ import {
   Settings as SettingsIcon,
   Person as PersonIcon,
   Close as CloseIcon,
+  Logout as LogoutIcon,
 } from "@mui/icons-material";
 
 const navigation = [
@@ -87,7 +90,7 @@ function NavigationLinks({
   );
 }
 
-// ユーザー情報セクション
+// ユーザー情報セクション（Drawer用）
 function UserSection({
   user,
   onNavigate,
@@ -95,6 +98,18 @@ function UserSection({
   user: any;
   onNavigate: (href: string) => void;
 }) {
+  // クライアントサイドのみでレンダリングするために、useEffectでマウント状態を確認
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // サーバーサイドレンダリング時は空のコンテナを返す
+  if (!isMounted) {
+    return <Box sx={{ minHeight: "40px" }} />;
+  }
+
   return user ? (
     <Box sx={{ display: "flex", alignItems: "center", gap: 2, p: 1 }}>
       <Avatar>
@@ -135,10 +150,24 @@ export default function Navbar() {
   const { user } = useSelector((state: RootState) => state.auth);
   const pathname = usePathname();
   const router = useRouter();
-  const { mutate: logout } = useLogout();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  // クライアントサイドのみでレンダリングするために、useEffectでマウント状態を確認
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Drawerを閉じる関数
+  const closeDrawer = () => {
+    setIsDrawerOpen(false);
+  };
+
+  // useLogoutフックにcloseDrawer関数を渡す
+  const { mutate: logout } = useLogout(closeDrawer);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     setIsDrawerOpen(false);
@@ -152,6 +181,11 @@ export default function Navbar() {
     setIsDrawerOpen(false);
   };
 
+  const handleLogout = () => {
+    logout();
+    // closeDrawerはuseLogoutフック内で呼び出されるので、ここでは不要
+  };
+
   const drawer = (
     <Box sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
       <DrawerHeader onClose={() => setIsDrawerOpen(false)} />
@@ -159,8 +193,24 @@ export default function Navbar() {
       <Box sx={{ flexGrow: 1 }} />
       <List>
         <ListItem>
-          <UserSection user={user} onNavigate={handleNavigate} />
+          <UserSection
+            user={isMounted ? user : null}
+            onNavigate={handleNavigate}
+          />
         </ListItem>
+        {isMounted && user && (
+          <>
+            <Divider />
+            <ListItem disablePadding>
+              <ListItemButton onClick={handleLogout}>
+                <ListItemIcon>
+                  <LogoutIcon />
+                </ListItemIcon>
+                <ListItemText primary="ログアウト" />
+              </ListItemButton>
+            </ListItem>
+          </>
+        )}
       </List>
     </Box>
   );
@@ -178,11 +228,18 @@ export default function Navbar() {
           height: appBarHeight,
         }}
       >
-        <Toolbar>
-          <HamburgerButton onClick={handleDrawerToggle} />
-          <Typography variant="h6" noWrap component="div">
-            ジョニー
-          </Typography>
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <HamburgerButton onClick={handleDrawerToggle} />
+            <Typography variant="h6" noWrap component="div">
+              ジョニー
+            </Typography>
+          </Box>
+          {isMounted ? (
+            <UserSection user={user} onNavigate={handleLogout} />
+          ) : (
+            <Box sx={{ minHeight: "40px", minWidth: "40px" }} />
+          )}
         </Toolbar>
       </AppBar>
       <Box component="nav">

@@ -12,6 +12,7 @@ import {
   LoginRequest,
   LoginResponse,
   RefreshTokenResponse,
+  LogoutResponse,
 } from '../proto/bst/v1/auth_service';
 import { IsEmail, IsNotEmpty, Length } from 'class-validator';
 
@@ -83,5 +84,19 @@ export class AuthController {
       refreshToken: result.refresh_token,
       user: result.user,
     };
+  }
+
+  @Post('logout')
+  async logout(
+    @Headers('Authorization') auth: string,
+  ): Promise<LogoutResponse> {
+    if (!auth) {
+      throw new UnauthorizedException('No token provided');
+    }
+
+    const token = auth.replace('Bearer ', '');
+    await this.authService.logout(token);
+
+    return { success: true };
   }
 }

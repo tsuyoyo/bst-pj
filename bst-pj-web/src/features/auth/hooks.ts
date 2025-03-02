@@ -61,7 +61,7 @@ export const useRefreshToken = () => {
   };
 };
 
-export const useLogout = () => {
+export const useLogout = (closeDrawer: () => void) => {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -69,6 +69,7 @@ export const useLogout = () => {
     mutationFn: logout,
     onSuccess: () => {
       dispatch(logoutAction());
+      closeDrawer();
       router.push("/");
     },
   });
