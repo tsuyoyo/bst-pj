@@ -2,10 +2,9 @@
 
 import React, { useEffect } from "react";
 import { Provider } from "react-redux";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { store } from "../store/store";
-import { queryClient } from "@/lib/react-query";
-import { useRefreshToken } from "@/features/auth/hooks";
+import { setCredentials } from "@/features/auth/authSlice";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Noto_Sans_JP } from "next/font/google";
@@ -72,14 +71,48 @@ const theme = createTheme({
 });
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
-  const { refetch } = useRefreshToken();
-
+  // アプリケーション初期化時に認証状態を復元
   useEffect(() => {
-    refetch(); // アプリ起動時にトークンをリフレッシュ
-  }, [refetch]);
+    try {
+      // authStateから読み込み
+      const authStateStr = localStorage.getItem("authState");
+      if (authStateStr) {
+        const authState = JSON.parse(authStateStr);
+        if (authState.accessToken && authState.refreshToken) {
+          store.dispatch(
+            setCredentials({
+              user: authState.user || null,
+              accessToken: authState.accessToken,
+              refreshToken: authState.refreshToken,
+            })
+          );
+          return;
+        }
+      }
+
+      // 個別のキーから読み込み（後方互換性のため）
+      const user = JSON.parse(localStorage.getItem("user") || "null");
+      const accessToken = localStorage.getItem("accessToken");
+      const refreshToken = localStorage.getItem("refreshToken");
+
+      if (accessToken && refreshToken) {
+        store.dispatch(
+          setCredentials({
+            user,
+            accessToken,
+            refreshToken,
+          })
+        );
+      }
+    } catch (error) {
+      console.error("Failed to restore auth state:", error);
+    }
+  }, []);
 
   return <>{children}</>;
 }
+
+const queryClient = new QueryClient();
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (

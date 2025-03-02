@@ -13,12 +13,35 @@ const getInitialState = (): AuthState => {
     };
   }
 
-  return {
-    user: JSON.parse(localStorage.getItem("user") || "null"),
-    accessToken: localStorage.getItem("accessToken"),
-    refreshToken: localStorage.getItem("refreshToken"),
-    isLoading: false,
-  };
+  try {
+    // authStateから読み込み
+    const authStateStr = localStorage.getItem("authState");
+    if (authStateStr) {
+      const authState = JSON.parse(authStateStr);
+      return {
+        user: authState.user || null,
+        accessToken: authState.accessToken || null,
+        refreshToken: authState.refreshToken || null,
+        isLoading: false,
+      };
+    }
+
+    // 個別のキーから読み込み（後方互換性のため）
+    return {
+      user: JSON.parse(localStorage.getItem("user") || "null"),
+      accessToken: localStorage.getItem("accessToken"),
+      refreshToken: localStorage.getItem("refreshToken"),
+      isLoading: false,
+    };
+  } catch (error) {
+    console.error("Failed to parse auth state from localStorage:", error);
+    return {
+      user: null,
+      accessToken: null,
+      refreshToken: null,
+      isLoading: false,
+    };
+  }
 };
 
 const initialState: AuthState = getInitialState();
@@ -41,6 +64,7 @@ export const authSlice = createSlice({
 
       // ローカルストレージに保存
       if (typeof window !== "undefined") {
+        // authStateとして保存
         localStorage.setItem(
           "authState",
           JSON.stringify({
@@ -49,6 +73,11 @@ export const authSlice = createSlice({
             refreshToken: action.payload.refreshToken,
           })
         );
+
+        // 個別のキーにも保存（後方互換性のため）
+        localStorage.setItem("user", JSON.stringify(action.payload.user));
+        localStorage.setItem("accessToken", action.payload.accessToken);
+        localStorage.setItem("refreshToken", action.payload.refreshToken);
       }
     },
     updateAccessToken: (state, action: PayloadAction<string>) => {
@@ -57,6 +86,19 @@ export const authSlice = createSlice({
       // ローカルストレージのアクセストークンを更新
       if (typeof window !== "undefined") {
         localStorage.setItem("accessToken", action.payload);
+
+        // authStateも更新
+        const authStateStr = localStorage.getItem("authState");
+        if (authStateStr) {
+          const authState = JSON.parse(authStateStr);
+          localStorage.setItem(
+            "authState",
+            JSON.stringify({
+              ...authState,
+              accessToken: action.payload,
+            })
+          );
+        }
       }
     },
     updateTokens: (
@@ -71,15 +113,23 @@ export const authSlice = createSlice({
 
       // ローカルストレージのトークンを更新
       if (typeof window !== "undefined") {
-        const authState = JSON.parse(localStorage.getItem("authState") || "{}");
-        localStorage.setItem(
-          "authState",
-          JSON.stringify({
-            ...authState,
-            accessToken: action.payload.accessToken,
-            refreshToken: action.payload.refreshToken,
-          })
-        );
+        // 個別のキーを更新
+        localStorage.setItem("accessToken", action.payload.accessToken);
+        localStorage.setItem("refreshToken", action.payload.refreshToken);
+
+        // authStateも更新
+        const authStateStr = localStorage.getItem("authState");
+        if (authStateStr) {
+          const authState = JSON.parse(authStateStr);
+          localStorage.setItem(
+            "authState",
+            JSON.stringify({
+              ...authState,
+              accessToken: action.payload.accessToken,
+              refreshToken: action.payload.refreshToken,
+            })
+          );
+        }
       }
     },
     logout: (state) => {
@@ -89,6 +139,7 @@ export const authSlice = createSlice({
 
       // ローカルストレージから削除
       if (typeof window !== "undefined") {
+        localStorage.removeItem("authState");
         localStorage.removeItem("user");
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
