@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { store } from "@/store/store";
 import { refreshAccessToken } from "@/features/auth/api";
+import { updateTokens } from "@/features/auth/authSlice";
 
 // Create API client
 export const apiClient = axios.create({
@@ -34,7 +35,7 @@ apiClient.interceptors.response.use(
     const originalRequest = error.config;
 
     interface ErrorResponse {
-      message?: string;
+      message: string;
     }
 
     // Get message from error response
@@ -63,6 +64,14 @@ apiClient.interceptors.response.use(
 
         // Refresh token
         const response = await refreshAccessToken();
+
+        // Update store with new tokens
+        store.dispatch(
+          updateTokens({
+            accessToken: response.accessToken,
+            refreshToken: response.refreshToken,
+          })
+        );
 
         // Retry request with new access token
         originalRequest.headers.Authorization = `Bearer ${response.accessToken}`;

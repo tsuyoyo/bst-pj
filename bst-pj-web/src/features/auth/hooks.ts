@@ -1,10 +1,17 @@
+"use client";
+
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { register, refreshAccessToken, logout, login } from "./api";
 import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
-import { setCredentials, logout as logoutAction } from "./authSlice";
-import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setCredentials,
+  logout as logoutAction,
+  updateTokens,
+} from "./authSlice";
+import { useEffect, useCallback, useRef } from "react";
 import { store } from "../../store/store";
+import { RootState } from "@/store/store";
 
 export const useRegister = () => {
   const router = useRouter();
@@ -27,38 +34,43 @@ export const useRegister = () => {
 
 export const useRefreshToken = () => {
   const dispatch = useDispatch();
-  const { auth } = store.getState();
+  const { refreshToken } = useSelector((state: RootState) => state.auth);
+  // リフレッシュ処理が進行中かどうかを追跡するためのref
+  const isRefreshing = useRef(false);
 
-  const query = useQuery({
-    queryKey: ["auth", "refresh"],
-    queryFn: refreshAccessToken,
-    retry: 1,
-    enabled: false,
-  });
+  const refetch = useCallback(async () => {
+    // すでにリフレッシュ中なら実行しない
+    if (isRefreshing.current) {
+      console.log(
+        "Token refresh already in progress, skipping duplicate request"
+      );
+      return;
+    }
 
-  useEffect(() => {
-    if (query.data) {
+    if (!refreshToken) {
+      console.error("No refresh token available");
+      return;
+    }
+
+    try {
+      isRefreshing.current = true;
+      const response = await refreshAccessToken();
       dispatch(
-        setCredentials({
-          accessToken: query.data.accessToken,
-          refreshToken: query.data.refreshToken,
-          user: query.data.user,
+        updateTokens({
+          accessToken: response.accessToken,
+          refreshToken: response.refreshToken,
         })
       );
+      return response;
+    } catch (error) {
+      console.error("Failed to refresh token:", error);
+      throw error;
+    } finally {
+      isRefreshing.current = false;
     }
-  }, [query.data, dispatch]);
+  }, [dispatch, refreshToken]);
 
-  const conditionalRefetch = () => {
-    if (auth.refreshToken) {
-      return query.refetch();
-    }
-    return Promise.resolve(null);
-  };
-
-  return {
-    ...query,
-    refetch: conditionalRefetch,
-  };
+  return { refetch };
 };
 
 export const useLogout = (closeDrawer: () => void) => {

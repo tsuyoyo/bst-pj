@@ -30,21 +30,25 @@ export const authSlice = createSlice({
     setCredentials: (
       state,
       action: PayloadAction<{
-        user: any;
+        user: User | null;
         accessToken: string;
         refreshToken: string;
       }>
     ) => {
-      const { user, accessToken, refreshToken } = action.payload;
-      state.user = user;
-      state.accessToken = accessToken;
-      state.refreshToken = refreshToken;
+      state.user = action.payload.user;
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
 
       // ローカルストレージに保存
       if (typeof window !== "undefined") {
-        localStorage.setItem("user", JSON.stringify(user));
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("refreshToken", refreshToken);
+        localStorage.setItem(
+          "authState",
+          JSON.stringify({
+            user: action.payload.user,
+            accessToken: action.payload.accessToken,
+            refreshToken: action.payload.refreshToken,
+          })
+        );
       }
     },
     updateAccessToken: (state, action: PayloadAction<string>) => {
@@ -57,16 +61,25 @@ export const authSlice = createSlice({
     },
     updateTokens: (
       state,
-      action: PayloadAction<{ accessToken: string; refreshToken: string }>
+      action: PayloadAction<{
+        accessToken: string;
+        refreshToken: string;
+      }>
     ) => {
-      const { accessToken, refreshToken } = action.payload;
-      state.accessToken = accessToken;
-      state.refreshToken = refreshToken;
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
 
       // ローカルストレージのトークンを更新
       if (typeof window !== "undefined") {
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("refreshToken", refreshToken);
+        const authState = JSON.parse(localStorage.getItem("authState") || "{}");
+        localStorage.setItem(
+          "authState",
+          JSON.stringify({
+            ...authState,
+            accessToken: action.payload.accessToken,
+            refreshToken: action.payload.refreshToken,
+          })
+        );
       }
     },
     logout: (state) => {

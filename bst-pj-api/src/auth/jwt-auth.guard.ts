@@ -66,8 +66,6 @@ export class JwtAuthGuard implements CanActivate {
       throw new UnauthorizedException('User not found');
     }
 
-    console.log('zzzzzzzzzz');
-
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     (request as any).user = user;
 

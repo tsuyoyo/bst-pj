@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Typography, Container, Paper, Button, Grid } from "@mui/material";
-import { MusicNote, Group, LibraryMusic } from "@mui/icons-material";
+import { MusicNote, Group, LibraryMusic, Category } from "@mui/icons-material";
 import Link from "next/link";
 
 const CommunityPage = () => {
@@ -56,17 +56,20 @@ const CommunityPage = () => {
                 alignItems: "center",
               }}
             >
-              <LibraryMusic
-                sx={{ fontSize: 40, mb: 1, color: "primary.main" }}
-              />
+              <Category sx={{ fontSize: 40, mb: 1, color: "primary.main" }} />
               <Typography variant="h6" align="center" gutterBottom>
-                曲管理
+                ジャンル管理
               </Typography>
               <Typography variant="body2" align="center" paragraph>
-                曲の情報を閲覧・登録できます。（準備中）
+                音楽ジャンルの情報を閲覧・登録できます。
               </Typography>
-              <Button variant="contained" disabled sx={{ mt: "auto" }}>
-                準備中
+              <Button
+                component={Link}
+                href="/community/genres"
+                variant="contained"
+                sx={{ mt: "auto" }}
+              >
+                ジャンル一覧を見る
               </Button>
             </Paper>
           </Grid>
@@ -82,12 +85,14 @@ const CommunityPage = () => {
                 alignItems: "center",
               }}
             >
-              <Group sx={{ fontSize: 40, mb: 1, color: "primary.main" }} />
+              <LibraryMusic
+                sx={{ fontSize: 40, mb: 1, color: "primary.main" }}
+              />
               <Typography variant="h6" align="center" gutterBottom>
-                アーティスト管理
+                曲管理
               </Typography>
               <Typography variant="body2" align="center" paragraph>
-                アーティストの情報を閲覧・登録できます。（準備中）
+                曲の情報を閲覧・登録できます。（準備中）
               </Typography>
               <Button variant="contained" disabled sx={{ mt: "auto" }}>
                 準備中

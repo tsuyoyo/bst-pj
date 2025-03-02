@@ -40,41 +40,40 @@ export function useApi<T>() {
         setState((prev) => ({ ...prev, loading: true, error: null }));
 
         try {
-          const response = await apiClient({
-            method,
-            url,
-            ...options,
-          });
+          const axiosMethod =
+            apiClient[method.toLowerCase() as keyof typeof apiClient];
+          if (typeof axiosMethod !== "function") {
+            throw new Error(`Invalid HTTP method: ${method}`);
+          }
 
-          const result = response.data;
+          const result = await axiosMethod(url, options);
           setState({
-            data: result,
+            data: result.data,
             loading: false,
             error: null,
           });
-
-          return result;
+          return result.data;
         } catch (err: any) {
           console.error(`API ${method} ${url} request error:`, err);
 
+          // トークン期限切れエラーの場合のみリフレッシュを試みる
           if (err.response?.data?.message === "TOKEN_EXPIRED") {
             try {
+              // トークンをリフレッシュ
               await refetch();
 
-              const response = await apiClient({
-                method,
-                url,
-                ...options,
-              });
+              // リフレッシュ成功後、元のリクエストを再試行
+              const axiosMethod =
+                apiClient[method.toLowerCase() as keyof typeof apiClient];
+              const result = await axiosMethod(url, options);
 
-              const result = response.data;
               setState({
-                data: result,
+                data: result.data,
                 loading: false,
                 error: null,
               });
 
-              return result;
+              return result.data;
             } catch (refreshErr) {
               console.error("Failed to refresh token", refreshErr);
               setState({
