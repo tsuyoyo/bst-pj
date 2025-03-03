@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Usable } from "react";
 import React from "react";
 import {
   Box,
@@ -22,7 +22,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
 const EditPartPage = ({ params }: { params: { id: string } }) => {
-  const id = React.use(params as any).id;
+  const id = React.use(params as unknown as Usable<{ id: string }>).id;
 
   const router = useRouter();
   const [name, setName] = useState("");

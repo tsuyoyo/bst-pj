@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Usable } from "react";
 import {
   Box,
   Typography,
@@ -15,12 +15,14 @@ import { useRouter } from "next/navigation";
 import { GetPartResponse } from "@/proto/bst/v1/part_service";
 import { Part } from "@/proto/bst/v1/content";
 import { useApi } from "@/hooks/useApi";
+import React from "react";
 
 const PartDetailPage = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
   const [part, setPart] = useState<Part | null>(null);
   const api = useApi<GetPartResponse>();
   const isMounted = useRef(true);
+  const { id } = React.use(params as unknown as Usable<{ id: string }>);
 
   // Execute once on mount
   useEffect(() => {
@@ -28,7 +30,7 @@ const PartDetailPage = ({ params }: { params: { id: string } }) => {
     isMounted.current = true;
 
     const fetchPart = async () => {
-      const response = await api.execute("get", `/parts/${params.id}`);
+      const response = await api.execute("get", `/parts/${id}`);
       // Prevent state updates after unmount
       if (isMounted.current && response) {
         setPart(response.part || null);
@@ -41,7 +43,7 @@ const PartDetailPage = ({ params }: { params: { id: string } }) => {
     return () => {
       isMounted.current = false;
     };
-  }, [params.id]); // Remove api.execute from dependency array
+  }, [id]); // Remove api.execute from dependency array
 
   const handleEdit = () => {
     router.push(`/community/parts/${params.id}/edit`);
