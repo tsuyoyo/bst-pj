@@ -33,7 +33,7 @@ export class AuthService {
   private generateTokens(payload: { sub: number; email: string }) {
     const access_token = this.jwtService.sign(payload, {
       secret: process.env.JWT_SECRET,
-      expiresIn: '10m',
+      expiresIn: '1m',
     });
 
     const refresh_token = this.jwtService.sign(payload, {

@@ -33,7 +33,7 @@ export class GenreController {
   @Post()
   @UseGuards(JwtAuthGuard)
   async createGenre(
-    @Body('data') request: CreateGenreDto,
+    @Body() request: CreateGenreDto,
     @CurrentUser() user: User,
   ): Promise<CreateGenreResponse> {
     console.log(`Creating genre by user: ${user.email}`);
@@ -55,7 +55,7 @@ export class GenreController {
   @UseGuards(JwtAuthGuard)
   async updateGenre(
     @Param('id') id: string,
-    @Body('data') request: UpdateGenreDto,
+    @Body() request: UpdateGenreDto,
     @CurrentUser() user: User,
   ): Promise<UpdateGenreResponse> {
     console.log(`Updating genre by user: ${user.email}`);

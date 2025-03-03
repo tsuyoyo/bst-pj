@@ -28,7 +28,6 @@ const PartDetailPage = ({ params }: { params: { id: string } }) => {
     isMounted.current = true;
 
     const fetchPart = async () => {
-      console.log("API call ---------");
       const response = await api.execute("get", `/parts/${params.id}`);
       // Prevent state updates after unmount
       if (isMounted.current && response) {

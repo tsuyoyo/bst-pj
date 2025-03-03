@@ -39,9 +39,7 @@ const NewGenrePage = () => {
 
     try {
       const response = await api.execute("post", "/genres", {
-        data: {
-          name,
-        },
+        name,
       });
 
       if (response) {

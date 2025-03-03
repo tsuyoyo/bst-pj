@@ -3,6 +3,31 @@ import { store } from "@/store/store";
 import { refreshAccessToken } from "@/features/auth/api";
 import { updateTokens } from "@/features/auth/authSlice";
 
+/**
+ * Centralized Axios client configuration with interceptors for authentication.
+ *
+ * This module provides a configured Axios instance with request and response
+ * interceptors that handle authentication tokens and token refresh automatically.
+ *
+ * Usage:
+ * ```ts
+ * // Direct usage in utility functions or services
+ * import { apiClient } from '@/lib/axios';
+ *
+ * const fetchData = async () => {
+ *   const response = await apiClient.get('/endpoint');
+ *   return response.data;
+ * };
+ * ```
+ *
+ * For React components, consider using the useApi hook which provides
+ * React-specific state management on top of this client.
+ *
+ * The interceptors in this client automatically:
+ * 1. Add the Authorization header with the current access token
+ * 2. Handle token expiration by refreshing tokens and retrying failed requests
+ */
+
 // Create API client
 export const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080",

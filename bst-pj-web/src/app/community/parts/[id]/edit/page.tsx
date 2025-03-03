@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import React from "react";
 import {
   Box,
   Typography,
@@ -12,14 +13,17 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { apiClient } from "@/lib/axios";
 import {
   GetPartResponse,
   UpdatePartResponse,
 } from "@/proto/bst/v1/part_service";
 import { useApi } from "@/hooks/useApi";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const EditPartPage = ({ params }: { params: { id: string } }) => {
+  const id = React.use(params as any).id;
+
   const router = useRouter();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -27,9 +31,16 @@ const EditPartPage = ({ params }: { params: { id: string } }) => {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const isMounted = useRef(true);
+  const { user } = useSelector((state: RootState) => state.auth);
 
   const getApi = useApi<GetPartResponse>();
   const updateApi = useApi<UpdatePartResponse>();
+
+  useEffect(() => {
+    if (!user) {
+      router.push(`/login?redirect=/community/parts/${id}/edit`);
+    }
+  }, [user, router, id]);
 
   useEffect(() => {
     isMounted.current = true;
@@ -37,7 +48,7 @@ const EditPartPage = ({ params }: { params: { id: string } }) => {
     const fetchPart = async () => {
       setLoading(true);
       try {
-        const response = await getApi.execute("get", `/parts/${params.id}`);
+        const response = await getApi.execute("get", `/parts/${id}`);
         if (isMounted.current && response?.part) {
           setName(response.part.name);
           setDescription(response.part.description);
@@ -62,7 +73,7 @@ const EditPartPage = ({ params }: { params: { id: string } }) => {
     return () => {
       isMounted.current = false;
     };
-  }, [params.id]);
+  }, [id]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,11 +81,9 @@ const EditPartPage = ({ params }: { params: { id: string } }) => {
     setError(null);
 
     try {
-      const response = await updateApi.execute("put", `/parts/${params.id}`, {
-        data: {
-          name,
-          description,
-        },
+      const response = await updateApi.execute("put", `/parts/${id}`, {
+        name,
+        description,
       });
 
       if (response) {
@@ -89,7 +98,7 @@ const EditPartPage = ({ params }: { params: { id: string } }) => {
   };
 
   const handleCancel = () => {
-    router.push(`/community/parts/${params.id}`);
+    router.push(`/community/parts/${id}`);
   };
 
   if (loading) {

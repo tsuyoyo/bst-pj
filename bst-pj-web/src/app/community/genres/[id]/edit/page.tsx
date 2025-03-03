@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Usable } from "react";
 import {
   Box,
   Typography,
@@ -17,8 +17,11 @@ import { useApi } from "@/hooks/useApi";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { Genre } from "@/proto/bst/v1/content";
+import React from "react";
 
 const EditGenrePage = ({ params }: { params: { id: string } }) => {
+  const { id } = React.use(params as unknown as Usable<{ id: string }>);
+
   const router = useRouter();
   const [name, setName] = useState("");
   const [saving, setSaving] = useState(false);
@@ -29,46 +32,39 @@ const EditGenrePage = ({ params }: { params: { id: string } }) => {
   const api = useApi<UpdateGenreResponse>();
   const genresApi = useApi<{ genres: Genre[] }>();
 
-  // Redirect if not logged in
   useEffect(() => {
     if (!user) {
-      router.push(`/login?redirect=/community/genres/${params.id}/edit`);
+      router.push(`/login?redirect=/community/genres/${id}/edit`);
     }
-  }, [user, router, params.id]);
+  }, [user, router, id]);
 
   useEffect(() => {
     isMounted.current = true;
-
-    const fetchGenre = async () => {
-      try {
-        // ジャンル一覧から該当のジャンルを取得
-        const response = await genresApi.execute("get", "/genres");
-        if (isMounted.current && response?.genres) {
-          const genre = response.genres.find((g) => g.id === Number(params.id));
-          if (genre) {
-            setName(genre.name);
-          } else {
-            setError("指定されたジャンルが見つかりませんでした。");
-          }
-        }
-      } catch (err) {
-        console.error("Failed to fetch genre", err);
-        if (isMounted.current) {
-          setError(
-            "ジャンルの取得に失敗しました。後でもう一度お試しください。"
-          );
-        }
-      }
-    };
-
-    if (user) {
-      fetchGenre();
-    }
+    fetchGenre();
 
     return () => {
       isMounted.current = false;
     };
-  }, [params.id, user]);
+  }, [id]);
+
+  const fetchGenre = async () => {
+    try {
+      const response = await genresApi.execute("get", "/genres");
+      if (isMounted.current && response?.genres) {
+        const genre = response.genres.find((g) => g.id === Number(id));
+        if (genre) {
+          setName(genre.name);
+        } else {
+          setError("指定されたジャンルが見つかりませんでした。");
+        }
+      }
+    } catch (err) {
+      console.error("Failed to fetch genre", err);
+      if (isMounted.current) {
+        setError("ジャンルの取得に失敗しました。後でもう一度お試しください。");
+      }
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,10 +72,8 @@ const EditGenrePage = ({ params }: { params: { id: string } }) => {
     setError(null);
 
     try {
-      const response = await api.execute("put", `/genres/${params.id}`, {
-        data: {
-          name,
-        },
+      const response = await api.execute("put", `/genres/${id}`, {
+        name,
       });
 
       if (response) {

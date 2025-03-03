@@ -116,10 +116,7 @@ const GenresListPage = () => {
               <Box key={genre.id}>
                 {index > 0 && <Divider />}
                 <ListItem>
-                  <ListItemText
-                    primary={genre.name}
-                    secondary={genre.description}
-                  />
+                  <ListItemText primary={genre.name} />
                   {user && (
                     <Button
                       size="small"

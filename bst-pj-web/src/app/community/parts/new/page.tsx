@@ -30,10 +30,8 @@ const NewPartPage = () => {
 
     try {
       const response = await api.execute("post", "/parts", {
-        data: {
-          name,
-          description,
-        },
+        name,
+        description,
       });
 
       if (response) {
