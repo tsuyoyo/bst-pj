@@ -67,7 +67,7 @@ apiClient.interceptors.response.use(
     return response;
   },
   async (error: AxiosError) => {
-    console.error("Response interceptor 1 - ", error);
+    console.warn("Response interceptor 1 - ", error);
     const originalRequest = error.config;
 
     interface ErrorResponse {
@@ -78,7 +78,7 @@ apiClient.interceptors.response.use(
     const errorResponse = error.response?.data as ErrorResponse;
     const errorMessage = errorResponse?.message;
 
-    console.error("Response interceptor 2 - ", errorMessage);
+    console.warn("Response interceptor 2 - ", errorMessage);
 
     // When token is expired
     if (

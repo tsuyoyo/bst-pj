@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'session.pb.dart' as $36;
+import 'session.pb.dart' as $37;
 
 class GetSessionTimetableRequest extends $pb.GeneratedMessage {
   factory GetSessionTimetableRequest({
@@ -67,7 +67,7 @@ class GetSessionTimetableRequest extends $pb.GeneratedMessage {
 
 class GetSessionTimetableResponse extends $pb.GeneratedMessage {
   factory GetSessionTimetableResponse({
-    $36.Timetable? timetable,
+    $37.Timetable? timetable,
   }) {
     final $result = create();
     if (timetable != null) {
@@ -80,7 +80,7 @@ class GetSessionTimetableResponse extends $pb.GeneratedMessage {
   factory GetSessionTimetableResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSessionTimetableResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$36.Timetable>(1, _omitFieldNames ? '' : 'timetable', subBuilder: $36.Timetable.create)
+    ..aOM<$37.Timetable>(1, _omitFieldNames ? '' : 'timetable', subBuilder: $37.Timetable.create)
     ..hasRequiredFields = false
   ;
 
@@ -106,21 +106,21 @@ class GetSessionTimetableResponse extends $pb.GeneratedMessage {
   static GetSessionTimetableResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $36.Timetable get timetable => $_getN(0);
+  $37.Timetable get timetable => $_getN(0);
   @$pb.TagNumber(1)
-  set timetable($36.Timetable v) { setField(1, v); }
+  set timetable($37.Timetable v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTimetable() => $_has(0);
   @$pb.TagNumber(1)
   void clearTimetable() => clearField(1);
   @$pb.TagNumber(1)
-  $36.Timetable ensureTimetable() => $_ensure(0);
+  $37.Timetable ensureTimetable() => $_ensure(0);
 }
 
 class UpdateSessionTimetableRequest extends $pb.GeneratedMessage {
   factory UpdateSessionTimetableRequest({
     $core.int? sessionId,
-    $36.Timetable? timetable,
+    $37.Timetable? timetable,
   }) {
     final $result = create();
     if (sessionId != null) {
@@ -137,7 +137,7 @@ class UpdateSessionTimetableRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionTimetableRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'sessionId', $pb.PbFieldType.O3)
-    ..aOM<$36.Timetable>(2, _omitFieldNames ? '' : 'timetable', subBuilder: $36.Timetable.create)
+    ..aOM<$37.Timetable>(2, _omitFieldNames ? '' : 'timetable', subBuilder: $37.Timetable.create)
     ..hasRequiredFields = false
   ;
 
@@ -172,20 +172,20 @@ class UpdateSessionTimetableRequest extends $pb.GeneratedMessage {
   void clearSessionId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $36.Timetable get timetable => $_getN(1);
+  $37.Timetable get timetable => $_getN(1);
   @$pb.TagNumber(2)
-  set timetable($36.Timetable v) { setField(2, v); }
+  set timetable($37.Timetable v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasTimetable() => $_has(1);
   @$pb.TagNumber(2)
   void clearTimetable() => clearField(2);
   @$pb.TagNumber(2)
-  $36.Timetable ensureTimetable() => $_ensure(1);
+  $37.Timetable ensureTimetable() => $_ensure(1);
 }
 
 class UpdateSessionTimetableResponse extends $pb.GeneratedMessage {
   factory UpdateSessionTimetableResponse({
-    $36.Timetable? timetable,
+    $37.Timetable? timetable,
   }) {
     final $result = create();
     if (timetable != null) {
@@ -198,7 +198,7 @@ class UpdateSessionTimetableResponse extends $pb.GeneratedMessage {
   factory UpdateSessionTimetableResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSessionTimetableResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$36.Timetable>(1, _omitFieldNames ? '' : 'timetable', subBuilder: $36.Timetable.create)
+    ..aOM<$37.Timetable>(1, _omitFieldNames ? '' : 'timetable', subBuilder: $37.Timetable.create)
     ..hasRequiredFields = false
   ;
 
@@ -224,15 +224,15 @@ class UpdateSessionTimetableResponse extends $pb.GeneratedMessage {
   static UpdateSessionTimetableResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $36.Timetable get timetable => $_getN(0);
+  $37.Timetable get timetable => $_getN(0);
   @$pb.TagNumber(1)
-  set timetable($36.Timetable v) { setField(1, v); }
+  set timetable($37.Timetable v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTimetable() => $_has(0);
   @$pb.TagNumber(1)
   void clearTimetable() => clearField(1);
   @$pb.TagNumber(1)
-  $36.Timetable ensureTimetable() => $_ensure(0);
+  $37.Timetable ensureTimetable() => $_ensure(0);
 }
 
 class GetOptimizedTimetableRequest extends $pb.GeneratedMessage {
@@ -295,7 +295,7 @@ class GetOptimizedTimetableRequest extends $pb.GeneratedMessage {
 
 class GetOptimizedTimetableResponse extends $pb.GeneratedMessage {
   factory GetOptimizedTimetableResponse({
-    $36.Timetable? timetable,
+    $37.Timetable? timetable,
   }) {
     final $result = create();
     if (timetable != null) {
@@ -308,7 +308,7 @@ class GetOptimizedTimetableResponse extends $pb.GeneratedMessage {
   factory GetOptimizedTimetableResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetOptimizedTimetableResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$36.Timetable>(1, _omitFieldNames ? '' : 'timetable', subBuilder: $36.Timetable.create)
+    ..aOM<$37.Timetable>(1, _omitFieldNames ? '' : 'timetable', subBuilder: $37.Timetable.create)
     ..hasRequiredFields = false
   ;
 
@@ -334,15 +334,15 @@ class GetOptimizedTimetableResponse extends $pb.GeneratedMessage {
   static GetOptimizedTimetableResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $36.Timetable get timetable => $_getN(0);
+  $37.Timetable get timetable => $_getN(0);
   @$pb.TagNumber(1)
-  set timetable($36.Timetable v) { setField(1, v); }
+  set timetable($37.Timetable v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTimetable() => $_has(0);
   @$pb.TagNumber(1)
   void clearTimetable() => clearField(1);
   @$pb.TagNumber(1)
-  $36.Timetable ensureTimetable() => $_ensure(0);
+  $37.Timetable ensureTimetable() => $_ensure(0);
 }
 
 class GetTimetableProgressRequest extends $pb.GeneratedMessage {
@@ -397,8 +397,8 @@ class GetTimetableProgressRequest extends $pb.GeneratedMessage {
 
 class GetTimetableProgressResponse extends $pb.GeneratedMessage {
   factory GetTimetableProgressResponse({
-    $core.Iterable<$36.TimetableEntry>? completedEntries,
-    $36.TimetableEntry? currentEntry,
+    $core.Iterable<$37.TimetableEntry>? completedEntries,
+    $37.TimetableEntry? currentEntry,
   }) {
     final $result = create();
     if (completedEntries != null) {
@@ -414,8 +414,8 @@ class GetTimetableProgressResponse extends $pb.GeneratedMessage {
   factory GetTimetableProgressResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetTimetableProgressResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$36.TimetableEntry>(1, _omitFieldNames ? '' : 'completedEntries', $pb.PbFieldType.PM, subBuilder: $36.TimetableEntry.create)
-    ..aOM<$36.TimetableEntry>(2, _omitFieldNames ? '' : 'currentEntry', subBuilder: $36.TimetableEntry.create)
+    ..pc<$37.TimetableEntry>(1, _omitFieldNames ? '' : 'completedEntries', $pb.PbFieldType.PM, subBuilder: $37.TimetableEntry.create)
+    ..aOM<$37.TimetableEntry>(2, _omitFieldNames ? '' : 'currentEntry', subBuilder: $37.TimetableEntry.create)
     ..hasRequiredFields = false
   ;
 
@@ -441,18 +441,18 @@ class GetTimetableProgressResponse extends $pb.GeneratedMessage {
   static GetTimetableProgressResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$36.TimetableEntry> get completedEntries => $_getList(0);
+  $core.List<$37.TimetableEntry> get completedEntries => $_getList(0);
 
   @$pb.TagNumber(2)
-  $36.TimetableEntry get currentEntry => $_getN(1);
+  $37.TimetableEntry get currentEntry => $_getN(1);
   @$pb.TagNumber(2)
-  set currentEntry($36.TimetableEntry v) { setField(2, v); }
+  set currentEntry($37.TimetableEntry v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCurrentEntry() => $_has(1);
   @$pb.TagNumber(2)
   void clearCurrentEntry() => clearField(2);
   @$pb.TagNumber(2)
-  $36.TimetableEntry ensureCurrentEntry() => $_ensure(1);
+  $37.TimetableEntry ensureCurrentEntry() => $_ensure(1);
 }
 
 class UpdateTimetableProgressRequest extends $pb.GeneratedMessage {

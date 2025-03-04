@@ -12,78 +12,46 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { UpdateGenreResponse } from "@/proto/bst/v1/genre_service";
-import { useApi } from "@/hooks/useApi";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { Genre } from "@/proto/bst/v1/content";
 import React from "react";
+import { useGenre, useUpdateGenre } from "@/features/genres/hooks";
 
 const EditGenrePage = ({ params }: { params: { id: string } }) => {
   const { id } = React.use(params as unknown as Usable<{ id: string }>);
-
   const router = useRouter();
   const [name, setName] = useState("");
-  const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const isMounted = useRef(true);
   const { user } = useSelector((state: RootState) => state.auth);
 
-  const api = useApi<UpdateGenreResponse>();
-  const genresApi = useApi<{ genres: Genre[] }>();
+  // React Queryフックを使用
+  const { data: genreData, isLoading, isError } = useGenre(id);
+  const updateGenreMutation = useUpdateGenre(id);
 
+  // ログインチェック
   useEffect(() => {
     if (!user) {
       router.push(`/login?redirect=/community/genres/${id}/edit`);
     }
   }, [user, router, id]);
 
+  // ジャンルデータのロード
   useEffect(() => {
-    isMounted.current = true;
-    fetchGenre();
-
-    return () => {
-      isMounted.current = false;
-    };
-  }, [id]);
-
-  const fetchGenre = async () => {
-    try {
-      const response = await genresApi.execute("get", "/genres");
-      if (isMounted.current && response?.genres) {
-        const genre = response.genres.find((g) => g.id === Number(id));
-        if (genre) {
-          setName(genre.name);
-        } else {
-          setError("指定されたジャンルが見つかりませんでした。");
-        }
-      }
-    } catch (err) {
-      console.error("Failed to fetch genre", err);
-      if (isMounted.current) {
-        setError("ジャンルの取得に失敗しました。後でもう一度お試しください。");
-      }
+    if (genreData?.genre) {
+      setName(genreData.genre.name);
     }
-  };
+  }, [genreData]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSaving(true);
     setError(null);
 
     try {
-      const response = await api.execute("put", `/genres/${id}`, {
-        name,
-      });
-
-      if (response) {
-        router.push("/community/genres");
-      }
+      await updateGenreMutation.mutateAsync(name);
+      router.push("/community/genres");
     } catch (err) {
       console.error("Failed to update genre", err);
       setError("ジャンルの更新に失敗しました。後でもう一度お試しください。");
-    } finally {
-      setSaving(false);
     }
   };
 
@@ -99,7 +67,7 @@ const EditGenrePage = ({ params }: { params: { id: string } }) => {
     );
   }
 
-  if (genresApi.loading) {
+  if (isLoading) {
     return (
       <Container className="page-container">
         <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
@@ -116,9 +84,10 @@ const EditGenrePage = ({ params }: { params: { id: string } }) => {
           ジャンル編集
         </Typography>
 
-        {error && (
+        {(error || isError) && (
           <Alert severity="error" sx={{ mb: 2 }}>
-            {error}
+            {error ||
+              "ジャンルの取得に失敗しました。後でもう一度お試しください。"}
           </Alert>
         )}
 
@@ -130,19 +99,27 @@ const EditGenrePage = ({ params }: { params: { id: string } }) => {
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            disabled={saving}
+            disabled={updateGenreMutation.isPending}
           />
 
           <Box sx={{ mt: 3, display: "flex", gap: 2 }}>
             <Button
               type="submit"
               variant="contained"
-              disabled={saving}
-              startIcon={saving ? <CircularProgress size={20} /> : null}
+              disabled={updateGenreMutation.isPending}
+              startIcon={
+                updateGenreMutation.isPending ? (
+                  <CircularProgress size={20} />
+                ) : null
+              }
             >
-              {saving ? "保存中..." : "保存する"}
+              {updateGenreMutation.isPending ? "保存中..." : "保存する"}
             </Button>
-            <Button variant="outlined" onClick={handleCancel} disabled={saving}>
+            <Button
+              variant="outlined"
+              onClick={handleCancel}
+              disabled={updateGenreMutation.isPending}
+            >
               キャンセル
             </Button>
           </Box>

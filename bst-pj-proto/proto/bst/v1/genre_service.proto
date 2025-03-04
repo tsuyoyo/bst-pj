@@ -6,6 +6,20 @@ import "bst/v1/content.proto";
 
 option go_package = "github.com/tsuyoyo/bst-pj-proto/gen/go/bst/v1;bstv1";
 
+service GenreService {
+  rpc GetGenre(GetGenreRequest) returns (GetGenreResponse);
+  rpc CreateGenre(CreateGenreRequest) returns (CreateGenreResponse);
+  rpc ListGenres(ListGenresRequest) returns (ListGenresResponse);
+  rpc UpdateGenre(UpdateGenreRequest) returns (UpdateGenreResponse);
+}
+
+message GetGenreRequest {
+}
+
+message GetGenreResponse {
+  Genre genre = 1;
+}
+
 message CreateGenreRequest {
   string name = 1;
 }
@@ -13,6 +27,8 @@ message CreateGenreRequest {
 message CreateGenreResponse {
   Genre genre = 1;
 }
+
+message ListGenresRequest {}
 
 message ListGenresResponse {
   repeated Genre genres = 1;

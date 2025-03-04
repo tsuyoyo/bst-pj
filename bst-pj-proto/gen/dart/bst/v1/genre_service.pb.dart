@@ -13,7 +13,91 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'content.pb.dart' as $30;
+import 'content.pb.dart' as $31;
+
+class GetGenreRequest extends $pb.GeneratedMessage {
+  factory GetGenreRequest() => create();
+  GetGenreRequest._() : super();
+  factory GetGenreRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetGenreRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetGenreRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetGenreRequest clone() => GetGenreRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetGenreRequest copyWith(void Function(GetGenreRequest) updates) => super.copyWith((message) => updates(message as GetGenreRequest)) as GetGenreRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetGenreRequest create() => GetGenreRequest._();
+  GetGenreRequest createEmptyInstance() => create();
+  static $pb.PbList<GetGenreRequest> createRepeated() => $pb.PbList<GetGenreRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetGenreRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetGenreRequest>(create);
+  static GetGenreRequest? _defaultInstance;
+}
+
+class GetGenreResponse extends $pb.GeneratedMessage {
+  factory GetGenreResponse({
+    $31.Genre? genre,
+  }) {
+    final $result = create();
+    if (genre != null) {
+      $result.genre = genre;
+    }
+    return $result;
+  }
+  GetGenreResponse._() : super();
+  factory GetGenreResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetGenreResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetGenreResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+    ..aOM<$31.Genre>(1, _omitFieldNames ? '' : 'genre', subBuilder: $31.Genre.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetGenreResponse clone() => GetGenreResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetGenreResponse copyWith(void Function(GetGenreResponse) updates) => super.copyWith((message) => updates(message as GetGenreResponse)) as GetGenreResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetGenreResponse create() => GetGenreResponse._();
+  GetGenreResponse createEmptyInstance() => create();
+  static $pb.PbList<GetGenreResponse> createRepeated() => $pb.PbList<GetGenreResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetGenreResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetGenreResponse>(create);
+  static GetGenreResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $31.Genre get genre => $_getN(0);
+  @$pb.TagNumber(1)
+  set genre($31.Genre v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasGenre() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearGenre() => clearField(1);
+  @$pb.TagNumber(1)
+  $31.Genre ensureGenre() => $_ensure(0);
+}
 
 class CreateGenreRequest extends $pb.GeneratedMessage {
   factory CreateGenreRequest({
@@ -67,7 +151,7 @@ class CreateGenreRequest extends $pb.GeneratedMessage {
 
 class CreateGenreResponse extends $pb.GeneratedMessage {
   factory CreateGenreResponse({
-    $30.Genre? genre,
+    $31.Genre? genre,
   }) {
     final $result = create();
     if (genre != null) {
@@ -80,7 +164,7 @@ class CreateGenreResponse extends $pb.GeneratedMessage {
   factory CreateGenreResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateGenreResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.Genre>(1, _omitFieldNames ? '' : 'genre', subBuilder: $30.Genre.create)
+    ..aOM<$31.Genre>(1, _omitFieldNames ? '' : 'genre', subBuilder: $31.Genre.create)
     ..hasRequiredFields = false
   ;
 
@@ -106,20 +190,52 @@ class CreateGenreResponse extends $pb.GeneratedMessage {
   static CreateGenreResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.Genre get genre => $_getN(0);
+  $31.Genre get genre => $_getN(0);
   @$pb.TagNumber(1)
-  set genre($30.Genre v) { setField(1, v); }
+  set genre($31.Genre v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasGenre() => $_has(0);
   @$pb.TagNumber(1)
   void clearGenre() => clearField(1);
   @$pb.TagNumber(1)
-  $30.Genre ensureGenre() => $_ensure(0);
+  $31.Genre ensureGenre() => $_ensure(0);
+}
+
+class ListGenresRequest extends $pb.GeneratedMessage {
+  factory ListGenresRequest() => create();
+  ListGenresRequest._() : super();
+  factory ListGenresRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListGenresRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListGenresRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListGenresRequest clone() => ListGenresRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListGenresRequest copyWith(void Function(ListGenresRequest) updates) => super.copyWith((message) => updates(message as ListGenresRequest)) as ListGenresRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListGenresRequest create() => ListGenresRequest._();
+  ListGenresRequest createEmptyInstance() => create();
+  static $pb.PbList<ListGenresRequest> createRepeated() => $pb.PbList<ListGenresRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListGenresRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListGenresRequest>(create);
+  static ListGenresRequest? _defaultInstance;
 }
 
 class ListGenresResponse extends $pb.GeneratedMessage {
   factory ListGenresResponse({
-    $core.Iterable<$30.Genre>? genres,
+    $core.Iterable<$31.Genre>? genres,
   }) {
     final $result = create();
     if (genres != null) {
@@ -132,7 +248,7 @@ class ListGenresResponse extends $pb.GeneratedMessage {
   factory ListGenresResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListGenresResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$30.Genre>(1, _omitFieldNames ? '' : 'genres', $pb.PbFieldType.PM, subBuilder: $30.Genre.create)
+    ..pc<$31.Genre>(1, _omitFieldNames ? '' : 'genres', $pb.PbFieldType.PM, subBuilder: $31.Genre.create)
     ..hasRequiredFields = false
   ;
 
@@ -158,7 +274,7 @@ class ListGenresResponse extends $pb.GeneratedMessage {
   static ListGenresResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$30.Genre> get genres => $_getList(0);
+  $core.List<$31.Genre> get genres => $_getList(0);
 }
 
 class UpdateGenreRequest extends $pb.GeneratedMessage {
@@ -213,7 +329,7 @@ class UpdateGenreRequest extends $pb.GeneratedMessage {
 
 class UpdateGenreResponse extends $pb.GeneratedMessage {
   factory UpdateGenreResponse({
-    $30.Genre? genre,
+    $31.Genre? genre,
   }) {
     final $result = create();
     if (genre != null) {
@@ -226,7 +342,7 @@ class UpdateGenreResponse extends $pb.GeneratedMessage {
   factory UpdateGenreResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateGenreResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$30.Genre>(1, _omitFieldNames ? '' : 'genre', subBuilder: $30.Genre.create)
+    ..aOM<$31.Genre>(1, _omitFieldNames ? '' : 'genre', subBuilder: $31.Genre.create)
     ..hasRequiredFields = false
   ;
 
@@ -252,15 +368,15 @@ class UpdateGenreResponse extends $pb.GeneratedMessage {
   static UpdateGenreResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.Genre get genre => $_getN(0);
+  $31.Genre get genre => $_getN(0);
   @$pb.TagNumber(1)
-  set genre($30.Genre v) { setField(1, v); }
+  set genre($31.Genre v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasGenre() => $_has(0);
   @$pb.TagNumber(1)
   void clearGenre() => clearField(1);
   @$pb.TagNumber(1)
-  $30.Genre ensureGenre() => $_ensure(0);
+  $31.Genre ensureGenre() => $_ensure(0);
 }
 
 

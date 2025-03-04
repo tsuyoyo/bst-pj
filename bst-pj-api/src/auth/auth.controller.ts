@@ -72,14 +72,7 @@ export class AuthController {
   }
 
   @Post('refresh')
-  async refresh(
-    @Headers('Authorization') auth: string,
-    @Body() refreshDto: RefreshDto,
-  ): Promise<RefreshTokenResponse> {
-    if (!auth) {
-      throw new UnauthorizedException('No token provided');
-    }
-
+  async refresh(@Body() refreshDto: RefreshDto): Promise<RefreshTokenResponse> {
     const token = refreshDto.refreshToken;
     const result = await this.authService.refresh(token);
 

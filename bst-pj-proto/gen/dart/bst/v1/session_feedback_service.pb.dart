@@ -13,11 +13,11 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'session.pb.dart' as $36;
+import 'session.pb.dart' as $37;
 
 class AddSessionFeedbackRequest extends $pb.GeneratedMessage {
   factory AddSessionFeedbackRequest({
-    $36.SessionFeedback? feedback,
+    $37.SessionFeedback? feedback,
   }) {
     final $result = create();
     if (feedback != null) {
@@ -30,7 +30,7 @@ class AddSessionFeedbackRequest extends $pb.GeneratedMessage {
   factory AddSessionFeedbackRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddSessionFeedbackRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOM<$36.SessionFeedback>(1, _omitFieldNames ? '' : 'feedback', subBuilder: $36.SessionFeedback.create)
+    ..aOM<$37.SessionFeedback>(1, _omitFieldNames ? '' : 'feedback', subBuilder: $37.SessionFeedback.create)
     ..hasRequiredFields = false
   ;
 
@@ -56,15 +56,15 @@ class AddSessionFeedbackRequest extends $pb.GeneratedMessage {
   static AddSessionFeedbackRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $36.SessionFeedback get feedback => $_getN(0);
+  $37.SessionFeedback get feedback => $_getN(0);
   @$pb.TagNumber(1)
-  set feedback($36.SessionFeedback v) { setField(1, v); }
+  set feedback($37.SessionFeedback v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasFeedback() => $_has(0);
   @$pb.TagNumber(1)
   void clearFeedback() => clearField(1);
   @$pb.TagNumber(1)
-  $36.SessionFeedback ensureFeedback() => $_ensure(0);
+  $37.SessionFeedback ensureFeedback() => $_ensure(0);
 }
 
 class AddSessionFeedbackResponse extends $pb.GeneratedMessage {
@@ -169,7 +169,7 @@ class ListSessionFeedbacksRequest extends $pb.GeneratedMessage {
 
 class ListSessionFeedbacksResponse extends $pb.GeneratedMessage {
   factory ListSessionFeedbacksResponse({
-    $core.Iterable<$36.SessionFeedback>? feedbacks,
+    $core.Iterable<$37.SessionFeedback>? feedbacks,
   }) {
     final $result = create();
     if (feedbacks != null) {
@@ -182,7 +182,7 @@ class ListSessionFeedbacksResponse extends $pb.GeneratedMessage {
   factory ListSessionFeedbacksResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSessionFeedbacksResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..pc<$36.SessionFeedback>(1, _omitFieldNames ? '' : 'feedbacks', $pb.PbFieldType.PM, subBuilder: $36.SessionFeedback.create)
+    ..pc<$37.SessionFeedback>(1, _omitFieldNames ? '' : 'feedbacks', $pb.PbFieldType.PM, subBuilder: $37.SessionFeedback.create)
     ..hasRequiredFields = false
   ;
 
@@ -208,7 +208,7 @@ class ListSessionFeedbacksResponse extends $pb.GeneratedMessage {
   static ListSessionFeedbacksResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$36.SessionFeedback> get feedbacks => $_getList(0);
+  $core.List<$37.SessionFeedback> get feedbacks => $_getList(0);
 }
 
 

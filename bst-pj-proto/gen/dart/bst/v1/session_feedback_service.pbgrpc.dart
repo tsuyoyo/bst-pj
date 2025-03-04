@@ -15,20 +15,20 @@ import 'dart:core' as $core;
 import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'session_feedback_service.pb.dart' as $14;
+import 'session_feedback_service.pb.dart' as $15;
 
 export 'session_feedback_service.pb.dart';
 
 @$pb.GrpcServiceName('bst.v1.SessionFeedbackService')
 class SessionFeedbackServiceClient extends $grpc.Client {
-  static final _$addSessionFeedback = $grpc.ClientMethod<$14.AddSessionFeedbackRequest, $14.AddSessionFeedbackResponse>(
+  static final _$addSessionFeedback = $grpc.ClientMethod<$15.AddSessionFeedbackRequest, $15.AddSessionFeedbackResponse>(
       '/bst.v1.SessionFeedbackService/AddSessionFeedback',
-      ($14.AddSessionFeedbackRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $14.AddSessionFeedbackResponse.fromBuffer(value));
-  static final _$listSessionFeedbacks = $grpc.ClientMethod<$14.ListSessionFeedbacksRequest, $14.ListSessionFeedbacksResponse>(
+      ($15.AddSessionFeedbackRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $15.AddSessionFeedbackResponse.fromBuffer(value));
+  static final _$listSessionFeedbacks = $grpc.ClientMethod<$15.ListSessionFeedbacksRequest, $15.ListSessionFeedbacksResponse>(
       '/bst.v1.SessionFeedbackService/ListSessionFeedbacks',
-      ($14.ListSessionFeedbacksRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $14.ListSessionFeedbacksResponse.fromBuffer(value));
+      ($15.ListSessionFeedbacksRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $15.ListSessionFeedbacksResponse.fromBuffer(value));
 
   SessionFeedbackServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -36,11 +36,11 @@ class SessionFeedbackServiceClient extends $grpc.Client {
       : super(channel, options: options,
         interceptors: interceptors);
 
-  $grpc.ResponseFuture<$14.AddSessionFeedbackResponse> addSessionFeedback($14.AddSessionFeedbackRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$15.AddSessionFeedbackResponse> addSessionFeedback($15.AddSessionFeedbackRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$addSessionFeedback, request, options: options);
   }
 
-  $grpc.ResponseFuture<$14.ListSessionFeedbacksResponse> listSessionFeedbacks($14.ListSessionFeedbacksRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$15.ListSessionFeedbacksResponse> listSessionFeedbacks($15.ListSessionFeedbacksRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$listSessionFeedbacks, request, options: options);
   }
 }
@@ -50,30 +50,30 @@ abstract class SessionFeedbackServiceBase extends $grpc.Service {
   $core.String get $name => 'bst.v1.SessionFeedbackService';
 
   SessionFeedbackServiceBase() {
-    $addMethod($grpc.ServiceMethod<$14.AddSessionFeedbackRequest, $14.AddSessionFeedbackResponse>(
+    $addMethod($grpc.ServiceMethod<$15.AddSessionFeedbackRequest, $15.AddSessionFeedbackResponse>(
         'AddSessionFeedback',
         addSessionFeedback_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $14.AddSessionFeedbackRequest.fromBuffer(value),
-        ($14.AddSessionFeedbackResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$14.ListSessionFeedbacksRequest, $14.ListSessionFeedbacksResponse>(
+        ($core.List<$core.int> value) => $15.AddSessionFeedbackRequest.fromBuffer(value),
+        ($15.AddSessionFeedbackResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$15.ListSessionFeedbacksRequest, $15.ListSessionFeedbacksResponse>(
         'ListSessionFeedbacks',
         listSessionFeedbacks_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $14.ListSessionFeedbacksRequest.fromBuffer(value),
-        ($14.ListSessionFeedbacksResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $15.ListSessionFeedbacksRequest.fromBuffer(value),
+        ($15.ListSessionFeedbacksResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$14.AddSessionFeedbackResponse> addSessionFeedback_Pre($grpc.ServiceCall call, $async.Future<$14.AddSessionFeedbackRequest> request) async {
+  $async.Future<$15.AddSessionFeedbackResponse> addSessionFeedback_Pre($grpc.ServiceCall call, $async.Future<$15.AddSessionFeedbackRequest> request) async {
     return addSessionFeedback(call, await request);
   }
 
-  $async.Future<$14.ListSessionFeedbacksResponse> listSessionFeedbacks_Pre($grpc.ServiceCall call, $async.Future<$14.ListSessionFeedbacksRequest> request) async {
+  $async.Future<$15.ListSessionFeedbacksResponse> listSessionFeedbacks_Pre($grpc.ServiceCall call, $async.Future<$15.ListSessionFeedbacksRequest> request) async {
     return listSessionFeedbacks(call, await request);
   }
 
-  $async.Future<$14.AddSessionFeedbackResponse> addSessionFeedback($grpc.ServiceCall call, $14.AddSessionFeedbackRequest request);
-  $async.Future<$14.ListSessionFeedbacksResponse> listSessionFeedbacks($grpc.ServiceCall call, $14.ListSessionFeedbacksRequest request);
+  $async.Future<$15.AddSessionFeedbackResponse> addSessionFeedback($grpc.ServiceCall call, $15.AddSessionFeedbackRequest request);
+  $async.Future<$15.ListSessionFeedbacksResponse> listSessionFeedbacks($grpc.ServiceCall call, $15.ListSessionFeedbacksRequest request);
 }

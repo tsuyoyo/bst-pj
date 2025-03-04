@@ -33,7 +33,7 @@ export class AuthService {
   private generateTokens(payload: { sub: number; email: string }) {
     const access_token = this.jwtService.sign(payload, {
       secret: process.env.JWT_SECRET,
-      expiresIn: '3m',
+      expiresIn: '1m',
     });
 
     const refresh_token = this.jwtService.sign(payload, {
@@ -103,6 +103,7 @@ export class AuthService {
     access_token: string;
     refresh_token: string;
   }> {
+    console.log('refresh token', token);
     try {
       const payload = this.jwtService.verify<JwtPayload>(token, {
         secret: process.env.JWT_REFRESH_SECRET,

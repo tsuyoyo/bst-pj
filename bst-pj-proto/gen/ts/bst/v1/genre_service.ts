@@ -10,12 +10,22 @@ import { Genre } from "./content";
 
 export const protobufPackage = "bst.v1";
 
+export interface GetGenreRequest {
+}
+
+export interface GetGenreResponse {
+  genre: Genre | undefined;
+}
+
 export interface CreateGenreRequest {
   name: string;
 }
 
 export interface CreateGenreResponse {
   genre: Genre | undefined;
+}
+
+export interface ListGenresRequest {
 }
 
 export interface ListGenresResponse {
@@ -29,6 +39,106 @@ export interface UpdateGenreRequest {
 export interface UpdateGenreResponse {
   genre: Genre | undefined;
 }
+
+function createBaseGetGenreRequest(): GetGenreRequest {
+  return {};
+}
+
+export const GetGenreRequest = {
+  encode(_: GetGenreRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetGenreRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetGenreRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): GetGenreRequest {
+    return {};
+  },
+
+  toJSON(_: GetGenreRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetGenreRequest>, I>>(base?: I): GetGenreRequest {
+    return GetGenreRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetGenreRequest>, I>>(_: I): GetGenreRequest {
+    const message = createBaseGetGenreRequest();
+    return message;
+  },
+};
+
+function createBaseGetGenreResponse(): GetGenreResponse {
+  return { genre: undefined };
+}
+
+export const GetGenreResponse = {
+  encode(message: GetGenreResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.genre !== undefined) {
+      Genre.encode(message.genre, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetGenreResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetGenreResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.genre = Genre.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetGenreResponse {
+    return { genre: isSet(object.genre) ? Genre.fromJSON(object.genre) : undefined };
+  },
+
+  toJSON(message: GetGenreResponse): unknown {
+    const obj: any = {};
+    if (message.genre !== undefined) {
+      obj.genre = Genre.toJSON(message.genre);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetGenreResponse>, I>>(base?: I): GetGenreResponse {
+    return GetGenreResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetGenreResponse>, I>>(object: I): GetGenreResponse {
+    const message = createBaseGetGenreResponse();
+    message.genre = (object.genre !== undefined && object.genre !== null) ? Genre.fromPartial(object.genre) : undefined;
+    return message;
+  },
+};
 
 function createBaseCreateGenreRequest(): CreateGenreRequest {
   return { name: "" };
@@ -140,6 +250,49 @@ export const CreateGenreResponse = {
   fromPartial<I extends Exact<DeepPartial<CreateGenreResponse>, I>>(object: I): CreateGenreResponse {
     const message = createBaseCreateGenreResponse();
     message.genre = (object.genre !== undefined && object.genre !== null) ? Genre.fromPartial(object.genre) : undefined;
+    return message;
+  },
+};
+
+function createBaseListGenresRequest(): ListGenresRequest {
+  return {};
+}
+
+export const ListGenresRequest = {
+  encode(_: ListGenresRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListGenresRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseListGenresRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): ListGenresRequest {
+    return {};
+  },
+
+  toJSON(_: ListGenresRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ListGenresRequest>, I>>(base?: I): ListGenresRequest {
+    return ListGenresRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ListGenresRequest>, I>>(_: I): ListGenresRequest {
+    const message = createBaseListGenresRequest();
     return message;
   },
 };
@@ -314,6 +467,54 @@ export const UpdateGenreResponse = {
     return message;
   },
 };
+
+export interface GenreService {
+  GetGenre(request: GetGenreRequest): Promise<GetGenreResponse>;
+  CreateGenre(request: CreateGenreRequest): Promise<CreateGenreResponse>;
+  ListGenres(request: ListGenresRequest): Promise<ListGenresResponse>;
+  UpdateGenre(request: UpdateGenreRequest): Promise<UpdateGenreResponse>;
+}
+
+export const GenreServiceServiceName = "bst.v1.GenreService";
+export class GenreServiceClientImpl implements GenreService {
+  private readonly rpc: Rpc;
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || GenreServiceServiceName;
+    this.rpc = rpc;
+    this.GetGenre = this.GetGenre.bind(this);
+    this.CreateGenre = this.CreateGenre.bind(this);
+    this.ListGenres = this.ListGenres.bind(this);
+    this.UpdateGenre = this.UpdateGenre.bind(this);
+  }
+  GetGenre(request: GetGenreRequest): Promise<GetGenreResponse> {
+    const data = GetGenreRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "GetGenre", data);
+    return promise.then((data) => GetGenreResponse.decode(_m0.Reader.create(data)));
+  }
+
+  CreateGenre(request: CreateGenreRequest): Promise<CreateGenreResponse> {
+    const data = CreateGenreRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "CreateGenre", data);
+    return promise.then((data) => CreateGenreResponse.decode(_m0.Reader.create(data)));
+  }
+
+  ListGenres(request: ListGenresRequest): Promise<ListGenresResponse> {
+    const data = ListGenresRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "ListGenres", data);
+    return promise.then((data) => ListGenresResponse.decode(_m0.Reader.create(data)));
+  }
+
+  UpdateGenre(request: UpdateGenreRequest): Promise<UpdateGenreResponse> {
+    const data = UpdateGenreRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "UpdateGenre", data);
+    return promise.then((data) => UpdateGenreResponse.decode(_m0.Reader.create(data)));
+  }
+}
+
+interface Rpc {
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
+}
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 

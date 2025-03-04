@@ -13,6 +13,28 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+@$core.Deprecated('Use getGenreRequestDescriptor instead')
+const GetGenreRequest$json = {
+  '1': 'GetGenreRequest',
+};
+
+/// Descriptor for `GetGenreRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getGenreRequestDescriptor = $convert.base64Decode(
+    'Cg9HZXRHZW5yZVJlcXVlc3Q=');
+
+@$core.Deprecated('Use getGenreResponseDescriptor instead')
+const GetGenreResponse$json = {
+  '1': 'GetGenreResponse',
+  '2': [
+    {'1': 'genre', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.Genre', '10': 'genre'},
+  ],
+};
+
+/// Descriptor for `GetGenreResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getGenreResponseDescriptor = $convert.base64Decode(
+    'ChBHZXRHZW5yZVJlc3BvbnNlEiMKBWdlbnJlGAEgASgLMg0uYnN0LnYxLkdlbnJlUgVnZW5yZQ'
+    '==');
+
 @$core.Deprecated('Use createGenreRequestDescriptor instead')
 const CreateGenreRequest$json = {
   '1': 'CreateGenreRequest',
@@ -37,6 +59,15 @@ const CreateGenreResponse$json = {
 final $typed_data.Uint8List createGenreResponseDescriptor = $convert.base64Decode(
     'ChNDcmVhdGVHZW5yZVJlc3BvbnNlEiMKBWdlbnJlGAEgASgLMg0uYnN0LnYxLkdlbnJlUgVnZW'
     '5yZQ==');
+
+@$core.Deprecated('Use listGenresRequestDescriptor instead')
+const ListGenresRequest$json = {
+  '1': 'ListGenresRequest',
+};
+
+/// Descriptor for `ListGenresRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listGenresRequestDescriptor = $convert.base64Decode(
+    'ChFMaXN0R2VucmVzUmVxdWVzdA==');
 
 @$core.Deprecated('Use listGenresResponseDescriptor instead')
 const ListGenresResponse$json = {

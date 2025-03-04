@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import {
   Box,
   Typography,
@@ -16,48 +16,15 @@ import {
 } from "@mui/material";
 import { Add as AddIcon, Edit as EditIcon } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
-import { Genre } from "@/proto/bst/v1/content";
-import { ListGenresResponse } from "@/proto/bst/v1/genre_service";
-import { useApi } from "@/hooks/useApi";
+import { useGenres } from "@/features/genres/hooks";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
 const GenresListPage = () => {
   const router = useRouter();
-  const [genres, setGenres] = useState<Genre[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const { user } = useSelector((state: RootState) => state.auth);
-  const isMounted = useRef(true);
-
-  const api = useApi<ListGenresResponse>();
-
-  useEffect(() => {
-    isMounted.current = true;
-    fetchGenres();
-
-    return () => {
-      isMounted.current = false;
-    };
-  }, []);
-
-  const fetchGenres = async () => {
-    try {
-      const response = await api.execute("get", "/genres");
-      if (isMounted.current && response) {
-        setGenres(response.genres || []);
-      }
-    } catch (err) {
-      console.error("Failed to fetch genres", err);
-      if (isMounted.current) {
-        setError("ジャンルの取得に失敗しました。後でもう一度お試しください。");
-      }
-    } finally {
-      if (isMounted.current) {
-        setLoading(false);
-      }
-    }
-  };
+  const { data, isLoading, error } = useGenres();
+  const genres = data?.genres || [];
 
   const handleAddGenre = () => {
     router.push("/community/genres/new");
@@ -98,11 +65,11 @@ const GenresListPage = () => {
 
         {error && (
           <Alert severity="error" sx={{ mb: 2 }}>
-            {error}
+            ジャンルの取得に失敗しました。後でもう一度お試しください。
           </Alert>
         )}
 
-        {api.loading ? (
+        {isLoading ? (
           <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
             <CircularProgress />
           </Box>

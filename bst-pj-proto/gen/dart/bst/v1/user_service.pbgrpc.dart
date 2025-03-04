@@ -15,28 +15,28 @@ import 'dart:core' as $core;
 import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'user_service.pb.dart' as $29;
+import 'user_service.pb.dart' as $30;
 
 export 'user_service.pb.dart';
 
 @$pb.GrpcServiceName('bst.v1.UserService')
 class UserServiceClient extends $grpc.Client {
-  static final _$getUser = $grpc.ClientMethod<$29.GetUserRequest, $29.GetUserResponse>(
+  static final _$getUser = $grpc.ClientMethod<$30.GetUserRequest, $30.GetUserResponse>(
       '/bst.v1.UserService/GetUser',
-      ($29.GetUserRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $29.GetUserResponse.fromBuffer(value));
-  static final _$updateUser = $grpc.ClientMethod<$29.UpdateUserRequest, $29.UpdateUserResponse>(
+      ($30.GetUserRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $30.GetUserResponse.fromBuffer(value));
+  static final _$updateUser = $grpc.ClientMethod<$30.UpdateUserRequest, $30.UpdateUserResponse>(
       '/bst.v1.UserService/UpdateUser',
-      ($29.UpdateUserRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $29.UpdateUserResponse.fromBuffer(value));
-  static final _$deleteUser = $grpc.ClientMethod<$29.DeleteUserRequest, $29.DeleteUserResponse>(
+      ($30.UpdateUserRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $30.UpdateUserResponse.fromBuffer(value));
+  static final _$deleteUser = $grpc.ClientMethod<$30.DeleteUserRequest, $30.DeleteUserResponse>(
       '/bst.v1.UserService/DeleteUser',
-      ($29.DeleteUserRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $29.DeleteUserResponse.fromBuffer(value));
-  static final _$getMyself = $grpc.ClientMethod<$29.GetMyselfRequest, $29.GetMyselfResponse>(
+      ($30.DeleteUserRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $30.DeleteUserResponse.fromBuffer(value));
+  static final _$getMyself = $grpc.ClientMethod<$30.GetMyselfRequest, $30.GetMyselfResponse>(
       '/bst.v1.UserService/GetMyself',
-      ($29.GetMyselfRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $29.GetMyselfResponse.fromBuffer(value));
+      ($30.GetMyselfRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $30.GetMyselfResponse.fromBuffer(value));
 
   UserServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -44,19 +44,19 @@ class UserServiceClient extends $grpc.Client {
       : super(channel, options: options,
         interceptors: interceptors);
 
-  $grpc.ResponseFuture<$29.GetUserResponse> getUser($29.GetUserRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$30.GetUserResponse> getUser($30.GetUserRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getUser, request, options: options);
   }
 
-  $grpc.ResponseFuture<$29.UpdateUserResponse> updateUser($29.UpdateUserRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$30.UpdateUserResponse> updateUser($30.UpdateUserRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateUser, request, options: options);
   }
 
-  $grpc.ResponseFuture<$29.DeleteUserResponse> deleteUser($29.DeleteUserRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$30.DeleteUserResponse> deleteUser($30.DeleteUserRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteUser, request, options: options);
   }
 
-  $grpc.ResponseFuture<$29.GetMyselfResponse> getMyself($29.GetMyselfRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$30.GetMyselfResponse> getMyself($30.GetMyselfRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getMyself, request, options: options);
   }
 }
@@ -66,54 +66,54 @@ abstract class UserServiceBase extends $grpc.Service {
   $core.String get $name => 'bst.v1.UserService';
 
   UserServiceBase() {
-    $addMethod($grpc.ServiceMethod<$29.GetUserRequest, $29.GetUserResponse>(
+    $addMethod($grpc.ServiceMethod<$30.GetUserRequest, $30.GetUserResponse>(
         'GetUser',
         getUser_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $29.GetUserRequest.fromBuffer(value),
-        ($29.GetUserResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$29.UpdateUserRequest, $29.UpdateUserResponse>(
+        ($core.List<$core.int> value) => $30.GetUserRequest.fromBuffer(value),
+        ($30.GetUserResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$30.UpdateUserRequest, $30.UpdateUserResponse>(
         'UpdateUser',
         updateUser_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $29.UpdateUserRequest.fromBuffer(value),
-        ($29.UpdateUserResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$29.DeleteUserRequest, $29.DeleteUserResponse>(
+        ($core.List<$core.int> value) => $30.UpdateUserRequest.fromBuffer(value),
+        ($30.UpdateUserResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$30.DeleteUserRequest, $30.DeleteUserResponse>(
         'DeleteUser',
         deleteUser_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $29.DeleteUserRequest.fromBuffer(value),
-        ($29.DeleteUserResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$29.GetMyselfRequest, $29.GetMyselfResponse>(
+        ($core.List<$core.int> value) => $30.DeleteUserRequest.fromBuffer(value),
+        ($30.DeleteUserResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$30.GetMyselfRequest, $30.GetMyselfResponse>(
         'GetMyself',
         getMyself_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $29.GetMyselfRequest.fromBuffer(value),
-        ($29.GetMyselfResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $30.GetMyselfRequest.fromBuffer(value),
+        ($30.GetMyselfResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$29.GetUserResponse> getUser_Pre($grpc.ServiceCall call, $async.Future<$29.GetUserRequest> request) async {
+  $async.Future<$30.GetUserResponse> getUser_Pre($grpc.ServiceCall call, $async.Future<$30.GetUserRequest> request) async {
     return getUser(call, await request);
   }
 
-  $async.Future<$29.UpdateUserResponse> updateUser_Pre($grpc.ServiceCall call, $async.Future<$29.UpdateUserRequest> request) async {
+  $async.Future<$30.UpdateUserResponse> updateUser_Pre($grpc.ServiceCall call, $async.Future<$30.UpdateUserRequest> request) async {
     return updateUser(call, await request);
   }
 
-  $async.Future<$29.DeleteUserResponse> deleteUser_Pre($grpc.ServiceCall call, $async.Future<$29.DeleteUserRequest> request) async {
+  $async.Future<$30.DeleteUserResponse> deleteUser_Pre($grpc.ServiceCall call, $async.Future<$30.DeleteUserRequest> request) async {
     return deleteUser(call, await request);
   }
 
-  $async.Future<$29.GetMyselfResponse> getMyself_Pre($grpc.ServiceCall call, $async.Future<$29.GetMyselfRequest> request) async {
+  $async.Future<$30.GetMyselfResponse> getMyself_Pre($grpc.ServiceCall call, $async.Future<$30.GetMyselfRequest> request) async {
     return getMyself(call, await request);
   }
 
-  $async.Future<$29.GetUserResponse> getUser($grpc.ServiceCall call, $29.GetUserRequest request);
-  $async.Future<$29.UpdateUserResponse> updateUser($grpc.ServiceCall call, $29.UpdateUserRequest request);
-  $async.Future<$29.DeleteUserResponse> deleteUser($grpc.ServiceCall call, $29.DeleteUserRequest request);
-  $async.Future<$29.GetMyselfResponse> getMyself($grpc.ServiceCall call, $29.GetMyselfRequest request);
+  $async.Future<$30.GetUserResponse> getUser($grpc.ServiceCall call, $30.GetUserRequest request);
+  $async.Future<$30.UpdateUserResponse> updateUser($grpc.ServiceCall call, $30.UpdateUserRequest request);
+  $async.Future<$30.DeleteUserResponse> deleteUser($grpc.ServiceCall call, $30.DeleteUserRequest request);
+  $async.Future<$30.GetMyselfResponse> getMyself($grpc.ServiceCall call, $30.GetMyselfRequest request);
 }

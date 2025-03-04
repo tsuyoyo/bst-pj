@@ -6,6 +6,8 @@ import {
   Post,
   Put,
   UseGuards,
+  NotFoundException,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { GenreService } from './genre.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -15,6 +17,7 @@ import {
   CreateGenreResponse,
   ListGenresResponse,
   UpdateGenreResponse,
+  GetGenreResponse,
 } from 'src/proto/bst/v1/genre_service';
 import { CurrentUser } from '../auth/user.decorator';
 import { User } from '../entities/user.entity';
@@ -36,7 +39,6 @@ export class GenreController {
     @Body() request: CreateGenreDto,
     @CurrentUser() user: User,
   ): Promise<CreateGenreResponse> {
-    console.log(`Creating genre by user: ${user.email}`);
     const genre = await this.genreService.createGenre(request.name, user.id);
     return {
       genre: this.mapEntityToProto(genre),
@@ -51,6 +53,19 @@ export class GenreController {
     };
   }
 
+  @Get(':id')
+  async getGenre(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<GetGenreResponse> {
+    const genre = await this.genreService.getGenre(id);
+    if (!genre) {
+      throw new NotFoundException(`Genre with ID ${id} not found`);
+    }
+    return {
+      genre: this.mapEntityToProto(genre),
+    };
+  }
+
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   async updateGenre(
@@ -58,7 +73,6 @@ export class GenreController {
     @Body() request: UpdateGenreDto,
     @CurrentUser() user: User,
   ): Promise<UpdateGenreResponse> {
-    console.log(`Updating genre by user: ${user.email}`);
     const genre = await this.genreService.updateGenre(
       parseInt(id, 10),
       request.name,

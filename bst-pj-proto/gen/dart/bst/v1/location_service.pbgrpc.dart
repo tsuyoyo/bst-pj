@@ -15,32 +15,32 @@ import 'dart:core' as $core;
 import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'location_service.pb.dart' as $5;
+import 'location_service.pb.dart' as $6;
 
 export 'location_service.pb.dart';
 
 @$pb.GrpcServiceName('bst.v1.LocationService')
 class LocationServiceClient extends $grpc.Client {
-  static final _$createLocation = $grpc.ClientMethod<$5.CreateLocationRequest, $5.CreateLocationResponse>(
+  static final _$createLocation = $grpc.ClientMethod<$6.CreateLocationRequest, $6.CreateLocationResponse>(
       '/bst.v1.LocationService/CreateLocation',
-      ($5.CreateLocationRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $5.CreateLocationResponse.fromBuffer(value));
-  static final _$listLocations = $grpc.ClientMethod<$5.ListLocationsRequest, $5.ListLocationsResponse>(
+      ($6.CreateLocationRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $6.CreateLocationResponse.fromBuffer(value));
+  static final _$listLocations = $grpc.ClientMethod<$6.ListLocationsRequest, $6.ListLocationsResponse>(
       '/bst.v1.LocationService/ListLocations',
-      ($5.ListLocationsRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $5.ListLocationsResponse.fromBuffer(value));
-  static final _$getLocation = $grpc.ClientMethod<$5.GetLocationRequest, $5.GetLocationResponse>(
+      ($6.ListLocationsRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $6.ListLocationsResponse.fromBuffer(value));
+  static final _$getLocation = $grpc.ClientMethod<$6.GetLocationRequest, $6.GetLocationResponse>(
       '/bst.v1.LocationService/GetLocation',
-      ($5.GetLocationRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $5.GetLocationResponse.fromBuffer(value));
-  static final _$updateLocation = $grpc.ClientMethod<$5.UpdateLocationRequest, $5.UpdateLocationResponse>(
+      ($6.GetLocationRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $6.GetLocationResponse.fromBuffer(value));
+  static final _$updateLocation = $grpc.ClientMethod<$6.UpdateLocationRequest, $6.UpdateLocationResponse>(
       '/bst.v1.LocationService/UpdateLocation',
-      ($5.UpdateLocationRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $5.UpdateLocationResponse.fromBuffer(value));
-  static final _$deleteLocation = $grpc.ClientMethod<$5.DeleteLocationRequest, $5.DeleteLocationResponse>(
+      ($6.UpdateLocationRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $6.UpdateLocationResponse.fromBuffer(value));
+  static final _$deleteLocation = $grpc.ClientMethod<$6.DeleteLocationRequest, $6.DeleteLocationResponse>(
       '/bst.v1.LocationService/DeleteLocation',
-      ($5.DeleteLocationRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $5.DeleteLocationResponse.fromBuffer(value));
+      ($6.DeleteLocationRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $6.DeleteLocationResponse.fromBuffer(value));
 
   LocationServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -48,23 +48,23 @@ class LocationServiceClient extends $grpc.Client {
       : super(channel, options: options,
         interceptors: interceptors);
 
-  $grpc.ResponseFuture<$5.CreateLocationResponse> createLocation($5.CreateLocationRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$6.CreateLocationResponse> createLocation($6.CreateLocationRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createLocation, request, options: options);
   }
 
-  $grpc.ResponseFuture<$5.ListLocationsResponse> listLocations($5.ListLocationsRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$6.ListLocationsResponse> listLocations($6.ListLocationsRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$listLocations, request, options: options);
   }
 
-  $grpc.ResponseFuture<$5.GetLocationResponse> getLocation($5.GetLocationRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$6.GetLocationResponse> getLocation($6.GetLocationRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getLocation, request, options: options);
   }
 
-  $grpc.ResponseFuture<$5.UpdateLocationResponse> updateLocation($5.UpdateLocationRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$6.UpdateLocationResponse> updateLocation($6.UpdateLocationRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateLocation, request, options: options);
   }
 
-  $grpc.ResponseFuture<$5.DeleteLocationResponse> deleteLocation($5.DeleteLocationRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$6.DeleteLocationResponse> deleteLocation($6.DeleteLocationRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteLocation, request, options: options);
   }
 }
@@ -74,66 +74,66 @@ abstract class LocationServiceBase extends $grpc.Service {
   $core.String get $name => 'bst.v1.LocationService';
 
   LocationServiceBase() {
-    $addMethod($grpc.ServiceMethod<$5.CreateLocationRequest, $5.CreateLocationResponse>(
+    $addMethod($grpc.ServiceMethod<$6.CreateLocationRequest, $6.CreateLocationResponse>(
         'CreateLocation',
         createLocation_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $5.CreateLocationRequest.fromBuffer(value),
-        ($5.CreateLocationResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$5.ListLocationsRequest, $5.ListLocationsResponse>(
+        ($core.List<$core.int> value) => $6.CreateLocationRequest.fromBuffer(value),
+        ($6.CreateLocationResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.ListLocationsRequest, $6.ListLocationsResponse>(
         'ListLocations',
         listLocations_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $5.ListLocationsRequest.fromBuffer(value),
-        ($5.ListLocationsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$5.GetLocationRequest, $5.GetLocationResponse>(
+        ($core.List<$core.int> value) => $6.ListLocationsRequest.fromBuffer(value),
+        ($6.ListLocationsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.GetLocationRequest, $6.GetLocationResponse>(
         'GetLocation',
         getLocation_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $5.GetLocationRequest.fromBuffer(value),
-        ($5.GetLocationResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$5.UpdateLocationRequest, $5.UpdateLocationResponse>(
+        ($core.List<$core.int> value) => $6.GetLocationRequest.fromBuffer(value),
+        ($6.GetLocationResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.UpdateLocationRequest, $6.UpdateLocationResponse>(
         'UpdateLocation',
         updateLocation_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $5.UpdateLocationRequest.fromBuffer(value),
-        ($5.UpdateLocationResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$5.DeleteLocationRequest, $5.DeleteLocationResponse>(
+        ($core.List<$core.int> value) => $6.UpdateLocationRequest.fromBuffer(value),
+        ($6.UpdateLocationResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.DeleteLocationRequest, $6.DeleteLocationResponse>(
         'DeleteLocation',
         deleteLocation_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $5.DeleteLocationRequest.fromBuffer(value),
-        ($5.DeleteLocationResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $6.DeleteLocationRequest.fromBuffer(value),
+        ($6.DeleteLocationResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$5.CreateLocationResponse> createLocation_Pre($grpc.ServiceCall call, $async.Future<$5.CreateLocationRequest> request) async {
+  $async.Future<$6.CreateLocationResponse> createLocation_Pre($grpc.ServiceCall call, $async.Future<$6.CreateLocationRequest> request) async {
     return createLocation(call, await request);
   }
 
-  $async.Future<$5.ListLocationsResponse> listLocations_Pre($grpc.ServiceCall call, $async.Future<$5.ListLocationsRequest> request) async {
+  $async.Future<$6.ListLocationsResponse> listLocations_Pre($grpc.ServiceCall call, $async.Future<$6.ListLocationsRequest> request) async {
     return listLocations(call, await request);
   }
 
-  $async.Future<$5.GetLocationResponse> getLocation_Pre($grpc.ServiceCall call, $async.Future<$5.GetLocationRequest> request) async {
+  $async.Future<$6.GetLocationResponse> getLocation_Pre($grpc.ServiceCall call, $async.Future<$6.GetLocationRequest> request) async {
     return getLocation(call, await request);
   }
 
-  $async.Future<$5.UpdateLocationResponse> updateLocation_Pre($grpc.ServiceCall call, $async.Future<$5.UpdateLocationRequest> request) async {
+  $async.Future<$6.UpdateLocationResponse> updateLocation_Pre($grpc.ServiceCall call, $async.Future<$6.UpdateLocationRequest> request) async {
     return updateLocation(call, await request);
   }
 
-  $async.Future<$5.DeleteLocationResponse> deleteLocation_Pre($grpc.ServiceCall call, $async.Future<$5.DeleteLocationRequest> request) async {
+  $async.Future<$6.DeleteLocationResponse> deleteLocation_Pre($grpc.ServiceCall call, $async.Future<$6.DeleteLocationRequest> request) async {
     return deleteLocation(call, await request);
   }
 
-  $async.Future<$5.CreateLocationResponse> createLocation($grpc.ServiceCall call, $5.CreateLocationRequest request);
-  $async.Future<$5.ListLocationsResponse> listLocations($grpc.ServiceCall call, $5.ListLocationsRequest request);
-  $async.Future<$5.GetLocationResponse> getLocation($grpc.ServiceCall call, $5.GetLocationRequest request);
-  $async.Future<$5.UpdateLocationResponse> updateLocation($grpc.ServiceCall call, $5.UpdateLocationRequest request);
-  $async.Future<$5.DeleteLocationResponse> deleteLocation($grpc.ServiceCall call, $5.DeleteLocationRequest request);
+  $async.Future<$6.CreateLocationResponse> createLocation($grpc.ServiceCall call, $6.CreateLocationRequest request);
+  $async.Future<$6.ListLocationsResponse> listLocations($grpc.ServiceCall call, $6.ListLocationsRequest request);
+  $async.Future<$6.GetLocationResponse> getLocation($grpc.ServiceCall call, $6.GetLocationRequest request);
+  $async.Future<$6.UpdateLocationResponse> updateLocation($grpc.ServiceCall call, $6.UpdateLocationRequest request);
+  $async.Future<$6.DeleteLocationResponse> deleteLocation($grpc.ServiceCall call, $6.DeleteLocationRequest request);
 }

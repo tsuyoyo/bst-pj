@@ -10,12 +10,22 @@ import { Genre } from "./content";
 
 export const protobufPackage = "bst.v1";
 
+export interface GetGenreRequest {
+}
+
+export interface GetGenreResponse {
+  genre: Genre | undefined;
+}
+
 export interface CreateGenreRequest {
   name: string;
 }
 
 export interface CreateGenreResponse {
   genre: Genre | undefined;
+}
+
+export interface ListGenresRequest {
 }
 
 export interface ListGenresResponse {
@@ -30,15 +40,112 @@ export interface UpdateGenreResponse {
   genre: Genre | undefined;
 }
 
+function createBaseGetGenreRequest(): GetGenreRequest {
+  return {};
+}
+
+export const GetGenreRequest = {
+  encode(_: GetGenreRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetGenreRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetGenreRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): GetGenreRequest {
+    return {};
+  },
+
+  toJSON(_: GetGenreRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetGenreRequest>, I>>(base?: I): GetGenreRequest {
+    return GetGenreRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetGenreRequest>, I>>(_: I): GetGenreRequest {
+    const message = createBaseGetGenreRequest();
+    return message;
+  },
+};
+
+function createBaseGetGenreResponse(): GetGenreResponse {
+  return { genre: undefined };
+}
+
+export const GetGenreResponse = {
+  encode(message: GetGenreResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.genre !== undefined) {
+      Genre.encode(message.genre, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetGenreResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetGenreResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.genre = Genre.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetGenreResponse {
+    return { genre: isSet(object.genre) ? Genre.fromJSON(object.genre) : undefined };
+  },
+
+  toJSON(message: GetGenreResponse): unknown {
+    const obj: any = {};
+    if (message.genre !== undefined) {
+      obj.genre = Genre.toJSON(message.genre);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetGenreResponse>, I>>(base?: I): GetGenreResponse {
+    return GetGenreResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetGenreResponse>, I>>(object: I): GetGenreResponse {
+    const message = createBaseGetGenreResponse();
+    message.genre = (object.genre !== undefined && object.genre !== null) ? Genre.fromPartial(object.genre) : undefined;
+    return message;
+  },
+};
+
 function createBaseCreateGenreRequest(): CreateGenreRequest {
   return { name: "" };
 }
 
 export const CreateGenreRequest = {
-  encode(
-    message: CreateGenreRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: CreateGenreRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -46,8 +153,7 @@ export const CreateGenreRequest = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): CreateGenreRequest {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateGenreRequest();
     while (reader.pos < end) {
@@ -81,14 +187,10 @@ export const CreateGenreRequest = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<CreateGenreRequest>, I>>(
-    base?: I
-  ): CreateGenreRequest {
+  create<I extends Exact<DeepPartial<CreateGenreRequest>, I>>(base?: I): CreateGenreRequest {
     return CreateGenreRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<CreateGenreRequest>, I>>(
-    object: I
-  ): CreateGenreRequest {
+  fromPartial<I extends Exact<DeepPartial<CreateGenreRequest>, I>>(object: I): CreateGenreRequest {
     const message = createBaseCreateGenreRequest();
     message.name = object.name ?? "";
     return message;
@@ -100,10 +202,7 @@ function createBaseCreateGenreResponse(): CreateGenreResponse {
 }
 
 export const CreateGenreResponse = {
-  encode(
-    message: CreateGenreResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: CreateGenreResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.genre !== undefined) {
       Genre.encode(message.genre, writer.uint32(10).fork()).ldelim();
     }
@@ -111,8 +210,7 @@ export const CreateGenreResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): CreateGenreResponse {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateGenreResponse();
     while (reader.pos < end) {
@@ -135,9 +233,7 @@ export const CreateGenreResponse = {
   },
 
   fromJSON(object: any): CreateGenreResponse {
-    return {
-      genre: isSet(object.genre) ? Genre.fromJSON(object.genre) : undefined,
-    };
+    return { genre: isSet(object.genre) ? Genre.fromJSON(object.genre) : undefined };
   },
 
   toJSON(message: CreateGenreResponse): unknown {
@@ -148,19 +244,55 @@ export const CreateGenreResponse = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<CreateGenreResponse>, I>>(
-    base?: I
-  ): CreateGenreResponse {
+  create<I extends Exact<DeepPartial<CreateGenreResponse>, I>>(base?: I): CreateGenreResponse {
     return CreateGenreResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<CreateGenreResponse>, I>>(
-    object: I
-  ): CreateGenreResponse {
+  fromPartial<I extends Exact<DeepPartial<CreateGenreResponse>, I>>(object: I): CreateGenreResponse {
     const message = createBaseCreateGenreResponse();
-    message.genre =
-      object.genre !== undefined && object.genre !== null
-        ? Genre.fromPartial(object.genre)
-        : undefined;
+    message.genre = (object.genre !== undefined && object.genre !== null) ? Genre.fromPartial(object.genre) : undefined;
+    return message;
+  },
+};
+
+function createBaseListGenresRequest(): ListGenresRequest {
+  return {};
+}
+
+export const ListGenresRequest = {
+  encode(_: ListGenresRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListGenresRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseListGenresRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): ListGenresRequest {
+    return {};
+  },
+
+  toJSON(_: ListGenresRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ListGenresRequest>, I>>(base?: I): ListGenresRequest {
+    return ListGenresRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ListGenresRequest>, I>>(_: I): ListGenresRequest {
+    const message = createBaseListGenresRequest();
     return message;
   },
 };
@@ -170,10 +302,7 @@ function createBaseListGenresResponse(): ListGenresResponse {
 }
 
 export const ListGenresResponse = {
-  encode(
-    message: ListGenresResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ListGenresResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.genres) {
       Genre.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -181,8 +310,7 @@ export const ListGenresResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ListGenresResponse {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListGenresResponse();
     while (reader.pos < end) {
@@ -205,11 +333,7 @@ export const ListGenresResponse = {
   },
 
   fromJSON(object: any): ListGenresResponse {
-    return {
-      genres: globalThis.Array.isArray(object?.genres)
-        ? object.genres.map((e: any) => Genre.fromJSON(e))
-        : [],
-    };
+    return { genres: globalThis.Array.isArray(object?.genres) ? object.genres.map((e: any) => Genre.fromJSON(e)) : [] };
   },
 
   toJSON(message: ListGenresResponse): unknown {
@@ -220,14 +344,10 @@ export const ListGenresResponse = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ListGenresResponse>, I>>(
-    base?: I
-  ): ListGenresResponse {
+  create<I extends Exact<DeepPartial<ListGenresResponse>, I>>(base?: I): ListGenresResponse {
     return ListGenresResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ListGenresResponse>, I>>(
-    object: I
-  ): ListGenresResponse {
+  fromPartial<I extends Exact<DeepPartial<ListGenresResponse>, I>>(object: I): ListGenresResponse {
     const message = createBaseListGenresResponse();
     message.genres = object.genres?.map((e) => Genre.fromPartial(e)) || [];
     return message;
@@ -239,10 +359,7 @@ function createBaseUpdateGenreRequest(): UpdateGenreRequest {
 }
 
 export const UpdateGenreRequest = {
-  encode(
-    message: UpdateGenreRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: UpdateGenreRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -250,8 +367,7 @@ export const UpdateGenreRequest = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): UpdateGenreRequest {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateGenreRequest();
     while (reader.pos < end) {
@@ -285,14 +401,10 @@ export const UpdateGenreRequest = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<UpdateGenreRequest>, I>>(
-    base?: I
-  ): UpdateGenreRequest {
+  create<I extends Exact<DeepPartial<UpdateGenreRequest>, I>>(base?: I): UpdateGenreRequest {
     return UpdateGenreRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<UpdateGenreRequest>, I>>(
-    object: I
-  ): UpdateGenreRequest {
+  fromPartial<I extends Exact<DeepPartial<UpdateGenreRequest>, I>>(object: I): UpdateGenreRequest {
     const message = createBaseUpdateGenreRequest();
     message.name = object.name ?? "";
     return message;
@@ -304,10 +416,7 @@ function createBaseUpdateGenreResponse(): UpdateGenreResponse {
 }
 
 export const UpdateGenreResponse = {
-  encode(
-    message: UpdateGenreResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: UpdateGenreResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.genre !== undefined) {
       Genre.encode(message.genre, writer.uint32(10).fork()).ldelim();
     }
@@ -315,8 +424,7 @@ export const UpdateGenreResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): UpdateGenreResponse {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateGenreResponse();
     while (reader.pos < end) {
@@ -339,9 +447,7 @@ export const UpdateGenreResponse = {
   },
 
   fromJSON(object: any): UpdateGenreResponse {
-    return {
-      genre: isSet(object.genre) ? Genre.fromJSON(object.genre) : undefined,
-    };
+    return { genre: isSet(object.genre) ? Genre.fromJSON(object.genre) : undefined };
   },
 
   toJSON(message: UpdateGenreResponse): unknown {
@@ -352,48 +458,75 @@ export const UpdateGenreResponse = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<UpdateGenreResponse>, I>>(
-    base?: I
-  ): UpdateGenreResponse {
+  create<I extends Exact<DeepPartial<UpdateGenreResponse>, I>>(base?: I): UpdateGenreResponse {
     return UpdateGenreResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<UpdateGenreResponse>, I>>(
-    object: I
-  ): UpdateGenreResponse {
+  fromPartial<I extends Exact<DeepPartial<UpdateGenreResponse>, I>>(object: I): UpdateGenreResponse {
     const message = createBaseUpdateGenreResponse();
-    message.genre =
-      object.genre !== undefined && object.genre !== null
-        ? Genre.fromPartial(object.genre)
-        : undefined;
+    message.genre = (object.genre !== undefined && object.genre !== null) ? Genre.fromPartial(object.genre) : undefined;
     return message;
   },
 };
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+export interface GenreService {
+  GetGenre(request: GetGenreRequest): Promise<GetGenreResponse>;
+  CreateGenre(request: CreateGenreRequest): Promise<CreateGenreResponse>;
+  ListGenres(request: ListGenresRequest): Promise<ListGenresResponse>;
+  UpdateGenre(request: UpdateGenreRequest): Promise<UpdateGenreResponse>;
+}
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends globalThis.Array<infer U>
-  ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+export const GenreServiceServiceName = "bst.v1.GenreService";
+export class GenreServiceClientImpl implements GenreService {
+  private readonly rpc: Rpc;
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || GenreServiceServiceName;
+    this.rpc = rpc;
+    this.GetGenre = this.GetGenre.bind(this);
+    this.CreateGenre = this.CreateGenre.bind(this);
+    this.ListGenres = this.ListGenres.bind(this);
+    this.UpdateGenre = this.UpdateGenre.bind(this);
+  }
+  GetGenre(request: GetGenreRequest): Promise<GetGenreResponse> {
+    const data = GetGenreRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "GetGenre", data);
+    return promise.then((data) => GetGenreResponse.decode(_m0.Reader.create(data)));
+  }
+
+  CreateGenre(request: CreateGenreRequest): Promise<CreateGenreResponse> {
+    const data = CreateGenreRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "CreateGenre", data);
+    return promise.then((data) => CreateGenreResponse.decode(_m0.Reader.create(data)));
+  }
+
+  ListGenres(request: ListGenresRequest): Promise<ListGenresResponse> {
+    const data = ListGenresRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "ListGenres", data);
+    return promise.then((data) => ListGenresResponse.decode(_m0.Reader.create(data)));
+  }
+
+  UpdateGenre(request: UpdateGenreRequest): Promise<UpdateGenreResponse> {
+    const data = UpdateGenreRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "UpdateGenre", data);
+    return promise.then((data) => UpdateGenreResponse.decode(_m0.Reader.create(data)));
+  }
+}
+
+interface Rpc {
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
+}
+
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
-      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
-    };
+export type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

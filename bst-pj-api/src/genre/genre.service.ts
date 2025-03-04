@@ -53,4 +53,8 @@ export class GenreService {
 
     return await this.genreRepository.save(genre);
   }
+
+  async getGenre(id: number): Promise<Genre | null> {
+    return await this.genreRepository.findOne({ where: { id } });
+  }
 }
