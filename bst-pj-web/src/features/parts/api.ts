@@ -13,9 +13,8 @@ export const fetchParts = async (
   pageToken?: string
 ): Promise<ListPartsResponse> => {
   const params: Record<string, any> = {};
-  if (pageSize) params.pageSize = pageSize;
-  if (pageToken) params.pageToken = pageToken;
-
+  params.pageSize = pageSize ?? 10;
+  params.pageToken = pageToken ?? "";
   const { data } = await apiClient.get<ListPartsResponse>("/parts", { params });
   return data;
 };
