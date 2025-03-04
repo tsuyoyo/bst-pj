@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Box,
   Typography,
@@ -12,36 +12,37 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { useApi } from "@/hooks/useApi";
-import { CreatePartResponse } from "@/proto/bst/v1/part_service";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { useCreatePart } from "@/features/parts/hooks";
 
 const NewPartPage = () => {
   const router = useRouter();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const api = useApi<CreatePartResponse>();
+  const { user } = useSelector((state: RootState) => state.auth);
+
+  // React Queryフックを使用
+  const createPartMutation = useCreatePart();
+
+  // ログインチェック
+  useEffect(() => {
+    if (!user) {
+      router.push("/login?redirect=/community/parts/new");
+    }
+  }, [user, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     setError(null);
 
     try {
-      const response = await api.execute("post", "/parts", {
-        name,
-        description,
-      });
-
-      if (response) {
-        router.push(`/community/parts/${response.part?.id}`);
-      }
+      await createPartMutation.mutateAsync({ name, description });
+      router.push("/community/parts");
     } catch (err) {
       console.error("Failed to create part", err);
-      setError("Failed to create part. Please try again later.");
-    } finally {
-      setLoading(false);
+      setError("パートの登録に失敗しました。後でもう一度お試しください。");
     }
   };
 
@@ -49,11 +50,22 @@ const NewPartPage = () => {
     router.push("/community/parts");
   };
 
+  if (!user) {
+    return (
+      <Container className="page-container">
+        <Alert severity="info">ログインが必要です。リダイレクトします...</Alert>
+      </Container>
+    );
+  }
+
   return (
     <Container className="page-container">
       <Paper elevation={2} sx={{ p: 3, mt: 2 }}>
         <Typography variant="h4" component="h1" gutterBottom>
-          Add New Part
+          新規パート登録
+        </Typography>
+        <Typography variant="body1" paragraph>
+          新しい楽器パートを登録して、コミュニティに貢献しましょう。
         </Typography>
 
         {error && (
@@ -64,17 +76,17 @@ const NewPartPage = () => {
 
         <Box component="form" onSubmit={handleSubmit}>
           <TextField
-            label="Name"
+            label="パート名"
             fullWidth
             margin="normal"
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            disabled={loading}
+            disabled={createPartMutation.isPending}
           />
 
           <TextField
-            label="Description"
+            label="説明"
             fullWidth
             margin="normal"
             multiline
@@ -82,24 +94,28 @@ const NewPartPage = () => {
             required
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            disabled={loading}
+            disabled={createPartMutation.isPending}
           />
 
           <Box sx={{ mt: 3, display: "flex", gap: 2 }}>
             <Button
               type="submit"
               variant="contained"
-              disabled={loading}
-              startIcon={loading ? <CircularProgress size={20} /> : null}
+              disabled={createPartMutation.isPending}
+              startIcon={
+                createPartMutation.isPending ? (
+                  <CircularProgress size={20} />
+                ) : null
+              }
             >
-              {loading ? "Creating..." : "Create"}
+              {createPartMutation.isPending ? "登録中..." : "登録する"}
             </Button>
             <Button
               variant="outlined"
               onClick={handleCancel}
-              disabled={loading}
+              disabled={createPartMutation.isPending}
             >
-              Cancel
+              キャンセル
             </Button>
           </Box>
         </Box>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Box,
   Typography,
@@ -12,51 +12,22 @@ import {
   ListItemText,
   Divider,
   CircularProgress,
-  Pagination,
   Alert,
+  ListItemButton,
 } from "@mui/material";
-import { Add as AddIcon } from "@mui/icons-material";
+import { Add as AddIcon, Edit as EditIcon } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
-import { Part } from "@/proto/bst/v1/content";
-import { ListPartsResponse } from "@/proto/bst/v1/part_service";
-import { useApi } from "@/hooks/useApi";
-
-const PAGE_SIZE = 10;
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { useParts } from "@/features/parts/hooks";
 
 const PartsListPage = () => {
   const router = useRouter();
-  const [parts, setParts] = useState<Part[]>([]);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [nextPageToken, setNextPageToken] = useState("");
+  const { user } = useSelector((state: RootState) => state.auth);
 
-  const api = useApi<ListPartsResponse>();
-
-  useEffect(() => {
-    fetchParts();
-  }, [page]);
-
-  const fetchParts = async (pageToken = "") => {
-    const response = await api.execute("get", "/parts", {
-      params: {
-        pageSize: PAGE_SIZE,
-        pageToken,
-      },
-    });
-
-    if (response) {
-      setParts(response.parts);
-      setNextPageToken(response.nextPageToken);
-      setTotalPages(Math.ceil(response.totalSize / PAGE_SIZE));
-    }
-  };
-
-  const handlePageChange = (
-    event: React.ChangeEvent<unknown>,
-    value: number
-  ) => {
-    setPage(value);
-  };
+  // React Queryフックを使用
+  const { data, isLoading, error } = useParts();
+  const parts = data?.parts || [];
 
   const handleAddPart = () => {
     router.push("/community/parts/new");
@@ -82,66 +53,63 @@ const PartsListPage = () => {
           }}
         >
           <Typography variant="h4" component="h1">
-            Parts
+            パート一覧
           </Typography>
-          <Button
-            variant="contained"
-            startIcon={<AddIcon />}
-            onClick={handleAddPart}
-          >
-            Add Part
-          </Button>
+          {user && (
+            <Button
+              variant="contained"
+              startIcon={<AddIcon />}
+              onClick={handleAddPart}
+            >
+              新規パート登録
+            </Button>
+          )}
         </Box>
 
-        {api.error && (
+        <Typography variant="body1" paragraph>
+          楽器パートの一覧です。新しいパートを登録してコミュニティに貢献しましょう。
+        </Typography>
+
+        {error && (
           <Alert severity="error" sx={{ mb: 2 }}>
-            {api.error}
+            パートの取得に失敗しました。後でもう一度お試しください。
           </Alert>
         )}
 
-        {api.loading ? (
+        {isLoading ? (
           <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
             <CircularProgress />
           </Box>
         ) : parts.length === 0 ? (
-          <Typography>No parts registered. Please add a new part.</Typography>
+          <Typography>
+            パートが登録されていません。新しいパートを追加してください。
+          </Typography>
         ) : (
-          <>
-            <List>
-              {parts.map((part, index) => (
-                <Box key={part.id}>
-                  {index > 0 && <Divider />}
-                  <ListItem
-                    sx={{ cursor: "pointer" }}
-                    onClick={() => handleViewPart(part.id)}
-                  >
-                    <ListItemText
-                      primary={part.name}
-                      secondary={part.description}
-                    />
+          <List>
+            {parts.map((part, index) => (
+              <Box key={part.id}>
+                {index > 0 && <Divider />}
+                <ListItemButton onClick={() => handleViewPart(part.id)}>
+                  <ListItemText
+                    primary={part.name}
+                    secondary={part.description}
+                  />
+                  {user && (
                     <Button
                       size="small"
+                      startIcon={<EditIcon />}
                       onClick={(e) => {
                         e.stopPropagation();
                         handleEditPart(part.id);
                       }}
                     >
-                      Edit
+                      編集
                     </Button>
-                  </ListItem>
-                </Box>
-              ))}
-            </List>
-
-            <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
-              <Pagination
-                count={totalPages}
-                page={page}
-                onChange={handlePageChange}
-                color="primary"
-              />
-            </Box>
-          </>
+                  )}
+                </ListItemButton>
+              </Box>
+            ))}
+          </List>
         )}
       </Paper>
     </Container>

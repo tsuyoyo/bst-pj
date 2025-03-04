@@ -3,8 +3,18 @@
 import { Box, Typography, Container, Paper, Button, Grid } from "@mui/material";
 import { MusicNote, Group, LibraryMusic, Category } from "@mui/icons-material";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const CommunityPage = () => {
+  const router = useRouter();
+  const { user } = useSelector((state: RootState) => state.auth);
+
+  const handleNavigate = (path: string) => {
+    router.push(path);
+  };
+
   return (
     <Container className="page-container">
       <Paper elevation={2} sx={{ p: 3, mt: 2 }}>
