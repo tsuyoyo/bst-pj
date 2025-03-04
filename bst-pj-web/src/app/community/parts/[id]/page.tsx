@@ -46,7 +46,7 @@ const PartDetailPage = ({ params }: { params: { id: string } }) => {
   }, [id]); // Remove api.execute from dependency array
 
   const handleEdit = () => {
-    router.push(`/community/parts/${params.id}/edit`);
+    router.push(`/community/parts/${id}/edit`);
   };
 
   const handleBack = () => {

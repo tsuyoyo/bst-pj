@@ -1,6 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { store } from "@/store/store";
-import { refreshAccessToken } from "@/features/auth/api";
 import { updateTokens } from "@/features/auth/authSlice";
 
 /**
@@ -35,6 +34,18 @@ export const apiClient = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+// 循環参照を避けるための関数
+const refreshAccessToken = async () => {
+  const { auth } = store.getState();
+  const response = await axios.post(
+    `${
+      process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080"
+    }/auth/refresh`,
+    { refreshToken: auth.refreshToken }
+  );
+  return response.data;
+};
 
 // Request interceptor
 apiClient.interceptors.request.use(
