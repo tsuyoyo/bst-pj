@@ -12,20 +12,20 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { useApi } from "@/hooks/useApi";
-import { CreateGenreResponse } from "@/proto/bst/v1/genre_service";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { useCreateGenre } from "@/features/genres/hooks";
 
 const NewGenrePage = () => {
   const router = useRouter();
   const [name, setName] = useState("");
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const api = useApi<CreateGenreResponse>();
   const { user } = useSelector((state: RootState) => state.auth);
 
-  // Redirect if not logged in
+  // React Queryフックを使用
+  const createGenreMutation = useCreateGenre();
+
+  // ログインチェック
   useEffect(() => {
     if (!user) {
       router.push("/login?redirect=/community/genres/new");
@@ -34,23 +34,14 @@ const NewGenrePage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     setError(null);
 
     try {
-      const response = await api.execute("post", "/genres", {
-        name,
-      });
-
-      if (response) {
-        // 一覧ページに遷移するように修正
-        router.push("/community/genres");
-      }
+      await createGenreMutation.mutateAsync(name);
+      router.push("/community/genres");
     } catch (err) {
       console.error("Failed to create genre", err);
       setError("ジャンルの登録に失敗しました。後でもう一度お試しください。");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -90,22 +81,26 @@ const NewGenrePage = () => {
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            disabled={loading}
+            disabled={createGenreMutation.isPending}
           />
 
           <Box sx={{ mt: 3, display: "flex", gap: 2 }}>
             <Button
               type="submit"
               variant="contained"
-              disabled={loading}
-              startIcon={loading ? <CircularProgress size={20} /> : null}
+              disabled={createGenreMutation.isPending}
+              startIcon={
+                createGenreMutation.isPending ? (
+                  <CircularProgress size={20} />
+                ) : null
+              }
             >
-              {loading ? "登録中..." : "登録する"}
+              {createGenreMutation.isPending ? "登録中..." : "登録する"}
             </Button>
             <Button
               variant="outlined"
               onClick={handleCancel}
-              disabled={loading}
+              disabled={createGenreMutation.isPending}
             >
               キャンセル
             </Button>

@@ -103,7 +103,6 @@ export class AuthService {
     access_token: string;
     refresh_token: string;
   }> {
-    console.log('refresh token', token);
     try {
       const payload = this.jwtService.verify<JwtPayload>(token, {
         secret: process.env.JWT_REFRESH_SECRET,

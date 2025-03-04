@@ -13,87 +13,45 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
-import {
-  GetPartResponse,
-  UpdatePartResponse,
-} from "@/proto/bst/v1/part_service";
-import { useApi } from "@/hooks/useApi";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { usePart, useUpdatePart } from "@/features/parts/hooks";
 
 const EditPartPage = ({ params }: { params: { id: string } }) => {
-  const id = React.use(params as unknown as Usable<{ id: string }>).id;
+  const { id } = React.use(params as unknown as Usable<{ id: string }>);
 
   const router = useRouter();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const isMounted = useRef(true);
   const { user } = useSelector((state: RootState) => state.auth);
 
-  const getApi = useApi<GetPartResponse>();
-  const updateApi = useApi<UpdatePartResponse>();
+  // React Queryフックを使用
+  const { data, isLoading, isError } = usePart(id);
+  const updatePartMutation = useUpdatePart(id);
 
+  // ログインチェック
   useEffect(() => {
     if (!user) {
       router.push(`/login?redirect=/community/parts/${id}/edit`);
     }
   }, [user, router, id]);
 
+  // パートデータのロード
   useEffect(() => {
-    isMounted.current = true;
-
-    const fetchPart = async () => {
-      setLoading(true);
-      try {
-        const response = await getApi.execute("get", `/parts/${id}`);
-        if (isMounted.current && response?.part) {
-          setName(response.part.name);
-          setDescription(response.part.description);
-        }
-        if (isMounted.current) {
-          setError(null);
-        }
-      } catch (err) {
-        console.error("Failed to fetch part", err);
-        if (isMounted.current) {
-          setError("Failed to fetch part. Please try again later.");
-        }
-      } finally {
-        if (isMounted.current) {
-          setLoading(false);
-        }
-      }
-    };
-
-    fetchPart();
-
-    return () => {
-      isMounted.current = false;
-    };
-  }, [id]);
+    if (data?.part) {
+      setName(data.part.name);
+      setDescription(data.part.description);
+    }
+  }, [data]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSaving(true);
-    setError(null);
 
     try {
-      const response = await updateApi.execute("put", `/parts/${id}`, {
-        name,
-        description,
-      });
-
-      if (response) {
-        router.back();
-      }
+      await updatePartMutation.mutateAsync({ name, description });
+      router.push(`/community/parts/${id}`);
     } catch (err) {
-      console.error("Failed to update part ----- ", err);
-      setError("Failed to update part. Please try again later.");
-    } finally {
-      setSaving(false);
+      console.error("Failed to update part", err);
     }
   };
 
@@ -101,7 +59,7 @@ const EditPartPage = ({ params }: { params: { id: string } }) => {
     router.push(`/community/parts/${id}`);
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <Container className="page-container">
         <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
@@ -115,28 +73,28 @@ const EditPartPage = ({ params }: { params: { id: string } }) => {
     <Container className="page-container">
       <Paper elevation={2} sx={{ p: 3, mt: 2 }}>
         <Typography variant="h4" component="h1" gutterBottom>
-          Edit Part
+          パート編集
         </Typography>
 
-        {error && (
+        {isError && (
           <Alert severity="error" sx={{ mb: 2 }}>
-            {error}
+            パートの取得に失敗しました。後でもう一度お試しください。
           </Alert>
         )}
 
         <Box component="form" onSubmit={handleSubmit}>
           <TextField
-            label="Name"
+            label="パート名"
             fullWidth
             margin="normal"
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            disabled={saving}
+            disabled={updatePartMutation.isPending}
           />
 
           <TextField
-            label="Description"
+            label="説明"
             fullWidth
             margin="normal"
             multiline
@@ -144,20 +102,28 @@ const EditPartPage = ({ params }: { params: { id: string } }) => {
             required
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            disabled={saving}
+            disabled={updatePartMutation.isPending}
           />
 
           <Box sx={{ mt: 3, display: "flex", gap: 2 }}>
             <Button
               type="submit"
               variant="contained"
-              disabled={saving}
-              startIcon={saving ? <CircularProgress size={20} /> : null}
+              disabled={updatePartMutation.isPending}
+              startIcon={
+                updatePartMutation.isPending ? (
+                  <CircularProgress size={20} />
+                ) : null
+              }
             >
-              {saving ? "Saving..." : "Save"}
+              {updatePartMutation.isPending ? "保存中..." : "保存する"}
             </Button>
-            <Button variant="outlined" onClick={handleCancel} disabled={saving}>
-              Cancel
+            <Button
+              variant="outlined"
+              onClick={handleCancel}
+              disabled={updatePartMutation.isPending}
+            >
+              キャンセル
             </Button>
           </Box>
         </Box>

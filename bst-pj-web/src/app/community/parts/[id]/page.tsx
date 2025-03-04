@@ -12,38 +12,16 @@ import {
 } from "@mui/material";
 import { Edit as EditIcon } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
-import { GetPartResponse } from "@/proto/bst/v1/part_service";
-import { Part } from "@/proto/bst/v1/content";
-import { useApi } from "@/hooks/useApi";
 import React from "react";
+import { usePart } from "@/features/parts/hooks";
 
 const PartDetailPage = ({ params }: { params: { id: string } }) => {
-  const router = useRouter();
-  const [part, setPart] = useState<Part | null>(null);
-  const api = useApi<GetPartResponse>();
-  const isMounted = useRef(true);
   const { id } = React.use(params as unknown as Usable<{ id: string }>);
+  const router = useRouter();
 
-  // Execute once on mount
-  useEffect(() => {
-    // Check if component is mounted
-    isMounted.current = true;
-
-    const fetchPart = async () => {
-      const response = await api.execute("get", `/parts/${id}`);
-      // Prevent state updates after unmount
-      if (isMounted.current && response) {
-        setPart(response.part || null);
-      }
-    };
-
-    fetchPart();
-
-    // Cleanup function
-    return () => {
-      isMounted.current = false;
-    };
-  }, [id]); // Remove api.execute from dependency array
+  // React Queryフックを使用
+  const { data, isLoading, error } = usePart(id);
+  const part = data?.part || null;
 
   const handleEdit = () => {
     router.push(`/community/parts/${id}/edit`);
@@ -53,7 +31,7 @@ const PartDetailPage = ({ params }: { params: { id: string } }) => {
     router.push("/community/parts");
   };
 
-  if (api.loading) {
+  if (isLoading) {
     return (
       <Container className="page-container">
         <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
@@ -63,12 +41,16 @@ const PartDetailPage = ({ params }: { params: { id: string } }) => {
     );
   }
 
-  if (api.error || !part) {
+  if (error || !part) {
     return (
       <Container className="page-container">
-        <Alert severity="error">{api.error || "Part not found."}</Alert>
+        <Alert severity="error">
+          {error
+            ? "パートの取得に失敗しました。"
+            : "パートが見つかりませんでした。"}
+        </Alert>
         <Button sx={{ mt: 2 }} onClick={handleBack}>
-          Back to list
+          一覧に戻る
         </Button>
       </Container>
     );
@@ -93,19 +75,19 @@ const PartDetailPage = ({ params }: { params: { id: string } }) => {
             startIcon={<EditIcon />}
             onClick={handleEdit}
           >
-            Edit
+            編集
           </Button>
         </Box>
 
         <Typography variant="h6" gutterBottom>
-          Description
+          説明
         </Typography>
         <Typography variant="body1" paragraph>
           {part.description}
         </Typography>
 
         <Button onClick={handleBack} sx={{ mt: 3 }}>
-          Back to list
+          一覧に戻る
         </Button>
       </Paper>
     </Container>

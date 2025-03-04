@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Usable } from "react";
 import {
   Box,
   Typography,
@@ -12,49 +12,29 @@ import {
 } from "@mui/material";
 import { Edit as EditIcon } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
-import { GetGenreResponse } from "@/proto/bst/v1/genre_service";
-import { Genre } from "@/proto/bst/v1/content";
-import { useApi } from "@/hooks/useApi";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import React from "react";
+import { useGenre } from "@/features/genres/hooks";
 
 const GenreDetailPage = ({ params }: { params: { id: string } }) => {
+  const { id } = React.use(params as unknown as Usable<{ id: string }>);
   const router = useRouter();
-  const [genre, setGenre] = useState<Genre | null>(null);
-  const api = useApi<GetGenreResponse>();
-  const isMounted = useRef(true);
   const { user } = useSelector((state: RootState) => state.auth);
 
-  // Execute once on mount
-  useEffect(() => {
-    // Check if component is mounted
-    isMounted.current = true;
-
-    const fetchGenre = async () => {
-      const response = await api.execute("get", `/genres/${params.id}`);
-      // Prevent state updates after unmount
-      if (isMounted.current && response) {
-        setGenre(response.genre || null);
-      }
-    };
-
-    fetchGenre();
-
-    // Cleanup function
-    return () => {
-      isMounted.current = false;
-    };
-  }, [params.id]); // Remove api.execute from dependency array
+  // React Queryフックを使用
+  const { data, isLoading, error } = useGenre(id);
+  const genre = data?.genre || null;
 
   const handleEdit = () => {
-    router.push(`/community/genres/${params.id}/edit`);
+    router.push(`/community/genres/${id}/edit`);
   };
 
   const handleBack = () => {
     router.push("/community/genres");
   };
 
-  if (api.loading) {
+  if (isLoading) {
     return (
       <Container className="page-container">
         <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
@@ -64,11 +44,13 @@ const GenreDetailPage = ({ params }: { params: { id: string } }) => {
     );
   }
 
-  if (api.error || !genre) {
+  if (error || !genre) {
     return (
       <Container className="page-container">
         <Alert severity="error">
-          {api.error || "ジャンルが見つかりませんでした。"}
+          {error
+            ? "ジャンルの取得に失敗しました。"
+            : "ジャンルが見つかりませんでした。"}
         </Alert>
         <Button sx={{ mt: 2 }} onClick={handleBack}>
           一覧に戻る
@@ -101,17 +83,6 @@ const GenreDetailPage = ({ params }: { params: { id: string } }) => {
             </Button>
           )}
         </Box>
-
-        {genre.description && (
-          <>
-            <Typography variant="h6" gutterBottom>
-              説明
-            </Typography>
-            <Typography variant="body1" paragraph>
-              {genre.description}
-            </Typography>
-          </>
-        )}
 
         <Button onClick={handleBack} sx={{ mt: 3 }}>
           一覧に戻る
