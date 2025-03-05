@@ -12,7 +12,6 @@ export const protobufPackage = "bst.v1";
 
 export interface CreateArtistRequest {
   name: string;
-  description: string;
   genreIds: number[];
   website: string;
 }
@@ -51,7 +50,6 @@ export interface GetArtistsResponse {
 export interface UpdateArtistRequest {
   artistId: number;
   name: string;
-  description: string;
   genreIds: number[];
   website: string;
 }
@@ -81,7 +79,7 @@ export interface ListArtistSongsResponse {
 }
 
 function createBaseCreateArtistRequest(): CreateArtistRequest {
-  return { name: "", description: "", genreIds: [], website: "" };
+  return { name: "", genreIds: [], website: "" };
 }
 
 export const CreateArtistRequest = {
@@ -89,16 +87,13 @@ export const CreateArtistRequest = {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.description !== "") {
-      writer.uint32(18).string(message.description);
-    }
-    writer.uint32(26).fork();
+    writer.uint32(18).fork();
     for (const v of message.genreIds) {
       writer.int32(v);
     }
     writer.ldelim();
     if (message.website !== "") {
-      writer.uint32(34).string(message.website);
+      writer.uint32(26).string(message.website);
     }
     return writer;
   },
@@ -118,20 +113,13 @@ export const CreateArtistRequest = {
           message.name = reader.string();
           continue;
         case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
-        case 3:
-          if (tag === 24) {
+          if (tag === 16) {
             message.genreIds.push(reader.int32());
 
             continue;
           }
 
-          if (tag === 26) {
+          if (tag === 18) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.genreIds.push(reader.int32());
@@ -141,8 +129,8 @@ export const CreateArtistRequest = {
           }
 
           break;
-        case 4:
-          if (tag !== 34) {
+        case 3:
+          if (tag !== 26) {
             break;
           }
 
@@ -160,7 +148,6 @@ export const CreateArtistRequest = {
   fromJSON(object: any): CreateArtistRequest {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
       genreIds: globalThis.Array.isArray(object?.genreIds) ? object.genreIds.map((e: any) => globalThis.Number(e)) : [],
       website: isSet(object.website) ? globalThis.String(object.website) : "",
     };
@@ -170,9 +157,6 @@ export const CreateArtistRequest = {
     const obj: any = {};
     if (message.name !== "") {
       obj.name = message.name;
-    }
-    if (message.description !== "") {
-      obj.description = message.description;
     }
     if (message.genreIds?.length) {
       obj.genreIds = message.genreIds.map((e) => Math.round(e));
@@ -189,7 +173,6 @@ export const CreateArtistRequest = {
   fromPartial<I extends Exact<DeepPartial<CreateArtistRequest>, I>>(object: I): CreateArtistRequest {
     const message = createBaseCreateArtistRequest();
     message.name = object.name ?? "";
-    message.description = object.description ?? "";
     message.genreIds = object.genreIds?.map((e) => e) || [];
     message.website = object.website ?? "";
     return message;
@@ -667,7 +650,7 @@ export const GetArtistsResponse = {
 };
 
 function createBaseUpdateArtistRequest(): UpdateArtistRequest {
-  return { artistId: 0, name: "", description: "", genreIds: [], website: "" };
+  return { artistId: 0, name: "", genreIds: [], website: "" };
 }
 
 export const UpdateArtistRequest = {
@@ -678,16 +661,13 @@ export const UpdateArtistRequest = {
     if (message.name !== "") {
       writer.uint32(18).string(message.name);
     }
-    if (message.description !== "") {
-      writer.uint32(26).string(message.description);
-    }
-    writer.uint32(34).fork();
+    writer.uint32(26).fork();
     for (const v of message.genreIds) {
       writer.int32(v);
     }
     writer.ldelim();
     if (message.website !== "") {
-      writer.uint32(42).string(message.website);
+      writer.uint32(34).string(message.website);
     }
     return writer;
   },
@@ -714,20 +694,13 @@ export const UpdateArtistRequest = {
           message.name = reader.string();
           continue;
         case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
-        case 4:
-          if (tag === 32) {
+          if (tag === 24) {
             message.genreIds.push(reader.int32());
 
             continue;
           }
 
-          if (tag === 34) {
+          if (tag === 26) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.genreIds.push(reader.int32());
@@ -737,8 +710,8 @@ export const UpdateArtistRequest = {
           }
 
           break;
-        case 5:
-          if (tag !== 42) {
+        case 4:
+          if (tag !== 34) {
             break;
           }
 
@@ -757,7 +730,6 @@ export const UpdateArtistRequest = {
     return {
       artistId: isSet(object.artistId) ? globalThis.Number(object.artistId) : 0,
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
       genreIds: globalThis.Array.isArray(object?.genreIds) ? object.genreIds.map((e: any) => globalThis.Number(e)) : [],
       website: isSet(object.website) ? globalThis.String(object.website) : "",
     };
@@ -770,9 +742,6 @@ export const UpdateArtistRequest = {
     }
     if (message.name !== "") {
       obj.name = message.name;
-    }
-    if (message.description !== "") {
-      obj.description = message.description;
     }
     if (message.genreIds?.length) {
       obj.genreIds = message.genreIds.map((e) => Math.round(e));
@@ -790,7 +759,6 @@ export const UpdateArtistRequest = {
     const message = createBaseUpdateArtistRequest();
     message.artistId = object.artistId ?? 0;
     message.name = object.name ?? "";
-    message.description = object.description ?? "";
     message.genreIds = object.genreIds?.map((e) => e) || [];
     message.website = object.website ?? "";
     return message;
