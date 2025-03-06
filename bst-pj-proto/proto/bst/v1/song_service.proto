@@ -30,7 +30,6 @@ service SongService {
 message CreateSongRequest {
   string title       = 1;
   int32  artist_id   = 2;
-  string description = 3;
 }
 
 message CreateSongResponse {
@@ -62,7 +61,6 @@ message UpdateSongRequest {
   int32  song_id     = 1;
   string title       = 2;
   int32  artist_id   = 3;
-  string description = 4;
 }
 
 message UpdateSongResponse {

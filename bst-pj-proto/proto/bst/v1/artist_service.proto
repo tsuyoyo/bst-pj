@@ -25,9 +25,8 @@ service ArtistService {
 
 message CreateArtistRequest {
   string         name        = 1;
-  string         description = 2;
-  repeated int32 genre_ids   = 3;
-  string         website     = 4;
+  repeated int32 genre_ids   = 2;
+  string         website     = 3;
 }
 
 message CreateArtistResponse {
@@ -64,9 +63,8 @@ message GetArtistsResponse {
 message UpdateArtistRequest {
   int32          artist_id   = 1;
   string         name        = 2;
-  string         description = 3;
-  repeated int32 genre_ids   = 4;
-  string         website     = 5;
+  repeated int32 genre_ids   = 3;
+  string         website     = 4;
 }
 
 message UpdateArtistResponse {

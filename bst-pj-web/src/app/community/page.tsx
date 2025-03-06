@@ -112,6 +112,37 @@ const CommunityPage = () => {
               </Button>
             </Paper>
           </Grid>
+
+          <Grid item xs={12} sm={4}>
+            <Paper
+              elevation={1}
+              sx={{
+                p: 2,
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <LibraryMusic
+                sx={{ fontSize: 40, mb: 1, color: "primary.main" }}
+              />
+              <Typography variant="h6" align="center" gutterBottom>
+                曲管理
+              </Typography>
+              <Typography variant="body2" align="center" paragraph>
+                曲の情報を閲覧・登録できます。
+              </Typography>
+              <Button
+                component={Link}
+                href="/community/songs"
+                variant="contained"
+                sx={{ mt: "auto" }}
+              >
+                曲一覧を見る
+              </Button>
+            </Paper>
+          </Grid>
         </Grid>
 
         <Box sx={{ mt: 4 }}>
@@ -120,7 +151,6 @@ const CommunityPage = () => {
           </Typography>
           <ul>
             <Typography component="li">スタジオ情報の閲覧と予約</Typography>
-            <Typography component="li">新曲のリリース情報</Typography>
             <Typography component="li">音楽イベントのカレンダー</Typography>
             <Typography component="li">
               コミュニティメンバー同士の交流機能

@@ -42,10 +42,12 @@ export class SongController {
 
   @Get()
   async listSongs(
-    @Query('pageSize', new ParseIntPipe()) pageSize: number = 10,
-    @Query('pageToken') pageToken: string | null = null,
+    @Query('pageSize') pageSizeStr?: string,
+    @Query('pageToken') pageToken?: string,
   ): Promise<ListSongsResponse> {
-    return await this.songService.listSongs(pageSize, pageToken);
+    const pageSize = pageSizeStr ? parseInt(pageSizeStr, 10) : 10;
+    console.log('listSongs', pageSize, pageToken);
+    return await this.songService.listSongs(pageSize, pageToken ?? '');
   }
 
   @Get(':id')
@@ -85,9 +87,11 @@ export class SongController {
   @Get(':id/resources')
   async listSongResources(
     @Param('id', ParseIntPipe) id: number,
-    @Query('pageSize', new ParseIntPipe()) pageSize: number = 10,
-    @Query('pageToken', new ParseIntPipe()) pageToken: number = 0,
+    @Query('pageSize') pageSizeStr?: string,
+    @Query('pageToken') pageTokenStr?: string,
   ): Promise<ListSongResourcesResponse> {
+    const pageSize = pageSizeStr ? parseInt(pageSizeStr, 10) : 10;
+    const pageToken = pageTokenStr ? parseInt(pageTokenStr, 10) : 0;
     return await this.songService.listSongResources(id, pageSize, pageToken);
   }
 

@@ -13,9 +13,6 @@ export class UpdateArtistDto implements Omit<UpdateArtistRequest, 'artistId'> {
   @IsString()
   name: string;
 
-  @IsString()
-  description: string;
-
   @IsOptional()
   @IsUrl()
   website: string;

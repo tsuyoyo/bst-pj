@@ -45,7 +45,6 @@ export class SongService {
     const song = this.songRepository.create({
       title: request.title,
       artistId: request.artistId,
-      description: request.description,
       updatedUserId: userId,
     });
 
@@ -70,27 +69,40 @@ export class SongService {
     pageSize: number,
     pageToken: string | null,
   ): Promise<ListSongsResponse> {
-    const [songs, totalCount] = await this.songRepository.findAndCount({
-      relations: ['artist'],
-      take: pageSize,
-      skip: pageToken ? parseInt(pageToken, 10) : 0,
-    });
+    try {
+      const skip = pageToken ? parseInt(pageToken, 10) : 0;
 
-    return {
-      songs: songs.map((song) => ({
-        id: song.id,
-        title: song.title,
-        artist: {
-          id: song.artist.id,
-          name: song.artist.name,
-          website: song.artist.website || '',
-          genres: [],
-        },
-        resources: [],
-      })),
-      nextPageToken: totalCount > pageSize ? String(pageSize) : '',
-      totalSize: totalCount,
-    };
+      const [songs, totalCount] = await this.songRepository.findAndCount({
+        relations: ['artist'],
+        take: pageSize,
+        skip: skip,
+      });
+
+      return {
+        songs: songs.map((song) => ({
+          id: song.id,
+          title: song.title,
+          artist: {
+            id: song.artist.id,
+            name: song.artist.name,
+            website: song.artist.website || '',
+            genres: [],
+          },
+          resources: [],
+        })),
+        nextPageToken:
+          totalCount > skip + pageSize ? String(skip + pageSize) : '',
+        totalSize: totalCount,
+      };
+    } catch (error) {
+      console.error('Error in listSongs:', error);
+      // エラーが発生した場合は空の結果を返す
+      return {
+        songs: [],
+        nextPageToken: '',
+        totalSize: 0,
+      };
+    }
   }
 
   async getSong(id: number): Promise<GetSongResponse> {
@@ -141,7 +153,6 @@ export class SongService {
 
     song.title = request.title;
     song.artistId = request.artistId;
-    song.description = request.description;
     song.updatedUserId = userId;
 
     await this.songRepository.save(song);

@@ -18,16 +18,12 @@ import 'content.pb.dart' as $31;
 class CreateArtistRequest extends $pb.GeneratedMessage {
   factory CreateArtistRequest({
     $core.String? name,
-    $core.String? description,
     $core.Iterable<$core.int>? genreIds,
     $core.String? website,
   }) {
     final $result = create();
     if (name != null) {
       $result.name = name;
-    }
-    if (description != null) {
-      $result.description = description;
     }
     if (genreIds != null) {
       $result.genreIds.addAll(genreIds);
@@ -43,9 +39,8 @@ class CreateArtistRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateArtistRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
-    ..aOS(2, _omitFieldNames ? '' : 'description')
-    ..p<$core.int>(3, _omitFieldNames ? '' : 'genreIds', $pb.PbFieldType.K3)
-    ..aOS(4, _omitFieldNames ? '' : 'website')
+    ..p<$core.int>(2, _omitFieldNames ? '' : 'genreIds', $pb.PbFieldType.K3)
+    ..aOS(3, _omitFieldNames ? '' : 'website')
     ..hasRequiredFields = false
   ;
 
@@ -80,25 +75,16 @@ class CreateArtistRequest extends $pb.GeneratedMessage {
   void clearName() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get description => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set description($core.String v) { $_setString(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasDescription() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearDescription() => clearField(2);
+  $core.List<$core.int> get genreIds => $_getList(1);
 
   @$pb.TagNumber(3)
-  $core.List<$core.int> get genreIds => $_getList(2);
-
-  @$pb.TagNumber(4)
-  $core.String get website => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set website($core.String v) { $_setString(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasWebsite() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearWebsite() => clearField(4);
+  $core.String get website => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set website($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasWebsite() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearWebsite() => clearField(3);
 }
 
 class CreateArtistResponse extends $pb.GeneratedMessage {
@@ -483,7 +469,6 @@ class UpdateArtistRequest extends $pb.GeneratedMessage {
   factory UpdateArtistRequest({
     $core.int? artistId,
     $core.String? name,
-    $core.String? description,
     $core.Iterable<$core.int>? genreIds,
     $core.String? website,
   }) {
@@ -493,9 +478,6 @@ class UpdateArtistRequest extends $pb.GeneratedMessage {
     }
     if (name != null) {
       $result.name = name;
-    }
-    if (description != null) {
-      $result.description = description;
     }
     if (genreIds != null) {
       $result.genreIds.addAll(genreIds);
@@ -512,9 +494,8 @@ class UpdateArtistRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateArtistRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'artistId', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'name')
-    ..aOS(3, _omitFieldNames ? '' : 'description')
-    ..p<$core.int>(4, _omitFieldNames ? '' : 'genreIds', $pb.PbFieldType.K3)
-    ..aOS(5, _omitFieldNames ? '' : 'website')
+    ..p<$core.int>(3, _omitFieldNames ? '' : 'genreIds', $pb.PbFieldType.K3)
+    ..aOS(4, _omitFieldNames ? '' : 'website')
     ..hasRequiredFields = false
   ;
 
@@ -558,25 +539,16 @@ class UpdateArtistRequest extends $pb.GeneratedMessage {
   void clearName() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get description => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set description($core.String v) { $_setString(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasDescription() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearDescription() => clearField(3);
+  $core.List<$core.int> get genreIds => $_getList(2);
 
   @$pb.TagNumber(4)
-  $core.List<$core.int> get genreIds => $_getList(3);
-
-  @$pb.TagNumber(5)
-  $core.String get website => $_getSZ(4);
-  @$pb.TagNumber(5)
-  set website($core.String v) { $_setString(4, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasWebsite() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearWebsite() => clearField(5);
+  $core.String get website => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set website($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasWebsite() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearWebsite() => clearField(4);
 }
 
 class UpdateArtistResponse extends $pb.GeneratedMessage {

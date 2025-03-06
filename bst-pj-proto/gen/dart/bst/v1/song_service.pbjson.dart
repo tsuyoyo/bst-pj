@@ -19,14 +19,13 @@ const CreateSongRequest$json = {
   '2': [
     {'1': 'title', '3': 1, '4': 1, '5': 9, '10': 'title'},
     {'1': 'artist_id', '3': 2, '4': 1, '5': 5, '10': 'artistId'},
-    {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
   ],
 };
 
 /// Descriptor for `CreateSongRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createSongRequestDescriptor = $convert.base64Decode(
     'ChFDcmVhdGVTb25nUmVxdWVzdBIUCgV0aXRsZRgBIAEoCVIFdGl0bGUSGwoJYXJ0aXN0X2lkGA'
-    'IgASgFUghhcnRpc3RJZBIgCgtkZXNjcmlwdGlvbhgDIAEoCVILZGVzY3JpcHRpb24=');
+    'IgASgFUghhcnRpc3RJZA==');
 
 @$core.Deprecated('Use createSongResponseDescriptor instead')
 const CreateSongResponse$json = {
@@ -104,15 +103,13 @@ const UpdateSongRequest$json = {
     {'1': 'song_id', '3': 1, '4': 1, '5': 5, '10': 'songId'},
     {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
     {'1': 'artist_id', '3': 3, '4': 1, '5': 5, '10': 'artistId'},
-    {'1': 'description', '3': 4, '4': 1, '5': 9, '10': 'description'},
   ],
 };
 
 /// Descriptor for `UpdateSongRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateSongRequestDescriptor = $convert.base64Decode(
     'ChFVcGRhdGVTb25nUmVxdWVzdBIXCgdzb25nX2lkGAEgASgFUgZzb25nSWQSFAoFdGl0bGUYAi'
-    'ABKAlSBXRpdGxlEhsKCWFydGlzdF9pZBgDIAEoBVIIYXJ0aXN0SWQSIAoLZGVzY3JpcHRpb24Y'
-    'BCABKAlSC2Rlc2NyaXB0aW9u');
+    'ABKAlSBXRpdGxlEhsKCWFydGlzdF9pZBgDIAEoBVIIYXJ0aXN0SWQ=');
 
 @$core.Deprecated('Use updateSongResponseDescriptor instead')
 const UpdateSongResponse$json = {

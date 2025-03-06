@@ -18,17 +18,15 @@ const CreateArtistRequest$json = {
   '1': 'CreateArtistRequest',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'description', '3': 2, '4': 1, '5': 9, '10': 'description'},
-    {'1': 'genre_ids', '3': 3, '4': 3, '5': 5, '10': 'genreIds'},
-    {'1': 'website', '3': 4, '4': 1, '5': 9, '10': 'website'},
+    {'1': 'genre_ids', '3': 2, '4': 3, '5': 5, '10': 'genreIds'},
+    {'1': 'website', '3': 3, '4': 1, '5': 9, '10': 'website'},
   ],
 };
 
 /// Descriptor for `CreateArtistRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createArtistRequestDescriptor = $convert.base64Decode(
-    'ChNDcmVhdGVBcnRpc3RSZXF1ZXN0EhIKBG5hbWUYASABKAlSBG5hbWUSIAoLZGVzY3JpcHRpb2'
-    '4YAiABKAlSC2Rlc2NyaXB0aW9uEhsKCWdlbnJlX2lkcxgDIAMoBVIIZ2VucmVJZHMSGAoHd2Vi'
-    'c2l0ZRgEIAEoCVIHd2Vic2l0ZQ==');
+    'ChNDcmVhdGVBcnRpc3RSZXF1ZXN0EhIKBG5hbWUYASABKAlSBG5hbWUSGwoJZ2VucmVfaWRzGA'
+    'IgAygFUghnZW5yZUlkcxIYCgd3ZWJzaXRlGAMgASgJUgd3ZWJzaXRl');
 
 @$core.Deprecated('Use createArtistResponseDescriptor instead')
 const CreateArtistResponse$json = {
@@ -129,17 +127,16 @@ const UpdateArtistRequest$json = {
   '2': [
     {'1': 'artist_id', '3': 1, '4': 1, '5': 5, '10': 'artistId'},
     {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
-    {'1': 'genre_ids', '3': 4, '4': 3, '5': 5, '10': 'genreIds'},
-    {'1': 'website', '3': 5, '4': 1, '5': 9, '10': 'website'},
+    {'1': 'genre_ids', '3': 3, '4': 3, '5': 5, '10': 'genreIds'},
+    {'1': 'website', '3': 4, '4': 1, '5': 9, '10': 'website'},
   ],
 };
 
 /// Descriptor for `UpdateArtistRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateArtistRequestDescriptor = $convert.base64Decode(
     'ChNVcGRhdGVBcnRpc3RSZXF1ZXN0EhsKCWFydGlzdF9pZBgBIAEoBVIIYXJ0aXN0SWQSEgoEbm'
-    'FtZRgCIAEoCVIEbmFtZRIgCgtkZXNjcmlwdGlvbhgDIAEoCVILZGVzY3JpcHRpb24SGwoJZ2Vu'
-    'cmVfaWRzGAQgAygFUghnZW5yZUlkcxIYCgd3ZWJzaXRlGAUgASgJUgd3ZWJzaXRl');
+    'FtZRgCIAEoCVIEbmFtZRIbCglnZW5yZV9pZHMYAyADKAVSCGdlbnJlSWRzEhgKB3dlYnNpdGUY'
+    'BCABKAlSB3dlYnNpdGU=');
 
 @$core.Deprecated('Use updateArtistResponseDescriptor instead')
 const UpdateArtistResponse$json = {

@@ -13,7 +13,6 @@ export const protobufPackage = "bst.v1";
 export interface CreateSongRequest {
   title: string;
   artistId: number;
-  description: string;
 }
 
 export interface CreateSongResponse {
@@ -45,7 +44,6 @@ export interface UpdateSongRequest {
   songId: number;
   title: string;
   artistId: number;
-  description: string;
 }
 
 export interface UpdateSongResponse {
@@ -91,7 +89,7 @@ export interface DeleteSongResourceResponse {
 }
 
 function createBaseCreateSongRequest(): CreateSongRequest {
-  return { title: "", artistId: 0, description: "" };
+  return { title: "", artistId: 0 };
 }
 
 export const CreateSongRequest = {
@@ -101,9 +99,6 @@ export const CreateSongRequest = {
     }
     if (message.artistId !== 0) {
       writer.uint32(16).int32(message.artistId);
-    }
-    if (message.description !== "") {
-      writer.uint32(26).string(message.description);
     }
     return writer;
   },
@@ -129,13 +124,6 @@ export const CreateSongRequest = {
 
           message.artistId = reader.int32();
           continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -149,7 +137,6 @@ export const CreateSongRequest = {
     return {
       title: isSet(object.title) ? globalThis.String(object.title) : "",
       artistId: isSet(object.artistId) ? globalThis.Number(object.artistId) : 0,
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
     };
   },
 
@@ -161,9 +148,6 @@ export const CreateSongRequest = {
     if (message.artistId !== 0) {
       obj.artistId = Math.round(message.artistId);
     }
-    if (message.description !== "") {
-      obj.description = message.description;
-    }
     return obj;
   },
 
@@ -174,7 +158,6 @@ export const CreateSongRequest = {
     const message = createBaseCreateSongRequest();
     message.title = object.title ?? "";
     message.artistId = object.artistId ?? 0;
-    message.description = object.description ?? "";
     return message;
   },
 };
@@ -544,7 +527,7 @@ export const GetSongResponse = {
 };
 
 function createBaseUpdateSongRequest(): UpdateSongRequest {
-  return { songId: 0, title: "", artistId: 0, description: "" };
+  return { songId: 0, title: "", artistId: 0 };
 }
 
 export const UpdateSongRequest = {
@@ -557,9 +540,6 @@ export const UpdateSongRequest = {
     }
     if (message.artistId !== 0) {
       writer.uint32(24).int32(message.artistId);
-    }
-    if (message.description !== "") {
-      writer.uint32(34).string(message.description);
     }
     return writer;
   },
@@ -592,13 +572,6 @@ export const UpdateSongRequest = {
 
           message.artistId = reader.int32();
           continue;
-        case 4:
-          if (tag !== 34) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -613,7 +586,6 @@ export const UpdateSongRequest = {
       songId: isSet(object.songId) ? globalThis.Number(object.songId) : 0,
       title: isSet(object.title) ? globalThis.String(object.title) : "",
       artistId: isSet(object.artistId) ? globalThis.Number(object.artistId) : 0,
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
     };
   },
 
@@ -628,9 +600,6 @@ export const UpdateSongRequest = {
     if (message.artistId !== 0) {
       obj.artistId = Math.round(message.artistId);
     }
-    if (message.description !== "") {
-      obj.description = message.description;
-    }
     return obj;
   },
 
@@ -642,7 +611,6 @@ export const UpdateSongRequest = {
     message.songId = object.songId ?? 0;
     message.title = object.title ?? "";
     message.artistId = object.artistId ?? 0;
-    message.description = object.description ?? "";
     return message;
   },
 };

@@ -6,7 +6,7 @@ exports.up = (pgm) => {
   // Create songs table
   pgm.createTable("songs", {
     id: "id",
-    name: { type: "varchar(255)", notNull: true },
+    title: { type: "varchar(255)", notNull: true },
     artist_id: {
       type: "integer",
       notNull: true,

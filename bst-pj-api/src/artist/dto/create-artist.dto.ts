@@ -13,9 +13,6 @@ export class CreateArtistDto implements CreateArtistRequest {
   @IsString()
   name: string;
 
-  @IsString()
-  description: string;
-
   @IsOptional()
   @IsUrl()
   website: string;

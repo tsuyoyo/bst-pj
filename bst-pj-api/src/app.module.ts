@@ -16,6 +16,7 @@ import { FollowModule } from './follow/follow.module';
 import { CommentModule } from './comment/comment.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
 import { MyProfileModule } from './my-profile/my-profile.module';
+import { SongModule } from './song/song.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { MyProfileModule } from './my-profile/my-profile.module';
     CommentModule,
     UserProfileModule,
     MyProfileModule,
+    SongModule,
   ],
   controllers: [AppController],
   providers: [AppService],
