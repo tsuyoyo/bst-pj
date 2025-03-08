@@ -17,14 +17,14 @@ export class Location {
   @Column({ type: 'varchar', length: 255, nullable: false })
   name: string;
 
-  @Column({ name: 'google_maps_url', type: 'text', nullable: true })
+  @Column({ name: 'prefecture_id', type: 'integer', nullable: false })
+  prefectureId: number;
+
+  @Column({ name: 'google_maps_url', type: 'text', nullable: false })
   googleMapsUrl: string;
 
   @Column({ name: 'additional_info', type: 'text', nullable: true })
   additionalInfo: string;
-
-  @Column({ name: 'area_id', type: 'integer', nullable: false })
-  areaId: number;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
@@ -33,7 +33,7 @@ export class Location {
   updatedAt: Date;
 
   @ManyToOne(() => Area, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'area_id' })
+  @JoinColumn({ name: 'prefecture_id' })
   area: Area;
 
   @Column({ name: 'updated_user_id', type: 'integer', nullable: false })

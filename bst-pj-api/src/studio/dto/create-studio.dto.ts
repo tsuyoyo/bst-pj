@@ -12,7 +12,7 @@ export class CreateStudioDto implements CreateStudioRequest {
 
   @IsNotEmpty()
   @IsNumber()
-  areaId: number;
+  prefectureId: number;
 
   @IsString()
   googleMapsUrl: string;

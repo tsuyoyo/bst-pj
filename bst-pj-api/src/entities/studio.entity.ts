@@ -19,8 +19,8 @@ export class Studio {
   @Column({ type: 'text', nullable: true })
   description: string;
 
-  @Column({ name: 'area_id', type: 'integer', nullable: false })
-  areaId: number;
+  @Column({ name: 'prefecture_id', type: 'integer', nullable: false })
+  prefectureId: number;
 
   @Column({ name: 'google_maps_url', type: 'text', nullable: false })
   googleMapsUrl: string;

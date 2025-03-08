@@ -7,17 +7,15 @@ import { UpdateLocationDto } from './dto/update-location.dto';
 import { ListLocationsDto } from './dto/list-locations.dto';
 import { Location } from '../entities/location.entity';
 import { Area } from '../entities/area.entity';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { User } from '../entities/user.entity';
 import { ExternalService } from '../entities/types/external-service.enum';
-import { JwtService } from '@nestjs/jwt';
-import { getRepositoryToken } from '@nestjs/typeorm';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 describe('LocationController', () => {
   let controller: LocationController;
   let service: LocationService;
 
-  const mockUser: Partial<User> = {
+  const mockUser: User = {
     id: 1,
     name: 'Test User',
     email: 'test@example.com',
@@ -25,6 +23,7 @@ describe('LocationController', () => {
     externalService: ExternalService.GOOGLE,
     password: 'hashed-password',
     iconUrl: 'https://example.com/icon.png',
+    profilePictureUrl: null,
     createdAt: new Date(),
     updatedAt: new Date(),
   };
@@ -40,10 +39,10 @@ describe('LocationController', () => {
   const mockLocation: Location = {
     id: 1,
     name: 'Test Location',
-    googleMapsUrl: 'https://maps.google.com',
-    additionalInfo: 'Test Info',
-    areaId: mockArea.id,
     area: mockArea,
+    googleMapsUrl: 'https://maps.google.com',
+    additionalInfo: 'Additional Info',
+    prefectureId: mockArea.id,
     createdAt: new Date(),
     updatedAt: new Date(),
     updatedUserId: 1,
@@ -67,21 +66,11 @@ describe('LocationController', () => {
             deleteLocation: jest.fn().mockResolvedValue(true),
           },
         },
-        {
-          provide: JwtService,
-          useValue: {
-            verifyAsync: jest.fn(),
-          },
-        },
-        {
-          provide: getRepositoryToken(User),
-          useValue: {
-            findOne: jest.fn(),
-          },
-        },
-        JwtAuthGuard,
       ],
-    }).compile();
+    })
+      .overrideGuard(JwtAuthGuard)
+      .useValue({ canActivate: jest.fn().mockReturnValue(true) })
+      .compile();
 
     controller = module.get<LocationController>(LocationController);
     service = module.get<LocationService>(LocationService);
@@ -97,20 +86,15 @@ describe('LocationController', () => {
         name: 'Test Location',
         googleMapsUrl: 'https://maps.google.com',
         additionalInfo: 'Test Info',
-        areaId: 1,
+        prefectureId: 1,
       };
 
-      const result = await controller.createLocation(
-        createLocationDto,
-        mockUser as User,
-      );
+      const req = { user: mockUser };
+      const result = await controller.createLocation(createLocationDto, req);
 
       expect(result.location).toBeDefined();
       expect(service.createLocation).toHaveBeenCalledWith(
-        createLocationDto.name,
-        createLocationDto.googleMapsUrl,
-        createLocationDto.additionalInfo,
-        createLocationDto.areaId,
+        createLocationDto,
         mockUser.id,
       );
     });
@@ -126,7 +110,11 @@ describe('LocationController', () => {
 
       expect(result.locations).toBeDefined();
       expect(result.locations).toHaveLength(1);
-      expect(service.listLocations).toHaveBeenCalledWith(10, null, undefined);
+      expect(service.listLocations).toHaveBeenCalledWith(
+        10,
+        undefined,
+        undefined,
+      );
     });
   });
 
@@ -145,22 +133,16 @@ describe('LocationController', () => {
         name: 'Updated Location',
         googleMapsUrl: 'https://maps.google.com/updated',
         additionalInfo: 'Updated Info',
-        areaId: 2,
+        prefectureId: 2,
       };
 
-      const result = await controller.updateLocation(
-        1,
-        updateLocationDto,
-        mockUser as User,
-      );
+      const req = { user: mockUser };
+      const result = await controller.updateLocation(1, updateLocationDto, req);
 
       expect(result.location).toBeDefined();
       expect(service.updateLocation).toHaveBeenCalledWith(
         1,
-        updateLocationDto.name,
-        updateLocationDto.googleMapsUrl,
-        updateLocationDto.additionalInfo,
-        updateLocationDto.areaId,
+        updateLocationDto,
         mockUser.id,
       );
     });

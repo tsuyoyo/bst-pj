@@ -18,5 +18,5 @@ export class UpdateLocationDto
 
   @IsOptional()
   @IsNumber()
-  areaId?: number;
+  prefectureId?: number;
 }

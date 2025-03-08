@@ -3,6 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Location } from '../entities/location.entity';
 import { Area } from '../entities/area.entity';
+import { CreateLocationDto } from './dto/create-location.dto';
+import { UpdateLocationDto } from './dto/update-location.dto';
 
 @Injectable()
 export class LocationService {
@@ -14,21 +16,14 @@ export class LocationService {
   ) {}
 
   async createLocation(
-    name: string,
-    googleMapsUrl: string | null,
-    additionalInfo: string | null,
-    areaId: number,
+    createLocationDto: CreateLocationDto,
     userId: number,
   ): Promise<Location> {
-    const area = await this.areaRepository.findOneOrFail({
-      where: { id: areaId },
-    });
-
     const location = this.locationRepository.create({
-      name,
-      googleMapsUrl: googleMapsUrl || undefined,
-      additionalInfo: additionalInfo || undefined,
-      areaId: area.id,
+      name: createLocationDto.name,
+      prefectureId: createLocationDto.prefectureId,
+      googleMapsUrl: createLocationDto.googleMapsUrl,
+      additionalInfo: createLocationDto.additionalInfo,
       updatedUserId: userId,
     });
 
@@ -37,7 +32,7 @@ export class LocationService {
 
   async listLocations(
     pageSize: number,
-    pageToken: string | null,
+    pageToken?: string,
     areaId?: number,
   ): Promise<{
     locations: Location[];
@@ -78,10 +73,7 @@ export class LocationService {
 
   async updateLocation(
     id: number,
-    name: string | undefined,
-    googleMapsUrl: string | undefined,
-    additionalInfo: string | undefined,
-    areaId: number | undefined,
+    updateLocationDto: UpdateLocationDto,
     userId: number,
   ): Promise<Location> {
     const location = await this.locationRepository.findOneOrFail({
@@ -91,20 +83,19 @@ export class LocationService {
       throw new NotFoundException(`Location (id: ${id}) not found`);
     }
 
-    if (name) {
-      location.name = name;
+    if (updateLocationDto.name) {
+      location.name = updateLocationDto.name;
     }
-    if (googleMapsUrl !== undefined) {
-      location.googleMapsUrl = googleMapsUrl;
-    }
-    if (additionalInfo !== undefined) {
-      location.additionalInfo = additionalInfo;
-    }
-    if (areaId) {
-      const area = await this.areaRepository.findOneOrFail({
-        where: { id: areaId },
+    if (updateLocationDto.prefectureId) {
+      const area = await this.areaRepository.findOne({
+        where: { id: updateLocationDto.prefectureId },
       });
-      location.areaId = area.id;
+      if (!area) {
+        throw new NotFoundException(
+          `Area with ID ${updateLocationDto.prefectureId} not found`,
+        );
+      }
+      location.prefectureId = area.id;
     }
     location.updatedUserId = userId;
 

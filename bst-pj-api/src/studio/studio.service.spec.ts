@@ -38,7 +38,7 @@ describe('StudioService', () => {
     area: mockArea,
     googleMapsUrl: 'https://maps.google.com',
     additionalInfo: 'Additional Info',
-    areaId: 1,
+    prefectureId: 1,
     createdAt: new Date(),
     updatedAt: new Date(),
     updatedUserId: 1,
@@ -48,7 +48,7 @@ describe('StudioService', () => {
     id: 1,
     name: 'Test Studio',
     description: 'Test Description',
-    areaId: 1,
+    prefectureId: 1,
     googleMapsUrl: 'https://maps.google.com',
     additionalInfo: 'Additional Info',
     rooms: [],
@@ -62,7 +62,7 @@ describe('StudioService', () => {
     ...mockStudio,
     name: 'Updated Studio',
     description: 'Updated Description',
-    areaId: 2,
+    prefectureId: 2,
     googleMapsUrl: 'https://maps.google.com/updated',
     additionalInfo: 'Updated Additional Info',
   };
@@ -157,7 +157,7 @@ describe('StudioService', () => {
       const createStudioDto: CreateStudioDto = {
         name: 'Test Studio',
         description: 'Test Description',
-        areaId: 1,
+        prefectureId: 1,
         googleMapsUrl: 'https://maps.google.com',
         additionalInfo: 'Additional Info',
       };
@@ -171,7 +171,7 @@ describe('StudioService', () => {
       expect(studioRepository.create).toHaveBeenCalledWith({
         name: 'Test Studio',
         description: 'Test Description',
-        areaId: 1,
+        prefectureId: 1,
         googleMapsUrl: 'https://maps.google.com',
         additionalInfo: 'Additional Info',
         updatedUserId: 1,
@@ -252,7 +252,7 @@ describe('StudioService', () => {
       const updateStudioDto: UpdateStudioDto = {
         name: 'Updated Studio',
         description: 'Updated Description',
-        areaId: 2,
+        prefectureId: 2,
         googleMapsUrl: 'https://maps.google.com/updated',
         additionalInfo: 'Updated Additional Info',
       };
@@ -277,7 +277,7 @@ describe('StudioService', () => {
       const updateStudioDto: UpdateStudioDto = {
         name: 'Updated Studio',
         description: 'Updated Description',
-        areaId: 2,
+        prefectureId: 2,
         googleMapsUrl: 'https://maps.google.com/updated',
         additionalInfo: 'Updated Additional Info',
       };

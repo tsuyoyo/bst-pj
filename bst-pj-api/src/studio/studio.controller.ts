@@ -1,20 +1,21 @@
 import {
-  Body,
   Controller,
-  Delete,
   Get,
-  Param,
   Post,
-  Put,
-  Query,
+  Body,
+  Param,
+  Delete,
   UseGuards,
+  Query,
+  Put,
+  Req,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { StudioService } from './studio.service';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { CurrentUser } from '../auth/user.decorator';
-import { User } from '../entities/user.entity';
 import { CreateStudioDto } from './dto/create-studio.dto';
 import { UpdateStudioDto } from './dto/update-studio.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { User } from '../entities/user.entity';
 
 @Controller('studios')
 export class StudioController {
@@ -24,44 +25,39 @@ export class StudioController {
   @UseGuards(JwtAuthGuard)
   async createStudio(
     @Body() createStudioDto: CreateStudioDto,
-    @CurrentUser() user: User,
+    @Req() req: { user: User },
   ) {
-    return await this.studioService.createStudio(createStudioDto, user.id);
+    const userId = req.user.id;
+    return this.studioService.createStudio(createStudioDto, userId);
   }
 
   @Get()
   async listStudios(
-    @Query('pageSize') pageSizeStr: string,
-    @Query('pageToken') pageToken?: string,
-    @Query('areaId') areaIdStr?: string,
+    @Query('pageSize', ParseIntPipe) pageSize: number,
+    @Query('pageToken') pageToken: string | null,
+    @Query('prefectureId', ParseIntPipe) prefectureId: number | null,
   ) {
-    const pageSize = pageSizeStr ? parseInt(pageSizeStr, 10) : 10;
-    const areaId = areaIdStr ? parseInt(areaIdStr, 10) : undefined;
-    return await this.studioService.listStudios(pageSize, pageToken, areaId);
+    return this.studioService.listStudios(pageSize, pageToken, prefectureId);
   }
 
   @Get(':id')
-  async getStudio(@Param('id') id: string) {
-    return await this.studioService.getStudio(parseInt(id, 10));
+  async getStudio(@Param('id', ParseIntPipe) id: number) {
+    return this.studioService.getStudio(id);
   }
 
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   async updateStudio(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateStudioDto: UpdateStudioDto,
-    @CurrentUser() user: User,
+    @Req() req: { user: User },
   ) {
-    return await this.studioService.updateStudio(
-      parseInt(id, 10),
-      updateStudioDto,
-      user.id,
-    );
+    const userId = req.user.id;
+    return this.studioService.updateStudio(id, updateStudioDto, userId);
   }
 
   @Delete(':id')
-  @UseGuards(JwtAuthGuard)
-  async deleteStudio(@Param('id') id: string) {
-    return await this.studioService.deleteStudio(parseInt(id, 10));
+  async deleteStudio(@Param('id', ParseIntPipe) id: number) {
+    return this.studioService.deleteStudio(id);
   }
 }

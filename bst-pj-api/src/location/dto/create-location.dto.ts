@@ -1,16 +1,13 @@
 import { IsNotEmpty, IsString, IsNumber, IsOptional } from 'class-validator';
-import { CreateLocationRequest } from '../../proto/bst/v1/location_service';
 
-export class CreateLocationDto
-  implements Omit<CreateLocationRequest, 'googleMapsUrl' | 'additionalInfo'>
-{
+export class CreateLocationDto {
   @IsNotEmpty()
   @IsString()
   name: string;
 
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
-  googleMapsUrl?: string;
+  googleMapsUrl: string;
 
   @IsOptional()
   @IsString()
@@ -18,5 +15,5 @@ export class CreateLocationDto
 
   @IsNotEmpty()
   @IsNumber()
-  areaId: number;
+  prefectureId: number;
 }

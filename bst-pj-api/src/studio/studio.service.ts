@@ -32,7 +32,7 @@ export class StudioService {
     const studio = this.studioRepository.create({
       name: createStudioDto.name,
       description: createStudioDto.description,
-      areaId: createStudioDto.areaId,
+      prefectureId: createStudioDto.prefectureId,
       googleMapsUrl: createStudioDto.googleMapsUrl,
       additionalInfo: createStudioDto.additionalInfo,
       updatedUserId: userId,
@@ -53,15 +53,17 @@ export class StudioService {
   async listStudios(
     pageSize: number,
     pageToken?: string | null,
-    areaId?: number | null,
+    prefectureId?: number | null,
   ): Promise<ListStudiosResponse> {
     const skip = pageToken ? parseInt(pageToken, 10) : 0;
     const take = pageSize || 10;
 
     const queryBuilder = this.studioRepository.createQueryBuilder('studio');
 
-    if (areaId) {
-      queryBuilder.where('studio.area_id = :areaId', { areaId });
+    if (prefectureId) {
+      queryBuilder.where('studio.prefecture_id = :prefectureId', {
+        prefectureId,
+      });
     }
 
     const [studios, totalSize] = await queryBuilder
@@ -112,8 +114,8 @@ export class StudioService {
     if (updateStudioDto.description !== undefined) {
       studio.description = updateStudioDto.description;
     }
-    if (updateStudioDto.areaId !== undefined) {
-      studio.areaId = updateStudioDto.areaId;
+    if (updateStudioDto.prefectureId !== undefined) {
+      studio.prefectureId = updateStudioDto.prefectureId;
     }
     if (updateStudioDto.googleMapsUrl !== undefined) {
       studio.googleMapsUrl = updateStudioDto.googleMapsUrl;
@@ -139,10 +141,12 @@ export class StudioService {
 
   private async toProto(entity: Studio): Promise<ProtoStudio> {
     const area = await this.areaRepository.findOne({
-      where: { id: entity.areaId },
+      where: { id: entity.prefectureId },
     });
     if (!area) {
-      throw new NotFoundException(`Area with ID ${entity.areaId} not found`);
+      throw new NotFoundException(
+        `Area with ID ${entity.prefectureId} not found`,
+      );
     }
     return {
       id: entity.id,
