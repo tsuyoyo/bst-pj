@@ -81,15 +81,16 @@ const StudioRoom$json = {
     {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
     {'1': 'capacity', '3': 3, '4': 1, '5': 5, '10': 'capacity'},
     {'1': 'price', '3': 4, '4': 1, '5': 5, '10': 'price'},
-    {'1': 'infos', '3': 5, '4': 3, '5': 11, '6': '.bst.v1.StudioRoomInfo', '10': 'infos'},
+    {'1': 'size', '3': 5, '4': 1, '5': 5, '10': 'size'},
+    {'1': 'infos', '3': 6, '4': 3, '5': 11, '6': '.bst.v1.StudioRoomInfo', '10': 'infos'},
   ],
 };
 
 /// Descriptor for `StudioRoom`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List studioRoomDescriptor = $convert.base64Decode(
     'CgpTdHVkaW9Sb29tEg4KAmlkGAEgASgFUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEhoKCGNhcG'
-    'FjaXR5GAMgASgFUghjYXBhY2l0eRIUCgVwcmljZRgEIAEoBVIFcHJpY2USLAoFaW5mb3MYBSAD'
-    'KAsyFi5ic3QudjEuU3R1ZGlvUm9vbUluZm9SBWluZm9z');
+    'FjaXR5GAMgASgFUghjYXBhY2l0eRIUCgVwcmljZRgEIAEoBVIFcHJpY2USEgoEc2l6ZRgFIAEo'
+    'BVIEc2l6ZRIsCgVpbmZvcxgGIAMoCzIWLmJzdC52MS5TdHVkaW9Sb29tSW5mb1IFaW5mb3M=');
 
 @$core.Deprecated('Use studioRoomInfoDescriptor instead')
 const StudioRoomInfo$json = {

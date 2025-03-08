@@ -50,6 +50,7 @@ export interface StudioRoom {
   name: string;
   capacity: number;
   price: number;
+  size: number;
   infos: StudioRoomInfo[];
 }
 
@@ -484,7 +485,7 @@ export const Studio = {
 };
 
 function createBaseStudioRoom(): StudioRoom {
-  return { id: 0, name: "", capacity: 0, price: 0, infos: [] };
+  return { id: 0, name: "", capacity: 0, price: 0, size: 0, infos: [] };
 }
 
 export const StudioRoom = {
@@ -501,8 +502,11 @@ export const StudioRoom = {
     if (message.price !== 0) {
       writer.uint32(32).int32(message.price);
     }
+    if (message.size !== 0) {
+      writer.uint32(40).int32(message.size);
+    }
     for (const v of message.infos) {
-      StudioRoomInfo.encode(v!, writer.uint32(42).fork()).ldelim();
+      StudioRoomInfo.encode(v!, writer.uint32(50).fork()).ldelim();
     }
     return writer;
   },
@@ -543,7 +547,14 @@ export const StudioRoom = {
           message.price = reader.int32();
           continue;
         case 5:
-          if (tag !== 42) {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.size = reader.int32();
+          continue;
+        case 6:
+          if (tag !== 50) {
             break;
           }
 
@@ -564,6 +575,7 @@ export const StudioRoom = {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       capacity: isSet(object.capacity) ? globalThis.Number(object.capacity) : 0,
       price: isSet(object.price) ? globalThis.Number(object.price) : 0,
+      size: isSet(object.size) ? globalThis.Number(object.size) : 0,
       infos: globalThis.Array.isArray(object?.infos) ? object.infos.map((e: any) => StudioRoomInfo.fromJSON(e)) : [],
     };
   },
@@ -582,6 +594,9 @@ export const StudioRoom = {
     if (message.price !== 0) {
       obj.price = Math.round(message.price);
     }
+    if (message.size !== 0) {
+      obj.size = Math.round(message.size);
+    }
     if (message.infos?.length) {
       obj.infos = message.infos.map((e) => StudioRoomInfo.toJSON(e));
     }
@@ -597,6 +612,7 @@ export const StudioRoom = {
     message.name = object.name ?? "";
     message.capacity = object.capacity ?? 0;
     message.price = object.price ?? 0;
+    message.size = object.size ?? 0;
     message.infos = object.infos?.map((e) => StudioRoomInfo.fromPartial(e)) || [];
     return message;
   },

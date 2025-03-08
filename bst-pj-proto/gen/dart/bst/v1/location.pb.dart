@@ -381,6 +381,7 @@ class StudioRoom extends $pb.GeneratedMessage {
     $core.String? name,
     $core.int? capacity,
     $core.int? price,
+    $core.int? size,
     $core.Iterable<StudioRoomInfo>? infos,
   }) {
     final $result = create();
@@ -396,6 +397,9 @@ class StudioRoom extends $pb.GeneratedMessage {
     if (price != null) {
       $result.price = price;
     }
+    if (size != null) {
+      $result.size = size;
+    }
     if (infos != null) {
       $result.infos.addAll(infos);
     }
@@ -410,7 +414,8 @@ class StudioRoom extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'capacity', $pb.PbFieldType.O3)
     ..a<$core.int>(4, _omitFieldNames ? '' : 'price', $pb.PbFieldType.O3)
-    ..pc<StudioRoomInfo>(5, _omitFieldNames ? '' : 'infos', $pb.PbFieldType.PM, subBuilder: StudioRoomInfo.create)
+    ..a<$core.int>(5, _omitFieldNames ? '' : 'size', $pb.PbFieldType.O3)
+    ..pc<StudioRoomInfo>(6, _omitFieldNames ? '' : 'infos', $pb.PbFieldType.PM, subBuilder: StudioRoomInfo.create)
     ..hasRequiredFields = false
   ;
 
@@ -472,7 +477,16 @@ class StudioRoom extends $pb.GeneratedMessage {
   void clearPrice() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.List<StudioRoomInfo> get infos => $_getList(4);
+  $core.int get size => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set size($core.int v) { $_setSignedInt32(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasSize() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSize() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.List<StudioRoomInfo> get infos => $_getList(5);
 }
 
 class StudioRoomInfo extends $pb.GeneratedMessage {

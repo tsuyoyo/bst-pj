@@ -42,7 +42,8 @@ message StudioRoom {
   string                  name     = 2;
   int32                   capacity = 3;
   int32                   price    = 4;
-  repeated StudioRoomInfo infos    = 5;
+  int32                   size     = 5;
+  repeated StudioRoomInfo infos    = 6;
 }
 
 message StudioRoomInfo {
