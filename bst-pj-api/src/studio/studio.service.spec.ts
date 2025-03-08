@@ -11,6 +11,14 @@ import { NotFoundException } from '@nestjs/common';
 import { CreateStudioDto } from './dto/create-studio.dto';
 import { UpdateStudioDto } from './dto/update-studio.dto';
 
+// 型定義を追加
+interface FindOneOptions {
+  where: {
+    id: number;
+  };
+  relations?: string[];
+}
+
 describe('StudioService', () => {
   let service: StudioService;
   let studioRepository: Repository<Studio>;
@@ -90,14 +98,14 @@ describe('StudioService', () => {
           provide: getRepositoryToken(Studio),
           useValue: {
             create: jest.fn().mockReturnValue(mockStudio),
-            save: jest.fn((studio) => {
+            save: jest.fn((studio: Studio) => {
               // 更新の場合は更新されたスタジオを返す
               if (studio.name === 'Updated Studio') {
                 return Promise.resolve(mockUpdatedStudio);
               }
               return Promise.resolve(mockStudio);
             }),
-            findOne: jest.fn((options) => {
+            findOne: jest.fn((options: FindOneOptions) => {
               if (options?.where?.id === 999) {
                 return Promise.resolve(null);
               }
@@ -123,7 +131,7 @@ describe('StudioService', () => {
         {
           provide: getRepositoryToken(Area),
           useValue: {
-            findOne: jest.fn((options) => {
+            findOne: jest.fn((options: { where: { id: number } }) => {
               if (options?.where?.id === 2) {
                 return Promise.resolve({ ...mockArea, id: 2 });
               }
