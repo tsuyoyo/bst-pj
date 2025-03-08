@@ -8,6 +8,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { StudioRoom } from './studio-room.entity';
+import { StudioRoomInfoType } from './studio-room-info-type.entity';
 
 @Entity('studio_room_infos')
 export class StudioRoomInfo {
@@ -21,12 +22,11 @@ export class StudioRoomInfo {
   studioId: number;
 
   @Column({
-    type: 'varchar',
-    length: 50,
+    name: 'studio_room_info_type_id',
+    type: 'integer',
     nullable: false,
-    comment: '情報の種類 (例: Equipment)',
   })
-  type: string;
+  typeId: number;
 
   @Column({
     type: 'varchar',
@@ -56,4 +56,8 @@ export class StudioRoomInfo {
   @ManyToOne(() => StudioRoom, (room) => room.infos, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'studio_room_id' })
   studioRoom: StudioRoom;
+
+  @ManyToOne(() => StudioRoomInfoType, (infoType) => infoType.roomInfos)
+  @JoinColumn({ name: 'studio_room_info_type_id' })
+  type: StudioRoomInfoType;
 }

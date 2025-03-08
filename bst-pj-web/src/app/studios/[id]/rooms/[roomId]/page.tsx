@@ -43,20 +43,17 @@ import {
   useCreateStudioRoomInfo,
   useUpdateStudioRoomInfo,
   useDeleteStudioRoomInfo,
+  useRoomInfoTypes,
 } from "@/features/studioRooms/hooks";
-import { StudioRoom, StudioRoomInfo } from "@/proto/bst/v1/location";
+import {
+  StudioRoom,
+  StudioRoomInfo,
+  StudioRoomInfoType,
+} from "@/proto/bst/v1/location";
 import {
   CreateStudioRoomInfoRequest,
   UpdateStudioRoomInfoRequest,
 } from "@/proto/bst/v1/studio_room_service";
-
-// 追加情報のタイプ選択肢
-const INFO_TYPES = [
-  { value: "equipment", label: "設備" },
-  { value: "amenity", label: "アメニティ" },
-  { value: "rule", label: "利用規則" },
-  { value: "other", label: "その他" },
-];
 
 const StudioRoomDetailPage = () => {
   const params = useParams();
@@ -94,6 +91,14 @@ const StudioRoomDetailPage = () => {
   } = useStudioRoomInfos(studioId, roomId);
   const roomInfos = roomInfosData?.infos || [];
 
+  // ルーム情報タイプ一覧を取得
+  const {
+    data: roomInfoTypesData,
+    isLoading: isTypesLoading,
+    error: typesError,
+  } = useRoomInfoTypes();
+  const roomInfoTypes = roomInfoTypesData?.types || [];
+
   // 追加情報の作成・更新・削除のミューテーション
   const createInfoMutation = useCreateStudioRoomInfo(studioId, roomId);
   const updateInfoMutation = useUpdateStudioRoomInfo(studioId, roomId);
@@ -102,7 +107,7 @@ const StudioRoomDetailPage = () => {
   // 追加情報作成用のダイアログ状態
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
   const [newInfo, setNewInfo] = useState<CreateStudioRoomInfoRequest>({
-    type: "",
+    typeId: 0,
     key: "",
     value: "",
   });
@@ -139,20 +144,20 @@ const StudioRoomDetailPage = () => {
   // 追加情報作成ダイアログを閉じる
   const handleCloseCreateDialog = () => {
     setOpenCreateDialog(false);
-    setNewInfo({ type: "", key: "", value: "" });
+    setNewInfo({ typeId: 0, key: "", value: "" });
   };
 
   // 追加情報作成フォームの入力値を更新
   const handleNewInfoChange = (
-    e:
-      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      | SelectChangeEvent
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setNewInfo((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    if (name === "key" || name === "value") {
+      setNewInfo((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   // 追加情報を作成
@@ -170,7 +175,7 @@ const StudioRoomDetailPage = () => {
     setEditingInfo({
       id: info.id,
       request: {
-        type: info.type,
+        typeId: info.type?.id || 0,
         key: info.key,
         value: info.value,
       },
@@ -186,12 +191,10 @@ const StudioRoomDetailPage = () => {
 
   // 追加情報編集フォームの入力値を更新
   const handleEditInfoChange = (
-    e:
-      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      | SelectChangeEvent
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    if (editingInfo) {
+    if (name === "key" || (name === "value" && editingInfo)) {
       setEditingInfo({
         ...editingInfo,
         request: {
@@ -242,14 +245,14 @@ const StudioRoomDetailPage = () => {
   };
 
   // 追加情報のタイプに応じたラベルを取得
-  const getTypeLabel = (type: string): string => {
-    const typeObj = INFO_TYPES.find((t) => t.value === type);
-    return typeObj ? typeObj.label : type;
+  const getTypeLabel = (typeId: number): string => {
+    const typeObj = roomInfoTypes.find((t) => t.id === typeId);
+    return typeObj ? typeObj.name : `タイプID: ${typeId}`;
   };
 
   // 追加情報のタイプに応じた色を取得
   const getTypeColor = (
-    type: string
+    typeId: number
   ):
     | "default"
     | "primary"
@@ -258,20 +261,23 @@ const StudioRoomDetailPage = () => {
     | "info"
     | "success"
     | "warning" => {
-    switch (type) {
-      case "equipment":
+    const typeObj = roomInfoTypes.find((t) => t.id === typeId);
+    if (!typeObj) return "default";
+
+    switch (typeObj.name) {
+      case "設備":
         return "primary";
-      case "amenity":
+      case "アメニティ":
         return "success";
-      case "rule":
+      case "利用規則":
         return "warning";
       default:
         return "default";
     }
   };
 
-  const isLoading = isRoomsLoading || isInfosLoading;
-  const error = roomsError || infosError;
+  const isLoading = isRoomsLoading || isInfosLoading || isTypesLoading;
+  const error = roomsError || infosError || typesError;
 
   return (
     <Container className="page-container">
@@ -388,8 +394,8 @@ const StudioRoomDetailPage = () => {
                           >
                             <Box>
                               <Chip
-                                label={getTypeLabel(info.type)}
-                                color={getTypeColor(info.type)}
+                                label={info.type?.name || "不明"}
+                                color={getTypeColor(info.type?.id || 0)}
                                 size="small"
                                 sx={{ mb: 1 }}
                               />
@@ -441,16 +447,27 @@ const StudioRoomDetailPage = () => {
                 <InputLabel id="info-type-label">情報タイプ</InputLabel>
                 <Select
                   labelId="info-type-label"
-                  name="type"
-                  value={newInfo.type}
+                  name="typeId"
+                  value={String(newInfo.typeId)}
                   label="情報タイプ"
-                  onChange={handleNewInfoChange}
+                  onChange={(e) => {
+                    setNewInfo({
+                      ...newInfo,
+                      typeId: Number(e.target.value),
+                    });
+                  }}
                 >
-                  {INFO_TYPES.map((type) => (
-                    <MenuItem key={type.value} value={type.value}>
-                      {type.label}
-                    </MenuItem>
-                  ))}
+                  {isTypesLoading ? (
+                    <MenuItem disabled>読み込み中...</MenuItem>
+                  ) : typesError ? (
+                    <MenuItem disabled>タイプ情報の取得に失敗しました</MenuItem>
+                  ) : (
+                    roomInfoTypes.map((type) => (
+                      <MenuItem key={type.id} value={String(type.id)}>
+                        {type.name}
+                      </MenuItem>
+                    ))
+                  )}
                 </Select>
               </FormControl>
             </Grid>
@@ -482,7 +499,7 @@ const StudioRoomDetailPage = () => {
             onClick={handleCreateInfo}
             variant="contained"
             disabled={
-              !newInfo.type ||
+              !newInfo.typeId ||
               !newInfo.key ||
               !newInfo.value ||
               createInfoMutation.isPending
@@ -504,16 +521,32 @@ const StudioRoomDetailPage = () => {
                   <InputLabel id="edit-info-type-label">情報タイプ</InputLabel>
                   <Select
                     labelId="edit-info-type-label"
-                    name="type"
-                    value={editingInfo.request.type}
+                    name="typeId"
+                    value={String(editingInfo.request.typeId)}
                     label="情報タイプ"
-                    onChange={handleEditInfoChange}
+                    onChange={(e) => {
+                      setEditingInfo({
+                        ...editingInfo,
+                        request: {
+                          ...editingInfo.request,
+                          typeId: Number(e.target.value),
+                        },
+                      });
+                    }}
                   >
-                    {INFO_TYPES.map((type) => (
-                      <MenuItem key={type.value} value={type.value}>
-                        {type.label}
+                    {isTypesLoading ? (
+                      <MenuItem disabled>読み込み中...</MenuItem>
+                    ) : typesError ? (
+                      <MenuItem disabled>
+                        タイプ情報の取得に失敗しました
                       </MenuItem>
-                    ))}
+                    ) : (
+                      roomInfoTypes.map((type) => (
+                        <MenuItem key={type.id} value={String(type.id)}>
+                          {type.name}
+                        </MenuItem>
+                      ))
+                    )}
                   </Select>
                 </FormControl>
               </Grid>
@@ -547,7 +580,7 @@ const StudioRoomDetailPage = () => {
             variant="contained"
             disabled={
               !editingInfo ||
-              !editingInfo.request.type ||
+              !editingInfo.request.typeId ||
               !editingInfo.request.key ||
               !editingInfo.request.value ||
               updateInfoMutation.isPending

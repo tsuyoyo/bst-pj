@@ -16,6 +16,18 @@ import {
   DeleteStudioRoomInfoResponse,
 } from '../proto/bst/v1/studio_room_service';
 import { User } from '../entities/user.entity';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+
+// JwtAuthGuardのモック
+jest.mock('../auth/jwt-auth.guard', () => {
+  return {
+    JwtAuthGuard: jest.fn().mockImplementation(() => {
+      return {
+        canActivate: jest.fn().mockReturnValue(true),
+      };
+    }),
+  };
+});
 
 describe('StudioRoomController', () => {
   let controller: StudioRoomController;
@@ -59,7 +71,10 @@ describe('StudioRoomController', () => {
           useValue: mockStudioRoomService,
         },
       ],
-    }).compile();
+    })
+      .overrideGuard(JwtAuthGuard)
+      .useValue({ canActivate: jest.fn().mockReturnValue(true) })
+      .compile();
 
     controller = module.get<StudioRoomController>(StudioRoomController);
     service = module.get<StudioRoomService>(StudioRoomService);
@@ -124,14 +139,17 @@ describe('StudioRoomController', () => {
   describe('createStudioRoomInfo', () => {
     it('should create a studio room info', async () => {
       const createStudioRoomInfoDto: CreateStudioRoomInfoDto = {
-        type: 'Type A',
+        typeId: 1,
         key: 'Key A',
         value: 'Value A',
       };
       const result: CreateStudioRoomInfoResponse = {
         info: {
           id: 1,
-          type: 'Type A',
+          type: {
+            id: 1,
+            name: 'Equipment',
+          },
           key: 'Key A',
           value: 'Value A',
         },

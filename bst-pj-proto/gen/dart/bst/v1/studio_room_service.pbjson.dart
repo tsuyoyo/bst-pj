@@ -136,7 +136,7 @@ final $typed_data.Uint8List deleteStudioRoomResponseDescriptor = $convert.base64
 const CreateStudioRoomInfoRequest$json = {
   '1': 'CreateStudioRoomInfoRequest',
   '2': [
-    {'1': 'type', '3': 1, '4': 1, '5': 9, '10': 'type'},
+    {'1': 'type_id', '3': 1, '4': 1, '5': 5, '10': 'typeId'},
     {'1': 'key', '3': 2, '4': 1, '5': 9, '10': 'key'},
     {'1': 'value', '3': 3, '4': 1, '5': 9, '10': 'value'},
   ],
@@ -144,8 +144,8 @@ const CreateStudioRoomInfoRequest$json = {
 
 /// Descriptor for `CreateStudioRoomInfoRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createStudioRoomInfoRequestDescriptor = $convert.base64Decode(
-    'ChtDcmVhdGVTdHVkaW9Sb29tSW5mb1JlcXVlc3QSEgoEdHlwZRgBIAEoCVIEdHlwZRIQCgNrZX'
-    'kYAiABKAlSA2tleRIUCgV2YWx1ZRgDIAEoCVIFdmFsdWU=');
+    'ChtDcmVhdGVTdHVkaW9Sb29tSW5mb1JlcXVlc3QSFwoHdHlwZV9pZBgBIAEoBVIGdHlwZUlkEh'
+    'AKA2tleRgCIAEoCVIDa2V5EhQKBXZhbHVlGAMgASgJUgV2YWx1ZQ==');
 
 @$core.Deprecated('Use createStudioRoomInfoResponseDescriptor instead')
 const CreateStudioRoomInfoResponse$json = {
@@ -186,7 +186,7 @@ final $typed_data.Uint8List listStudioRoomInfosResponseDescriptor = $convert.bas
 const UpdateStudioRoomInfoRequest$json = {
   '1': 'UpdateStudioRoomInfoRequest',
   '2': [
-    {'1': 'type', '3': 1, '4': 1, '5': 9, '10': 'type'},
+    {'1': 'type_id', '3': 1, '4': 1, '5': 5, '10': 'typeId'},
     {'1': 'key', '3': 2, '4': 1, '5': 9, '10': 'key'},
     {'1': 'value', '3': 3, '4': 1, '5': 9, '10': 'value'},
   ],
@@ -194,8 +194,8 @@ const UpdateStudioRoomInfoRequest$json = {
 
 /// Descriptor for `UpdateStudioRoomInfoRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateStudioRoomInfoRequestDescriptor = $convert.base64Decode(
-    'ChtVcGRhdGVTdHVkaW9Sb29tSW5mb1JlcXVlc3QSEgoEdHlwZRgBIAEoCVIEdHlwZRIQCgNrZX'
-    'kYAiABKAlSA2tleRIUCgV2YWx1ZRgDIAEoCVIFdmFsdWU=');
+    'ChtVcGRhdGVTdHVkaW9Sb29tSW5mb1JlcXVlc3QSFwoHdHlwZV9pZBgBIAEoBVIGdHlwZUlkEh'
+    'AKA2tleRgCIAEoCVIDa2V5EhQKBXZhbHVlGAMgASgJUgV2YWx1ZQ==');
 
 @$core.Deprecated('Use updateStudioRoomInfoResponseDescriptor instead')
 const UpdateStudioRoomInfoResponse$json = {
@@ -231,4 +231,26 @@ const DeleteStudioRoomInfoResponse$json = {
 final $typed_data.Uint8List deleteStudioRoomInfoResponseDescriptor = $convert.base64Decode(
     'ChxEZWxldGVTdHVkaW9Sb29tSW5mb1Jlc3BvbnNlEhgKB3N1Y2Nlc3MYASABKAhSB3N1Y2Nlc3'
     'M=');
+
+@$core.Deprecated('Use listRoomInfoTypesRequestDescriptor instead')
+const ListRoomInfoTypesRequest$json = {
+  '1': 'ListRoomInfoTypesRequest',
+};
+
+/// Descriptor for `ListRoomInfoTypesRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listRoomInfoTypesRequestDescriptor = $convert.base64Decode(
+    'ChhMaXN0Um9vbUluZm9UeXBlc1JlcXVlc3Q=');
+
+@$core.Deprecated('Use listRoomInfoTypesResponseDescriptor instead')
+const ListRoomInfoTypesResponse$json = {
+  '1': 'ListRoomInfoTypesResponse',
+  '2': [
+    {'1': 'types', '3': 1, '4': 3, '5': 11, '6': '.bst.v1.StudioRoomInfoType', '10': 'types'},
+  ],
+};
+
+/// Descriptor for `ListRoomInfoTypesResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listRoomInfoTypesResponseDescriptor = $convert.base64Decode(
+    'ChlMaXN0Um9vbUluZm9UeXBlc1Jlc3BvbnNlEjAKBXR5cGVzGAEgAygLMhouYnN0LnYxLlN0dW'
+    'Rpb1Jvb21JbmZvVHlwZVIFdHlwZXM=');
 

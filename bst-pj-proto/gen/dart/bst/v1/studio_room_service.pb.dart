@@ -534,13 +534,13 @@ class DeleteStudioRoomResponse extends $pb.GeneratedMessage {
 
 class CreateStudioRoomInfoRequest extends $pb.GeneratedMessage {
   factory CreateStudioRoomInfoRequest({
-    $core.String? type,
+    $core.int? typeId,
     $core.String? key,
     $core.String? value,
   }) {
     final $result = create();
-    if (type != null) {
-      $result.type = type;
+    if (typeId != null) {
+      $result.typeId = typeId;
     }
     if (key != null) {
       $result.key = key;
@@ -555,7 +555,7 @@ class CreateStudioRoomInfoRequest extends $pb.GeneratedMessage {
   factory CreateStudioRoomInfoRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateStudioRoomInfoRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'type')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'typeId', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'key')
     ..aOS(3, _omitFieldNames ? '' : 'value')
     ..hasRequiredFields = false
@@ -583,13 +583,13 @@ class CreateStudioRoomInfoRequest extends $pb.GeneratedMessage {
   static CreateStudioRoomInfoRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get type => $_getSZ(0);
+  $core.int get typeId => $_getIZ(0);
   @$pb.TagNumber(1)
-  set type($core.String v) { $_setString(0, v); }
+  set typeId($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasType() => $_has(0);
+  $core.bool hasTypeId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearType() => clearField(1);
+  void clearTypeId() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.String get key => $_getSZ(1);
@@ -740,13 +740,13 @@ class ListStudioRoomInfosResponse extends $pb.GeneratedMessage {
 
 class UpdateStudioRoomInfoRequest extends $pb.GeneratedMessage {
   factory UpdateStudioRoomInfoRequest({
-    $core.String? type,
+    $core.int? typeId,
     $core.String? key,
     $core.String? value,
   }) {
     final $result = create();
-    if (type != null) {
-      $result.type = type;
+    if (typeId != null) {
+      $result.typeId = typeId;
     }
     if (key != null) {
       $result.key = key;
@@ -761,7 +761,7 @@ class UpdateStudioRoomInfoRequest extends $pb.GeneratedMessage {
   factory UpdateStudioRoomInfoRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateStudioRoomInfoRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'type')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'typeId', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'key')
     ..aOS(3, _omitFieldNames ? '' : 'value')
     ..hasRequiredFields = false
@@ -789,13 +789,13 @@ class UpdateStudioRoomInfoRequest extends $pb.GeneratedMessage {
   static UpdateStudioRoomInfoRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get type => $_getSZ(0);
+  $core.int get typeId => $_getIZ(0);
   @$pb.TagNumber(1)
-  set type($core.String v) { $_setString(0, v); }
+  set typeId($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasType() => $_has(0);
+  $core.bool hasTypeId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearType() => clearField(1);
+  void clearTypeId() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.String get key => $_getSZ(1);
@@ -948,6 +948,82 @@ class DeleteStudioRoomInfoResponse extends $pb.GeneratedMessage {
   $core.bool hasSuccess() => $_has(0);
   @$pb.TagNumber(1)
   void clearSuccess() => clearField(1);
+}
+
+class ListRoomInfoTypesRequest extends $pb.GeneratedMessage {
+  factory ListRoomInfoTypesRequest() => create();
+  ListRoomInfoTypesRequest._() : super();
+  factory ListRoomInfoTypesRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListRoomInfoTypesRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListRoomInfoTypesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListRoomInfoTypesRequest clone() => ListRoomInfoTypesRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListRoomInfoTypesRequest copyWith(void Function(ListRoomInfoTypesRequest) updates) => super.copyWith((message) => updates(message as ListRoomInfoTypesRequest)) as ListRoomInfoTypesRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListRoomInfoTypesRequest create() => ListRoomInfoTypesRequest._();
+  ListRoomInfoTypesRequest createEmptyInstance() => create();
+  static $pb.PbList<ListRoomInfoTypesRequest> createRepeated() => $pb.PbList<ListRoomInfoTypesRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListRoomInfoTypesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListRoomInfoTypesRequest>(create);
+  static ListRoomInfoTypesRequest? _defaultInstance;
+}
+
+class ListRoomInfoTypesResponse extends $pb.GeneratedMessage {
+  factory ListRoomInfoTypesResponse({
+    $core.Iterable<$35.StudioRoomInfoType>? types,
+  }) {
+    final $result = create();
+    if (types != null) {
+      $result.types.addAll(types);
+    }
+    return $result;
+  }
+  ListRoomInfoTypesResponse._() : super();
+  factory ListRoomInfoTypesResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListRoomInfoTypesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListRoomInfoTypesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+    ..pc<$35.StudioRoomInfoType>(1, _omitFieldNames ? '' : 'types', $pb.PbFieldType.PM, subBuilder: $35.StudioRoomInfoType.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListRoomInfoTypesResponse clone() => ListRoomInfoTypesResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListRoomInfoTypesResponse copyWith(void Function(ListRoomInfoTypesResponse) updates) => super.copyWith((message) => updates(message as ListRoomInfoTypesResponse)) as ListRoomInfoTypesResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListRoomInfoTypesResponse create() => ListRoomInfoTypesResponse._();
+  ListRoomInfoTypesResponse createEmptyInstance() => create();
+  static $pb.PbList<ListRoomInfoTypesResponse> createRepeated() => $pb.PbList<ListRoomInfoTypesResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListRoomInfoTypesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListRoomInfoTypesResponse>(create);
+  static ListRoomInfoTypesResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$35.StudioRoomInfoType> get types => $_getList(0);
 }
 
 

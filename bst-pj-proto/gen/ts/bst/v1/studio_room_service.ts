@@ -6,7 +6,7 @@
 
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
-import { StudioRoom, StudioRoomInfo } from "./location";
+import { StudioRoom, StudioRoomInfo, StudioRoomInfoType } from "./location";
 
 export const protobufPackage = "bst.v1";
 
@@ -55,7 +55,7 @@ export interface DeleteStudioRoomResponse {
 }
 
 export interface CreateStudioRoomInfoRequest {
-  type: string;
+  typeId: number;
   key: string;
   value: string;
 }
@@ -72,7 +72,7 @@ export interface ListStudioRoomInfosResponse {
 }
 
 export interface UpdateStudioRoomInfoRequest {
-  type: string;
+  typeId: number;
   key: string;
   value: string;
 }
@@ -86,6 +86,13 @@ export interface DeleteStudioRoomInfoRequest {
 
 export interface DeleteStudioRoomInfoResponse {
   success: boolean;
+}
+
+export interface ListRoomInfoTypesRequest {
+}
+
+export interface ListRoomInfoTypesResponse {
+  types: StudioRoomInfoType[];
 }
 
 function createBaseCreateStudioRoomRequest(): CreateStudioRoomRequest {
@@ -690,13 +697,13 @@ export const DeleteStudioRoomResponse = {
 };
 
 function createBaseCreateStudioRoomInfoRequest(): CreateStudioRoomInfoRequest {
-  return { type: "", key: "", value: "" };
+  return { typeId: 0, key: "", value: "" };
 }
 
 export const CreateStudioRoomInfoRequest = {
   encode(message: CreateStudioRoomInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.type !== "") {
-      writer.uint32(10).string(message.type);
+    if (message.typeId !== 0) {
+      writer.uint32(8).int32(message.typeId);
     }
     if (message.key !== "") {
       writer.uint32(18).string(message.key);
@@ -715,11 +722,11 @@ export const CreateStudioRoomInfoRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag !== 10) {
+          if (tag !== 8) {
             break;
           }
 
-          message.type = reader.string();
+          message.typeId = reader.int32();
           continue;
         case 2:
           if (tag !== 18) {
@@ -746,7 +753,7 @@ export const CreateStudioRoomInfoRequest = {
 
   fromJSON(object: any): CreateStudioRoomInfoRequest {
     return {
-      type: isSet(object.type) ? globalThis.String(object.type) : "",
+      typeId: isSet(object.typeId) ? globalThis.Number(object.typeId) : 0,
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? globalThis.String(object.value) : "",
     };
@@ -754,8 +761,8 @@ export const CreateStudioRoomInfoRequest = {
 
   toJSON(message: CreateStudioRoomInfoRequest): unknown {
     const obj: any = {};
-    if (message.type !== "") {
-      obj.type = message.type;
+    if (message.typeId !== 0) {
+      obj.typeId = Math.round(message.typeId);
     }
     if (message.key !== "") {
       obj.key = message.key;
@@ -771,7 +778,7 @@ export const CreateStudioRoomInfoRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<CreateStudioRoomInfoRequest>, I>>(object: I): CreateStudioRoomInfoRequest {
     const message = createBaseCreateStudioRoomInfoRequest();
-    message.type = object.type ?? "";
+    message.typeId = object.typeId ?? 0;
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
@@ -940,13 +947,13 @@ export const ListStudioRoomInfosResponse = {
 };
 
 function createBaseUpdateStudioRoomInfoRequest(): UpdateStudioRoomInfoRequest {
-  return { type: "", key: "", value: "" };
+  return { typeId: 0, key: "", value: "" };
 }
 
 export const UpdateStudioRoomInfoRequest = {
   encode(message: UpdateStudioRoomInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.type !== "") {
-      writer.uint32(10).string(message.type);
+    if (message.typeId !== 0) {
+      writer.uint32(8).int32(message.typeId);
     }
     if (message.key !== "") {
       writer.uint32(18).string(message.key);
@@ -965,11 +972,11 @@ export const UpdateStudioRoomInfoRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag !== 10) {
+          if (tag !== 8) {
             break;
           }
 
-          message.type = reader.string();
+          message.typeId = reader.int32();
           continue;
         case 2:
           if (tag !== 18) {
@@ -996,7 +1003,7 @@ export const UpdateStudioRoomInfoRequest = {
 
   fromJSON(object: any): UpdateStudioRoomInfoRequest {
     return {
-      type: isSet(object.type) ? globalThis.String(object.type) : "",
+      typeId: isSet(object.typeId) ? globalThis.Number(object.typeId) : 0,
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? globalThis.String(object.value) : "",
     };
@@ -1004,8 +1011,8 @@ export const UpdateStudioRoomInfoRequest = {
 
   toJSON(message: UpdateStudioRoomInfoRequest): unknown {
     const obj: any = {};
-    if (message.type !== "") {
-      obj.type = message.type;
+    if (message.typeId !== 0) {
+      obj.typeId = Math.round(message.typeId);
     }
     if (message.key !== "") {
       obj.key = message.key;
@@ -1021,7 +1028,7 @@ export const UpdateStudioRoomInfoRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<UpdateStudioRoomInfoRequest>, I>>(object: I): UpdateStudioRoomInfoRequest {
     const message = createBaseUpdateStudioRoomInfoRequest();
-    message.type = object.type ?? "";
+    message.typeId = object.typeId ?? 0;
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
@@ -1187,6 +1194,110 @@ export const DeleteStudioRoomInfoResponse = {
   },
 };
 
+function createBaseListRoomInfoTypesRequest(): ListRoomInfoTypesRequest {
+  return {};
+}
+
+export const ListRoomInfoTypesRequest = {
+  encode(_: ListRoomInfoTypesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListRoomInfoTypesRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseListRoomInfoTypesRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): ListRoomInfoTypesRequest {
+    return {};
+  },
+
+  toJSON(_: ListRoomInfoTypesRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ListRoomInfoTypesRequest>, I>>(base?: I): ListRoomInfoTypesRequest {
+    return ListRoomInfoTypesRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ListRoomInfoTypesRequest>, I>>(_: I): ListRoomInfoTypesRequest {
+    const message = createBaseListRoomInfoTypesRequest();
+    return message;
+  },
+};
+
+function createBaseListRoomInfoTypesResponse(): ListRoomInfoTypesResponse {
+  return { types: [] };
+}
+
+export const ListRoomInfoTypesResponse = {
+  encode(message: ListRoomInfoTypesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.types) {
+      StudioRoomInfoType.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListRoomInfoTypesResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseListRoomInfoTypesResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.types.push(StudioRoomInfoType.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ListRoomInfoTypesResponse {
+    return {
+      types: globalThis.Array.isArray(object?.types)
+        ? object.types.map((e: any) => StudioRoomInfoType.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: ListRoomInfoTypesResponse): unknown {
+    const obj: any = {};
+    if (message.types?.length) {
+      obj.types = message.types.map((e) => StudioRoomInfoType.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ListRoomInfoTypesResponse>, I>>(base?: I): ListRoomInfoTypesResponse {
+    return ListRoomInfoTypesResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ListRoomInfoTypesResponse>, I>>(object: I): ListRoomInfoTypesResponse {
+    const message = createBaseListRoomInfoTypesResponse();
+    message.types = object.types?.map((e) => StudioRoomInfoType.fromPartial(e)) || [];
+    return message;
+  },
+};
+
 export interface StudioRoomService {
   /** POST /studios/{id}/rooms */
   CreateStudioRoom(request: CreateStudioRoomRequest): Promise<CreateStudioRoomResponse>;
@@ -1204,6 +1315,8 @@ export interface StudioRoomService {
   UpdateStudioRoomInfo(request: UpdateStudioRoomInfoRequest): Promise<UpdateStudioRoomInfoResponse>;
   /** DELETE /studios/{id}/rooms/{roomId}/infos/{infoId} */
   DeleteStudioRoomInfo(request: DeleteStudioRoomInfoRequest): Promise<DeleteStudioRoomInfoResponse>;
+  /** GET studios/rooms/infos/types */
+  ListRoomInfoTypes(request: ListRoomInfoTypesRequest): Promise<ListRoomInfoTypesResponse>;
 }
 
 export const StudioRoomServiceServiceName = "bst.v1.StudioRoomService";
@@ -1221,6 +1334,7 @@ export class StudioRoomServiceClientImpl implements StudioRoomService {
     this.ListStudioRoomInfos = this.ListStudioRoomInfos.bind(this);
     this.UpdateStudioRoomInfo = this.UpdateStudioRoomInfo.bind(this);
     this.DeleteStudioRoomInfo = this.DeleteStudioRoomInfo.bind(this);
+    this.ListRoomInfoTypes = this.ListRoomInfoTypes.bind(this);
   }
   CreateStudioRoom(request: CreateStudioRoomRequest): Promise<CreateStudioRoomResponse> {
     const data = CreateStudioRoomRequest.encode(request).finish();
@@ -1268,6 +1382,12 @@ export class StudioRoomServiceClientImpl implements StudioRoomService {
     const data = DeleteStudioRoomInfoRequest.encode(request).finish();
     const promise = this.rpc.request(this.service, "DeleteStudioRoomInfo", data);
     return promise.then((data) => DeleteStudioRoomInfoResponse.decode(_m0.Reader.create(data)));
+  }
+
+  ListRoomInfoTypes(request: ListRoomInfoTypesRequest): Promise<ListRoomInfoTypesResponse> {
+    const data = ListRoomInfoTypesRequest.encode(request).finish();
+    const promise = this.rpc.request(this.service, "ListRoomInfoTypes", data);
+    return promise.then((data) => ListRoomInfoTypesResponse.decode(_m0.Reader.create(data)));
   }
 }
 

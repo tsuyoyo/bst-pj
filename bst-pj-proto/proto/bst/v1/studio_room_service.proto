@@ -31,13 +31,17 @@ service StudioRoomService {
   // DELETE /studios/{id}/rooms/{roomId}/infos/{infoId}
   rpc DeleteStudioRoomInfo(DeleteStudioRoomInfoRequest)
       returns (DeleteStudioRoomInfoResponse);
+
+  // GET studios/rooms/infos/types
+  rpc ListRoomInfoTypes(ListRoomInfoTypesRequest)
+      returns (ListRoomInfoTypesResponse);
 }
 
 message CreateStudioRoomRequest {
   string name     = 1;
-  int32  capacity = 2; // 定員
+  int32  capacity = 2;  // 定員
   int32  price    = 3;
-  int32  size     = 4; // 畳数
+  int32  size     = 4;  // 畳数
 }
 
 message CreateStudioRoomResponse {
@@ -74,9 +78,9 @@ message DeleteStudioRoomResponse {
 }
 
 message CreateStudioRoomInfoRequest {
-  string type  = 1;
-  string key   = 2;
-  string value = 3;
+  int32  type_id = 1;
+  string key     = 2;
+  string value   = 3;
 }
 
 message CreateStudioRoomInfoResponse {
@@ -90,9 +94,9 @@ message ListStudioRoomInfosResponse {
 }
 
 message UpdateStudioRoomInfoRequest {
-  string type  = 1;
-  string key   = 2;
-  string value = 3;
+  int32  type_id = 1;
+  string key     = 2;
+  string value   = 3;
 }
 
 message UpdateStudioRoomInfoResponse {
@@ -103,4 +107,10 @@ message DeleteStudioRoomInfoRequest {}
 
 message DeleteStudioRoomInfoResponse {
   bool success = 1;
+}
+
+message ListRoomInfoTypesRequest {}
+
+message ListRoomInfoTypesResponse {
+  repeated StudioRoomInfoType types = 1;
 }

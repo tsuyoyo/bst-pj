@@ -478,7 +478,7 @@ class StudioRoom extends $pb.GeneratedMessage {
 class StudioRoomInfo extends $pb.GeneratedMessage {
   factory StudioRoomInfo({
     $core.int? id,
-    $core.String? type,
+    StudioRoomInfoType? type,
     $core.String? key,
     $core.String? value,
   }) {
@@ -503,7 +503,7 @@ class StudioRoomInfo extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StudioRoomInfo', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
-    ..aOS(2, _omitFieldNames ? '' : 'type')
+    ..aOM<StudioRoomInfoType>(2, _omitFieldNames ? '' : 'type', subBuilder: StudioRoomInfoType.create)
     ..aOS(3, _omitFieldNames ? '' : 'key')
     ..aOS(4, _omitFieldNames ? '' : 'value')
     ..hasRequiredFields = false
@@ -541,13 +541,15 @@ class StudioRoomInfo extends $pb.GeneratedMessage {
 
   /// 情報の種類 (例: Equipment)"
   @$pb.TagNumber(2)
-  $core.String get type => $_getSZ(1);
+  StudioRoomInfoType get type => $_getN(1);
   @$pb.TagNumber(2)
-  set type($core.String v) { $_setString(1, v); }
+  set type(StudioRoomInfoType v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasType() => $_has(1);
   @$pb.TagNumber(2)
   void clearType() => clearField(2);
+  @$pb.TagNumber(2)
+  StudioRoomInfoType ensureType() => $_ensure(1);
 
   /// 情報のキー (例: ギターアンプ)"
   @$pb.TagNumber(3)
@@ -568,6 +570,70 @@ class StudioRoomInfo extends $pb.GeneratedMessage {
   $core.bool hasValue() => $_has(3);
   @$pb.TagNumber(4)
   void clearValue() => clearField(4);
+}
+
+class StudioRoomInfoType extends $pb.GeneratedMessage {
+  factory StudioRoomInfoType({
+    $core.int? id,
+    $core.String? name,
+  }) {
+    final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
+    if (name != null) {
+      $result.name = name;
+    }
+    return $result;
+  }
+  StudioRoomInfoType._() : super();
+  factory StudioRoomInfoType.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory StudioRoomInfoType.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StudioRoomInfoType', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  StudioRoomInfoType clone() => StudioRoomInfoType()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  StudioRoomInfoType copyWith(void Function(StudioRoomInfoType) updates) => super.copyWith((message) => updates(message as StudioRoomInfoType)) as StudioRoomInfoType;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StudioRoomInfoType create() => StudioRoomInfoType._();
+  StudioRoomInfoType createEmptyInstance() => create();
+  static $pb.PbList<StudioRoomInfoType> createRepeated() => $pb.PbList<StudioRoomInfoType>();
+  @$core.pragma('dart2js:noInline')
+  static StudioRoomInfoType getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StudioRoomInfoType>(create);
+  static StudioRoomInfoType? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get id => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set id($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => clearField(2);
 }
 
 

@@ -70,6 +70,26 @@ exports.up = (pgm) => {
     updated_user_id: { type: "integer", notNull: true },
   });
 
+  // Create studio_room_info_types table
+  pgm.createTable("studio_room_info_types", {
+    id: "id",
+    name: {
+      type: "varchar(100)",
+      notNull: true,
+      unique: true,
+    },
+    created_at: {
+      type: "timestamp",
+      notNull: true,
+      default: pgm.func("current_timestamp"),
+    },
+    updated_at: {
+      type: "timestamp",
+      notNull: true,
+      default: pgm.func("current_timestamp"),
+    },
+  });
+
   // Create studio_room_infos table
   pgm.createTable("studio_room_infos", {
     id: "id",
@@ -85,10 +105,12 @@ exports.up = (pgm) => {
       references: "studios",
       onDelete: "CASCADE",
     },
-    type: {
-      type: "varchar(50)",
+    studio_room_info_type_id: {
+      type: "integer",
       notNull: true,
-      comment: "情報の種類 (例: Equipment)",
+      references: "studio_room_info_types",
+      onDelete: "CASCADE",
+      comment: "情報の種類 (studio_room_info_types テーブルの ID)",
     },
     key: {
       type: "varchar(100)",
@@ -114,7 +136,12 @@ exports.up = (pgm) => {
   });
 
   // Create triggers for updating updated_at
-  const tables = ["studios", "studio_rooms", "studio_room_infos"];
+  const tables = [
+    "studios",
+    "studio_rooms",
+    "studio_room_infos",
+    "studio_room_info_types",
+  ];
   tables.forEach((table) => {
     pgm.createTrigger(table, "update_updated_at_trigger", {
       when: "BEFORE",
@@ -129,12 +156,18 @@ exports.up = (pgm) => {
   pgm.createIndex("studios", ["prefecture_id"]);
   pgm.createIndex("studio_rooms", ["studio_id"]);
   pgm.createIndex("studio_room_infos", ["studio_room_id"]);
-  pgm.createIndex("studio_room_infos", ["type"]);
+  pgm.createIndex("studio_room_infos", ["studio_room_info_type_id"]);
+  pgm.createIndex("studio_room_info_types", ["name"]);
 };
 
 exports.down = (pgm) => {
   // Drop triggers
-  const tables = ["studios", "studio_rooms", "studio_room_infos"];
+  const tables = [
+    "studios",
+    "studio_rooms",
+    "studio_room_infos",
+    "studio_room_info_types",
+  ];
   tables.forEach((table) => {
     pgm.dropTrigger(table, "update_updated_at_trigger", { ifExists: true });
   });
@@ -144,10 +177,14 @@ exports.down = (pgm) => {
   pgm.dropIndex("studios", ["prefecture_id"], { ifExists: true });
   pgm.dropIndex("studio_rooms", ["studio_id"], { ifExists: true });
   pgm.dropIndex("studio_room_infos", ["studio_room_id"], { ifExists: true });
-  pgm.dropIndex("studio_room_infos", ["type"], { ifExists: true });
+  pgm.dropIndex("studio_room_infos", ["studio_room_info_type_id"], {
+    ifExists: true,
+  });
+  pgm.dropIndex("studio_room_info_types", ["name"], { ifExists: true });
 
   // Drop tables
   pgm.dropTable("studio_room_infos", { ifExists: true });
+  pgm.dropTable("studio_room_info_types", { ifExists: true });
   pgm.dropTable("studio_rooms", { ifExists: true });
   pgm.dropTable("studios", { ifExists: true });
 };

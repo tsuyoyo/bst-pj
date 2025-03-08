@@ -1,5 +1,9 @@
 import { apiClient } from "@/lib/axios";
-import { StudioRoom, StudioRoomInfo } from "@/proto/bst/v1/location";
+import {
+  StudioRoom,
+  StudioRoomInfo,
+  StudioRoomInfoType,
+} from "@/proto/bst/v1/location";
 import {
   CreateStudioRoomRequest,
   CreateStudioRoomResponse,
@@ -16,6 +20,7 @@ import {
   UpdateStudioRoomInfoResponse,
   DeleteStudioRoomInfoRequest,
   DeleteStudioRoomInfoResponse,
+  ListRoomInfoTypesResponse,
 } from "@/proto/bst/v1/studio_room_service";
 
 // スタジオルーム一覧を取得
@@ -113,3 +118,12 @@ export const deleteStudioRoomInfo = async (
   );
   return data;
 };
+
+// ルーム情報タイプ一覧を取得
+export const fetchRoomInfoTypes =
+  async (): Promise<ListRoomInfoTypesResponse> => {
+    const { data } = await apiClient.get<ListRoomInfoTypesResponse>(
+      `/studios/rooms/infos/types`
+    );
+    return data;
+  };

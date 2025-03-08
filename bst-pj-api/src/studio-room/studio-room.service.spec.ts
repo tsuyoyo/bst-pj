@@ -3,6 +3,7 @@ import { StudioRoomService } from './studio-room.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { StudioRoom } from '../entities/studio-room.entity';
 import { StudioRoomInfo } from '../entities/studio-room-info.entity';
+import { StudioRoomInfoType } from '../entities/studio-room-info-type.entity';
 import { Repository, DeleteResult } from 'typeorm';
 import { NotFoundException } from '@nestjs/common';
 import { Studio } from '../entities/studio.entity';
@@ -239,27 +240,32 @@ describe('StudioRoomService', () => {
   describe('createStudioRoomInfo', () => {
     it('should create a studio room info', async () => {
       const createStudioRoomInfoDto = {
-        type: 'Type A',
+        typeId: 1,
         key: 'Key A',
         value: 'Value A',
       };
+
+      const infoType = new StudioRoomInfoType();
+      infoType.id = 1;
+      infoType.name = 'Equipment';
 
       const savedRoomInfo: StudioRoomInfo = {
         id: 1,
         studioId: 1,
         studioRoomId: 1,
-        type: createStudioRoomInfoDto.type,
+        typeId: createStudioRoomInfoDto.typeId,
         key: createStudioRoomInfoDto.key,
         value: createStudioRoomInfoDto.value,
         createdAt: new Date(),
         updatedAt: new Date(),
         updatedUserId: 1,
         studioRoom: new StudioRoom(),
+        type: infoType,
       };
 
       jest
-        .spyOn(studioRoomInfoRepository, 'create')
-        .mockReturnValue(savedRoomInfo);
+        .spyOn(studioRoomInfoRepository, 'findOne')
+        .mockResolvedValue(savedRoomInfo);
       jest
         .spyOn(studioRoomInfoRepository, 'save')
         .mockResolvedValue(savedRoomInfo);

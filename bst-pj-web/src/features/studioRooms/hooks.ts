@@ -9,6 +9,7 @@ import {
   createStudioRoomInfo,
   updateStudioRoomInfo,
   deleteStudioRoomInfo,
+  fetchRoomInfoTypes,
 } from "./api";
 import {
   CreateStudioRoomRequest,
@@ -114,5 +115,13 @@ export const useDeleteStudioRoomInfo = (studioId: number, roomId: number) => {
         queryKey: ["studioRoomInfos", studioId, roomId],
       });
     },
+  });
+};
+
+// ルーム情報タイプ一覧を取得するフック
+export const useRoomInfoTypes = () => {
+  return useQuery({
+    queryKey: ["roomInfoTypes"],
+    queryFn: fetchRoomInfoTypes,
   });
 };

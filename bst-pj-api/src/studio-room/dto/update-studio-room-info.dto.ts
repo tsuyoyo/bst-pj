@@ -1,10 +1,10 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { UpdateStudioRoomInfoRequest } from 'src/proto/bst/v1/studio_room_service';
 
 export class UpdateStudioRoomInfoDto implements UpdateStudioRoomInfoRequest {
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
-  type: string;
+  typeId: number;
 
   @IsString()
   @IsNotEmpty()

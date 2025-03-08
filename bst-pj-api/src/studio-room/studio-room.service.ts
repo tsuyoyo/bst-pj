@@ -44,7 +44,10 @@ export class StudioRoomService {
   mapToProtoStudioRoomInfo(roomInfo: StudioRoomInfo): ProtoStudioRoomInfo {
     return {
       id: roomInfo.id,
-      type: roomInfo.type,
+      type: {
+        id: roomInfo.typeId,
+        name: roomInfo.type?.name || '',
+      },
       key: roomInfo.key,
       value: roomInfo.value,
     };
@@ -76,6 +79,7 @@ export class StudioRoomService {
   ): Promise<ListStudioRoomInfosResponse> {
     const roomInfos = await this.studioRoomInfoRepository.find({
       where: { studioRoomId: roomId, studioId: studioId },
+      relations: ['type'],
     });
     return {
       infos: roomInfos.map((roomInfo) =>
@@ -90,6 +94,7 @@ export class StudioRoomService {
   ): Promise<GetStudioRoomResponse> {
     const studioRoom = await this.studioRoomRepository.findOne({
       where: { id: roomId, studioId: studioId },
+      relations: ['infos', 'infos.type'],
     });
     if (!studioRoom) {
       throw new NotFoundException('Studio room not found');
@@ -100,6 +105,7 @@ export class StudioRoomService {
   async getStudioRooms(studioId: number): Promise<ListStudioRoomsResponse> {
     const studioRooms = await this.studioRoomRepository.find({
       where: { studioId: studioId },
+      relations: ['infos', 'infos.type'],
     });
 
     return {
@@ -137,11 +143,12 @@ export class StudioRoomService {
   ): Promise<UpdateStudioRoomInfoResponse> {
     const roomInfo = await this.studioRoomInfoRepository.findOne({
       where: { id: infoId, studioRoomId: roomId, studioId: studioId },
+      relations: ['type'],
     });
     if (!roomInfo) {
       throw new NotFoundException('Room info not found');
     }
-    roomInfo.type = updateStudioRoomInfoDto.type;
+    roomInfo.typeId = updateStudioRoomInfoDto.typeId;
     roomInfo.key = updateStudioRoomInfoDto.key;
     roomInfo.value = updateStudioRoomInfoDto.value;
     roomInfo.updatedUserId = user.id;
@@ -160,12 +167,21 @@ export class StudioRoomService {
     const roomInfo = {
       studioId: studioId,
       studioRoomId: roomId,
+      typeId: createStudioRoomInfoDto.typeId,
+      key: createStudioRoomInfoDto.key,
+      value: createStudioRoomInfoDto.value,
       updatedUserId: user.id,
-      ...createStudioRoomInfoDto,
     };
     const savedRoomInfo = await this.studioRoomInfoRepository.save(roomInfo);
+
+    // 保存後にtypeの情報を取得するために再度読み込む
+    const roomInfoWithType = await this.studioRoomInfoRepository.findOne({
+      where: { id: savedRoomInfo.id },
+      relations: ['type'],
+    });
+
     return {
-      info: this.mapToProtoStudioRoomInfo(savedRoomInfo),
+      info: this.mapToProtoStudioRoomInfo(roomInfoWithType || savedRoomInfo),
     };
   }
 

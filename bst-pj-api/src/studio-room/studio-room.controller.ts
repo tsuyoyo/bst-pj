@@ -25,8 +25,8 @@ import {
 } from '../proto/bst/v1/studio_room_service';
 import { CreateStudioRoomInfoDto } from './dto/create-studio-room-info.dto';
 import { UpdateStudioRoomInfoDto } from './dto/update-studio-room-info.dto';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { User } from 'src/entities/user.entity';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { User } from '../entities/user.entity';
 
 @Controller('studios')
 export class StudioRoomController {

@@ -56,11 +56,18 @@ export interface StudioRoom {
 export interface StudioRoomInfo {
   id: number;
   /** 情報の種類 (例: Equipment)" */
-  type: string;
+  type:
+    | StudioRoomInfoType
+    | undefined;
   /** 情報のキー (例: ギターアンプ)" */
   key: string;
   /** 情報の値 (例: Marshall)" */
   value: string;
+}
+
+export interface StudioRoomInfoType {
+  id: number;
+  name: string;
 }
 
 function createBaseLocation(): Location {
@@ -596,7 +603,7 @@ export const StudioRoom = {
 };
 
 function createBaseStudioRoomInfo(): StudioRoomInfo {
-  return { id: 0, type: "", key: "", value: "" };
+  return { id: 0, type: undefined, key: "", value: "" };
 }
 
 export const StudioRoomInfo = {
@@ -604,8 +611,8 @@ export const StudioRoomInfo = {
     if (message.id !== 0) {
       writer.uint32(8).int32(message.id);
     }
-    if (message.type !== "") {
-      writer.uint32(18).string(message.type);
+    if (message.type !== undefined) {
+      StudioRoomInfoType.encode(message.type, writer.uint32(18).fork()).ldelim();
     }
     if (message.key !== "") {
       writer.uint32(26).string(message.key);
@@ -635,7 +642,7 @@ export const StudioRoomInfo = {
             break;
           }
 
-          message.type = reader.string();
+          message.type = StudioRoomInfoType.decode(reader, reader.uint32());
           continue;
         case 3:
           if (tag !== 26) {
@@ -663,7 +670,7 @@ export const StudioRoomInfo = {
   fromJSON(object: any): StudioRoomInfo {
     return {
       id: isSet(object.id) ? globalThis.Number(object.id) : 0,
-      type: isSet(object.type) ? globalThis.String(object.type) : "",
+      type: isSet(object.type) ? StudioRoomInfoType.fromJSON(object.type) : undefined,
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? globalThis.String(object.value) : "",
     };
@@ -674,8 +681,8 @@ export const StudioRoomInfo = {
     if (message.id !== 0) {
       obj.id = Math.round(message.id);
     }
-    if (message.type !== "") {
-      obj.type = message.type;
+    if (message.type !== undefined) {
+      obj.type = StudioRoomInfoType.toJSON(message.type);
     }
     if (message.key !== "") {
       obj.key = message.key;
@@ -692,9 +699,85 @@ export const StudioRoomInfo = {
   fromPartial<I extends Exact<DeepPartial<StudioRoomInfo>, I>>(object: I): StudioRoomInfo {
     const message = createBaseStudioRoomInfo();
     message.id = object.id ?? 0;
-    message.type = object.type ?? "";
+    message.type = (object.type !== undefined && object.type !== null)
+      ? StudioRoomInfoType.fromPartial(object.type)
+      : undefined;
     message.key = object.key ?? "";
     message.value = object.value ?? "";
+    return message;
+  },
+};
+
+function createBaseStudioRoomInfoType(): StudioRoomInfoType {
+  return { id: 0, name: "" };
+}
+
+export const StudioRoomInfoType = {
+  encode(message: StudioRoomInfoType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.id !== 0) {
+      writer.uint32(8).int32(message.id);
+    }
+    if (message.name !== "") {
+      writer.uint32(18).string(message.name);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): StudioRoomInfoType {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseStudioRoomInfoType();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.id = reader.int32();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): StudioRoomInfoType {
+    return {
+      id: isSet(object.id) ? globalThis.Number(object.id) : 0,
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+    };
+  },
+
+  toJSON(message: StudioRoomInfoType): unknown {
+    const obj: any = {};
+    if (message.id !== 0) {
+      obj.id = Math.round(message.id);
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<StudioRoomInfoType>, I>>(base?: I): StudioRoomInfoType {
+    return StudioRoomInfoType.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<StudioRoomInfoType>, I>>(object: I): StudioRoomInfoType {
+    const message = createBaseStudioRoomInfoType();
+    message.id = object.id ?? 0;
+    message.name = object.name ?? "";
     return message;
   },
 };

@@ -53,6 +53,10 @@ class StudioRoomServiceClient extends $grpc.Client {
       '/bst.v1.StudioRoomService/DeleteStudioRoomInfo',
       ($25.DeleteStudioRoomInfoRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $25.DeleteStudioRoomInfoResponse.fromBuffer(value));
+  static final _$listRoomInfoTypes = $grpc.ClientMethod<$25.ListRoomInfoTypesRequest, $25.ListRoomInfoTypesResponse>(
+      '/bst.v1.StudioRoomService/ListRoomInfoTypes',
+      ($25.ListRoomInfoTypesRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $25.ListRoomInfoTypesResponse.fromBuffer(value));
 
   StudioRoomServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -90,6 +94,10 @@ class StudioRoomServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$25.DeleteStudioRoomInfoResponse> deleteStudioRoomInfo($25.DeleteStudioRoomInfoRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteStudioRoomInfo, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$25.ListRoomInfoTypesResponse> listRoomInfoTypes($25.ListRoomInfoTypesRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$listRoomInfoTypes, request, options: options);
   }
 }
 
@@ -154,6 +162,13 @@ abstract class StudioRoomServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $25.DeleteStudioRoomInfoRequest.fromBuffer(value),
         ($25.DeleteStudioRoomInfoResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$25.ListRoomInfoTypesRequest, $25.ListRoomInfoTypesResponse>(
+        'ListRoomInfoTypes',
+        listRoomInfoTypes_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $25.ListRoomInfoTypesRequest.fromBuffer(value),
+        ($25.ListRoomInfoTypesResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$25.CreateStudioRoomResponse> createStudioRoom_Pre($grpc.ServiceCall call, $async.Future<$25.CreateStudioRoomRequest> request) async {
@@ -188,6 +203,10 @@ abstract class StudioRoomServiceBase extends $grpc.Service {
     return deleteStudioRoomInfo(call, await request);
   }
 
+  $async.Future<$25.ListRoomInfoTypesResponse> listRoomInfoTypes_Pre($grpc.ServiceCall call, $async.Future<$25.ListRoomInfoTypesRequest> request) async {
+    return listRoomInfoTypes(call, await request);
+  }
+
   $async.Future<$25.CreateStudioRoomResponse> createStudioRoom($grpc.ServiceCall call, $25.CreateStudioRoomRequest request);
   $async.Future<$25.ListStudioRoomsResponse> listStudioRooms($grpc.ServiceCall call, $25.ListStudioRoomsRequest request);
   $async.Future<$25.UpdateStudioRoomResponse> updateStudioRoom($grpc.ServiceCall call, $25.UpdateStudioRoomRequest request);
@@ -196,4 +215,5 @@ abstract class StudioRoomServiceBase extends $grpc.Service {
   $async.Future<$25.ListStudioRoomInfosResponse> listStudioRoomInfos($grpc.ServiceCall call, $25.ListStudioRoomInfosRequest request);
   $async.Future<$25.UpdateStudioRoomInfoResponse> updateStudioRoomInfo($grpc.ServiceCall call, $25.UpdateStudioRoomInfoRequest request);
   $async.Future<$25.DeleteStudioRoomInfoResponse> deleteStudioRoomInfo($grpc.ServiceCall call, $25.DeleteStudioRoomInfoRequest request);
+  $async.Future<$25.ListRoomInfoTypesResponse> listRoomInfoTypes($grpc.ServiceCall call, $25.ListRoomInfoTypesRequest request);
 }
