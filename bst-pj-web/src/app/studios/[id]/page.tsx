@@ -43,6 +43,7 @@ import {
 } from "@/features/studioRooms/hooks";
 import { useAreas } from "@/features/areas/hooks";
 import { CreateStudioRoomRequest } from "@/proto/bst/v1/studio_room_service";
+import { StudioRoom } from "@/proto/bst/v1/location";
 
 const StudioDetailPage = ({ params }: { params: { id: string } }) => {
   const { id } = React.use(params as unknown as Usable<{ id: string }>);
@@ -63,6 +64,7 @@ const StudioDetailPage = ({ params }: { params: { id: string } }) => {
 
   const studio = studioData?.studio || null;
   const rooms = roomsData?.rooms || [];
+  const roomsWithSize = rooms as Array<StudioRoom & { size?: number }>;
 
   // エリア情報を取得
   const { data: areasData, isLoading: isAreasLoading } = useAreas();
@@ -115,8 +117,7 @@ const StudioDetailPage = ({ params }: { params: { id: string } }) => {
     try {
       await createRoomMutation.mutateAsync(newRoom);
       handleCloseRoomDialog();
-      // 成功したらルーム一覧ページに遷移
-      router.push(`/studios/${id}/rooms`);
+      // 成功したらルーム一覧を再取得（遷移はしない）
     } catch (error) {
       console.error("Failed to create room:", error);
     }
@@ -260,7 +261,7 @@ const StudioDetailPage = ({ params }: { params: { id: string } }) => {
           </Typography>
         ) : (
           <List>
-            {rooms.map((room, index) => (
+            {roomsWithSize.map((room, index) => (
               <React.Fragment key={room.id}>
                 {index > 0 && <Divider />}
                 <ListItem
@@ -286,7 +287,7 @@ const StudioDetailPage = ({ params }: { params: { id: string } }) => {
                           収容人数: {room.capacity}人
                         </Typography>
                         <Typography variant="body2">
-                          広さ: {room.size}㎡
+                          広さ: {room.size || 0}㎡
                         </Typography>
                         <Typography variant="body2">
                           料金: {room.price}円/時間

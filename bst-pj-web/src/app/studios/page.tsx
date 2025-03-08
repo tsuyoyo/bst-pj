@@ -20,11 +20,7 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
-import {
-  Add as AddIcon,
-  Edit as EditIcon,
-  MeetingRoom as MeetingRoomIcon,
-} from "@mui/icons-material";
+import { Add as AddIcon, Edit as EditIcon } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
@@ -70,12 +66,6 @@ const StudiosListPage = () => {
 
   const handlePrefectureChange = (event: SelectChangeEvent<number | "">) => {
     setSelectedPrefecture(event.target.value as number | "");
-  };
-
-  // ルーム管理ページへ移動
-  const handleManageRooms = (id: number, e: React.MouseEvent) => {
-    e.stopPropagation();
-    router.push(`/studios/${id}/rooms`);
   };
 
   // エリア名を取得する関数
@@ -181,14 +171,6 @@ const StudiosListPage = () => {
                   />
                   {user && (
                     <Box>
-                      <Button
-                        size="small"
-                        startIcon={<MeetingRoomIcon />}
-                        onClick={(e) => handleManageRooms(studio.id, e)}
-                        sx={{ mr: 1 }}
-                      >
-                        ルーム管理
-                      </Button>
                       <Button
                         size="small"
                         startIcon={<EditIcon />}
