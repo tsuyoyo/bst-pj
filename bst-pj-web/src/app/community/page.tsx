@@ -1,7 +1,13 @@
 "use client";
 
 import { Box, Typography, Container, Paper, Button, Grid } from "@mui/material";
-import { MusicNote, Group, LibraryMusic, Category } from "@mui/icons-material";
+import {
+  MusicNote,
+  Group,
+  LibraryMusic,
+  Category,
+  MeetingRoom,
+} from "@mui/icons-material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -143,6 +149,37 @@ const CommunityPage = () => {
               </Button>
             </Paper>
           </Grid>
+
+          <Grid item xs={12} sm={4}>
+            <Paper
+              elevation={1}
+              sx={{
+                p: 2,
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <MeetingRoom
+                sx={{ fontSize: 40, mb: 1, color: "primary.main" }}
+              />
+              <Typography variant="h6" align="center" gutterBottom>
+                スタジオ管理
+              </Typography>
+              <Typography variant="body2" align="center" paragraph>
+                スタジオの情報を閲覧・登録できます。
+              </Typography>
+              <Button
+                component={Link}
+                href="/community/studios"
+                variant="contained"
+                sx={{ mt: "auto" }}
+              >
+                スタジオ一覧を見る
+              </Button>
+            </Paper>
+          </Grid>
         </Grid>
 
         <Box sx={{ mt: 4 }}>
@@ -150,7 +187,6 @@ const CommunityPage = () => {
             今後追加される機能:
           </Typography>
           <ul>
-            <Typography component="li">スタジオ情報の閲覧と予約</Typography>
             <Typography component="li">音楽イベントのカレンダー</Typography>
             <Typography component="li">
               コミュニティメンバー同士の交流機能

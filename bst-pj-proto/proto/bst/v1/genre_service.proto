@@ -13,8 +13,7 @@ service GenreService {
   rpc UpdateGenre(UpdateGenreRequest) returns (UpdateGenreResponse);
 }
 
-message GetGenreRequest {
-}
+message GetGenreRequest {}
 
 message GetGenreResponse {
   Genre genre = 1;

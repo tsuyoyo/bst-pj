@@ -21,9 +21,11 @@ service StudioService {
 }
 
 message CreateStudioRequest {
-  string   name        = 1;
-  string   description = 2;
-  Location location    = 3;
+  string name            = 1;
+  string description     = 2;
+  string google_maps_url = 3;
+  string additional_info = 4;
+  int32  area_id         = 5;
 }
 
 message CreateStudioResponse {

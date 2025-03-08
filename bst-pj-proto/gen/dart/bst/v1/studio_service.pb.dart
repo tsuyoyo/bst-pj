@@ -20,7 +20,9 @@ class CreateStudioRequest extends $pb.GeneratedMessage {
   factory CreateStudioRequest({
     $core.String? name,
     $core.String? description,
-    $35.Location? location,
+    $core.String? googleMapsUrl,
+    $core.String? additionalInfo,
+    $core.int? areaId,
   }) {
     final $result = create();
     if (name != null) {
@@ -29,8 +31,14 @@ class CreateStudioRequest extends $pb.GeneratedMessage {
     if (description != null) {
       $result.description = description;
     }
-    if (location != null) {
-      $result.location = location;
+    if (googleMapsUrl != null) {
+      $result.googleMapsUrl = googleMapsUrl;
+    }
+    if (additionalInfo != null) {
+      $result.additionalInfo = additionalInfo;
+    }
+    if (areaId != null) {
+      $result.areaId = areaId;
     }
     return $result;
   }
@@ -41,7 +49,9 @@ class CreateStudioRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateStudioRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..aOS(2, _omitFieldNames ? '' : 'description')
-    ..aOM<$35.Location>(3, _omitFieldNames ? '' : 'location', subBuilder: $35.Location.create)
+    ..aOS(3, _omitFieldNames ? '' : 'googleMapsUrl')
+    ..aOS(4, _omitFieldNames ? '' : 'additionalInfo')
+    ..a<$core.int>(5, _omitFieldNames ? '' : 'areaId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -85,15 +95,31 @@ class CreateStudioRequest extends $pb.GeneratedMessage {
   void clearDescription() => clearField(2);
 
   @$pb.TagNumber(3)
-  $35.Location get location => $_getN(2);
+  $core.String get googleMapsUrl => $_getSZ(2);
   @$pb.TagNumber(3)
-  set location($35.Location v) { setField(3, v); }
+  set googleMapsUrl($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasLocation() => $_has(2);
+  $core.bool hasGoogleMapsUrl() => $_has(2);
   @$pb.TagNumber(3)
-  void clearLocation() => clearField(3);
-  @$pb.TagNumber(3)
-  $35.Location ensureLocation() => $_ensure(2);
+  void clearGoogleMapsUrl() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get additionalInfo => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set additionalInfo($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasAdditionalInfo() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearAdditionalInfo() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.int get areaId => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set areaId($core.int v) { $_setSignedInt32(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasAreaId() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearAreaId() => clearField(5);
 }
 
 class CreateStudioResponse extends $pb.GeneratedMessage {

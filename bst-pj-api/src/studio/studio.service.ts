@@ -53,8 +53,8 @@ export class StudioService {
 
   async listStudios(
     pageSize: number,
-    pageToken: string | null,
-    areaId?: number,
+    pageToken?: string | null,
+    areaId?: number | null,
   ): Promise<ListStudiosResponse> {
     const skip = pageToken ? parseInt(pageToken, 10) : 0;
     const take = pageSize || 10;

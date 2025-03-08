@@ -19,15 +19,18 @@ const CreateStudioRequest$json = {
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     {'1': 'description', '3': 2, '4': 1, '5': 9, '10': 'description'},
-    {'1': 'location', '3': 3, '4': 1, '5': 11, '6': '.bst.v1.Location', '10': 'location'},
+    {'1': 'google_maps_url', '3': 3, '4': 1, '5': 9, '10': 'googleMapsUrl'},
+    {'1': 'additional_info', '3': 4, '4': 1, '5': 9, '10': 'additionalInfo'},
+    {'1': 'area_id', '3': 5, '4': 1, '5': 5, '10': 'areaId'},
   ],
 };
 
 /// Descriptor for `CreateStudioRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createStudioRequestDescriptor = $convert.base64Decode(
     'ChNDcmVhdGVTdHVkaW9SZXF1ZXN0EhIKBG5hbWUYASABKAlSBG5hbWUSIAoLZGVzY3JpcHRpb2'
-    '4YAiABKAlSC2Rlc2NyaXB0aW9uEiwKCGxvY2F0aW9uGAMgASgLMhAuYnN0LnYxLkxvY2F0aW9u'
-    'Ughsb2NhdGlvbg==');
+    '4YAiABKAlSC2Rlc2NyaXB0aW9uEiYKD2dvb2dsZV9tYXBzX3VybBgDIAEoCVINZ29vZ2xlTWFw'
+    'c1VybBInCg9hZGRpdGlvbmFsX2luZm8YBCABKAlSDmFkZGl0aW9uYWxJbmZvEhcKB2FyZWFfaW'
+    'QYBSABKAVSBmFyZWFJZA==');
 
 @$core.Deprecated('Use createStudioResponseDescriptor instead')
 const CreateStudioResponse$json = {

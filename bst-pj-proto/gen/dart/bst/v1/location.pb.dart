@@ -234,7 +234,9 @@ class StudioReview extends $pb.GeneratedMessage {
 class Studio extends $pb.GeneratedMessage {
   factory Studio({
     $core.int? id,
-    Location? location,
+    $core.String? googleMapsUrl,
+    $core.String? additionalInfo,
+    $32.Area? area,
     $core.int? overallRating,
     $core.Iterable<StudioRoom>? rooms,
   }) {
@@ -242,8 +244,14 @@ class Studio extends $pb.GeneratedMessage {
     if (id != null) {
       $result.id = id;
     }
-    if (location != null) {
-      $result.location = location;
+    if (googleMapsUrl != null) {
+      $result.googleMapsUrl = googleMapsUrl;
+    }
+    if (additionalInfo != null) {
+      $result.additionalInfo = additionalInfo;
+    }
+    if (area != null) {
+      $result.area = area;
     }
     if (overallRating != null) {
       $result.overallRating = overallRating;
@@ -259,9 +267,11 @@ class Studio extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Studio', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
-    ..aOM<Location>(2, _omitFieldNames ? '' : 'location', subBuilder: Location.create)
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'overallRating', $pb.PbFieldType.O3)
-    ..pc<StudioRoom>(4, _omitFieldNames ? '' : 'rooms', $pb.PbFieldType.PM, subBuilder: StudioRoom.create)
+    ..aOS(2, _omitFieldNames ? '' : 'googleMapsUrl')
+    ..aOS(3, _omitFieldNames ? '' : 'additionalInfo')
+    ..aOM<$32.Area>(4, _omitFieldNames ? '' : 'area', subBuilder: $32.Area.create)
+    ..a<$core.int>(5, _omitFieldNames ? '' : 'overallRating', $pb.PbFieldType.O3)
+    ..pc<StudioRoom>(6, _omitFieldNames ? '' : 'rooms', $pb.PbFieldType.PM, subBuilder: StudioRoom.create)
     ..hasRequiredFields = false
   ;
 
@@ -296,27 +306,45 @@ class Studio extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  Location get location => $_getN(1);
+  $core.String get googleMapsUrl => $_getSZ(1);
   @$pb.TagNumber(2)
-  set location(Location v) { setField(2, v); }
+  set googleMapsUrl($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasLocation() => $_has(1);
+  $core.bool hasGoogleMapsUrl() => $_has(1);
   @$pb.TagNumber(2)
-  void clearLocation() => clearField(2);
-  @$pb.TagNumber(2)
-  Location ensureLocation() => $_ensure(1);
+  void clearGoogleMapsUrl() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.int get overallRating => $_getIZ(2);
+  $core.String get additionalInfo => $_getSZ(2);
   @$pb.TagNumber(3)
-  set overallRating($core.int v) { $_setSignedInt32(2, v); }
+  set additionalInfo($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasOverallRating() => $_has(2);
+  $core.bool hasAdditionalInfo() => $_has(2);
   @$pb.TagNumber(3)
-  void clearOverallRating() => clearField(3);
+  void clearAdditionalInfo() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.List<StudioRoom> get rooms => $_getList(3);
+  $32.Area get area => $_getN(3);
+  @$pb.TagNumber(4)
+  set area($32.Area v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasArea() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearArea() => clearField(4);
+  @$pb.TagNumber(4)
+  $32.Area ensureArea() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  $core.int get overallRating => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set overallRating($core.int v) { $_setSignedInt32(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasOverallRating() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearOverallRating() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.List<StudioRoom> get rooms => $_getList(5);
 }
 
 class StudioRoom extends $pb.GeneratedMessage {

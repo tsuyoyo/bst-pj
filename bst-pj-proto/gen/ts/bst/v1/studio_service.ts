@@ -14,7 +14,9 @@ export const protobufPackage = "bst.v1";
 export interface CreateStudioRequest {
   name: string;
   description: string;
-  location: Location | undefined;
+  googleMapsUrl: string;
+  additionalInfo: string;
+  areaId: number;
 }
 
 export interface CreateStudioResponse {
@@ -61,7 +63,7 @@ export interface DeleteStudioResponse {
 }
 
 function createBaseCreateStudioRequest(): CreateStudioRequest {
-  return { name: "", description: "", location: undefined };
+  return { name: "", description: "", googleMapsUrl: "", additionalInfo: "", areaId: 0 };
 }
 
 export const CreateStudioRequest = {
@@ -72,8 +74,14 @@ export const CreateStudioRequest = {
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    if (message.location !== undefined) {
-      Location.encode(message.location, writer.uint32(26).fork()).ldelim();
+    if (message.googleMapsUrl !== "") {
+      writer.uint32(26).string(message.googleMapsUrl);
+    }
+    if (message.additionalInfo !== "") {
+      writer.uint32(34).string(message.additionalInfo);
+    }
+    if (message.areaId !== 0) {
+      writer.uint32(40).int32(message.areaId);
     }
     return writer;
   },
@@ -104,7 +112,21 @@ export const CreateStudioRequest = {
             break;
           }
 
-          message.location = Location.decode(reader, reader.uint32());
+          message.googleMapsUrl = reader.string();
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.additionalInfo = reader.string();
+          continue;
+        case 5:
+          if (tag !== 40) {
+            break;
+          }
+
+          message.areaId = reader.int32();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -119,7 +141,9 @@ export const CreateStudioRequest = {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       description: isSet(object.description) ? globalThis.String(object.description) : "",
-      location: isSet(object.location) ? Location.fromJSON(object.location) : undefined,
+      googleMapsUrl: isSet(object.googleMapsUrl) ? globalThis.String(object.googleMapsUrl) : "",
+      additionalInfo: isSet(object.additionalInfo) ? globalThis.String(object.additionalInfo) : "",
+      areaId: isSet(object.areaId) ? globalThis.Number(object.areaId) : 0,
     };
   },
 
@@ -131,8 +155,14 @@ export const CreateStudioRequest = {
     if (message.description !== "") {
       obj.description = message.description;
     }
-    if (message.location !== undefined) {
-      obj.location = Location.toJSON(message.location);
+    if (message.googleMapsUrl !== "") {
+      obj.googleMapsUrl = message.googleMapsUrl;
+    }
+    if (message.additionalInfo !== "") {
+      obj.additionalInfo = message.additionalInfo;
+    }
+    if (message.areaId !== 0) {
+      obj.areaId = Math.round(message.areaId);
     }
     return obj;
   },
@@ -144,9 +174,9 @@ export const CreateStudioRequest = {
     const message = createBaseCreateStudioRequest();
     message.name = object.name ?? "";
     message.description = object.description ?? "";
-    message.location = (object.location !== undefined && object.location !== null)
-      ? Location.fromPartial(object.location)
-      : undefined;
+    message.googleMapsUrl = object.googleMapsUrl ?? "";
+    message.additionalInfo = object.additionalInfo ?? "";
+    message.areaId = object.areaId ?? 0;
     return message;
   },
 };

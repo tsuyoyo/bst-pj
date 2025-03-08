@@ -184,7 +184,9 @@ ENTITY(Studio) {
   + ID : Integer
   + Name : String
   + Description : String
-  + LocationID : Integer
+  + GoogleMapsURL : String
+  + AdditionalInfo : String
+  + AreaID : Integer
 }
 
 ENTITY(StudioReview) {
@@ -340,7 +342,6 @@ SongPerformance "1" -- "1" Song
 Song "1" -- "1" Artist
 Artist "1" -- "*" ArtistGenre
 ArtistGenre "1" -- "1" Genre
-Studio "1" -- "1" Location
 Studio "1" -- "*" StudioReview
 Studio "1" -- "*" StudioRoom
 StudioRoom "1" -- "*" StudioRoomInfo

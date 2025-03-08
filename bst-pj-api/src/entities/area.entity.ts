@@ -22,7 +22,4 @@ export class Area {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
-
-  @Column({ name: 'updated_user_id', type: 'integer', nullable: false })
-  updatedUserId: number;
 }

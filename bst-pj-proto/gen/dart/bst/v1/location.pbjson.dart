@@ -55,17 +55,20 @@ const Studio$json = {
   '1': 'Studio',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
-    {'1': 'location', '3': 2, '4': 1, '5': 11, '6': '.bst.v1.Location', '10': 'location'},
-    {'1': 'overall_rating', '3': 3, '4': 1, '5': 5, '10': 'overallRating'},
-    {'1': 'rooms', '3': 4, '4': 3, '5': 11, '6': '.bst.v1.StudioRoom', '10': 'rooms'},
+    {'1': 'google_maps_url', '3': 2, '4': 1, '5': 9, '10': 'googleMapsUrl'},
+    {'1': 'additional_info', '3': 3, '4': 1, '5': 9, '10': 'additionalInfo'},
+    {'1': 'area', '3': 4, '4': 1, '5': 11, '6': '.bst.v1.Area', '10': 'area'},
+    {'1': 'overall_rating', '3': 5, '4': 1, '5': 5, '10': 'overallRating'},
+    {'1': 'rooms', '3': 6, '4': 3, '5': 11, '6': '.bst.v1.StudioRoom', '10': 'rooms'},
   ],
 };
 
 /// Descriptor for `Studio`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List studioDescriptor = $convert.base64Decode(
-    'CgZTdHVkaW8SDgoCaWQYASABKAVSAmlkEiwKCGxvY2F0aW9uGAIgASgLMhAuYnN0LnYxLkxvY2'
-    'F0aW9uUghsb2NhdGlvbhIlCg5vdmVyYWxsX3JhdGluZxgDIAEoBVINb3ZlcmFsbFJhdGluZxIo'
-    'CgVyb29tcxgEIAMoCzISLmJzdC52MS5TdHVkaW9Sb29tUgVyb29tcw==');
+    'CgZTdHVkaW8SDgoCaWQYASABKAVSAmlkEiYKD2dvb2dsZV9tYXBzX3VybBgCIAEoCVINZ29vZ2'
+    'xlTWFwc1VybBInCg9hZGRpdGlvbmFsX2luZm8YAyABKAlSDmFkZGl0aW9uYWxJbmZvEiAKBGFy'
+    'ZWEYBCABKAsyDC5ic3QudjEuQXJlYVIEYXJlYRIlCg5vdmVyYWxsX3JhdGluZxgFIAEoBVINb3'
+    'ZlcmFsbFJhdGluZxIoCgVyb29tcxgGIAMoCzISLmJzdC52MS5TdHVkaW9Sb29tUgVyb29tcw==');
 
 @$core.Deprecated('Use studioRoomDescriptor instead')
 const StudioRoom$json = {

@@ -11,12 +11,15 @@ exports.up = (pgm) => {
       notNull: true,
     },
     description: { type: "text" },
-    location_id: {
+    google_maps_url: { type: "text" },
+    additional_info: { type: "text" },
+    area_id: {
       type: "integer",
       notNull: true,
-      references: "locations",
+      references: "areas",
       onDelete: "CASCADE",
     },
+
     created_at: {
       type: "timestamp",
       notNull: true,
@@ -123,7 +126,6 @@ exports.up = (pgm) => {
   });
 
   // Create indexes
-  pgm.createIndex("studios", ["location_id"]);
   pgm.createIndex("studio_rooms", ["studio_id"]);
   pgm.createIndex("studio_room_infos", ["studio_room_id"]);
   pgm.createIndex("studio_room_infos", ["type"]);
@@ -137,7 +139,6 @@ exports.down = (pgm) => {
   });
 
   // Drop indexes
-  pgm.dropIndex("studios", ["location_id"], { ifExists: true });
   pgm.dropIndex("studio_rooms", ["studio_id"], { ifExists: true });
   pgm.dropIndex("studio_room_infos", ["studio_room_id"], { ifExists: true });
   pgm.dropIndex("studio_room_infos", ["type"], { ifExists: true });

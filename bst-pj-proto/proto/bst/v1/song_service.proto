@@ -28,8 +28,8 @@ service SongService {
 }
 
 message CreateSongRequest {
-  string title       = 1;
-  int32  artist_id   = 2;
+  string title     = 1;
+  int32  artist_id = 2;
 }
 
 message CreateSongResponse {
@@ -58,9 +58,9 @@ message GetSongResponse {
 }
 
 message UpdateSongRequest {
-  int32  song_id     = 1;
-  string title       = 2;
-  int32  artist_id   = 3;
+  int32  song_id   = 1;
+  string title     = 2;
+  int32  artist_id = 3;
 }
 
 message UpdateSongResponse {

@@ -33,8 +33,10 @@ export interface StudioReview {
 
 export interface Studio {
   id: number;
-  location:
-    | Location
+  googleMapsUrl: string;
+  additionalInfo: string;
+  area:
+    | Area
     | undefined;
   /** Note: Rating logic is hidden in the backend */
   overallRating: number;
@@ -300,7 +302,7 @@ export const StudioReview = {
 };
 
 function createBaseStudio(): Studio {
-  return { id: 0, location: undefined, overallRating: 0, rooms: [] };
+  return { id: 0, googleMapsUrl: "", additionalInfo: "", area: undefined, overallRating: 0, rooms: [] };
 }
 
 export const Studio = {
@@ -308,14 +310,20 @@ export const Studio = {
     if (message.id !== 0) {
       writer.uint32(8).int32(message.id);
     }
-    if (message.location !== undefined) {
-      Location.encode(message.location, writer.uint32(18).fork()).ldelim();
+    if (message.googleMapsUrl !== "") {
+      writer.uint32(18).string(message.googleMapsUrl);
+    }
+    if (message.additionalInfo !== "") {
+      writer.uint32(26).string(message.additionalInfo);
+    }
+    if (message.area !== undefined) {
+      Area.encode(message.area, writer.uint32(34).fork()).ldelim();
     }
     if (message.overallRating !== 0) {
-      writer.uint32(24).int32(message.overallRating);
+      writer.uint32(40).int32(message.overallRating);
     }
     for (const v of message.rooms) {
-      StudioRoom.encode(v!, writer.uint32(34).fork()).ldelim();
+      StudioRoom.encode(v!, writer.uint32(50).fork()).ldelim();
     }
     return writer;
   },
@@ -339,17 +347,31 @@ export const Studio = {
             break;
           }
 
-          message.location = Location.decode(reader, reader.uint32());
+          message.googleMapsUrl = reader.string();
           continue;
         case 3:
-          if (tag !== 24) {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.additionalInfo = reader.string();
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.area = Area.decode(reader, reader.uint32());
+          continue;
+        case 5:
+          if (tag !== 40) {
             break;
           }
 
           message.overallRating = reader.int32();
           continue;
-        case 4:
-          if (tag !== 34) {
+        case 6:
+          if (tag !== 50) {
             break;
           }
 
@@ -367,7 +389,9 @@ export const Studio = {
   fromJSON(object: any): Studio {
     return {
       id: isSet(object.id) ? globalThis.Number(object.id) : 0,
-      location: isSet(object.location) ? Location.fromJSON(object.location) : undefined,
+      googleMapsUrl: isSet(object.googleMapsUrl) ? globalThis.String(object.googleMapsUrl) : "",
+      additionalInfo: isSet(object.additionalInfo) ? globalThis.String(object.additionalInfo) : "",
+      area: isSet(object.area) ? Area.fromJSON(object.area) : undefined,
       overallRating: isSet(object.overallRating) ? globalThis.Number(object.overallRating) : 0,
       rooms: globalThis.Array.isArray(object?.rooms) ? object.rooms.map((e: any) => StudioRoom.fromJSON(e)) : [],
     };
@@ -378,8 +402,14 @@ export const Studio = {
     if (message.id !== 0) {
       obj.id = Math.round(message.id);
     }
-    if (message.location !== undefined) {
-      obj.location = Location.toJSON(message.location);
+    if (message.googleMapsUrl !== "") {
+      obj.googleMapsUrl = message.googleMapsUrl;
+    }
+    if (message.additionalInfo !== "") {
+      obj.additionalInfo = message.additionalInfo;
+    }
+    if (message.area !== undefined) {
+      obj.area = Area.toJSON(message.area);
     }
     if (message.overallRating !== 0) {
       obj.overallRating = Math.round(message.overallRating);
@@ -396,9 +426,9 @@ export const Studio = {
   fromPartial<I extends Exact<DeepPartial<Studio>, I>>(object: I): Studio {
     const message = createBaseStudio();
     message.id = object.id ?? 0;
-    message.location = (object.location !== undefined && object.location !== null)
-      ? Location.fromPartial(object.location)
-      : undefined;
+    message.googleMapsUrl = object.googleMapsUrl ?? "";
+    message.additionalInfo = object.additionalInfo ?? "";
+    message.area = (object.area !== undefined && object.area !== null) ? Area.fromPartial(object.area) : undefined;
     message.overallRating = object.overallRating ?? 0;
     message.rooms = object.rooms?.map((e) => StudioRoom.fromPartial(e)) || [];
     return message;

@@ -23,6 +23,7 @@ import {
 } from '../proto/bst/v1/studio_service';
 import { CurrentUser } from '../auth/user.decorator';
 import { User } from '../entities/user.entity';
+import { ListStudiosDto } from './dto/list-studio.dto';
 
 @Controller('studios')
 export class StudioController {
@@ -44,9 +45,10 @@ export class StudioController {
 
   @Get()
   async listStudios(
-    @Query('pageSize', new ParseIntPipe()) pageSize: number = 10,
+    // @Query() query: ListStudiosDto,
+    @Query('pageSize') pageSize: number = 10,
     @Query('pageToken') pageToken: string | null = null,
-    @Query('areaId', new ParseIntPipe()) areaId?: number,
+    @Query('areaId') areaId: number | null = null,
   ): Promise<ListStudiosResponse> {
     return this.studioService.listStudios(pageSize, pageToken, areaId);
   }
