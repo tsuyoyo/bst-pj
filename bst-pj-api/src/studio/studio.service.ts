@@ -5,6 +5,7 @@ import { Studio } from '../entities/studio.entity';
 import { Area } from '../entities/area.entity';
 import { CreateStudioDto } from './dto/create-studio.dto';
 import { UpdateStudioDto } from './dto/update-studio.dto';
+import { Studio as ProtoStudio } from '../proto/bst/v1/location';
 
 @Injectable()
 export class StudioService {
@@ -105,7 +106,7 @@ export class StudioService {
     };
   }
 
-  async getStudio(id: number): Promise<{ studio: any }> {
+  async getStudio(id: number): Promise<{ studio: ProtoStudio }> {
     const studio = await this.studioRepository.findOne({
       where: { id },
     });

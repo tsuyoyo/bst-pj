@@ -38,6 +38,7 @@ export class StudioRoomService {
       capacity: studioRoom.capacity,
       price: studioRoom.price,
       infos: studioRoom.infos,
+      size: studioRoom.size,
     };
   }
 
