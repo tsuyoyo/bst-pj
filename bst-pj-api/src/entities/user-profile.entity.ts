@@ -21,8 +21,8 @@ export class UserProfile {
   @Column({ type: 'text', nullable: true })
   bio: string;
 
-  @Column({ name: 'area_id', type: 'integer', nullable: true })
-  areaId: number;
+  @Column({ name: 'prefecture_id', type: 'integer', nullable: true })
+  prefectureId: number;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
@@ -35,6 +35,6 @@ export class UserProfile {
   user: User;
 
   @ManyToOne(() => Area, { onDelete: 'SET NULL' })
-  @JoinColumn({ name: 'area_id' })
+  @JoinColumn({ name: 'prefecture_id' })
   area: Area;
 }

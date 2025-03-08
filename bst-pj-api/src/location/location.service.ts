@@ -33,7 +33,7 @@ export class LocationService {
   async listLocations(
     pageSize: number,
     pageToken?: string,
-    areaId?: number,
+    prefectureId?: number,
   ): Promise<{
     locations: Location[];
     nextPageToken: string | null;
@@ -43,8 +43,8 @@ export class LocationService {
       .createQueryBuilder('location')
       .leftJoinAndSelect('location.area', 'area');
 
-    if (areaId) {
-      query.where('location.areaId = :areaId', { areaId });
+    if (prefectureId) {
+      query.where('location.prefectureId = :prefectureId', { prefectureId });
     }
 
     const [locations, totalSize] = await query

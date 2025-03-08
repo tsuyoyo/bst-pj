@@ -22,7 +22,7 @@ export class UserProfileService {
   private mapProfileToProto(profile: UserProfile) {
     return {
       bio: profile.bio || '',
-      areaId: profile.areaId || 0,
+      areaId: profile.prefectureId || 0,
     };
   }
 

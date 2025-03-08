@@ -15,5 +15,5 @@ export class ListLocationsDto implements Partial<ListLocationsRequest> {
   @IsOptional()
   @IsNumber()
   @Transform(({ value }) => parseInt(value, 10))
-  areaId?: number;
+  prefectureId?: number;
 }

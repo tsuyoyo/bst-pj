@@ -40,11 +40,11 @@ export class LocationController {
 
   @Get()
   async listLocations(@Query() query: ListLocationsDto) {
-    const { pageSize = 10, pageToken, areaId } = query;
+    const { pageSize = 10, pageToken, prefectureId } = query;
     const result = await this.locationService.listLocations(
       pageSize,
       pageToken,
-      areaId,
+      prefectureId,
     );
     return {
       locations: result.locations,

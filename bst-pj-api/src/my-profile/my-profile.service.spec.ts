@@ -53,7 +53,7 @@ describe('MyProfileService', () => {
     id: 1,
     userId: 1,
     bio: 'Test Bio',
-    areaId: 1,
+    prefectureId: 1,
     createdAt: new Date(),
     updatedAt: new Date(),
     user: mockUser,

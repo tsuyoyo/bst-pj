@@ -182,7 +182,7 @@ export class MyProfileService {
       );
     }
 
-    userProfile.areaId = areaId;
+    userProfile.prefectureId = areaId;
     await this.userProfileRepository.save(userProfile);
 
     const updatedProfile = await this.userProfileService.getUserProfile(userId);

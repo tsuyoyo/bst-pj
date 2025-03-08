@@ -26,22 +26,6 @@ describe('StudioController', () => {
     createdAt: new Date(),
     updatedAt: new Date(),
   };
-
-  const mockStudioResponse = {
-    studio: {
-      id: 1,
-      area: {
-        id: 1,
-        name: 'Test Area',
-        prefectureId: 1,
-      },
-      googleMapsUrl: 'https://maps.google.com',
-      additionalInfo: 'Additional Info',
-      overallRating: 0,
-      rooms: [],
-    },
-  };
-
   const mockStudioService = {
     createStudio: jest.fn(),
     listStudios: jest.fn(),

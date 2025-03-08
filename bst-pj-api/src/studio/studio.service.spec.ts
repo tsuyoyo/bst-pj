@@ -217,7 +217,7 @@ describe('StudioService', () => {
     };
 
     it('should return a list of studios', () => listStudiosTest());
-    it('should filter by area when areaId is provided', () =>
+    it('should filter by area when prefectureId is provided', () =>
       listStudiosWithAreaTest());
   });
 
