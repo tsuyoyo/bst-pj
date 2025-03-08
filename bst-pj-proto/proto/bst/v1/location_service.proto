@@ -24,7 +24,7 @@ message CreateLocationRequest {
   string name            = 1;
   string google_maps_url = 2;
   string additional_info = 3;
-  int32  area_id         = 4;
+  int32  prefecture_id   = 4;
 }
 
 message CreateLocationResponse {
@@ -56,7 +56,7 @@ message UpdateLocationRequest {
   optional string name            = 2;
   optional string google_maps_url = 3;
   optional string additional_info = 4;
-  optional int32  area_id         = 5;
+  optional int32  prefecture_id   = 5;
 }
 
 message UpdateLocationResponse {

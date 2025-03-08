@@ -32,23 +32,28 @@ const CommunityPage = () => {
         </Typography>
 
         <Grid container spacing={3} sx={{ mt: 2 }}>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <Paper
-              elevation={1}
+              elevation={3}
               sx={{
                 p: 2,
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
               }}
             >
-              <MusicNote sx={{ fontSize: 40, mb: 1, color: "primary.main" }} />
-              <Typography variant="h6" align="center" gutterBottom>
-                パート管理
-              </Typography>
-              <Typography variant="body2" align="center" paragraph>
-                演奏パートや楽器の情報を閲覧・登録できます。
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  mb: 2,
+                }}
+              >
+                <MusicNote sx={{ mr: 1, color: "primary.main" }} />
+                <Typography variant="h6">パート</Typography>
+              </Box>
+              <Typography variant="body2" sx={{ mb: 2, flexGrow: 1 }}>
+                楽器やボーカルなどのパート情報を管理します。
               </Typography>
               <Button
                 component={Link}
@@ -61,52 +66,28 @@ const CommunityPage = () => {
             </Paper>
           </Grid>
 
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <Paper
-              elevation={1}
+              elevation={3}
               sx={{
                 p: 2,
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
               }}
             >
-              <Category sx={{ fontSize: 40, mb: 1, color: "primary.main" }} />
-              <Typography variant="h6" align="center" gutterBottom>
-                ジャンル管理
-              </Typography>
-              <Typography variant="body2" align="center" paragraph>
-                音楽ジャンルの情報を閲覧・登録できます。
-              </Typography>
-              <Button
-                component={Link}
-                href="/community/genres"
-                variant="contained"
-                sx={{ mt: "auto" }}
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  mb: 2,
+                }}
               >
-                ジャンル一覧を見る
-              </Button>
-            </Paper>
-          </Grid>
-
-          <Grid item xs={12} sm={4}>
-            <Paper
-              elevation={1}
-              sx={{
-                p: 2,
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <Group sx={{ fontSize: 40, mb: 1, color: "primary.main" }} />
-              <Typography variant="h6" align="center" gutterBottom>
-                アーティスト管理
-              </Typography>
-              <Typography variant="body2" align="center" paragraph>
-                アーティストの情報を閲覧・登録できます。
+                <Group sx={{ mr: 1, color: "primary.main" }} />
+                <Typography variant="h6">アーティスト</Typography>
+              </Box>
+              <Typography variant="body2" sx={{ mb: 2, flexGrow: 1 }}>
+                アーティスト情報を管理します。
               </Typography>
               <Button
                 component={Link}
@@ -119,25 +100,28 @@ const CommunityPage = () => {
             </Paper>
           </Grid>
 
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <Paper
-              elevation={1}
+              elevation={3}
               sx={{
                 p: 2,
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
               }}
             >
-              <LibraryMusic
-                sx={{ fontSize: 40, mb: 1, color: "primary.main" }}
-              />
-              <Typography variant="h6" align="center" gutterBottom>
-                曲管理
-              </Typography>
-              <Typography variant="body2" align="center" paragraph>
-                曲の情報を閲覧・登録できます。
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  mb: 2,
+                }}
+              >
+                <LibraryMusic sx={{ mr: 1, color: "primary.main" }} />
+                <Typography variant="h6">曲</Typography>
+              </Box>
+              <Typography variant="body2" sx={{ mb: 2, flexGrow: 1 }}>
+                曲情報を管理します。
               </Typography>
               <Button
                 component={Link}
@@ -150,29 +134,66 @@ const CommunityPage = () => {
             </Paper>
           </Grid>
 
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <Paper
-              elevation={1}
+              elevation={3}
               sx={{
                 p: 2,
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
               }}
             >
-              <MeetingRoom
-                sx={{ fontSize: 40, mb: 1, color: "primary.main" }}
-              />
-              <Typography variant="h6" align="center" gutterBottom>
-                スタジオ管理
-              </Typography>
-              <Typography variant="body2" align="center" paragraph>
-                スタジオの情報を閲覧・登録できます。
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  mb: 2,
+                }}
+              >
+                <Category sx={{ mr: 1, color: "primary.main" }} />
+                <Typography variant="h6">ジャンル</Typography>
+              </Box>
+              <Typography variant="body2" sx={{ mb: 2, flexGrow: 1 }}>
+                音楽ジャンル情報を管理します。
               </Typography>
               <Button
                 component={Link}
-                href="/community/studios"
+                href="/community/genres"
+                variant="contained"
+                sx={{ mt: "auto" }}
+              >
+                ジャンル一覧を見る
+              </Button>
+            </Paper>
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={4}>
+            <Paper
+              elevation={3}
+              sx={{
+                p: 2,
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  mb: 2,
+                }}
+              >
+                <MeetingRoom sx={{ mr: 1, color: "primary.main" }} />
+                <Typography variant="h6">スタジオ</Typography>
+              </Box>
+              <Typography variant="body2" sx={{ mb: 2, flexGrow: 1 }}>
+                練習スタジオ情報を管理します。
+              </Typography>
+              <Button
+                component={Link}
+                href="/studios"
                 variant="contained"
                 sx={{ mt: "auto" }}
               >

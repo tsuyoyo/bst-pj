@@ -28,11 +28,13 @@ message StudioReview {
 
 message Studio {
   int32  id                 = 1;
-  string google_maps_url    = 2;
-  string additional_info    = 3;
-  Area   area               = 4;
-  int32  overall_rating     = 5;  // Note: Rating logic is hidden in the backend
-  repeated StudioRoom rooms = 6;
+  string name               = 2;
+  string description        = 3;
+  string google_maps_url    = 4;
+  string additional_info    = 5;
+  Area   area               = 6;
+  int32  overall_rating     = 7;  // Note: Rating logic is hidden in the backend
+  repeated StudioRoom rooms = 8;
 }
 
 message StudioRoom {

@@ -21,7 +21,7 @@ class CreateLocationRequest extends $pb.GeneratedMessage {
     $core.String? name,
     $core.String? googleMapsUrl,
     $core.String? additionalInfo,
-    $core.int? areaId,
+    $core.int? prefectureId,
   }) {
     final $result = create();
     if (name != null) {
@@ -33,8 +33,8 @@ class CreateLocationRequest extends $pb.GeneratedMessage {
     if (additionalInfo != null) {
       $result.additionalInfo = additionalInfo;
     }
-    if (areaId != null) {
-      $result.areaId = areaId;
+    if (prefectureId != null) {
+      $result.prefectureId = prefectureId;
     }
     return $result;
   }
@@ -46,7 +46,7 @@ class CreateLocationRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..aOS(2, _omitFieldNames ? '' : 'googleMapsUrl')
     ..aOS(3, _omitFieldNames ? '' : 'additionalInfo')
-    ..a<$core.int>(4, _omitFieldNames ? '' : 'areaId', $pb.PbFieldType.O3)
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'prefectureId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -99,13 +99,13 @@ class CreateLocationRequest extends $pb.GeneratedMessage {
   void clearAdditionalInfo() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.int get areaId => $_getIZ(3);
+  $core.int get prefectureId => $_getIZ(3);
   @$pb.TagNumber(4)
-  set areaId($core.int v) { $_setSignedInt32(3, v); }
+  set prefectureId($core.int v) { $_setSignedInt32(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasAreaId() => $_has(3);
+  $core.bool hasPrefectureId() => $_has(3);
   @$pb.TagNumber(4)
-  void clearAreaId() => clearField(4);
+  void clearPrefectureId() => clearField(4);
 }
 
 class CreateLocationResponse extends $pb.GeneratedMessage {
@@ -420,7 +420,7 @@ class UpdateLocationRequest extends $pb.GeneratedMessage {
     $core.String? name,
     $core.String? googleMapsUrl,
     $core.String? additionalInfo,
-    $core.int? areaId,
+    $core.int? prefectureId,
   }) {
     final $result = create();
     if (locationId != null) {
@@ -435,8 +435,8 @@ class UpdateLocationRequest extends $pb.GeneratedMessage {
     if (additionalInfo != null) {
       $result.additionalInfo = additionalInfo;
     }
-    if (areaId != null) {
-      $result.areaId = areaId;
+    if (prefectureId != null) {
+      $result.prefectureId = prefectureId;
     }
     return $result;
   }
@@ -449,7 +449,7 @@ class UpdateLocationRequest extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'googleMapsUrl')
     ..aOS(4, _omitFieldNames ? '' : 'additionalInfo')
-    ..a<$core.int>(5, _omitFieldNames ? '' : 'areaId', $pb.PbFieldType.O3)
+    ..a<$core.int>(5, _omitFieldNames ? '' : 'prefectureId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -511,13 +511,13 @@ class UpdateLocationRequest extends $pb.GeneratedMessage {
   void clearAdditionalInfo() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.int get areaId => $_getIZ(4);
+  $core.int get prefectureId => $_getIZ(4);
   @$pb.TagNumber(5)
-  set areaId($core.int v) { $_setSignedInt32(4, v); }
+  set prefectureId($core.int v) { $_setSignedInt32(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasAreaId() => $_has(4);
+  $core.bool hasPrefectureId() => $_has(4);
   @$pb.TagNumber(5)
-  void clearAreaId() => clearField(5);
+  void clearPrefectureId() => clearField(5);
 }
 
 class UpdateLocationResponse extends $pb.GeneratedMessage {

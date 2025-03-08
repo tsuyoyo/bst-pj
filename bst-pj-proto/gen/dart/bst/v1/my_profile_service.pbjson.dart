@@ -105,13 +105,14 @@ final $typed_data.Uint8List updateUserPartsRequestDescriptor = $convert.base64De
 const UpdateUserAreaRequest$json = {
   '1': 'UpdateUserAreaRequest',
   '2': [
-    {'1': 'area_id', '3': 1, '4': 1, '5': 5, '10': 'areaId'},
+    {'1': 'prefecture_id', '3': 1, '4': 1, '5': 5, '10': 'prefectureId'},
   ],
 };
 
 /// Descriptor for `UpdateUserAreaRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateUserAreaRequestDescriptor = $convert.base64Decode(
-    'ChVVcGRhdGVVc2VyQXJlYVJlcXVlc3QSFwoHYXJlYV9pZBgBIAEoBVIGYXJlYUlk');
+    'ChVVcGRhdGVVc2VyQXJlYVJlcXVlc3QSIwoNcHJlZmVjdHVyZV9pZBgBIAEoBVIMcHJlZmVjdH'
+    'VyZUlk');
 
 @$core.Deprecated('Use updateResponseDescriptor instead')
 const UpdateResponse$json = {

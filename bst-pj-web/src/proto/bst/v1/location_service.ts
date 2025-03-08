@@ -15,7 +15,7 @@ export interface CreateLocationRequest {
   name: string;
   googleMapsUrl: string;
   additionalInfo: string;
-  areaId: number;
+  prefectureId: number;
 }
 
 export interface CreateLocationResponse {
@@ -47,7 +47,7 @@ export interface UpdateLocationRequest {
   name?: string | undefined;
   googleMapsUrl?: string | undefined;
   additionalInfo?: string | undefined;
-  areaId?: number | undefined;
+  prefectureId?: number | undefined;
 }
 
 export interface UpdateLocationResponse {
@@ -63,7 +63,7 @@ export interface DeleteLocationResponse {
 }
 
 function createBaseCreateLocationRequest(): CreateLocationRequest {
-  return { name: "", googleMapsUrl: "", additionalInfo: "", areaId: 0 };
+  return { name: "", googleMapsUrl: "", additionalInfo: "", prefectureId: 0 };
 }
 
 export const CreateLocationRequest = {
@@ -77,8 +77,8 @@ export const CreateLocationRequest = {
     if (message.additionalInfo !== "") {
       writer.uint32(26).string(message.additionalInfo);
     }
-    if (message.areaId !== 0) {
-      writer.uint32(32).int32(message.areaId);
+    if (message.prefectureId !== 0) {
+      writer.uint32(32).int32(message.prefectureId);
     }
     return writer;
   },
@@ -116,7 +116,7 @@ export const CreateLocationRequest = {
             break;
           }
 
-          message.areaId = reader.int32();
+          message.prefectureId = reader.int32();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -132,7 +132,7 @@ export const CreateLocationRequest = {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       googleMapsUrl: isSet(object.googleMapsUrl) ? globalThis.String(object.googleMapsUrl) : "",
       additionalInfo: isSet(object.additionalInfo) ? globalThis.String(object.additionalInfo) : "",
-      areaId: isSet(object.areaId) ? globalThis.Number(object.areaId) : 0,
+      prefectureId: isSet(object.prefectureId) ? globalThis.Number(object.prefectureId) : 0,
     };
   },
 
@@ -147,8 +147,8 @@ export const CreateLocationRequest = {
     if (message.additionalInfo !== "") {
       obj.additionalInfo = message.additionalInfo;
     }
-    if (message.areaId !== 0) {
-      obj.areaId = Math.round(message.areaId);
+    if (message.prefectureId !== 0) {
+      obj.prefectureId = Math.round(message.prefectureId);
     }
     return obj;
   },
@@ -161,7 +161,7 @@ export const CreateLocationRequest = {
     message.name = object.name ?? "";
     message.googleMapsUrl = object.googleMapsUrl ?? "";
     message.additionalInfo = object.additionalInfo ?? "";
-    message.areaId = object.areaId ?? 0;
+    message.prefectureId = object.prefectureId ?? 0;
     return message;
   },
 };
@@ -522,7 +522,13 @@ export const GetLocationResponse = {
 };
 
 function createBaseUpdateLocationRequest(): UpdateLocationRequest {
-  return { locationId: 0, name: undefined, googleMapsUrl: undefined, additionalInfo: undefined, areaId: undefined };
+  return {
+    locationId: 0,
+    name: undefined,
+    googleMapsUrl: undefined,
+    additionalInfo: undefined,
+    prefectureId: undefined,
+  };
 }
 
 export const UpdateLocationRequest = {
@@ -539,8 +545,8 @@ export const UpdateLocationRequest = {
     if (message.additionalInfo !== undefined) {
       writer.uint32(34).string(message.additionalInfo);
     }
-    if (message.areaId !== undefined) {
-      writer.uint32(40).int32(message.areaId);
+    if (message.prefectureId !== undefined) {
+      writer.uint32(40).int32(message.prefectureId);
     }
     return writer;
   },
@@ -585,7 +591,7 @@ export const UpdateLocationRequest = {
             break;
           }
 
-          message.areaId = reader.int32();
+          message.prefectureId = reader.int32();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -602,7 +608,7 @@ export const UpdateLocationRequest = {
       name: isSet(object.name) ? globalThis.String(object.name) : undefined,
       googleMapsUrl: isSet(object.googleMapsUrl) ? globalThis.String(object.googleMapsUrl) : undefined,
       additionalInfo: isSet(object.additionalInfo) ? globalThis.String(object.additionalInfo) : undefined,
-      areaId: isSet(object.areaId) ? globalThis.Number(object.areaId) : undefined,
+      prefectureId: isSet(object.prefectureId) ? globalThis.Number(object.prefectureId) : undefined,
     };
   },
 
@@ -620,8 +626,8 @@ export const UpdateLocationRequest = {
     if (message.additionalInfo !== undefined) {
       obj.additionalInfo = message.additionalInfo;
     }
-    if (message.areaId !== undefined) {
-      obj.areaId = Math.round(message.areaId);
+    if (message.prefectureId !== undefined) {
+      obj.prefectureId = Math.round(message.prefectureId);
     }
     return obj;
   },
@@ -635,7 +641,7 @@ export const UpdateLocationRequest = {
     message.name = object.name ?? undefined;
     message.googleMapsUrl = object.googleMapsUrl ?? undefined;
     message.additionalInfo = object.additionalInfo ?? undefined;
-    message.areaId = object.areaId ?? undefined;
+    message.prefectureId = object.prefectureId ?? undefined;
     return message;
   },
 };

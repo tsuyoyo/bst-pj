@@ -25,7 +25,7 @@ message CreateStudioRequest {
   string description     = 2;
   string google_maps_url = 3;
   string additional_info = 4;
-  int32  area_id         = 5;
+  int32  prefecture_id   = 5;
 }
 
 message CreateStudioResponse {
@@ -58,7 +58,7 @@ message UpdateStudioRequest {
   optional string description     = 3;
   optional string google_maps_url = 4;
   optional string additional_info = 5;
-  optional int32  area_id         = 6;
+  optional int32  prefecture_id   = 6;
 }
 
 message UpdateStudioResponse {

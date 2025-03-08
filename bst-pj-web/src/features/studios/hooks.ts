@@ -13,11 +13,11 @@ import { Area } from "@/proto/bst/v1/area";
 export const useStudios = (
   pageSize?: number,
   pageToken?: string,
-  area?: Area
+  prefectureId?: number
 ) => {
   return useQuery({
-    queryKey: ["studios", { pageSize, pageToken, area }],
-    queryFn: () => fetchStudios(pageSize, pageToken, area),
+    queryKey: ["studios", { pageSize, pageToken, prefectureId }],
+    queryFn: () => fetchStudios(pageSize, pageToken, prefectureId),
   });
 };
 
@@ -40,7 +40,7 @@ export const useCreateStudio = () => {
       description: string;
       googleMapsUrl: string;
       additionalInfo: string;
-      areaId: number;
+      prefectureId: number;
     }) => createStudio(studioData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["studios"] });
@@ -58,7 +58,7 @@ export const useUpdateStudio = (id: string | number) => {
       description?: string;
       googleMapsUrl?: string;
       additionalInfo?: string;
-      areaId?: number;
+      prefectureId?: number;
     }) => updateStudio(id, studioData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["studios"] });

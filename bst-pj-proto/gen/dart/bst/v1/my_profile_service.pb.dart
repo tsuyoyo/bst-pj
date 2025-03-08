@@ -365,11 +365,11 @@ class UpdateUserPartsRequest extends $pb.GeneratedMessage {
 
 class UpdateUserAreaRequest extends $pb.GeneratedMessage {
   factory UpdateUserAreaRequest({
-    $core.int? areaId,
+    $core.int? prefectureId,
   }) {
     final $result = create();
-    if (areaId != null) {
-      $result.areaId = areaId;
+    if (prefectureId != null) {
+      $result.prefectureId = prefectureId;
     }
     return $result;
   }
@@ -378,7 +378,7 @@ class UpdateUserAreaRequest extends $pb.GeneratedMessage {
   factory UpdateUserAreaRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateUserAreaRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'areaId', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'prefectureId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -404,13 +404,13 @@ class UpdateUserAreaRequest extends $pb.GeneratedMessage {
   static UpdateUserAreaRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get areaId => $_getIZ(0);
+  $core.int get prefectureId => $_getIZ(0);
   @$pb.TagNumber(1)
-  set areaId($core.int v) { $_setSignedInt32(0, v); }
+  set prefectureId($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasAreaId() => $_has(0);
+  $core.bool hasPrefectureId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearAreaId() => clearField(1);
+  void clearPrefectureId() => clearField(1);
 }
 
 class UpdateResponse extends $pb.GeneratedMessage {

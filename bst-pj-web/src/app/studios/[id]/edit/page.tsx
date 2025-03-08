@@ -22,6 +22,7 @@ import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { useStudio, useUpdateStudio } from "@/features/studios/hooks";
+import { useAreas } from "@/features/areas/hooks";
 
 const EditStudioPage = ({ params }: { params: { id: string } }) => {
   const { id } = React.use(params as unknown as Usable<{ id: string }>);
@@ -31,7 +32,7 @@ const EditStudioPage = ({ params }: { params: { id: string } }) => {
   const [description, setDescription] = useState("");
   const [googleMapsUrl, setGoogleMapsUrl] = useState("");
   const [additionalInfo, setAdditionalInfo] = useState("");
-  const [areaId, setAreaId] = useState<number | "">("");
+  const [prefectureId, setPrefectureId] = useState<number | "">("");
   const [error, setError] = useState<string | null>(null);
   const { user } = useSelector((state: RootState) => state.auth);
 
@@ -43,10 +44,18 @@ const EditStudioPage = ({ params }: { params: { id: string } }) => {
   } = useStudio(id);
   const updateStudioMutation = useUpdateStudio(id);
 
+  // エリア情報を取得
+  const {
+    data: areasData,
+    isLoading: isAreasLoading,
+    error: areasError,
+  } = useAreas();
+  const areas = areasData?.areas || [];
+
   // ログインチェック
   useEffect(() => {
     if (!user) {
-      router.push(`/login?redirect=/community/studios/${id}/edit`);
+      router.push(`/login?redirect=/studios/${id}/edit`);
     }
   }, [user, router, id]);
 
@@ -57,7 +66,7 @@ const EditStudioPage = ({ params }: { params: { id: string } }) => {
       setDescription(studioData.studio.description || "");
       setGoogleMapsUrl(studioData.studio.googleMapsUrl || "");
       setAdditionalInfo(studioData.studio.additionalInfo || "");
-      setAreaId(studioData.studio.areaId || "");
+      setPrefectureId(studioData.studio.area.prefectureId || "");
     }
   }, [studioData]);
 
@@ -70,7 +79,7 @@ const EditStudioPage = ({ params }: { params: { id: string } }) => {
       return;
     }
 
-    if (!areaId) {
+    if (!prefectureId) {
       setError("エリアを選択してください。");
       return;
     }
@@ -81,9 +90,9 @@ const EditStudioPage = ({ params }: { params: { id: string } }) => {
         description,
         googleMapsUrl,
         additionalInfo,
-        areaId: Number(areaId),
+        prefectureId,
       });
-      router.push(`/community/studios/${id}`);
+      router.push(`/studios/${id}`);
     } catch (err) {
       console.error("Failed to update studio", err);
       setError("スタジオの更新に失敗しました。後でもう一度お試しください。");
@@ -91,18 +100,18 @@ const EditStudioPage = ({ params }: { params: { id: string } }) => {
   };
 
   const handleCancel = () => {
-    router.push(`/community/studios/${id}`);
+    router.push(`/studios/${id}`);
   };
 
   const handleAreaChange = (event: SelectChangeEvent<number | "">) => {
-    setAreaId(event.target.value as number | "");
+    setPrefectureId(event.target.value as number | "");
   };
 
   if (isStudioLoading) {
     return (
       <Container className="page-container">
         <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
-          <CircularProgress />
+          <CircularProgress size={40} />
         </Box>
       </Container>
     );
@@ -114,10 +123,7 @@ const EditStudioPage = ({ params }: { params: { id: string } }) => {
         <Alert severity="error">
           スタジオの取得に失敗しました。後でもう一度お試しください。
         </Alert>
-        <Button
-          sx={{ mt: 2 }}
-          onClick={() => router.push("/community/studios")}
-        >
+        <Button sx={{ mt: 2 }} onClick={() => router.push("/studios")}>
           一覧に戻る
         </Button>
       </Container>
@@ -128,7 +134,7 @@ const EditStudioPage = ({ params }: { params: { id: string } }) => {
     <Container className="page-container">
       <Paper elevation={2} sx={{ p: 3, mt: 2 }}>
         <Typography variant="h4" component="h1" gutterBottom>
-          スタジオ編集
+          スタジオ情報編集
         </Typography>
 
         {error && (
@@ -137,7 +143,7 @@ const EditStudioPage = ({ params }: { params: { id: string } }) => {
           </Alert>
         )}
 
-        <Box component="form" onSubmit={handleSubmit}>
+        <Box component="form" onSubmit={handleSubmit} noValidate>
           <TextField
             label="スタジオ名"
             fullWidth
@@ -153,7 +159,7 @@ const EditStudioPage = ({ params }: { params: { id: string } }) => {
             fullWidth
             margin="normal"
             multiline
-            rows={4}
+            rows={3}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             disabled={updateStudioMutation.isPending}
@@ -184,19 +190,22 @@ const EditStudioPage = ({ params }: { params: { id: string } }) => {
             <Select
               labelId="area-select-label"
               id="area-select"
-              value={areaId}
+              value={prefectureId}
               label="エリア"
               onChange={handleAreaChange}
-              disabled={updateStudioMutation.isPending}
+              disabled={updateStudioMutation.isPending || isAreasLoading}
             >
-              <MenuItem value={1}>東京</MenuItem>
-              <MenuItem value={2}>神奈川</MenuItem>
-              <MenuItem value={3}>埼玉</MenuItem>
-              <MenuItem value={4}>千葉</MenuItem>
-              <MenuItem value={5}>大阪</MenuItem>
-              <MenuItem value={6}>京都</MenuItem>
-              <MenuItem value={7}>兵庫</MenuItem>
-              <MenuItem value={8}>名古屋</MenuItem>
+              {isAreasLoading ? (
+                <MenuItem disabled>読み込み中...</MenuItem>
+              ) : areasError ? (
+                <MenuItem disabled>エリア情報の取得に失敗しました</MenuItem>
+              ) : (
+                areas.map((area) => (
+                  <MenuItem key={area.prefectureId} value={area.prefectureId}>
+                    {area.name}
+                  </MenuItem>
+                ))
+              )}
             </Select>
           </FormControl>
 

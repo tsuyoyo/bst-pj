@@ -81,9 +81,6 @@ They are automatically executed during database initialization.
 # Create a new migration
 npm run migrate:create my_migration_name
 
-# Run migrations
-npm run migrate:up
-
 # Run migrations in development environment
 npm run migrate:dev
 

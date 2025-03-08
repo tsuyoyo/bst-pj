@@ -13,7 +13,7 @@ import { Area } from "@/proto/bst/v1/area";
 export const fetchStudios = async (
   pageSize?: number,
   pageToken?: string,
-  area?: Area
+  prefectureId?: number
 ): Promise<ListStudiosResponse> => {
   const params: Record<string, any> = {};
   params.pageSize = pageSize ?? 10;
@@ -22,9 +22,7 @@ export const fetchStudios = async (
     params.pageToken = pageToken;
   }
 
-  if (area) {
-    params.area = area;
-  }
+  params.prefectureId = prefectureId ? prefectureId : 0;
 
   const { data } = await apiClient.get<ListStudiosResponse>("/studios", {
     params,
@@ -46,7 +44,7 @@ export const createStudio = async (studioData: {
   description: string;
   googleMapsUrl: string;
   additionalInfo: string;
-  areaId: number;
+  prefectureId: number;
 }): Promise<CreateStudioResponse> => {
   const { data } = await apiClient.post<CreateStudioResponse>(
     "/studios",
@@ -63,7 +61,7 @@ export const updateStudio = async (
     description?: string;
     googleMapsUrl?: string;
     additionalInfo?: string;
-    areaId?: number;
+    prefectureId?: number;
   }
 ): Promise<UpdateStudioResponse> => {
   const { data } = await apiClient.put<UpdateStudioResponse>(

@@ -22,7 +22,7 @@ class CreateStudioRequest extends $pb.GeneratedMessage {
     $core.String? description,
     $core.String? googleMapsUrl,
     $core.String? additionalInfo,
-    $core.int? areaId,
+    $core.int? prefectureId,
   }) {
     final $result = create();
     if (name != null) {
@@ -37,8 +37,8 @@ class CreateStudioRequest extends $pb.GeneratedMessage {
     if (additionalInfo != null) {
       $result.additionalInfo = additionalInfo;
     }
-    if (areaId != null) {
-      $result.areaId = areaId;
+    if (prefectureId != null) {
+      $result.prefectureId = prefectureId;
     }
     return $result;
   }
@@ -51,7 +51,7 @@ class CreateStudioRequest extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'description')
     ..aOS(3, _omitFieldNames ? '' : 'googleMapsUrl')
     ..aOS(4, _omitFieldNames ? '' : 'additionalInfo')
-    ..a<$core.int>(5, _omitFieldNames ? '' : 'areaId', $pb.PbFieldType.O3)
+    ..a<$core.int>(5, _omitFieldNames ? '' : 'prefectureId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -113,13 +113,13 @@ class CreateStudioRequest extends $pb.GeneratedMessage {
   void clearAdditionalInfo() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.int get areaId => $_getIZ(4);
+  $core.int get prefectureId => $_getIZ(4);
   @$pb.TagNumber(5)
-  set areaId($core.int v) { $_setSignedInt32(4, v); }
+  set prefectureId($core.int v) { $_setSignedInt32(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasAreaId() => $_has(4);
+  $core.bool hasPrefectureId() => $_has(4);
   @$pb.TagNumber(5)
-  void clearAreaId() => clearField(5);
+  void clearPrefectureId() => clearField(5);
 }
 
 class CreateStudioResponse extends $pb.GeneratedMessage {
@@ -435,7 +435,7 @@ class UpdateStudioRequest extends $pb.GeneratedMessage {
     $core.String? description,
     $core.String? googleMapsUrl,
     $core.String? additionalInfo,
-    $core.int? areaId,
+    $core.int? prefectureId,
   }) {
     final $result = create();
     if (studioId != null) {
@@ -453,8 +453,8 @@ class UpdateStudioRequest extends $pb.GeneratedMessage {
     if (additionalInfo != null) {
       $result.additionalInfo = additionalInfo;
     }
-    if (areaId != null) {
-      $result.areaId = areaId;
+    if (prefectureId != null) {
+      $result.prefectureId = prefectureId;
     }
     return $result;
   }
@@ -468,7 +468,7 @@ class UpdateStudioRequest extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'description')
     ..aOS(4, _omitFieldNames ? '' : 'googleMapsUrl')
     ..aOS(5, _omitFieldNames ? '' : 'additionalInfo')
-    ..a<$core.int>(6, _omitFieldNames ? '' : 'areaId', $pb.PbFieldType.O3)
+    ..a<$core.int>(6, _omitFieldNames ? '' : 'prefectureId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -539,13 +539,13 @@ class UpdateStudioRequest extends $pb.GeneratedMessage {
   void clearAdditionalInfo() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.int get areaId => $_getIZ(5);
+  $core.int get prefectureId => $_getIZ(5);
   @$pb.TagNumber(6)
-  set areaId($core.int v) { $_setSignedInt32(5, v); }
+  set prefectureId($core.int v) { $_setSignedInt32(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasAreaId() => $_has(5);
+  $core.bool hasPrefectureId() => $_has(5);
   @$pb.TagNumber(6)
-  void clearAreaId() => clearField(6);
+  void clearPrefectureId() => clearField(6);
 }
 
 class UpdateStudioResponse extends $pb.GeneratedMessage {

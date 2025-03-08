@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { useCreateStudio } from "@/features/studios/hooks";
+import { useAreas } from "@/features/areas/hooks";
 
 const NewStudioPage = () => {
   const router = useRouter();
@@ -28,17 +29,25 @@ const NewStudioPage = () => {
   const [description, setDescription] = useState("");
   const [googleMapsUrl, setGoogleMapsUrl] = useState("");
   const [additionalInfo, setAdditionalInfo] = useState("");
-  const [areaId, setAreaId] = useState<number | "">("");
+  const [prefectureId, setPrefectureId] = useState<number | "">("");
   const [error, setError] = useState<string | null>(null);
   const { user } = useSelector((state: RootState) => state.auth);
 
   // React Queryフックを使用
   const createStudioMutation = useCreateStudio();
 
+  // エリア情報を取得
+  const {
+    data: areasData,
+    isLoading: isAreasLoading,
+    error: areasError,
+  } = useAreas();
+  const areas = areasData?.areas || [];
+
   // ログインチェック
   useEffect(() => {
     if (!user) {
-      router.push("/login?redirect=/community/studios/new");
+      router.push("/login?redirect=/studios/new");
     }
   }, [user, router]);
 
@@ -51,7 +60,7 @@ const NewStudioPage = () => {
       return;
     }
 
-    if (!areaId) {
+    if (!prefectureId) {
       setError("エリアを選択してください。");
       return;
     }
@@ -62,9 +71,9 @@ const NewStudioPage = () => {
         description,
         googleMapsUrl,
         additionalInfo,
-        areaId: Number(areaId),
+        prefectureId,
       });
-      router.push("/community/studios");
+      router.push("/studios");
     } catch (err) {
       console.error("Failed to create studio", err);
       setError("スタジオの登録に失敗しました。後でもう一度お試しください。");
@@ -72,17 +81,19 @@ const NewStudioPage = () => {
   };
 
   const handleCancel = () => {
-    router.push("/community/studios");
+    router.push("/studios");
   };
 
   const handleAreaChange = (event: SelectChangeEvent<number | "">) => {
-    setAreaId(event.target.value as number | "");
+    setPrefectureId(event.target.value as number | "");
   };
 
   if (!user) {
     return (
       <Container className="page-container">
-        <Alert severity="info">ログインが必要です。リダイレクトします...</Alert>
+        <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
+          <CircularProgress size={40} />
+        </Box>
       </Container>
     );
   }
@@ -93,9 +104,6 @@ const NewStudioPage = () => {
         <Typography variant="h4" component="h1" gutterBottom>
           新規スタジオ登録
         </Typography>
-        <Typography variant="body1" paragraph>
-          新しいスタジオを登録して、コミュニティに貢献しましょう。
-        </Typography>
 
         {error && (
           <Alert severity="error" sx={{ mb: 2 }}>
@@ -103,7 +111,7 @@ const NewStudioPage = () => {
           </Alert>
         )}
 
-        <Box component="form" onSubmit={handleSubmit}>
+        <Box component="form" onSubmit={handleSubmit} noValidate>
           <TextField
             label="スタジオ名"
             fullWidth
@@ -119,7 +127,7 @@ const NewStudioPage = () => {
             fullWidth
             margin="normal"
             multiline
-            rows={4}
+            rows={3}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             disabled={createStudioMutation.isPending}
@@ -150,19 +158,22 @@ const NewStudioPage = () => {
             <Select
               labelId="area-select-label"
               id="area-select"
-              value={areaId}
+              value={prefectureId}
               label="エリア"
               onChange={handleAreaChange}
-              disabled={createStudioMutation.isPending}
+              disabled={createStudioMutation.isPending || isAreasLoading}
             >
-              <MenuItem value={1}>東京</MenuItem>
-              <MenuItem value={2}>神奈川</MenuItem>
-              <MenuItem value={3}>埼玉</MenuItem>
-              <MenuItem value={4}>千葉</MenuItem>
-              <MenuItem value={5}>大阪</MenuItem>
-              <MenuItem value={6}>京都</MenuItem>
-              <MenuItem value={7}>兵庫</MenuItem>
-              <MenuItem value={8}>名古屋</MenuItem>
+              {isAreasLoading ? (
+                <MenuItem disabled>読み込み中...</MenuItem>
+              ) : areasError ? (
+                <MenuItem disabled>エリア情報の取得に失敗しました</MenuItem>
+              ) : (
+                areas.map((area) => (
+                  <MenuItem key={area.prefectureId} value={area.prefectureId}>
+                    {area.name}
+                  </MenuItem>
+                ))
+              )}
             </Select>
           </FormControl>
 

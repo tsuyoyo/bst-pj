@@ -78,7 +78,7 @@ exports.up = (pgm) => {
       onDelete: "CASCADE",
     },
     bio: { type: "text" },
-    area_id: {
+    prefecture_id: {
       type: "integer",
       references: "areas",
       onDelete: "SET NULL",

@@ -55,20 +55,23 @@ const Studio$json = {
   '1': 'Studio',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
-    {'1': 'google_maps_url', '3': 2, '4': 1, '5': 9, '10': 'googleMapsUrl'},
-    {'1': 'additional_info', '3': 3, '4': 1, '5': 9, '10': 'additionalInfo'},
-    {'1': 'area', '3': 4, '4': 1, '5': 11, '6': '.bst.v1.Area', '10': 'area'},
-    {'1': 'overall_rating', '3': 5, '4': 1, '5': 5, '10': 'overallRating'},
-    {'1': 'rooms', '3': 6, '4': 3, '5': 11, '6': '.bst.v1.StudioRoom', '10': 'rooms'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
+    {'1': 'google_maps_url', '3': 4, '4': 1, '5': 9, '10': 'googleMapsUrl'},
+    {'1': 'additional_info', '3': 5, '4': 1, '5': 9, '10': 'additionalInfo'},
+    {'1': 'area', '3': 6, '4': 1, '5': 11, '6': '.bst.v1.Area', '10': 'area'},
+    {'1': 'overall_rating', '3': 7, '4': 1, '5': 5, '10': 'overallRating'},
+    {'1': 'rooms', '3': 8, '4': 3, '5': 11, '6': '.bst.v1.StudioRoom', '10': 'rooms'},
   ],
 };
 
 /// Descriptor for `Studio`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List studioDescriptor = $convert.base64Decode(
-    'CgZTdHVkaW8SDgoCaWQYASABKAVSAmlkEiYKD2dvb2dsZV9tYXBzX3VybBgCIAEoCVINZ29vZ2'
-    'xlTWFwc1VybBInCg9hZGRpdGlvbmFsX2luZm8YAyABKAlSDmFkZGl0aW9uYWxJbmZvEiAKBGFy'
-    'ZWEYBCABKAsyDC5ic3QudjEuQXJlYVIEYXJlYRIlCg5vdmVyYWxsX3JhdGluZxgFIAEoBVINb3'
-    'ZlcmFsbFJhdGluZxIoCgVyb29tcxgGIAMoCzISLmJzdC52MS5TdHVkaW9Sb29tUgVyb29tcw==');
+    'CgZTdHVkaW8SDgoCaWQYASABKAVSAmlkEhIKBG5hbWUYAiABKAlSBG5hbWUSIAoLZGVzY3JpcH'
+    'Rpb24YAyABKAlSC2Rlc2NyaXB0aW9uEiYKD2dvb2dsZV9tYXBzX3VybBgEIAEoCVINZ29vZ2xl'
+    'TWFwc1VybBInCg9hZGRpdGlvbmFsX2luZm8YBSABKAlSDmFkZGl0aW9uYWxJbmZvEiAKBGFyZW'
+    'EYBiABKAsyDC5ic3QudjEuQXJlYVIEYXJlYRIlCg5vdmVyYWxsX3JhdGluZxgHIAEoBVINb3Zl'
+    'cmFsbFJhdGluZxIoCgVyb29tcxgIIAMoCzISLmJzdC52MS5TdHVkaW9Sb29tUgVyb29tcw==');
 
 @$core.Deprecated('Use studioRoomDescriptor instead')
 const StudioRoom$json = {

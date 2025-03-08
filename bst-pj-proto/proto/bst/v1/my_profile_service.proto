@@ -34,7 +34,7 @@ message UpdateUserPartsRequest {
 }
 
 message UpdateUserAreaRequest {
-  int32 area_id = 1;
+  int32 prefecture_id = 1;
 }
 
 message UpdateResponse {

@@ -33,6 +33,7 @@ import { RootState } from "@/store/store";
 import React from "react";
 import { useStudio } from "@/features/studios/hooks";
 import { useStudioRooms } from "@/features/studioRooms/hooks";
+import { useAreas } from "@/features/areas/hooks";
 
 const StudioDetailPage = ({ params }: { params: { id: string } }) => {
   const { id } = React.use(params as unknown as Usable<{ id: string }>);
@@ -54,41 +55,38 @@ const StudioDetailPage = ({ params }: { params: { id: string } }) => {
   const studio = studioData?.studio || null;
   const rooms = roomsData?.rooms || [];
 
+  // エリア情報を取得
+  const { data: areasData, isLoading: isAreasLoading } = useAreas();
+  const areas = areasData?.areas || [];
+
   const handleEdit = () => {
-    router.push(`/community/studios/${id}/edit`);
+    router.push(`/studios/${id}/edit`);
   };
 
   const handleAddRoom = () => {
-    router.push(`/community/studios/${id}/rooms/new`);
+    router.push(`/studios/${id}/rooms/new`);
   };
 
   const handleEditRoom = (roomId: number) => {
-    router.push(`/community/studios/${id}/rooms/${roomId}/edit`);
+    router.push(`/studios/${id}/rooms/${roomId}/edit`);
   };
 
   const handleBack = () => {
-    router.push("/community/studios");
+    router.push("/studios");
   };
 
-  const getAreaName = (areaId: number): string => {
-    const areaMap: Record<number, string> = {
-      1: "東京",
-      2: "神奈川",
-      3: "埼玉",
-      4: "千葉",
-      5: "大阪",
-      6: "京都",
-      7: "兵庫",
-      8: "名古屋",
-    };
-    return areaMap[areaId] || "不明なエリア";
+  // エリア名を取得する関数
+  const getAreaName = (prefectureId: number): string => {
+    if (isAreasLoading) return "読み込み中...";
+    const area = areas.find((area) => area.prefectureId === prefectureId);
+    return area ? area.name : `都道府県ID: ${prefectureId}`;
   };
 
   if (isStudioLoading) {
     return (
       <Container className="page-container">
         <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
-          <CircularProgress />
+          <CircularProgress size={40} />
         </Box>
       </Container>
     );
@@ -97,14 +95,10 @@ const StudioDetailPage = ({ params }: { params: { id: string } }) => {
   if (studioError || !studio) {
     return (
       <Container className="page-container">
-        <Alert severity="error">
-          {studioError
-            ? "スタジオの取得に失敗しました。"
-            : "スタジオが見つかりませんでした。"}
+        <Alert severity="error" sx={{ mb: 2 }}>
+          スタジオ情報の取得に失敗しました。
         </Alert>
-        <Button sx={{ mt: 2 }} onClick={handleBack}>
-          一覧に戻る
-        </Button>
+        <Button onClick={handleBack}>一覧に戻る</Button>
       </Container>
     );
   }
@@ -144,11 +138,11 @@ const StudioDetailPage = ({ params }: { params: { id: string } }) => {
               スタジオ情報
             </Typography>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
                   <LocationOn sx={{ mr: 1 }} />
                   <Typography variant="body1">
-                    エリア: {getAreaName(studio.areaId)}
+                    エリア: {studio.area.name}
                   </Typography>
                 </Box>
               </Grid>
@@ -214,8 +208,8 @@ const StudioDetailPage = ({ params }: { params: { id: string } }) => {
             ルーム情報の取得に失敗しました。
           </Alert>
         ) : rooms.length === 0 ? (
-          <Typography variant="body1">
-            このスタジオにはまだルームが登録されていません。
+          <Typography>
+            ルームが登録されていません。新しいルームを追加してください。
           </Typography>
         ) : (
           <List>
@@ -243,7 +237,7 @@ const StudioDetailPage = ({ params }: { params: { id: string } }) => {
                           収容人数: {room.capacity}人
                         </Typography>
                         <Typography variant="body2">
-                          広さ: {room.size}㎡
+                          広さ: {room.capacity}㎡
                         </Typography>
                         <Typography variant="body2">
                           料金: {room.price}円/時間

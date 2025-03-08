@@ -20,7 +20,7 @@ const CreateLocationRequest$json = {
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     {'1': 'google_maps_url', '3': 2, '4': 1, '5': 9, '10': 'googleMapsUrl'},
     {'1': 'additional_info', '3': 3, '4': 1, '5': 9, '10': 'additionalInfo'},
-    {'1': 'area_id', '3': 4, '4': 1, '5': 5, '10': 'areaId'},
+    {'1': 'prefecture_id', '3': 4, '4': 1, '5': 5, '10': 'prefectureId'},
   ],
 };
 
@@ -28,7 +28,7 @@ const CreateLocationRequest$json = {
 final $typed_data.Uint8List createLocationRequestDescriptor = $convert.base64Decode(
     'ChVDcmVhdGVMb2NhdGlvblJlcXVlc3QSEgoEbmFtZRgBIAEoCVIEbmFtZRImCg9nb29nbGVfbW'
     'Fwc191cmwYAiABKAlSDWdvb2dsZU1hcHNVcmwSJwoPYWRkaXRpb25hbF9pbmZvGAMgASgJUg5h'
-    'ZGRpdGlvbmFsSW5mbxIXCgdhcmVhX2lkGAQgASgFUgZhcmVhSWQ=');
+    'ZGRpdGlvbmFsSW5mbxIjCg1wcmVmZWN0dXJlX2lkGAQgASgFUgxwcmVmZWN0dXJlSWQ=');
 
 @$core.Deprecated('Use createLocationResponseDescriptor instead')
 const CreateLocationResponse$json = {
@@ -108,13 +108,13 @@ const UpdateLocationRequest$json = {
     {'1': 'name', '3': 2, '4': 1, '5': 9, '9': 0, '10': 'name', '17': true},
     {'1': 'google_maps_url', '3': 3, '4': 1, '5': 9, '9': 1, '10': 'googleMapsUrl', '17': true},
     {'1': 'additional_info', '3': 4, '4': 1, '5': 9, '9': 2, '10': 'additionalInfo', '17': true},
-    {'1': 'area_id', '3': 5, '4': 1, '5': 5, '9': 3, '10': 'areaId', '17': true},
+    {'1': 'prefecture_id', '3': 5, '4': 1, '5': 5, '9': 3, '10': 'prefectureId', '17': true},
   ],
   '8': [
     {'1': '_name'},
     {'1': '_google_maps_url'},
     {'1': '_additional_info'},
-    {'1': '_area_id'},
+    {'1': '_prefecture_id'},
   ],
 };
 
@@ -123,8 +123,9 @@ final $typed_data.Uint8List updateLocationRequestDescriptor = $convert.base64Dec
     'ChVVcGRhdGVMb2NhdGlvblJlcXVlc3QSHwoLbG9jYXRpb25faWQYASABKAVSCmxvY2F0aW9uSW'
     'QSFwoEbmFtZRgCIAEoCUgAUgRuYW1liAEBEisKD2dvb2dsZV9tYXBzX3VybBgDIAEoCUgBUg1n'
     'b29nbGVNYXBzVXJsiAEBEiwKD2FkZGl0aW9uYWxfaW5mbxgEIAEoCUgCUg5hZGRpdGlvbmFsSW'
-    '5mb4gBARIcCgdhcmVhX2lkGAUgASgFSANSBmFyZWFJZIgBAUIHCgVfbmFtZUISChBfZ29vZ2xl'
-    'X21hcHNfdXJsQhIKEF9hZGRpdGlvbmFsX2luZm9CCgoIX2FyZWFfaWQ=');
+    '5mb4gBARIoCg1wcmVmZWN0dXJlX2lkGAUgASgFSANSDHByZWZlY3R1cmVJZIgBAUIHCgVfbmFt'
+    'ZUISChBfZ29vZ2xlX21hcHNfdXJsQhIKEF9hZGRpdGlvbmFsX2luZm9CEAoOX3ByZWZlY3R1cm'
+    'VfaWQ=');
 
 @$core.Deprecated('Use updateLocationResponseDescriptor instead')
 const UpdateLocationResponse$json = {

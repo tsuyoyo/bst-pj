@@ -33,6 +33,8 @@ export interface StudioReview {
 
 export interface Studio {
   id: number;
+  name: string;
+  description: string;
   googleMapsUrl: string;
   additionalInfo: string;
   area:
@@ -302,7 +304,16 @@ export const StudioReview = {
 };
 
 function createBaseStudio(): Studio {
-  return { id: 0, googleMapsUrl: "", additionalInfo: "", area: undefined, overallRating: 0, rooms: [] };
+  return {
+    id: 0,
+    name: "",
+    description: "",
+    googleMapsUrl: "",
+    additionalInfo: "",
+    area: undefined,
+    overallRating: 0,
+    rooms: [],
+  };
 }
 
 export const Studio = {
@@ -310,20 +321,26 @@ export const Studio = {
     if (message.id !== 0) {
       writer.uint32(8).int32(message.id);
     }
+    if (message.name !== "") {
+      writer.uint32(18).string(message.name);
+    }
+    if (message.description !== "") {
+      writer.uint32(26).string(message.description);
+    }
     if (message.googleMapsUrl !== "") {
-      writer.uint32(18).string(message.googleMapsUrl);
+      writer.uint32(34).string(message.googleMapsUrl);
     }
     if (message.additionalInfo !== "") {
-      writer.uint32(26).string(message.additionalInfo);
+      writer.uint32(42).string(message.additionalInfo);
     }
     if (message.area !== undefined) {
-      Area.encode(message.area, writer.uint32(34).fork()).ldelim();
+      Area.encode(message.area, writer.uint32(50).fork()).ldelim();
     }
     if (message.overallRating !== 0) {
-      writer.uint32(40).int32(message.overallRating);
+      writer.uint32(56).int32(message.overallRating);
     }
     for (const v of message.rooms) {
-      StudioRoom.encode(v!, writer.uint32(50).fork()).ldelim();
+      StudioRoom.encode(v!, writer.uint32(66).fork()).ldelim();
     }
     return writer;
   },
@@ -347,31 +364,45 @@ export const Studio = {
             break;
           }
 
-          message.googleMapsUrl = reader.string();
+          message.name = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.additionalInfo = reader.string();
+          message.description = reader.string();
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.area = Area.decode(reader, reader.uint32());
+          message.googleMapsUrl = reader.string();
           continue;
         case 5:
-          if (tag !== 40) {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.additionalInfo = reader.string();
+          continue;
+        case 6:
+          if (tag !== 50) {
+            break;
+          }
+
+          message.area = Area.decode(reader, reader.uint32());
+          continue;
+        case 7:
+          if (tag !== 56) {
             break;
           }
 
           message.overallRating = reader.int32();
           continue;
-        case 6:
-          if (tag !== 50) {
+        case 8:
+          if (tag !== 66) {
             break;
           }
 
@@ -389,6 +420,8 @@ export const Studio = {
   fromJSON(object: any): Studio {
     return {
       id: isSet(object.id) ? globalThis.Number(object.id) : 0,
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
       googleMapsUrl: isSet(object.googleMapsUrl) ? globalThis.String(object.googleMapsUrl) : "",
       additionalInfo: isSet(object.additionalInfo) ? globalThis.String(object.additionalInfo) : "",
       area: isSet(object.area) ? Area.fromJSON(object.area) : undefined,
@@ -401,6 +434,12 @@ export const Studio = {
     const obj: any = {};
     if (message.id !== 0) {
       obj.id = Math.round(message.id);
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.description !== "") {
+      obj.description = message.description;
     }
     if (message.googleMapsUrl !== "") {
       obj.googleMapsUrl = message.googleMapsUrl;
@@ -426,6 +465,8 @@ export const Studio = {
   fromPartial<I extends Exact<DeepPartial<Studio>, I>>(object: I): Studio {
     const message = createBaseStudio();
     message.id = object.id ?? 0;
+    message.name = object.name ?? "";
+    message.description = object.description ?? "";
     message.googleMapsUrl = object.googleMapsUrl ?? "";
     message.additionalInfo = object.additionalInfo ?? "";
     message.area = (object.area !== undefined && object.area !== null) ? Area.fromPartial(object.area) : undefined;

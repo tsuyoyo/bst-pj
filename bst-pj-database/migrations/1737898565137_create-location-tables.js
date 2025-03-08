@@ -9,7 +9,7 @@ exports.up = (pgm) => {
     name: { type: "varchar(255)", notNull: true },
     google_maps_url: { type: "text" },
     additional_info: { type: "text" },
-    area_id: {
+    prefecture_id: {
       type: "integer",
       notNull: true,
       references: "areas",

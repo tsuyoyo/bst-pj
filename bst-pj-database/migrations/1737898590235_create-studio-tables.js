@@ -13,7 +13,7 @@ exports.up = (pgm) => {
     description: { type: "text" },
     google_maps_url: { type: "text" },
     additional_info: { type: "text" },
-    area_id: {
+    prefecture_id: {
       type: "integer",
       notNull: true,
       references: "areas",
@@ -125,6 +125,8 @@ exports.up = (pgm) => {
   });
 
   // Create indexes
+  pgm.createIndex("studios", ["name"]);
+  pgm.createIndex("studios", ["prefecture_id"]);
   pgm.createIndex("studio_rooms", ["studio_id"]);
   pgm.createIndex("studio_room_infos", ["studio_room_id"]);
   pgm.createIndex("studio_room_infos", ["type"]);
@@ -138,6 +140,8 @@ exports.down = (pgm) => {
   });
 
   // Drop indexes
+  pgm.dropIndex("studios", ["name"], { ifExists: true });
+  pgm.dropIndex("studios", ["prefecture_id"], { ifExists: true });
   pgm.dropIndex("studio_rooms", ["studio_id"], { ifExists: true });
   pgm.dropIndex("studio_room_infos", ["studio_room_id"], { ifExists: true });
   pgm.dropIndex("studio_room_infos", ["type"], { ifExists: true });

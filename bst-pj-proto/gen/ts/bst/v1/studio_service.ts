@@ -16,7 +16,7 @@ export interface CreateStudioRequest {
   description: string;
   googleMapsUrl: string;
   additionalInfo: string;
-  areaId: number;
+  prefectureId: number;
 }
 
 export interface CreateStudioResponse {
@@ -49,7 +49,7 @@ export interface UpdateStudioRequest {
   description?: string | undefined;
   googleMapsUrl?: string | undefined;
   additionalInfo?: string | undefined;
-  areaId?: number | undefined;
+  prefectureId?: number | undefined;
 }
 
 export interface UpdateStudioResponse {
@@ -65,7 +65,7 @@ export interface DeleteStudioResponse {
 }
 
 function createBaseCreateStudioRequest(): CreateStudioRequest {
-  return { name: "", description: "", googleMapsUrl: "", additionalInfo: "", areaId: 0 };
+  return { name: "", description: "", googleMapsUrl: "", additionalInfo: "", prefectureId: 0 };
 }
 
 export const CreateStudioRequest = {
@@ -82,8 +82,8 @@ export const CreateStudioRequest = {
     if (message.additionalInfo !== "") {
       writer.uint32(34).string(message.additionalInfo);
     }
-    if (message.areaId !== 0) {
-      writer.uint32(40).int32(message.areaId);
+    if (message.prefectureId !== 0) {
+      writer.uint32(40).int32(message.prefectureId);
     }
     return writer;
   },
@@ -128,7 +128,7 @@ export const CreateStudioRequest = {
             break;
           }
 
-          message.areaId = reader.int32();
+          message.prefectureId = reader.int32();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -145,7 +145,7 @@ export const CreateStudioRequest = {
       description: isSet(object.description) ? globalThis.String(object.description) : "",
       googleMapsUrl: isSet(object.googleMapsUrl) ? globalThis.String(object.googleMapsUrl) : "",
       additionalInfo: isSet(object.additionalInfo) ? globalThis.String(object.additionalInfo) : "",
-      areaId: isSet(object.areaId) ? globalThis.Number(object.areaId) : 0,
+      prefectureId: isSet(object.prefectureId) ? globalThis.Number(object.prefectureId) : 0,
     };
   },
 
@@ -163,8 +163,8 @@ export const CreateStudioRequest = {
     if (message.additionalInfo !== "") {
       obj.additionalInfo = message.additionalInfo;
     }
-    if (message.areaId !== 0) {
-      obj.areaId = Math.round(message.areaId);
+    if (message.prefectureId !== 0) {
+      obj.prefectureId = Math.round(message.prefectureId);
     }
     return obj;
   },
@@ -178,7 +178,7 @@ export const CreateStudioRequest = {
     message.description = object.description ?? "";
     message.googleMapsUrl = object.googleMapsUrl ?? "";
     message.additionalInfo = object.additionalInfo ?? "";
-    message.areaId = object.areaId ?? 0;
+    message.prefectureId = object.prefectureId ?? 0;
     return message;
   },
 };
@@ -543,7 +543,7 @@ function createBaseUpdateStudioRequest(): UpdateStudioRequest {
     description: undefined,
     googleMapsUrl: undefined,
     additionalInfo: undefined,
-    areaId: undefined,
+    prefectureId: undefined,
   };
 }
 
@@ -564,8 +564,8 @@ export const UpdateStudioRequest = {
     if (message.additionalInfo !== undefined) {
       writer.uint32(42).string(message.additionalInfo);
     }
-    if (message.areaId !== undefined) {
-      writer.uint32(48).int32(message.areaId);
+    if (message.prefectureId !== undefined) {
+      writer.uint32(48).int32(message.prefectureId);
     }
     return writer;
   },
@@ -617,7 +617,7 @@ export const UpdateStudioRequest = {
             break;
           }
 
-          message.areaId = reader.int32();
+          message.prefectureId = reader.int32();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -635,7 +635,7 @@ export const UpdateStudioRequest = {
       description: isSet(object.description) ? globalThis.String(object.description) : undefined,
       googleMapsUrl: isSet(object.googleMapsUrl) ? globalThis.String(object.googleMapsUrl) : undefined,
       additionalInfo: isSet(object.additionalInfo) ? globalThis.String(object.additionalInfo) : undefined,
-      areaId: isSet(object.areaId) ? globalThis.Number(object.areaId) : undefined,
+      prefectureId: isSet(object.prefectureId) ? globalThis.Number(object.prefectureId) : undefined,
     };
   },
 
@@ -656,8 +656,8 @@ export const UpdateStudioRequest = {
     if (message.additionalInfo !== undefined) {
       obj.additionalInfo = message.additionalInfo;
     }
-    if (message.areaId !== undefined) {
-      obj.areaId = Math.round(message.areaId);
+    if (message.prefectureId !== undefined) {
+      obj.prefectureId = Math.round(message.prefectureId);
     }
     return obj;
   },
@@ -672,7 +672,7 @@ export const UpdateStudioRequest = {
     message.description = object.description ?? undefined;
     message.googleMapsUrl = object.googleMapsUrl ?? undefined;
     message.additionalInfo = object.additionalInfo ?? undefined;
-    message.areaId = object.areaId ?? undefined;
+    message.prefectureId = object.prefectureId ?? undefined;
     return message;
   },
 };
