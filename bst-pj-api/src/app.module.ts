@@ -18,6 +18,7 @@ import { UserProfileModule } from './user-profile/user-profile.module';
 import { MyProfileModule } from './my-profile/my-profile.module';
 import { SongModule } from './song/song.module';
 import { AreaModule } from './area/area.module';
+import { StudioRoomModule } from './studio-room/studio-room.module';
 
 @Module({
   imports: [
@@ -54,6 +55,7 @@ import { AreaModule } from './area/area.module';
     MyProfileModule,
     SongModule,
     AreaModule,
+    StudioRoomModule,
   ],
   controllers: [AppController],
   providers: [AppService],

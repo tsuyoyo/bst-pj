@@ -8,6 +8,7 @@ import { NotFoundException } from '@nestjs/common';
 import { Studio } from '../entities/studio.entity';
 import { CreateStudioRoomDto } from './dto/create-studio-room.dto';
 import { UpdateStudioRoomDto } from './dto/update-studio-room.dto';
+import { User } from '../entities/user.entity';
 
 describe('StudioRoomService', () => {
   let service: StudioRoomService;
@@ -28,6 +29,19 @@ describe('StudioRoomService', () => {
     create: jest.fn(),
     save: jest.fn(),
     delete: jest.fn(),
+  };
+
+  const mockUser: User = {
+    id: 1,
+    email: 'test@example.com',
+    password: 'password',
+    name: 'Test User',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    externalId: null,
+    externalService: null,
+    iconUrl: null,
+    profilePictureUrl: null,
   };
 
   beforeEach(async () => {
@@ -84,7 +98,11 @@ describe('StudioRoomService', () => {
       jest.spyOn(studioRoomRepository, 'create').mockReturnValue(savedRoom);
       jest.spyOn(studioRoomRepository, 'save').mockResolvedValue(savedRoom);
 
-      const result = await service.createStudioRoom(1, createStudioRoomDto);
+      const result = await service.createStudioRoom(
+        1,
+        mockUser,
+        createStudioRoomDto,
+      );
       expect(result.room).toEqual(service.mapToProtoStudioRoom(savedRoom));
     });
   });
@@ -176,7 +194,7 @@ describe('StudioRoomService', () => {
         .spyOn(studioRoomRepository, 'save')
         .mockResolvedValue({ ...studioRoom, ...updateDto });
 
-      const result = await service.updateStudioRoom(1, 1, updateDto);
+      const result = await service.updateStudioRoom(1, 1, mockUser, updateDto);
       expect(result.name).toEqual('Updated Room');
     });
 
@@ -190,9 +208,9 @@ describe('StudioRoomService', () => {
         size: 50,
       };
 
-      await expect(service.updateStudioRoom(1, 999, updateDto)).rejects.toThrow(
-        NotFoundException,
-      );
+      await expect(
+        service.updateStudioRoom(1, 999, mockUser, updateDto),
+      ).rejects.toThrow(NotFoundException);
     });
   });
 
@@ -235,6 +253,7 @@ describe('StudioRoomService', () => {
         value: createStudioRoomInfoDto.value,
         createdAt: new Date(),
         updatedAt: new Date(),
+        updatedUserId: 1,
         studioRoom: new StudioRoom(),
       };
 
@@ -248,6 +267,7 @@ describe('StudioRoomService', () => {
       const result = await service.createStudioRoomInfo(
         1,
         1,
+        mockUser,
         createStudioRoomInfoDto,
       );
       expect(result.info).toEqual(

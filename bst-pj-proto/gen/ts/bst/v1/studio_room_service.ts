@@ -12,8 +12,11 @@ export const protobufPackage = "bst.v1";
 
 export interface CreateStudioRoomRequest {
   name: string;
+  /** 定員 */
   capacity: number;
   price: number;
+  /** 畳数 */
+  size: number;
 }
 
 export interface CreateStudioRoomResponse {
@@ -86,7 +89,7 @@ export interface DeleteStudioRoomInfoResponse {
 }
 
 function createBaseCreateStudioRoomRequest(): CreateStudioRoomRequest {
-  return { name: "", capacity: 0, price: 0 };
+  return { name: "", capacity: 0, price: 0, size: 0 };
 }
 
 export const CreateStudioRoomRequest = {
@@ -99,6 +102,9 @@ export const CreateStudioRoomRequest = {
     }
     if (message.price !== 0) {
       writer.uint32(24).int32(message.price);
+    }
+    if (message.size !== 0) {
+      writer.uint32(32).int32(message.size);
     }
     return writer;
   },
@@ -131,6 +137,13 @@ export const CreateStudioRoomRequest = {
 
           message.price = reader.int32();
           continue;
+        case 4:
+          if (tag !== 32) {
+            break;
+          }
+
+          message.size = reader.int32();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -145,6 +158,7 @@ export const CreateStudioRoomRequest = {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       capacity: isSet(object.capacity) ? globalThis.Number(object.capacity) : 0,
       price: isSet(object.price) ? globalThis.Number(object.price) : 0,
+      size: isSet(object.size) ? globalThis.Number(object.size) : 0,
     };
   },
 
@@ -159,6 +173,9 @@ export const CreateStudioRoomRequest = {
     if (message.price !== 0) {
       obj.price = Math.round(message.price);
     }
+    if (message.size !== 0) {
+      obj.size = Math.round(message.size);
+    }
     return obj;
   },
 
@@ -170,6 +187,7 @@ export const CreateStudioRoomRequest = {
     message.name = object.name ?? "";
     message.capacity = object.capacity ?? 0;
     message.price = object.price ?? 0;
+    message.size = object.size ?? 0;
     return message;
   },
 };

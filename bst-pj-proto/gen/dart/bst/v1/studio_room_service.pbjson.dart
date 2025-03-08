@@ -20,13 +20,15 @@ const CreateStudioRoomRequest$json = {
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     {'1': 'capacity', '3': 2, '4': 1, '5': 5, '10': 'capacity'},
     {'1': 'price', '3': 3, '4': 1, '5': 5, '10': 'price'},
+    {'1': 'size', '3': 4, '4': 1, '5': 5, '10': 'size'},
   ],
 };
 
 /// Descriptor for `CreateStudioRoomRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createStudioRoomRequestDescriptor = $convert.base64Decode(
     'ChdDcmVhdGVTdHVkaW9Sb29tUmVxdWVzdBISCgRuYW1lGAEgASgJUgRuYW1lEhoKCGNhcGFjaX'
-    'R5GAIgASgFUghjYXBhY2l0eRIUCgVwcmljZRgDIAEoBVIFcHJpY2U=');
+    'R5GAIgASgFUghjYXBhY2l0eRIUCgVwcmljZRgDIAEoBVIFcHJpY2USEgoEc2l6ZRgEIAEoBVIE'
+    'c2l6ZQ==');
 
 @$core.Deprecated('Use createStudioRoomResponseDescriptor instead')
 const CreateStudioRoomResponse$json = {

@@ -50,6 +50,9 @@ export class StudioRoomInfo {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
+  @Column({ name: 'updated_user_id', type: 'integer', nullable: false })
+  updatedUserId: number;
+
   @ManyToOne(() => StudioRoom, (room) => room.infos, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'studio_room_id' })
   studioRoom: StudioRoom;

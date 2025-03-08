@@ -15,6 +15,7 @@ import {
   DeleteStudioRoomResponse,
   DeleteStudioRoomInfoResponse,
 } from '../proto/bst/v1/studio_room_service';
+import { User } from '../entities/user.entity';
 
 describe('StudioRoomController', () => {
   let controller: StudioRoomController;
@@ -30,6 +31,23 @@ describe('StudioRoomController', () => {
     updateStudioRoomInfo: jest.fn(),
     deleteStudioRoom: jest.fn(),
     deleteStudioRoomInfo: jest.fn(),
+  };
+
+  const mockUser: User = {
+    id: 1,
+    email: 'test@example.com',
+    password: 'password',
+    name: 'Test User',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    externalId: null,
+    externalService: null,
+    iconUrl: null,
+    profilePictureUrl: null,
+  };
+
+  const mockRequest = {
+    user: mockUser,
   };
 
   beforeEach(async () => {
@@ -92,11 +110,12 @@ describe('StudioRoomController', () => {
       const result: CreateStudioRoomResponse = { room: new StudioRoom() };
       jest.spyOn(service, 'createStudioRoom').mockResolvedValue(result);
 
-      expect(await controller.createStudioRoom(1, createStudioRoomDto)).toBe(
-        result,
-      );
+      expect(
+        await controller.createStudioRoom(1, createStudioRoomDto, mockRequest),
+      ).toBe(result);
       expect(service.createStudioRoom).toHaveBeenCalledWith(
         1,
+        mockUser,
         createStudioRoomDto,
       );
     });
@@ -120,11 +139,17 @@ describe('StudioRoomController', () => {
       jest.spyOn(service, 'createStudioRoomInfo').mockResolvedValue(result);
 
       expect(
-        await controller.createStudioRoomInfo(1, 1, createStudioRoomInfoDto),
+        await controller.createStudioRoomInfo(
+          1,
+          1,
+          mockRequest,
+          createStudioRoomInfoDto,
+        ),
       ).toBe(result);
       expect(service.createStudioRoomInfo).toHaveBeenCalledWith(
         1,
         1,
+        mockUser,
         createStudioRoomInfoDto,
       );
     });
@@ -141,8 +166,15 @@ describe('StudioRoomController', () => {
       const result: StudioRoom = new StudioRoom();
       jest.spyOn(service, 'updateStudioRoom').mockResolvedValue(result);
 
-      expect(await controller.updateStudioRoom(1, 1, updateDto)).toBe(result);
-      expect(service.updateStudioRoom).toHaveBeenCalledWith(1, 1, updateDto);
+      expect(
+        await controller.updateStudioRoom(1, 1, mockRequest, updateDto),
+      ).toBe(result);
+      expect(service.updateStudioRoom).toHaveBeenCalledWith(
+        1,
+        1,
+        mockUser,
+        updateDto,
+      );
     });
   });
 

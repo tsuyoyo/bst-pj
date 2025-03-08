@@ -18,6 +18,11 @@ import {
   CardContent,
   Grid,
   Link,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
 } from "@mui/material";
 import {
   Edit as EditIcon,
@@ -32,8 +37,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import React from "react";
 import { useStudio } from "@/features/studios/hooks";
-import { useStudioRooms } from "@/features/studioRooms/hooks";
+import {
+  useStudioRooms,
+  useCreateStudioRoom,
+} from "@/features/studioRooms/hooks";
 import { useAreas } from "@/features/areas/hooks";
+import { CreateStudioRoomRequest } from "@/proto/bst/v1/studio_room_service";
 
 const StudioDetailPage = ({ params }: { params: { id: string } }) => {
   const { id } = React.use(params as unknown as Usable<{ id: string }>);
@@ -50,7 +59,7 @@ const StudioDetailPage = ({ params }: { params: { id: string } }) => {
     data: roomsData,
     isLoading: isRoomsLoading,
     error: roomsError,
-  } = useStudioRooms(id);
+  } = useStudioRooms(Number(id));
 
   const studio = studioData?.studio || null;
   const rooms = roomsData?.rooms || [];
@@ -59,12 +68,26 @@ const StudioDetailPage = ({ params }: { params: { id: string } }) => {
   const { data: areasData, isLoading: isAreasLoading } = useAreas();
   const areas = areasData?.areas || [];
 
+  const [openRoomDialog, setOpenRoomDialog] = useState(false);
+  const [newRoom, setNewRoom] = useState<CreateStudioRoomRequest>({
+    name: "",
+    capacity: 0,
+    size: 0,
+    price: 0,
+  });
+
+  const createRoomMutation = useCreateStudioRoom(Number(id));
+
   const handleEdit = () => {
     router.push(`/studios/${id}/edit`);
   };
 
   const handleAddRoom = () => {
-    router.push(`/studios/${id}/rooms/new`);
+    setOpenRoomDialog(true);
+  };
+
+  const handleViewRoom = (roomId: number) => {
+    router.push(`/studios/${id}/rooms/${roomId}`);
   };
 
   const handleEditRoom = (roomId: number) => {
@@ -73,6 +96,30 @@ const StudioDetailPage = ({ params }: { params: { id: string } }) => {
 
   const handleBack = () => {
     router.push("/studios");
+  };
+
+  const handleCloseRoomDialog = () => {
+    setOpenRoomDialog(false);
+    setNewRoom({ name: "", capacity: 0, size: 0, price: 0 });
+  };
+
+  const handleNewRoomChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setNewRoom((prev) => ({
+      ...prev,
+      [name]: name === "name" ? value : Number(value),
+    }));
+  };
+
+  const handleCreateRoom = async () => {
+    try {
+      await createRoomMutation.mutateAsync(newRoom);
+      handleCloseRoomDialog();
+      // 成功したらルーム一覧ページに遷移
+      router.push(`/studios/${id}/rooms`);
+    } catch (error) {
+      console.error("Failed to create room:", error);
+    }
   };
 
   // エリア名を取得する関数
@@ -228,6 +275,8 @@ const StudioDetailPage = ({ params }: { params: { id: string } }) => {
                       </Button>
                     )
                   }
+                  onClick={() => handleViewRoom(room.id)}
+                  sx={{ cursor: "pointer" }}
                 >
                   <ListItemText
                     primary={<Typography variant="h6">{room.name}</Typography>}
@@ -237,7 +286,7 @@ const StudioDetailPage = ({ params }: { params: { id: string } }) => {
                           収容人数: {room.capacity}人
                         </Typography>
                         <Typography variant="body2">
-                          広さ: {room.capacity}㎡
+                          広さ: {room.size}㎡
                         </Typography>
                         <Typography variant="body2">
                           料金: {room.price}円/時間
@@ -255,6 +304,71 @@ const StudioDetailPage = ({ params }: { params: { id: string } }) => {
           一覧に戻る
         </Button>
       </Paper>
+
+      {/* ルーム追加ダイアログ */}
+      <Dialog open={openRoomDialog} onClose={handleCloseRoomDialog}>
+        <DialogTitle>新規ルーム登録</DialogTitle>
+        <DialogContent>
+          <Grid container spacing={2} sx={{ mt: 1 }}>
+            <Grid item xs={12}>
+              <TextField
+                name="name"
+                label="ルーム名"
+                fullWidth
+                value={newRoom.name}
+                onChange={handleNewRoomChange}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                name="capacity"
+                label="定員（人数）"
+                type="number"
+                fullWidth
+                value={newRoom.capacity}
+                onChange={handleNewRoomChange}
+                InputProps={{ inputProps: { min: 1 } }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                name="size"
+                label="広さ（㎡）"
+                type="number"
+                fullWidth
+                value={newRoom.size}
+                onChange={handleNewRoomChange}
+                InputProps={{ inputProps: { min: 0 } }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                name="price"
+                label="料金（円）"
+                type="number"
+                fullWidth
+                value={newRoom.price}
+                onChange={handleNewRoomChange}
+                InputProps={{ inputProps: { min: 0 } }}
+              />
+            </Grid>
+          </Grid>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseRoomDialog}>キャンセル</Button>
+          <Button
+            onClick={handleCreateRoom}
+            variant="contained"
+            disabled={
+              !newRoom.name ||
+              newRoom.capacity <= 0 ||
+              createRoomMutation.isPending
+            }
+          >
+            {createRoomMutation.isPending ? "登録中..." : "登録"}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 };

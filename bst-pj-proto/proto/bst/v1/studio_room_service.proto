@@ -35,8 +35,9 @@ service StudioRoomService {
 
 message CreateStudioRoomRequest {
   string name     = 1;
-  int32  capacity = 2;
+  int32  capacity = 2; // 定員
   int32  price    = 3;
+  int32  size     = 4; // 畳数
 }
 
 message CreateStudioRoomResponse {

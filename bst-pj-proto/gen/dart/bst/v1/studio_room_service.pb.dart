@@ -20,6 +20,7 @@ class CreateStudioRoomRequest extends $pb.GeneratedMessage {
     $core.String? name,
     $core.int? capacity,
     $core.int? price,
+    $core.int? size,
   }) {
     final $result = create();
     if (name != null) {
@@ -31,6 +32,9 @@ class CreateStudioRoomRequest extends $pb.GeneratedMessage {
     if (price != null) {
       $result.price = price;
     }
+    if (size != null) {
+      $result.size = size;
+    }
     return $result;
   }
   CreateStudioRoomRequest._() : super();
@@ -41,6 +45,7 @@ class CreateStudioRoomRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'capacity', $pb.PbFieldType.O3)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'price', $pb.PbFieldType.O3)
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'size', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -91,6 +96,15 @@ class CreateStudioRoomRequest extends $pb.GeneratedMessage {
   $core.bool hasPrice() => $_has(2);
   @$pb.TagNumber(3)
   void clearPrice() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.int get size => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set size($core.int v) { $_setSignedInt32(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasSize() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSize() => clearField(4);
 }
 
 class CreateStudioRoomResponse extends $pb.GeneratedMessage {

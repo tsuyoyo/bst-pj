@@ -21,6 +21,7 @@ import {
 import { UpdateStudioRoomDto } from './dto/update-studio-room.dto';
 import { CreateStudioRoomInfoDto } from './dto/create-studio-room-info.dto';
 import { UpdateStudioRoomInfoDto } from './dto/update-studio-room-info.dto';
+import { User } from 'src/entities/user.entity';
 @Injectable()
 export class StudioRoomService {
   constructor(
@@ -51,13 +52,17 @@ export class StudioRoomService {
 
   async createStudioRoom(
     studioId: number,
+    user: User,
     createStudioRoomDto: CreateStudioRoomDto,
   ): Promise<CreateStudioRoomResponse> {
-    const studio = {
-      id: studioId,
-      ...createStudioRoomDto,
-    };
-    const studioRoom = this.studioRoomRepository.create(studio);
+    const studioRoom = this.studioRoomRepository.create({
+      studioId: studioId,
+      name: createStudioRoomDto.name,
+      capacity: createStudioRoomDto.capacity,
+      price: createStudioRoomDto.price,
+      size: createStudioRoomDto.size,
+      updatedUserId: user.id,
+    });
     const savedStudioRoom = await this.studioRoomRepository.save(studioRoom);
 
     return {
@@ -72,9 +77,6 @@ export class StudioRoomService {
     const roomInfos = await this.studioRoomInfoRepository.find({
       where: { studioRoomId: roomId, studioId: studioId },
     });
-    if (roomInfos.length === 0) {
-      throw new NotFoundException('Room info not found');
-    }
     return {
       infos: roomInfos.map((roomInfo) =>
         this.mapToProtoStudioRoomInfo(roomInfo),
@@ -108,6 +110,7 @@ export class StudioRoomService {
   async updateStudioRoom(
     studioId: number,
     roomId: number,
+    user: User,
     updateStudioRoomDto: UpdateStudioRoomDto,
   ): Promise<StudioRoom> {
     const studioRoom = await this.studioRoomRepository.findOne({
@@ -121,6 +124,7 @@ export class StudioRoomService {
     studioRoom.capacity = updateStudioRoomDto.capacity;
     studioRoom.price = updateStudioRoomDto.price;
     studioRoom.size = updateStudioRoomDto.size;
+    studioRoom.updatedUserId = user.id;
     return await this.studioRoomRepository.save(studioRoom);
   }
 
@@ -128,6 +132,7 @@ export class StudioRoomService {
     studioId: number,
     roomId: number,
     infoId: number,
+    user: User,
     updateStudioRoomInfoDto: UpdateStudioRoomInfoDto,
   ): Promise<UpdateStudioRoomInfoResponse> {
     const roomInfo = await this.studioRoomInfoRepository.findOne({
@@ -139,6 +144,7 @@ export class StudioRoomService {
     roomInfo.type = updateStudioRoomInfoDto.type;
     roomInfo.key = updateStudioRoomInfoDto.key;
     roomInfo.value = updateStudioRoomInfoDto.value;
+    roomInfo.updatedUserId = user.id;
     const savedRoomInfo = await this.studioRoomInfoRepository.save(roomInfo);
     return {
       info: this.mapToProtoStudioRoomInfo(savedRoomInfo),
@@ -148,11 +154,13 @@ export class StudioRoomService {
   async createStudioRoomInfo(
     studioId: number,
     roomId: number,
+    user: User,
     createStudioRoomInfoDto: CreateStudioRoomInfoDto,
   ): Promise<CreateStudioRoomInfoResponse> {
     const roomInfo = {
       studioId: studioId,
       studioRoomId: roomId,
+      updatedUserId: user.id,
       ...createStudioRoomInfoDto,
     };
     const savedRoomInfo = await this.studioRoomInfoRepository.save(roomInfo);

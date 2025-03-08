@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   fetchStudioRooms,
-  fetchStudioRoom,
   createStudioRoom,
   updateStudioRoom,
   deleteStudioRoom,
@@ -11,9 +10,15 @@ import {
   updateStudioRoomInfo,
   deleteStudioRoomInfo,
 } from "./api";
+import {
+  CreateStudioRoomRequest,
+  UpdateStudioRoomRequest,
+  CreateStudioRoomInfoRequest,
+  UpdateStudioRoomInfoRequest,
+} from "@/proto/bst/v1/studio_room_service";
 
 // スタジオのルーム一覧を取得するフック
-export const useStudioRooms = (studioId: string | number) => {
+export const useStudioRooms = (studioId: number) => {
   return useQuery({
     queryKey: ["studioRooms", studioId],
     queryFn: () => fetchStudioRooms(studioId),
@@ -21,25 +26,12 @@ export const useStudioRooms = (studioId: string | number) => {
   });
 };
 
-// 特定のスタジオルームを取得するフック
-export const useStudioRoom = (
-  studioId: string | number,
-  roomId: string | number
-) => {
-  return useQuery({
-    queryKey: ["studioRooms", studioId, roomId],
-    queryFn: () => fetchStudioRoom(studioId, roomId),
-    enabled: !!studioId && !!roomId,
-  });
-};
-
-// 新しいスタジオルームを作成するフック
-export const useCreateStudioRoom = (studioId: string | number) => {
+// スタジオルームを作成するフック
+export const useCreateStudioRoom = (studioId: number) => {
   const queryClient = useQueryClient();
-
   return useMutation({
-    mutationFn: (roomData: { name: string; capacity: number; price: number }) =>
-      createStudioRoom(studioId, roomData),
+    mutationFn: (request: CreateStudioRoomRequest) =>
+      createStudioRoom(studioId, request),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["studioRooms", studioId] });
     },
@@ -47,34 +39,22 @@ export const useCreateStudioRoom = (studioId: string | number) => {
 };
 
 // スタジオルームを更新するフック
-export const useUpdateStudioRoom = (
-  studioId: string | number,
-  roomId: string | number
-) => {
+export const useUpdateStudioRoom = (studioId: number, roomId: number) => {
   const queryClient = useQueryClient();
-
   return useMutation({
-    mutationFn: (roomData: {
-      name: string;
-      capacity: number;
-      size: number;
-      price: number;
-    }) => updateStudioRoom(studioId, roomId, roomData),
+    mutationFn: (request: UpdateStudioRoomRequest) =>
+      updateStudioRoom(studioId, roomId, request),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["studioRooms", studioId] });
-      queryClient.invalidateQueries({
-        queryKey: ["studioRooms", studioId, roomId],
-      });
     },
   });
 };
 
 // スタジオルームを削除するフック
-export const useDeleteStudioRoom = (studioId: string | number) => {
+export const useDeleteStudioRoom = (studioId: number) => {
   const queryClient = useQueryClient();
-
   return useMutation({
-    mutationFn: (roomId: string | number) => deleteStudioRoom(studioId, roomId),
+    mutationFn: (roomId: number) => deleteStudioRoom(studioId, roomId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["studioRooms", studioId] });
     },
@@ -82,10 +62,7 @@ export const useDeleteStudioRoom = (studioId: string | number) => {
 };
 
 // スタジオルーム情報一覧を取得するフック
-export const useStudioRoomInfos = (
-  studioId: string | number,
-  roomId: string | number
-) => {
+export const useStudioRoomInfos = (studioId: number, roomId: number) => {
   return useQuery({
     queryKey: ["studioRoomInfos", studioId, roomId],
     queryFn: () => fetchStudioRoomInfos(studioId, roomId),
@@ -94,15 +71,11 @@ export const useStudioRoomInfos = (
 };
 
 // 新しいスタジオルーム情報を作成するフック
-export const useCreateStudioRoomInfo = (
-  studioId: string | number,
-  roomId: string | number
-) => {
+export const useCreateStudioRoomInfo = (studioId: number, roomId: number) => {
   const queryClient = useQueryClient();
-
   return useMutation({
-    mutationFn: (infoData: { type: string; key: string; value: string }) =>
-      createStudioRoomInfo(studioId, roomId, infoData),
+    mutationFn: (request: CreateStudioRoomInfoRequest) =>
+      createStudioRoomInfo(studioId, roomId, request),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["studioRoomInfos", studioId, roomId],
@@ -112,16 +85,16 @@ export const useCreateStudioRoomInfo = (
 };
 
 // スタジオルーム情報を更新するフック
-export const useUpdateStudioRoomInfo = (
-  studioId: string | number,
-  roomId: string | number,
-  infoId: string | number
-) => {
+export const useUpdateStudioRoomInfo = (studioId: number, roomId: number) => {
   const queryClient = useQueryClient();
-
   return useMutation({
-    mutationFn: (infoData: { type: string; key: string; value: string }) =>
-      updateStudioRoomInfo(studioId, roomId, infoId, infoData),
+    mutationFn: ({
+      infoId,
+      request,
+    }: {
+      infoId: number;
+      request: UpdateStudioRoomInfoRequest;
+    }) => updateStudioRoomInfo(studioId, roomId, infoId, request),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["studioRoomInfos", studioId, roomId],
@@ -131,14 +104,10 @@ export const useUpdateStudioRoomInfo = (
 };
 
 // スタジオルーム情報を削除するフック
-export const useDeleteStudioRoomInfo = (
-  studioId: string | number,
-  roomId: string | number
-) => {
+export const useDeleteStudioRoomInfo = (studioId: number, roomId: number) => {
   const queryClient = useQueryClient();
-
   return useMutation({
-    mutationFn: (infoId: string | number) =>
+    mutationFn: (infoId: number) =>
       deleteStudioRoomInfo(studioId, roomId, infoId),
     onSuccess: () => {
       queryClient.invalidateQueries({
