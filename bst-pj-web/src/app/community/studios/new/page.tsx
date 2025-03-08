@@ -11,6 +11,11 @@ import {
   Alert,
   CircularProgress,
   Grid,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -21,9 +26,9 @@ const NewStudioPage = () => {
   const router = useRouter();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
+  const [googleMapsUrl, setGoogleMapsUrl] = useState("");
+  const [additionalInfo, setAdditionalInfo] = useState("");
+  const [areaId, setAreaId] = useState<number | "">("");
   const [error, setError] = useState<string | null>(null);
   const { user } = useSelector((state: RootState) => state.auth);
 
@@ -46,8 +51,8 @@ const NewStudioPage = () => {
       return;
     }
 
-    if (!address.trim()) {
-      setError("住所を入力してください。");
+    if (!areaId) {
+      setError("エリアを選択してください。");
       return;
     }
 
@@ -55,11 +60,9 @@ const NewStudioPage = () => {
       await createStudioMutation.mutateAsync({
         name,
         description,
-        location: {
-          address,
-          phone,
-          email,
-        },
+        googleMapsUrl,
+        additionalInfo,
+        areaId: Number(areaId),
       });
       router.push("/community/studios");
     } catch (err) {
@@ -70,6 +73,10 @@ const NewStudioPage = () => {
 
   const handleCancel = () => {
     router.push("/community/studios");
+  };
+
+  const handleAreaChange = (event: SelectChangeEvent<number | "">) => {
+    setAreaId(event.target.value as number | "");
   };
 
   if (!user) {
@@ -118,43 +125,46 @@ const NewStudioPage = () => {
             disabled={createStudioMutation.isPending}
           />
 
-          <Typography variant="h6" sx={{ mt: 3, mb: 1 }}>
-            所在地情報
-          </Typography>
-
           <TextField
-            label="住所"
+            label="Google Maps URL"
             fullWidth
             margin="normal"
-            required
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            value={googleMapsUrl}
+            onChange={(e) => setGoogleMapsUrl(e.target.value)}
             disabled={createStudioMutation.isPending}
           />
 
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="電話番号"
-                fullWidth
-                margin="normal"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                disabled={createStudioMutation.isPending}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="メールアドレス"
-                fullWidth
-                margin="normal"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                disabled={createStudioMutation.isPending}
-              />
-            </Grid>
-          </Grid>
+          <TextField
+            label="追加情報"
+            fullWidth
+            margin="normal"
+            multiline
+            rows={2}
+            value={additionalInfo}
+            onChange={(e) => setAdditionalInfo(e.target.value)}
+            disabled={createStudioMutation.isPending}
+          />
+
+          <FormControl fullWidth margin="normal" required>
+            <InputLabel id="area-select-label">エリア</InputLabel>
+            <Select
+              labelId="area-select-label"
+              id="area-select"
+              value={areaId}
+              label="エリア"
+              onChange={handleAreaChange}
+              disabled={createStudioMutation.isPending}
+            >
+              <MenuItem value={1}>東京</MenuItem>
+              <MenuItem value={2}>神奈川</MenuItem>
+              <MenuItem value={3}>埼玉</MenuItem>
+              <MenuItem value={4}>千葉</MenuItem>
+              <MenuItem value={5}>大阪</MenuItem>
+              <MenuItem value={6}>京都</MenuItem>
+              <MenuItem value={7}>兵庫</MenuItem>
+              <MenuItem value={8}>名古屋</MenuItem>
+            </Select>
+          </FormControl>
 
           <Box sx={{ mt: 3, display: "flex", gap: 2 }}>
             <Button

@@ -435,7 +435,7 @@ class UpdateStudioRequest extends $pb.GeneratedMessage {
     $core.String? description,
     $core.String? googleMapsUrl,
     $core.String? additionalInfo,
-    $32.Area? area,
+    $core.int? areaId,
   }) {
     final $result = create();
     if (studioId != null) {
@@ -453,8 +453,8 @@ class UpdateStudioRequest extends $pb.GeneratedMessage {
     if (additionalInfo != null) {
       $result.additionalInfo = additionalInfo;
     }
-    if (area != null) {
-      $result.area = area;
+    if (areaId != null) {
+      $result.areaId = areaId;
     }
     return $result;
   }
@@ -468,7 +468,7 @@ class UpdateStudioRequest extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'description')
     ..aOS(4, _omitFieldNames ? '' : 'googleMapsUrl')
     ..aOS(5, _omitFieldNames ? '' : 'additionalInfo')
-    ..aOM<$32.Area>(6, _omitFieldNames ? '' : 'area', subBuilder: $32.Area.create)
+    ..a<$core.int>(6, _omitFieldNames ? '' : 'areaId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -539,15 +539,13 @@ class UpdateStudioRequest extends $pb.GeneratedMessage {
   void clearAdditionalInfo() => clearField(5);
 
   @$pb.TagNumber(6)
-  $32.Area get area => $_getN(5);
+  $core.int get areaId => $_getIZ(5);
   @$pb.TagNumber(6)
-  set area($32.Area v) { setField(6, v); }
+  set areaId($core.int v) { $_setSignedInt32(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasArea() => $_has(5);
+  $core.bool hasAreaId() => $_has(5);
   @$pb.TagNumber(6)
-  void clearArea() => clearField(6);
-  @$pb.TagNumber(6)
-  $32.Area ensureArea() => $_ensure(5);
+  void clearAreaId() => clearField(6);
 }
 
 class UpdateStudioResponse extends $pb.GeneratedMessage {

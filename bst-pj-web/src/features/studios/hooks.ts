@@ -7,13 +7,17 @@ import {
   updateStudio,
   deleteStudio,
 } from "./api";
-import { Location } from "@/proto/bst/v1/location";
+import { Area } from "@/proto/bst/v1/area";
 
 // スタジオ一覧を取得するフック
-export const useStudios = (pageSize?: number, pageToken?: string) => {
+export const useStudios = (
+  pageSize?: number,
+  pageToken?: string,
+  area?: Area
+) => {
   return useQuery({
-    queryKey: ["studios", { pageSize, pageToken }],
-    queryFn: () => fetchStudios(pageSize, pageToken),
+    queryKey: ["studios", { pageSize, pageToken, area }],
+    queryFn: () => fetchStudios(pageSize, pageToken, area),
   });
 };
 
@@ -34,7 +38,9 @@ export const useCreateStudio = () => {
     mutationFn: (studioData: {
       name: string;
       description: string;
-      location: Location;
+      googleMapsUrl: string;
+      additionalInfo: string;
+      areaId: number;
     }) => createStudio(studioData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["studios"] });
@@ -50,7 +56,9 @@ export const useUpdateStudio = (id: string | number) => {
     mutationFn: (studioData: {
       name?: string;
       description?: string;
-      location?: Location;
+      googleMapsUrl?: string;
+      additionalInfo?: string;
+      areaId?: number;
     }) => updateStudio(id, studioData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["studios"] });

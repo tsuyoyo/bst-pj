@@ -49,7 +49,7 @@ export interface UpdateStudioRequest {
   description?: string | undefined;
   googleMapsUrl?: string | undefined;
   additionalInfo?: string | undefined;
-  area?: Area | undefined;
+  areaId?: number | undefined;
 }
 
 export interface UpdateStudioResponse {
@@ -543,7 +543,7 @@ function createBaseUpdateStudioRequest(): UpdateStudioRequest {
     description: undefined,
     googleMapsUrl: undefined,
     additionalInfo: undefined,
-    area: undefined,
+    areaId: undefined,
   };
 }
 
@@ -564,8 +564,8 @@ export const UpdateStudioRequest = {
     if (message.additionalInfo !== undefined) {
       writer.uint32(42).string(message.additionalInfo);
     }
-    if (message.area !== undefined) {
-      Area.encode(message.area, writer.uint32(50).fork()).ldelim();
+    if (message.areaId !== undefined) {
+      writer.uint32(48).int32(message.areaId);
     }
     return writer;
   },
@@ -613,11 +613,11 @@ export const UpdateStudioRequest = {
           message.additionalInfo = reader.string();
           continue;
         case 6:
-          if (tag !== 50) {
+          if (tag !== 48) {
             break;
           }
 
-          message.area = Area.decode(reader, reader.uint32());
+          message.areaId = reader.int32();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -635,7 +635,7 @@ export const UpdateStudioRequest = {
       description: isSet(object.description) ? globalThis.String(object.description) : undefined,
       googleMapsUrl: isSet(object.googleMapsUrl) ? globalThis.String(object.googleMapsUrl) : undefined,
       additionalInfo: isSet(object.additionalInfo) ? globalThis.String(object.additionalInfo) : undefined,
-      area: isSet(object.area) ? Area.fromJSON(object.area) : undefined,
+      areaId: isSet(object.areaId) ? globalThis.Number(object.areaId) : undefined,
     };
   },
 
@@ -656,8 +656,8 @@ export const UpdateStudioRequest = {
     if (message.additionalInfo !== undefined) {
       obj.additionalInfo = message.additionalInfo;
     }
-    if (message.area !== undefined) {
-      obj.area = Area.toJSON(message.area);
+    if (message.areaId !== undefined) {
+      obj.areaId = Math.round(message.areaId);
     }
     return obj;
   },
@@ -672,7 +672,7 @@ export const UpdateStudioRequest = {
     message.description = object.description ?? undefined;
     message.googleMapsUrl = object.googleMapsUrl ?? undefined;
     message.additionalInfo = object.additionalInfo ?? undefined;
-    message.area = (object.area !== undefined && object.area !== null) ? Area.fromPartial(object.area) : undefined;
+    message.areaId = object.areaId ?? undefined;
     return message;
   },
 };

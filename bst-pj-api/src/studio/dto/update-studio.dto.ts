@@ -10,10 +10,6 @@ export class UpdateStudioDto implements Omit<UpdateStudioRequest, 'studioId'> {
   @IsString()
   description?: string;
 
-  @IsOptional()
-  @IsNumber()
-  locationId?: number;
-
   @IsNotEmpty()
   @IsNumber()
   areaId: number;

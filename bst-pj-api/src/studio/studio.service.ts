@@ -58,13 +58,10 @@ export class StudioService {
     const skip = pageToken ? parseInt(pageToken, 10) : 0;
     const take = pageSize || 10;
 
-    const queryBuilder = this.studioRepository
-      .createQueryBuilder('studio')
-      .leftJoinAndSelect('studio.location', 'location')
-      .leftJoinAndSelect('location.area', 'area');
+    const queryBuilder = this.studioRepository.createQueryBuilder('studio');
 
     if (areaId) {
-      queryBuilder.where('area.id = :areaId', { areaId });
+      queryBuilder.where('studio.area_id = :areaId', { areaId });
     }
 
     const [studios, totalSize] = await queryBuilder
@@ -85,7 +82,6 @@ export class StudioService {
   async getStudio(id: number): Promise<GetStudioResponse> {
     const studio = await this.studioRepository.findOne({
       where: { id },
-      relations: ['location', 'location.area'],
     });
 
     if (!studio) {
@@ -104,7 +100,6 @@ export class StudioService {
   ): Promise<UpdateStudioResponse> {
     const studio = await this.studioRepository.findOne({
       where: { id },
-      relations: ['location', 'location.area'],
     });
 
     if (!studio) {

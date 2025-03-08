@@ -58,7 +58,7 @@ message UpdateStudioRequest {
   optional string description     = 3;
   optional string google_maps_url = 4;
   optional string additional_info = 5;
-  optional Area   area            = 6;
+  optional int32  area_id         = 6;
 }
 
 message UpdateStudioResponse {

@@ -51,7 +51,6 @@ describe('StudioService', () => {
     areaId: 1,
     googleMapsUrl: 'https://maps.google.com',
     additionalInfo: 'Additional Info',
-    location: mockLocation,
     rooms: [],
     updatedUserId: 1,
     createdAt: new Date(),
@@ -232,7 +231,6 @@ describe('StudioService', () => {
 
       expect(studioRepository.findOne).toHaveBeenCalledWith({
         where: { id: 1 },
-        relations: ['location', 'location.area'],
       });
       expect(areaRepository.findOne).toHaveBeenCalledWith({
         where: { id: 1 },
@@ -267,7 +265,6 @@ describe('StudioService', () => {
 
       expect(studioRepository.findOne).toHaveBeenCalledWith({
         where: { id: 1 },
-        relations: ['location', 'location.area'],
       });
       expect(studioRepository.save).toHaveBeenCalled();
       expect(areaRepository.findOne).toHaveBeenCalledWith({

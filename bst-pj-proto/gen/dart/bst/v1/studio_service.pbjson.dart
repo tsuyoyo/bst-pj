@@ -111,14 +111,14 @@ const UpdateStudioRequest$json = {
     {'1': 'description', '3': 3, '4': 1, '5': 9, '9': 1, '10': 'description', '17': true},
     {'1': 'google_maps_url', '3': 4, '4': 1, '5': 9, '9': 2, '10': 'googleMapsUrl', '17': true},
     {'1': 'additional_info', '3': 5, '4': 1, '5': 9, '9': 3, '10': 'additionalInfo', '17': true},
-    {'1': 'area', '3': 6, '4': 1, '5': 11, '6': '.bst.v1.Area', '9': 4, '10': 'area', '17': true},
+    {'1': 'area_id', '3': 6, '4': 1, '5': 5, '9': 4, '10': 'areaId', '17': true},
   ],
   '8': [
     {'1': '_name'},
     {'1': '_description'},
     {'1': '_google_maps_url'},
     {'1': '_additional_info'},
-    {'1': '_area'},
+    {'1': '_area_id'},
   ],
 };
 
@@ -127,9 +127,9 @@ final $typed_data.Uint8List updateStudioRequestDescriptor = $convert.base64Decod
     'ChNVcGRhdGVTdHVkaW9SZXF1ZXN0EhsKCXN0dWRpb19pZBgBIAEoBVIIc3R1ZGlvSWQSFwoEbm'
     'FtZRgCIAEoCUgAUgRuYW1liAEBEiUKC2Rlc2NyaXB0aW9uGAMgASgJSAFSC2Rlc2NyaXB0aW9u'
     'iAEBEisKD2dvb2dsZV9tYXBzX3VybBgEIAEoCUgCUg1nb29nbGVNYXBzVXJsiAEBEiwKD2FkZG'
-    'l0aW9uYWxfaW5mbxgFIAEoCUgDUg5hZGRpdGlvbmFsSW5mb4gBARIlCgRhcmVhGAYgASgLMgwu'
-    'YnN0LnYxLkFyZWFIBFIEYXJlYYgBAUIHCgVfbmFtZUIOCgxfZGVzY3JpcHRpb25CEgoQX2dvb2'
-    'dsZV9tYXBzX3VybEISChBfYWRkaXRpb25hbF9pbmZvQgcKBV9hcmVh');
+    'l0aW9uYWxfaW5mbxgFIAEoCUgDUg5hZGRpdGlvbmFsSW5mb4gBARIcCgdhcmVhX2lkGAYgASgF'
+    'SARSBmFyZWFJZIgBAUIHCgVfbmFtZUIOCgxfZGVzY3JpcHRpb25CEgoQX2dvb2dsZV9tYXBzX3'
+    'VybEISChBfYWRkaXRpb25hbF9pbmZvQgoKCF9hcmVhX2lk');
 
 @$core.Deprecated('Use updateStudioResponseDescriptor instead')
 const UpdateStudioResponse$json = {

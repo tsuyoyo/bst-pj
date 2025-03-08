@@ -17,6 +17,7 @@ import {
   Card,
   CardContent,
   Grid,
+  Link,
 } from "@mui/material";
 import {
   Edit as EditIcon,
@@ -24,6 +25,7 @@ import {
   LocationOn,
   Phone,
   Email,
+  Info,
 } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -66,6 +68,20 @@ const StudioDetailPage = ({ params }: { params: { id: string } }) => {
 
   const handleBack = () => {
     router.push("/community/studios");
+  };
+
+  const getAreaName = (areaId: number): string => {
+    const areaMap: Record<number, string> = {
+      1: "東京",
+      2: "神奈川",
+      3: "埼玉",
+      4: "千葉",
+      5: "大阪",
+      6: "京都",
+      7: "兵庫",
+      8: "名古屋",
+    };
+    return areaMap[areaId] || "不明なエリア";
   };
 
   if (isStudioLoading) {
@@ -122,45 +138,49 @@ const StudioDetailPage = ({ params }: { params: { id: string } }) => {
           {studio.description}
         </Typography>
 
-        {studio.location && (
-          <Card sx={{ mb: 3 }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                所在地情報
-              </Typography>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
+        <Card sx={{ mb: 3 }}>
+          <CardContent>
+            <Typography variant="h6" gutterBottom>
+              スタジオ情報
+            </Typography>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+                  <LocationOn sx={{ mr: 1 }} />
+                  <Typography variant="body1">
+                    エリア: {getAreaName(studio.areaId)}
+                  </Typography>
+                </Box>
+              </Grid>
+              {studio.googleMapsUrl && (
+                <Grid item xs={12}>
                   <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
                     <LocationOn sx={{ mr: 1 }} />
+                    <Link
+                      href={studio.googleMapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Google Mapsで見る
+                    </Link>
+                  </Box>
+                </Grid>
+              )}
+              {studio.additionalInfo && (
+                <Grid item xs={12}>
+                  <Box
+                    sx={{ display: "flex", alignItems: "flex-start", mb: 1 }}
+                  >
+                    <Info sx={{ mr: 1, mt: 0.5 }} />
                     <Typography variant="body1">
-                      {studio.location.address}
+                      {studio.additionalInfo}
                     </Typography>
                   </Box>
                 </Grid>
-                {studio.location.phone && (
-                  <Grid item xs={12} sm={6}>
-                    <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-                      <Phone sx={{ mr: 1 }} />
-                      <Typography variant="body1">
-                        {studio.location.phone}
-                      </Typography>
-                    </Box>
-                  </Grid>
-                )}
-                {studio.location.email && (
-                  <Grid item xs={12} sm={6}>
-                    <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-                      <Email sx={{ mr: 1 }} />
-                      <Typography variant="body1">
-                        {studio.location.email}
-                      </Typography>
-                    </Box>
-                  </Grid>
-                )}
-              </Grid>
-            </CardContent>
-          </Card>
-        )}
+              )}
+            </Grid>
+          </CardContent>
+        </Card>
 
         <Box
           sx={{

@@ -7,18 +7,23 @@ import {
   UpdateStudioResponse,
   DeleteStudioResponse,
 } from "@/proto/bst/v1/studio_service";
-import { Location } from "@/proto/bst/v1/location";
+import { Area } from "@/proto/bst/v1/area";
 
 // スタジオ一覧を取得
 export const fetchStudios = async (
   pageSize?: number,
-  pageToken?: string
+  pageToken?: string,
+  area?: Area
 ): Promise<ListStudiosResponse> => {
   const params: Record<string, any> = {};
   params.pageSize = pageSize ?? 10;
 
   if (pageToken) {
     params.pageToken = pageToken;
+  }
+
+  if (area) {
+    params.area = area;
   }
 
   const { data } = await apiClient.get<ListStudiosResponse>("/studios", {
@@ -39,7 +44,9 @@ export const fetchStudio = async (
 export const createStudio = async (studioData: {
   name: string;
   description: string;
-  location: Location;
+  googleMapsUrl: string;
+  additionalInfo: string;
+  areaId: number;
 }): Promise<CreateStudioResponse> => {
   const { data } = await apiClient.post<CreateStudioResponse>(
     "/studios",
@@ -54,7 +61,9 @@ export const updateStudio = async (
   studioData: {
     name?: string;
     description?: string;
-    location?: Location;
+    googleMapsUrl?: string;
+    additionalInfo?: string;
+    areaId?: number;
   }
 ): Promise<UpdateStudioResponse> => {
   const { data } = await apiClient.put<UpdateStudioResponse>(

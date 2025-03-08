@@ -4,11 +4,8 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
-  JoinColumn,
   OneToMany,
 } from 'typeorm';
-import { Location } from './location.entity';
 import { StudioRoom } from './studio-room.entity';
 
 @Entity('studios')
@@ -22,13 +19,13 @@ export class Studio {
   @Column({ type: 'text', nullable: true })
   description: string;
 
-  @Column({ type: 'integer', nullable: false })
+  @Column({ name: 'area_id', type: 'integer', nullable: false })
   areaId: number;
 
-  @Column({ type: 'text', nullable: false })
+  @Column({ name: 'google_maps_url', type: 'text', nullable: false })
   googleMapsUrl: string;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ name: 'additional_info', type: 'text', nullable: true })
   additionalInfo: string;
 
   @CreateDateColumn({ name: 'created_at' })
@@ -36,10 +33,6 @@ export class Studio {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
-
-  @ManyToOne(() => Location, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'location_id' })
-  location: Location;
 
   @OneToMany(() => StudioRoom, (room) => room.studio, { eager: false })
   rooms: StudioRoom[];

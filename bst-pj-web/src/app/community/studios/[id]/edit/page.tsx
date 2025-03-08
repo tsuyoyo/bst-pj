@@ -12,6 +12,11 @@ import {
   Alert,
   CircularProgress,
   Grid,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -24,9 +29,9 @@ const EditStudioPage = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
+  const [googleMapsUrl, setGoogleMapsUrl] = useState("");
+  const [additionalInfo, setAdditionalInfo] = useState("");
+  const [areaId, setAreaId] = useState<number | "">("");
   const [error, setError] = useState<string | null>(null);
   const { user } = useSelector((state: RootState) => state.auth);
 
@@ -50,11 +55,9 @@ const EditStudioPage = ({ params }: { params: { id: string } }) => {
     if (studioData?.studio) {
       setName(studioData.studio.name);
       setDescription(studioData.studio.description || "");
-      if (studioData.studio.location) {
-        setAddress(studioData.studio.location.address || "");
-        setPhone(studioData.studio.location.phone || "");
-        setEmail(studioData.studio.location.email || "");
-      }
+      setGoogleMapsUrl(studioData.studio.googleMapsUrl || "");
+      setAdditionalInfo(studioData.studio.additionalInfo || "");
+      setAreaId(studioData.studio.areaId || "");
     }
   }, [studioData]);
 
@@ -67,8 +70,8 @@ const EditStudioPage = ({ params }: { params: { id: string } }) => {
       return;
     }
 
-    if (!address.trim()) {
-      setError("住所を入力してください。");
+    if (!areaId) {
+      setError("エリアを選択してください。");
       return;
     }
 
@@ -76,11 +79,9 @@ const EditStudioPage = ({ params }: { params: { id: string } }) => {
       await updateStudioMutation.mutateAsync({
         name,
         description,
-        location: {
-          address,
-          phone,
-          email,
-        },
+        googleMapsUrl,
+        additionalInfo,
+        areaId: Number(areaId),
       });
       router.push(`/community/studios/${id}`);
     } catch (err) {
@@ -93,12 +94,32 @@ const EditStudioPage = ({ params }: { params: { id: string } }) => {
     router.push(`/community/studios/${id}`);
   };
 
+  const handleAreaChange = (event: SelectChangeEvent<number | "">) => {
+    setAreaId(event.target.value as number | "");
+  };
+
   if (isStudioLoading) {
     return (
       <Container className="page-container">
         <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
           <CircularProgress />
         </Box>
+      </Container>
+    );
+  }
+
+  if (isStudioError) {
+    return (
+      <Container className="page-container">
+        <Alert severity="error">
+          スタジオの取得に失敗しました。後でもう一度お試しください。
+        </Alert>
+        <Button
+          sx={{ mt: 2 }}
+          onClick={() => router.push("/community/studios")}
+        >
+          一覧に戻る
+        </Button>
       </Container>
     );
   }
@@ -110,10 +131,9 @@ const EditStudioPage = ({ params }: { params: { id: string } }) => {
           スタジオ編集
         </Typography>
 
-        {(error || isStudioError) && (
+        {error && (
           <Alert severity="error" sx={{ mb: 2 }}>
-            {error ||
-              "スタジオの取得に失敗しました。後でもう一度お試しください。"}
+            {error}
           </Alert>
         )}
 
@@ -139,43 +159,46 @@ const EditStudioPage = ({ params }: { params: { id: string } }) => {
             disabled={updateStudioMutation.isPending}
           />
 
-          <Typography variant="h6" sx={{ mt: 3, mb: 1 }}>
-            所在地情報
-          </Typography>
-
           <TextField
-            label="住所"
+            label="Google Maps URL"
             fullWidth
             margin="normal"
-            required
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            value={googleMapsUrl}
+            onChange={(e) => setGoogleMapsUrl(e.target.value)}
             disabled={updateStudioMutation.isPending}
           />
 
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="電話番号"
-                fullWidth
-                margin="normal"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                disabled={updateStudioMutation.isPending}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="メールアドレス"
-                fullWidth
-                margin="normal"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                disabled={updateStudioMutation.isPending}
-              />
-            </Grid>
-          </Grid>
+          <TextField
+            label="追加情報"
+            fullWidth
+            margin="normal"
+            multiline
+            rows={2}
+            value={additionalInfo}
+            onChange={(e) => setAdditionalInfo(e.target.value)}
+            disabled={updateStudioMutation.isPending}
+          />
+
+          <FormControl fullWidth margin="normal" required>
+            <InputLabel id="area-select-label">エリア</InputLabel>
+            <Select
+              labelId="area-select-label"
+              id="area-select"
+              value={areaId}
+              label="エリア"
+              onChange={handleAreaChange}
+              disabled={updateStudioMutation.isPending}
+            >
+              <MenuItem value={1}>東京</MenuItem>
+              <MenuItem value={2}>神奈川</MenuItem>
+              <MenuItem value={3}>埼玉</MenuItem>
+              <MenuItem value={4}>千葉</MenuItem>
+              <MenuItem value={5}>大阪</MenuItem>
+              <MenuItem value={6}>京都</MenuItem>
+              <MenuItem value={7}>兵庫</MenuItem>
+              <MenuItem value={8}>名古屋</MenuItem>
+            </Select>
+          </FormControl>
 
           <Box sx={{ mt: 3, display: "flex", gap: 2 }}>
             <Button
