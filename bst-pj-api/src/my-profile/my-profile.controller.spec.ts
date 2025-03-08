@@ -248,7 +248,7 @@ describe('MyProfileController', () => {
 
   describe('updateUserArea', () => {
     it('should update user area successfully', async () => {
-      const updateRequest = { areaId: 1 };
+      const updateRequest = { prefectureId: 1 };
       jest
         .spyOn(myProfileService, 'updateUserArea')
         .mockResolvedValue(mockUpdateResponse);
@@ -258,7 +258,7 @@ describe('MyProfileController', () => {
       expect(result).toEqual(mockUpdateResponse);
       expect(myProfileService.updateUserArea).toHaveBeenCalledWith(
         mockUser.id,
-        updateRequest.areaId,
+        updateRequest.prefectureId,
       );
     });
   });

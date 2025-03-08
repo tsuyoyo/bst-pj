@@ -81,6 +81,6 @@ export class MyProfileController {
     @Body() request: UpdateUserAreaDto,
     @CurrentUser() user: User,
   ): Promise<UpdateResponse> {
-    return this.myProfileService.updateUserArea(user.id, request.areaId);
+    return this.myProfileService.updateUserArea(user.id, request.prefectureId);
   }
 }

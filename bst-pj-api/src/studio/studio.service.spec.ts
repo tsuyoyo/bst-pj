@@ -5,7 +5,6 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { StudioService } from './studio.service';
 import { Studio } from '../entities/studio.entity';
-import { Location } from '../entities/location.entity';
 import { Area } from '../entities/area.entity';
 import { NotFoundException } from '@nestjs/common';
 import { CreateStudioDto } from './dto/create-studio.dto';
@@ -30,18 +29,6 @@ describe('StudioService', () => {
     prefectureId: 1,
     createdAt: new Date(),
     updatedAt: new Date(),
-  };
-
-  const mockLocation: Location = {
-    id: 1,
-    name: 'Test Location',
-    area: mockArea,
-    googleMapsUrl: 'https://maps.google.com',
-    additionalInfo: 'Additional Info',
-    prefectureId: 1,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    updatedUserId: 1,
   };
 
   const mockStudio: Studio = {

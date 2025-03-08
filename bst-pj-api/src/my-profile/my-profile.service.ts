@@ -170,7 +170,7 @@ export class MyProfileService {
 
   async updateUserArea(
     userId: number,
-    areaId: number,
+    prefectureId: number,
   ): Promise<UpdateResponse> {
     const userProfile = await this.userProfileRepository.findOne({
       where: { userId },
@@ -182,7 +182,7 @@ export class MyProfileService {
       );
     }
 
-    userProfile.prefectureId = areaId;
+    userProfile.prefectureId = prefectureId;
     await this.userProfileRepository.save(userProfile);
 
     const updatedProfile = await this.userProfileService.getUserProfile(userId);

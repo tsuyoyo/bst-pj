@@ -17,6 +17,7 @@ import { CommentModule } from './comment/comment.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
 import { MyProfileModule } from './my-profile/my-profile.module';
 import { SongModule } from './song/song.module';
+import { AreaModule } from './area/area.module';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { SongModule } from './song/song.module';
     UserProfileModule,
     MyProfileModule,
     SongModule,
+    AreaModule,
   ],
   controllers: [AppController],
   providers: [AppService],
