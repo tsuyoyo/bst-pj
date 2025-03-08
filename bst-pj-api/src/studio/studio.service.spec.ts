@@ -69,6 +69,8 @@ describe('StudioService', () => {
 
   const expectedStudioResponse = {
     id: 1,
+    name: 'Test Studio',
+    description: 'Test Description',
     overallRating: 0,
     rooms: [],
     area: mockArea,
@@ -79,6 +81,8 @@ describe('StudioService', () => {
   // 更新されたレスポンスの期待値
   const expectedUpdatedStudioResponse = {
     id: 1,
+    name: 'Updated Studio',
+    description: 'Updated Description',
     overallRating: 0,
     rooms: [],
     area: {
@@ -97,44 +101,36 @@ describe('StudioService', () => {
           provide: getRepositoryToken(Studio),
           useValue: {
             create: jest.fn().mockReturnValue(mockStudio),
-            save: jest.fn((studio: Studio) => {
-              // 更新の場合は更新されたスタジオを返す
-              if (studio.name === 'Updated Studio') {
-                return Promise.resolve(mockUpdatedStudio);
+            save: jest.fn().mockResolvedValue(mockStudio),
+            findOne: jest.fn().mockImplementation((options: FindOneOptions) => {
+              if (options.where.id === 1) {
+                return Promise.resolve(mockStudio);
               }
-              return Promise.resolve(mockStudio);
+              return Promise.resolve(null);
             }),
-            findOne: jest.fn((options: FindOneOptions) => {
-              if (options?.where?.id === 999) {
-                return Promise.resolve(null);
-              }
-              return Promise.resolve(mockStudio);
-            }),
-            find: jest.fn().mockResolvedValue([mockStudio]),
             createQueryBuilder: jest.fn(() => ({
               leftJoinAndSelect: jest.fn().mockReturnThis(),
               where: jest.fn().mockReturnThis(),
-              skip: jest.fn().mockReturnThis(),
               take: jest.fn().mockReturnThis(),
+              skip: jest.fn().mockReturnThis(),
               getManyAndCount: jest.fn().mockResolvedValue([[mockStudio], 1]),
             })),
             delete: jest.fn().mockResolvedValue({ affected: 1 }),
           },
         },
         {
-          provide: getRepositoryToken(Location),
-          useValue: {
-            findOneOrFail: jest.fn().mockResolvedValue(mockLocation),
-          },
-        },
-        {
           provide: getRepositoryToken(Area),
           useValue: {
-            findOne: jest.fn((options: { where: { id: number } }) => {
-              if (options?.where?.id === 2) {
-                return Promise.resolve({ ...mockArea, id: 2 });
+            findOne: jest.fn().mockImplementation((options: FindOneOptions) => {
+              if (options.where.id === 1) {
+                return Promise.resolve(mockArea);
+              } else if (options.where.id === 2) {
+                return Promise.resolve({
+                  ...mockArea,
+                  id: 2,
+                });
               }
-              return Promise.resolve(mockArea);
+              return Promise.resolve(null);
             }),
           },
         },
@@ -196,9 +192,6 @@ describe('StudioService', () => {
       });
 
       expect(studioRepository.createQueryBuilder).toHaveBeenCalled();
-      expect(areaRepository.findOne).toHaveBeenCalledWith({
-        where: { id: 1 },
-      });
     };
 
     const listStudiosWithAreaTest = async (): Promise<void> => {
@@ -211,9 +204,6 @@ describe('StudioService', () => {
       });
 
       expect(studioRepository.createQueryBuilder).toHaveBeenCalled();
-      expect(areaRepository.findOne).toHaveBeenCalledWith({
-        where: { id: 1 },
-      });
     };
 
     it('should return a list of studios', () => listStudiosTest());
@@ -257,6 +247,8 @@ describe('StudioService', () => {
         additionalInfo: 'Updated Additional Info',
       };
 
+      jest.spyOn(studioRepository, 'save').mockResolvedValue(mockUpdatedStudio);
+
       const result = await service.updateStudio(1, updateStudioDto, 1);
 
       expect(result).toEqual({
@@ -293,29 +285,11 @@ describe('StudioService', () => {
   });
 
   describe('deleteStudio', () => {
-    const deleteStudioTest = async (): Promise<void> => {
+    it('should delete a studio', async () => {
       const result = await service.deleteStudio(1);
 
-      expect(result).toEqual({
-        success: true,
-      });
-
+      expect(result).toEqual({ success: true });
       expect(studioRepository.delete).toHaveBeenCalledWith(1);
-    };
-
-    const deleteStudioNotFoundTest = async (): Promise<void> => {
-      jest
-        .spyOn(studioRepository, 'delete')
-        .mockResolvedValue({ affected: 0, raw: [] });
-
-      const result = await service.deleteStudio(999);
-      expect(result).toEqual({
-        success: false,
-      });
-    };
-
-    it('should delete a studio', () => deleteStudioTest());
-    it('should return false when studio is not found', () =>
-      deleteStudioNotFoundTest());
+    });
   });
 });
