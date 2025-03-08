@@ -1,9 +1,7 @@
-import { IsString, IsOptional, IsNumber } from 'class-validator';
+import { IsString, IsOptional, IsNumber, IsNotEmpty } from 'class-validator';
 import { UpdateStudioRequest } from '../../proto/bst/v1/studio_service';
 
-export class UpdateStudioDto
-  implements Omit<UpdateStudioRequest, 'studioId' | 'location'>
-{
+export class UpdateStudioDto implements Omit<UpdateStudioRequest, 'studioId'> {
   @IsOptional()
   @IsString()
   name?: string;
@@ -15,4 +13,15 @@ export class UpdateStudioDto
   @IsOptional()
   @IsNumber()
   locationId?: number;
+
+  @IsNotEmpty()
+  @IsNumber()
+  areaId: number;
+
+  @IsString()
+  googleMapsUrl: string;
+
+  @IsOptional()
+  @IsString()
+  additionalInfo: string;
 }

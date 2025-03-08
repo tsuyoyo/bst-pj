@@ -53,10 +53,12 @@ message GetStudioResponse {
 }
 
 message UpdateStudioRequest {
-  int32             studio_id   = 1;
-  optional string   name        = 2;
-  optional string   description = 3;
-  optional Location location    = 4;
+  int32           studio_id       = 1;
+  optional string name            = 2;
+  optional string description     = 3;
+  optional string google_maps_url = 4;
+  optional string additional_info = 5;
+  optional Area   area            = 6;
 }
 
 message UpdateStudioResponse {

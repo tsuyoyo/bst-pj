@@ -43,11 +43,11 @@ export class SongController {
   @Get()
   async listSongs(
     @Query('pageSize') pageSizeStr?: string,
-    @Query('pageToken') pageToken?: string,
+    @Query('pageToken') pageToken?: string | null,
   ): Promise<ListSongsResponse> {
     const pageSize = pageSizeStr ? parseInt(pageSizeStr, 10) : 10;
     console.log('listSongs', pageSize, pageToken);
-    return await this.songService.listSongs(pageSize, pageToken ?? '');
+    return await this.songService.listSongs(pageSize, pageToken);
   }
 
   @Get(':id')

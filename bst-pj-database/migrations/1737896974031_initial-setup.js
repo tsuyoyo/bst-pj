@@ -134,6 +134,31 @@ exports.up = (pgm) => {
     updated_user_id: { type: "integer", notNull: true },
   });
 
+  // ジャンルの初期データを挿入
+  const genres = [
+    { id: 1, name: "ロック" },
+    { id: 2, name: "ポップス" },
+    { id: 3, name: "ジャズ" },
+    { id: 4, name: "クラシック" },
+    { id: 5, name: "メタル" },
+    { id: 6, name: "パンク" },
+    { id: 7, name: "ブルース" },
+    { id: 8, name: "R&B" },
+    { id: 9, name: "ヒップホップ" },
+    { id: 10, name: "レゲエ" },
+    { id: 11, name: "フォーク" },
+    { id: 12, name: "カントリー" },
+    { id: 13, name: "エレクトロニカ" },
+    { id: 14, name: "アニソン" },
+    { id: 15, name: "J-POP" },
+  ];
+
+  genres.forEach(({ id, name }) => {
+    pgm.sql(
+      `INSERT INTO genres (id, name, updated_user_id) VALUES (${id}, '${name}', 0)`
+    );
+  });
+
   // Create Part table
   pgm.createTable("parts", {
     id: "id",

@@ -8,10 +8,13 @@ import { Studio } from '../entities/studio.entity';
 import { Location } from '../entities/location.entity';
 import { Area } from '../entities/area.entity';
 import { NotFoundException } from '@nestjs/common';
+import { CreateStudioDto } from './dto/create-studio.dto';
+import { UpdateStudioDto } from './dto/update-studio.dto';
 
 describe('StudioService', () => {
   let service: StudioService;
   let studioRepository: Repository<Studio>;
+  let areaRepository: Repository<Area>;
 
   const mockArea: Area = {
     id: 1,
@@ -19,7 +22,6 @@ describe('StudioService', () => {
     prefectureId: 1,
     createdAt: new Date(),
     updatedAt: new Date(),
-    updatedUserId: 1,
   };
 
   const mockLocation: Location = {
@@ -38,7 +40,9 @@ describe('StudioService', () => {
     id: 1,
     name: 'Test Studio',
     description: 'Test Description',
-    locationId: 1,
+    areaId: 1,
+    googleMapsUrl: 'https://maps.google.com',
+    additionalInfo: 'Additional Info',
     location: mockLocation,
     rooms: [],
     updatedUserId: 1,
@@ -46,20 +50,36 @@ describe('StudioService', () => {
     updatedAt: new Date(),
   };
 
+  // 更新されたスタジオのモック
+  const mockUpdatedStudio: Studio = {
+    ...mockStudio,
+    name: 'Updated Studio',
+    description: 'Updated Description',
+    areaId: 2,
+    googleMapsUrl: 'https://maps.google.com/updated',
+    additionalInfo: 'Updated Additional Info',
+  };
+
   const expectedStudioResponse = {
     id: 1,
-    location: {
-      id: 1,
-      name: 'Test Location',
-      additionalInfo: 'Additional Info',
-      area: {
-        name: 'Test Area',
-        prefectureId: 1,
-      },
-      mapUrl: 'https://maps.google.com',
-    },
     overallRating: 0,
     rooms: [],
+    area: mockArea,
+    googleMapsUrl: 'https://maps.google.com',
+    additionalInfo: 'Additional Info',
+  };
+
+  // 更新されたレスポンスの期待値
+  const expectedUpdatedStudioResponse = {
+    id: 1,
+    overallRating: 0,
+    rooms: [],
+    area: {
+      ...mockArea,
+      id: 2,
+    },
+    googleMapsUrl: 'https://maps.google.com/updated',
+    additionalInfo: 'Updated Additional Info',
   };
 
   beforeEach(async () => {
@@ -70,8 +90,19 @@ describe('StudioService', () => {
           provide: getRepositoryToken(Studio),
           useValue: {
             create: jest.fn().mockReturnValue(mockStudio),
-            save: jest.fn().mockResolvedValue(mockStudio),
-            findOne: jest.fn().mockResolvedValue(mockStudio),
+            save: jest.fn((studio) => {
+              // 更新の場合は更新されたスタジオを返す
+              if (studio.name === 'Updated Studio') {
+                return Promise.resolve(mockUpdatedStudio);
+              }
+              return Promise.resolve(mockStudio);
+            }),
+            findOne: jest.fn((options) => {
+              if (options?.where?.id === 999) {
+                return Promise.resolve(null);
+              }
+              return Promise.resolve(mockStudio);
+            }),
             find: jest.fn().mockResolvedValue([mockStudio]),
             createQueryBuilder: jest.fn(() => ({
               leftJoinAndSelect: jest.fn().mockReturnThis(),
@@ -89,6 +120,17 @@ describe('StudioService', () => {
             findOneOrFail: jest.fn().mockResolvedValue(mockLocation),
           },
         },
+        {
+          provide: getRepositoryToken(Area),
+          useValue: {
+            findOne: jest.fn((options) => {
+              if (options?.where?.id === 2) {
+                return Promise.resolve({ ...mockArea, id: 2 });
+              }
+              return Promise.resolve(mockArea);
+            }),
+          },
+        },
       ],
     }).compile();
 
@@ -96,6 +138,7 @@ describe('StudioService', () => {
     studioRepository = module.get<Repository<Studio>>(
       getRepositoryToken(Studio),
     );
+    areaRepository = module.get<Repository<Area>>(getRepositoryToken(Area));
   });
 
   it('should be defined', () => {
@@ -104,12 +147,15 @@ describe('StudioService', () => {
 
   describe('createStudio', () => {
     const createStudioTest = async (): Promise<void> => {
-      const result = await service.createStudio(
-        'Test Studio',
-        'Test Description',
-        1,
-        1,
-      );
+      const createStudioDto: CreateStudioDto = {
+        name: 'Test Studio',
+        description: 'Test Description',
+        areaId: 1,
+        googleMapsUrl: 'https://maps.google.com',
+        additionalInfo: 'Additional Info',
+      };
+
+      const result = await service.createStudio(createStudioDto, 1);
 
       expect(result).toEqual({
         studio: expectedStudioResponse,
@@ -118,10 +164,15 @@ describe('StudioService', () => {
       expect(studioRepository.create).toHaveBeenCalledWith({
         name: 'Test Studio',
         description: 'Test Description',
-        locationId: 1,
+        areaId: 1,
+        googleMapsUrl: 'https://maps.google.com',
+        additionalInfo: 'Additional Info',
         updatedUserId: 1,
       });
       expect(studioRepository.save).toHaveBeenCalled();
+      expect(areaRepository.findOne).toHaveBeenCalledWith({
+        where: { id: 1 },
+      });
     };
 
     it('should create a studio', () => createStudioTest());
@@ -138,6 +189,9 @@ describe('StudioService', () => {
       });
 
       expect(studioRepository.createQueryBuilder).toHaveBeenCalled();
+      expect(areaRepository.findOne).toHaveBeenCalledWith({
+        where: { id: 1 },
+      });
     };
 
     const listStudiosWithAreaTest = async (): Promise<void> => {
@@ -150,6 +204,9 @@ describe('StudioService', () => {
       });
 
       expect(studioRepository.createQueryBuilder).toHaveBeenCalled();
+      expect(areaRepository.findOne).toHaveBeenCalledWith({
+        where: { id: 1 },
+      });
     };
 
     it('should return a list of studios', () => listStudiosTest());
@@ -169,6 +226,9 @@ describe('StudioService', () => {
         where: { id: 1 },
         relations: ['location', 'location.area'],
       });
+      expect(areaRepository.findOne).toHaveBeenCalledWith({
+        where: { id: 1 },
+      });
     };
 
     const getStudioNotFoundTest = async (): Promise<void> => {
@@ -183,16 +243,18 @@ describe('StudioService', () => {
 
   describe('updateStudio', () => {
     const updateStudioTest = async (): Promise<void> => {
-      const result = await service.updateStudio(
-        1,
-        'Updated Studio',
-        'Updated Description',
-        2,
-        1,
-      );
+      const updateStudioDto: UpdateStudioDto = {
+        name: 'Updated Studio',
+        description: 'Updated Description',
+        areaId: 2,
+        googleMapsUrl: 'https://maps.google.com/updated',
+        additionalInfo: 'Updated Additional Info',
+      };
+
+      const result = await service.updateStudio(1, updateStudioDto, 1);
 
       expect(result).toEqual({
-        studio: expectedStudioResponse,
+        studio: expectedUpdatedStudioResponse,
       });
 
       expect(studioRepository.findOne).toHaveBeenCalledWith({
@@ -200,19 +262,23 @@ describe('StudioService', () => {
         relations: ['location', 'location.area'],
       });
       expect(studioRepository.save).toHaveBeenCalled();
+      expect(areaRepository.findOne).toHaveBeenCalledWith({
+        where: { id: 2 },
+      });
     };
 
     const updateStudioNotFoundTest = async (): Promise<void> => {
       jest.spyOn(studioRepository, 'findOne').mockResolvedValue(null);
+      const updateStudioDto: UpdateStudioDto = {
+        name: 'Updated Studio',
+        description: 'Updated Description',
+        areaId: 2,
+        googleMapsUrl: 'https://maps.google.com/updated',
+        additionalInfo: 'Updated Additional Info',
+      };
 
       await expect(
-        service.updateStudio(
-          999,
-          'Updated Studio',
-          'Updated Description',
-          2,
-          1,
-        ),
+        service.updateStudio(999, updateStudioDto, 1),
       ).rejects.toThrow(NotFoundException);
     };
 

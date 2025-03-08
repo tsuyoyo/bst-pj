@@ -22,8 +22,14 @@ export class Studio {
   @Column({ type: 'text', nullable: true })
   description: string;
 
-  @Column({ name: 'location_id', type: 'integer', nullable: false })
-  locationId: number;
+  @Column({ type: 'integer', nullable: false })
+  areaId: number;
+
+  @Column({ type: 'text', nullable: false })
+  googleMapsUrl: string;
+
+  @Column({ type: 'text', nullable: true })
+  additionalInfo: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

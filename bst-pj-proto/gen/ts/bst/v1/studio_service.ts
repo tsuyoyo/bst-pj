@@ -7,7 +7,7 @@
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
 import { Area } from "./area";
-import { Location, Studio } from "./location";
+import { Studio } from "./location";
 
 export const protobufPackage = "bst.v1";
 
@@ -47,7 +47,9 @@ export interface UpdateStudioRequest {
   studioId: number;
   name?: string | undefined;
   description?: string | undefined;
-  location?: Location | undefined;
+  googleMapsUrl?: string | undefined;
+  additionalInfo?: string | undefined;
+  area?: Area | undefined;
 }
 
 export interface UpdateStudioResponse {
@@ -535,7 +537,14 @@ export const GetStudioResponse = {
 };
 
 function createBaseUpdateStudioRequest(): UpdateStudioRequest {
-  return { studioId: 0, name: undefined, description: undefined, location: undefined };
+  return {
+    studioId: 0,
+    name: undefined,
+    description: undefined,
+    googleMapsUrl: undefined,
+    additionalInfo: undefined,
+    area: undefined,
+  };
 }
 
 export const UpdateStudioRequest = {
@@ -549,8 +558,14 @@ export const UpdateStudioRequest = {
     if (message.description !== undefined) {
       writer.uint32(26).string(message.description);
     }
-    if (message.location !== undefined) {
-      Location.encode(message.location, writer.uint32(34).fork()).ldelim();
+    if (message.googleMapsUrl !== undefined) {
+      writer.uint32(34).string(message.googleMapsUrl);
+    }
+    if (message.additionalInfo !== undefined) {
+      writer.uint32(42).string(message.additionalInfo);
+    }
+    if (message.area !== undefined) {
+      Area.encode(message.area, writer.uint32(50).fork()).ldelim();
     }
     return writer;
   },
@@ -588,7 +603,21 @@ export const UpdateStudioRequest = {
             break;
           }
 
-          message.location = Location.decode(reader, reader.uint32());
+          message.googleMapsUrl = reader.string();
+          continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.additionalInfo = reader.string();
+          continue;
+        case 6:
+          if (tag !== 50) {
+            break;
+          }
+
+          message.area = Area.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -604,7 +633,9 @@ export const UpdateStudioRequest = {
       studioId: isSet(object.studioId) ? globalThis.Number(object.studioId) : 0,
       name: isSet(object.name) ? globalThis.String(object.name) : undefined,
       description: isSet(object.description) ? globalThis.String(object.description) : undefined,
-      location: isSet(object.location) ? Location.fromJSON(object.location) : undefined,
+      googleMapsUrl: isSet(object.googleMapsUrl) ? globalThis.String(object.googleMapsUrl) : undefined,
+      additionalInfo: isSet(object.additionalInfo) ? globalThis.String(object.additionalInfo) : undefined,
+      area: isSet(object.area) ? Area.fromJSON(object.area) : undefined,
     };
   },
 
@@ -619,8 +650,14 @@ export const UpdateStudioRequest = {
     if (message.description !== undefined) {
       obj.description = message.description;
     }
-    if (message.location !== undefined) {
-      obj.location = Location.toJSON(message.location);
+    if (message.googleMapsUrl !== undefined) {
+      obj.googleMapsUrl = message.googleMapsUrl;
+    }
+    if (message.additionalInfo !== undefined) {
+      obj.additionalInfo = message.additionalInfo;
+    }
+    if (message.area !== undefined) {
+      obj.area = Area.toJSON(message.area);
     }
     return obj;
   },
@@ -633,9 +670,9 @@ export const UpdateStudioRequest = {
     message.studioId = object.studioId ?? 0;
     message.name = object.name ?? undefined;
     message.description = object.description ?? undefined;
-    message.location = (object.location !== undefined && object.location !== null)
-      ? Location.fromPartial(object.location)
-      : undefined;
+    message.googleMapsUrl = object.googleMapsUrl ?? undefined;
+    message.additionalInfo = object.additionalInfo ?? undefined;
+    message.area = (object.area !== undefined && object.area !== null) ? Area.fromPartial(object.area) : undefined;
     return message;
   },
 };

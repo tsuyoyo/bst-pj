@@ -6,7 +6,9 @@
     "migrate": "node-pg-migrate",
     "migrate:create": "node-pg-migrate create",
     "migrate:up": "node-pg-migrate up",
-    "migrate:down": "node-pg-migrate down"
+    "migrate:down": "node-pg-migrate down",
+    "migrate:dev": "NODE_ENV=development npm run migrate:up",
+    "migrate:prod": "NODE_ENV=production npm run migrate:up"
   },
   "dependencies": {
     "dotenv": "^16.4.7",

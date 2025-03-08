@@ -19,7 +19,6 @@ exports.up = (pgm) => {
       references: "areas",
       onDelete: "CASCADE",
     },
-
     created_at: {
       type: "timestamp",
       notNull: true,

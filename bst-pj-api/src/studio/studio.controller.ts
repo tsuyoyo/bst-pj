@@ -4,7 +4,6 @@ import {
   Delete,
   Get,
   Param,
-  ParseIntPipe,
   Post,
   Put,
   Query,
@@ -12,18 +11,10 @@ import {
 } from '@nestjs/common';
 import { StudioService } from './studio.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { CreateStudioDto } from './dto/create-studio.dto';
-import { UpdateStudioDto } from './dto/update-studio.dto';
-import {
-  CreateStudioResponse,
-  DeleteStudioResponse,
-  GetStudioResponse,
-  ListStudiosResponse,
-  UpdateStudioResponse,
-} from '../proto/bst/v1/studio_service';
 import { CurrentUser } from '../auth/user.decorator';
 import { User } from '../entities/user.entity';
-import { ListStudiosDto } from './dto/list-studio.dto';
+import { CreateStudioDto } from './dto/create-studio.dto';
+import { UpdateStudioDto } from './dto/update-studio.dto';
 
 @Controller('studios')
 export class StudioController {
@@ -32,55 +23,45 @@ export class StudioController {
   @Post()
   @UseGuards(JwtAuthGuard)
   async createStudio(
-    @Body() request: CreateStudioDto,
+    @Body() createStudioDto: CreateStudioDto,
     @CurrentUser() user: User,
-  ): Promise<CreateStudioResponse> {
-    return this.studioService.createStudio(
-      request.name,
-      request.description,
-      request.locationId,
-      user.id,
-    );
+  ) {
+    return await this.studioService.createStudio(createStudioDto, user.id);
   }
 
   @Get()
   async listStudios(
-    // @Query() query: ListStudiosDto,
-    @Query('pageSize') pageSize: number = 10,
-    @Query('pageToken') pageToken: string | null = null,
-    @Query('areaId') areaId: number | null = null,
-  ): Promise<ListStudiosResponse> {
-    return this.studioService.listStudios(pageSize, pageToken, areaId);
+    @Query('pageSize') pageSizeStr: string,
+    @Query('pageToken') pageToken?: string,
+    @Query('areaId') areaIdStr?: string,
+  ) {
+    const pageSize = pageSizeStr ? parseInt(pageSizeStr, 10) : 10;
+    const areaId = areaIdStr ? parseInt(areaIdStr, 10) : undefined;
+    return await this.studioService.listStudios(pageSize, pageToken, areaId);
   }
 
   @Get(':id')
-  async getStudio(
-    @Param('id', ParseIntPipe) id: number,
-  ): Promise<GetStudioResponse> {
-    return this.studioService.getStudio(id);
+  async getStudio(@Param('id') id: string) {
+    return await this.studioService.getStudio(parseInt(id, 10));
   }
 
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   async updateStudio(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() request: UpdateStudioDto,
+    @Param('id') id: string,
+    @Body() updateStudioDto: UpdateStudioDto,
     @CurrentUser() user: User,
-  ): Promise<UpdateStudioResponse> {
-    return this.studioService.updateStudio(
-      id,
-      request.name,
-      request.description,
-      request.locationId,
+  ) {
+    return await this.studioService.updateStudio(
+      parseInt(id, 10),
+      updateStudioDto,
       user.id,
     );
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  async deleteStudio(
-    @Param('id', ParseIntPipe) id: number,
-  ): Promise<DeleteStudioResponse> {
-    return this.studioService.deleteStudio(id);
+  async deleteStudio(@Param('id') id: string) {
+    return await this.studioService.deleteStudio(parseInt(id, 10));
   }
 }

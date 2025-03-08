@@ -2,8 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Studio } from '../entities/studio.entity';
+import { Studio as ProtoStudio } from '../proto/bst/v1/location';
 import { Location } from '../entities/location.entity';
-import { StudioMapper } from './mapper/studio.mapper';
 import {
   CreateStudioResponse,
   ListStudiosResponse,
@@ -11,7 +11,9 @@ import {
   UpdateStudioResponse,
   DeleteStudioResponse,
 } from '../proto/bst/v1/studio_service';
-
+import { CreateStudioDto } from './dto/create-studio.dto';
+import { UpdateStudioDto } from './dto/update-studio.dto';
+import { Area } from '../entities/area.entity';
 @Injectable()
 export class StudioService {
   constructor(
@@ -19,35 +21,32 @@ export class StudioService {
     private readonly studioRepository: Repository<Studio>,
     @InjectRepository(Location)
     private readonly locationRepository: Repository<Location>,
+    @InjectRepository(Area)
+    private readonly areaRepository: Repository<Area>,
   ) {}
 
   async createStudio(
-    name: string,
-    description: string,
-    locationId: number,
+    createStudioDto: CreateStudioDto,
     userId: number,
   ): Promise<CreateStudioResponse> {
-    const location = await this.locationRepository.findOneOrFail({
-      where: { id: locationId },
-    });
-
     const studio = this.studioRepository.create({
-      name,
-      description,
-      locationId: location.id,
+      name: createStudioDto.name,
+      description: createStudioDto.description,
+      areaId: createStudioDto.areaId,
+      googleMapsUrl: createStudioDto.googleMapsUrl,
+      additionalInfo: createStudioDto.additionalInfo,
       updatedUserId: userId,
     });
 
     const savedStudio = await this.studioRepository.save(studio);
     const studioWithLocation = await this.studioRepository.findOne({
       where: { id: savedStudio.id },
-      relations: ['location'],
     });
-
+    if (!studioWithLocation) {
+      throw new NotFoundException(`Studio with ID ${savedStudio.id} not found`);
+    }
     return {
-      studio: studioWithLocation
-        ? StudioMapper.toProto(studioWithLocation)
-        : undefined,
+      studio: await this.toProto(studioWithLocation),
     };
   }
 
@@ -77,7 +76,7 @@ export class StudioService {
       studios.length === take ? (skip + take).toString() : null;
 
     return {
-      studios: StudioMapper.toProtoList(studios),
+      studios: await this.toProtoList(studios),
       nextPageToken: nextPageToken || '',
       totalSize,
     };
@@ -94,15 +93,13 @@ export class StudioService {
     }
 
     return {
-      studio: StudioMapper.toProto(studio),
+      studio: await this.toProto(studio),
     };
   }
 
   async updateStudio(
     id: number,
-    name: string | undefined,
-    description: string | undefined,
-    locationId: number | undefined,
+    updateStudioDto: UpdateStudioDto,
     userId: number,
   ): Promise<UpdateStudioResponse> {
     const studio = await this.studioRepository.findOne({
@@ -114,23 +111,27 @@ export class StudioService {
       throw new NotFoundException(`Studio with ID ${id} not found`);
     }
 
-    if (name) {
-      studio.name = name;
+    if (updateStudioDto.name !== undefined) {
+      studio.name = updateStudioDto.name;
     }
-    if (description !== undefined) {
-      studio.description = description;
+    if (updateStudioDto.description !== undefined) {
+      studio.description = updateStudioDto.description;
     }
-    if (locationId) {
-      const location = await this.locationRepository.findOneOrFail({
-        where: { id: locationId },
-      });
-      studio.locationId = location.id;
+    if (updateStudioDto.areaId !== undefined) {
+      studio.areaId = updateStudioDto.areaId;
     }
+    if (updateStudioDto.googleMapsUrl !== undefined) {
+      studio.googleMapsUrl = updateStudioDto.googleMapsUrl;
+    }
+    if (updateStudioDto.additionalInfo !== undefined) {
+      studio.additionalInfo = updateStudioDto.additionalInfo;
+    }
+
     studio.updatedUserId = userId;
 
     const updatedStudio = await this.studioRepository.save(studio);
     return {
-      studio: StudioMapper.toProto(updatedStudio),
+      studio: await this.toProto(updatedStudio),
     };
   }
 
@@ -139,5 +140,26 @@ export class StudioService {
     return {
       success: result.affected ? result.affected > 0 : false,
     };
+  }
+
+  private async toProto(entity: Studio): Promise<ProtoStudio> {
+    const area = await this.areaRepository.findOne({
+      where: { id: entity.areaId },
+    });
+    if (!area) {
+      throw new NotFoundException(`Area with ID ${entity.areaId} not found`);
+    }
+    return {
+      id: entity.id,
+      overallRating: 0, // TODO: Implement rating calculation logic
+      rooms: [],
+      area: area,
+      googleMapsUrl: entity.googleMapsUrl,
+      additionalInfo: entity.additionalInfo,
+    };
+  }
+
+  private async toProtoList(entities: Studio[]): Promise<ProtoStudio[]> {
+    return Promise.all(entities.map((entity) => this.toProto(entity)));
   }
 }

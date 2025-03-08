@@ -16,7 +16,6 @@ describe('LocationService', () => {
     name: 'Test Area',
     prefectureId: 1,
     createdAt: new Date(),
-    updatedUserId: 1,
     updatedAt: new Date(),
   };
 

@@ -109,12 +109,16 @@ const UpdateStudioRequest$json = {
     {'1': 'studio_id', '3': 1, '4': 1, '5': 5, '10': 'studioId'},
     {'1': 'name', '3': 2, '4': 1, '5': 9, '9': 0, '10': 'name', '17': true},
     {'1': 'description', '3': 3, '4': 1, '5': 9, '9': 1, '10': 'description', '17': true},
-    {'1': 'location', '3': 4, '4': 1, '5': 11, '6': '.bst.v1.Location', '9': 2, '10': 'location', '17': true},
+    {'1': 'google_maps_url', '3': 4, '4': 1, '5': 9, '9': 2, '10': 'googleMapsUrl', '17': true},
+    {'1': 'additional_info', '3': 5, '4': 1, '5': 9, '9': 3, '10': 'additionalInfo', '17': true},
+    {'1': 'area', '3': 6, '4': 1, '5': 11, '6': '.bst.v1.Area', '9': 4, '10': 'area', '17': true},
   ],
   '8': [
     {'1': '_name'},
     {'1': '_description'},
-    {'1': '_location'},
+    {'1': '_google_maps_url'},
+    {'1': '_additional_info'},
+    {'1': '_area'},
   ],
 };
 
@@ -122,8 +126,10 @@ const UpdateStudioRequest$json = {
 final $typed_data.Uint8List updateStudioRequestDescriptor = $convert.base64Decode(
     'ChNVcGRhdGVTdHVkaW9SZXF1ZXN0EhsKCXN0dWRpb19pZBgBIAEoBVIIc3R1ZGlvSWQSFwoEbm'
     'FtZRgCIAEoCUgAUgRuYW1liAEBEiUKC2Rlc2NyaXB0aW9uGAMgASgJSAFSC2Rlc2NyaXB0aW9u'
-    'iAEBEjEKCGxvY2F0aW9uGAQgASgLMhAuYnN0LnYxLkxvY2F0aW9uSAJSCGxvY2F0aW9uiAEBQg'
-    'cKBV9uYW1lQg4KDF9kZXNjcmlwdGlvbkILCglfbG9jYXRpb24=');
+    'iAEBEisKD2dvb2dsZV9tYXBzX3VybBgEIAEoCUgCUg1nb29nbGVNYXBzVXJsiAEBEiwKD2FkZG'
+    'l0aW9uYWxfaW5mbxgFIAEoCUgDUg5hZGRpdGlvbmFsSW5mb4gBARIlCgRhcmVhGAYgASgLMgwu'
+    'YnN0LnYxLkFyZWFIBFIEYXJlYYgBAUIHCgVfbmFtZUIOCgxfZGVzY3JpcHRpb25CEgoQX2dvb2'
+    'dsZV9tYXBzX3VybEISChBfYWRkaXRpb25hbF9pbmZvQgcKBV9hcmVh');
 
 @$core.Deprecated('Use updateStudioResponseDescriptor instead')
 const UpdateStudioResponse$json = {

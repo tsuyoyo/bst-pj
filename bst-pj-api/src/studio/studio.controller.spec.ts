@@ -6,6 +6,8 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { JwtService } from '@nestjs/jwt';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { User } from '../entities/user.entity';
+import { CreateStudioDto } from './dto/create-studio.dto';
+import { UpdateStudioDto } from './dto/update-studio.dto';
 
 describe('StudioController', () => {
   let controller: StudioController;
@@ -20,17 +22,15 @@ describe('StudioController', () => {
   const mockStudioResponse = {
     studio: {
       id: 1,
-      location: {
+      area: {
         id: 1,
-        name: 'Test Location',
-        additionalInfo: 'Additional Info',
-        area: {
-          name: 'Test Area',
-          prefectureId: 1,
-        },
-        mapUrl: 'https://maps.google.com',
+        name: 'Test Area',
+        prefectureId: 1,
       },
+      googleMapsUrl: 'https://maps.google.com',
+      additionalInfo: 'Additional Info',
       overallRating: 0,
+      rooms: [],
     },
   };
 
@@ -81,10 +81,12 @@ describe('StudioController', () => {
 
   describe('createStudio', () => {
     it('should create a studio', async () => {
-      const createStudioDto = {
+      const createStudioDto: CreateStudioDto = {
         name: 'Test Studio',
         description: 'Test Description',
-        locationId: 1,
+        areaId: 1,
+        googleMapsUrl: 'https://maps.google.com',
+        additionalInfo: 'Additional Info',
       };
 
       const result = await controller.createStudio(
@@ -93,9 +95,7 @@ describe('StudioController', () => {
       );
       expect(result).toEqual(mockStudioResponse);
       expect(service.createStudio).toHaveBeenCalledWith(
-        createStudioDto.name,
-        createStudioDto.description,
-        createStudioDto.locationId,
+        createStudioDto,
         mockUser.id,
       );
     });
@@ -103,19 +103,33 @@ describe('StudioController', () => {
 
   describe('listStudios', () => {
     it('should return a list of studios', async () => {
-      const result = await controller.listStudios(10, null);
+      const result = await controller.listStudios('10');
       expect(result).toEqual({
         studios: [mockStudioResponse.studio],
         nextPageToken: '',
         totalSize: 1,
       });
-      expect(service.listStudios).toHaveBeenCalledWith(10, null, undefined);
+      expect(service.listStudios).toHaveBeenCalledWith(
+        10,
+        undefined,
+        undefined,
+      );
+    });
+
+    it('should pass areaId when provided', async () => {
+      const result = await controller.listStudios('10', undefined, '1');
+      expect(result).toEqual({
+        studios: [mockStudioResponse.studio],
+        nextPageToken: '',
+        totalSize: 1,
+      });
+      expect(service.listStudios).toHaveBeenCalledWith(10, undefined, 1);
     });
   });
 
   describe('getStudio', () => {
     it('should return a studio', async () => {
-      const result = await controller.getStudio(1);
+      const result = await controller.getStudio('1');
       expect(result).toEqual(mockStudioResponse);
       expect(service.getStudio).toHaveBeenCalledWith(1);
     });
@@ -123,23 +137,23 @@ describe('StudioController', () => {
 
   describe('updateStudio', () => {
     it('should update a studio', async () => {
-      const updateStudioDto = {
+      const updateStudioDto: UpdateStudioDto = {
         name: 'Updated Studio',
         description: 'Updated Description',
-        locationId: 2,
+        areaId: 2,
+        googleMapsUrl: 'https://maps.google.com/updated',
+        additionalInfo: 'Updated Additional Info',
       };
 
       const result = await controller.updateStudio(
-        1,
+        '1',
         updateStudioDto,
         mockUser as User,
       );
       expect(result).toEqual(mockStudioResponse);
       expect(service.updateStudio).toHaveBeenCalledWith(
         1,
-        updateStudioDto.name,
-        updateStudioDto.description,
-        updateStudioDto.locationId,
+        updateStudioDto,
         mockUser.id,
       );
     });
@@ -147,7 +161,7 @@ describe('StudioController', () => {
 
   describe('deleteStudio', () => {
     it('should delete a studio', async () => {
-      const result = await controller.deleteStudio(1);
+      const result = await controller.deleteStudio('1');
       expect(result).toEqual({ success: true });
       expect(service.deleteStudio).toHaveBeenCalledWith(1);
     });

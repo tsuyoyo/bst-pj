@@ -56,7 +56,6 @@ describe('ArtistController', () => {
     it('should create an artist', async () => {
       const createArtistDto: CreateArtistDto = {
         name: 'Test Artist',
-        description: 'Test Description',
         website: 'http://test.com',
         genreIds: [1, 2],
       };
@@ -136,7 +135,6 @@ describe('ArtistController', () => {
       const artistId = '1';
       const updateArtistDto: UpdateArtistDto = {
         name: 'Updated Artist',
-        description: 'Updated Description',
         website: 'http://updated.com',
         genreIds: [2, 3],
       };

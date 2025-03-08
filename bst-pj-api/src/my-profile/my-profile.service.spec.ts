@@ -37,7 +37,6 @@ describe('MyProfileService', () => {
     id: 1,
     name: 'Test Area',
     prefectureId: 1,
-    updatedUserId: 1,
     createdAt: new Date(),
     updatedAt: new Date(),
   };

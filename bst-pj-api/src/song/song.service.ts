@@ -67,7 +67,7 @@ export class SongService {
 
   async listSongs(
     pageSize: number,
-    pageToken: string | null,
+    pageToken?: string | null,
   ): Promise<ListSongsResponse> {
     try {
       const skip = pageToken ? parseInt(pageToken, 10) : 0;

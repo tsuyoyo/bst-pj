@@ -124,7 +124,6 @@ describe('SongController', () => {
     it('should create a song', async () => {
       const createSongDto: CreateSongDto = {
         title: 'Test Song',
-        description: 'Test Description',
         artistId: 1,
       };
 
@@ -139,7 +138,7 @@ describe('SongController', () => {
 
   describe('listSongs', () => {
     it('should return a list of songs', async () => {
-      const result = await controller.listSongs(10, null);
+      const result = await controller.listSongs('10', null);
       expect(result.songs).toBeDefined();
       expect(Array.isArray(result.songs)).toBe(true);
       expect(service.listSongs).toHaveBeenCalledWith(10, null);
@@ -190,7 +189,7 @@ describe('SongController', () => {
 
   describe('listSongResources', () => {
     it('should return a list of song resources', async () => {
-      const result = await controller.listSongResources(1, 10, 0);
+      const result = await controller.listSongResources(1, '10', '0');
       expect(result.resources).toBeDefined();
       expect(Array.isArray(result.resources)).toBe(true);
       expect(service.listSongResources).toHaveBeenCalledWith(1, 10, 0);

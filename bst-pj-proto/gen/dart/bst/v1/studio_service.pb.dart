@@ -433,7 +433,9 @@ class UpdateStudioRequest extends $pb.GeneratedMessage {
     $core.int? studioId,
     $core.String? name,
     $core.String? description,
-    $35.Location? location,
+    $core.String? googleMapsUrl,
+    $core.String? additionalInfo,
+    $32.Area? area,
   }) {
     final $result = create();
     if (studioId != null) {
@@ -445,8 +447,14 @@ class UpdateStudioRequest extends $pb.GeneratedMessage {
     if (description != null) {
       $result.description = description;
     }
-    if (location != null) {
-      $result.location = location;
+    if (googleMapsUrl != null) {
+      $result.googleMapsUrl = googleMapsUrl;
+    }
+    if (additionalInfo != null) {
+      $result.additionalInfo = additionalInfo;
+    }
+    if (area != null) {
+      $result.area = area;
     }
     return $result;
   }
@@ -458,7 +466,9 @@ class UpdateStudioRequest extends $pb.GeneratedMessage {
     ..a<$core.int>(1, _omitFieldNames ? '' : 'studioId', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'description')
-    ..aOM<$35.Location>(4, _omitFieldNames ? '' : 'location', subBuilder: $35.Location.create)
+    ..aOS(4, _omitFieldNames ? '' : 'googleMapsUrl')
+    ..aOS(5, _omitFieldNames ? '' : 'additionalInfo')
+    ..aOM<$32.Area>(6, _omitFieldNames ? '' : 'area', subBuilder: $32.Area.create)
     ..hasRequiredFields = false
   ;
 
@@ -511,15 +521,33 @@ class UpdateStudioRequest extends $pb.GeneratedMessage {
   void clearDescription() => clearField(3);
 
   @$pb.TagNumber(4)
-  $35.Location get location => $_getN(3);
+  $core.String get googleMapsUrl => $_getSZ(3);
   @$pb.TagNumber(4)
-  set location($35.Location v) { setField(4, v); }
+  set googleMapsUrl($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasLocation() => $_has(3);
+  $core.bool hasGoogleMapsUrl() => $_has(3);
   @$pb.TagNumber(4)
-  void clearLocation() => clearField(4);
-  @$pb.TagNumber(4)
-  $35.Location ensureLocation() => $_ensure(3);
+  void clearGoogleMapsUrl() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get additionalInfo => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set additionalInfo($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasAdditionalInfo() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearAdditionalInfo() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $32.Area get area => $_getN(5);
+  @$pb.TagNumber(6)
+  set area($32.Area v) { setField(6, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasArea() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearArea() => clearField(6);
+  @$pb.TagNumber(6)
+  $32.Area ensureArea() => $_ensure(5);
 }
 
 class UpdateStudioResponse extends $pb.GeneratedMessage {
