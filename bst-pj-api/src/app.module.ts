@@ -19,6 +19,7 @@ import { MyProfileModule } from './my-profile/my-profile.module';
 import { SongModule } from './song/song.module';
 import { AreaModule } from './area/area.module';
 import { StudioRoomModule } from './studio-room/studio-room.module';
+import { UserPrefectureModule } from './user-prefecture/user-prefecture.module';
 
 @Module({
   imports: [
@@ -56,6 +57,7 @@ import { StudioRoomModule } from './studio-room/studio-room.module';
     SongModule,
     AreaModule,
     StudioRoomModule,
+    UserPrefectureModule,
   ],
   controllers: [AppController],
   providers: [AppService],

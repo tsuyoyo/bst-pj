@@ -24,7 +24,7 @@ message UserFavorite {
 message UserProfile {
   User                      user         = 1;
   string                    introduction = 2;
-  Area                      area         = 3;
+  repeated Area                      areas         = 3;
   UserFavorite              favorite     = 4;
   google.protobuf.Timestamp created_at   = 5;
 

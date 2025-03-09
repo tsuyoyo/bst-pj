@@ -134,11 +134,11 @@ export const updateUserParts = async (
  * @returns Promise with update response
  */
 export const updateUserArea = async (
-  prefectureId: number
+  prefectureIds: number[]
 ): Promise<UpdateResponse> => {
   try {
     const { data } = await apiClient.put<UpdateResponse>("/my-profile/area", {
-      prefectureId,
+      prefectureIds,
     });
     return data;
   } catch (error) {
@@ -170,7 +170,7 @@ export const updateProfileField = async (
     case "parts":
       return updateUserParts(value as number[]);
     case "area":
-      return updateUserArea(value as number);
+      return updateUserArea(value as number[]);
     default:
       throw new Error("不明なフィールドタイプです");
   }

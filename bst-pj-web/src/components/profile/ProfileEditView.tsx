@@ -170,10 +170,7 @@ export default function ProfileEditView({
 
     // 選択タイプに応じて更新処理を実行
     updateProfile(
-      {
-        field: selectionType,
-        value: selectionType === "area" ? selectedIds[0] : selectedIds,
-      },
+      { field: selectionType, value: selectedIds },
       {
         onSuccess: (data) => {
           if (onProfileUpdated && data.profile) {
@@ -228,17 +225,15 @@ export default function ProfileEditView({
         };
       case "area":
         return {
-          title: "主な活動場所を選択",
+          title: "活動場所を選択",
           items:
             areasData?.areas.map((area) => ({
               id: area.prefectureId,
               name: area.name,
             })) || [],
-          selectedIds: profile.area?.prefectureId
-            ? [profile.area.prefectureId]
-            : [],
+          selectedIds: profile.areas?.map((area) => area.prefectureId) || [],
           loading: areasLoading,
-          multiSelect: false,
+          multiSelect: true,
         };
       default:
         return null;
@@ -347,22 +342,42 @@ export default function ProfileEditView({
         <Grid container spacing={2} sx={{ mb: 3 }}>
           {/* Activity area */}
           <Grid item xs={12} sm={6}>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <LocationIcon color="action" sx={{ mr: 1 }} />
-              <Typography variant="subtitle2" component="span">
-                主な活動場所:
-              </Typography>
-              <Typography variant="body2" sx={{ ml: 1 }}>
-                {profile.area?.name || "未設定"}
-              </Typography>
-              <IconButton
-                size="small"
-                onClick={() => handleOpenModal("area")}
-                disabled={isLoading}
-                sx={{ ml: 1 }}
-              >
-                <EditIcon fontSize="small" />
-              </IconButton>
+            <Box sx={{ display: "flex", alignItems: "flex-start" }}>
+              <LocationIcon color="action" sx={{ mr: 1, mt: 0.5 }} />
+              <Box>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Typography variant="subtitle2" component="span">
+                    主な活動場所:
+                  </Typography>
+                  <IconButton
+                    size="small"
+                    onClick={() => handleOpenModal("area")}
+                    disabled={isLoading}
+                    sx={{ ml: 1 }}
+                  >
+                    <EditIcon fontSize="small" />
+                  </IconButton>
+                </Box>
+                <Box
+                  sx={{ display: "flex", flexWrap: "wrap", gap: 0.5, mt: 0.5 }}
+                >
+                  {profile.areas && profile.areas.length > 0 ? (
+                    profile.areas.map((area) => (
+                      <Chip
+                        key={area.prefectureId}
+                        label={area.name}
+                        size="small"
+                        color="primary"
+                        variant="outlined"
+                      />
+                    ))
+                  ) : (
+                    <Typography variant="body2" color="text.secondary">
+                      未設定
+                    </Typography>
+                  )}
+                </Box>
+              </Box>
             </Box>
           </Grid>
 

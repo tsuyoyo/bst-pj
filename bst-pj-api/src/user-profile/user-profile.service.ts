@@ -7,6 +7,7 @@ import { UserGenreService } from '../user-genre/user-genre.service';
 import { UserPartService } from '../user-part/user-part.service';
 import { UserArtistService } from '../user-artist/user-artist.service';
 import { UserService } from '../user/user.service';
+import { UserPrefectureService } from '../user-prefecture/user-prefecture.service';
 
 @Injectable()
 export class UserProfileService {
@@ -17,19 +18,19 @@ export class UserProfileService {
     private readonly userGenreService: UserGenreService,
     private readonly userPartService: UserPartService,
     private readonly userArtistService: UserArtistService,
+    private readonly userPrefectureService: UserPrefectureService,
   ) {}
 
   private mapProfileToProto(profile: UserProfile) {
     return {
       bio: profile.bio || '',
-      areaId: profile.prefectureId || 0,
     };
   }
 
   async getUserProfile(userId: number): Promise<GetUserProfileResponse> {
     const userProfile = await this.userProfileRepository.findOne({
       where: { userId },
-      relations: ['user', 'area'],
+      relations: ['user'],
     });
 
     if (!userProfile) {
@@ -37,6 +38,8 @@ export class UserProfileService {
         `User profile not found for user ID: ${userId}`,
       );
     }
+
+    const areas = await this.userPrefectureService.getUserPrefectures(userId);
 
     const userGenres =
       await this.userGenreService.getUserPreferredGenres(userId);
@@ -50,12 +53,7 @@ export class UserProfileService {
       profile: {
         user: this.userService.mapUserToProto(userProfile.user),
         ...this.mapProfileToProto(userProfile),
-        area: userProfile.area
-          ? {
-              name: userProfile.area.name,
-              prefectureId: userProfile.area.prefectureId,
-            }
-          : undefined,
+        areas: areas,
         favorite: {
           genres: userGenres,
           artists: userArtists,

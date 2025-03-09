@@ -11,12 +11,14 @@ import {
   GetMyProfileResponse,
   UpdateResponse,
 } from '../proto/bst/v1/my_profile_service';
+import { GcpStorageService } from './gcp-storage.service';
+import { FileValidationService } from './file-validation.service';
 
 describe('MyProfileController', () => {
   let controller: MyProfileController;
   let myProfileService: MyProfileService;
 
-  const mockUser: User = {
+  const mockUser = {
     id: 1,
     name: 'Test User',
     email: 'test@example.com',
@@ -27,7 +29,7 @@ describe('MyProfileController', () => {
     profilePictureUrl: null,
     createdAt: new Date(),
     updatedAt: new Date(),
-  };
+  } as User;
 
   const mockGetMyProfileResponse: GetMyProfileResponse = {
     profile: {
@@ -37,10 +39,12 @@ describe('MyProfileController', () => {
         icon: mockUser.iconUrl || '',
       },
       introduction: 'Test Bio',
-      area: {
-        name: 'Test Area',
-        prefectureId: 1,
-      },
+      areas: [
+        {
+          name: 'Test Area',
+          prefectureId: 1,
+        },
+      ],
       favorite: {
         genres: [],
         artists: [],
@@ -60,10 +64,12 @@ describe('MyProfileController', () => {
         icon: mockUser.iconUrl || '',
       },
       introduction: 'Test Bio',
-      area: {
-        name: 'Test Area',
-        prefectureId: 1,
-      },
+      areas: [
+        {
+          name: 'Test Area',
+          prefectureId: 1,
+        },
+      ],
       favorite: {
         genres: [],
         artists: [],
@@ -89,7 +95,8 @@ describe('MyProfileController', () => {
             updateUserGenres: jest.fn(),
             updateUserArtists: jest.fn(),
             updateUserParts: jest.fn(),
-            updateUserArea: jest.fn(),
+            updateUserPrefectures: jest.fn(),
+            getUserPrefectures: jest.fn(),
           },
         },
         {
@@ -109,6 +116,20 @@ describe('MyProfileController', () => {
           provide: getRepositoryToken(User),
           useValue: {
             findOne: jest.fn(),
+          },
+        },
+        {
+          provide: GcpStorageService,
+          useValue: {
+            generateSignedUrlForUserIcon: jest.fn(),
+            compressAndUploadUserIcon: jest.fn(),
+            deleteFile: jest.fn(),
+          },
+        },
+        {
+          provide: FileValidationService,
+          useValue: {
+            validateAndCompressImage: jest.fn(),
           },
         },
       ],
@@ -248,17 +269,17 @@ describe('MyProfileController', () => {
 
   describe('updateUserArea', () => {
     it('should update user area successfully', async () => {
-      const updateRequest = { prefectureId: 1 };
+      const updateRequest = { prefectureIds: [1] };
       jest
-        .spyOn(myProfileService, 'updateUserArea')
+        .spyOn(myProfileService, 'updateUserPrefectures')
         .mockResolvedValue(mockUpdateResponse);
 
       const result = await controller.updateUserArea(updateRequest, mockUser);
 
       expect(result).toEqual(mockUpdateResponse);
-      expect(myProfileService.updateUserArea).toHaveBeenCalledWith(
+      expect(myProfileService.updateUserPrefectures).toHaveBeenCalledWith(
         mockUser.id,
-        updateRequest.prefectureId,
+        updateRequest.prefectureIds,
       );
     });
   });

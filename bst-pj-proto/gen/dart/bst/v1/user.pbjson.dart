@@ -50,7 +50,7 @@ const UserProfile$json = {
   '2': [
     {'1': 'user', '3': 1, '4': 1, '5': 11, '6': '.bst.v1.User', '10': 'user'},
     {'1': 'introduction', '3': 2, '4': 1, '5': 9, '10': 'introduction'},
-    {'1': 'area', '3': 3, '4': 1, '5': 11, '6': '.bst.v1.Area', '10': 'area'},
+    {'1': 'areas', '3': 3, '4': 3, '5': 11, '6': '.bst.v1.Area', '10': 'areas'},
     {'1': 'favorite', '3': 4, '4': 1, '5': 11, '6': '.bst.v1.UserFavorite', '10': 'favorite'},
     {'1': 'created_at', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     {'1': 'badges', '3': 6, '4': 3, '5': 11, '6': '.bst.v1.UserRatingBadge', '10': 'badges'},
@@ -60,10 +60,11 @@ const UserProfile$json = {
 /// Descriptor for `UserProfile`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List userProfileDescriptor = $convert.base64Decode(
     'CgtVc2VyUHJvZmlsZRIgCgR1c2VyGAEgASgLMgwuYnN0LnYxLlVzZXJSBHVzZXISIgoMaW50cm'
-    '9kdWN0aW9uGAIgASgJUgxpbnRyb2R1Y3Rpb24SIAoEYXJlYRgDIAEoCzIMLmJzdC52MS5BcmVh'
-    'UgRhcmVhEjAKCGZhdm9yaXRlGAQgASgLMhQuYnN0LnYxLlVzZXJGYXZvcml0ZVIIZmF2b3JpdG'
-    'USOQoKY3JlYXRlZF9hdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWNyZWF0'
-    'ZWRBdBIvCgZiYWRnZXMYBiADKAsyFy5ic3QudjEuVXNlclJhdGluZ0JhZGdlUgZiYWRnZXM=');
+    '9kdWN0aW9uGAIgASgJUgxpbnRyb2R1Y3Rpb24SIgoFYXJlYXMYAyADKAsyDC5ic3QudjEuQXJl'
+    'YVIFYXJlYXMSMAoIZmF2b3JpdGUYBCABKAsyFC5ic3QudjEuVXNlckZhdm9yaXRlUghmYXZvcm'
+    'l0ZRI5CgpjcmVhdGVkX2F0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIJY3Jl'
+    'YXRlZEF0Ei8KBmJhZGdlcxgGIAMoCzIXLmJzdC52MS5Vc2VyUmF0aW5nQmFkZ2VSBmJhZGdlcw'
+    '==');
 
 @$core.Deprecated('Use myProfileDescriptor instead')
 const MyProfile$json = {

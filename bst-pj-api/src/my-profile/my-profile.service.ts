@@ -12,6 +12,7 @@ import {
 } from '../proto/bst/v1/my_profile_service';
 import { UserProfileService } from '../user-profile/user-profile.service';
 import { UserService } from '../user/user.service';
+import { UserPrefectureService } from '../user-prefecture/user-prefecture.service';
 
 @Injectable()
 export class MyProfileService {
@@ -28,6 +29,7 @@ export class MyProfileService {
     private readonly userArtistRepository: Repository<UserArtist>,
     private readonly userProfileService: UserProfileService,
     private readonly userService: UserService,
+    private readonly userPrefectureService: UserPrefectureService,
   ) {}
 
   async getMyProfile(userId: number): Promise<GetMyProfileResponse> {
@@ -193,27 +195,62 @@ export class MyProfileService {
     };
   }
 
-  async updateUserArea(
+  /**
+   * ユーザーの都道府県を更新します
+   * @param userId ユーザーID
+   * @param prefectureIds 都道府県IDの配列
+   * @param primaryPrefectureId メインの都道府県ID（指定がない場合は最初の都道府県がメインになります）
+   * @returns 更新結果
+   */
+  async updateUserPrefectures(
     userId: number,
-    prefectureId: number,
+    prefectureIds: number[],
+    primaryPrefectureId?: number,
   ): Promise<UpdateResponse> {
-    const userProfile = await this.userProfileRepository.findOne({
-      where: { userId },
-    });
-
-    if (!userProfile) {
-      throw new NotFoundException(
-        `User profile not found for user ID: ${userId}`,
-      );
-    }
-
-    userProfile.prefectureId = prefectureId;
-    await this.userProfileRepository.save(userProfile);
+    // UserPrefectureServiceを使用して都道府県情報を更新
+    await this.userPrefectureService.updateUserPrefectures(
+      userId,
+      prefectureIds,
+      primaryPrefectureId,
+    );
 
     const updatedProfile = await this.userProfileService.getUserProfile(userId);
     return {
       success: true,
       profile: updatedProfile.profile,
     };
+  }
+
+  /**
+   * ユーザーの都道府県を取得します
+   * @param userId ユーザーID
+   * @returns 都道府県IDの配列
+   */
+  async getUserPrefectures(userId: number): Promise<{
+    prefectureIds: number[];
+    primaryPrefectureId: number | null;
+  }> {
+    // UserPrefectureServiceを使用して都道府県情報を取得
+    const { prefectureIds, primaryPrefectureId } =
+      await this.userPrefectureService.getUserPrefecturesFormatted(userId);
+
+    return {
+      prefectureIds,
+      primaryPrefectureId,
+    };
+  }
+
+  /**
+   * 単一の都道府県を設定します（後方互換性のため）
+   * @param userId ユーザーID
+   * @param prefectureId 都道府県ID
+   * @returns 更新結果
+   */
+  async updateUserArea(
+    userId: number,
+    prefectureId: number,
+  ): Promise<UpdateResponse> {
+    // 単一の都道府県更新の場合は、複数都道府県の更新メソッドを呼び出す
+    return this.updateUserPrefectures(userId, [prefectureId]);
   }
 }

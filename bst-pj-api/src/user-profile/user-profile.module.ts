@@ -20,6 +20,7 @@ import { ArtistModule } from '../artist/artist.module';
 import { UserGenreModule } from '../user-genre/user-genre.module';
 import { UserPartModule } from '../user-part/user-part.module';
 import { UserArtistModule } from '../user-artist/user-artist.module';
+import { UserPrefectureModule } from '../user-prefecture/user-prefecture.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { UserArtistModule } from '../user-artist/user-artist.module';
     UserGenreModule,
     UserPartModule,
     UserArtistModule,
+    UserPrefectureModule,
   ],
   controllers: [UserProfileController],
   providers: [

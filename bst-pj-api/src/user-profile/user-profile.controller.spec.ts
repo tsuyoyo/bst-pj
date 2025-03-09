@@ -29,7 +29,7 @@ describe('UserProfileController', () => {
     const result: GetUserProfileResponse = {
       profile: {
         user: { id: userId, name: 'Test User', icon: '' },
-        area: { name: 'Test Area', prefectureId: 1 },
+        areas: [{ name: 'Test Area', prefectureId: 1 }],
         favorite: {
           genres: [],
           artists: [],

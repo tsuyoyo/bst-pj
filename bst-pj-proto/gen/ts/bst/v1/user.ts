@@ -28,7 +28,7 @@ export interface UserFavorite {
 export interface UserProfile {
   user: User | undefined;
   introduction: string;
-  area: Area | undefined;
+  areas: Area[];
   favorite: UserFavorite | undefined;
   createdAt:
     | Date
@@ -227,7 +227,7 @@ export const UserFavorite = {
 };
 
 function createBaseUserProfile(): UserProfile {
-  return { user: undefined, introduction: "", area: undefined, favorite: undefined, createdAt: undefined, badges: [] };
+  return { user: undefined, introduction: "", areas: [], favorite: undefined, createdAt: undefined, badges: [] };
 }
 
 export const UserProfile = {
@@ -238,8 +238,8 @@ export const UserProfile = {
     if (message.introduction !== "") {
       writer.uint32(18).string(message.introduction);
     }
-    if (message.area !== undefined) {
-      Area.encode(message.area, writer.uint32(26).fork()).ldelim();
+    for (const v of message.areas) {
+      Area.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     if (message.favorite !== undefined) {
       UserFavorite.encode(message.favorite, writer.uint32(34).fork()).ldelim();
@@ -279,7 +279,7 @@ export const UserProfile = {
             break;
           }
 
-          message.area = Area.decode(reader, reader.uint32());
+          message.areas.push(Area.decode(reader, reader.uint32()));
           continue;
         case 4:
           if (tag !== 34) {
@@ -315,7 +315,7 @@ export const UserProfile = {
     return {
       user: isSet(object.user) ? User.fromJSON(object.user) : undefined,
       introduction: isSet(object.introduction) ? globalThis.String(object.introduction) : "",
-      area: isSet(object.area) ? Area.fromJSON(object.area) : undefined,
+      areas: globalThis.Array.isArray(object?.areas) ? object.areas.map((e: any) => Area.fromJSON(e)) : [],
       favorite: isSet(object.favorite) ? UserFavorite.fromJSON(object.favorite) : undefined,
       createdAt: isSet(object.createdAt) ? fromJsonTimestamp(object.createdAt) : undefined,
       badges: globalThis.Array.isArray(object?.badges)
@@ -332,8 +332,8 @@ export const UserProfile = {
     if (message.introduction !== "") {
       obj.introduction = message.introduction;
     }
-    if (message.area !== undefined) {
-      obj.area = Area.toJSON(message.area);
+    if (message.areas?.length) {
+      obj.areas = message.areas.map((e) => Area.toJSON(e));
     }
     if (message.favorite !== undefined) {
       obj.favorite = UserFavorite.toJSON(message.favorite);
@@ -354,7 +354,7 @@ export const UserProfile = {
     const message = createBaseUserProfile();
     message.user = (object.user !== undefined && object.user !== null) ? User.fromPartial(object.user) : undefined;
     message.introduction = object.introduction ?? "";
-    message.area = (object.area !== undefined && object.area !== null) ? Area.fromPartial(object.area) : undefined;
+    message.areas = object.areas?.map((e) => Area.fromPartial(e)) || [];
     message.favorite = (object.favorite !== undefined && object.favorite !== null)
       ? UserFavorite.fromPartial(object.favorite)
       : undefined;

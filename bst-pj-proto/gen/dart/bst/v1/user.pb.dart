@@ -160,7 +160,7 @@ class UserProfile extends $pb.GeneratedMessage {
   factory UserProfile({
     User? user,
     $core.String? introduction,
-    $32.Area? area,
+    $core.Iterable<$32.Area>? areas,
     UserFavorite? favorite,
     $33.Timestamp? createdAt,
     $core.Iterable<UserRatingBadge>? badges,
@@ -172,8 +172,8 @@ class UserProfile extends $pb.GeneratedMessage {
     if (introduction != null) {
       $result.introduction = introduction;
     }
-    if (area != null) {
-      $result.area = area;
+    if (areas != null) {
+      $result.areas.addAll(areas);
     }
     if (favorite != null) {
       $result.favorite = favorite;
@@ -193,7 +193,7 @@ class UserProfile extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UserProfile', package: const $pb.PackageName(_omitMessageNames ? '' : 'bst.v1'), createEmptyInstance: create)
     ..aOM<User>(1, _omitFieldNames ? '' : 'user', subBuilder: User.create)
     ..aOS(2, _omitFieldNames ? '' : 'introduction')
-    ..aOM<$32.Area>(3, _omitFieldNames ? '' : 'area', subBuilder: $32.Area.create)
+    ..pc<$32.Area>(3, _omitFieldNames ? '' : 'areas', $pb.PbFieldType.PM, subBuilder: $32.Area.create)
     ..aOM<UserFavorite>(4, _omitFieldNames ? '' : 'favorite', subBuilder: UserFavorite.create)
     ..aOM<$33.Timestamp>(5, _omitFieldNames ? '' : 'createdAt', subBuilder: $33.Timestamp.create)
     ..pc<UserRatingBadge>(6, _omitFieldNames ? '' : 'badges', $pb.PbFieldType.PM, subBuilder: UserRatingBadge.create)
@@ -242,15 +242,7 @@ class UserProfile extends $pb.GeneratedMessage {
   void clearIntroduction() => clearField(2);
 
   @$pb.TagNumber(3)
-  $32.Area get area => $_getN(2);
-  @$pb.TagNumber(3)
-  set area($32.Area v) { setField(3, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasArea() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearArea() => clearField(3);
-  @$pb.TagNumber(3)
-  $32.Area ensureArea() => $_ensure(2);
+  $core.List<$32.Area> get areas => $_getList(2);
 
   @$pb.TagNumber(4)
   UserFavorite get favorite => $_getN(3);

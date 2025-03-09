@@ -25,6 +25,7 @@ import { GcpStorageService } from './gcp-storage.service';
 import { MulterModule } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
 import { FileValidationService } from './file-validation.service';
+import { UserPrefectureModule } from '../user-prefecture/user-prefecture.module';
 
 @Module({
   imports: [
@@ -69,6 +70,7 @@ import { FileValidationService } from './file-validation.service';
     UserGenreModule,
     UserPartModule,
     UserArtistModule,
+    UserPrefectureModule,
   ],
   controllers: [MyProfileController],
   providers: [

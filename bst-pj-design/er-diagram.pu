@@ -264,8 +264,14 @@ ENTITY(UserProfile) {
   + ID : Integer
   + UserID : Integer // Userへの外部キー
   + Bio : Text <<Optional>> // 自己紹介
-  + AreaID : Integer // 活動地域
   + LastUpdated : DateTime // 最終更新日
+}
+
+ENTITY(UserPrefecture){
+  + ID : Integer
+  + UserID : Integer
+  + PrefectureID : Integer
+  + IsPrimary : Boolean
 }
 
 ENTITY(UserArtist){
@@ -353,6 +359,8 @@ User "1" -- "*" UserGenre
 User "1" -- "*" UserResource
 User "1" -- "*" Follow
 User "1" -- "*" Rating
+User "1" -- "*" UserPrefecture
+UserPrefecture "1" -- "1" Area
 UserArtist "1" -- "1" Artist
 UserPart "1" -- "1" Part
 UserGenre "1" -- "1" Genre

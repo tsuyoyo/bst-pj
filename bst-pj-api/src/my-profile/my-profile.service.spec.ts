@@ -13,14 +13,18 @@ import { NotFoundException } from '@nestjs/common';
 import { Area } from '../entities/area.entity';
 import { GetUserProfileResponse } from '../proto/bst/v1/user_profile_service';
 import { Genre } from '../entities/genre.entity';
+import { UserPrefectureService } from '../user-prefecture/user-prefecture.service';
+import { UserService } from '../user/user.service';
+import { Area as ProtoArea } from '../proto/bst/v1/area';
 
 describe('MyProfileService', () => {
   let service: MyProfileService;
   let userRepository: Repository<User>;
   let userProfileService: UserProfileService;
   let userGenreRepository: Repository<UserGenre>;
+  let userPrefectureService: UserPrefectureService;
 
-  const mockUser: User = {
+  const mockUser = {
     id: 1,
     name: 'Test User',
     email: 'test@example.com',
@@ -31,7 +35,7 @@ describe('MyProfileService', () => {
     profilePictureUrl: null,
     createdAt: new Date(),
     updatedAt: new Date(),
-  };
+  } as User;
 
   const mockArea: Area = {
     id: 1,
@@ -53,11 +57,9 @@ describe('MyProfileService', () => {
     id: 1,
     userId: 1,
     bio: 'Test Bio',
-    prefectureId: 1,
     createdAt: new Date(),
     updatedAt: new Date(),
     user: mockUser,
-    area: mockArea,
   };
 
   const mockUserProfileResponse: GetUserProfileResponse = {
@@ -68,10 +70,12 @@ describe('MyProfileService', () => {
         icon: mockUser.iconUrl || '',
       },
       introduction: mockUserProfile.bio,
-      area: {
-        name: mockArea.name,
-        prefectureId: mockArea.prefectureId,
-      },
+      areas: [
+        {
+          name: mockArea.name,
+          prefectureId: mockArea.prefectureId,
+        },
+      ],
       favorite: {
         genres: [],
         artists: [],
@@ -90,10 +94,7 @@ describe('MyProfileService', () => {
         icon: '',
       },
       introduction: '',
-      area: {
-        name: '',
-        prefectureId: 0,
-      },
+      areas: [],
       favorite: {
         genres: [],
         artists: [],
@@ -151,6 +152,20 @@ describe('MyProfileService', () => {
             getUserProfile: jest.fn(),
           },
         },
+        {
+          provide: UserService,
+          useValue: {
+            mapUserToProto: jest.fn(),
+          },
+        },
+        {
+          provide: UserPrefectureService,
+          useValue: {
+            getUserPrefectures: jest.fn(),
+            updateUserPrefectures: jest.fn(),
+            getUserPrefecturesFormatted: jest.fn(),
+          },
+        },
       ],
     }).compile();
 
@@ -159,6 +174,9 @@ describe('MyProfileService', () => {
     userProfileService = module.get<UserProfileService>(UserProfileService);
     userGenreRepository = module.get<Repository<UserGenre>>(
       getRepositoryToken(UserGenre),
+    );
+    userPrefectureService = module.get<UserPrefectureService>(
+      UserPrefectureService,
     );
   });
 
@@ -234,10 +252,12 @@ describe('MyProfileService', () => {
             icon: mockUser.iconUrl || '',
           },
           introduction: mockUserProfile.bio,
-          area: {
-            name: mockArea.name,
-            prefectureId: mockArea.prefectureId,
-          },
+          areas: [
+            {
+              name: mockArea.name,
+              prefectureId: mockArea.prefectureId,
+            },
+          ],
           favorite: {
             genres: [
               {
@@ -249,16 +269,142 @@ describe('MyProfileService', () => {
             parts: [],
           },
           badges: [],
-          createdAt: mockUser.createdAt,
+          createdAt: new Date(),
         },
       });
 
       const result = await service.updateUserGenres(userId, genreIds);
 
-      expect(result).toBeDefined();
-      expect(userGenreRepository.delete).toHaveBeenCalled();
-      expect(userGenreRepository.save).toHaveBeenCalled();
+      expect(result).toEqual({
+        success: true,
+        profile: {
+          user: {
+            id: mockUser.id,
+            name: mockUser.name,
+            icon: mockUser.iconUrl || '',
+          },
+          introduction: mockUserProfile.bio,
+          areas: [
+            {
+              name: mockArea.name,
+              prefectureId: mockArea.prefectureId,
+            },
+          ],
+          favorite: {
+            genres: [
+              {
+                id: genreIds[0],
+                name: 'Test Genre',
+              },
+            ],
+            artists: [],
+            parts: [],
+          },
+          badges: [],
+          createdAt: expect.any(Date),
+        },
+      });
+      expect(userGenreRepository.delete).toHaveBeenCalledWith({ userId });
+      expect(userGenreRepository.save).toHaveBeenCalledWith([
+        { userId, genreId: genreIds[0] },
+      ]);
       expect(userProfileService.getUserProfile).toHaveBeenCalledWith(userId);
+    });
+  });
+
+  describe('updateUserPrefectures', () => {
+    it('should update user prefectures successfully', async () => {
+      const userId = 1;
+      const prefectureIds = [1];
+      const mockPrefectures: ProtoArea[] = [
+        {
+          name: mockArea.name,
+          prefectureId: mockArea.prefectureId,
+        },
+      ];
+
+      jest
+        .spyOn(userPrefectureService, 'updateUserPrefectures')
+        .mockResolvedValue(mockPrefectures);
+
+      jest.spyOn(userProfileService, 'getUserProfile').mockResolvedValue({
+        profile: {
+          user: {
+            id: mockUser.id,
+            name: mockUser.name,
+            icon: mockUser.iconUrl || '',
+          },
+          introduction: mockUserProfile.bio,
+          areas: mockPrefectures,
+          favorite: {
+            genres: [],
+            artists: [],
+            parts: [],
+          },
+          badges: [],
+          createdAt: new Date(),
+        },
+      });
+
+      const result = await service.updateUserPrefectures(userId, prefectureIds);
+
+      expect(result).toEqual({
+        success: true,
+        profile: {
+          user: {
+            id: mockUser.id,
+            name: mockUser.name,
+            icon: mockUser.iconUrl || '',
+          },
+          introduction: mockUserProfile.bio,
+          areas: mockPrefectures,
+          favorite: {
+            genres: [],
+            artists: [],
+            parts: [],
+          },
+          badges: [],
+          createdAt: expect.any(Date),
+        },
+      });
+
+      expect(userPrefectureService.updateUserPrefectures).toHaveBeenCalledWith(
+        userId,
+        prefectureIds,
+        undefined,
+      );
+      expect(userProfileService.getUserProfile).toHaveBeenCalledWith(userId);
+    });
+  });
+
+  describe('getUserPrefectures', () => {
+    it('should get user prefectures successfully', async () => {
+      const userId = 1;
+      const mockPrefectureData = {
+        prefectureIds: [1],
+        primaryPrefectureId: 1,
+        prefectures: [
+          {
+            name: 'Test Area',
+            prefectureId: 1,
+          },
+        ] as ProtoArea[],
+      };
+
+      jest
+        .spyOn(userPrefectureService, 'getUserPrefecturesFormatted')
+        .mockResolvedValue(mockPrefectureData);
+
+      const result = await service.getUserPrefectures(userId);
+
+      expect(result).toEqual({
+        prefectureIds: [1],
+        primaryPrefectureId: 1,
+      });
+
+      expect(
+        userPrefectureService.getUserPrefecturesFormatted,
+      ).toHaveBeenCalledWith(userId);
     });
   });
 });

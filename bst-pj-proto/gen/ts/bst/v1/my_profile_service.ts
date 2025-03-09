@@ -40,7 +40,7 @@ export interface UpdateUserPartsRequest {
 }
 
 export interface UpdateUserAreaRequest {
-  prefectureId: number;
+  prefectureIds: number[];
 }
 
 export interface UpdateResponse {
@@ -511,14 +511,16 @@ export const UpdateUserPartsRequest = {
 };
 
 function createBaseUpdateUserAreaRequest(): UpdateUserAreaRequest {
-  return { prefectureId: 0 };
+  return { prefectureIds: [] };
 }
 
 export const UpdateUserAreaRequest = {
   encode(message: UpdateUserAreaRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.prefectureId !== 0) {
-      writer.uint32(8).int32(message.prefectureId);
+    writer.uint32(10).fork();
+    for (const v of message.prefectureIds) {
+      writer.int32(v);
     }
+    writer.ldelim();
     return writer;
   },
 
@@ -530,12 +532,22 @@ export const UpdateUserAreaRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag !== 8) {
-            break;
+          if (tag === 8) {
+            message.prefectureIds.push(reader.int32());
+
+            continue;
           }
 
-          message.prefectureId = reader.int32();
-          continue;
+          if (tag === 10) {
+            const end2 = reader.uint32() + reader.pos;
+            while (reader.pos < end2) {
+              message.prefectureIds.push(reader.int32());
+            }
+
+            continue;
+          }
+
+          break;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -546,13 +558,17 @@ export const UpdateUserAreaRequest = {
   },
 
   fromJSON(object: any): UpdateUserAreaRequest {
-    return { prefectureId: isSet(object.prefectureId) ? globalThis.Number(object.prefectureId) : 0 };
+    return {
+      prefectureIds: globalThis.Array.isArray(object?.prefectureIds)
+        ? object.prefectureIds.map((e: any) => globalThis.Number(e))
+        : [],
+    };
   },
 
   toJSON(message: UpdateUserAreaRequest): unknown {
     const obj: any = {};
-    if (message.prefectureId !== 0) {
-      obj.prefectureId = Math.round(message.prefectureId);
+    if (message.prefectureIds?.length) {
+      obj.prefectureIds = message.prefectureIds.map((e) => Math.round(e));
     }
     return obj;
   },
@@ -562,7 +578,7 @@ export const UpdateUserAreaRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<UpdateUserAreaRequest>, I>>(object: I): UpdateUserAreaRequest {
     const message = createBaseUpdateUserAreaRequest();
-    message.prefectureId = object.prefectureId ?? 0;
+    message.prefectureIds = object.prefectureIds?.map((e) => e) || [];
     return message;
   },
 };

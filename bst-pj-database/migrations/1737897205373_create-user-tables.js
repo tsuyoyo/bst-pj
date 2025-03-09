@@ -68,7 +68,7 @@ exports.up = (pgm) => {
   pgm.createIndex("users", ["email"]);
   pgm.createIndex("users", ["external_service", "external_id"]);
 
-  // Create user_profiles table
+  // Create user_profiles table (prefecture_id を削除)
   pgm.createTable("user_profiles", {
     id: "id",
     user_id: {
@@ -78,10 +78,38 @@ exports.up = (pgm) => {
       onDelete: "CASCADE",
     },
     bio: { type: "text" },
+    created_at: {
+      type: "timestamp",
+      notNull: true,
+      default: pgm.func("current_timestamp"),
+    },
+    updated_at: {
+      type: "timestamp",
+      notNull: true,
+      default: pgm.func("current_timestamp"),
+    },
+  });
+
+  // Create user_prefectures table
+  pgm.createTable("user_prefectures", {
+    id: "id",
+    user_id: {
+      type: "integer",
+      notNull: true,
+      references: "users",
+      onDelete: "CASCADE",
+    },
     prefecture_id: {
       type: "integer",
+      notNull: true,
       references: "areas",
-      onDelete: "SET NULL",
+      onDelete: "CASCADE",
+    },
+    is_primary: {
+      type: "boolean",
+      notNull: true,
+      default: false,
+      comment: "主な活動地域かどうか",
     },
     created_at: {
       type: "timestamp",
@@ -168,14 +196,28 @@ exports.up = (pgm) => {
 
   // Create unique indexes
   pgm.createIndex("user_profiles", "user_id", { unique: true });
+  pgm.createIndex("user_prefectures", ["user_id", "prefecture_id"], {
+    unique: true,
+  });
   pgm.createIndex("user_parts", ["user_id", "part_id"], { unique: true });
   pgm.createIndex("user_genres", ["user_id", "genre_id"], { unique: true });
   pgm.createIndex("follows", ["follower_id", "following_id"], { unique: true });
+
+  // Create trigger for updating updated_at
+  pgm.createTrigger("user_prefectures", "update_updated_at_trigger", {
+    when: "BEFORE",
+    operation: "UPDATE",
+    function: "update_updated_at",
+    level: "ROW",
+  });
 };
 
 exports.down = (pgm) => {
   // Drop trigger
   pgm.dropTrigger("users", "update_updated_at_trigger", { ifExists: true });
+  pgm.dropTrigger("user_prefectures", "update_updated_at_trigger", {
+    ifExists: true,
+  });
 
   // Drop indexes
   pgm.dropIndex("users", ["email"], { ifExists: true });
@@ -193,6 +235,7 @@ exports.down = (pgm) => {
   pgm.dropTable("follows", { ifExists: true });
   pgm.dropTable("user_genres", { ifExists: true });
   pgm.dropTable("user_parts", { ifExists: true });
+  pgm.dropTable("user_prefectures", { ifExists: true });
   pgm.dropTable("user_profiles", { ifExists: true });
 
   // Drop enum types

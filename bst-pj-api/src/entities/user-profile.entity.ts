@@ -8,7 +8,6 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { User } from './user.entity';
-import { Area } from './area.entity';
 
 @Entity('user_profiles')
 export class UserProfile {
@@ -21,9 +20,6 @@ export class UserProfile {
   @Column({ type: 'text', nullable: true })
   bio: string;
 
-  @Column({ name: 'prefecture_id', type: 'integer', nullable: true })
-  prefectureId: number;
-
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
@@ -33,8 +29,4 @@ export class UserProfile {
   @ManyToOne(() => User, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
   user: User;
-
-  @ManyToOne(() => Area, { onDelete: 'SET NULL' })
-  @JoinColumn({ name: 'prefecture_id' })
-  area: Area;
 }
