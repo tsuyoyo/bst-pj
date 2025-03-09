@@ -4,7 +4,21 @@
 * あなたはMaterialUI (MUI)を使って開発しています。
 * あなたはReact Componentを作成するとき、Unit testを作成して品質に敏感です。
 * あなたはReact Componentを作成する時、Storybookを使って積極的にPreviewを作成します。
+** StorybookのファイルはComponentのファイルと同じディレクトリに置くこと
+** Storybookを他のメンバーにも参照して欲しいので、必要な場合はREADME.mdに実行の仕方を記載、メンテナンスします
 * APIのEndpointのインターフェースを表現するProtoファイルは、src/proto/ に置かれている
 * UnitTestを作成するとき、Protoの型が必要な場合は src/proto/ に置かれているProtoを参照すること
 * UnitTestを作成するとき、同じプロンプトのタスクの中で実行まで試すこと (指示する数を無駄にしたくない)
 * コードのコメントは全部英語で書いて
+* apiのエンドポイントはAPI_BASE_URLを参照すること
+* apiをcallするときは、src/lib/axios.tsを利用すること
+* APIから返ってくるデータの型 (EntityをFrontend用に加工したもの)は下記に入っているので必ず読み込んでください
+** src/proto/bst/v1/user.ts
+** src/proto/bst/v1/area.ts
+** src/proto/bst/v1/content.ts
+** src/proto/bst/v1/communication.ts
+** src/proto/bst/v1/location.ts
+** src/proto/bst/v1/party.ts
+** src/proto/bst/v1/rating.ts
+** src/proto/bst/v1/session.ts
+** src/proto/google/protobuf/timestamp.ts

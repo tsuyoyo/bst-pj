@@ -113,11 +113,29 @@ function UserSection({
   }
 
   return user ? (
-    <Box sx={{ display: "flex", alignItems: "center", gap: 2, p: 1 }}>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        gap: 2,
+        p: 1,
+        cursor: "pointer",
+        borderRadius: 1,
+        "&:hover": {
+          bgcolor: "rgba(0, 0, 0, 0.04)",
+        },
+      }}
+      onClick={() => onNavigate("/my-profile")}
+    >
       <Avatar>
         <PersonIcon />
       </Avatar>
-      <Typography variant="body2">{user.name}</Typography>
+      <Box>
+        <Typography variant="body2">{user.name}</Typography>
+        <Typography variant="caption" color="text.secondary">
+          マイプロフィールを表示
+        </Typography>
+      </Box>
     </Box>
   ) : (
     <ListItemButton
@@ -197,12 +215,30 @@ export default function Navbar() {
         <ListItem>
           <UserSection
             user={isMounted ? user : null}
-            onNavigate={handleNavigate}
+            onNavigate={(href) => {
+              if (href === "/my-profile") {
+                router.push(href);
+              } else {
+                handleLogout();
+              }
+            }}
           />
         </ListItem>
         {isMounted && user && (
           <>
             <Divider />
+            <ListItem disablePadding>
+              <ListItemButton
+                component={Link}
+                href="/my-profile"
+                onClick={() => handleNavigate("/my-profile")}
+              >
+                <ListItemIcon>
+                  <PersonIcon />
+                </ListItemIcon>
+                <ListItemText primary="マイプロフィール" />
+              </ListItemButton>
+            </ListItem>
             <ListItem disablePadding>
               <ListItemButton onClick={handleLogout}>
                 <ListItemIcon>
@@ -238,7 +274,16 @@ export default function Navbar() {
             </Typography>
           </Box>
           {isMounted ? (
-            <UserSection user={user} onNavigate={handleLogout} />
+            <UserSection
+              user={user}
+              onNavigate={(href) => {
+                if (href === "/my-profile") {
+                  router.push(href);
+                } else {
+                  handleLogout();
+                }
+              }}
+            />
           ) : (
             <Box sx={{ minHeight: "40px", minWidth: "40px" }} />
           )}

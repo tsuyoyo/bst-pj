@@ -61,7 +61,7 @@ export class UserProfileService {
           artists: userArtists,
           parts: userParts,
         },
-        introduction: '',
+        introduction: userProfile.bio || '',
         createdAt: userProfile.user.createdAt,
         badges: [], // TODO: Badge design hasn't been fixed yet.
       },
