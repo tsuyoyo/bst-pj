@@ -28,7 +28,15 @@ import {
 } from "@mui/icons-material";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
-import { useUpdateProfile } from "@/features/profile/hooks";
+import {
+  useUpdateProfile,
+  useGenres,
+  useArtists,
+  useParts,
+} from "@/features/profile/hooks";
+import SelectionModal, {
+  SelectionItem,
+} from "@/components/common/SelectionModal";
 
 interface ProfileEditViewProps {
   profile: UserProfile;
@@ -37,6 +45,7 @@ interface ProfileEditViewProps {
 }
 
 type EditableField = "name" | "introduction" | "icon";
+type SelectionType = "genres" | "artists" | "parts";
 
 export default function ProfileEditView({
   profile,
@@ -46,10 +55,22 @@ export default function ProfileEditView({
   const user = profile.user;
   const { mutate: updateProfile, isPending: isLoading } = useUpdateProfile();
 
+  // 編集状態の管理
   const [editMode, setEditMode] = useState<EditableField | null>(null);
   const [nameValue, setNameValue] = useState(user?.name || "");
   const [introValue, setIntroValue] = useState(profile.introduction || "");
   const [iconValue, setIconValue] = useState(user?.icon || "");
+
+  // モーダルの状態管理
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectionType, setSelectionType] = useState<SelectionType | null>(
+    null
+  );
+
+  // ジャンル、アーティスト、パートのデータ取得
+  const { data: genres, isLoading: genresLoading } = useGenres();
+  const { data: artistsData, isLoading: artistsLoading } = useArtists();
+  const { data: partsData, isLoading: partsLoading } = useParts();
 
   if (!user) {
     return (
@@ -123,6 +144,66 @@ export default function ProfileEditView({
       }
     );
   };
+
+  // 選択モーダルを開く
+  const handleOpenModal = (type: SelectionType) => {
+    setSelectionType(type);
+    setModalOpen(true);
+  };
+
+  // 選択モーダルを閉じる
+  const handleCloseModal = () => {
+    setModalOpen(false);
+    setSelectionType(null);
+  };
+
+  // 選択した項目を保存
+  const handleSaveSelection = (selectedIds: number[]) => {
+    if (!selectionType) return;
+
+    updateProfile(
+      { field: selectionType, value: selectedIds },
+      {
+        onSuccess: (data) => {
+          if (onProfileUpdated && data.profile) {
+            onProfileUpdated(data.profile);
+          }
+        },
+      }
+    );
+  };
+
+  // 現在選択中のモーダルに応じたデータと設定を取得
+  const getModalProps = () => {
+    if (!selectionType)
+      return { items: [], selectedIds: [], title: "", loading: false };
+
+    switch (selectionType) {
+      case "genres":
+        return {
+          items: genres?.genres || [],
+          selectedIds: profile.favorite?.genres.map((g) => g.id) || [],
+          title: "ジャンルを選択",
+          loading: genresLoading,
+        };
+      case "artists":
+        return {
+          items: artistsData?.artists || [],
+          selectedIds: profile.favorite?.artists.map((a) => a.id) || [],
+          title: "アーティストを選択",
+          loading: artistsLoading,
+        };
+      case "parts":
+        return {
+          items: partsData?.parts || [],
+          selectedIds: profile.favorite?.parts.map((p) => p.id) || [],
+          title: "担当パートを選択",
+          loading: partsLoading,
+        };
+    }
+  };
+
+  const modalProps = getModalProps();
 
   return (
     <Card variant="outlined" sx={{ mb: 4 }}>
@@ -305,7 +386,15 @@ export default function ProfileEditView({
           <>
             <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
               <Typography variant="h6">好きなジャンル</Typography>
-              {/* Genre editing will be implemented in the future */}
+              <Tooltip title="ジャンルを編集">
+                <IconButton
+                  size="small"
+                  sx={{ ml: 1 }}
+                  onClick={() => handleOpenModal("genres")}
+                >
+                  <EditIcon fontSize="small" />
+                </IconButton>
+              </Tooltip>
             </Box>
             <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ mb: 2 }}>
               {profile.favorite.genres.length > 0 ? (
@@ -326,7 +415,15 @@ export default function ProfileEditView({
 
             <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
               <Typography variant="h6">好きなアーティスト</Typography>
-              {/* Artist editing will be implemented in the future */}
+              <Tooltip title="アーティストを編集">
+                <IconButton
+                  size="small"
+                  sx={{ ml: 1 }}
+                  onClick={() => handleOpenModal("artists")}
+                >
+                  <EditIcon fontSize="small" />
+                </IconButton>
+              </Tooltip>
             </Box>
             <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ mb: 2 }}>
               {profile.favorite.artists.length > 0 ? (
@@ -347,7 +444,15 @@ export default function ProfileEditView({
 
             <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
               <Typography variant="h6">担当パート</Typography>
-              {/* Part editing will be implemented in the future */}
+              <Tooltip title="担当パートを編集">
+                <IconButton
+                  size="small"
+                  sx={{ ml: 1 }}
+                  onClick={() => handleOpenModal("parts")}
+                >
+                  <EditIcon fontSize="small" />
+                </IconButton>
+              </Tooltip>
             </Box>
             <Stack direction="row" spacing={1} flexWrap="wrap">
               {profile.favorite.parts.length > 0 ? (
@@ -390,6 +495,17 @@ export default function ProfileEditView({
             </Stack>
           </>
         )}
+
+        {/* Selection Modal */}
+        <SelectionModal
+          open={modalOpen}
+          onClose={handleCloseModal}
+          title={modalProps.title}
+          items={modalProps.items}
+          selectedIds={modalProps.selectedIds}
+          onSave={handleSaveSelection}
+          loading={modalProps.loading}
+        />
       </CardContent>
     </Card>
   );

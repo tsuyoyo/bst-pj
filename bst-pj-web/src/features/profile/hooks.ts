@@ -1,6 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getMyProfile, updateProfileField } from "./api";
 import { ProfileUpdateField } from "./types";
+import { useGenres } from "@/features/genres/hooks";
+import { useArtists } from "@/features/artists/hooks";
+import { useParts } from "@/features/parts/hooks";
 
 /**
  * Custom hook to fetch current user's profile
@@ -38,3 +41,6 @@ export const useUpdateProfile = () => {
     },
   });
 };
+
+// 既存のフックをエクスポート
+export { useGenres, useArtists, useParts };

@@ -2,6 +2,7 @@
 * あなたはNext.jsとReactを使って開発しています。
 * あなたはTypeScriptを使って開発しています。
 * あなたはMaterialUI (MUI)を使って開発しています。
+* 共有のcomponentは src/components/common に置くこと。可能な限りcomponentは機能で共通にしていきたい。
 * あなたはReact Componentを作成するとき、Unit testを作成して品質に敏感です。
 * あなたはReact Componentを作成する時、Storybookを使って積極的にPreviewを作成します。
 ** StorybookのファイルはComponentのファイルと同じディレクトリに置くこと
@@ -22,3 +23,4 @@
 ** src/proto/bst/v1/rating.ts
 ** src/proto/bst/v1/session.ts
 ** src/proto/google/protobuf/timestamp.ts
+* apiをcallするhookは src/features 配下に貯めていきたい。再利用可能なものは積極的に使うこと
