@@ -35,6 +35,7 @@ import {
   useParts,
   useIconUpload,
 } from "@/features/profile/hooks";
+import { useAreas } from "@/features/areas/hooks";
 import SelectionModal, {
   SelectionItem,
 } from "@/components/common/SelectionModal";
@@ -47,7 +48,7 @@ interface ProfileEditViewProps {
 }
 
 type EditableField = "name" | "introduction" | "icon";
-type SelectionType = "genres" | "artists" | "parts";
+type SelectionType = "genres" | "artists" | "parts" | "area";
 
 export default function ProfileEditView({
   profile,
@@ -69,10 +70,11 @@ export default function ProfileEditView({
     null
   );
 
-  // ジャンル、アーティスト、パートのデータ取得
+  // ジャンル、アーティスト、パート、エリアのデータ取得
   const { data: genres, isLoading: genresLoading } = useGenres();
   const { data: artistsData, isLoading: artistsLoading } = useArtists();
   const { data: partsData, isLoading: partsLoading } = useParts();
+  const { data: areasData, isLoading: areasLoading } = useAreas();
 
   // アイコンアップロード用のフック
   const { uploadIcon, isUploading: isUploadingIcon } = useIconUpload();
@@ -150,61 +152,96 @@ export default function ProfileEditView({
     );
   };
 
-  // 選択モーダルを開く
+  // モーダルを開く関数
   const handleOpenModal = (type: SelectionType) => {
     setSelectionType(type);
     setModalOpen(true);
   };
 
-  // 選択モーダルを閉じる
+  // モーダルを閉じる関数
   const handleCloseModal = () => {
     setModalOpen(false);
     setSelectionType(null);
   };
 
-  // 選択した項目を保存
+  // 選択を保存する関数
   const handleSaveSelection = (selectedIds: number[]) => {
     if (!selectionType) return;
 
+    // 選択タイプに応じて更新処理を実行
     updateProfile(
-      { field: selectionType, value: selectedIds },
+      {
+        field: selectionType,
+        value: selectionType === "area" ? selectedIds[0] : selectedIds,
+      },
       {
         onSuccess: (data) => {
           if (onProfileUpdated && data.profile) {
             onProfileUpdated(data.profile);
           }
+          handleCloseModal();
         },
       }
     );
   };
 
-  // 現在選択中のモーダルに応じたデータと設定を取得
+  // モーダルのプロパティを取得する関数
   const getModalProps = () => {
-    if (!selectionType)
-      return { items: [], selectedIds: [], title: "", loading: false };
+    if (!selectionType) return null;
 
     switch (selectionType) {
       case "genres":
         return {
-          items: genres?.genres || [],
-          selectedIds: profile.favorite?.genres.map((g) => g.id) || [],
           title: "ジャンルを選択",
+          items:
+            genres?.genres.map((genre) => ({
+              id: genre.id,
+              name: genre.name,
+            })) || [],
+          selectedIds: profile.favorite?.genres.map((g) => g.id) || [],
           loading: genresLoading,
+          multiSelect: true,
         };
       case "artists":
         return {
-          items: artistsData?.artists || [],
+          title: "影響を受けたアーティストを選択",
+          items:
+            artistsData?.artists.map((artist) => ({
+              id: artist.id,
+              name: artist.name,
+            })) || [],
           selectedIds: profile.favorite?.artists.map((a) => a.id) || [],
-          title: "アーティストを選択",
           loading: artistsLoading,
+          multiSelect: true,
         };
       case "parts":
         return {
-          items: partsData?.parts || [],
-          selectedIds: profile.favorite?.parts.map((p) => p.id) || [],
           title: "担当パートを選択",
+          items:
+            partsData?.parts.map((part) => ({
+              id: part.id,
+              name: part.name,
+            })) || [],
+          selectedIds: profile.favorite?.parts.map((p) => p.id) || [],
           loading: partsLoading,
+          multiSelect: true,
         };
+      case "area":
+        return {
+          title: "主な活動場所を選択",
+          items:
+            areasData?.areas.map((area) => ({
+              id: area.prefectureId,
+              name: area.name,
+            })) || [],
+          selectedIds: profile.area?.prefectureId
+            ? [profile.area.prefectureId]
+            : [],
+          loading: areasLoading,
+          multiSelect: false,
+        };
+      default:
+        return null;
     }
   };
 
@@ -318,7 +355,14 @@ export default function ProfileEditView({
               <Typography variant="body2" sx={{ ml: 1 }}>
                 {profile.area?.name || "未設定"}
               </Typography>
-              {/* Area editing will be implemented in the future */}
+              <IconButton
+                size="small"
+                onClick={() => handleOpenModal("area")}
+                disabled={isLoading}
+                sx={{ ml: 1 }}
+              >
+                <EditIcon fontSize="small" />
+              </IconButton>
             </Box>
           </Grid>
 
@@ -515,16 +559,18 @@ export default function ProfileEditView({
           </>
         )}
 
-        {/* Selection Modal */}
-        <SelectionModal
-          open={modalOpen}
-          onClose={handleCloseModal}
-          title={modalProps.title}
-          items={modalProps.items}
-          selectedIds={modalProps.selectedIds}
-          onSave={handleSaveSelection}
-          loading={modalProps.loading}
-        />
+        {/* SelectionModal */}
+        {modalProps && (
+          <SelectionModal
+            open={modalOpen}
+            onClose={handleCloseModal}
+            title={modalProps.title}
+            items={modalProps.items}
+            selectedIds={modalProps.selectedIds}
+            onSave={handleSaveSelection}
+            loading={modalProps.loading}
+          />
+        )}
       </CardContent>
     </Card>
   );
