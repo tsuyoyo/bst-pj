@@ -145,6 +145,34 @@ export const authSlice = createSlice({
         localStorage.removeItem("refreshToken");
       }
     },
+    updateUser: (state, action: PayloadAction<Partial<User>>) => {
+      if (state.user) {
+        // 既存のユーザー情報とマージ
+        state.user = {
+          ...state.user,
+          ...action.payload,
+        };
+
+        // ローカルストレージを更新
+        if (typeof window !== "undefined") {
+          // authStateを更新
+          const authStateStr = localStorage.getItem("authState");
+          if (authStateStr) {
+            const authState = JSON.parse(authStateStr);
+            localStorage.setItem(
+              "authState",
+              JSON.stringify({
+                ...authState,
+                user: state.user,
+              })
+            );
+          }
+
+          // 個別のキーも更新（後方互換性のため）
+          localStorage.setItem("user", JSON.stringify(state.user));
+        }
+      }
+    },
     startLoading: (state) => {
       state.isLoading = true;
     },
@@ -157,5 +185,6 @@ export const {
   updateTokens,
   logout,
   startLoading,
+  updateUser,
 } = authSlice.actions;
 export default authSlice.reducer;

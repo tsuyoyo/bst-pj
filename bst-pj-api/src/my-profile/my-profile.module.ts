@@ -21,6 +21,10 @@ import { ArtistModule } from '../artist/artist.module';
 import { UserGenreModule } from '../user-genre/user-genre.module';
 import { UserPartModule } from '../user-part/user-part.module';
 import { UserArtistModule } from '../user-artist/user-artist.module';
+import { GcpStorageService } from './gcp-storage.service';
+import { MulterModule } from '@nestjs/platform-express';
+import { memoryStorage } from 'multer';
+import { FileValidationService } from './file-validation.service';
 
 @Module({
   imports: [
@@ -39,6 +43,28 @@ import { UserArtistModule } from '../user-artist/user-artist.module';
       secret: process.env.JWT_SECRET || 'your-secret-key',
       signOptions: { expiresIn: '1d' },
     }),
+    MulterModule.register({
+      storage: memoryStorage(), // メモリストレージを使用（一時ファイルとして保存）
+      limits: {
+        fileSize: 100 * 1024, // 100KB
+      },
+      fileFilter: (req, file, callback) => {
+        // 許可するMIMEタイプ
+        const allowedMimeTypes = [
+          'image/jpeg',
+          'image/png',
+          'image/gif',
+          'image/webp',
+        ];
+        if (!allowedMimeTypes.includes(file.mimetype)) {
+          return callback(
+            new Error('サポートされていないファイル形式です'),
+            false,
+          );
+        }
+        callback(null, true);
+      },
+    }),
     ArtistModule,
     UserGenreModule,
     UserPartModule,
@@ -52,6 +78,8 @@ import { UserArtistModule } from '../user-artist/user-artist.module';
     UserGenreService,
     UserPartService,
     UserArtistService,
+    GcpStorageService,
+    FileValidationService,
   ],
   exports: [MyProfileService],
 })

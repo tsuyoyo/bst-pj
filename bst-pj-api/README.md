@@ -97,3 +97,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+# GCP Tips
+
+- GCP Bucketを公開する https://qiita.com/mako0715/items/a2049d31915f10f40681

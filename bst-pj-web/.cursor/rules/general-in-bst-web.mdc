@@ -1,3 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
 * あなたはWebFrontEndの開発者です。
 * あなたはNext.jsとReactを使って開発しています。
 * あなたはTypeScriptを使って開発しています。

@@ -33,10 +33,12 @@ import {
   useGenres,
   useArtists,
   useParts,
+  useIconUpload,
 } from "@/features/profile/hooks";
 import SelectionModal, {
   SelectionItem,
 } from "@/components/common/SelectionModal";
+import ImageUploader from "@/components/common/ImageUploader";
 
 interface ProfileEditViewProps {
   profile: UserProfile;
@@ -71,6 +73,9 @@ export default function ProfileEditView({
   const { data: genres, isLoading: genresLoading } = useGenres();
   const { data: artistsData, isLoading: artistsLoading } = useArtists();
   const { data: partsData, isLoading: partsLoading } = useParts();
+
+  // アイコンアップロード用のフック
+  const { uploadIcon, isUploading: isUploadingIcon } = useIconUpload();
 
   if (!user) {
     return (
@@ -205,6 +210,17 @@ export default function ProfileEditView({
 
   const modalProps = getModalProps();
 
+  // アイコンアップロード処理
+  const handleIconUpload = async (file: File): Promise<void> => {
+    try {
+      await uploadIcon(file);
+      // 成功通知などを表示する場合はここに追加
+    } catch (error) {
+      console.error("Icon upload failed:", error);
+      // エラー通知などを表示する場合はここに追加
+    }
+  };
+
   return (
     <Card variant="outlined" sx={{ mb: 4 }}>
       <CardContent>
@@ -217,23 +233,26 @@ export default function ProfileEditView({
             >
               <PersonIcon fontSize="large" />
             </Avatar>
-            <Tooltip title="アイコンを変更">
-              <IconButton
-                size="small"
-                sx={{
-                  position: "absolute",
-                  bottom: 0,
-                  right: 24,
-                  bgcolor: "background.paper",
-                  "&:hover": { bgcolor: "action.hover" },
-                  border: "1px solid",
-                  borderColor: "divider",
+            <Box
+              sx={{
+                position: "absolute",
+                bottom: 0,
+                right: 24,
+                transform: "translateY(50%)",
+                zIndex: 1,
+              }}
+            >
+              <ImageUploader
+                onUpload={handleIconUpload}
+                isUploading={isUploadingIcon}
+                accept="image/jpeg, image/png"
+                maxSize={0.5 * 1024 * 1024} // 0.5MB
+                onError={(message) => {
+                  // エラーメッセージをSnackbarで表示するなどの処理を追加できます
+                  console.error("Icon upload error:", message);
                 }}
-                onClick={() => handleEdit("icon")}
-              >
-                <EditIcon fontSize="small" />
-              </IconButton>
-            </Tooltip>
+              />
+            </Box>
           </Box>
 
           <Box sx={{ flexGrow: 1 }}>

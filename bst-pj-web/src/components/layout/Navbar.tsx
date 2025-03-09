@@ -127,8 +127,16 @@ function UserSection({
       }}
       onClick={() => onNavigate("/my-profile")}
     >
-      <Avatar>
-        <PersonIcon />
+      <Avatar
+        src={user.icon || undefined}
+        alt={user.name || "ユーザー"}
+        sx={{
+          width: 40,
+          height: 40,
+          bgcolor: user.icon ? "transparent" : "primary.main",
+        }}
+      >
+        {!user.icon && <PersonIcon />}
       </Avatar>
       <Box>
         <Typography variant="body2">{user.name}</Typography>

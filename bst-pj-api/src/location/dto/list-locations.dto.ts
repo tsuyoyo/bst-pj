@@ -6,6 +6,7 @@ export class ListLocationsDto implements Partial<ListLocationsRequest> {
   @IsOptional()
   @IsNumber()
   pageSize?: number;
+
   @Transform(({ value }) => parseInt(value, 10))
   @IsOptional()
   @IsString()
